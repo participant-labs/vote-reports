@@ -10,21 +10,7 @@
 
     <div id="container">
       <div id="header">
-        <div class="logo">
-          <h1>Vote Reports</h1>
-        </div>
-        <div class="login-section">
-          <div class="login-box">
-            <% if current_user %>
-              <%= current_user.username %> (<%= link_to "Logout", logout_path %>)
-              
-            <% else %>
-              <%= link_to "Login", login_path %>
-            <% end %>
-            
-          </div>
-          
-        </div>
+        <%= link_to image_tag('logo.png'), root_path %>
       </div>
       <div id="sidebar-left">
         <div class="about">
@@ -38,15 +24,35 @@
         <%= yield %>
       </div>
       <div id="sidebar-right">
-        <div class="site-links">
-          <ul>
-            <li><%= link_to "About us" %></li>
-          </ul>
+      
+
+
+        <h3>Links</h3>
+        <ul class="sidebar-links">
+          <% if current_user %>
+            <li><%= link_to "Log out", logout_path %></li>   
+          <% else %>
+            <li><%= link_to "Log in", login_path %></li>
+            <li><%= link_to "Sign up", signup_path %></li>
+          <% end %>
+          <li><%= link_to "About us", about_path %></li>
+        </ul>
+
+        
+      </div>
+      <div id="footer">Footer goes here</div>
+      <div class="section">
+        <div class="login-box">
+          <% if current_user %>
+            <%= current_user.username %> (<%= link_to "Logout", logout_path %>)
+            
+          <% else %>
+            
+          <% end %>
           
         </div>
         
       </div>
-      <div id="footer">Footer goes here</div>
     </div>
 
     
