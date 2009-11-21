@@ -3,3 +3,11 @@
   <%= text_field_tag :q %>
   <%= submit_tag 'Search' %>
 <% end %>
+
+<%- unless @bills.blank? -%>
+  <ul>
+    <%- @bills.each do |bill| -%>
+      <li><%= render 'bills/bill', :bill => bill %></li>
+    <%- end -%>
+  </ul>
+<%- end -%>

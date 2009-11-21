@@ -20,6 +20,8 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   config.gem "authlogic", :version => '>=2.1.3'
   config.gem 'inherited_resources',  :version => '>= 0.9.2'
+  config.gem 'opencongress-ruby', :lib => 'opencongress_ruby'
+  config.gem 'json'
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
 
@@ -42,3 +44,5 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
+
+ActiveSupport::JSON.backend = 'JSONGem'
