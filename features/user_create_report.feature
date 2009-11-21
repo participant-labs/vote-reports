@@ -7,3 +7,13 @@ Feature: User create report
       Given I am signed in
       When I go to my profile page
       And I follow "Create a report"
+      And I fill in "Name" with "My report"
+      And I press "Save"
+      Then I should see "Report was successfully created"
+            
+    Scenario: User tries to create a report without a name
+      Given I am signed in
+      When I go to my profile page
+      And I follow "Create a report"
+      And I press "Save"
+      Then I should see "Name can't be blank"

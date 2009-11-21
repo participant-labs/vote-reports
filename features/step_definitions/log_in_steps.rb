@@ -7,4 +7,5 @@ end
 
 Given /^I am signed in$/ do
   @current_user = Factory(:user)
+  When %{I log in as "#{@current_user.email}/#{@current_user.password}"}
 end
