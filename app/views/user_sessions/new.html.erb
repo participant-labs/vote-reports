@@ -1,0 +1,16 @@
+<% title "New User Session" %>
+
+<% form_for @user_session do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.text_field :password %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
+
+
