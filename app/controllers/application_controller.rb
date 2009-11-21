@@ -10,6 +10,15 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user
   
+  def login_required
+    unless current_user
+      #store_location #TODO: implement store location
+      flash[:notice] = "You must be logged in to access this page"
+      redirect_to login_path
+      return false
+    end
+  end
+  
   private
 
   def current_user_session
