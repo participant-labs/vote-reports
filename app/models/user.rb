@@ -3,5 +3,5 @@ class User < ActiveRecord::Base
     c.login_field = 'email'
   end
   
-  has_many :projects
+  has_many :reports
 end
