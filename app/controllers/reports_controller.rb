@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  
+  before_filter :login_required
   def index
     @reports = Report.all
   end

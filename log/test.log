@@ -654,3 +654,959 @@ Processing UsersController#destroy (for 0.0.0.0 at 2009-11-21 13:57:18) [DELETE]
   [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
   [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
   [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.9ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (1.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'14a258ddafffbf2142a70a9be6e3f794c82c49d8aa1d8a58f5c9840044da4515643b1aec4eddd47419a490f07415be30f299796a1471371baf917ceac5b9bb90') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'b8rz43tTJJJzVhWcManz', '2009-11-21 19:05:39.013331', E'b6e472d13ca05109e234a162b1aee536887b3733e22cca463cbe4871f15697f6a5f39e15aefc429350caeccfbab54fe8e46c7a9b70ff1e04579016dfd1dfb442', E'user1', E'14a258ddafffbf2142a70a9be6e3f794c82c49d8aa1d8a58f5c9840044da4515643b1aec4eddd47419a490f07415be30f299796a1471371baf917ceac5b9bb90', E'user1@example.com', '2009-11-21 19:05:39.013331') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'563ef4e7fda08e7e36d99614c0e82e752a19d8f72e95f039c37912d72644aedf7d12771373e16831bed0db23a1235de459ad7f3f7b3442d0f1aa75a10b708f6a') LIMIT 1[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'KXVuHKyrFSHU6vKQrflN', '2009-11-21 19:05:39.034716', E'8ad3b72d8cc023f5057eab8e7a311623a1a52747a950cc82a84ceca79ad84aa1d4a4c64a93975953041586c200a8c838f79a659661aafff6d77f153fb36b6691', E'user2', E'563ef4e7fda08e7e36d99614c0e82e752a19d8f72e95f039c37912d72644aedf7d12771373e16831bed0db23a1235de459ad7f3f7b3442d0f1aa75a10b708f6a', E'user2@example.com', '2009-11-21 19:05:39.034716') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.9ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'4aba0819b65ee3d4fbf5f62e5e6455eaffaf7ea386be77f4610221a90cd9578c53ee6f26e96f5572ccbbdc156c44517e46beb35cbcdc683b97c28609dd023da4') LIMIT 1[0m
+  [4;36;1mSQL (1.5ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'R4hPuixQLZx3zJXbyoj_', '2009-11-21 19:06:06.034990', E'ee56775ce4c9473ec38a82c81c206a23a14323049e00b8a43f373e0b3f1f7589b327e6b36a8c4831232950970670c90761a8a1c06ffe30ecb94e7ed7cd80a9f5', E'user1', E'4aba0819b65ee3d4fbf5f62e5e6455eaffaf7ea386be77f4610221a90cd9578c53ee6f26e96f5572ccbbdc156c44517e46beb35cbcdc683b97c28609dd023da4', E'user1@example.com', '2009-11-21 19:06:06.034990') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.5ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'8a0babfbf36f9284ab55e261a012c251772eb74ba8c9f1724b2b27041a3be409465b65a08098a0f932acff57a8f7eabfa23c78176840ae862936dd06b0a12b28') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'vcODJRwGR6sREB4xJh1l', '2009-11-21 19:06:06.061587', E'ba1b61a19f7644534a6e6930a92a21954548c0e6647560ccbcb2e736dd71d1ad4ac64a4e510bcf727ac34a7143692f80162f347df54ea47c25997ecc67d94a7b', E'user2', E'8a0babfbf36f9284ab55e261a012c251772eb74ba8c9f1724b2b27041a3be409465b65a08098a0f932acff57a8f7eabfa23c78176840ae862936dd06b0a12b28', E'user2@example.com', '2009-11-21 19:06:06.061587') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'4787d28f9dd84b73f74b9b24c05050daf10baa9804022683d8793092324e779ed0ef7339287fb5b1a107a1800231c9e844371a8f406849298b8850be59ea4e44') LIMIT 1[0m
+  [4;36;1mSQL (1.1ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'Za8umLfhfzl6T4VOlwS_', '2009-11-21 19:08:23.065749', E'f1b2c5f02fc4b8fd91a2d0e95af5b7df6eebeb9285da137c62d00d88c3d1bb62ead7ed6de22f9d926e7605e320321a88b06afbbf24809969a2d9011616aa69cb', E'user1', E'4787d28f9dd84b73f74b9b24c05050daf10baa9804022683d8793092324e779ed0ef7339287fb5b1a107a1800231c9e844371a8f406849298b8850be59ea4e44', E'user1@example.com', '2009-11-21 19:08:23.065749') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'2e01d0b1ca0c258bebd40ed21febf80270787881dba26b54469a37f8a90590bf286016d264c911464cf46e82ce87897bbf1fd7a9485f10f97b0e03f4c746beeb') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'VeSckmkPl0ZGqEkHZZUE', '2009-11-21 19:08:23.086491', E'243f0f87c5f5784ae20e1419f1c5d486f2f558f272fda61314a26c67b55b220fea7ed54d823343e18a320fda95a999cfe19a52ff188e14f54623b3f106e844eb', E'user2', E'2e01d0b1ca0c258bebd40ed21febf80270787881dba26b54469a37f8a90590bf286016d264c911464cf46e82ce87897bbf1fd7a9485f10f97b0e03f4c746beeb', E'user2@example.com', '2009-11-21 19:08:23.086491') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'abf4e8b52839994dd920d8ed3818224865f496d9729b9564438f5225c707826bee8b730bc88eae6ee30bf336331dcbd05ff28a2bee3341a39a36e10d7234b0e2') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'YuaW-D5VV1Xekw4bHx-c', '2009-11-21 19:10:08.504978', E'94fb5cbafc2a09a48f44e03c2ad9c6f8f38ac0caba528e80dea571fa196f4d04390edca1989d60224b3d47362646998c7abcf104a33f8799bd24b43c3c840ba8', E'user1', E'abf4e8b52839994dd920d8ed3818224865f496d9729b9564438f5225c707826bee8b730bc88eae6ee30bf336331dcbd05ff28a2bee3341a39a36e10d7234b0e2', E'user1@example.com', '2009-11-21 19:10:08.504978') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'9b3b96b204e03bf3a7268a679bf249e2614e34ddf979d3b6a13c6141dce6f82a9cdd7574653eab00c2673d85f37acfeec9272e88a00b5c9feb26ba6e609cf38a') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'nEeMuMEngmy01qwrTCYa', '2009-11-21 19:10:08.525161', E'ab24f41bde917ee80851269d62b7ab4e0cba6a5d3df8fb94e203fb793f147dcca35242ea5e1b51066bdb3ccaf110d8e457db15609606a6f74881c36712f23e73', E'user2', E'9b3b96b204e03bf3a7268a679bf249e2614e34ddf979d3b6a13c6141dce6f82a9cdd7574653eab00c2673d85f37acfeec9272e88a00b5c9feb26ba6e609cf38a', E'user2@example.com', '2009-11-21 19:10:08.525161') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'16a294a630af1db72156b8ac113712ad7b116baabac4a6a9ac37cfb0e632ae2cdeeb8d0dd1699f43682424f922909ded8b50c538d7a5e2185ccd41cd533fa875') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'h2lS8FXp5GGOYva47OQQ', '2009-11-21 19:10:29.803027', E'4c8f02f9dabfab018a1618fd72405350cdaec22a7fedd8aac695d4ecd515d48df67cae42f046924ba0c1a5dd83081f645b230793ccea3ef7d6f1b0c0fb68725c', E'user1', E'16a294a630af1db72156b8ac113712ad7b116baabac4a6a9ac37cfb0e632ae2cdeeb8d0dd1699f43682424f922909ded8b50c538d7a5e2185ccd41cd533fa875', E'user1@example.com', '2009-11-21 19:10:29.803027') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'16542bf250d816328a5a83e24edab8295aae4aff8f7c83637bd0dbd48d15d5bcc77fbf7b68a96b930ffa86343e415f505bc6306acc23db00c5238095c8675c87') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'yhN5DyQ7DoplQQRQZ0xF', '2009-11-21 19:10:29.823626', E'43fdd58654cc94fe4661ac12716d95770dd131c1a5da883e358d89567bf7d5ff138a4a8c0e6cdccf3285cbe37681f5312fdbc4655e01b8bda375b08542316788', E'user2', E'16542bf250d816328a5a83e24edab8295aae4aff8f7c83637bd0dbd48d15d5bcc77fbf7b68a96b930ffa86343e415f505bc6306acc23db00c5238095c8675c87', E'user2@example.com', '2009-11-21 19:10:29.823626') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'b1ea02cab0ebc1b561d0049a91f12567191a9aa0a6d77cb6285f7bbcd0447fd6e1bde16df1fc33cf48800f78e0edd0d141e2e59274dd12aa31b92884c321fae0') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'CWXjMKuoz-4oySqVcHkI', '2009-11-21 19:12:07.988523', E'f0b151239c1944c85166a88e3427cdc7aa2dd87ee5d24cc9c260c859c4ee1a2cdf3d2e5e63631fe84cfff393521decfbe91f527a7d87d73372f4770dc5215f60', E'user1', E'b1ea02cab0ebc1b561d0049a91f12567191a9aa0a6d77cb6285f7bbcd0447fd6e1bde16df1fc33cf48800f78e0edd0d141e2e59274dd12aa31b92884c321fae0', E'user1@example.com', '2009-11-21 19:12:07.988523') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.9ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'a67134c61e8816dc2f5d168424eba84853727b5a0557ce209d4702950d51345d1bf2b8b9776a7ce5edf94cba5d7cd396e878950a0d313f0d1e069ee63e9d1d4e') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'YptKlpnCHdyzOr4ORa85', '2009-11-21 19:12:08.010041', E'd6011807e281429257f83e0d1d0b41de1397086b1a068c7a196faec3ebf2f88ac6f0bcc0cc4cee83627158a0b47341719391d2e891b637adfd95b084e701f4c2', E'user2', E'a67134c61e8816dc2f5d168424eba84853727b5a0557ce209d4702950d51345d1bf2b8b9776a7ce5edf94cba5d7cd396e878950a0d313f0d1e069ee63e9d1d4e', E'user2@example.com', '2009-11-21 19:12:08.010041') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (1.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'45c160bb91724a3a1b47ca191f69db8d1004e40dca252e413eddd224d22c311697350e6b3352b374ce7930daa6ea8a6c6b2c1498a26dcad9177ed89994fb1b55') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'H9TepAt8I6cNOFae30sD', '2009-11-21 19:12:57.182465', E'6e1eb4fef1d06344552291e170782d2259319fb5a7aa1f0f6c78efa68c2ec1afa4911678b5780ae72cb0d84b06641dad9ab27eaa3d1aaa2087766dfafeac010c', E'user1', E'45c160bb91724a3a1b47ca191f69db8d1004e40dca252e413eddd224d22c311697350e6b3352b374ce7930daa6ea8a6c6b2c1498a26dcad9177ed89994fb1b55', E'user1@example.com', '2009-11-21 19:12:57.182465') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'c4757ea9907b7e2c26b9786c1168d5ce7bdeb583688ae40ba3f6a5a05cff2d590787c09bcd0772ed9299bc929ec8ae7b70c2cba8f7b6fa2f8df88619a6617997') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'mevKXozUyEeyby1nSBes', '2009-11-21 19:12:57.203796', E'34555830f264b0d58f4834e8ac6a3bb2200688100223bf9f38791d432c7d5b264523cc9cdb996d8e1d860e1ebdc17904b62e24d04cb0a271772ab999102f94c9', E'user2', E'c4757ea9907b7e2c26b9786c1168d5ce7bdeb583688ae40ba3f6a5a05cff2d590787c09bcd0772ed9299bc929ec8ae7b70c2cba8f7b6fa2f8df88619a6617997', E'user2@example.com', '2009-11-21 19:12:57.203796') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'35214dd36912c511d1050ca2b5e9bf9e55de53a695f9999bbc13caee5172c578071855ba331e74dd59f78bc49043b321c60e571516266432fdaa3afe073d2f84') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'K-uiuyRDKBYcUR61Vad8', '2009-11-21 19:19:12.935738', E'1eca74d39fc0e13adc6e5b9c821de611f1017814563e0455c48c924ba5ec128bf46b904c172da41a07b8c79b1c91f73fb531331c575f90b1f3478117418b8b95', E'user1', E'35214dd36912c511d1050ca2b5e9bf9e55de53a695f9999bbc13caee5172c578071855ba331e74dd59f78bc49043b321c60e571516266432fdaa3afe073d2f84', E'user1@example.com', '2009-11-21 19:19:12.935738') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'4f7236cbc4af386c47551bff61c584f43844c9499248ce41da49fde297ba9786c50f0eb035428f5fdfd01cb0b8f7e5aeed2a73a15a6780354992c74f9c796db8') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'uOIOUS7YAFaChofY5c1a', '2009-11-21 19:19:12.956352', E'd2b24deb599b8115acb230aa609c5935baa4d2a4fb5d373d415b9bb26f014c5f3fad5e3037b965fa05ab06e38dadc83eec2eebf0b24bf7748e16ccbd68e6b71d', E'user2', E'4f7236cbc4af386c47551bff61c584f43844c9499248ce41da49fde297ba9786c50f0eb035428f5fdfd01cb0b8f7e5aeed2a73a15a6780354992c74f9c796db8', E'user2@example.com', '2009-11-21 19:19:12.956352') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:19:12) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 10) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:19:12) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:19:12) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:19:13) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:19:13) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:19:13) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:19:13) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:19:13) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:19:13) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:19:13) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:19:13) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:19:13) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.9ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'f1617581d5426048da4d7f9cb35886d9819290f7f8ea409af55056a206231a39b7b3bf5856a07a282be0d1ea93f04b47081e3139c28a7607a00451fd6685914a') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'64wLcSy5wFe3s0P3MG_-', '2009-11-21 19:19:43.553057', E'be7c78281421308bfc029740f6acb8a24f1615fde83ffe49d68f658a372545f85d916699a7866bfa7eee63907e26566cbe7ee992e66fd52f74fdbaada134cbad', E'user1', E'f1617581d5426048da4d7f9cb35886d9819290f7f8ea409af55056a206231a39b7b3bf5856a07a282be0d1ea93f04b47081e3139c28a7607a00451fd6685914a', E'user1@example.com', '2009-11-21 19:19:43.553057') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'ab544fcb0a3c4fdb8a6f3e8075136c9ed8eb139c75c619ffe67d195668cc18c66b6dd0798a414441f9101093bc27360b63e3486f02b5d6523a43cd869752ee51') LIMIT 1[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'RbG0uMuSVI21B-HgfTB1', '2009-11-21 19:19:43.573790', E'b5a33a6d5082ae700a3077b83cccd43a3e696aecaa7692652670803d79c22d1b84efcc4687a1ac9eeb9d030a5ecb67abb5d5c164bb748075de61730fad3117af', E'user2', E'ab544fcb0a3c4fdb8a6f3e8075136c9ed8eb139c75c619ffe67d195668cc18c66b6dd0798a414441f9101093bc27360b63e3486f02b5d6523a43cd869752ee51', E'user2@example.com', '2009-11-21 19:19:43.573790') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:19:43) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 10) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:19:43) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:19:43) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:19:43) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:19:43) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:19:43) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:19:43) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:19:43) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:19:43) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:19:43) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.4ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:19:43) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:19:43) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'46743fe690adb0221005512bf04cf3493b1b201e0a9b917eb56e314e08037ac5da0150584ac57f85437ffe03296cf4a03a7d99393b4c7ce6d7ef75edb556f9b4') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'RXd90I0Qb2c_c3hRZGPT', '2009-11-21 19:20:07.584487', E'93b726d71903e40be2e2477c4a491a0a4d63cc63452e8bb512ce0f95387b8377b5d52e77ef018c454bc219fe8dc9fd3801f3ae1c18f1c437f9d8c8dfee0b7d01', E'user1', E'46743fe690adb0221005512bf04cf3493b1b201e0a9b917eb56e314e08037ac5da0150584ac57f85437ffe03296cf4a03a7d99393b4c7ce6d7ef75edb556f9b4', E'user1@example.com', '2009-11-21 19:20:07.584487') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'ca9b88ca3f508cf107f8b972a2da3ca90bcb4172c14262b99e0fbbcd471d0ebe189da4e895a145f791dc3aed6e1e4d316c01d9d8b6715c51b90c714fc7086e34') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'mqpj57KxNRTxSfTw-EvB', '2009-11-21 19:20:07.605429', E'e4f0e8f8c665ee6f23d974910be2a3c727ec681484a3cf3405561d6ba276c99ae5ffdcb111d565fda1b6bcf900e2ae1a8f2de2b72aca0f75ab14faa71e718be3', E'user2', E'ca9b88ca3f508cf107f8b972a2da3ca90bcb4172c14262b99e0fbbcd471d0ebe189da4e895a145f791dc3aed6e1e4d316c01d9d8b6715c51b90c714fc7086e34', E'user2@example.com', '2009-11-21 19:20:07.605429') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:20:07) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 10) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:20:07) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:20:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:20:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:20:07) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:20:07) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:20:07) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:20:07) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:20:07) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:20:07) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:20:07) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:20:07) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.7ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'22c748fa2eec4fdbab92fadb306d1cb540407a745ad9442b25071509ea5b4af6235e00da0406a5248fe7aa66121830f85819abd72076fc268aec51d201a33224') LIMIT 1[0m
+  [4;36;1mSQL (1.1ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'QKo8WMyDe4o-XhInaA3a', '2009-11-21 19:20:30.103203', E'5b11dca7450d403ed7e77cc135c6a5fce090e81f6172b0f3a32c7d9cad2645c8f8eb97f9cc8e13171a04ddbe51723ec52991cc007429c950e85a4f20ef0b85d6', E'user1', E'22c748fa2eec4fdbab92fadb306d1cb540407a745ad9442b25071509ea5b4af6235e00da0406a5248fe7aa66121830f85819abd72076fc268aec51d201a33224', E'user1@example.com', '2009-11-21 19:20:30.103203') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'6704439da7b0ec0616723fcfb149adb81dc81f609b4d5ab3790b94965b2225fb077a5f752e1da825c53601e29572b74473eb560ea1d8655cc552da82cda24ed7') LIMIT 1[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'RIRVy_UGlEayjA0Rm9rC', '2009-11-21 19:20:30.123876', E'b038914a0671e833cd5545734a0f6b2248b0f63a1fff3729933e086ea6debb9d792ecae0c961348d79c32857ab581046f861cdc460a249a89d9a8d89791c4f52', E'user2', E'6704439da7b0ec0616723fcfb149adb81dc81f609b4d5ab3790b94965b2225fb077a5f752e1da825c53601e29572b74473eb560ea1d8655cc552da82cda24ed7', E'user2@example.com', '2009-11-21 19:20:30.123876') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:20:30) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 11) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:20:30) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:20:30) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:20:30) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:20:30) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:20:30) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:20:30) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:20:30) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:20:30) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:20:30) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:20:30) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:20:30) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (1.6ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'7812442840743f579ee8b33f44bf1b35857dac077c51517527a8bc95ed05b4624df5802e2d63c9f19af6dfe737d874a4c504f80bd91b36a8ab12e344b3d16085') LIMIT 1[0m
+  [4;36;1mSQL (1.1ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'efgBvyY_07mvea56xS88', '2009-11-21 19:21:04.744860', E'afd77f24b280f77e0a9321a791baee7a7270e74765042313bfe206b7cc2cf70cd18f2ad7cf655d61cb57c63d1faf20ee44d2455e750ba1832d673679ee924f46', E'user1', E'7812442840743f579ee8b33f44bf1b35857dac077c51517527a8bc95ed05b4624df5802e2d63c9f19af6dfe737d874a4c504f80bd91b36a8ab12e344b3d16085', E'user1@example.com', '2009-11-21 19:21:04.744860') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'e984b4d6fce951ed2482b2a911fcbf20f836fd7c0c57c15c747c1f2248b1b5529b0bf9d9924dba5a7a5ec76a739e10b7dd82b559394d48691a11e6b5c0d350d4') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'_7bTMl8-nkzBUAWxrNfX', '2009-11-21 19:21:04.765678', E'333fef887c9091a961062636006f64ca5e6140c6744320cdfaf6fc81b72e630647601ce212e8b3667e39e2ce98f5a6ce22d6baaa36697833a54db20703febfce', E'user2', E'e984b4d6fce951ed2482b2a911fcbf20f836fd7c0c57c15c747c1f2248b1b5529b0bf9d9924dba5a7a5ec76a739e10b7dd82b559394d48691a11e6b5c0d350d4', E'user2@example.com', '2009-11-21 19:21:04.765678') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:21:04) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 11) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:21:04) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:21:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:21:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:21:04) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:21:04) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:21:04) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:21:04) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:21:04) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:21:04) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:21:04) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:21:04) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m

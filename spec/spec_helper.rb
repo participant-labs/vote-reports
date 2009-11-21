@@ -52,3 +52,34 @@ Spec::Runner.configure do |config|
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
 end
+
+
+def route_matches(path, method, params)
+  it "maps #{params.inspect} to #{path.inspect}" do
+    route_for(params).should == {:path => path, :method => method}
+  end
+
+  it "generates params #{params.inspect} from #{method.to_s.upcase} to #{path.inspect}" do
+    params_from(method.to_sym, path).should == params
+  end
+end
+
+def requires_login_for(method, action, *args)
+  describe "in the name of security" do
+    before(:each) { send(method, action, *args) }
+    it_denies_access
+  end
+end
+
+def it_denies_access(opts = {})
+  flash_msg = opts[:flash] || /You must be logged in to access this page/
+  redirect_path = opts[:redirect] || "login_path"
+
+  it "sets the flash to #{flash_msg.inspect}" do
+    flash[:notice].should match(flash_msg)
+  end
+
+  it "redirects to #{redirect_path}" do
+    response.should redirect_to(eval(redirect_path))
+  end
+end
