@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :reports
   end
 
-
+  map.about "about", :controller => "site", :action => "about"  
   map.signup "/signup", :controller => "users", :action => "new"  
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"  

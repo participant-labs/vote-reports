@@ -8,8 +8,12 @@
 @import blueprint/modules/scaffolding.sass
 @import compass/utilities.sass
 
-// To generate css equivalent to the blueprint css but with your configuration applied, uncomment:
-// +blueprint
+!main_header_background = #414040
+!second_header_background = #787878
+!normal = #282828
+
+
+
 
 //Recommended Blueprint configuration with scoping and semantic layout:
 +blueprint-typography("body.bp")
@@ -18,6 +22,13 @@ body.bp
   +blueprint-utilities
   +blueprint-debug
   +blueprint-interaction
+  
+  h3
+    background-color= !main_header_background
+    color: white
+    padding: 5px 10px
+    margin-bottom: 2px
+
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
 form.bp
@@ -25,37 +36,51 @@ form.bp
 
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body.three-col
+
   #container
     +container
+    background-color: white
   #header
-    margin-top: 10px
-    +column(!blueprint_grid_columns)
-    .logo
-      +column(20)
-    .login-section
-      +column(4,true)
-      .login-box
-        +box
+    margin-bottom: 10px
+    +column(!blueprint_grid_columns, true)
   #footer
-    +column(!blueprint_grid_columns)
+    +column(!blueprint_grid_columns, true)
+    padding: 10px
+  #sidebar-left, #sidebar-right
+    p 
+      padding: 10px 10px
+    ul
+      +no-bullets      
+      margin-left: 5px
+
   #sidebar-left
     // One third of the grid columns, rounding down. With 24 cols, this is 8.
     !sidebar_columns = 4
     +column(!sidebar_columns)
-    .about
-      +box
+
+  #sidebar-right
+    // One third of the grid columns, rounding down. With 24 cols, this is 8.
+    !sidebar_columns = 4
+    +column(!sidebar_columns,true)
+    ul.sidebar-links
+      a
+        +hover-link
+
   #content
     // Two thirds of the grid columns, rounding up.
     // With 24 cols, this is 16.
     !content_columns = 16
     // true means it's the last column in the row
     +column(!content_columns)
-  #sidebar-right
-    // One third of the grid columns, rounding down. With 24 cols, this is 8.
-    !sidebar_columns = 4
-    +column(!sidebar_columns,true)
-    .site-links
-      +box
-      +no-bullets
-      ul
-        margin-left: 0px
+    h2
+      background-color= !main_header_background
+      color: white
+      padding: 5px 10px
+      margin-bottom: 2px
+    h3
+      background-color= !main_header_background
+    p, form
+      padding: 5px
+
+
+      

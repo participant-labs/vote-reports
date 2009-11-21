@@ -70,7 +70,7 @@ body.bp .first { margin-left: 0; padding-left: 0; }
 body.bp .last { margin-right: 0; padding-right: 0; }
 body.bp .top { margin-top: 0; padding-top: 0; }
 body.bp .bottom { margin-bottom: 0; padding-bottom: 0; }
-body.bp .showgrid { background: url('/images/grid.png?1258837293'); }
+body.bp .showgrid { background: url('/images/grid.png?1258839511'); }
 body.bp .error { padding: .8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
 body.bp .error a { color: #8a1f11; }
 body.bp .notice { padding: .8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #fff6bf; color: #514721; border-color: #ffd324; }
@@ -81,6 +81,7 @@ body.bp .hide { display: none; }
 body.bp .highlight { background: yellow; }
 body.bp .added { background: #006600; color: white; }
 body.bp .removed { background: #990000; color: white; }
+body.bp h3 { background-color: #414040; color: white; padding: 5px 10px; margin-bottom: 2px; }
 
 form.bp label { font-weight: bold; }
 form.bp fieldset { padding: 1.4em; margin: 0 0 1.5em 0; }
@@ -96,24 +97,23 @@ form.bp input.text:focus, form.bp input.title:focus, form.bp textarea:focus, for
 form.bp input.text, form.bp input.title { width: 300px; }
 form.bp textarea { width: 390px; height: 250px; }
 
-body.three-col #container { width: 950px; margin: 0 auto; overflow: hidden; display: inline-block; }
+body.three-col #container { width: 950px; margin: 0 auto; overflow: hidden; display: inline-block; background-color: white; }
 body.three-col #container { display: block; }
-body.three-col #header { margin-top: 10px; display: inline; float: left; margin-right: 10px; width: 950px; }
+body.three-col #header { margin-bottom: 10px; display: inline; float: left; margin-right: 0; width: 950px; }
 * html body.three-col #header { overflow-x: hidden; }
-body.three-col #header .logo { display: inline; float: left; margin-right: 10px; width: 790px; }
-* html body.three-col #header .logo { overflow-x: hidden; }
-body.three-col #header .login-section { display: inline; float: left; margin-right: 0; width: 150px; }
-* html body.three-col #header .login-section { overflow-x: hidden; }
-body.three-col #header .login-section .login-box { padding: 1.5em; margin-bottom: 1.5em; background: #E5ECF9; }
-body.three-col #footer { display: inline; float: left; margin-right: 10px; width: 950px; }
+body.three-col #footer { display: inline; float: left; margin-right: 0; width: 950px; padding: 10px; }
 * html body.three-col #footer { overflow-x: hidden; }
+body.three-col #sidebar-left p, body.three-col #sidebar-right p { padding: 10px 10px; }
+body.three-col #sidebar-left ul, body.three-col #sidebar-right ul { margin-left: 5px; }
+body.three-col #sidebar-left ul li, body.three-col #sidebar-right ul li { list-style-type: none; margin-left: 0px; }
 body.three-col #sidebar-left { display: inline; float: left; margin-right: 10px; width: 150px; }
 * html body.three-col #sidebar-left { overflow-x: hidden; }
-body.three-col #sidebar-left .about { padding: 1.5em; margin-bottom: 1.5em; background: #E5ECF9; }
-body.three-col #content { display: inline; float: left; margin-right: 10px; width: 630px; }
-* html body.three-col #content { overflow-x: hidden; }
 body.three-col #sidebar-right { display: inline; float: left; margin-right: 0; width: 150px; }
 * html body.three-col #sidebar-right { overflow-x: hidden; }
-body.three-col #sidebar-right .site-links { padding: 1.5em; margin-bottom: 1.5em; background: #E5ECF9; }
-body.three-col #sidebar-right .site-links li { list-style-type: none; margin-left: 0px; }
-body.three-col #sidebar-right .site-links ul { margin-left: 0px; }
+body.three-col #sidebar-right ul.sidebar-links a { text-decoration: none; }
+body.three-col #sidebar-right ul.sidebar-links a:hover { text-decoration: underline; }
+body.three-col #content { display: inline; float: left; margin-right: 10px; width: 630px; }
+* html body.three-col #content { overflow-x: hidden; }
+body.three-col #content h2 { background-color: #414040; color: white; padding: 5px 10px; margin-bottom: 2px; }
+body.three-col #content h3 { background-color: #414040; }
+body.three-col #content p, body.three-col #content form { padding: 5px; }
