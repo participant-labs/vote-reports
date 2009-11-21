@@ -1,6 +1,6 @@
 <% form_tag bills_path, :method => :get do %>
   <%= label_tag :q, 'Search' %>
-  <%= text_field_tag :q %>
+  <%= text_field_tag :q, @q %>
   <%= submit_tag 'Search' %>
 <% end %>
 
