@@ -8,3 +8,8 @@ data
 spec/support/web_requests.marshal
 solr
 rerun.txt
+
+vendor/bundler_gems/gems
+vendor/bundler_gems/specifications
+vendor/bundler_gems/doc
+vendor/bundler_gems/environment.rb
