@@ -14,6 +14,8 @@ module NavigationHelpers
       signup_path
     when /the log in page/i
       login_path
+    when /the bills page/i
+      bills_path
     
     # Add more mappings here.
     # Here is a more fancy example:
