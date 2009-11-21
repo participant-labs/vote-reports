@@ -30,3 +30,4 @@ config.action_mailer.delivery_method = :test
 config.gem 'rspec'
 config.gem 'rspec-rails'
 config.gem 'cucumber'
+config.gem "thoughtbot-factory_girl", :lib => "factory_girl"

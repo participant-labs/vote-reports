@@ -8,5 +8,9 @@ module ApplicationHelper
   def title(page_title)
     @page_title = page_title.to_s
   end
+  
+  def flash_helper
+    [:notice, :warning, :message].map { |f| content_tag(:div, flash[f], :class => f) if flash[f] }
+  end
 
 end
