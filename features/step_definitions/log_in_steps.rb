@@ -4,3 +4,7 @@ When /^I log in as "(.*)\/(.*)"$/ do |email, password|
   And %{I fill in "Password" with "#{password}"}
   And %{I press "Log in"}
 end
+
+Given /^I am signed in$/ do
+  @current_user = Factory(:user)
+end
