@@ -8,3 +8,5 @@ Feature: Bill viewing
       And I fill in "Search" with "Patriot Act"
       And I press "Search"
       Then I should see "USA PATRIOT Reauthorization Act of 2009"
+      When I follow "USA PATRIOT Reauthorization Act of 2009"
+      Then I should see "View on OpenCongress"
