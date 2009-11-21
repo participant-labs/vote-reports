@@ -1,0 +1,12 @@
+/* 
+CSS3 + vendor-specific styles
+
+-webkit	 	Safari
+-moz 	 	Firefox
+*/
+
+.main {
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	}
