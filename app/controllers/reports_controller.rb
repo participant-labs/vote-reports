@@ -1,4 +1,4 @@
 class ReportsController < InheritedResources::Base
-  actions :show
+  actions :index, :show
 
 end

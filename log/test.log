@@ -1610,3 +1610,559 @@ Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
   [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
   [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
   [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.1ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'5b218d20262f01118c60111c7a7dc153056574a5cef0033ab06f41c7faa42a783462b1b9828a9f96997f4a359c88a28975b42264b7ee4c9168ab29d841ada364') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'Oa_nSoDZ_NI0Zb6OZEXP', '2009-11-21 19:29:04.057262', E'6c0cea4ec0beb5e3976f9c2995361c4fc001563bcecc22db0342406be9a055bc9886400d36d0e00850a8fca50f1b0b73e1e7f6898a0b379b4aedcb403b3f6d68', E'user1', E'5b218d20262f01118c60111c7a7dc153056574a5cef0033ab06f41c7faa42a783462b1b9828a9f96997f4a359c88a28975b42264b7ee4c9168ab29d841ada364', E'user1@example.com', '2009-11-21 19:29:04.057262') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'e9995101291bc982e7cad20b208413adf7d81e4852f6e239553db47d787f67a0895e7d94ee262f1d3b59b436d600ac6e23e11595e3edce636ea1adc70ee0d07f') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'_e4BFQYJnWyMaxMG5mGl', '2009-11-21 19:29:04.077461', E'57640a80ec432f6d0f82080b2069937c49583ea938279e908b375333bcdc7cd7780b4fed76e44fbe3df74bacf15fd5a5343fb44987619984c876ed7f8b5cff07', E'user2', E'e9995101291bc982e7cad20b208413adf7d81e4852f6e239553db47d787f67a0895e7d94ee262f1d3b59b436d600ac6e23e11595e3edce636ea1adc70ee0d07f', E'user2@example.com', '2009-11-21 19:29:04.077461') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:29:04) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/destroy
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:29:04) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/destroy
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:29:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/new
+  [4;35;1mSQL (0.4ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:29:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/new
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:29:04) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/edit
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:29:04) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/edit
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:29:04) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/update
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:29:04) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/update
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:29:04) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/create
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:29:04) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/create
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:29:04) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/index
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:29:04) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/index
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (1.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'52d67375170cb8f4a391ca2e89737eb54e9dda2d566e57703e3e2fb7681a8184d04892b47231d05d3d9cac1f6b3301482d56fd2694ec83d509e9cfe87bb71316') LIMIT 1[0m
+  [4;36;1mSQL (1.2ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'W0wEgnGmGjOjFra2mCfb', '2009-11-21 19:30:51.320280', E'958ed24dd4cf8954f98351d492337e396ee5afde13dad6af3232c4908d1fc1bb79c9544d633e32939b86dda985aecb5381532660c7e9b88938d360a222a2f149', E'user1', E'52d67375170cb8f4a391ca2e89737eb54e9dda2d566e57703e3e2fb7681a8184d04892b47231d05d3d9cac1f6b3301482d56fd2694ec83d509e9cfe87bb71316', E'user1@example.com', '2009-11-21 19:30:51.320280') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'6145983acff34b73e1df2357d26975296f3491eedf9691bad9a1cf9e00c8bf14c576a6de95c6d2a417ab870f437abbe5f8d07397c25f38c67786a1f248884692') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'Rt6MR146i-1WcuT1AzyO', '2009-11-21 19:30:51.342511', E'40fee2eccc3d2f67c0965a8d2a06ae1a4a7de35896d1eb123975d68e5d4f93da5fb78a41ca33552111da8a59485d6258a72c7530d4b685b6fe8e80aa568cda84', E'user2', E'6145983acff34b73e1df2357d26975296f3491eedf9691bad9a1cf9e00c8bf14c576a6de95c6d2a417ab870f437abbe5f8d07397c25f38c67786a1f248884692', E'user2@example.com', '2009-11-21 19:30:51.342511') RETURNING "id"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:30:51) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 12) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:30:51) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:30:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:30:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:30:51) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:30:51) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:30:51) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:30:51) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:30:51) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:30:51) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:30:51) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:30:51) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'ee371d4969358c450b13ea469fbaa04f24c1ba4b06e2bbced918338cd3d5c6564dba159aca1442c530a6db8ef41b5ddcd0ebc9dff5ec343dbe84e8ca016d3659') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'Lv6jO5hfk67Ad9GVUsSI', '2009-11-21 19:31:43.207459', E'bf48fcf215a3e8f6bcf6b90642c48ef824611e247ab3d8c5311a11f95893763eb27c21f5a6ba9ca29579adc0dc128b38475f55b85837cf65fdd07d5fe21bf8ff', E'user1', E'ee371d4969358c450b13ea469fbaa04f24c1ba4b06e2bbced918338cd3d5c6564dba159aca1442c530a6db8ef41b5ddcd0ebc9dff5ec343dbe84e8ca016d3659', E'user1@example.com', '2009-11-21 19:31:43.207459') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'7c08b5c5099bfffa38fe9980e7b2982089081e4ac5464a31177e3ecb4912063a4b6908dbe4efb25a677438c3fb26a2bc04d8ad1f7dc81fd9a77474187e9cd68d') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'jQEeOcZ1IruxNe3BcSGg', '2009-11-21 19:31:43.229086', E'8701ca2df0dad1bf7cf203b602cdf000fc1cef7351d22ee81387399795e64d9c0653b7a6c26334ad30e1c6444e0567fefa64a9a38501ae2333b9c735ecfb8ef1', E'user2', E'7c08b5c5099bfffa38fe9980e7b2982089081e4ac5464a31177e3ecb4912063a4b6908dbe4efb25a677438c3fb26a2bc04d8ad1f7dc81fd9a77474187e9cd68d', E'user2@example.com', '2009-11-21 19:31:43.229086') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:31:43) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 10) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:31:43) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/destroy]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:31:43) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:31:43) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/new]
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:31:43) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:31:43) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:31:43) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:31:43) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports/update]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:31:43) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:31:43) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:31:43) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:31:43) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+Redirected to http://test.host/login
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/reports]
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user1@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'30d43b275b95a20bf4e6ec6a277aa9f781ef9d42dbb6ab1727f7fb0c6504e361e420486b05b4b1a7520db5944d161291575419382fab8c6a0b64ac789c40bd43') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'P0kwj4sv9tDwJvt9Ixvi', '2009-11-21 19:34:39.091283', E'57cb80fabc1de716776eaf8e8c2e5cd35c41b381cf0098f8a3a44332dbce527feb5a3033d418e241a782cc4a75b46593fe870861b9171497bfedc71c127375ef', E'user1', E'30d43b275b95a20bf4e6ec6a277aa9f781ef9d42dbb6ab1727f7fb0c6504e361e420486b05b4b1a7520db5944d161291575419382fab8c6a0b64ac789c40bd43', E'user1@example.com', '2009-11-21 19:34:39.091283') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email") = E'user2@example.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."persistence_token" = E'afec5d5fce02070038fd43e0d398d98841a7009b66f85586f74521af3c1508f8913a1809760f01652abf18751672bfbad6aa752f81db2c722ee531ac03583bbf') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "users" ("salt", "updated_at", "crypted_password", "username", "persistence_token", "email", "created_at") VALUES(E'p3ee16ubokyWHsNraQMS', '2009-11-21 19:34:39.111910', E'a662a81b782e2f8442f47e2dd78a2136380553015dbc0946c913334ade26294cfe8373eb31eb8c7ed497085bd6c2765580f42106798fc7c4a19f94adcf85a4b4', E'user2', E'afec5d5fce02070038fd43e0d398d98841a7009b66f85586f74521af3c1508f8913a1809760f01652abf18751672bfbad6aa752f81db2c722ee531ac03583bbf', E'user2@example.com', '2009-11-21 19:34:39.111910') RETURNING "id"[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "reports" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:34:39) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/destroy
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#destroy (for 0.0.0.0 at 2009-11-21 14:34:39) [DELETE]
+  Parameters: {"action"=>"destroy", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/destroy
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:34:39) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/new
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#new (for 0.0.0.0 at 2009-11-21 14:34:39) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/new
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:34:39) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/edit
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#edit (for 0.0.0.0 at 2009-11-21 14:34:39) [GET]
+  Parameters: {"action"=>"edit", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/edit
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:34:39) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/update
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#update (for 0.0.0.0 at 2009-11-21 14:34:39) [PUT]
+  Parameters: {"action"=>"update", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/update
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:34:39) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/create
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#create (for 0.0.0.0 at 2009-11-21 14:34:39) [POST]
+  Parameters: {"action"=>"create", "controller"=>"reports"}
+Rendering template within layouts/application
+Rendering reports/create
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:34:39) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+  [4;35;1mReport Load (0.3ms)[0m   [0mSELECT * FROM "reports" [0m
+Rendering template within layouts/application
+Rendering reports/index
+Completed in 1ms (View: 0, DB: 1) | 200 OK [http://test.host/reports]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+
+
+Processing ReportsController#index (for 0.0.0.0 at 2009-11-21 14:34:39) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reports"}
+  [4;36;1mReport Load (0.2ms)[0m   [0;1mSELECT * FROM "reports" [0m
+Rendering template within layouts/application
+Rendering reports/index
+Completed in 1ms (View: 0, DB: 1) | 200 OK [http://test.host/reports]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
