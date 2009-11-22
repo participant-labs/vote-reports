@@ -20,6 +20,6 @@
 <h2>Recent Reports</h2>
 <ol>
   <%- @recent_reports.each do |report| -%>
-    <%= render report %>
+    <%= render 'users/reports/report', :report => report %>
   <%- end -%>
 </ol>

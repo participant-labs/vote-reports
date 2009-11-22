@@ -4,11 +4,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resources :bills
   map.resources :politicians
-  map.resources :reports do |report|
-    report.resource :bills, :controller => 'reports/bills'
-  end
+  map.resources :reports
   map.resources :users do |user|
-    user.resources :reports
+    user.resources :reports, :controller => 'users/reports' do |report|
+      report.resource :bills, :controller => 'users/reports/bills'
+    end
   end
 
   map.about "about", :controller => "site", :action => "about"  
