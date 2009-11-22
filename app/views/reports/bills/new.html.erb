@@ -1,5 +1,5 @@
 <h2>Declare Your Opposition/Support to Bills</h2>
-<% form_for @report do |f| %>
+<% form_for [@report.user, @report] do |f| %>
   <table>
     <thead>
       <th>Bill</th>
