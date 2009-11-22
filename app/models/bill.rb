@@ -10,8 +10,10 @@ class Bill < ActiveRecord::Base
     end
 
     def fetch_by_query(query)
-      OpenCongress::OCBill.by_query(query).map do |bill|
-        find_or_create(bill)
+      Cachy.cache(query, :expires_in => 1.day, :hash_key => true) do
+        OpenCongress::OCBill.by_query(query).map do |bill|
+          find_or_create(bill)
+        end
       end
     end
 
