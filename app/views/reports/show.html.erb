@@ -1,12 +1,9 @@
-<% title "Report" %>
+<% title "Report - #{h @report.name}" %>
+
+<h2><%=h @report.name %></h2>
 
 <p>
-  <strong>User:</strong>
-  <%=h @report.user.username %>
-</p>
-<p>
-  <strong>Name:</strong>
-  <%=h @report.name %>
+  Created by <%= link_to h(@report.user.username), @report.user %>
 </p>
 
 <p>
