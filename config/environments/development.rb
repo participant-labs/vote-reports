@@ -16,4 +16,4 @@ config.action_controller.perform_caching             = false
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
 
-ActionController::Base.cache_store = :mem_cache_store, "127.0.0.1"
+#ActionController::Base.cache_store = :mem_cache_store, "127.0.0.1"
