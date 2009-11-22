@@ -40,5 +40,7 @@ class Bill < ActiveRecord::Base
     "http://www.opencongress.org/bill/#{opencongress_id}/show"
   end
 
+  has_many :bill_criteria, :dependent => :destroy
+
   validates_uniqueness_of :opencongress_id
 end
