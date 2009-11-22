@@ -33,7 +33,7 @@ body.bp
 
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
-form.bp
+form
   +blueprint-form
 
 // Page layout can be done using mixins applied to your semantic classes and IDs:
@@ -81,6 +81,11 @@ body.three-col
     ul.sidebar-links
       a
         +hover-link
+    form
+      padding-bottom: 10px
+
+      input.text
+        width: 125px
 
   #content
     !content_columns = 20

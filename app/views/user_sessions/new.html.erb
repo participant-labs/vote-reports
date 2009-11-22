@@ -6,11 +6,10 @@
   <%= f.error_messages %>
   <p>
     <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
+    <%= f.text_field :email, :class => "text" %><br />
+
     <%= f.label :password %><br />
-    <%= f.password_field :password %>
+    <%= f.password_field :password, :class => "text" %>
   </p>
   <p><%= f.submit "Log in" %></p>
 <% end %>
