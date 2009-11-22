@@ -21,9 +21,10 @@
       </div>
       <div id="sidebar-right">
 
+        <h3>Search</h3>
+        <%= render 'bills/search', :button => 'Search for Bills', :label => '' %>
         <h3>Links</h3>
         <ul class="sidebar-links">
-          <li><%= render 'bills/search', :button => 'Search for Bills', :label => '' %></li>
           <%= sidebar_link("Create a Report", new_report_path) %>
           <% if current_user %>
             <%= sidebar_link("My reports", user_reports_path(current_user)) %>
