@@ -6,6 +6,16 @@
   Created by <%= link_to h(@report.user.username), @report.user %>
 </p>
 
+
+<h3>Bill Criteria</h3>
+<%- unless @report.bill_criteria.empty? -%>
+<ul>
+  <%- @report.bill_criteria.each do |criterion| -%>
+    <li><%= render criterion %></li>
+  <%- end -%>
+</ul>
+<%- end -%>
+
 <%- if @report.user == current_user -%>
   <h3>Add Bills to Report</h3>
   <%= render 'bills/search', :label => '', :path => new_report_bills_path(@report) %>
