@@ -1,9 +1,13 @@
 <% title "Reports" %>
 
-<ul>
-<% @reports.each do |report| %>
-  <li><%= render report %></li>
-<% end %>
-</ul>
+<%- if @reports.empty? -%>
+  <p>You haven't created a report yet - <%= link_to "try it out!", new_resource_path %></p>
+<%- else -%>
+  <ul>
+  <% @reports.each do |report| %>
+    <li><%= render report %></li>
+  <% end %>
+  </ul>
+<%- end -%>
 
 <p><%= link_to "New Report", new_resource_path %></p>
