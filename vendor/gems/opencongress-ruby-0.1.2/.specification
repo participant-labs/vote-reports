@@ -1,0 +1,73 @@
+--- !ruby/object:Gem::Specification 
+name: opencongress-ruby
+version: !ruby/object:Gem::Version 
+  version: 0.1.2
+platform: ruby
+authors: 
+- David Shettler
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2009-11-21 00:00:00 -05:00
+default_executable: 
+dependencies: []
+
+description: 
+email: dave@opencongress.org
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- LICENSE
+- README.rdoc
+files: 
+- .gitignore
+- LICENSE
+- README.rdoc
+- Rakefile
+- VERSION.yml
+- lib/opencongress/bill.rb
+- lib/opencongress/blog_post.rb
+- lib/opencongress/news_post.rb
+- lib/opencongress/person.rb
+- lib/opencongress/person_stat.rb
+- lib/opencongress/roll_call.rb
+- lib/opencongress/roll_call_comparison.rb
+- lib/opencongress/voting_comparison.rb
+- lib/opencongress_ruby.rb
+- opencongress-ruby.gemspec
+- spec/open_congress/bill_spec.rb
+- spec/spec_helper.rb
+has_rdoc: true
+homepage: http://github.com/opencongress/opencongress-ruby
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --charset=UTF-8
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 3
+summary: OpenCongress API ruby binding
+test_files: 
+- spec/open_congress/bill_spec.rb
+- spec/spec_helper.rb
