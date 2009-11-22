@@ -11,7 +11,7 @@
 !main_header_background = #414040
 !second_header_background = #787878
 !normal = #282828
-
+!hover = #0070BD
 
 
 
@@ -23,9 +23,11 @@ body.bp
   +blueprint-debug
   +blueprint-interaction
   
+  a
+    +link-colors(!normal, !hover, !hover, !normal, !hover)
+    //link-colors(!normal, !hover = false, !active = false, !visited = false, !focus = false)
+
   h3
-    background-color= !main_header_background
-    color: white
     padding: 5px 10px
     margin-bottom: 2px
 
@@ -47,11 +49,19 @@ body.three-col
     +column(!blueprint_grid_columns, true)
     padding: 10px
   #sidebar-left, #sidebar-right
+    h3
+      background-color= !main_header_background
+      color: white
+      padding: 5px 10px
+      margin-bottom: 2px
     p 
       padding: 10px 10px
     ul
       +no-bullets      
       margin-left: 5px
+      
+      li.selected
+        color= !hover
 
   #sidebar-left
     // One third of the grid columns, rounding down. With 24 cols, this is 8.
@@ -84,8 +94,6 @@ body.three-col
       color: white
       padding: 5px 10px
       margin-bottom: 2px
-    h3
-      background-color= !main_header_background
     p, form
       padding: 5px
     #errorExplanation

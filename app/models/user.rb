@@ -4,4 +4,8 @@ class User < ActiveRecord::Base
   end
   
   has_many :reports
+  
+  def is_admin?
+    false
+  end
 end

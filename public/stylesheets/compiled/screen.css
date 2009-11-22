@@ -81,7 +81,12 @@ body.bp .hide { display: none; }
 body.bp .highlight { background: yellow; }
 body.bp .added { background: #006600; color: white; }
 body.bp .removed { background: #990000; color: white; }
-body.bp h3 { background-color: #414040; color: white; padding: 5px 10px; margin-bottom: 2px; }
+body.bp a { color: #282828; }
+body.bp a:visited { color: #282828; }
+body.bp a:focus { color: #0070bd; }
+body.bp a:hover { color: #0070bd; }
+body.bp a:active { color: #0070bd; }
+body.bp h3 { padding: 5px 10px; margin-bottom: 2px; }
 
 form.bp label { font-weight: bold; }
 form.bp fieldset { padding: 1.4em; margin: 0 0 1.5em 0; }
@@ -103,9 +108,11 @@ body.three-col #header { margin-bottom: 10px; display: inline; float: left; marg
 * html body.three-col #header { overflow-x: hidden; }
 body.three-col #footer { display: inline; float: left; margin-right: 0; width: 950px; padding: 10px; }
 * html body.three-col #footer { overflow-x: hidden; }
+body.three-col #sidebar-left h3, body.three-col #sidebar-right h3 { background-color: #414040; color: white; padding: 5px 10px; margin-bottom: 2px; }
 body.three-col #sidebar-left p, body.three-col #sidebar-right p { padding: 10px 10px; }
 body.three-col #sidebar-left ul, body.three-col #sidebar-right ul { margin-left: 5px; }
 body.three-col #sidebar-left ul li, body.three-col #sidebar-right ul li { list-style-type: none; margin-left: 0px; }
+body.three-col #sidebar-left ul li.selected, body.three-col #sidebar-right ul li.selected { color: #0070bd; }
 body.three-col #sidebar-left { display: inline; float: left; margin-right: 10px; width: 150px; }
 * html body.three-col #sidebar-left { overflow-x: hidden; }
 body.three-col .flash { text-align: center; position: fixed; z-index: 1001; top: 0px; width: 100%; }
@@ -116,6 +123,5 @@ body.three-col #sidebar-right ul.sidebar-links a:hover { text-decoration: underl
 body.three-col #content { display: inline; float: left; margin-right: 10px; width: 630px; }
 * html body.three-col #content { overflow-x: hidden; }
 body.three-col #content h2 { background-color: #414040; color: white; padding: 5px 10px; margin-bottom: 2px; }
-body.three-col #content h3 { background-color: #414040; }
 body.three-col #content p, body.three-col #content form { padding: 5px; }
 body.three-col #content #errorExplanation h2 { background-color: #fff; color: #282828; }

@@ -19,6 +19,14 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def is_admin?
+    unless current_user && current_user.admin?
+      flash[:notice] = "You are not an admin"
+      redirect_to login_path
+      return false
+    end
+  end
+  
   private
 
   def current_user_session
