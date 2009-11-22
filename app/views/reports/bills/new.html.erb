@@ -10,7 +10,7 @@
         <%- f.fields_for :bill_criteria, criterion do |bill_criteria_fields| -%>
           <tr>
             <td>
-              <%= render criterion.bill %>
+              <%= render 'bills/bill', :bill => criterion.bill %>
               <%= bill_criteria_fields.hidden_field :bill_id %>
               <%= bill_criteria_fields.hidden_field :id unless criterion.new_record? %>
             </td>
