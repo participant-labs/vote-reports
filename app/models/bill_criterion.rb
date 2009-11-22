@@ -13,8 +13,13 @@ class BillCriterion < ActiveRecord::Base
   def oppose=(value)
     self.support = value
   end
+  
+  def support=(value)
+    self[:support] = true if value == '1'
+  end
 
   validates_presence_of :bill, :report
+  validates_uniqueness_of :bill_id, :scope => "report_id"
   
   accepts_nested_attributes_for :bill
 end
