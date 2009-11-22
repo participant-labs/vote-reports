@@ -120,7 +120,7 @@ body.three-col #sidebar-right { display: inline; float: left; margin-right: 0; w
 * html body.three-col #sidebar-right { overflow-x: hidden; }
 body.three-col #sidebar-right ul.sidebar-links a { text-decoration: none; }
 body.three-col #sidebar-right ul.sidebar-links a:hover { text-decoration: underline; }
-body.three-col #content { display: inline; float: left; margin-right: 10px; width: 630px; }
+body.three-col #content { display: inline; float: left; margin-right: 10px; width: 790px; }
 * html body.three-col #content { overflow-x: hidden; }
 body.three-col #content h2 { background-color: #414040; color: white; padding: 5px 10px; margin-bottom: 2px; }
 body.three-col #content p, body.three-col #content form { padding: 5px; }
