@@ -1,0 +1,28 @@
+<h2>Declare Your Opposition/Support to Bills</h2>
+<% form_for @report do |f| %>
+  <table>
+    <thead>
+      <th>Bill</th>
+      <th>Support/Oppose</th>
+    </thead>
+    <tbody>
+      <%- @bills.each do |bill| -%>
+        <%- f.fields_for :bill_criteria, @report.bill_criteria.new(:bill_id => bill.id) do |bill_criteria_fields| -%>
+          <tr>
+            <td>
+              <%= render 'bills/bill', :bill => bill %>
+              <%= bill_criteria_fields.hidden_field :bill_id %>
+            </td>
+            <td>
+              <%= bill_criteria_fields.label :support %>
+              <%= bill_criteria_fields.check_box :support %>
+              <%= bill_criteria_fields.label :oppose, 'Oppose' %>
+              <%= bill_criteria_fields.check_box :oppose %>
+            </td>
+          </tr>
+        <%- end -%>
+      <%- end -%>
+    </tbody>
+  </table>
+  <%= f.submit 'Save Bills' %>
+<% end %>

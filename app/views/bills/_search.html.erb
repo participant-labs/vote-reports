@@ -1,9 +1,10 @@
 <%-
   label ||= 'Search'
   button ||= 'Search'
+  path ||= bills_path
 -%>
 
-<% form_tag bills_path, :method => :get do %>
+<% form_tag path, :method => :get do %>
   <%= label_tag :q, label %>
   <%= text_field_tag :q, @q %>
   <%= submit_tag button %>

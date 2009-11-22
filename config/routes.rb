@@ -3,7 +3,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :user_sessions
   map.resources :users
   map.resources :bills
-  map.resources :reports
+  map.resources :reports do |report|
+    report.resource :bills, :controller => 'reports/bills'
+  end
   map.resources :users do |user|
     user.resources :reports
   end
