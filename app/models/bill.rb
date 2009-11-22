@@ -6,8 +6,10 @@ class Bill < DelegateClass(OpenCongress::OCBill)
     end
 
     def find_by_query(query)
-      OpenCongress::OCBill.by_query(query).map do |bill|
-        new(bill)
+      Cachy.cache(query, :expires_in => 1.day, :hash_key => true) do
+        OpenCongress::OCBill.by_query(query).map do |bill|
+          new(bill)
+        end
       end
     end
   end
