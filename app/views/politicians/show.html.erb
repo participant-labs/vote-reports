@@ -1,0 +1,19 @@
+<h2><%= resource.full_name %></h2>
+
+
+
+<h3>Supported Bills</h3>
+<ul>
+  <% for bill in @politician.supported_bills %>
+    <li><%= link_to bill.title, bill%></li>
+  <% end %>
+</ul>
+
+
+
+<h3>Opposed Bills</h3>
+<ul>
+  <% for bill in @politician.opposed_bills %>
+    <li><%= link_to bill.title, bill%></li>
+  <% end %>
+</ul>
