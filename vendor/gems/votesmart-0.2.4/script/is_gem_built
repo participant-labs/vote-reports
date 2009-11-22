@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+APP_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+
+require 'rubygems/specification'
+require 'net/http'
+
+@gem_name = "netroots-ruby-votesmart"
+@gem_spec_file = "ruby-votesmart.gemspec"
+
+@gem_spec = eval(File.open(File.join(APP_ROOT, @gem_spec_file)) {|f| f.read })
+
+@gem_path = "/gems/#{@gem_name}-#{@gem_spec.version}.gem"
+
+def gem_available_on_server?
+  Net::HTTP.start('gems.github.com') {|http|
+    req = Net::HTTP::Head.new(@gem_path)
+    response = http.request(req)
+    return response.code == "200"
+  }
+end
+
+def gem_is_in_specfile?
+  fetcher = Gem::SpecFetcher.new
+  specs = fetcher.load_specs(URI.parse('http://gems.github.com/'), 'specs')
+  specs.any?{|(name, spec)| name == @gem_name and spec.version.to_s == @gem_spec.version.to_s }
+end
+
+
+is_built = false
+
+while not is_built
+  
+  if gem_available_on_server? && gem_is_in_specfile?
+    is_built = true
+    system "say 'gem is built'"
+  else
+    Kernel.sleep(10)
+  end
+  
+end

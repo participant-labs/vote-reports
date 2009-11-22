@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  politician_id: 1
+  vote: false
+  bill_id: 1
+
+two:
+  politician_id: 1
+  vote: false
+  bill_id: 1
