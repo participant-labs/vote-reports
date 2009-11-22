@@ -12,5 +12,9 @@ module ApplicationHelper
   def flash_helper
     [:notice, :warning, :message].map { |f| content_tag(:div, flash[f], :class => [f, " flash"]) if flash[f] }
   end
+  
+  def sidebar_link(text,path)
+    current_page?(path) ? content_tag(:li, text, :class => "selected") : content_tag(:li, link_to(text,path))
+  end
 
 end

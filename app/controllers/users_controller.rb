@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :is_admin?, :only => :destroy
+  
   def index
     @users = User.all
   end
