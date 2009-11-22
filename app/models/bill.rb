@@ -1,12 +1,14 @@
 class Bill < ActiveRecord::Base
   class << self
     def fetch(id)
-      find_by_opencongress_id(id) ||
-        begin
-          ids = Array(id)
-          bills = OpenCongress::OCBill.by_idents(ids)
-          (ids.size == 1 ? find_or_create(bills.first) : bills.map {|bill| find_or_create(bill) })
-        end
+      Cachy.cache(id, :expires_in => 1.day) do
+        find_by_opencongress_id(id) ||
+          begin
+            ids = Array(id)
+            bills = OpenCongress::OCBill.by_idents(ids)
+            (ids.size == 1 ? find_or_create(bills.first) : bills.map {|bill| find_or_create(bill) })
+          end
+      end
     end
 
     def fetch_by_query(query)
