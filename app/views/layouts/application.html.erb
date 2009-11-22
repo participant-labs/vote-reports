@@ -15,7 +15,7 @@
       <div id="sidebar-left">
         <div class="about">
           <h3>About us</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pulvinar mollis nibh sed eleifend. Vestibulum eu libero sed urna auctor tristique vel ac metus. Phasellus vehicula tempor hendrerit. Donec ultrices dignissim varius. </p>
+          <p>Our mission is to be the premiere tool for assessing political accountability. To inform. To promote truth. To combat political apathy. We are united by our common desire to have honest representatives who stand for our interests, and we are passionate about transparency in the government. Visit VoteReports to see if your representative truly represents you!</p>
         </div>
         
       </div>
@@ -30,20 +30,25 @@
         <h3>Links</h3>
         <ul class="sidebar-links">
           <li><%= render 'bills/search', :button => 'Search for Bills', :label => '' %></li>
-          <li><%= link_to 'Create a Report', new_report_path %></li>
+          <%= sidebar_link("Create a Report", new_report_path) %>
           <% if current_user %>
-            <li><%= link_to "My reports", user_reports_path(current_user) %></li>             
-            <li><%= link_to "Log out", logout_path %></li>   
+            <%= sidebar_link("My reports", user_reports_path(current_user)) %>
+            <%= sidebar_link("Log out", logout_path) %>
           <% else %>
-            <li><%= link_to "Log in", login_path %></li>
-            <li><%= link_to "Sign up", signup_path %></li>
+            <%= sidebar_link("Log in", login_path) %>
+            <%= sidebar_link("Sign up", signup_path) %>
           <% end %>
-          <li><%= link_to "About us", about_path %></li>
+          
+          <%= sidebar_link("About us", about_path) %>
+
+
+
+          
         </ul>
 
         
       </div>
-      <div id="footer">Footer goes here</div>
+      <div id="footer">VoteReports &copy; 2009</div>
     </div>
 
     
