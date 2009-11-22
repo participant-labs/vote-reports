@@ -13,4 +13,22 @@ class Report < ActiveRecord::Base
   named_scope :recent, {
     :limit => 10, :order => 'updated_at DESC'
   }
+  
+  def generate_scores!
+    bills.each do |bill|
+      Vote.fetch_for_bill(bill)
+    end
+    all_scores = bill_criteria.inject({}) do |scores, bill_criterion|
+      votes = bill_criterion.bill.votes
+      votes.each do |vote|
+        scores[vote.politician] ||= 0
+        scores[vote.politician] += 1 if (bill_criterion.support && vote.vote) || (bill_criterion.oppose && !vote.vote)
+      end
+      scores
+    end
+    all_scores.each_pair do |politician, score|
+      all_scores[politician] = (score * 100) / bill_criteria.count
+    end
+    all_scores
+  end
 end
