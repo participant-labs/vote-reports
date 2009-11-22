@@ -8,10 +8,10 @@
 @import blueprint/modules/scaffolding.sass
 @import compass/utilities.sass
 
-!main_header_background = #414040
+!main_header_background = #150C15
 !second_header_background = #787878
-!normal = #282828
-!hover = #0070BD
+!normal = #150C15
+!hover = #635254
 
 
 
@@ -35,9 +35,10 @@ body.bp
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
 form
   +blueprint-form
+  +blueprint-form-borders(#bbb,#635254,#ccc)
   
   input.submit
-    background-color: #959494
+    background-color: #382841
     border-color: #605F5F
     border-style: solid
     border-width: 1px

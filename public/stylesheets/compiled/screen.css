@@ -81,11 +81,11 @@ body.bp .hide { display: none; }
 body.bp .highlight { background: yellow; }
 body.bp .added { background: #006600; color: white; }
 body.bp .removed { background: #990000; color: white; }
-body.bp a { color: #282828; }
-body.bp a:visited { color: #282828; }
-body.bp a:focus { color: #0070bd; }
-body.bp a:hover { color: #0070bd; }
-body.bp a:active { color: #0070bd; }
+body.bp a { color: #150c15; }
+body.bp a:visited { color: #150c15; }
+body.bp a:focus { color: #635254; }
+body.bp a:hover { color: #635254; }
+body.bp a:active { color: #635254; }
 body.bp h3 { padding: 5px 10px; margin-bottom: 2px; }
 
 form label { font-weight: bold; }
@@ -101,7 +101,10 @@ form input.text, form input.title, form textarea, form select { border: 1px soli
 form input.text:focus, form input.title:focus, form textarea:focus, form select:focus { border: 1px solid #666666; }
 form input.text, form input.title { width: 300px; }
 form textarea { width: 390px; height: 250px; }
-form input.submit { background-color: #959494; border-color: #605F5F; border-style: solid; border-width: 1px; color: #FFF; font-weight: bold; padding-bottom: 0.3333em; padding-top: 0.3333em; text-decoration: none; }
+form fieldset { border: 1px solid #cccccc; }
+form input.text, form input.title, form textarea, form select { border: 1px solid #bbbbbb; }
+form input.text:focus, form input.title:focus, form textarea:focus, form select:focus { border: 1px solid #635254; }
+form input.submit { background-color: #382841; border-color: #605F5F; border-style: solid; border-width: 1px; color: #FFF; font-weight: bold; padding-bottom: 0.3333em; padding-top: 0.3333em; text-decoration: none; }
 
 body.three-col #container { width: 950px; margin: 0 auto; overflow: hidden; display: inline-block; background-color: white; }
 body.three-col #container { display: block; }
@@ -109,11 +112,11 @@ body.three-col #header { margin-bottom: 10px; display: inline; float: left; marg
 * html body.three-col #header { overflow-x: hidden; }
 body.three-col #footer { display: inline; float: left; margin-right: 0; width: 950px; padding: 10px; }
 * html body.three-col #footer { overflow-x: hidden; }
-body.three-col #sidebar-left h3, body.three-col #sidebar-right h3 { background-color: #414040; color: white; padding: 5px 10px; margin-bottom: 2px; }
+body.three-col #sidebar-left h3, body.three-col #sidebar-right h3 { background-color: #150c15; color: white; padding: 5px 10px; margin-bottom: 2px; }
 body.three-col #sidebar-left p, body.three-col #sidebar-right p { padding: 10px 10px; }
 body.three-col #sidebar-left ul, body.three-col #sidebar-right ul { margin-left: 5px; }
 body.three-col #sidebar-left ul li, body.three-col #sidebar-right ul li { list-style-type: none; margin-left: 0px; }
-body.three-col #sidebar-left ul li.selected, body.three-col #sidebar-right ul li.selected { color: #0070bd; }
+body.three-col #sidebar-left ul li.selected, body.three-col #sidebar-right ul li.selected { color: #635254; }
 body.three-col #sidebar-left { display: inline; float: left; margin-right: 10px; width: 150px; }
 * html body.three-col #sidebar-left { overflow-x: hidden; }
 body.three-col .flash { text-align: center; position: fixed; z-index: 1001; top: 0px; width: 100%; }
@@ -125,7 +128,7 @@ body.three-col #sidebar-right form { padding-bottom: 15px; }
 body.three-col #sidebar-right form input.text { width: 125px; }
 body.three-col #content { display: inline; float: left; margin-right: 10px; width: 790px; }
 * html body.three-col #content { overflow-x: hidden; }
-body.three-col #content h2 { background-color: #414040; color: white; padding: 5px 10px; margin-bottom: 2px; }
+body.three-col #content h2 { background-color: #150c15; color: white; padding: 5px 10px; margin-bottom: 2px; }
 body.three-col #content p, body.three-col #content form { padding: 5px; }
 body.three-col #content .welcome p { font-size: 14px; margin-bottom: 0.5em; }
-body.three-col #content #errorExplanation h2 { background-color: #fff; color: #282828; }
+body.three-col #content #errorExplanation h2 { background-color: #fff; color: #150c15; }
