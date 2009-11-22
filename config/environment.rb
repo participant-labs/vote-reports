@@ -22,6 +22,7 @@ Rails::Initializer.run do |config|
   config.gem 'inherited_resources',  :version => '>= 0.9.2'
   config.gem 'opencongress-ruby', :lib => 'opencongress_ruby'
   config.gem 'json'
+  config.gem 'cachy', :version => '>=0.1.3'
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
 
@@ -46,3 +47,4 @@ Rails::Initializer.run do |config|
 end
 
 ActiveSupport::JSON.backend = 'JSONGem'
+# export OPEN_CONGRESS_API_KEY=520e23015cfb8926b9efaeb3ef1b83b08a1c3359
