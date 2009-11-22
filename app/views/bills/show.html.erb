@@ -1,3 +1,18 @@
 <h2><%=h @bill.title_with_number %></h2>
 
 <%= link_to 'View on OpenCongress', @bill.opencongress_url %>
+
+<h3>Supporting Politicians</h3>
+<ul>
+  <% for politician in @bill.supporting_politicians %>
+    <li><%= link_to politician.full_name, politician%></li>
+  <% end %>
+</ul>
+
+<h3>Opposing Politicians</h3>
+<ul>
+  <% for politician in @bill.opposing_politicians %>
+    <li><%= link_to politician.full_name, politician%></li>
+  <% end %>
+</ul>
+
