@@ -4,5 +4,6 @@
 
 <p>
   <%= link_to "Show", @report %> |
+  <%= link_to "Destroy", @report, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", collection_path %>
 </p>
