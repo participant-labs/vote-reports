@@ -28,8 +28,8 @@ class Bill < ActiveRecord::Base
     super(:title => ocbill.title, :bill_type => ocbill.bill_type_human, :opencongress_id => ocbill.ident)
   end
   
-  def bill_type= bill_type
-    self['bill_type']= bill_type.gsub('.',' ').gsub('H Res','HR').gsub('H R','HR')
+  def bill_type
+    self['bill_type'].gsub('.',' ').gsub('H Res','HR').gsub('H R','HR')
   end
 
   def title_with_number
