@@ -6,5 +6,7 @@ class Report < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :name
 
-  accepts_nested_attributes_for :bill_criteria
+  accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes|
+    attributes['support'] == '0' && attributes['oppose'] == '0'
+  }
 end
