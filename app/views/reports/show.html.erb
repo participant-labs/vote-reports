@@ -6,6 +6,11 @@
   Created by <%= link_to h(@report.user.username), @report.user %>
 </p>
 
+<%- if @report.user == current_user -%>
+  <h3>Add Bills to Report</h3>
+  <%= render 'bills/search', :label => '', :path => new_report_bills_path(@report) %>
+<%- end -%>
+
 <p>
   <%= link_to "Edit", edit_report_path(@report) %> |
   <%= link_to "Destroy", @report, :confirm => 'Are you sure?', :method => :delete %> |
