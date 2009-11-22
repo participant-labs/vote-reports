@@ -35,6 +35,17 @@ body.bp
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
 form
   +blueprint-form
+  
+  input.submit
+    background-color: #959494
+    border-color: #605F5F
+    border-style: solid
+    border-width: 1px
+    color: #FFF
+    font-weight: bold
+    padding-bottom: 0.3333em
+    padding-top: 0.3333em
+    text-decoration: none
 
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body.three-col
@@ -82,7 +93,7 @@ body.three-col
       a
         +hover-link
     form
-      padding-bottom: 10px
+      padding-bottom: 15px
 
       input.text
         width: 125px
