@@ -30,6 +30,7 @@
         <h3>Links</h3>
         <ul class="sidebar-links">
           <li><%= render 'bills/search', :button => 'Search for Bills', :label => '' %></li>
+          <li><%= link_to 'Create a Report', new_report_path %></li>
           <% if current_user %>
             <li><%= link_to "Log out", logout_path %></li>   
           <% else %>
