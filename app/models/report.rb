@@ -9,4 +9,8 @@ class Report < ActiveRecord::Base
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes|
     attributes['support'] == '0' && attributes['oppose'] == '0'
   }
+
+  named_scope :recent, {
+    :limit => 10, :order => 'updated_at DESC'
+  }
 end
