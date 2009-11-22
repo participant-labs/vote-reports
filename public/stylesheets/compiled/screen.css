@@ -108,6 +108,7 @@ body.three-col #sidebar-left ul, body.three-col #sidebar-right ul { margin-left:
 body.three-col #sidebar-left ul li, body.three-col #sidebar-right ul li { list-style-type: none; margin-left: 0px; }
 body.three-col #sidebar-left { display: inline; float: left; margin-right: 10px; width: 150px; }
 * html body.three-col #sidebar-left { overflow-x: hidden; }
+body.three-col .flash { text-align: center; }
 body.three-col #sidebar-right { display: inline; float: left; margin-right: 0; width: 150px; }
 * html body.three-col #sidebar-right { overflow-x: hidden; }
 body.three-col #sidebar-right ul.sidebar-links a { text-decoration: none; }
@@ -117,3 +118,4 @@ body.three-col #content { display: inline; float: left; margin-right: 10px; widt
 body.three-col #content h2 { background-color: #414040; color: white; padding: 5px 10px; margin-bottom: 2px; }
 body.three-col #content h3 { background-color: #414040; }
 body.three-col #content p, body.three-col #content form { padding: 5px; }
+body.three-col #content #errorExplanation h2 { background-color: #fff; color: #282828; }

@@ -1,5 +1,7 @@
 <% title "Reports" %>
 
+<h2>Reports</h2>
+
 <%- if @reports.empty? -%>
   <p>You haven't created a report yet - <%= link_to "try it out!", new_resource_path %></p>
 <%- else -%>
