@@ -16,3 +16,10 @@
   <p>We are united by our common desire to have honest representatives who stand for our interests, and we are passionate about transparency in the government.</p>
   <p>Use VoteReports to see if your representative truly represents you!</p>
 </div>
+
+<h2>Recent Reports</h2>
+<ol>
+  <%- @recent_reports.each do |report| -%>
+    <%= render report %>
+  <%- end -%>
+</ol>
