@@ -1,7 +1,8 @@
 <% form_for [@user,@report] do |f| %>
   <%= f.error_messages %>
+  <h2><%= @report.new_record? ? 'Create' : 'Edit' %> Report Card</h2>
   <p>
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </p>
   <p><%= f.submit "Save" %></p>
