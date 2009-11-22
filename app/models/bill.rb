@@ -1,14 +1,22 @@
 class Bill < ActiveRecord::Base
   class << self
-    def find(id)
-      bills = OpenCongress::OCBill.by_idents(Array(id))
-      (bills.size == 1 ? new(bills.first) : bills.map {|bill| new(bill) })
+    def fetch(id)
+      find_by_opencongress_id(id) ||
+        begin
+          ids = Array(id)
+          bills = OpenCongress::OCBill.by_idents(ids)
+          (ids.size == 1 ? find_or_create(bills.first) : bills.map {|bill| find_or_create(bill) })
+        end
     end
 
-    def find_by_query(query)
+    def fetch_by_query(query)
       OpenCongress::OCBill.by_query(query).map do |bill|
-        new(bill)
+        find_or_create(bill)
       end
+    end
+
+    def find_or_create(bill)
+      find_by_opencongress_id(bill.ident) || create(bill)
     end
   end
 
@@ -19,4 +27,6 @@ class Bill < ActiveRecord::Base
   def to_param
     opencongress_id
   end
+
+  validates_uniqueness_of :opencongress_id
 end
