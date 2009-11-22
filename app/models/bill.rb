@@ -1,4 +1,4 @@
-class Bill < DelegateClass(OpenCongress::OCBill)
+class Bill < ActiveRecord::Base
   class << self
     def find(id)
       bills = OpenCongress::OCBill.by_idents(Array(id))
@@ -12,7 +12,11 @@ class Bill < DelegateClass(OpenCongress::OCBill)
     end
   end
 
+  def initialize(ocbill)
+    super(:title => ocbill.title, :bill_type => ocbill.bill_type_human, :opencongress_id => ocbill.ident)
+  end
+
   def to_param
-    ident
+    opencongress_id
   end
 end
