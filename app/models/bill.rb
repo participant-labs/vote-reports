@@ -43,8 +43,25 @@ class Bill < ActiveRecord::Base
   def opencongress_url
     "http://www.opencongress.org/bill/#{opencongress_id}/show"
   end
+  
+  def supporting_politicians
+    politicians.supporting
+  end
+  
+  def opposing_politicians
+    politicians.opposing
+  end
 
   has_many :bill_criteria, :dependent => :destroy
+  has_many :votes
+  has_many :politicians, :through => :votes do
+    def supporting
+      scoped(:conditions => "votes.vote = true")
+    end
+    def opposing
+      scoped(:conditions => "votes.vote = false")      
+    end
+  end
 
   validates_uniqueness_of :opencongress_id
 end
