@@ -1,9 +1,11 @@
 <%= render 'bills/search' %>
 
-<%- unless @bills.blank? -%>
+<%- if @bills.present? -%>
   <ul>
     <%- @bills.each do |bill| -%>
       <li><%= render 'bills/bill', :bill => bill %></li>
     <%- end -%>
   </ul>
+<%- elsif @q -%>
+  <p>No matching bills found...</p>
 <%- end -%>
