@@ -24,8 +24,16 @@ class Bill < ActiveRecord::Base
     super(:title => ocbill.title, :bill_type => ocbill.bill_type_human, :opencongress_id => ocbill.ident)
   end
 
+  def title_with_number
+    "#{bill_type}: #{title}"
+  end
+
   def to_param
     opencongress_id
+  end
+
+  def opencongress_url
+    "http://www.opencongress.org/bill/#{opencongress_id}/show"
   end
 
   validates_uniqueness_of :opencongress_id

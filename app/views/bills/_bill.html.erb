@@ -1,3 +1,7 @@
+<%- no_title ||= false -%>
+
 <div class="bill">
-  <h4><%= link_to_unless_current "#{bill.bill_type}: #{bill.title}", bill %></h4>
+  <%- unless no_title -%>
+    <h4><%= link_to_unless_current bill.title_with_number, bill_path(bill) %></h4>
+  <%- end -%>
 </div>
