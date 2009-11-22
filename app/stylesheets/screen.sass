@@ -76,7 +76,6 @@ body.three-col
     width: 100%
 
   #sidebar-right
-    // One third of the grid columns, rounding down. With 24 cols, this is 8.
     !sidebar_columns = 4
     +column(!sidebar_columns,true)
     ul.sidebar-links
@@ -84,10 +83,7 @@ body.three-col
         +hover-link
 
   #content
-    // Two thirds of the grid columns, rounding up.
-    // With 24 cols, this is 16.
-    !content_columns = 16
-    // true means it's the last column in the row
+    !content_columns = 20
     +column(!content_columns)
     h2
       background-color= !main_header_background
