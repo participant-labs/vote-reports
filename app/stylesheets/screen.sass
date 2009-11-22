@@ -58,6 +58,9 @@ body.three-col
     !sidebar_columns = 4
     +column(!sidebar_columns)
 
+  .flash
+    text-align: center
+
   #sidebar-right
     // One third of the grid columns, rounding down. With 24 cols, this is 8.
     !sidebar_columns = 4
@@ -81,6 +84,9 @@ body.three-col
       background-color= !main_header_background
     p, form
       padding: 5px
-
+    #errorExplanation
+      h2
+        background-color: #fff
+        color= !normal
 
       

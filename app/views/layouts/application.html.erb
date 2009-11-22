@@ -11,6 +11,7 @@
     <div id="container">
       <div id="header">
         <%= link_to image_tag('logo.png'), root_path %>
+        <%= flash_helper %>
       </div>
       <div id="sidebar-left">
         <div class="about">
@@ -20,7 +21,7 @@
         
       </div>
       <div id="content">
-        <%= flash_helper %>
+
         <%= yield %>
       </div>
       <div id="sidebar-right">
@@ -32,6 +33,7 @@
           <li><%= render 'bills/search', :button => 'Search for Bills', :label => '' %></li>
           <li><%= link_to 'Create a Report', new_report_path %></li>
           <% if current_user %>
+            <li><%= link_to "My reports", user_reports_path(current_user) %></li>             
             <li><%= link_to "Log out", logout_path %></li>   
           <% else %>
             <li><%= link_to "Log in", login_path %></li>
