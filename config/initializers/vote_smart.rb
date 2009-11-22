@@ -1,0 +1,1 @@
+VoteSmart.api_key = 'a495c384bd8a712f13616811c5f3d7ae'

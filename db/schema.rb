@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091122175542) do
+ActiveRecord::Schema.define(:version => 20091122204819) do
 
   create_table "bill_criteria", :force => true do |t|
     t.integer  "bill_id"
@@ -20,9 +20,17 @@ ActiveRecord::Schema.define(:version => 20091122175542) do
   end
 
   create_table "bills", :force => true do |t|
-    t.text     "title",           :limit => 255
+    t.text     "title"
     t.string   "bill_type"
     t.string   "opencongress_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "politicians", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "vote_smart_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -40,6 +48,14 @@ ActiveRecord::Schema.define(:version => 20091122175542) do
     t.string   "salt"
     t.string   "persistence_token"
     t.string   "username"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "politician_id"
+    t.boolean  "vote"
+    t.integer  "bill_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
