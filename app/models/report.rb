@@ -29,6 +29,6 @@ class Report < ActiveRecord::Base
     all_scores.each_pair do |politician, score|
       all_scores[politician] = (score * 100) / bill_criteria.count
     end
-    all_scores
+    all_scores.to_a.sort_by(&:last).reverse
   end
 end

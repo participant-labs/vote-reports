@@ -3,8 +3,6 @@ class Vote < ActiveRecord::Base
   belongs_to :politician
   belongs_to :bill
   
-  
-  
   class << self
     def fetch_for_bill(bill)
       vs_bill_id = VoteSmart::Vote.get_bill_by_bill_number(bill.bill_type)['bills']['bill'][0]['billId']

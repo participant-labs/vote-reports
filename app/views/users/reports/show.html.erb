@@ -9,7 +9,7 @@
 
 <h3>Scores</h3>
 <ol>
-  <%- scores.each_pair do |politician, score| -%>
+  <%- scores.each do |(politician, score)| -%>
     <li><%= politician.full_name %>: <%= score %></li>
   <%- end -%>
 </ol>
