@@ -11,7 +11,7 @@ class BillCriterion < ActiveRecord::Base
   end
 
   def oppose=(value)
-    self.support = value
+    self[:support] = false if value == '1'
   end
   
   def support=(value)
