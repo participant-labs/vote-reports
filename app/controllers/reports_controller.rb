@@ -1,6 +1,4 @@
 class ReportsController < ApplicationController
-  before_filter :login_required
-
   def new
     redirect_to new_user_report_path(current_user)
   end
