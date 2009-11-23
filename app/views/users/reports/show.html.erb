@@ -9,14 +9,14 @@
 
 <h3>Top Scores</h3>
 <ol>
-  <%- scores[0..20].each do |(politician, score)| -%>
+  <%- (scores[0..20] || []).each do |(politician, score)| -%>
     <li><%= link_to politician.full_name, politician %>: <%= score %></li>
   <%- end -%>
 </ol>
 
 <h3>Lowest Scores</h3>
 <ol>
-  <%- scores[-20..-1].each do |(politician, score)| -%>
+  <%- (scores[-20..-1] || []).each do |(politician, score)| -%>
     <li><%= link_to politician.full_name, politician %>: <%= score %></li>
   <%- end -%>
 </ol>
