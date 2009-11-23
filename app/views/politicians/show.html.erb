@@ -1,19 +1,23 @@
 <h2><%= resource.full_name %></h2>
 
-
-
 <h3>Supported Bills</h3>
+<%- if @politician.supported_bills.present? -%>
 <ul>
-  <% for bill in @politician.supported_bills %>
+  <% @politician.supported_bills.each do |bill|  %>
     <li><%= link_to bill.title, bill%></li>
   <% end %>
 </ul>
-
-
+<%- else -%>
+  <p>We have no record of support from this politician</p>
+<%- end -%>
 
 <h3>Opposed Bills</h3>
+<%- if @politician.opposed_bills.present? -%>
 <ul>
-  <% for bill in @politician.opposed_bills %>
+  <% @politician.opposed_bills.each do |bill|  %>
     <li><%= link_to bill.title, bill%></li>
   <% end %>
 </ul>
+<%- else -%>
+  <p>We have no record of opposition from this politician</p>
+<%- end -%>
