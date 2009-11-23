@@ -4,10 +4,12 @@ class ReportsController < ApplicationController
   end
 
   def show
-    redirect_to user_report_path(current_user, Report.find(params[:id]))
+    report = Report.find(params[:id])
+    redirect_to user_report_path(report.user, report)
   end
 
   def edit
-    redirect_to edit_user_report_path(current_user, Report.find(params[:id]))
+    report = Report.find(params[:id])
+    redirect_to edit_user_report_path(report.user, report)
   end
 end
