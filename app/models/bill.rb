@@ -45,11 +45,15 @@ class Bill < ActiveRecord::Base
   end
   
   def supporting_politicians
-    politicians.supporting
+    votes.map do |vote|
+      vote.politician if vote.vote
+    end.compact
   end
   
   def opposing_politicians
-    politicians.opposing
+    votes.map do |vote|
+      vote.politician unless vote.vote
+    end.compact
   end
 
   has_many :bill_criteria, :dependent => :destroy
