@@ -10,9 +10,8 @@ class Report < ActiveRecord::Base
     attributes['support'] == '0' && attributes['oppose'] == '0'
   }
 
-  named_scope :recent, {
-    :limit => 10, :order => 'updated_at DESC'
-  }
+  default_scope :select => 'DISTINCT reports.*', :joins => :bill_criteria, :conditions => 'bill_criteria.bill_id NOT NULL'
+  named_scope :recent, :limit => 10, :order => 'updated_at DESC'
 
   def generate_scores!
     all_scores = bill_criteria.inject({}) do |scores, bill_criterion|
