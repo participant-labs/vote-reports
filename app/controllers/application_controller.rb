@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  before_filter :ensure_domain if Rails.env.production?
+
   def login_required
     unless current_user
       #store_location #TODO: implement store location
@@ -37,5 +39,11 @@ class ApplicationController < ActionController::Base
   def current_user
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.record
+  end
+
+  DOMAIN = 'http://www.votereports.org'
+
+  def ensure_domain
+    Rails.logger.error request.env['HTTP_HOST']
   end
 end
