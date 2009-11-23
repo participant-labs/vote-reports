@@ -7,27 +7,37 @@
   Created by <%= link_to h(@report.user.username), @report.user %>
 </p>
 
-<h3>Top Scores</h3>
-<ol>
-  <%- (scores[0..20] || []).each do |(politician, score)| -%>
-    <li><%= link_to politician.full_name, politician %>: <%= score %></li>
-  <%- end -%>
-</ol>
+<%- top_scores = scores[0..20] -%>
+<%- if top_scores.present? -%>
+  <h3>Top Scores</h3>
+  <ol>
+    <%- top_scores.each do |(politician, score)| -%>
+      <li><%= link_to politician.full_name, politician %>: <%= score %></li>
+    <%- end -%>
+  </ol>
+<%- end -%>
 
-<h3>Lowest Scores</h3>
-<ol>
-  <%- (scores[-20..-1] || []).each do |(politician, score)| -%>
-    <li><%= link_to politician.full_name, politician %>: <%= score %></li>
-  <%- end -%>
-</ol>
+<%- lowest_scores = scores[-20..-1] -%>
+<%- if lowest_scores.present? -%>
+  <h3>Lowest Scores</h3>
+  <ol>
+    <%- lowest_scores.each do |(politician, score)| -%>
+      <li><%= link_to politician.full_name, politician %>: <%= score %></li>
+    <%- end -%>
+  </ol>
+<%- end -%>
 
 <h3>Bill Criteria</h3>
-<%- unless @report.bill_criteria.empty? -%>
-<ul>
-  <%- @report.bill_criteria.each do |criterion| -%>
-    <li><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %></li>
-  <%- end -%>
-</ul>
+<%- if @report.bill_criteria.present? -%>
+  <ul>
+    <%- @report.bill_criteria.each do |criterion| -%>
+      <li><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %></li>
+    <%- end -%>
+  </ul>
+<%- elsif @report.user == current_user -%>
+  <p>You need to add bills to this report in order to generate a score:</p>
+<%- else -%>
+  <p>This report doesn't have any bills selected</p>
 <%- end -%>
 
 <%- if @report.user == current_user -%>
