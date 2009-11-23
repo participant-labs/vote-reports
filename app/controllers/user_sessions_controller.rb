@@ -1,5 +1,6 @@
 class UserSessionsController < ApplicationController
   def new
+    @return_to = params[:return_to]
     @user_session = UserSession.new
   end
   
@@ -7,7 +8,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       flash[:notice] = "Logged in successfully"
-      redirect_to current_user
+      redirect_to (params[:return_to].present? ? params[:return_to] : current_user)
     else
       render :action => 'new'
     end

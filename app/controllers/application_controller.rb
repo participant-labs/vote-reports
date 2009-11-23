@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       #store_location #TODO: implement store location
       flash[:notice] = "You must be logged in to access this page"
-      redirect_to login_path
+      redirect_to login_path(:return_to => request.path)
       return false
     end
   end
