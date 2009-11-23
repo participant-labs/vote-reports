@@ -26,6 +26,7 @@ class Bill < ActiveRecord::Base
 
   def initialize(ocbill)
     super(:title => ocbill.title, :bill_type => ocbill.bill_type_human, :opencongress_id => ocbill.ident)
+    Vote.fetch_for_bill(self)
   end
   
   def bill_type
