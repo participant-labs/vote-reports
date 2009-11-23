@@ -21,8 +21,6 @@
       </div>
       <div id="sidebar-right">
 
-        <h3>Search</h3>
-        <%= render 'bills/search', :button => 'Search for Bills', :label => '' %>
         <h3>Links</h3>
         <ul class="sidebar-links">
           <%= sidebar_link("Create a Report", new_report_path) %>
@@ -34,6 +32,7 @@
             <%= sidebar_link("Sign up", signup_path) %>
           <% end %>
           <%= sidebar_link("Politicians", politicians_path) %>
+          <%= sidebar_link("Bills", bills_path) %>
           <%= sidebar_link("About us", about_path) %>
         </ul>
         <%= render 'layouts/mailchimp_signup' %>
