@@ -15,9 +15,6 @@ class Report < ActiveRecord::Base
   }
   
   def generate_scores!
-    bills.each do |bill|
-      Vote.fetch_for_bill(bill)
-    end
     all_scores = bill_criteria.inject({}) do |scores, bill_criterion|
       votes = bill_criterion.bill.votes
       votes.each do |vote|
