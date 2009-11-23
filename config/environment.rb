@@ -49,4 +49,3 @@ Rails::Initializer.run do |config|
 end
 
 ActiveSupport::JSON.backend = 'JSONGem'
-# export OPEN_CONGRESS_API_KEY=520e23015cfb8926b9efaeb3ef1b83b08a1c3359
