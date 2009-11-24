@@ -19,7 +19,6 @@ Rails::Initializer.run do |config|
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
   config.gem "authlogic", :version => '>=2.1.3'
-  config.gem 'inherited_resources',  :version => '>= 0.9.2'
   config.gem 'opencongress-ruby', :lib => 'opencongress_ruby'
   config.gem 'json'
   config.gem 'cachy', :version => '>=0.1.3'
