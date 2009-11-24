@@ -13,7 +13,7 @@ class Report < ActiveRecord::Base
   named_scope :recent, {
     :limit => 10, :order => 'updated_at DESC'
   }
-  
+
   def generate_scores!
     all_scores = bill_criteria.inject({}) do |scores, bill_criterion|
       votes = bill_criterion.bill.votes

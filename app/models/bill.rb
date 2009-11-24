@@ -28,7 +28,7 @@ class Bill < ActiveRecord::Base
     super(:title => ocbill.title, :bill_type => ocbill.bill_type_human, :opencongress_id => ocbill.ident)
     Vote.fetch_for_bill(self)
   end
-  
+
   def bill_type
     self['bill_type'].gsub('.',' ').gsub('H Res','HR').gsub('H R','HR')
   end
@@ -44,13 +44,13 @@ class Bill < ActiveRecord::Base
   def opencongress_url
     "http://www.opencongress.org/bill/#{opencongress_id}/show"
   end
-  
+
   def supporting_politicians
     votes.map do |vote|
       vote.politician if vote.vote
     end.compact
   end
-  
+
   def opposing_politicians
     votes.map do |vote|
       vote.politician unless vote.vote
@@ -64,7 +64,7 @@ class Bill < ActiveRecord::Base
       scoped(:conditions => "votes.vote = true")
     end
     def opposing
-      scoped(:conditions => "votes.vote = false")      
+      scoped(:conditions => "votes.vote = false")
     end
   end
 
