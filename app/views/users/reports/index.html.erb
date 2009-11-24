@@ -1,13 +1,13 @@
 <% title "Reports" %>
 
-<h2>Reports</h2>
+<h2><%= @user.username %>'s Reports</h2>
 
 <%- if @reports.empty? -%>
   <p>You haven't created a report yet - <%= link_to "try it out!", new_resource_path %></p>
 <%- else -%>
   <ul>
   <% @reports.each do |report| %>
-    <li><%= render report %></li>
+    <li><%= render 'reports/report', :report => report %></li>
   <% end %>
   </ul>
 <%- end -%>
