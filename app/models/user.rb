@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   has_many :reports
 
+  validates_uniqueness_of :username
+
   def is_admin?
     false
   end
