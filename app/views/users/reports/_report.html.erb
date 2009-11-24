@@ -1,5 +1,4 @@
 <div class="report">
-  <%= render 'users/user', :user => report.user %>'s
-  "<%= link_to h(report.name), report %>"
-  <%= link_to "Edit", edit_report_path(report) if report.user == current_user  %>
+  <%= render 'users/user', :user => report.user %>
+  <%= render 'reports/report', :report => report %>
 </div>
