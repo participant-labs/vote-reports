@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
-  
+
   helper_method :current_user
-  
+
   def login_required
     unless current_user
       #store_location #TODO: implement store location
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-  
+
   def is_admin?
     unless current_user && current_user.admin?
       flash[:notice] = "You are not an admin"
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-  
+
   private
 
   def current_user_session
