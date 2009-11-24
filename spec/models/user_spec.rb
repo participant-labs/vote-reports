@@ -6,4 +6,13 @@ describe User do
       Factory(:user)
     end.should change(User,:count).by(1)
   end
+  
+  it "should validate uniqueness of username" do
+    user = Factory.create(:user, :username => 'foo')
+    lambda do
+      @user = Factory.build(:user, :username => 'foo')
+      @user.save
+    end.should_not change(User,:count)
+    @user.errors.on(:username).should include("has already been taken")
+  end
 end
