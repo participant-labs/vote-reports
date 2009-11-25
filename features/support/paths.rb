@@ -18,6 +18,8 @@ module NavigationHelpers
       bills_path
     when /the reports page/i
       reports_path
+    when /my reports page/i
+      user_reports_path(@current_user)
     when /my profile page/i
       user_path(@current_user)
     
