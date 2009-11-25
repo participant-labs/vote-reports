@@ -9,3 +9,14 @@ Feature: Browsing Reports
     When I go to the reports page
     Then I should not see "Empty Report"
     And I should see "Active Report"
+
+  Scenario: My Reports doesn't exclude empty reports
+    Given I am signed in
+    Given a report by me named "Empty Report"
+    And a published report by me named "Active Report"
+    When I go to the reports page
+    Then I should not see "Empty Report"
+    And I should see "Active Report"
+    When I go to my reports page
+    Then I should see "Empty Report"
+    And I should see "Active Report"
