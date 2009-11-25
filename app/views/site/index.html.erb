@@ -17,9 +17,4 @@
   <p>Use VoteReports to see if your representative truly represents you!</p>
 </div>
 
-<h2>Recent Reports</h2>
-<ol>
-  <%- @recent_reports.each do |report| -%>
-    <%= render 'users/reports/report', :report => report %>
-  <%- end -%>
-</ol>
+<%= render 'reports/list', :title => 'Recent Reports', :reports => @recent_reports %>
