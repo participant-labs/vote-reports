@@ -29,4 +29,31 @@ describe Bill do
       Factory.create(:bill)
     end
   end
+
+  describe "#politicians" do
+    before(:all) do
+      @supporting = Factory.create(:politician)
+      @opposing = Factory.create(:politician)
+      @unconnected = Factory.create(:politician)
+      @bill = Factory.create(:bill)
+      Factory.create(:vote, :politician => @supporting, :bill => @bill, :vote => 1)
+      Factory.create(:vote, :politician => @opposing, :bill => @bill, :vote => 0)
+    end
+
+    it "returns all politicians with connecting votes" do
+      @bill.politicians.should =~ [@supporting, @opposing]
+    end
+
+    describe "#supporting" do
+      it "returns all politicians with supporting votes" do
+        @bill.politicians.supporting.should =~ [@supporting]
+      end
+    end
+
+    describe "#opposing" do
+      it "returns all politicians with supporting votes" do
+        @bill.politicians.opposing.should =~ [@opposing]
+      end
+    end
+  end
 end
