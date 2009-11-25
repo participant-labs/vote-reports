@@ -35,6 +35,7 @@
 
         <h3>Browse</h3>
         <ul class="sidebar-links">
+          <li><%= link_to_unless_current "Reports", reports_path %></li>
           <li><%= link_to_unless_current "Politicians", politicians_path %></li>
           <li><%= link_to_unless_current "Bills", bills_path %></li>
         </ul>
