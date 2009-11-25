@@ -16,6 +16,8 @@ module NavigationHelpers
       login_path
     when /the bills page/i
       bills_path
+    when /the reports page/i
+      reports_path
     when /my profile page/i
       user_path(@current_user)
     
