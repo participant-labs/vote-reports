@@ -44,6 +44,6 @@ class ApplicationController < ActionController::Base
   DOMAIN = 'votereports.org'
 
   def ensure_domain
-    redirect_to DOMAIN if request.env['HTTP_HOST'] != DOMAIN
+    redirect_to "http://#{DOMAIN}" if request.env['HTTP_HOST'] != DOMAIN
   end
 end
