@@ -10,10 +10,34 @@ Factory.define :report do |f|
   f.user {|u| u.association(:user) }
 end
 
+Factory.define :bill do |f|
+  f.title { Factory.next :text }
+  f.opencongress_id { Factory.next :opencongress_id }
+end
+
+Factory.define :politician do |f|
+  f.first_name { Forgery(:name).first_name }
+  f.last_name { Forgery(:name).last_name }
+end
+
+Factory.define :vote do |f|
+  f.politician {|p| p.association(:politician) }
+  f.bill {|b| b.association(:bill) }
+  f.vote { rand(2) == 1 }
+end
+
+Factory.sequence :text do |n|
+  "#{n}#{Forgery(:basic).text}"
+end
+
+Factory.sequence :opencongress_id do |n|
+  n
+end
+
 Factory.sequence :email do |n|
-  "user#{n}@example.com"
+  "#{n}#{Forgery(:internet).email_address}"
 end
 
 Factory.sequence :username do |n|
-  "user#{n}"
+  "#{n}#{Forgery(:internet).user_name}"
 end
