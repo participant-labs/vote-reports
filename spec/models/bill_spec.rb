@@ -22,4 +22,11 @@ describe Bill do
       bills.title.should == "Worker, Homeownership, and Business Assistance Act of 2009"
     end
   end
+
+  describe "Creation" do
+    it "should fetch votes for this bill" do
+      Vote.expects(:fetch_for_bill).at_least_once
+      Factory.create(:bill)
+    end
+  end
 end

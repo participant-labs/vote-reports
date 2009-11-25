@@ -1,4 +1,6 @@
 class Bill < ActiveRecord::Base
+  after_create :initialize_votes
+
   class << self
     def fetch(id)
       Cachy.cache(id, :expires_in => 1.day) do
@@ -20,13 +22,8 @@ class Bill < ActiveRecord::Base
     end
 
     def find_or_create(bill)
-      find_by_opencongress_id(bill.ident) || create(bill)
+      find_by_opencongress_id(bill.ident) || create(:title => bill.title, :bill_type => bill.bill_type_human, :opencongress_id => bill.ident)
     end
-  end
-
-  def initialize(ocbill)
-    super(:title => ocbill.title, :bill_type => ocbill.bill_type_human, :opencongress_id => ocbill.ident)
-    Vote.fetch_for_bill(self)
   end
 
   def bill_type
@@ -69,4 +66,10 @@ class Bill < ActiveRecord::Base
   end
 
   validates_uniqueness_of :opencongress_id
+
+  private
+
+  def initialize_votes
+    Vote.fetch_for_bill(self)
+  end
 end
