@@ -31,7 +31,7 @@ Factory.sequence :text do |n|
 end
 
 Factory.sequence :opencongress_id do |n|
-  n
+  "#{Bill.last.opencongress_id.to_i + 1}"
 end
 
 Factory.sequence :email do |n|
