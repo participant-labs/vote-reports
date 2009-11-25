@@ -42,18 +42,6 @@ class Bill < ActiveRecord::Base
     "http://www.opencongress.org/bill/#{opencongress_id}/show"
   end
 
-  def supporting_politicians
-    votes.map do |vote|
-      vote.politician if vote.vote
-    end.compact
-  end
-
-  def opposing_politicians
-    votes.map do |vote|
-      vote.politician unless vote.vote
-    end.compact
-  end
-
   has_many :bill_criteria, :dependent => :destroy
   has_many :votes
   has_many :politicians, :through => :votes do

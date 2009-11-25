@@ -3,9 +3,9 @@
 <%= link_to 'View on OpenCongress', @bill.opencongress_url %>
 
 <h3>Supporting Politicians</h3>
-<%- if @bill.supporting_politicians.present? -%>
+<%- if (supporting = @bill.politicians.supporting).present? -%>
 <ul>
-  <% @bill.supporting_politicians.each do |politician|  %>
+  <% supporting.each do |politician|  %>
     <li><%= link_to politician.full_name, politician%></li>
   <% end %>
 </ul>
@@ -14,9 +14,9 @@
 <%- end -%>
 
 <h3>Opposing Politicians</h3>
-<%- if @bill.opposing_politicians.present? -%>
+<%- if (opposing = @bill.politicians.opposing).present? -%>
 <ul>
-  <% for politician in @bill.opposing_politicians %>
+  <% opposing.each do |politician| %>
     <li><%= link_to politician.full_name, politician%></li>
   <% end %>
 </ul>
