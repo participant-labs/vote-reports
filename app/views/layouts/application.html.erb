@@ -23,21 +23,21 @@
 
         <h3>Act</h3>
         <ul class="sidebar-links">
-          <%= sidebar_link("Create a Report", new_report_path) %>
+          <li><%= link_to_unless_current "Create a Report", current_user ? new_user_report_path(current_user) : new_report_path %></li>
           <% if current_user %>
-            <%= sidebar_link("My reports", user_reports_path(current_user)) %>
-            <%= sidebar_link("Log out", logout_path) %>
+            <li><%= link_to_unless_current "My reports", user_reports_path(current_user) %></li>
+            <li><%= link_to_unless_current "Log out", logout_path %></li>
           <% else %>
-            <%= sidebar_link("Log in", login_path) %>
-            <%= sidebar_link("Sign up", signup_path) %>
+            <li><%= link_to_unless_current "Log in", login_path %></li>
+            <li><%= link_to_unless_current "Sign up", signup_path %></li>
           <% end %>
         </ul>
 
         <h3>Browse</h3>
         <ul class="sidebar-links">
-          <%= sidebar_link("Politicians", politicians_path) %>
-          <%= sidebar_link("Bills", bills_path) %>
-          <%= sidebar_link("About us", about_path) %>
+          <li><%= link_to_unless_current "Politicians", politicians_path %></li>
+          <li><%= link_to_unless_current "Bills", bills_path %></li>
+          <li><%= link_to_unless_current "About us", about_path %></li>
         </ul>
         <%= render 'layouts/mailchimp_signup' %>
 
