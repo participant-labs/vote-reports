@@ -41,9 +41,9 @@ class ApplicationController < ActionController::Base
     @current_user = current_user_session && current_user_session.record
   end
 
-  DOMAIN = 'http://www.votereports.org'
+  DOMAIN = 'votereports.org'
 
   def ensure_domain
-    Rails.logger.error request.env['HTTP_HOST']
+    redirect_to DOMAIN if request.env['HTTP_HOST'] != DOMAIN
   end
 end
