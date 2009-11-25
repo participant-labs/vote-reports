@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20091122204819) do
   end
 
   create_table "bills", :force => true do |t|
-    t.text     "title",           :limit => 255
+    t.text     "title"
     t.string   "bill_type"
     t.string   "opencongress_id"
     t.datetime "created_at"
