@@ -37,7 +37,12 @@
         <ul class="sidebar-links">
           <li><%= link_to_unless_current "Politicians", politicians_path %></li>
           <li><%= link_to_unless_current "Bills", bills_path %></li>
+        </ul>
+
+        <h3>VoteReports</h3>
+        <ul class="sidebar-links">
           <li><%= link_to_unless_current "About us", about_path %></li>
+          <li><%= mail_to 'votereports@gmail.com', "Contact us" %></li>
         </ul>
         <%= render 'layouts/mailchimp_signup' %>
 
