@@ -6,13 +6,18 @@ Factory.define :user do |f|
 end
 
 Factory.define :report do |f|
-  f.name "My report"
+  f.name { Factory.next :text }
   f.user {|u| u.association(:user) }
 end
 
 Factory.define :bill do |f|
   f.title { Factory.next :text }
   f.opencongress_id { Factory.next :opencongress_id }
+end
+
+Factory.define :bill_criterion do |f|
+  f.report {|r| r.association(:report) }
+  f.bill {|b| b.association(:bill) }
 end
 
 Factory.define :politician do |f|
