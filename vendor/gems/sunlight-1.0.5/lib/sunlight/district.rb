@@ -9,7 +9,6 @@ module Sunlight
       @number = number.to_i.to_s
     end
 
-
     # Usage:
     #   Sunlight::District.get(:latitude => 33.876145, :longitude => -84.453789)    # returns one District object or nil
     #   Sunlight::District.get(:address => "123 Fifth Ave New York, NY")     # returns one District object or nil
@@ -47,15 +46,10 @@ module Sunlight
 
       if (result = get_json_data(url))
 
-        districts = []
-        result["response"]["districts"].each do |district|
-          districts << District.new(district["district"]["state"], district["district"]["number"])
-        end
+        result["response"]["districts"].map do |district|
+          District.new(district["district"]["state"], district["district"]["number"])
+        end.first
 
-        districts.first
-
-      else  
-        nil
       end # if response.class
 
     end
@@ -71,15 +65,10 @@ module Sunlight
 
       if (result = get_json_data(url))
 
-        districts = []
-        result["response"]["districts"].each do |district|
-          districts << District.new(district["district"]["state"], district["district"]["number"])
+        result["response"]["districts"].map do |district|
+          District.new(district["district"]["state"], district["district"]["number"])
         end
 
-        districts
-
-      else  
-        nil
       end # if response.class
 
     end
@@ -95,8 +84,6 @@ module Sunlight
 
       if (result = get_json_data(url))
         result["response"]["zips"]
-      else  
-        nil
       end # if response.class
 
     end
