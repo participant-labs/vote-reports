@@ -1,5 +1,27 @@
 <%= image_tag @politician.headshot_url, :alt => @politician.full_name %>
-<h2><%= resource.full_name %></h2>
+<h2><%= @politician.title %> <%= resource.full_name %></h2>
+
+<%= @politician.party %> - <%= @politician.state %> <%= "(In Office)" if @politician.in_office %>
+
+<h3>Contact</h3>
+<dl>
+  <dt>Email</dt>
+  <dd><%= mail_to @politician.email %></dd>
+  <dt>Twitter</dt>
+  <dd><%= link_to "@#{@politician.twitter_id}", "http://twitter.com/#{@politician.twitter_id}" %></dd>
+  <dt>Contact Form</dt>
+  <dd><%= link_to @politician.webform, @politician.webform %></dd>
+  <dt>Website</dt>
+  <dd><%= link_to @politician.website, @politician.website %></dd>
+  <dt>Youtube</dt>
+  <dd><%= link_to @politician.youtube_url, @politician.youtube.url %></dd>
+  <dt>Phone</dt>
+  <dd><%= @politician.phone %></dd>
+  <dt>Fax</dt>
+  <dd><%= @politician.fax %></dd>
+</dl>
+
+<%= link_to 'View on Congresspedia', @politician.congresspedia_url %>
 
 <h3>Supported Bills</h3>
 <%- if (supported = @politician.bills.supported).present? -%>
