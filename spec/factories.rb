@@ -23,6 +23,7 @@ end
 Factory.define :politician do |f|
   f.first_name { Forgery(:name).first_name }
   f.last_name { Forgery(:name).last_name }
+  f.gov_track_id "300001"
 end
 
 Factory.define :vote do |f|

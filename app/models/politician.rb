@@ -1,4 +1,5 @@
 class Politician < ActiveRecord::Base
+  include Politician::GovTrack
 
   has_many :votes
   has_many :bills, :through => :votes do
@@ -9,7 +10,6 @@ class Politician < ActiveRecord::Base
       scoped(:conditions => "votes.vote = false")
     end
   end
-
 
   def full_name= full_name
     self.last_name, self.first_name = full_name.split(', ',2)
