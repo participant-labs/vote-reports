@@ -18,12 +18,4 @@ class Politician < ActiveRecord::Base
   def full_name
     [first_name, last_name].join(" ")
   end
-
-  def supported_bills
-    bills.supported
-  end
-
-  def opposed_bills
-    bills.opposed
-  end
 end
