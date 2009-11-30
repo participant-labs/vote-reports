@@ -50,11 +50,7 @@ module Sunlight
             Issue.new(issue["issue"])
           end
           filing
-        else
-          nil
         end
-      else
-        nil
       end
     end
 
@@ -88,9 +84,7 @@ module Sunlight
         url = construct_url("lobbyists.getFilingList", params)
         
         if (response = get_json_data(url))
-          filings = []
-          
-          response["response"]["filings"].each do |result|
+          filings = response["response"]["filings"].map do |result|
             filing = Filing.new(result["filing"])
 
             filing.lobbyists = filing.lobbyists.map do |lobbyist|
@@ -100,7 +94,7 @@ module Sunlight
               Issue.new(issue["issue"])
             end
 
-            filings << filing
+            filing
           end
           
           if filings.empty?

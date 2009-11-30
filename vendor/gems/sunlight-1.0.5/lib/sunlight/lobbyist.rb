@@ -23,7 +23,7 @@ module Sunlight
     #
     # Returns:
     #
-    # An array of Lobbyists, with the fuzzy_score set as an attribute
+    # An array of Lobbyists, sorted by the fuzzy_score attribute
     #
     # Usage:
     #
@@ -34,28 +34,14 @@ module Sunlight
 
       url = construct_url("lobbyists.search", :name => name, :threshold => threshold, :year => year)
       
-      if (results = get_json_data(url))
-        lobbyists = []
-        results["response"]["results"].each do |result|
-          if result
-            lobbyist = Lobbyist.new(result["result"]["lobbyist"])
-            fuzzy_score = result["result"]["score"]
-
-            if threshold.to_f < fuzzy_score.to_f
-              lobbyist.fuzzy_score = fuzzy_score.to_f
-              lobbyists << lobbyist
-            end
-          end
-        end
-
-        if lobbyists.empty?
-          nil
-        else
-          lobbyists
-        end
+      if (response = get_json_data(url))
+        lobbyists = response["response"]["results"].compact.map do |result|
+          Lobbyist.new(result["result"]["lobbyist"].merge("fuzzy_score" => result["result"]["score"].to_f))
+        end.select do |lobbyist|
+          lobbyist.fuzzy_score.to_f > threshold.to_f
+        end.sort_by {|l| l.fuzzy_score }.reverse
       
-      else
-        nil
+        lobbyists unless lobbyists.empty?
       end
     end # def self.search
   end # class Lobbyist
