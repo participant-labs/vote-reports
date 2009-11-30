@@ -1,6 +1,6 @@
 <h2>Politicians</h2>
 <ul>
-  <% for politician in @politicians %>
-    <li><%= link_to politician.full_name, politician %></li>
+  <% @politicians.each do |politician| %>
+    <li><%= render 'politicians/politician', :politician => politician %></li>
   <% end %>
 </ul>
