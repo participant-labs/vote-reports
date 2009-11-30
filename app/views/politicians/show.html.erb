@@ -1,9 +1,9 @@
 <h2><%= resource.full_name %></h2>
 
 <h3>Supported Bills</h3>
-<%- if @politician.supported_bills.present? -%>
+<%- if (supported = @politician.bills.supported).present? -%>
 <ul>
-  <% @politician.supported_bills.each do |bill|  %>
+  <% supported.each do |bill|  %>
     <li><%= link_to bill.title, bill%></li>
   <% end %>
 </ul>
@@ -12,9 +12,9 @@
 <%- end -%>
 
 <h3>Opposed Bills</h3>
-<%- if @politician.opposed_bills.present? -%>
+<%- if (opposed = @politician.bills.opposed).present? -%>
 <ul>
-  <% @politician.opposed_bills.each do |bill|  %>
+  <% opposed.each do |bill|  %>
     <li><%= link_to bill.title, bill%></li>
   <% end %>
 </ul>
