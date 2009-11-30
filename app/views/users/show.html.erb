@@ -2,4 +2,14 @@
 
 <h2><%= @user.username %></h2>
 
+<%- if @reports.empty? -%>
+  <p>You haven't created a report yet - <%= link_to "try it out!", new_resource_path %></p>
+<%- else -%>
+  <ul>
+  <% @reports.each do |report| %>
+    <li><%= render 'reports/report', :report => report %></li>
+  <% end %>
+  </ul>
+<%- end -%>
+
 <p><%= link_to "Create a report", new_user_report_path(@user) %></p>
