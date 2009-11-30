@@ -5,6 +5,19 @@ describe Politician do
     @politician = Factory.create(:politician)
   end
 
+  describe "Creation" do
+    it "should load attributes from Sunlight labs" do
+      Sunlight::Legislator.should_receive(:all).and_return([
+        Sunlight::Legislator.new("firstname"=>"Jessie", "govtrack_id" => '200001'),
+        Sunlight::Legislator.new("firstname"=>"Edward", "govtrack_id" => '200002'),
+        Sunlight::Legislator.new("firstname"=>"Bob", "govtrack_id" => '200003')
+      ])
+
+      politician = Factory.create(:politician)
+      politician.govtrack_id.should == 200001
+    end
+  end
+
   describe "#bills" do
     before do
       @supported = Factory.create(:bill)
