@@ -1,1 +1,1 @@
-VoteSmart.api_key = 'a495c384bd8a712f13616811c5f3d7ae'
+VoteSmart.api_key = ENV['PROJECT_VOTE_SMART_API_KEY'] || ENV['PVS_API_KEY']
