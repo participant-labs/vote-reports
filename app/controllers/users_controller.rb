@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @reports = @user.reports
     redirect_to [@user, :reports] unless current_user == @user
   end
 
