@@ -4,6 +4,8 @@ class Politician
 
     def headshot_url(type = nil)
       ::GovTrack::Politician.new(gov_track_id).headshot_url(HEADSHOT_TYPE_TO_SIZE[type])
+    rescue ArgumentError
+      nil
     end
   end
 end
