@@ -1,3 +1,10 @@
+h3. ?
+
+* Implement Legislator#eventful_id and #sunlight_old_id attributes
+* Implement Committee.all_for_legislator, and use it in Legislator#committees
+* Alias Legislator.all_where as .all
+* Implement Legislator.find (which is like .all but returns a single legislator, nil for none, or raises Sunlight::MultipleLegislatorsReturnedError for multiple)
+
 h3. 1.0.5 / 2009-10-27
 
 * Implement birthdate on Legislator as a Time object
