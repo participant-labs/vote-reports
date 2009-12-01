@@ -3,7 +3,7 @@
 <h2><%= @user.username %></h2>
 
 <%- if @reports.empty? -%>
-  <p>You haven't created a report yet - <%= link_to "try it out!", new_resource_path %></p>
+  <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
 <%- else -%>
   <ul>
   <% @reports.each do |report| %>
