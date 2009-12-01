@@ -12,7 +12,7 @@
   <h3>Top Scores</h3>
   <ol>
     <%- top_scores.each do |(politician, score)| -%>
-      <li><%= render politician %>: <%= score %></li>
+      <li><%= render 'politicians/politician', :politician => politician %>: <%= score %></li>
     <%- end -%>
   </ol>
 <%- end -%>
@@ -22,7 +22,7 @@
   <h3>Lowest Scores</h3>
   <ol>
     <%- lowest_scores.each do |(politician, score)| -%>
-      <li><%= render politician %>: <%= score %></li>
+      <li><%= render 'politicians/politician', :politician => politician %>: <%= score %></li>
     <%- end -%>
   </ol>
 <%- end -%>
