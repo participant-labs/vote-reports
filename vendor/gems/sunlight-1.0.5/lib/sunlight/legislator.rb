@@ -36,15 +36,12 @@ module Sunlight
       #   officials = Sunlight::Legislator.all_in_district(District.new("NJ", "7"))
       #
       def all_in_district(district)
-
         senior_senator = Legislator.all_where(:state => district.state, :district => "Senior Seat").first
         junior_senator = Legislator.all_where(:state => district.state, :district => "Junior Seat").first
         representative = Legislator.all_where(:state => district.state, :district => district.number).first
 
         {:senior_senator => senior_senator, :junior_senator => junior_senator, :representative => representative}
-
       end
-
 
       #
       # A more general, open-ended search on Legislators than #all_for.
@@ -63,7 +60,6 @@ module Sunlight
       #   dudes = Sunlight::Legislator.all_where(:gender => "M")
       #
       def all_where(params)
-
         url = construct_url("legislators.getList", params)
 
         if result = get_json_data(url)
@@ -73,7 +69,33 @@ module Sunlight
         end
       end
       alias_method :all, :all_where
-    
+
+      #
+      # Search for a single legislator.
+      # See the Sunlight API for list of conditions and values:
+      #
+      # http://services.sunlightlabs.com/api/docs/legislators/
+      #
+      # Returns:
+      #
+      # A Legislator that matches the conditions, if there is only one match
+      # nil, if none is found
+      # raises Sunlight::MultipleLegislatorsReturnedError if there are multiple matches
+      #
+      # Usage:
+      #
+      #   john = Sunlight::Legislator.find(:firstname => "John")
+      #   floridian = Sunlight::Legislator.find(:state => "FL")
+      #   dude = Sunlight::Legislator.find(:gender => "M")
+      #
+      def find(params)
+        url = construct_url("legislators.get", params)
+
+        if result = get_json_data(url)
+          Legislator.new(result["response"]["legislator"])
+        end
+      end
+
       #
       # When you only have a zipcode (and could not get address from the user), use this.
       # It specifically accounts for the case where more than one Representative's district
@@ -140,7 +162,8 @@ module Sunlight
     attr_accessor :title, :firstname, :middlename, :lastname, :name_suffix, :nickname,
                   :party, :state, :district, :gender, :phone, :fax, :website, :webform,
                   :email, :congress_office, :bioguide_id, :votesmart_id, :fec_id,
-                  :govtrack_id, :crp_id, :event_id, :congresspedia_url, :youtube_url,
+                  :govtrack_id, :crp_id, :event_id, :eventful_id, :sunlight_old_id,
+                  :congresspedia_url, :youtube_url,
                   :twitter_id, :fuzzy_score, :in_office, :senate_class, :birthdate
 
     # Takes in a hash where the keys are strings (the format passed in by the JSON parser)
@@ -154,7 +177,7 @@ module Sunlight
     
     # Convenience method for getting out the youtube_id from the youtube_url
     def youtube_id
-      /http:\/\/(?:www\.)?youtube\.com\/(?:user\/)?(.*?)\/?$/.match(youtube_url)[1] unless youtube_url.nil?
+      %r{http://(?:www\.)?youtube\.com/(?:user/)?(.*?)/?$}.match(youtube_url)[1] if youtube_url
     end
     
     # Get the committees the Legislator sits on
@@ -164,13 +187,7 @@ module Sunlight
     # An array of Committee objects, each possibly
     # having its own subarray of subcommittees
     def committees
-      url = Sunlight::Base.construct_url("committees.allForLegislator", {:bioguide_id => self.bioguide_id})
-
-      if result = Sunlight::Base.get_json_data(url)
-        result["response"]["committees"].map do |committee|
-          Sunlight::Committee.new(committee["committee"])
-        end
-      end
+      Committee.all_for_legislator(self)
     end
     
   end # class Legislator

@@ -1,4 +1,6 @@
 module Sunlight
+  class MultipleLegislatorsReturnedError < StandardError
+  end
 
   # Houses general methods to work with the Sunlight and Google Maps APIs
   class Base
@@ -7,6 +9,11 @@ module Sunlight
     API_FORMAT = "json"
     @@api_key = ''
     
+    EXCEPTIONS = {
+      "Multiple Legislators Returned" => MultipleLegislatorsReturnedError,
+      "No Such Object Exists" => nil
+    }
+
     def self.api_key
      @@api_key
     end
@@ -42,14 +49,14 @@ module Sunlight
     # Usage:
     #   Legislator::District.get_json_data("http://someurl.com")    # returns Hash of data or nil
     def self.get_json_data(url)
-
       response = Net::HTTP.get_response(URI.parse(url))
       if response.class == Net::HTTPOK
-        result = JSON.parse(response.body)
+        JSON.parse(response.body)
+      elsif response.class == Net::HTTPBadRequest
+        raise EXCEPTIONS[response.body] if EXCEPTIONS[response.body]
       else
         nil
       end
-
     end # self.get_json_data
 
   end # class Base
