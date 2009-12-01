@@ -5,20 +5,34 @@
 
 <h3>Contact</h3>
 <dl>
-  <dt>Email</dt>
-  <dd><%= mail_to @politician.email %></dd>
-  <dt>Twitter</dt>
-  <dd><%= link_to "@#{@politician.twitter_id}", "http://twitter.com/#{@politician.twitter_id}" %></dd>
-  <dt>Contact Form</dt>
-  <dd><%= link_to @politician.webform, @politician.webform %></dd>
-  <dt>Website</dt>
-  <dd><%= link_to @politician.website, @politician.website %></dd>
-  <dt>Youtube</dt>
-  <dd><%= link_to @politician.youtube_url, @politician.youtube.url %></dd>
-  <dt>Phone</dt>
-  <dd><%= @politician.phone %></dd>
-  <dt>Fax</dt>
-  <dd><%= @politician.fax %></dd>
+  <%- if @politician.email.present? -%>
+    <dt>Email</dt>
+    <dd><%= mail_to @politician.email %></dd>
+  <%- end -%>
+  <%- if @politician.twitter_id.present? -%>
+    <dt>Twitter</dt>
+    <dd><%= link_to "@#{@politician.twitter_id}", "http://twitter.com/#{@politician.twitter_id}" %></dd>
+  <%- end -%>
+  <%- if @politician.webform.present? -%>
+    <dt>Contact Form</dt>
+    <dd><%= link_to @politician.webform, @politician.webform %></dd>
+  <%- end -%>
+  <%- if @politician.website.present? -%>
+    <dt>Website</dt>
+    <dd><%= link_to @politician.website, @politician.website %></dd>
+  <%- end -%>
+  <%- if @politician.youtube_url.present? -%>
+    <dt>Youtube</dt>
+    <dd><%= link_to @politician.youtube_url, @politician.youtube_url %></dd>
+  <%- end -%>
+  <%- if @politician.phone.present? -%>
+    <dt>Phone</dt>
+    <dd><%= @politician.phone %></dd>
+  <%- end -%>
+  <%- if @politician.fax.present? -%>
+    <dt>Fax</dt>
+    <dd><%= @politician.fax %></dd>
+  <%- end -%>
 </dl>
 
 <%= link_to 'View on Congresspedia', @politician.congresspedia_url %>
