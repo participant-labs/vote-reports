@@ -17,3 +17,9 @@ Given /^a published report by me named "([^\"]*)"$/ do |name|
   report = Factory.create(:report, :name => name, :user => @current_user)
   Factory.create(:bill_criterion, :bill => bill, :report => report)
 end
+
+Given /^the following published reports by me:$/ do |table|
+  table.hashes.each do |row|
+    Factory.create(:report, row.symbolize_keys.merge(:user => @current_user))
+  end
+end
