@@ -1,2 +1,5 @@
-<%= link_to h(report.name), report %> - <q><%= truncate(strip_tags(report.description), 100) %></q>
+<%= link_to h(report.name), report %>
+<%- if report.description.present? -%>
+  - <q><%= truncate(strip_tags(report.description), 100) %></q>
+<%- end -%>
 <%= link_to "Edit", edit_report_path(report) if report.user == current_user  %>
