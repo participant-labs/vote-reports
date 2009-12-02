@@ -5,7 +5,7 @@ class PoliticiansController < ApplicationController
   end
 
   def show
-    @politicians = Politician.find(params[:id])
+    @politician = Politician.find(params[:id])
   end
 
 end
