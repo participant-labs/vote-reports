@@ -22,6 +22,17 @@ Feature: User edits reports
     And I should not see "My Report"
     And I should not see "I made this because I care"
 
+  Scenario: User edits a report description with markdown
+    When I go to my reports page
+    And I follow "My Report"
+    And I follow "edit"
+    Then I should see "you can use Markdown"
+    When I fill in "Description" with "# You should read this because I'm awesome"
+    And I press "Save"
+    Then I should see "Report was successfully updated"
+    And I should see "You should read this because I'm awesome"
+    And I should not see "#"
+
   Scenario: User tries to edit a report to not have a name
     When I go to my reports page
     And I follow "My Report"
