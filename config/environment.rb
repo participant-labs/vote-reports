@@ -24,6 +24,9 @@ Rails::Initializer.run do |config|
   config.gem 'votesmart'
   config.gem 'sunlight'
 
+  config.gem 'crack'
+  config.gem 'httparty'
+  config.gem 'ym4r'
   config.gem "authlogic", :version => '>=2.1.3'
   config.gem 'bluecloth', :version => '>=2.0.5'
 
