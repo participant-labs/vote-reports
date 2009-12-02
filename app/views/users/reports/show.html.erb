@@ -3,7 +3,9 @@
 
 <h2><%=h @report.name %></h2>
 
+<%- unless @report.description.blank? -%>
 <p><%=h @report.description %></p>
+<%- end -%>
 
 <p>
   Created by <%= link_to h(@report.user.username), @report.user %>
