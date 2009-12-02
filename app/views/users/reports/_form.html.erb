@@ -3,9 +3,8 @@
   <p>
     <%= f.label :name %>
     <%= f.text_field :name, :class => "text" %><br />
-    <%= f.label :description %><br />
+    <%= f.label :description %> <span class="small">(you can use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>)</span><br />
     <%= f.text_area :description %><br />
-    <p class="small">(you can use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> in the description)</p>
     <%= f.submit "Save", :class => 'submit' %> |
     <%= link_to 'cancel', :back %>
   </p>
