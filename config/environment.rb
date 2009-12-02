@@ -18,13 +18,14 @@ Rails::Initializer.run do |config|
 
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
-  config.gem "authlogic", :version => '>=2.1.3'
   config.gem 'opencongress-ruby', :lib => 'opencongress_ruby'
   config.gem 'json'
   config.gem 'cachy', :version => '>=0.1.3'
   config.gem 'votesmart'
   config.gem 'sunlight'
-  config.gem 'bluecloth', :version => '>= 2.0.5'
+
+  config.gem "authlogic", :version => '>=2.1.3'
+  config.gem 'bluecloth', :version => '>=2.0.5'
 
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"

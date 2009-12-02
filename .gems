@@ -1,1 +1,2 @@
-bluecloth --version '>= 2.0.5'
+authlogic --version '>=2.1.3'
+bluecloth --version '>=2.0.5'
