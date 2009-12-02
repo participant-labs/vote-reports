@@ -8,6 +8,7 @@ Feature: User create report
       When I go to my profile page
       And I follow "Create a report"
       And I fill in "Name" with "My report"
+      And I fill in "Description" with "I made this because I care"
       And I press "Save"
       Then I should see "Report was successfully created"
 

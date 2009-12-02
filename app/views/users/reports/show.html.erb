@@ -3,6 +3,8 @@
 
 <h2><%=h @report.name %></h2>
 
+<p><%=h @report.description %></p>
+
 <p>
   Created by <%= link_to h(@report.user.username), @report.user %>
 </p>
