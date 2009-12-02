@@ -32,6 +32,9 @@ Feature: User edits reports
     Then I should see "Report was successfully updated"
     And I should see "You should read this because I'm awesome"
     And I should not see "#"
+    And I should not see "<h1>"
+    When I go to my reports page
+    Then I should not see "<h1>"
 
   Scenario: User tries to edit a report to not have a name
     When I go to my reports page

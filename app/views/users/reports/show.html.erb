@@ -6,7 +6,7 @@
 <p>Created by <%= link_to h(@report.user.username), @report.user %></p>
 
 <%- unless @report.description.blank? -%>
-<blockquote><%=h @report.description %></blockquote>
+<blockquote><%= @report.description %></blockquote>
 <%- end -%>
 
 <%- top_scores = scores[0..20] -%>
