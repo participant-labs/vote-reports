@@ -14,8 +14,8 @@ class Report < ActiveRecord::Base
                           :conditions => 'bill_criteria.bill_id IS NOT NULL'
   named_scope :recent, :limit => 10, :order => 'updated_at DESC'
 
-  def description=(description)
-    self[:description] = BlueCloth::new(description).to_html
+  def description
+    BlueCloth::new(self[:description]).to_html
   end
 
   def generate_scores!
