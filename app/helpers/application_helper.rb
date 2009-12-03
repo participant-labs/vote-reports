@@ -12,5 +12,6 @@ module ApplicationHelper
   def flash_helper
     [:notice, :warning, :message].map { |f| content_tag(:div, flash[f], :class => [f, " flash"]) if flash[f] }
   end
+  safe_helper :flash_helper
 
 end
