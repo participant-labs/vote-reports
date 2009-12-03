@@ -10,7 +10,7 @@ Feature: User create report
       And I fill in "Name" with "My report"
       And I fill in "Description" with "I made this because I care"
       And I press "Save"
-      Then I should see "Report was successfully created"
+      Then I should see "Successfully created report."
 
     Scenario: User signs in to create a report
       Given I signed up as "email@person.com/password"
