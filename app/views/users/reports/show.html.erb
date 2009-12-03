@@ -1,12 +1,12 @@
 <% title "Report - #{h @report.name}" %>
 <% scores = @report.generate_scores! %>
 
-<h2><%=h @report.name %></h2>
+<h2><%= @report.name %></h2>
 
-<p>Created by <%= link_to h(@report.user.username), @report.user %></p>
+<p>Created by <%= link_to @report.user.username, @report.user %></p>
 
 <%- unless @report.description.blank? -%>
-<blockquote><%= @report.description %></blockquote>
+<blockquote><%= raw @report.description %></blockquote>
 <%- end -%>
 
 <%- top_scores = scores[0..20] -%>
