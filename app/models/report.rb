@@ -15,7 +15,7 @@ class Report < ActiveRecord::Base
   named_scope :recent, :limit => 10, :order => 'updated_at DESC'
 
   def description
-    BlueCloth::new(self[:description]).to_html
+    BlueCloth::new(self[:description].to_s).to_html
   end
 
   def generate_scores!
