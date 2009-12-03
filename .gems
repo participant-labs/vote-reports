@@ -3,3 +3,4 @@ bluecloth --version '>=2.0.5'
 crack
 httparty
 ym4r
+erubis
