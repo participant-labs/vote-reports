@@ -36,7 +36,7 @@ class Users::ReportsController < ApplicationController
     @user = User.find(params[:user_id])
     @report = @user.reports.build(params[:report])
     if @report.save
-      flash[:notice] = "Successfully updated report."
+      flash[:notice] = "Successfully created report."
       redirect_to [@user, @report]
     else
       render :action => 'new'
