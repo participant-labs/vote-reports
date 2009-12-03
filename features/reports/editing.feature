@@ -35,6 +35,10 @@ Feature: User edits reports
     And I should not see "<h1>"
     When I go to my reports page
     Then I should not see "<h1>"
+    And I follow "My Report"
+    And I follow "edit"
+    Then I should not see "<h1>"
+    But I should see "#"
 
   Scenario: User tries to edit a report to not have a name
     When I go to my reports page
