@@ -1,1 +1,3 @@
-<%= link_to_unless_current user.username, user %>
+<%- thumbnail_size ||= 25 -%>
+
+<%= link_to_unless_current render('users/user_token', :user => user, :thumbnail_size => thumbnail_size), user %>
