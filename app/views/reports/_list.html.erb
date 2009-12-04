@@ -1,6 +1,6 @@
 <h2><%= title %></h2>
 <ol>
   <%- reports.each do |report| -%>
-    <%= render 'users/reports/report', :report => report %>
+    <li><%= render 'users/reports/report', :report => report %></li>
   <%- end -%>
 </ol>
