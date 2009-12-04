@@ -29,6 +29,7 @@ Rails::Initializer.run do |config|
   config.gem 'ym4r'
   config.gem "authlogic", :version => '>=2.1.3'
   config.gem 'bluecloth', :version => '>=2.0.5'
+  config.gem 'gravtastic', :version => '>= 2.1.0'
 
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"

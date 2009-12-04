@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  is_gravtastic!
+
   acts_as_authentic do |c|
     c.login_field = 'email'
   end

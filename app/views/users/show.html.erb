@@ -1,6 +1,7 @@
 <% title "User" %>
 
-<h2><%= @user.username %></h2>
+<h2><%= render 'users/user_token', :user => @user, :thumbnail_size => 50 %></h2>
+
 
 <%- if @reports.empty? -%>
   <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
