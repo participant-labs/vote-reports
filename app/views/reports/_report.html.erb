@@ -1,4 +1,4 @@
-<%= link_to report.name, report %>
+<%= link_to report.name, [report.user, report] %>
 <%- if report.description.present? -%>
   - <q><%= truncate(strip_tags(report.description), :length => 100) %></q>
 <%- end -%>
