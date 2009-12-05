@@ -1,6 +1,6 @@
 class Report < ActiveRecord::Base
   belongs_to :user
-  has_friendly_id :name, :use_slug => true
+  has_friendly_id :name, :use_slug => true, :scope => :user
 
   has_many :bill_criteria
   has_many :bills, :through => :bill_criteria
