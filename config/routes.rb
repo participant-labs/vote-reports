@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resources :bills
   map.resources :politicians
-  map.resources :reports
+  map.resources :reports, :only => [:index, :new]
   map.resources :users do |user|
     user.resources :reports, :controller => 'users/reports' do |report|
       report.resource :bills, :controller => 'users/reports/bills'
@@ -16,7 +16,4 @@ ActionController::Routing::Routes.draw do |map|
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"  
   map.root :controller => "site", :action => 'index'
-  
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
 end
