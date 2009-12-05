@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :reports, :only => [:index, :new]
   map.resources :users do |user|
     user.resources :reports, :controller => 'users/reports' do |report|
-      report.resource :bills, :controller => 'users/reports/bills'
+      report.resource :bills, :controller => 'users/reports/bills', :only => :new
     end
   end
 
