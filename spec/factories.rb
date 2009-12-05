@@ -13,7 +13,7 @@ end
 Factory.define :bill do |f|
   f.title { Factory.next :text }
   f.opencongress_id { Factory.next :opencongress_id }
-  f.bill_type 'H.R.852'
+  f.bill_type { "H.Res.3549"}
 end
 
 Factory.define :bill_criterion do |f|

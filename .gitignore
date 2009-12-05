@@ -4,3 +4,4 @@ log/*.log
 tmp/
 public/system
 data
+spec/support/web_requests.marshal
