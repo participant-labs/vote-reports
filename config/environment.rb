@@ -25,6 +25,7 @@ Rails::Initializer.run do |config|
   config.gem 'sunlight'
 
   config.gem 'crack'
+  config.gem 'friendly_id'
   config.gem 'httparty'
   config.gem 'ym4r'
   config.gem "authlogic", :version => '>=2.1.3'
