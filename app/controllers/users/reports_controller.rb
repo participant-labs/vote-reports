@@ -8,7 +8,7 @@ class Users::ReportsController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
-    @report = @user.reports.find(params[:id])
+    @report = @user.reports.find(params[:id], :scope => @user)
     if @report.has_better_id?
       redirect_to user_report_bills_path(@user, @report), :status => 301
     end
@@ -16,7 +16,7 @@ class Users::ReportsController < ApplicationController
 
   def edit
     @user = User.find(params[:user_id])
-    @report = @user.reports.find(params[:id])
+    @report = @user.reports.find(params[:id], :scope => @user)
     if @report.has_better_id?
       redirect_to user_report_bills_path(@user, @report), :status => 301
     end
@@ -24,7 +24,7 @@ class Users::ReportsController < ApplicationController
 
   def update
     @user = User.find(params[:user_id])
-    @report = @user.reports.find(params[:id])
+    @report = @user.reports.find(params[:id], :scope => @user)
     if @report.update_attributes(params[:report])
       flash[:notice] = "Successfully updated report."
       redirect_to @user
@@ -51,7 +51,7 @@ class Users::ReportsController < ApplicationController
 
   def destroy
     @user = User.find_by_param!(params[:user_id])
-    @user.reports.find(params[:id]).destroy
+    @user.reports.find(params[:id], :scope => @user).destroy
     flash[:notice] = "Successfully destroyed report."
     redirect_to user_reports_url(@user)
   end
