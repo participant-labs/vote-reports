@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :user_sessions
   map.resources :users
   map.resources :bills
-  map.resources :politicians
+  map.resources :politicians, :only => [:index, :show]
   map.resources :reports, :only => [:index, :new]
   map.resources :users do |user|
     user.resources :reports, :controller => 'users/reports' do |report|
