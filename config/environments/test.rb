@@ -32,3 +32,4 @@ config.gem "rspec-rails", :lib => false, :version => ">=1.2.9"
 config.gem "thoughtbot-factory_girl", :lib => "factory_girl"
 config.gem 'mocha'
 config.gem 'forgery', :source => 'http://gemcutter.org'
+config.gem 'fakeweb'
