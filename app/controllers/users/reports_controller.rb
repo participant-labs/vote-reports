@@ -9,11 +9,17 @@ class Users::ReportsController < ApplicationController
   def show
     @user = User.find(params[:user_id])
     @report = @user.reports.find(params[:id])
+    if @report.has_better_id?
+      redirect_to user_report_bills_path(@user, @report), :status => 301
+    end
   end
 
   def edit
     @user = User.find(params[:user_id])
     @report = @user.reports.find(params[:id])
+    if @report.has_better_id?
+      redirect_to user_report_bills_path(@user, @report), :status => 301
+    end
   end
 
   def update

@@ -1,4 +1,6 @@
 class Bill < ActiveRecord::Base
+  has_friendly_id :opencongress_id
+
   after_create :initialize_votes
 
   class << self
@@ -32,10 +34,6 @@ class Bill < ActiveRecord::Base
 
   def title_with_number
     "#{bill_type}: #{title}"
-  end
-
-  def to_param
-    opencongress_id
   end
 
   def opencongress_url
