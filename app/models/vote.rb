@@ -17,7 +17,7 @@ class Vote < ActiveRecord::Base
           politician.votes.create(:bill_id => bill.id, :vote => bool_action(vote))
       end
     rescue => e
-      Rails.logger.error(e.message)
+      notify(e)
       []
     end
 
