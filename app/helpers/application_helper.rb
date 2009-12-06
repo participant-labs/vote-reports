@@ -1,6 +1,10 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
+  def blog_path
+    'http://blog.votereports.org/'
+  end
+
   def page_title
     @page_title || 'Vote Reports'
   end
