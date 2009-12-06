@@ -7,8 +7,4 @@ class SiteController < ApplicationController
   def about
   end
 
-  def exceptional_test
-    Politician.new.headshot_url
-  end
-
 end
