@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20091210214123) do
     t.string   "opencongress_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "bill_number"
+    t.integer  "session"
   end
 
   create_table "congresses", :force => true do |t|

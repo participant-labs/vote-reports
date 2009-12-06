@@ -5,7 +5,7 @@ class Bill < ActiveRecord::Base
 
   validates_presence_of :bill_type
 
-  after_create :initialize_votes
+  #after_create :initialize_votes
 
   class << self
     def fetch(id)
@@ -55,7 +55,7 @@ class Bill < ActiveRecord::Base
     end
   end
 
-  validates_uniqueness_of :opencongress_id
+  validates_uniqueness_of :opencongress_id, :allow_nil => true
 
   private
 
