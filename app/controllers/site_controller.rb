@@ -7,4 +7,8 @@ class SiteController < ApplicationController
   def about
   end
 
+  def exceptional_test
+    Vote.fetch_for_bill(nil)
+  end
+
 end

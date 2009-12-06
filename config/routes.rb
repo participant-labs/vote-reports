@@ -26,6 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   map.new_user_report_bills "reports/:user_id/:report_id/bills/new",
     :controller => 'users/reports/bills', :action => 'new', :conditions => { :method => :get }
 
+  map.about "exceptional_test", :controller => "site", :action => "exceptional_test"  
   map.about "about", :controller => "site", :action => "about"  
   map.signup "/signup", :controller => "users", :action => "new"  
   map.login "/login", :controller => "user_sessions", :action => "new"
