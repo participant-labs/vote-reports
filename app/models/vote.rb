@@ -17,7 +17,7 @@ class Vote < ActiveRecord::Base
           politician.votes.create(:bill_id => bill.id, :vote => bool_action(vote))
       end
     rescue => e
-      notify(e)
+      notify_exceptional(e)
       []
     end
 
