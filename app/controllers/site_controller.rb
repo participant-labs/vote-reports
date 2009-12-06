@@ -8,7 +8,7 @@ class SiteController < ApplicationController
   end
 
   def exceptional_test
-    Vote.fetch_for_bill(nil)
+    Politician.new.headshot_url
   end
 
 end
