@@ -1,5 +1,9 @@
 class Bill < ActiveRecord::Base
+  named_scope :recent, :limit => 25, :order => 'created_at DESC'
+
   has_friendly_id :opencongress_id
+
+  validates_presence_of :bill_type
 
   after_create :initialize_votes
 
