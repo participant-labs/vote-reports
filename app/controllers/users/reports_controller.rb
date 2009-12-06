@@ -50,7 +50,7 @@ class Users::ReportsController < ApplicationController
   end
 
   def destroy
-    @user = User.find_by_param!(params[:user_id])
+    @user = User.find(params[:user_id])
     @user.reports.find(params[:id], :scope => @user).destroy
     flash[:notice] = "Successfully destroyed report."
     redirect_to user_reports_url(@user)
