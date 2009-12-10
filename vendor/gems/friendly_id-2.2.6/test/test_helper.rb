@@ -96,3 +96,7 @@ class Book < ActiveRecord::Base ; end
 class Novel < ::Book
   has_friendly_id :name, :use_slug => true
 end
+
+# A model with no table
+class Question < ActiveRecord::Base
+end

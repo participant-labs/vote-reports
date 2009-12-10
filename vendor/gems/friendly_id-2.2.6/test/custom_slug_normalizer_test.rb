@@ -19,16 +19,16 @@ class CustomSlugNormalizerTest < Test::Unit::TestCase
     end
 
     should "respect the max_length option" do
-      Person.friendly_id_options = Person.friendly_id_options.merge(:max_length => 3)
+      Person.friendly_id_options.merge!(:max_length => 3)
       @person = Person.create!(:name => "Joe Schmoe")
       assert_equal "JOE", @person.friendly_id
     end
 
     should "respect the reserved option" do
-      Person.friendly_id_options = Person.friendly_id_options.merge(:reserved => ["JOE"])
-      assert_raises FriendlyId::SlugGenerationError do
-        Person.create!(:name => "Joe")
-      end
+      Person.friendly_id_options.merge!(:reserved => ["JOE"])
+      person = Person.new(:name => "Joe")
+      assert !person.save
+      assert_equal ['Name can not be "Joe"'], person.errors.full_messages
     end
 
   end

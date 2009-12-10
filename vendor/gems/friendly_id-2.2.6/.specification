@@ -1,7 +1,7 @@
 --- !ruby/object:Gem::Specification 
 name: friendly_id
 version: !ruby/object:Gem::Version 
-  version: 2.2.5
+  version: 2.2.6
 platform: ruby
 authors: 
 - Norman Clarke
@@ -11,7 +11,7 @@ autorequire:
 bindir: bin
 cert_chain: []
 
-date: 2009-12-05 00:00:00 -05:00
+date: 2009-12-09 00:00:00 -05:00
 default_executable: 
 dependencies: 
 - !ruby/object:Gem::Dependency 
@@ -74,7 +74,7 @@ dependencies:
       - !ruby/object:Gem::Version 
         version: "0"
     version: 
-description: "    FriendlyId is the \"Swiss Army bulldozer\" of slugging and permalink\n    plugins for Ruby on Rails. It allows you to create pretty URL\xE2\x80\x99s\n    and work with human-friendly strings as if they were numeric ids for\n    ActiveRecord models.'\n"
+description: "    FriendlyId is the \"Swiss Army bulldozer\" of slugging and permalink\n    plugins for Ruby on Rails. It allows you to create pretty URL\xE2\x80\x99s\n    and work with human-friendly strings as if they were numeric ids for\n    ActiveRecord models.\n"
 email: 
 - norman@njclarke.com
 - adrian@mugnolo.com
@@ -88,15 +88,14 @@ extra_rdoc_files:
 - History.txt
 files: 
 - lib/friendly_id/helpers.rb
-- lib/friendly_id/non_sluggable_class_methods.rb
-- lib/friendly_id/non_sluggable_instance_methods.rb
-- lib/friendly_id/slug.rb
-- lib/friendly_id/sluggable_class_methods.rb
-- lib/friendly_id/sluggable_instance_methods.rb
+- lib/friendly_id/non_sluggable/class_methods.rb
+- lib/friendly_id/non_sluggable/instance_methods.rb
+- lib/friendly_id/sluggable/class_methods.rb
+- lib/friendly_id/sluggable/instance_methods.rb
+- lib/friendly_id/sluggable/slug.rb
 - lib/friendly_id/tasks.rb
 - lib/friendly_id/version.rb
 - lib/friendly_id.rb
-- lib/tasks/friendly_id.rb
 - init.rb
 - README.rdoc
 - History.txt
@@ -123,7 +122,7 @@ files:
 - extras/template-gem.rb
 - extras/template-plugin.rb
 has_rdoc: true
-homepage: http://gemcutter.org/gems/friendly_id
+homepage: http://rdoc.info/projects/norman/friendly_id
 licenses: []
 
 post_install_message: |+
