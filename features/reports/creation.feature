@@ -24,3 +24,12 @@ Feature: User create report
       And I follow "Create a report"
       And I press "Save"
       Then I should see "Name can't be blank"
+
+    Scenario: User tries to create a report with a reserved name
+      Given I am signed in
+      When I go to my profile page
+      And I follow "Create a report"
+      And I fill in "Name" with "New"
+      And I press "Save"
+      Then I should see "Name can not be "
+      And I should not see "Slugs is invalid"

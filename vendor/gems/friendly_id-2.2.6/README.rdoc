@@ -138,9 +138,8 @@ Here's how to do it:
     has_friendly_id :name, :use_slug => true, :reserved => ["my", "values"]
   end
 
-As of FriendlyId version 2.0.2, "new" and "index" are reseved by default. When
-you attempt to store a reserved value, FriendlyId raises a
-FriendlyId::SlugGenerationError.
+As of FriendlyId version 2.0.2, "new" and "index" are reseverd by default. When
+you attempt to store a reserved value, the object fails validation.
 
 === Cached slugs
 

@@ -60,27 +60,27 @@ class SluggedModelTest < Test::Unit::TestCase
     end
 
     should "raise an error if the friendly_id text is reserved" do
-      assert_raises(FriendlyId::SlugGenerationError) do
-        Post.create!(:name => "new")
-      end
+      person = Post.new(:name => "new")
+      assert !person.save
+      assert_equal ['Name can not be "new"'], person.errors.full_messages
     end
 
     should "raise an error if the friendly_id text is an empty string" do
-      assert_raises(FriendlyId::SlugGenerationError) do
-        Post.create(:name => "")
-      end
+      person = Post.new(:name => "")
+      assert !person.save
+      assert_equal ['Name can not be ""'], person.errors.full_messages
     end
 
-    should "raise an error if the friendly_id text is nil" do
-      assert_raises(FriendlyId::SlugGenerationError) do
-        Post.create(:name => nil)
-      end
+    should "fails validation if the friendly_id text is nil" do
+      person = Post.new(:name => nil)
+      assert !person.save
+      assert_equal ['Name can not be ""'], person.errors.full_messages
     end
 
     should "raise an error if the normalized friendly id becomes blank" do
-      assert_raises(FriendlyId::SlugGenerationError) do
-        post = Post.create!(:name => "-.-")
-      end
+      person = Post.new(:name => "-.-")
+      assert !person.save
+      assert_equal ['Name can not be "-.-"'], person.errors.full_messages
     end
 
     should "not make a new slug unless the friendly_id method value has changed" do
@@ -171,15 +171,15 @@ class SluggedModelTest < Test::Unit::TestCase
       end
 
       should "raise an error if the friendly_id text is an empty string" do
-        assert_raises(FriendlyId::SlugGenerationError) do
-          Post.create(:name => "")
-        end
+        person = Post.new(:name => "")
+        assert !person.save
+        assert_equal ['Name can not be ""'], person.errors.full_messages
       end
 
-      should "raise an error if the friendly_id text is nil" do
-        assert_raises(FriendlyId::SlugGenerationError) do
-          Post.create(:name => nil)
-        end
+      should "fails validation if the friendly_id text is nil" do
+        person = Post.new(:name => nil)
+        assert !person.save
+        assert_equal ['Name can not be ""'], person.errors.full_messages
       end
 
     end
@@ -287,6 +287,14 @@ class SluggedModelTest < Test::Unit::TestCase
         assert_not_equal @post.slug, @post.finder_slug
       end
 
+    end
+
+    context "when table does not exist" do
+      should "not raise an error when doing friendly_id setup" do
+        assert_nothing_raised do
+          Question.has_friendly_id :title, :use_slug => true
+        end
+      end
     end
 
     context "when using an array as the find argument" do
