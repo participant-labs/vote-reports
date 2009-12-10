@@ -1,3 +1,4 @@
+require 'open-uri'
 require 'nokogiri'
 
 namespace :gov_track do
@@ -75,25 +76,25 @@ namespace :gov_track do
   end
   
   namespace :politicians do
-    desc "Download Politicians"
-    task :download do
-      `wget http://www.govtrack.us/data/us/111/people.xml`
-    end
-    
     desc "Process Politicians"
     task :unpack => :environment do
-      filename = Rails.root.join("public","system","people.xml")
-      doc = Nokogiri::XML(open(filename))
+      meeting = 111
+      doc = Nokogiri::XML(open("http://www.govtrack.us/data/us/#{meeting}/people.xml"))
+      congress = Congress.find_or_create_by_meeting(meeting)
 
       doc.xpath('//person').each do |person|
-        first_name = person.attributes["firstname"].value
-        last_name = person.attributes["lastname"].value
-        gov_track_id = person.attributes["id"].value
-        Politician.create!(
-          :first_name => first_name,
-          :last_name => last_name,
-          :gov_track_id => gov_track_id
-        )
+        politician = Politician.find_or_create_by_gov_track_id(person['id']) \
+          .update_attributes({
+              'lastname' => 'last_name',
+              'firstname' => 'first_name',
+              'bioguideid' => 'bioguide_id',
+              'metavidid' => 'metavid_id',
+              'birthday' => 'birthday',
+              'gender' => 'gender'
+            }.inject({}) do |attrs, (attr, method)|
+              attrs[method] = person[attr]
+              attrs
+          end)
       end
     end
   end
