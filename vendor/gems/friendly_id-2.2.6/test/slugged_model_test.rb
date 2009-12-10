@@ -59,16 +59,34 @@ class SluggedModelTest < Test::Unit::TestCase
       end
     end
 
-    should "raise an error if the friendly_id text is reserved" do
-      person = Post.new(:name => "new")
-      assert !person.save
-      assert_equal ['Name can not be "new"'], person.errors.full_messages
+    context "when the friendly_id text is reserved" do
+      should "fail validation" do
+        person = Post.new(:name => "new")
+        assert !person.save
+        assert_equal ['Name can not be "new"'], person.errors.full_messages
+      end
+
+      should "validate the latest slug when there are multiple versions" do
+        person = Post.new(:name => "Something")
+        assert person.save
+        assert !person.update_attributes(:name => "new")
+        assert_equal ['Name can not be "new"'], person.errors.full_messages
+      end
     end
 
-    should "raise an error if the friendly_id text is an empty string" do
-      person = Post.new(:name => "")
-      assert !person.save
-      assert_equal ['Name can not be ""'], person.errors.full_messages
+    context "when the friendly_id text is an empty string" do
+      should "fail validation" do
+        person = Post.new(:name => "")
+        assert !person.save
+        assert_equal ['Name can not be ""'], person.errors.full_messages
+      end
+
+      should "validate the latest slug when there are multiple versions" do
+        person = Post.new(:name => "Something")
+        assert person.save
+        assert !person.update_attributes(:name => "")
+        assert_equal ['Name can not be ""'], person.errors.full_messages
+      end
     end
 
     should "fails validation if the friendly_id text is nil" do
