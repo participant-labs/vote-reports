@@ -2,6 +2,14 @@ class Politician < ActiveRecord::Base
   include Politician::GovTrack
   include Politician::SunlightLabs
 
+  has_many :representative_terms
+  has_many :senate_terms
+
+  CONTACT_FIELDS = [:twitter_id, :email].freeze
+
+  validates_length_of CONTACT_FIELDS, :minimum => 1, :allow_nil => true
+  validates_uniqueness_of CONTACT_FIELDS, :allow_nil => true
+
   has_many :votes
   has_many :bills, :through => :votes do
     def supported
