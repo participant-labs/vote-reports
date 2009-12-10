@@ -1,6 +1,15 @@
 require 'nokogiri'
 
 namespace :gov_track do
+  desc "do everything"
+  task :update => [:download, :unpack]
+
+  desc "Download All Data"
+  task :download => [:'bills:download', :'votes:download', :'politicians:download']
+
+  desc "Process All Data"
+  task :unpack => [:'bills:unpack', :'votes:unpack', :'politicians:unpack']
+
   namespace :bills do
     desc "Download Bills"
     task :download do
@@ -22,7 +31,6 @@ namespace :gov_track do
           :bill_number => number,
           :session => session) 
       end
-      
     end
   end
   
