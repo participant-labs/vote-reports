@@ -18,7 +18,7 @@ namespace :gov_track do
     
     desc "Process Bills"
     task :unpack => :environment do
-      Dir.glob(File.join(RAILS_ROOT,"public","system","bills","*.xml")).each do |filename|
+      Dir.glob(Rails.root.join("public","system","bills","*.xml")).each do |filename|
         doc     = Nokogiri::XML(open(filename))
         title   = doc.xpath('//title').text
         number  = doc.root.attributes["number"].value
@@ -43,7 +43,7 @@ namespace :gov_track do
     
     desc "Process Votes"
     task :unpack => :environment do
-      filename = File.join(RAILS_ROOT,"public","system","votes.all.index.xml")
+      filename = Rails.root.join("public","system","votes.all.index.xml")
       doc = Nokogiri::XML(open(filename))
 
       doc.xpath('//vote').each do |vote|
@@ -56,7 +56,7 @@ namespace :gov_track do
 
           bill = Bill.find(:first, :conditions => {:session => bill_session, :bill_number => bill_number, :bill_type => bill_type})
           if bill
-            roll_filename = File.join(RAILS_ROOT,"public","system","rolls","#{bill_type}2009-#{roll}.xml")
+            roll_filename = Rails.root.join("public","system","rolls","#{bill_type}2009-#{roll}.xml")
             if File.exist?(roll_filename)
               roll_doc = Nokogiri::XML(open(roll_filename))
               roll_doc.xpath('//voter').each do |voter|
@@ -82,7 +82,7 @@ namespace :gov_track do
     
     desc "Process Politicians"
     task :unpack => :environment do
-      filename = File.join(RAILS_ROOT,"public","system","people.xml")
+      filename = Rails.root.join("public","system","people.xml")
       doc = Nokogiri::XML(open(filename))
 
       doc.xpath('//person').each do |person|
