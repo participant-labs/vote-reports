@@ -1,6 +1,10 @@
 class Politician
   module SunlightLabs
-    SUNLIGHT_ATTRIBUTES = %w[bioguide_id congress_office congresspedia_url crp_id district email event_id fax fec_id first_name gender gov_track_id in_office last_name middlename name_suffix nickname party phone senate_class state title twitter_id vote_smart_id webform website youtube_url].freeze
+    SUNLIGHT_ATTRIBUTES = %w[bioguide_id congress_office congresspedia_url crp_id district
+      email event_id fax fec_id first_name gender gov_track_id in_office last_name middlename
+      name_suffix nickname party phone senate_class state title twitter_id vote_smart_id webform
+      website youtube_url
+    ].freeze
 
     SUNLIGHT_RENAMES = {
       'first_name' => 'firstname',
@@ -21,7 +25,7 @@ class Politician
           self.send("#{attr}=", legislator.send(SUNLIGHT_RENAMES.fetch(attr, attr)))
         end
       else
-        Rails.logger.error "SUNLIGHT: Unable to fetch data for '#{full_name}'"
+        notify_exceptional(StandardError.new("SUNLIGHT: Unable to fetch data for '#{full_name}'"))
       end
     end
   end
