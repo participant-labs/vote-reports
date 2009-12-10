@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091205070140) do
+ActiveRecord::Schema.define(:version => 20091210214123) do
 
   create_table "bill_criteria", :force => true do |t|
     t.integer  "bill_id"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(:version => 20091205070140) do
     t.string   "opencongress_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "congresses", :force => true do |t|
+    t.integer "meeting"
   end
 
   create_table "politicians", :force => true do |t|
@@ -68,6 +72,30 @@ ActiveRecord::Schema.define(:version => 20091205070140) do
     t.string   "cached_slug"
   end
 
+  create_table "representative_terms", :force => true do |t|
+    t.integer "politician_id"
+    t.integer "congress_id"
+    t.date    "started_on"
+    t.date    "ended_on"
+    t.integer "district"
+    t.string  "party"
+    t.string  "state"
+    t.string  "type"
+    t.string  "url"
+  end
+
+  create_table "senate_terms", :force => true do |t|
+    t.integer "politician_id"
+    t.integer "congress_id"
+    t.date    "started_on"
+    t.date    "ended_on"
+    t.integer "senate_class"
+    t.string  "party"
+    t.string  "state"
+    t.string  "type"
+    t.string  "url"
+  end
+
   create_table "slugs", :force => true do |t|
     t.string   "name"
     t.integer  "sluggable_id"
@@ -77,7 +105,7 @@ ActiveRecord::Schema.define(:version => 20091205070140) do
     t.datetime "created_at"
   end
 
-  add_index "slugs", ["name", "sluggable_type", "scope", "sequence"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
+  add_index "slugs", ["name", "scope", "sequence", "sluggable_type"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
 
   create_table "users", :force => true do |t|
