@@ -1,6 +1,4 @@
-Download info
+Welcome to VoteReports
+======================
 
-rsync -az govtrack.us::govtrackdata/us/111/bills .
-rsync -az govtrack.us::govtrackdata/us/111/rolls .
-wget http://www.govtrack.us/data/us/111/people.xml
-wget http://www.govtrack.us/data/us/111/votes.all.index.xml
+To inform. To promote truth. To combat political apathy.
