@@ -31,6 +31,14 @@ class CustomSlugNormalizerTest < Test::Unit::TestCase
       assert_equal ['Name can not be "Joe"'], person.errors.full_messages
     end
 
+    should "validate the latest slug when there are multiple versions" do
+      Person.friendly_id_options.merge!(:reserved => ["JOE"])
+      person = Person.new(:name => "Not Joe")
+      assert person.save
+      assert !person.update_attributes(:name => "Joe")
+      assert_equal ['Name can not be "Joe"'], person.errors.full_messages
+    end
+
   end
 
 end
