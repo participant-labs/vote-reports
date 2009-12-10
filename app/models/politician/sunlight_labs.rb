@@ -18,8 +18,7 @@ class Politician
     end
 
     def load_sunlight_labs_data
-      legislator = Sunlight::Legislator.find(:votesmart_id => vote_smart_id)
-      if legislator
+      if legislator = Sunlight::Legislator.find(:votesmart_id => vote_smart_id, :all_legislators => true)
         Rails.logger.info "SUNLIGHT: Fetched '#{full_name}' as '#{legislator.firstname} #{legislator.lastname}'"
         SUNLIGHT_ATTRIBUTES.each do |attr|
           self.send("#{attr}=", legislator.send(SUNLIGHT_RENAMES.fetch(attr, attr)))
