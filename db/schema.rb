@@ -63,6 +63,9 @@ ActiveRecord::Schema.define(:version => 20091210214123) do
     t.string   "webform"
     t.string   "website"
     t.string   "youtube_url"
+    t.string   "metavid_id"
+    t.date     "birthday"
+    t.string   "religion"
   end
 
   create_table "reports", :force => true do |t|
