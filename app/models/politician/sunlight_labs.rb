@@ -14,15 +14,14 @@ class Politician
     end
 
     def load_sunlight_labs_data
-      legislators = Sunlight::Legislator.all(:votesmart_id => vote_smart_id)
-      if legislators.empty?
-        Rails.logger.error "SUNLIGHT: Unable to fetch data for '#{full_name}'"
-      else
-        legislator = legislators.first
+      legislator = Sunlight::Legislator.find(:votesmart_id => vote_smart_id)
+      if legislator
         Rails.logger.info "SUNLIGHT: Fetched '#{full_name}' as '#{legislator.firstname} #{legislator.lastname}'"
         SUNLIGHT_ATTRIBUTES.each do |attr|
           self.send("#{attr}=", legislator.send(SUNLIGHT_RENAMES.fetch(attr, attr)))
         end
+      else
+        Rails.logger.error "SUNLIGHT: Unable to fetch data for '#{full_name}'"
       end
     end
   end
