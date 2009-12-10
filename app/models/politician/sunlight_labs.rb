@@ -1,4 +1,4 @@
-class Politician
+class Politician < ActiveRecord::Base
   module SunlightLabs
     SUNLIGHT_ATTRIBUTES = %w[bioguide_id congress_office congresspedia_url crp_id district
       email event_id fax fec_id first_name gender gov_track_id in_office last_name middlename

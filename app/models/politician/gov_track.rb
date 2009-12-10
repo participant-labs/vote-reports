@@ -1,4 +1,4 @@
-class Politician
+class Politician < ActiveRecord::Base
   module GovTrack
     HEADSHOT_TYPE_TO_SIZE = {:small => '50px', :medium => '100px', :large => '200px'}.freeze
 
