@@ -9,3 +9,9 @@ end
 Then /^I should not be signed in$/ do
   assert_nil request.session['user_credentials_id']
 end
+
+Given /^the following (.+) records?:$/ do |type, table|
+  table.hashes.each do |row|
+    Factory.create(type.to_s.gsub(' ', '_').underscore.to_sym, row.symbolize_keys)
+  end
+end

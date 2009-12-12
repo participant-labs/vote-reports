@@ -35,6 +35,17 @@
 <%= link_to 'View on Congresspedia', @politician.congresspedia_url %>
 
 <hr />
+<h3>Terms in Congress</h3>
+<%- if (terms = @politician.terms).present? -%>
+<ul>
+  <% terms.each do |term|  %>
+    <li><%= render 'politicians/terms/term', :term => term %></li>
+  <% end %>
+</ul>
+<%- else -%>
+  <p>We have no record of elections for this politician</p>
+<%- end -%>
+
 <h3>Supported Bills</h3>
 <%- if (supported = @politician.bills.supported).present? -%>
 <ul>
