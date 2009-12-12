@@ -7,13 +7,15 @@ class Politician < ActiveRecord::Base
   has_many :representative_terms
   has_many :senate_terms
 
-  IDENTIFICATION_FIELDS = [:gov_track_id, :vote_smart_id, :bioguide_id, :eventful_id].freeze
-  CONTACT_FIELDS = [:twitter_id, :email].freeze
+  IDENTITY_STRING_FIELDS = [
+    :vote_smart_id, :bioguide_id, :eventful_id, :twitter_id, :email, :metavid_id,
+    :congresspedia_url, :crp_id, :fec_id, :phone, :website, :youtube_url
+  ].freeze
+  IDENTITY_INTEGER_FIELDS = [:gov_track_id].freeze
+  IDENTITY_FIELDS = (IDENTITY_STRING_FIELDS | IDENTITY_INTEGER_FIELDS).freeze
 
-  validates_length_of IDENTIFICATION_FIELDS, :minimum => 1, :allow_nil => true
-  validates_uniqueness_of IDENTIFICATION_FIELDS, :allow_nil => true
-  validates_length_of CONTACT_FIELDS, :minimum => 1, :allow_nil => true
-  validates_uniqueness_of CONTACT_FIELDS, :allow_nil => true
+  validates_length_of IDENTITY_STRING_FIELDS, :minimum => 1, :allow_nil => true
+  validates_uniqueness_of IDENTITY_FIELDS, :allow_nil => true
   validate :name_shouldnt_contain_nickname
   validate :terms_should_most_likely_be_from_the_same_state
 
