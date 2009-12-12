@@ -9,6 +9,7 @@ class Politician < ActiveRecord::Base
 
   validates_length_of CONTACT_FIELDS, :minimum => 1, :allow_nil => true
   validates_uniqueness_of CONTACT_FIELDS, :allow_nil => true
+  validate :name_shouldnt_contain_nickname
 
   has_many :votes
   has_many :bills, :through => :votes do
@@ -26,5 +27,11 @@ class Politician < ActiveRecord::Base
 
   def full_name
     [first_name, last_name].join(" ")
+  end
+
+  private
+
+  def name_shouldnt_contain_nickname
+    errors.add(:first_name, "shouldn't contain nickname") if first_name =~ /\s?(.+)\s'(.+)'\s?/
   end
 end
