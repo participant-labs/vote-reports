@@ -24,7 +24,8 @@ class Politician < ActiveRecord::Base
       if legislator = Sunlight::Legislator.find(find_by.merge(:all_legislators => true))
         Rails.logger.info "SUNLIGHT: Fetched '#{full_name}' as '#{legislator.firstname} #{legislator.lastname}'"
         SUNLIGHT_ATTRIBUTES.each do |attr|
-          self.send("#{attr}=", legislator.send(SUNLIGHT_RENAMES.fetch(attr, attr)))
+          value = legislator.send(SUNLIGHT_RENAMES.fetch(attr, attr))
+          self.send("#{attr}=", value) if value.present?
         end
       else
         notify_exceptional(StandardError.new("SUNLIGHT: Unable to fetch data for '#{full_name}'"))
