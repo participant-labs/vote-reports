@@ -29,6 +29,8 @@ class Politician < ActiveRecord::Base
       else
         notify_exceptional(StandardError.new("SUNLIGHT: Unable to fetch data for '#{full_name}'"))
       end
+    rescue Sunlight::MultipleLegislatorsReturnedError => e
+      notify_exceptional(Sunlight::MultipleLegislatorsReturnedError.new([e.message,"for #{inspect}"].join(' ')))
     end
   end
 end
