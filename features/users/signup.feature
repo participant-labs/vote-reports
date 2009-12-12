@@ -4,7 +4,7 @@ Feature: Sign up
   Should be able to sign up
   
     Scenario: User signs up with invalid data
-      When I go to the sign up page
+      When I go to the signup page
       And I fill in "Username" with "nobody"
       And I fill in "Email" with "invalidemail"
       And I fill in "Password" with "password"
@@ -12,7 +12,7 @@ Feature: Sign up
       Then I should see error messages
       
     Scenario: User signs up with valid data
-      When I go to the sign up page
+      When I go to the signup page
       And I fill in "Username" with "James"
       And I fill in "Email" with "email@person.com"
       And I fill in "Password" with "password"

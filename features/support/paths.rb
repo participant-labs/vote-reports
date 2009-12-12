@@ -7,22 +7,17 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-    
+
     when /the home\s?page/
       '/'
-    when /the sign up page/i
-      signup_path
-    when /the log in page/i
-      login_path
-    when /the bills page/i
-      bills_path
-    when /the reports page/i
-      reports_path
     when /my reports page/i
       user_reports_path(@current_user)
     when /my profile page/i
       user_path(@current_user)
-    
+
+    when /the (.+) page/i
+      send("#{$1}_path")
+
     # Add more mappings here.
     # Here is a more fancy example:
     #
