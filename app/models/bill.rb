@@ -5,7 +5,7 @@ class Bill < ActiveRecord::Base
 
   validates_presence_of :bill_type
 
-  #after_create :initialize_votes
+  after_create :initialize_votes
 
   class << self
     def fetch(id)
