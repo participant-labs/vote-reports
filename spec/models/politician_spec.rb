@@ -7,11 +7,8 @@ describe Politician do
 
   describe "Creation" do
     it "should load attributes from Sunlight labs" do
-      Sunlight::Legislator.expects(:all).returns([
-        Sunlight::Legislator.new("firstname"=>"Jessie", "govtrack_id" => '200001'),
-        Sunlight::Legislator.new("firstname"=>"Edward", "govtrack_id" => '200002'),
-        Sunlight::Legislator.new("firstname"=>"Bob", "govtrack_id" => '200003')
-      ])
+      Sunlight::Legislator.expects(:find).returns(
+        Sunlight::Legislator.new("firstname"=>"Jessie", "govtrack_id" => '200001'))
 
       politician = Factory.create(:politician)
       politician.gov_track_id.should == 200001
