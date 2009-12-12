@@ -24,7 +24,7 @@ end
 Factory.define :politician do |f|
   f.first_name { Forgery(:name).first_name }
   f.last_name { Forgery(:name).last_name }
-  f.gov_track_id "300001"
+  f.gov_track_id { Factory.next :gov_track_id }
 end
 
 Factory.define :vote do |f|
@@ -39,6 +39,10 @@ end
 
 Factory.sequence :opencongress_id do |n|
   "#{(Bill.last.try(:opencongress_id) || 1).to_i + 1}"
+end
+
+Factory.sequence :gov_track_id do |n|
+  "#{(Politician.last.try(:gov_track_id) || '300001').to_i + 1}"
 end
 
 Factory.sequence :email do |n|
