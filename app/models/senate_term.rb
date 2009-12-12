@@ -5,6 +5,6 @@ class SenateTerm < ActiveRecord::Base
   validates_presence_of :politician, :congress
 
   def for
-    "the #{politician.district} for #{state}"
+    "the #{politician.district} for #{UsState.name_from_abbrev(state)}"
   end
 end
