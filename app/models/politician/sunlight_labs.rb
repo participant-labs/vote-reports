@@ -18,7 +18,10 @@ class Politician < ActiveRecord::Base
     end
 
     def load_sunlight_labs_data
-      if legislator = Sunlight::Legislator.find(:votesmart_id => vote_smart_id, :all_legislators => true)
+      find_by = {:votesmart_id => vote_smart_id} if vote_smart_id.present?
+      find_by = {:govtrack_id => gov_track_id} if gov_track_id.present?
+
+      if legislator = Sunlight::Legislator.find(find_by.merge(:all_legislators => true))
         Rails.logger.info "SUNLIGHT: Fetched '#{full_name}' as '#{legislator.firstname} #{legislator.lastname}'"
         SUNLIGHT_ATTRIBUTES.each do |attr|
           self.send("#{attr}=", legislator.send(SUNLIGHT_RENAMES.fetch(attr, attr)))
