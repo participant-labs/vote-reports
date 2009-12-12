@@ -2,6 +2,11 @@ require 'open-uri'
 require 'nokogiri'
 
 namespace :gov_track do
+  def gov_track_path(path)
+    local_path = Rails.root.join('data/gov_track', path)
+    File.exist?(local_path) ? local_path : "http://www.govtrack.us/data/#{path}"
+  end
+
   desc "do everything"
   task :update => [:download, :unpack]
 
@@ -79,7 +84,7 @@ namespace :gov_track do
     desc "Process Politicians"
     task :unpack => :environment do
       meeting = 111
-      doc = Nokogiri::XML(open("http://www.govtrack.us/data/us/#{meeting}/people.xml"))
+      doc = Nokogiri::XML(open(gov_track_path("us/#{meeting}/people.xml")))
       congress = Congress.find_or_create_by_meeting(meeting)
 
       ActiveRecord::Base.transaction do
