@@ -2,7 +2,7 @@ class Politician < ActiveRecord::Base
   module SunlightLabs
     SUNLIGHT_ATTRIBUTES = %w[bioguide_id congress_office congresspedia_url crp_id district
       email event_id fax fec_id first_name gender gov_track_id in_office last_name middlename
-      name_suffix nickname party phone senate_class state title twitter_id vote_smart_id webform
+      name_suffix nickname party phone state title twitter_id vote_smart_id webform
       website youtube_url
     ].freeze
 
