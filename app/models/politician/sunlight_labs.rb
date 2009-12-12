@@ -27,6 +27,9 @@ class Politician < ActiveRecord::Base
           value = legislator.send(SUNLIGHT_RENAMES.fetch(attr, attr))
           self.send("#{attr}=", value) if value.present?
         end
+        if vote_smart_id == '8751' && twitter_id == 'RepMikeRogersAL'
+          self.twitter_id = nil
+        end
       else
         notify_exceptional(StandardError.new("SUNLIGHT: Unable to fetch data for '#{full_name}'"))
       end
