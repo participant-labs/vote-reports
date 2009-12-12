@@ -5,8 +5,10 @@ class Politician < ActiveRecord::Base
   has_many :representative_terms
   has_many :senate_terms
 
+  IDENTIFICATION_FIELDS = [:gov_track_id, :vote_smart_id, :bioguide_id].freeze
   CONTACT_FIELDS = [:twitter_id, :email].freeze
 
+  validates_uniqueness_of IDENTIFICATION_FIELDS, :allow_nil => true
   validates_length_of CONTACT_FIELDS, :minimum => 1, :allow_nil => true
   validates_uniqueness_of CONTACT_FIELDS, :allow_nil => true
   validate :name_shouldnt_contain_nickname
@@ -23,7 +25,7 @@ class Politician < ActiveRecord::Base
   end
 
   def full_name= full_name
-    self.last_name, self.first_name = full_name.split(', ',2)
+    self.last_name, self.first_name = full_name.split(', ', 2)
   end
 
   def full_name
