@@ -6,6 +6,9 @@ class Politician < ActiveRecord::Base
 
   has_many :representative_terms
   has_many :senate_terms
+  def terms
+    representative_terms | senate_terms
+  end
 
   IDENTITY_STRING_FIELDS = [
     :vote_smart_id, :bioguide_id, :eventful_id, :twitter_id, :email, :metavid_id,
@@ -28,6 +31,13 @@ class Politician < ActiveRecord::Base
     end
     def opposed
       scoped(:conditions => "votes.vote = false")
+    end
+  end
+
+  class << self
+    def find_by_full_name(name)
+      first, last = name.split(' ')
+      first(:conditions => {:first_name => first, :last_name => last})
     end
   end
 

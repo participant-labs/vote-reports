@@ -14,6 +14,8 @@ module NavigationHelpers
       user_reports_path(@current_user)
     when /my profile page/i
       user_path(@current_user)
+    when /the politician page for "(.+)"/
+      politician_path(Politician.find_by_full_name($1))
 
     when /the (.+) page/i
       send("#{$1}_path")

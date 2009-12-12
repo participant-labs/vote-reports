@@ -19,3 +19,14 @@ Feature: Browsing Politicians
     Then I should see "Ron Wyden"
     And I should see "Supported Bills"
     And I should see "Opposed Bills"
+
+  Scenario: Viewing terms from the Politicians Page
+    Given the following politician records:
+      | first_name | last_name   | gov_track_id |
+      | Ron        | Wyden       | 300100       |
+    And the following representative terms for "Ron Wyden":
+      | district | state |
+      | 3        | IA    |
+    When I go to the politician page for "Ron Wyden"
+    Then I should see "Terms in Congress"
+    And I should see "representing the 3rd district of Iowa"

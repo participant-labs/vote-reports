@@ -33,6 +33,10 @@ Factory.define :vote do |f|
   f.vote { rand(2) == 1 }
 end
 
+Factory.define :representative_term do |f|
+  f.congress { Congress.find_or_create_by_meeting(111) }
+end
+
 Factory.sequence :text do |n|
   "#{n}#{Forgery(:basic).text}"
 end
