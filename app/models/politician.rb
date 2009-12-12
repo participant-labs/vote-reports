@@ -8,6 +8,7 @@ class Politician < ActiveRecord::Base
   IDENTIFICATION_FIELDS = [:gov_track_id, :vote_smart_id, :bioguide_id].freeze
   CONTACT_FIELDS = [:twitter_id, :email].freeze
 
+  validates_length_of IDENTIFICATION_FIELDS, :minimum => 1, :allow_nil => true
   validates_uniqueness_of IDENTIFICATION_FIELDS, :allow_nil => true
   validates_length_of CONTACT_FIELDS, :minimum => 1, :allow_nil => true
   validates_uniqueness_of CONTACT_FIELDS, :allow_nil => true
