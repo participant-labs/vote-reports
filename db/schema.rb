@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091212042522) do
+ActiveRecord::Schema.define(:version => 20091212171710) do
 
   create_table "bill_criteria", :force => true do |t|
     t.integer  "bill_id"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20091212042522) do
     t.string   "crp_id"
     t.string   "district"
     t.string   "email"
-    t.string   "event_id"
+    t.string   "eventful_id"
     t.string   "fax"
     t.string   "fec_id"
     t.string   "gender"

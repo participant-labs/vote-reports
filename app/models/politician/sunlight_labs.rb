@@ -1,7 +1,7 @@
 class Politician < ActiveRecord::Base
   module SunlightLabs
     SUNLIGHT_ATTRIBUTES = %w[bioguide_id congress_office congresspedia_url crp_id district
-      email event_id fax fec_id first_name gender gov_track_id in_office last_name middlename
+      email eventful_id fax fec_id first_name gender gov_track_id in_office last_name middlename
       name_suffix nickname party phone state title twitter_id vote_smart_id webform
       website youtube_url
     ].freeze
@@ -29,6 +29,9 @@ class Politician < ActiveRecord::Base
         end
         if vote_smart_id == '8751' && twitter_id == 'RepMikeRogersAL'
           self.twitter_id = nil
+        end
+        if vote_smart_id == '6338' && eventful_id == 'P0-001-000016084-2'
+          self.eventful_id = nil
         end
       else
         notify_exceptional(StandardError.new("SUNLIGHT: Unable to fetch data for '#{full_name}'"))
