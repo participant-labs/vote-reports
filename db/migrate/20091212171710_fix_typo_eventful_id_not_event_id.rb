@@ -3,8 +3,12 @@ class FixTypoEventfulIdNotEventId < ActiveRecord::Migration
     transaction do
       rename_column :politicians, :event_id, :eventful_id
       Politician.all.each do |p|
-        p.load_sunlight_labs_data
-        p.save!
+        begin
+          p.load_sunlight_labs_data
+          p.save!
+        rescue
+          raise [p, p.errors.full_messages].inspect
+        end
       end
     end
   end
