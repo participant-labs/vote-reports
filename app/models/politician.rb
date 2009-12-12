@@ -5,7 +5,7 @@ class Politician < ActiveRecord::Base
   has_many :representative_terms
   has_many :senate_terms
 
-  IDENTIFICATION_FIELDS = [:gov_track_id, :vote_smart_id, :bioguide_id].freeze
+  IDENTIFICATION_FIELDS = [:gov_track_id, :vote_smart_id, :bioguide_id, :eventful_id].freeze
   CONTACT_FIELDS = [:twitter_id, :email].freeze
 
   validates_length_of IDENTIFICATION_FIELDS, :minimum => 1, :allow_nil => true
