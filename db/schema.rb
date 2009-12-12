@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091212041957) do
+ActiveRecord::Schema.define(:version => 20091212042522) do
 
   create_table "bill_criteria", :force => true do |t|
     t.integer  "bill_id"
@@ -84,7 +84,6 @@ ActiveRecord::Schema.define(:version => 20091212041957) do
     t.integer "district"
     t.string  "party"
     t.string  "state"
-    t.string  "type"
     t.string  "url"
   end
 
@@ -96,7 +95,6 @@ ActiveRecord::Schema.define(:version => 20091212041957) do
     t.integer "senate_class"
     t.string  "party"
     t.string  "state"
-    t.string  "type"
     t.string  "url"
   end
 
