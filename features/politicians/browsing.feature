@@ -3,6 +3,11 @@ Feature: Browsing Politicians
   As a user
   I want to browse politician info
 
+  Scenario: Navigating to politicians from the sidebar
+    When I go to the home page
+    And I follow "Politicians"
+    Then I should be on the politicians page
+
   Scenario: Browsing to a Politician from the Politicians Page
     Given the following politician:
       | first_name | last_name   | gov_track_id |
