@@ -99,7 +99,7 @@ namespace :gov_track do
               'gender' => 'gender',
               'religion' => 'religion'
             }.inject({}) do |attrs, (attr, method)|
-              attrs[method] = person[attr]
+              attrs[method] = person[attr] if person[attr].present?
               attrs
           end)
 
@@ -111,7 +111,7 @@ namespace :gov_track do
               'party' => 'party',
               'state' => 'state',
             }.inject({}) do |attrs, (attr, method)|
-              attrs[method] = role[attr]
+              attrs[method] = role[attr] if role[attr].present?
               attrs
             end.merge(:congress => congress)
 
