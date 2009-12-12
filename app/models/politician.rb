@@ -2,6 +2,8 @@ class Politician < ActiveRecord::Base
   include Politician::GovTrack
   include Politician::SunlightLabs
 
+  nilify_blanks
+
   has_many :representative_terms
   has_many :senate_terms
 
