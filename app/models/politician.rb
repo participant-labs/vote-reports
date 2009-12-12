@@ -19,6 +19,8 @@ class Politician < ActiveRecord::Base
   validate :name_shouldnt_contain_nickname
   validate :terms_should_most_likely_be_from_the_same_state
 
+  before_validation :extract_nickname_from_first_name_if_present
+
   has_many :votes
   has_many :bills, :through => :votes do
     def supported
@@ -53,6 +55,13 @@ class Politician < ActiveRecord::Base
         notify_exceptional(ArgumentError.new(
           "#{id} #{full_name} has different term states; senate: #{senate_states.join(', ')} representative: #{rep_states.join(', ')}"))
       end
+    end
+  end
+
+  def extract_nickname_from_first_name_if_present
+    if first_name =~ /\s?(.+)\s'(.+)'\s?/
+      self.first_name = $1
+      self.nickname = $2
     end
   end
 end
