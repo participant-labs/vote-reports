@@ -6,3 +6,4 @@ friendly_id
 gravtastic --version '>= 2.1.0'
 httparty
 ym4r
+railsgarden-nilify_blanks --source 'http://gems.github.com'
