@@ -27,17 +27,25 @@ class Politician < ActiveRecord::Base
           value = legislator.send(SUNLIGHT_RENAMES.fetch(attr, attr))
           self.send("#{attr}=", value) if value.present?
         end
-        if vote_smart_id == '8751' && twitter_id == 'RepMikeRogersAL'
-          self.twitter_id = nil
-        end
-        if vote_smart_id == '6338' && eventful_id == 'P0-001-000016084-2'
-          self.eventful_id = nil
-        end
+        protect_sunlight_attr(:eventful_id, 'P0-001-000016084-2', :for => {:vote_smart_id => '27067'})
+        protect_sunlight_attr(:twitter_id, 'RepMikeRogersAL', :for => {:vote_smart_id => '5705'})
       else
         notify_exceptional(StandardError.new("SUNLIGHT: Unable to fetch data for '#{full_name}'"))
       end
     rescue Sunlight::MultipleLegislatorsReturnedError => e
       notify_exceptional(Sunlight::MultipleLegislatorsReturnedError.new([e.message,"for #{inspect}"].join(' ')))
+    end
+
+    def protect_sunlight_attr(attr, value, options)
+      condition = options[:for]
+      if send(attr) == value
+        if send(condition.keys.first) != condition[condition.keys.first]
+          self.send("#{attr}=", nil)
+        else
+          #Update others to make this name available
+          Politician.update_all({attr => nil}, {attr => value})
+        end
+      end
     end
   end
 end
