@@ -7,15 +7,6 @@ namespace :gov_track do
     File.exist?(local_path) ? local_path : "http://www.govtrack.us/data/#{path}"
   end
 
-  desc "do everything"
-  task :update => [:download, :unpack]
-
-  desc "Download All Data"
-  task :download => [:'bills:download', :'votes:download', :'politicians:download']
-
-  desc "Process All Data"
-  task :unpack => [:'bills:unpack', :'votes:unpack', :'politicians:unpack']
-
   namespace :bills do
     desc "Download Bills"
     task :download do
