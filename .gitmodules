@@ -1,0 +1,3 @@
+[submodule "data/sunlight_labs"]
+	path = data/sunlight_labs
+	url = git@github.com:Empact/sunlight-labs-api-data.git
