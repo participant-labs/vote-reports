@@ -7,3 +7,4 @@ gravtastic --version '>= 2.1.0'
 httparty
 ym4r
 nokogiri
+fastercsv

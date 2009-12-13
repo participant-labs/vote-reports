@@ -60,4 +60,10 @@ describe Politician do
       end
     end
   end
+
+  describe "#firstname=" do
+    it "should set first_name" do
+      Politician.new(:firstname => 'Bill').first_name.should == 'Bill'
+    end
+  end
 end
