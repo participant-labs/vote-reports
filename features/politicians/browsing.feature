@@ -12,6 +12,7 @@ Feature: Browsing Politicians
     Given the following politician:
       | first_name | last_name   | gov_track_id |
       | Ron        | Wyden       | 300100       |
+      | Bob        | Barr        |              |
     When I go to the politicians page
     Then I should see "Ron Wyden"
 
@@ -31,13 +32,13 @@ Feature: Browsing Politicians
     Then I should see "Terms in Congress"
     And I should see "representing the 3rd district of Iowa"
 
-    Scenario: Viewing senate terms from the Politicians Page
-      Given the following politician records:
-        | first_name | last_name   | gov_track_id | district    |
-        | Ron        | Wyden       | 300100       | Senior Seat |
-      And the following senate terms for "Ron Wyden":
-        | senate_class | state |
-        | 3            | IA    |
-      When I go to the politician page for "Ron Wyden"
-      Then I should see "Terms in Congress"
-      And I should see "the Senior Seat for Iowa"
+  Scenario: Viewing senate terms from the Politicians Page
+    Given the following politician records:
+      | first_name | last_name   | gov_track_id | district    |
+      | Ron        | Wyden       | 300100       | Senior Seat |
+    And the following senate terms for "Ron Wyden":
+      | senate_class | state |
+      | 3            | IA    |
+    When I go to the politician page for "Ron Wyden"
+    Then I should see "Terms in Congress"
+    And I should see "the Senior Seat for Iowa"
