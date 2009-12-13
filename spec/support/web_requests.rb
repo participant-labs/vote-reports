@@ -1,7 +1,7 @@
-request_fixtures_path = File.join(File.dirname(__FILE__), 'web_requests.marshal')
+request_fixtures_path = Rails.root.join('spec/support/web_requests.marshal')
 
-unless File.exist?(request_fixtures_path)
-  Rake.application['web_requests:fixtures:generate'].invoke
+unless request_fixtures_path.exist?
+  `rake web_requests:fixtures:generate`
 end
 
 web_requests = Marshal.load(open(request_fixtures_path))
