@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091214005940) do
+ActiveRecord::Schema.define(:version => 20091214023624) do
+
+  create_table "amendments", :force => true do |t|
+    t.integer  "bill_id"
+    t.string   "gov_track_id"
+    t.text     "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "bill_criteria", :force => true do |t|
     t.integer  "bill_id"
@@ -101,14 +109,14 @@ ActiveRecord::Schema.define(:version => 20091214005940) do
     t.integer  "present"
     t.string   "result"
     t.string   "required"
-    t.string   "question"
+    t.text     "question"
     t.string   "roll_type"
     t.string   "opencongress_id"
     t.integer  "bill_id"
-    t.integer  "congress_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "title"
+    t.integer  "congress_id"
   end
 
   create_table "senate_terms", :force => true do |t|
