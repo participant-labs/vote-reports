@@ -52,12 +52,10 @@ namespace :gov_track do
           :roll_type => data.xpath('type').inner_text,
           :votes => data.xpath('voter').map do |voter|
             politician = Politician.find_by_gov_track_id(voter['id'].to_s)
-            (politician.votes.first(:conditions => {:roll_id => roll}) \
-              || politician.votes.build(:roll => roll)).tap do |vote|
-              vote.update_attributes!(:vote => voter['vote'].to_s)
-            end
-          end),
-          :congress => Congress.find_by_meeting(MEETING)
+            vote = politician.votes.first(:conditions => {:roll_id => roll}) unless roll.new_record?
+            vote ||= politician.votes.build(:roll => roll, :vote => voter['vote'].to_s)
+          end,
+          :congress => @congress)
         )
       end
     end
