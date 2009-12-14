@@ -78,7 +78,7 @@ namespace :gov_track do
           :introduced_on => data.xpath('introduced').first['datetime'].to_s,
           :sponsor => Politician.find_by_gov_track_id(data.xpath('sponsor').first['id'].to_s),
           :summary => data.xpath('summary').inner_text.strip,
-          :congress => Congress.find_by_meeting(MEETING)
+          :congress => @congress
         )
       end
     end
@@ -86,23 +86,21 @@ namespace :gov_track do
     desc "Process Votes"
     task :unpack => :environment do
       ActiveRecord::Base.transaction do
+        @congress = Congress.find_by_meeting(MEETING)
         doc = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/votes.all.index.xml")))
         doc.xpath('votes/vote').each do |vote|
-          begin
-            vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts')
-            next unless vote['bill']
-            bill = fetch_bill(vote.delete('bill'))
-            vote['subject'] =
-              if amendment_id = vote.delete('amendment').to_s
-                bill.amendments.first(:conditions => {:gov_track_id => amendment_id}) \
-                  || bill.amendments.build(:gov_track_id => amendment_id, :title => vote.delete('amendment_title').to_s)
-              else
-                bill
-              end
-            roll = fetch_roll(vote.delete('id'), vote)
-          rescue => e
-            raise [e, vote, roll].inspect
-          end
+          next unless vote['bill']
+          bill = fetch_bill(vote.delete('bill').to_s)
+          vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts')
+          vote['subject'] =
+            if amendment_id = vote.delete('amendment').to_s
+              bill.amendments.first(:conditions => {:gov_track_id => amendment_id}) \
+                || bill.amendments.build(:gov_track_id => amendment_id, :title => vote.delete('amendment_title').to_s)
+            else
+              bill
+            end
+          roll = fetch_roll(vote.delete('id').to_s, vote)
+          puts "Rolls: #{Roll.count}, Bills: #{Bill.count} Vote: #{Vote.count}"
         end
       end
     end
