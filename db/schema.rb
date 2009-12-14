@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091213172947) do
+ActiveRecord::Schema.define(:version => 20091214005940) do
 
   create_table "bill_criteria", :force => true do |t|
     t.integer  "bill_id"
@@ -26,7 +26,11 @@ ActiveRecord::Schema.define(:version => 20091213172947) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "bill_number"
-    t.integer  "session"
+    t.string   "gov_track_id"
+    t.integer  "congress_id"
+    t.integer  "sponsor_id"
+    t.date     "introduced_on"
+    t.text     "summary"
   end
 
   create_table "congresses", :force => true do |t|
@@ -88,6 +92,25 @@ ActiveRecord::Schema.define(:version => 20091213172947) do
     t.string  "url"
   end
 
+  create_table "rolls", :force => true do |t|
+    t.string   "where"
+    t.datetime "voted_at"
+    t.integer  "aye"
+    t.integer  "nay"
+    t.integer  "not_voting"
+    t.integer  "present"
+    t.string   "result"
+    t.string   "required"
+    t.string   "question"
+    t.string   "roll_type"
+    t.string   "opencongress_id"
+    t.integer  "bill_id"
+    t.integer  "congress_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "title"
+  end
+
   create_table "senate_terms", :force => true do |t|
     t.integer "politician_id"
     t.integer "congress_id"
@@ -124,10 +147,10 @@ ActiveRecord::Schema.define(:version => 20091213172947) do
 
   create_table "votes", :force => true do |t|
     t.integer  "politician_id"
-    t.boolean  "vote"
-    t.integer  "bill_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "roll_id"
+    t.string   "vote"
   end
 
 end

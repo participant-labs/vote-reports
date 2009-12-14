@@ -1,7 +1,9 @@
 class Vote < ActiveRecord::Base
 
   belongs_to :politician
-  belongs_to :bill
+  belongs_to :roll
+
+  validates_uniqueness_of :roll_id, :scope => :politician_id
 
   class << self
     def fetch_for_bill(bill)

@@ -14,23 +14,6 @@ namespace :gov_track do
     task :download do
       `rsync -az govtrack.us::govtrackdata/us/111/bills .`
     end
-
-    desc "Process Bills"
-    task :unpack => :environment do
-      Dir.glob(Rails.root.join("public","system","bills","*.xml")).each do |filename|
-        doc     = Nokogiri::XML(open(filename))
-        title   = doc.xpath('//title').text
-        number  = doc.root.attributes["number"].value
-        type    = doc.root.attributes["type"].value
-        session = doc.root.attributes["session"].value
-
-        Bill.create!(
-          :title => title,
-          :bill_type => type,
-          :bill_number => number,
-          :session => session)
-      end
-    end
   end
 
   namespace :votes do
@@ -40,36 +23,113 @@ namespace :gov_track do
       `wget http://www.govtrack.us/data/us/111/votes.all.index.xml`
     end
 
+    def bill_ref(gov_track_bill_id)
+      gov_track_bill_id.to_s.match(/([a-z]+)#{MEETING}-(\d+)/).captures.join
+    end
+    
+    def opencongress_bill_id(gov_track_bill_id)
+      "#{MEETING}-#{bill_ref(gov_track_bill_id)}"
+    end
+
+    def fetch_roll(gov_track_roll_id)
+      Roll.find_or_create_by_opencongress_id(gov_track_roll_id).tap do |roll|
+        data = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/rolls/#{gov_track_roll_id}.xml"))).xpath('roll')
+        raise data.inspect if data.size != 1
+        data = data.first
+        roll.update_attributes!({
+          :where => data['where'],
+          :voted_at => data['datetime'],
+          :aye => data['aye'],
+          :nay => data['nay'],
+          :not_voting => data['nv'],
+          :present => data['present'],
+          :result => data.xpath('result').inner_text,
+          :required => data.xpath('required').inner_text,
+          :question => data.xpath('question').inner_text,
+          :roll_type => data.xpath('type').inner_text,
+          :congress => Congress.find_by_meeting(MEETING)
+        })
+        roll.update_attributes!(:votes => data.xpath('voter').map do |voter|
+          politician = Politician.find_by_gov_track_id(voter['id'])
+          (politician.votes.first(:conditions => {:roll_id => roll}) \
+            || politician.votes.build(:roll => roll)).tap do |vote|
+            vote.update_attributes!(:vote => voter['vote'])
+          end
+        end)
+      end
+    end
+
+    def fetch_bill(gov_track_bill_id)
+      (Bill.find_by_opencongress_id(opencongress_bill_id(gov_track_bill_id)) \
+        || Bill.new(:opencongress_id => opencongress_bill_id(gov_track_bill_id))).tap do |bill|
+        data = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/bills/#{bill_ref(gov_track_bill_id)}.xml"))).xpath('bill')
+        raise data.inspect if data.size != 1
+        data = data.first
+        raise [bill.title, data.xpath('titles')].inspect if bill.title.present?
+        bill.update_attributes!(
+          :gov_track_id => gov_track_bill_id,
+          :congress => Congress.find_by_meeting(data['session']),
+          :bill_type => data['type'],
+          :bill_number => data['number'],
+          :updated_at => data['updated'],
+          :introduced_on => data.xpath('introduced').first['datetime'],
+          :sponsor => Politician.find_by_gov_track_id(data.xpath('sponsor').first['id']),
+          :summary => data.xpath('summary').inner_text.strip,
+          :congress => Congress.find_by_meeting(MEETING)
+        )
+      end
+    end
+
     desc "Process Votes"
     task :unpack => :environment do
-      filename = Rails.root.join("public","system","votes.all.index.xml")
-      doc = Nokogiri::XML(open(filename))
-
-      doc.xpath('//vote').each do |vote|
-        if vote.attributes["bill"] # Not all votes are associated with a bill
-          roll = vote.attributes["roll"].value
-          bill = vote.attributes["bill"].value
-          bill_session = bill.match(/[a-z+](\d+)-/)[1]
-          bill_number = bill.match(/-(\d+)/)[1]
-          bill_type = bill[0,1]
-
-          bill = Bill.find(:first, :conditions => {:session => bill_session, :bill_number => bill_number, :bill_type => bill_type})
-          if bill
-            roll_filename = Rails.root.join("public","system","rolls","#{bill_type}2009-#{roll}.xml")
-            if File.exist?(roll_filename)
-              roll_doc = Nokogiri::XML(open(roll_filename))
-              roll_doc.xpath('//voter').each do |voter|
-                gov_track_id = voter.attributes['id'].value
-                vote = voter.attributes['vote'].value == '+'
-                politician = Politician.find_by_gov_track_id(gov_track_id)
-                Vote.create!(:politician_id => politician.id, :vote => vote, :bill_id => bill.id)
-              end
+      ActiveRecord::Base.transaction do
+        doc = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/votes.all.index.xml")))
+        doc.xpath('votes/vote').each do |vote|
+          begin
+            vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts')
+            roll = fetch_roll(vote.delete('id'))
+            if bill_id = vote.delete('bill')
+              vote['bill'] = fetch_bill(bill_id)
             end
+            roll.update_attributes!(vote)
+          rescue => e
+            raise [e, vote, roll].inspect
           end
-
         end
       end
 
+      # doc.xpath('//vote').each do |vote|
+      #   if vote.attributes["bill"] # Not all votes are associated with a bill      # 
+      #     bill = Bill.find(:first, :conditions => {:session => bill_session, :bill_number => bill_number, :bill_type => bill_type})
+      #     if bill
+      #       roll_filename = Rails.root.join("public","system","rolls","#{bill_type}2009-#{roll}.xml")
+      #       if File.exist?(roll_filename)
+      #         roll_doc = Nokogiri::XML(open(roll_filename))
+      #         roll_doc.xpath('//voter').each do |voter|
+      #           gov_track_id = voter.attributes['id'].value
+      #           vote = voter.attributes['vote'].value == '+'
+      #           politician = Politician.find_by_gov_track_id(gov_track_id)
+      #           Vote.create!(:politician_id => politician.id, :vote => vote, :bill_id => bill.id)
+      #         end
+      #       end
+      #     end
+      # 
+      #   end
+      # end
+
+      #   Dir.glob(Rails.root.join("public","system","bills","*.xml")).each do |filename|
+      #     doc     = Nokogiri::XML(open(filename))
+      #     title   = doc.xpath('//title').text
+      #     number  = doc.root.attributes["number"].value
+      #     type    = doc.root.attributes["type"].value
+      #     session = doc.root.attributes["session"].value
+      # 
+      #     Bill.create!(
+      #       :title => title,
+      #       :bill_type => type,
+      #       :bill_number => number,
+      #       :session => session)
+      #   end
     end
   end
 
