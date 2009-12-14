@@ -31,31 +31,34 @@ namespace :gov_track do
       "#{MEETING}-#{bill_ref(gov_track_bill_id)}"
     end
 
-    def fetch_roll(gov_track_roll_id)
-      Roll.find_or_create_by_opencongress_id(gov_track_roll_id).tap do |roll|
+    def fetch_roll(gov_track_roll_id, attrs)
+      (Roll.find_by_opencongress_id(gov_track_roll_id) \
+        || Roll.new(:opencongress_id => gov_track_roll_id)).tap do |roll|
         data = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/rolls/#{gov_track_roll_id}.xml"))).xpath('roll')
         raise data.inspect if data.size != 1
         data = data.first
-        roll.update_attributes!({
-          :where => data['where'],
-          :voted_at => data['datetime'],
-          :aye => data['aye'],
-          :nay => data['nay'],
-          :not_voting => data['nv'],
-          :present => data['present'],
+        roll.update_attributes!(
+          attrs.symbolize_keys.merge(
+          :title => attrs[:title].to_s,
+          :where => data['where'].to_s,
+          :voted_at => data['datetime'].to_s,
+          :aye => data['aye'].to_s,
+          :nay => data['nay'].to_s,
+          :not_voting => data['nv'].to_s,
+          :present => data['present'].to_s,
           :result => data.xpath('result').inner_text,
           :required => data.xpath('required').inner_text,
           :question => data.xpath('question').inner_text,
           :roll_type => data.xpath('type').inner_text,
+          :votes => data.xpath('voter').map do |voter|
+            politician = Politician.find_by_gov_track_id(voter['id'].to_s)
+            (politician.votes.first(:conditions => {:roll_id => roll}) \
+              || politician.votes.build(:roll => roll)).tap do |vote|
+              vote.update_attributes!(:vote => voter['vote'].to_s)
+            end
+          end),
           :congress => Congress.find_by_meeting(MEETING)
-        })
-        roll.update_attributes!(:votes => data.xpath('voter').map do |voter|
-          politician = Politician.find_by_gov_track_id(voter['id'])
-          (politician.votes.first(:conditions => {:roll_id => roll}) \
-            || politician.votes.build(:roll => roll)).tap do |vote|
-            vote.update_attributes!(:vote => voter['vote'])
-          end
-        end)
+        )
       end
     end
 
@@ -65,15 +68,15 @@ namespace :gov_track do
         data = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/bills/#{bill_ref(gov_track_bill_id)}.xml"))).xpath('bill')
         raise data.inspect if data.size != 1
         data = data.first
-        raise [bill.title, data.xpath('titles')].inspect if bill.title.present?
         bill.update_attributes!(
           :gov_track_id => gov_track_bill_id,
-          :congress => Congress.find_by_meeting(data['session']),
-          :bill_type => data['type'],
-          :bill_number => data['number'],
-          :updated_at => data['updated'],
-          :introduced_on => data.xpath('introduced').first['datetime'],
-          :sponsor => Politician.find_by_gov_track_id(data.xpath('sponsor').first['id']),
+          :congress => Congress.find_by_meeting(data['session'].to_s),
+          :title => data.css('titles > title[type=official]').inner_text,
+          :bill_type => data['type'].to_s,
+          :bill_number => data['number'].to_s,
+          :updated_at => data['updated'].to_s,
+          :introduced_on => data.xpath('introduced').first['datetime'].to_s,
+          :sponsor => Politician.find_by_gov_track_id(data.xpath('sponsor').first['id'].to_s),
           :summary => data.xpath('summary').inner_text.strip,
           :congress => Congress.find_by_meeting(MEETING)
         )
@@ -87,49 +90,21 @@ namespace :gov_track do
         doc.xpath('votes/vote').each do |vote|
           begin
             vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts')
-            roll = fetch_roll(vote.delete('id'))
-            if bill_id = vote.delete('bill')
-              vote['bill'] = fetch_bill(bill_id)
-            end
-            roll.update_attributes!(vote)
+            next unless vote['bill']
+            bill = fetch_bill(vote.delete('bill'))
+            vote['subject'] =
+              if amendment_id = vote.delete('amendment').to_s
+                bill.amendments.first(:conditions => {:gov_track_id => amendment_id}) \
+                  || bill.amendments.build(:gov_track_id => amendment_id, :title => vote.delete('amendment_title').to_s)
+              else
+                bill
+              end
+            roll = fetch_roll(vote.delete('id'), vote)
           rescue => e
             raise [e, vote, roll].inspect
           end
         end
       end
-
-      # doc.xpath('//vote').each do |vote|
-      #   if vote.attributes["bill"] # Not all votes are associated with a bill      # 
-      #     bill = Bill.find(:first, :conditions => {:session => bill_session, :bill_number => bill_number, :bill_type => bill_type})
-      #     if bill
-      #       roll_filename = Rails.root.join("public","system","rolls","#{bill_type}2009-#{roll}.xml")
-      #       if File.exist?(roll_filename)
-      #         roll_doc = Nokogiri::XML(open(roll_filename))
-      #         roll_doc.xpath('//voter').each do |voter|
-      #           gov_track_id = voter.attributes['id'].value
-      #           vote = voter.attributes['vote'].value == '+'
-      #           politician = Politician.find_by_gov_track_id(gov_track_id)
-      #           Vote.create!(:politician_id => politician.id, :vote => vote, :bill_id => bill.id)
-      #         end
-      #       end
-      #     end
-      # 
-      #   end
-      # end
-
-      #   Dir.glob(Rails.root.join("public","system","bills","*.xml")).each do |filename|
-      #     doc     = Nokogiri::XML(open(filename))
-      #     title   = doc.xpath('//title').text
-      #     number  = doc.root.attributes["number"].value
-      #     type    = doc.root.attributes["type"].value
-      #     session = doc.root.attributes["session"].value
-      # 
-      #     Bill.create!(
-      #       :title => title,
-      #       :bill_type => type,
-      #       :bill_number => number,
-      #       :session => session)
-      #   end
     end
   end
 

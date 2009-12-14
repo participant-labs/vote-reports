@@ -2,11 +2,13 @@ class Bill < ActiveRecord::Base
   named_scope :recent, :limit => 25, :order => 'created_at DESC'
 
   has_friendly_id :opencongress_id
-  has_many :rolls
+  has_many :rolls, :as => :subject
+  has_many :amendments
   belongs_to :congress
   belongs_to :sponsor, :class_name => 'Politician'
 
-  validates_presence_of :bill_type
+  validates_presence_of :bill_type, :congress, :sponsor
+  validates_uniqueness_of :gov_track_id
 
   after_create :initialize_votes
 
