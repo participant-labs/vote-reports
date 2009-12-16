@@ -87,7 +87,7 @@ namespace :gov_track do
           bill = fetch_bill(vote.delete('bill').to_s)
           vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts')
           vote['subject'] =
-            if amendment_id = vote.delete('amendment').to_s
+            if (amendment_id = vote.delete('amendment').to_s).present?
               bill.amendments.first(:conditions => {:gov_track_id => amendment_id}) \
                 || bill.amendments.build(:gov_track_id => amendment_id, :title => vote.delete('amendment_title').to_s)
             else
