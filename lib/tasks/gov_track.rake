@@ -34,9 +34,7 @@ namespace :gov_track do
     def fetch_roll(gov_track_roll_id, attrs)
       (Roll.find_by_opencongress_id(gov_track_roll_id) \
         || Roll.new(:opencongress_id => gov_track_roll_id)).tap do |roll|
-        data = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/rolls/#{gov_track_roll_id}.xml"))).xpath('roll')
-        raise data.inspect if data.size != 1
-        data = data.first
+        data = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/rolls/#{gov_track_roll_id}.xml"))).at('roll')
         roll.update_attributes!(
           attrs.symbolize_keys.merge(
           :title => attrs[:title].to_s,
@@ -46,10 +44,10 @@ namespace :gov_track do
           :nay => data['nay'].to_s,
           :not_voting => data['nv'].to_s,
           :present => data['present'].to_s,
-          :result => data.xpath('result').inner_text,
-          :required => data.xpath('required').inner_text,
-          :question => data.xpath('question').inner_text,
-          :roll_type => data.xpath('type').inner_text,
+          :result => data.at('result').inner_text,
+          :required => data.at('required').inner_text,
+          :question => data.at('question').inner_text,
+          :roll_type => data.at('type').inner_text,
           :votes => data.xpath('voter').map do |voter|
             politician = Politician.find_by_gov_track_id(voter['id'].to_s)
             vote = politician.votes.first(:conditions => {:roll_id => roll}) unless roll.new_record?
@@ -63,9 +61,7 @@ namespace :gov_track do
     def fetch_bill(gov_track_bill_id)
       (Bill.find_by_opencongress_id(opencongress_bill_id(gov_track_bill_id)) \
         || Bill.new(:opencongress_id => opencongress_bill_id(gov_track_bill_id))).tap do |bill|
-        data = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/bills/#{bill_ref(gov_track_bill_id)}.xml"))).xpath('bill')
-        raise data.inspect if data.size != 1
-        data = data.first
+        data = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/bills/#{bill_ref(gov_track_bill_id)}.xml"))).at('bill')
         bill.update_attributes!(
           :gov_track_id => gov_track_bill_id,
           :congress => Congress.find_by_meeting(data['session'].to_s),
@@ -73,9 +69,9 @@ namespace :gov_track do
           :bill_type => data['type'].to_s,
           :bill_number => data['number'].to_s,
           :updated_at => data['updated'].to_s,
-          :introduced_on => data.xpath('introduced').first['datetime'].to_s,
-          :sponsor => Politician.find_by_gov_track_id(data.xpath('sponsor').first['id'].to_s),
-          :summary => data.xpath('summary').inner_text.strip,
+          :introduced_on => data.at('introduced')['datetime'].to_s,
+          :sponsor => Politician.find_by_gov_track_id(data.at('sponsor')['id'].to_s),
+          :summary => data.at('summary').inner_text.strip,
           :congress => @congress
         )
       end
