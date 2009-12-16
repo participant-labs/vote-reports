@@ -52,7 +52,7 @@ namespace :gov_track do
           :congress => @congress)
         )
         inserts = data.xpath('voter').map { |voter|
-          ["'#{voter['vote']}'", voter['id'].to_i, roll.id].join(', ')
+          ["'#{voter['vote']}'", @politicians[voter['id'].to_i].id, roll.id].join(', ')
         }.join("), (")
         ActiveRecord::Base.connection.execute(%{
           INSERT INTO "votes" (vote, politician_id, roll_id) VALUES
