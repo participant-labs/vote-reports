@@ -10,8 +10,6 @@ class Bill < ActiveRecord::Base
   validates_presence_of :bill_type, :congress, :sponsor
   validates_uniqueness_of :gov_track_id
 
-  after_create :initialize_votes
-
   class << self
     def fetch(id)
       Cachy.cache(id, :expires_in => 1.day) do
@@ -61,10 +59,4 @@ class Bill < ActiveRecord::Base
   end
 
   validates_uniqueness_of :opencongress_id, :allow_nil => true
-
-  private
-
-  def initialize_votes
-    Vote.fetch_for_bill(self)
-  end
 end
