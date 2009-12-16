@@ -97,8 +97,8 @@ namespace :gov_track do
             else
               bill
             end
-          roll = fetch_roll(vote.delete('id').to_s, vote)
-          puts "Rolls: #{Roll.count}, Bills: #{Bill.count} Vote: #{Vote.count}"
+          fetch_roll(vote.delete('id').to_s, vote)
+          puts "."
         end
       end
     end
