@@ -39,7 +39,6 @@ namespace :gov_track do
         roll = Roll.create(attrs.symbolize_keys.merge(
           :opencongress_id => gov_track_roll_id,
           :congress => @congress,
-          :title => attrs[:title].to_s,
           :where => data['where'].to_s,
           :voted_at => data['datetime'].to_s,
           :aye => data['aye'].to_s,
@@ -86,7 +85,7 @@ namespace :gov_track do
         doc.xpath('votes/vote').each do |vote|
           next unless vote['bill']
           bill = fetch_bill(vote.delete('bill').to_s)
-          vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts')
+          vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts', 'title')
           vote[:subject] =
             if (amendment_id = vote.delete('amendment').to_s).present?
               bill.amendments.first(:conditions => {:gov_track_id => amendment_id}) \
