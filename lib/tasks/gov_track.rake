@@ -98,7 +98,8 @@ namespace :gov_track do
               bill
             end
           fetch_roll(vote.delete('id').to_s, vote)
-          puts "."
+          $stdout.print "."
+          $stdout.flush
         end
       end
     end
