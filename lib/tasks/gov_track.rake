@@ -64,13 +64,13 @@ namespace :gov_track do
         data = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/bills/#{bill_ref(gov_track_bill_id)}.xml"))).at('bill')
         bill.update_attributes!(
           :gov_track_id => gov_track_bill_id,
-          :congress => Congress.find_by_meeting(data['session'].to_s),
+          :congress => Congress.find_by_meeting(data['session'].to_i),
           :title => data.css('titles > title[type=official]').inner_text,
           :bill_type => data['type'].to_s,
           :bill_number => data['number'].to_s,
           :updated_at => data['updated'].to_s,
           :introduced_on => data.at('introduced')['datetime'].to_s,
-          :sponsor => Politician.find_by_gov_track_id(data.at('sponsor')['id'].to_s),
+          :sponsor => @politicians[data.at('sponsor')['id'].to_i],
           :summary => data.at('summary').inner_text.strip,
           :congress => @congress
         )
@@ -81,6 +81,7 @@ namespace :gov_track do
     task :unpack => :environment do
       ActiveRecord::Base.transaction do
         @congress = Congress.find_by_meeting(MEETING)
+        @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
         doc = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/votes.all.index.xml")))
         doc.xpath('votes/vote').each do |vote|
           next unless vote['bill']
