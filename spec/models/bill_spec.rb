@@ -23,13 +23,6 @@ describe Bill do
     end
   end
 
-  describe "Creation" do
-    it "should fetch votes for this bill" do
-      Vote.expects(:fetch_for_bill).at_least_once
-      Factory.create(:bill)
-    end
-  end
-
   describe "#politicians" do
     before(:all) do
       @supporting = Factory.create(:politician)
