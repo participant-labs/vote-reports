@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091214023624) do
+ActiveRecord::Schema.define(:version => 20091214054049) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(:version => 20091214023624) do
     t.datetime "updated_at"
   end
 
+  add_index "amendments", ["gov_track_id"], :name => "index_amendments_on_gov_track_id", :unique => true
+
   create_table "bill_criteria", :force => true do |t|
     t.integer  "bill_id"
     t.integer  "report_id"
@@ -26,6 +28,8 @@ ActiveRecord::Schema.define(:version => 20091214023624) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "bill_criteria", ["bill_id", "report_id"], :name => "index_bill_criteria_on_bill_id_and_report_id", :unique => true
 
   create_table "bills", :force => true do |t|
     t.text     "title"
@@ -40,6 +44,9 @@ ActiveRecord::Schema.define(:version => 20091214023624) do
     t.date     "introduced_on"
     t.text     "summary"
   end
+
+  add_index "bills", ["gov_track_id"], :name => "index_bills_on_gov_track_id", :unique => true
+  add_index "bills", ["opencongress_id"], :name => "index_bills_on_opencongress_id", :unique => true
 
   create_table "congresses", :force => true do |t|
     t.integer "meeting"
@@ -80,6 +87,11 @@ ActiveRecord::Schema.define(:version => 20091214023624) do
     t.string   "official_rss"
   end
 
+  add_index "politicians", ["bioguide_id"], :name => "index_politicians_on_bioguide_id", :unique => true
+  add_index "politicians", ["fec_id"], :name => "index_politicians_on_fec_id", :unique => true
+  add_index "politicians", ["gov_track_id"], :name => "index_politicians_on_gov_track_id", :unique => true
+  add_index "politicians", ["vote_smart_id"], :name => "index_politicians_on_vote_smart_id", :unique => true
+
   create_table "reports", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -119,6 +131,8 @@ ActiveRecord::Schema.define(:version => 20091214023624) do
     t.integer  "congress_id"
   end
 
+  add_index "rolls", ["opencongress_id"], :name => "index_rolls_on_opencongress_id", :unique => true
+
   create_table "senate_terms", :force => true do |t|
     t.integer "politician_id"
     t.integer "congress_id"
@@ -153,6 +167,8 @@ ActiveRecord::Schema.define(:version => 20091214023624) do
     t.string   "cached_slug"
   end
 
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
+
   create_table "votes", :force => true do |t|
     t.integer  "politician_id"
     t.datetime "created_at"
@@ -160,5 +176,7 @@ ActiveRecord::Schema.define(:version => 20091214023624) do
     t.integer  "roll_id"
     t.string   "vote"
   end
+
+  add_index "votes", ["roll_id", "politician_id"], :name => "index_votes_on_roll_id_and_politician_id", :unique => true
 
 end
