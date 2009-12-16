@@ -32,11 +32,13 @@ namespace :gov_track do
     end
 
     def fetch_roll(gov_track_roll_id, attrs)
-      (Roll.find_by_opencongress_id(gov_track_roll_id) \
-        || Roll.new(:opencongress_id => gov_track_roll_id)).tap do |roll|
+      if roll = Roll.find_by_opencongress_id(gov_track_roll_id)
+        return roll
+      else
         data = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/rolls/#{gov_track_roll_id}.xml"))).at('roll')
-        roll.update_attributes!(
-          attrs.symbolize_keys.merge(
+        roll = Roll.create(attrs.symbolize_keys.merge(
+          :opencongress_id => gov_track_roll_id,
+          :congress => @congress,
           :title => attrs[:title].to_s,
           :where => data['where'].to_s,
           :voted_at => data['datetime'].to_s,
@@ -48,13 +50,11 @@ namespace :gov_track do
           :required => data.at('required').inner_text,
           :question => data.at('question').inner_text,
           :roll_type => data.at('type').inner_text,
-          :votes => data.xpath('voter').map do |voter|
-            politician = Politician.find_by_gov_track_id(voter['id'].to_s)
-            vote = politician.votes.first(:conditions => {:roll_id => roll}) unless roll.new_record?
-            vote ||= politician.votes.build(:roll => roll, :vote => voter['vote'].to_s)
-          end,
           :congress => @congress)
         )
+        data.xpath('voter').map do |voter|
+          @politicians.fetch(voter['id'].to_i).votes.create(:vote => voter['vote'].to_s, :roll => roll)
+        end
       end
     end
 
@@ -70,7 +70,7 @@ namespace :gov_track do
           :bill_number => data['number'].to_s,
           :updated_at => data['updated'].to_s,
           :introduced_on => data.at('introduced')['datetime'].to_s,
-          :sponsor => @politicians[data.at('sponsor')['id'].to_i],
+          :sponsor => @politicians.fetch(data.at('sponsor')['id'].to_i),
           :summary => data.at('summary').inner_text.strip,
           :congress => @congress
         )
@@ -87,7 +87,7 @@ namespace :gov_track do
           next unless vote['bill']
           bill = fetch_bill(vote.delete('bill').to_s)
           vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts')
-          vote['subject'] =
+          vote[:subject] =
             if (amendment_id = vote.delete('amendment').to_s).present?
               bill.amendments.first(:conditions => {:gov_track_id => amendment_id}) \
                 || bill.amendments.build(:gov_track_id => amendment_id, :title => vote.delete('amendment_title').to_s)
