@@ -8,3 +8,4 @@ httparty
 ym4r
 nokogiri
 fastercsv
+matthuhiggins-foreigner --source 'http://gemcutter.org'
