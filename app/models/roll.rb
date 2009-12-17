@@ -1,5 +1,5 @@
 class Roll < ActiveRecord::Base
-  has_many :votes
+  has_many :votes, :dependent => :destroy
   belongs_to :subject, :polymorphic => true
   belongs_to :congress
 

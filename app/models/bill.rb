@@ -2,8 +2,8 @@ class Bill < ActiveRecord::Base
   named_scope :recent, :limit => 25, :order => 'created_at DESC'
 
   has_friendly_id :opencongress_id
-  has_many :rolls, :as => :subject
-  has_many :amendments
+  has_many :rolls, :as => :subject, :dependent => :destroy
+  has_many :amendments, :dependent => :destroy
   belongs_to :congress
   belongs_to :sponsor, :class_name => 'Politician'
 
