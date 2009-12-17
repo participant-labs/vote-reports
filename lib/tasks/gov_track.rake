@@ -90,10 +90,11 @@ namespace :gov_track do
           next unless vote['bill']
           bill = fetch_bill(vote.delete('bill').to_s)
           vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts', 'title')
+          amendment_title = vote.delete('amendment_title').to_s
           vote[:subject] =
             if (amendment_id = vote.delete('amendment').to_s).present?
               bill.amendments.first(:conditions => {:gov_track_id => amendment_id}) \
-                || bill.amendments.build(:gov_track_id => amendment_id, :title => vote.delete('amendment_title').to_s)
+                || bill.amendments.build(:gov_track_id => amendment_id, :title => amendment_title)
             else
               bill
             end
