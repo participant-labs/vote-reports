@@ -25,13 +25,9 @@ class Politician < ActiveRecord::Base
   before_validation :extract_nickname_from_first_name_if_present
 
   has_many :votes
-  has_many :bills, :through => :votes do
-    def supported
-      scoped(:conditions => "votes.vote = true")
-    end
-    def opposed
-      scoped(:conditions => "votes.vote = false")
-    end
+  has_many :rolls, :through => :votes, :extend => Vote::Support
+  def bills
+    Bill.scoped(:joins => {:rolls => :votes}, :conditions => {:'votes.politician_id' => self}).extend(Vote::Support)
   end
 
   class << self

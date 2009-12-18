@@ -10,10 +10,22 @@ Factory.define :report do |f|
   f.user {|u| u.association(:user) }
 end
 
+Factory.define :amendment do |f|
+  f.title { Factory.next :text }
+  f.bill {|u| u.association(:bill) }
+end
+
+Factory.define :congress do |f|
+  f.meeting { Forgery(:basic).number(:at_most => 111) }
+end
+
 Factory.define :bill do |f|
   f.title { Factory.next :text }
   f.opencongress_id { Factory.next :opencongress_id }
+  f.gov_track_id { Factory.next :gov_track_id }
   f.bill_type { "H.Res.3549"}
+  f.sponsor {|s| s.association(:politician) }
+  f.congress {|s| s.association(:congress) }
 end
 
 Factory.define :bill_criterion do |f|
@@ -29,8 +41,14 @@ end
 
 Factory.define :vote do |f|
   f.politician {|p| p.association(:politician) }
-  f.bill {|b| b.association(:bill) }
-  f.vote { rand(2) == 1 }
+  f.roll {|b| b.association(:roll) }
+  f.vote { %w[+ - P 0].rand }
+end
+
+Factory.define :roll do |f|
+  f.congress {|s| s.association(:congress) }
+  f.subject {|b| b.association(:bill) }
+  f.opencongress_id { Factory.next :opencongress_id }
 end
 
 Factory.define :representative_term do |f|
