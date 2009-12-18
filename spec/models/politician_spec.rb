@@ -2,16 +2,16 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Politician do
   before do
-    @politician = Factory.create(:politician)
+    @politician = Politician.make
   end
 
   describe "#bills" do
     before do
-      @supported = Factory.create(:roll)
-      @opposed = Factory.create(:roll)
-      @unconnected = Factory.create(:roll)
-      Factory.create(:vote, :politician => @politician, :roll => @supported, :vote => '+')
-      Factory.create(:vote, :politician => @politician, :roll => @opposed, :vote => '-')
+      @supported = Roll.make
+      @opposed = Roll.make
+      @unconnected = Roll.make
+      Vote.make(:politician => @politician, :roll => @supported, :vote => '+')
+      Vote.make(:politician => @politician, :roll => @opposed, :vote => '-')
     end
 
     it "returns all politicians with connecting votes" do

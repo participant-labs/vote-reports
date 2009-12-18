@@ -23,7 +23,7 @@ config.gem 'cucumber',    :lib => false,        :version => '>=0.4.4' unless Fil
 config.gem 'webrat',      :lib => false,        :version => '>=0.5.3' unless File.directory?(File.join(Rails.root, 'vendor/plugins/webrat'))
 config.gem 'rspec',       :lib => false,        :version => '>=1.2.9' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
 config.gem 'rspec-rails', :lib => false,        :version => '>=1.2.9' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
-config.gem "thoughtbot-factory_girl", :lib => "factory_girl"
+config.gem 'machinist'
 config.gem 'mocha'
 config.gem 'forgery', :source => 'http://gemcutter.org'
 config.gem 'fakeweb'
