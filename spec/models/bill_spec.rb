@@ -29,8 +29,9 @@ describe Bill do
       @opposing = Factory.create(:politician)
       @unconnected = Factory.create(:politician)
       @bill = Factory.create(:bill)
-      Factory.create(:vote, :politician => @supporting, :bill => @bill, :vote => 1)
-      Factory.create(:vote, :politician => @opposing, :bill => @bill, :vote => 0)
+      @roll = Factory.create(:roll, :subject => @bill)
+      Factory.create(:vote, :politician => @supporting, :roll => @roll, :vote => '+')
+      Factory.create(:vote, :politician => @opposing, :roll => @roll, :vote => '-')
     end
 
     it "returns all politicians with connecting votes" do

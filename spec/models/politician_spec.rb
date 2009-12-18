@@ -7,26 +7,29 @@ describe Politician do
 
   describe "#bills" do
     before do
-      @supported = Factory.create(:bill)
-      @opposed = Factory.create(:bill)
-      @unconnected = Factory.create(:bill)
-      Factory.create(:vote, :politician => @politician, :bill => @supported, :vote => 1)
-      Factory.create(:vote, :politician => @politician, :bill => @opposed, :vote => 0)
+      @supported = Factory.create(:roll)
+      @opposed = Factory.create(:roll)
+      @unconnected = Factory.create(:roll)
+      Factory.create(:vote, :politician => @politician, :roll => @supported, :vote => '+')
+      Factory.create(:vote, :politician => @politician, :roll => @opposed, :vote => '-')
     end
 
     it "returns all politicians with connecting votes" do
-      @politician.bills.should =~ [@supported, @opposed]
+      @politician.rolls.should =~ [@supported, @opposed]
+      @politician.bills.should =~ [@supported.subject, @opposed.subject]
     end
 
     describe "#supported" do
       it "returns all politicians with supporting votes" do
-        @politician.bills.supported.should =~ [@supported]
+        @politician.rolls.supported.should =~ [@supported]
+        @politician.bills.supported.should =~ [@supported.subject]
       end
     end
 
     describe "#opposed" do
       it "returns all politicians with supporting votes" do
-        @politician.bills.opposed.should =~ [@opposed]
+        @politician.rolls.opposed.should =~ [@opposed]
+        @politician.bills.opposed.should =~ [@opposed.subject]
       end
     end
   end

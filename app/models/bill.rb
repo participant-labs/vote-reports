@@ -7,7 +7,7 @@ class Bill < ActiveRecord::Base
   belongs_to :congress
   belongs_to :sponsor, :class_name => 'Politician'
 
-  validates_presence_of :bill_type, :congress, :sponsor
+  validates_presence_of :bill_type, :congress, :sponsor, :gov_track_id
   validates_uniqueness_of :gov_track_id
 
   class << self
@@ -48,14 +48,12 @@ class Bill < ActiveRecord::Base
   end
 
   has_many :bill_criteria, :dependent => :destroy
-  has_many :votes
-  has_many :politicians, :through => :votes do
-    def supporting
-      scoped(:conditions => "votes.vote = true")
-    end
-    def opposing
-      scoped(:conditions => "votes.vote = false")
-    end
+  has_many :rolls, :as => :subject
+  has_many :votes, :through => :rolls
+  def politicians
+    Politician.scoped(:joins => {:votes => :roll}, :conditions => {
+      :'rolls.subject_id' => self, :'rolls.subject_type' => 'Bill'
+    }).extend(Vote::Support)
   end
 
   validates_uniqueness_of :opencongress_id, :allow_nil => true
