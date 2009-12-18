@@ -6,6 +6,6 @@ When /^I log in as "(.*)\/(.*)"$/ do |email, password|
 end
 
 Given /^I am signed in$/ do
-  @current_user = Factory(:user)
+  @current_user = User.make
   When %{I log in as "#{@current_user.email}/#{@current_user.password}"}
 end

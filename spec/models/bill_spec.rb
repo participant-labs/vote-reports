@@ -25,13 +25,13 @@ describe Bill do
 
   describe "#politicians" do
     before(:all) do
-      @supporting = Factory.create(:politician)
-      @opposing = Factory.create(:politician)
-      @unconnected = Factory.create(:politician)
-      @bill = Factory.create(:bill)
-      @roll = Factory.create(:roll, :subject => @bill)
-      Factory.create(:vote, :politician => @supporting, :roll => @roll, :vote => '+')
-      Factory.create(:vote, :politician => @opposing, :roll => @roll, :vote => '-')
+      @supporting = Politician.make
+      @opposing = Politician.make
+      @unconnected = Politician.make
+      @bill = Bill.make
+      @roll = Roll.make(:subject => @bill)
+      Vote.make(:politician => @supporting, :roll => @roll, :vote => '+')
+      Vote.make(:politician => @opposing, :roll => @roll, :vote => '-')
     end
 
     it "returns all politicians with connecting votes" do

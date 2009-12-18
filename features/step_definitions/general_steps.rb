@@ -12,6 +12,6 @@ end
 
 Given /^the following (.+) records?:$/ do |type, table|
   table.hashes.each do |row|
-    Factory.create(type.to_s.gsub(' ', '_').underscore.to_sym, row.symbolize_keys)
+    type.to_s.gsub(' ', '_').camelcase.constantize.make(row.symbolize_keys)
   end
 end
