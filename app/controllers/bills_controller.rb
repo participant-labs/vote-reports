@@ -1,11 +1,15 @@
 class BillsController < ApplicationController
   def index
-    if @q = params[:q]
+    page = {:page => params[:page], :per_page => Bill::PER_PAGE}
+    if @q = q = params[:q]
       @title = 'Matching Bills'
-      @bills = Bill.search { fulltext @q }.results
+      @bills = Bill.search {
+        fulltext q
+        paginate page
+      }.results
     else
       @title = 'Recent Bills'
-      @bills = Bill.recent.paginate :page => params[:page], :per_page => 50
+      @bills = Bill.recent.paginate page
     end
   end
 

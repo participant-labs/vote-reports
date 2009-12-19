@@ -1,4 +1,6 @@
 class Bill < ActiveRecord::Base
+  PER_PAGE = 30
+
   named_scope :recent, :limit => 25, :order => 'created_at DESC'
 
   has_friendly_id :opencongress_id
