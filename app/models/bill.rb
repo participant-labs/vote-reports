@@ -39,4 +39,8 @@ class Bill < ActiveRecord::Base
   def opencongress_url
     "http://www.opencongress.org/bill/#{opencongress_id}/show"
   end
+
+  def inspect
+    %{#<Politician #{gov_track_id} - "#{title}">}
+  end
 end
