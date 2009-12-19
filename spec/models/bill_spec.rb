@@ -22,6 +22,16 @@ describe Bill do
     end
   end
 
+  describe ".recent" do
+    it "should return bills with the most recent first" do
+      prior_bills = Bill.recent.all
+      bill1 = Bill.make
+      bill2 = Bill.make
+      bill3 = Bill.make
+      Bill.recent.should == [bill3, bill2, bill1, *prior_bills]
+    end
+  end
+
   describe "#politicians" do
     before(:all) do
       @supporting = Politician.make
