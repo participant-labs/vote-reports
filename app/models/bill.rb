@@ -10,29 +10,10 @@ class Bill < ActiveRecord::Base
   validates_presence_of :bill_type, :congress, :sponsor, :gov_track_id
   validates_uniqueness_of :gov_track_id
 
-  class << self
-    def fetch(id)
-      Cachy.cache(id, :expires_in => 1.day) do
-        find_by_opencongress_id(id) ||
-          begin
-            ids = Array(id)
-            bills = OpenCongress::OCBill.by_idents(ids)
-            (ids.size == 1 ? find_or_create(bills.first) : bills.map {|bill| find_or_create(bill) })
-          end
-      end
-    end
-
-    def fetch_by_query(query)
-      Cachy.cache(query, :expires_in => 1.day, :hash_key => true) do
-        OpenCongress::OCBill.by_query(query).map do |bill|
-          find_or_create(bill)
-        end
-      end
-    end
-
-    def find_or_create(bill)
-      find_by_opencongress_id(bill.ident) || create(:title => bill.title, :bill_type => bill.bill_type_human, :opencongress_id => bill.ident)
-    end
+  searchable do
+    text :title, :summary, :gov_track_id, :opencongress_id
+    integer :bill_number
+    time :introduced_on
   end
 
   def bill_type

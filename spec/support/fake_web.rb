@@ -10,4 +10,4 @@ web_requests.each do |request|
   FakeWeb.register_uri(*request)
 end
 
-FakeWeb.allow_net_connect = false
+FakeWeb.allow_net_connect = %r{^http://localhost:8981/solr/}

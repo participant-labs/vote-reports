@@ -34,6 +34,9 @@ Rails::Initializer.run do |config|
   config.gem 'nokogiri'
   config.gem 'fastercsv'
   config.gem "matthuhiggins-foreigner", :lib => "foreigner", :source => 'http://gemcutter.org'
+  config.gem 'sunspot', :lib => 'sunspot'
+  config.gem 'sunspot_rails', :lib => 'sunspot/rails'
+  config.gem 'will_paginate'
 
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
