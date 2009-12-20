@@ -41,6 +41,6 @@ class Bill < ActiveRecord::Base
   end
 
   def inspect
-    %{#<Politician #{gov_track_id} - "#{title}">}
+    %{#<Bill #{gov_track_id} - "#{title}">}
   end
 end
