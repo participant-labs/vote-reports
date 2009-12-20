@@ -4,6 +4,8 @@ Feature: Bill viewing
   I want to browse bills
 
   Scenario: User searches for and views a specific bill
+    Given a bill named "USA PATRIOT Reauthorization Act of 2009"
+    And 30 recent bills
     When I go to the bills page
     Then I should not see "USA PATRIOT Reauthorization Act of 2009"
 
@@ -13,9 +15,6 @@ Feature: Bill viewing
 
     When I follow "USA PATRIOT Reauthorization Act of 2009"
     Then I should see "View on OpenCongress"
-
-    When I go to the bills page
-    And I should see "USA PATRIOT Reauthorization Act of 2009"
 
   Scenario: User searches for and doesn't find a bills
     When I go to the bills page
