@@ -4,6 +4,6 @@ end
 
 Given /^the following (.+) records?:$/ do |type, table|
   table.hashes.each do |row|
-    type.to_s.gsub(' ', '_').camelcase.constantize.make(row.symbolize_keys)
+    send "create_#{type.to_s.gsub(' ', '_').underscore}", row.symbolize_keys
   end
 end

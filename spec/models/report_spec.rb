@@ -14,6 +14,6 @@ describe Report, "creation" do
       @report = Report.new(:user_id => nil)
       @report.save
     end.should_not change(Report,:count)
-    @report.errors.on(:user_id).should include("can't be blank")
+    @report.errors.on(:user).should include("can't be blank")
   end
 end
