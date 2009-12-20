@@ -3,12 +3,12 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe User do
   it "should be created with valid attributes" do
     lambda do
-      User.make
+      create_user
     end.should change(User,:count).by(1)
   end
   
   it "should validate uniqueness of username" do
-    user = User.make(:username => 'foo')
+    user = create_user(:username => 'foo')
     lambda do
       @user = User.new(:username => 'foo')
       @user.save

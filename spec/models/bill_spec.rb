@@ -4,7 +4,8 @@ describe Bill do
   describe ".search" do
     integrate_sunspot
     before do
-      Bill.make(:title => "USA PATRIOT Reauthorization Act of 2009").index
+      create_bill(:title => "USA PATRIOT Reauthorization Act of 2009")
+      Bill.reindex
     end
 
     context "when there are no matches" do
@@ -15,8 +16,7 @@ describe Bill do
 
     context "when there are matches" do
       it "should return bills with titles matching the query" do
-        bills = Bill.search { fulltext "PATRIOT" }
-        pending "Interaction between friendly_id and sunspot?"
+        bills = Bill.search { fulltext "Reauthorization" }
         bills.results.map(&:title).should include("USA PATRIOT Reauthorization Act of 2009")
       end
     end
@@ -25,22 +25,22 @@ describe Bill do
   describe ".recent" do
     it "should return bills with the most recent first" do
       prior_bills = Bill.recent.all
-      bill1 = Bill.make
-      bill2 = Bill.make
-      bill3 = Bill.make
+      bill1 = create_bill
+      bill2 = create_bill
+      bill3 = create_bill
       Bill.recent.should == [bill3, bill2, bill1, *prior_bills]
     end
   end
 
   describe "#politicians" do
     before(:all) do
-      @supporting = Politician.make
-      @opposing = Politician.make
-      @unconnected = Politician.make
-      @bill = Bill.make
-      @roll = Roll.make(:subject => @bill)
-      Vote.make(:politician => @supporting, :roll => @roll, :vote => '+')
-      Vote.make(:politician => @opposing, :roll => @roll, :vote => '-')
+      @supporting = create_politician
+      @opposing = create_politician
+      @unconnected = create_politician
+      @bill = create_bill
+      @roll = create_roll(:subject => @bill)
+      create_vote(:politician => @supporting, :roll => @roll, :vote => '+')
+      create_vote(:politician => @opposing, :roll => @roll, :vote => '-')
     end
 
     it "returns all politicians with connecting votes" do

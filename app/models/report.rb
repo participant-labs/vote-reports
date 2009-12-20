@@ -5,8 +5,7 @@ class Report < ActiveRecord::Base
   has_many :bill_criteria
   has_many :bills, :through => :bill_criteria
 
-  validates_presence_of :user_id
-  validates_presence_of :name
+  validates_presence_of :user, :name
 
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes|
     attributes['support'] == '0' && attributes['oppose'] == '0'
