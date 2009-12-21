@@ -4,6 +4,19 @@ require 'nokogiri'
 MEETING = 111
 
 namespace :gov_track do
+  task :download_all do
+    101.upto(111).each do |meeting|
+      dest = Rails.root.join("data/gov_track/us/#{meeting}/")
+      FileUtils.mkdir_p(dest)
+      Dir.chdir(dest) do
+        `wget -N http://www.govtrack.us/data/us/#{meeting}/votes.all.index.xml`
+        `wget -N http://www.govtrack.us/data/us/#{meeting}/people.xml`
+        `rsync -az govtrack.us::govtrackdata/us/#{meeting}/bills .`
+        `rsync -az govtrack.us::govtrackdata/us/#{meeting}/rolls .`
+      end
+    end
+  end
+
   def gov_track_path(path)
     local_path = Rails.root.join('data/gov_track', path)
     File.exist?(local_path) ? local_path : "http://www.govtrack.us/data/#{path}"
