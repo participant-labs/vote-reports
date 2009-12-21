@@ -152,7 +152,7 @@ namespace :gov_track do
             when 'sen'
               politician.senate_terms.find_or_create_by_started_on(role['startdate'].to_date) \
                 .update_attributes(attrs.merge(:senate_class => role['class'], :state => role['state']))
-            when 'sen'
+            when 'prez'
               politician.presidential_terms.find_or_create_by_started_on(role['startdate'].to_date) \
                 .update_attributes(attrs)
             else
