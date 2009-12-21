@@ -8,4 +8,8 @@ describe Congress do
   describe "#representatives" do
     it "should return the representatives in office during this Congress"
   end
+
+  describe "#presidents" do
+    it "should return the presidents in office during this Congress"
+  end
 end

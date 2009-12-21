@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091221024634) do
+ActiveRecord::Schema.define(:version => 20091221030859) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id"
@@ -91,6 +91,16 @@ ActiveRecord::Schema.define(:version => 20091221024634) do
   add_index "politicians", ["fec_id"], :name => "index_politicians_on_fec_id", :unique => true
   add_index "politicians", ["gov_track_id"], :name => "index_politicians_on_gov_track_id", :unique => true
   add_index "politicians", ["vote_smart_id"], :name => "index_politicians_on_vote_smart_id", :unique => true
+
+  create_table "presidential_terms", :force => true do |t|
+    t.integer  "politician_id"
+    t.date     "started_on"
+    t.date     "ended_on"
+    t.string   "party"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "reports", :force => true do |t|
     t.integer  "user_id"
@@ -184,6 +194,8 @@ ActiveRecord::Schema.define(:version => 20091221024634) do
 
   add_foreign_key "bills", "congresses", :name => "bills_congress_id_fk", :dependent => :delete
   add_foreign_key "bills", "politicians", :name => "bills_sponsor_id_fk", :column => "sponsor_id", :dependent => :nullify
+
+  add_foreign_key "presidential_terms", "politicians", :name => "presidential_terms_politician_id_fk", :dependent => :delete
 
   add_foreign_key "reports", "users", :name => "reports_user_id_fk", :dependent => :delete
 
