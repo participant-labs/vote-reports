@@ -6,8 +6,9 @@ class Politician < ActiveRecord::Base
 
   has_many :representative_terms
   has_many :senate_terms
+  has_many :presidential_terms
   def terms
-    representative_terms | senate_terms
+    representative_terms | senate_terms | presidential_terms
   end
 
   IDENTITY_STRING_FIELDS = [
