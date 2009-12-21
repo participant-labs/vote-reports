@@ -22,20 +22,7 @@ namespace :gov_track do
     File.exist?(local_path) ? local_path : "http://www.govtrack.us/data/#{path}"
   end
 
-  namespace :bills do
-    desc "Download Bills"
-    task :download do
-      `rsync -az govtrack.us::govtrackdata/us/111/bills .`
-    end
-  end
-
   namespace :votes do
-    desc "Download Votes"
-    task :download do
-      `rsync -az govtrack.us::govtrackdata/us/111/rolls .`
-      `wget http://www.govtrack.us/data/us/111/votes.all.index.xml`
-    end
-
     def bill_ref(gov_track_bill_id)
       gov_track_bill_id.to_s.match(/([a-z]+)#{MEETING}-(\d+)/).captures.join
     end
