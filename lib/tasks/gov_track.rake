@@ -124,6 +124,7 @@ namespace :gov_track do
               'firstname' => 'first_name',
               'bioguideid' => 'bioguide_id',
               'metavidid' => 'metavid_id',
+              'osid' => 'open_secrets_id',
               'birthday' => 'birthday',
               'gender' => 'gender',
               'religion' => 'religion'
