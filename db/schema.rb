@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091220060743) do
+ActiveRecord::Schema.define(:version => 20091221024634) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id"
@@ -103,7 +103,6 @@ ActiveRecord::Schema.define(:version => 20091220060743) do
 
   create_table "representative_terms", :force => true do |t|
     t.integer "politician_id"
-    t.integer "congress_id"
     t.date    "started_on"
     t.date    "ended_on"
     t.integer "district"
@@ -135,7 +134,6 @@ ActiveRecord::Schema.define(:version => 20091220060743) do
 
   create_table "senate_terms", :force => true do |t|
     t.integer "politician_id"
-    t.integer "congress_id"
     t.date    "started_on"
     t.date    "ended_on"
     t.integer "senate_class"
@@ -189,12 +187,10 @@ ActiveRecord::Schema.define(:version => 20091220060743) do
 
   add_foreign_key "reports", "users", :name => "reports_user_id_fk", :dependent => :delete
 
-  add_foreign_key "representative_terms", "congresses", :name => "representative_terms_congress_id_fk", :dependent => :delete
   add_foreign_key "representative_terms", "politicians", :name => "representative_terms_politician_id_fk", :dependent => :delete
 
   add_foreign_key "rolls", "congresses", :name => "rolls_congress_id_fk", :dependent => :delete
 
-  add_foreign_key "senate_terms", "congresses", :name => "senate_terms_congress_id_fk", :dependent => :delete
   add_foreign_key "senate_terms", "politicians", :name => "senate_terms_politician_id_fk", :dependent => :delete
 
   add_foreign_key "votes", "politicians", :name => "votes_politician_id_fk", :dependent => :delete

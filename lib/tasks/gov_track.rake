@@ -110,7 +110,6 @@ namespace :gov_track do
     desc "Process Politicians"
     task :unpack => :environment do
       doc = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/people.xml")))
-      congress = Congress.find_or_create_by_meeting(MEETING)
 
       ActiveRecord::Base.transaction do
         doc.xpath('people/person').each do |person|
@@ -138,7 +137,7 @@ namespace :gov_track do
             }.inject({}) do |attrs, (attr, method)|
               attrs[method] = role[attr] if role[attr].present?
               attrs
-            end.merge(:congress => congress)
+            end
 
             case role['type']
             when 'rep'
