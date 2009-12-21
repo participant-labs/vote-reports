@@ -4,6 +4,7 @@ class Politician < ActiveRecord::Base
     def self.included(base)
       {
         :firstname => :first_name,
+        :middlename => :middle_name,
         :lastname => :last_name,
         :govtrack_id => :gov_track_id,
         :votesmart_id => :vote_smart_id,
