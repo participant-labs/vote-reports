@@ -138,8 +138,7 @@ namespace :gov_track do
               'startdate' => 'started_on',
               'enddate' => 'ended_on',
               'url' => 'url',
-              'party' => 'party',
-              'state' => 'state',
+              'party' => 'party'
             }.inject({}) do |attrs, (attr, method)|
               attrs[method] = role[attr] if role[attr].present?
               attrs
@@ -148,10 +147,13 @@ namespace :gov_track do
             case role['type']
             when 'rep'
               politician.representative_terms.find_or_create_by_started_on(role['startdate'].to_date) \
-                .update_attributes(attrs.merge(:district => role['district']))
+                .update_attributes(attrs.merge(:district => role['district'], :state => role['state']))
             when 'sen'
               politician.senate_terms.find_or_create_by_started_on(role['startdate'].to_date) \
-                .update_attributes(attrs.merge(:senate_class => role['class']))
+                .update_attributes(attrs.merge(:senate_class => role['class'], :state => role['state']))
+            when 'sen'
+              politician.presidential_terms.find_or_create_by_started_on(role['startdate'].to_date) \
+                .update_attributes(attrs)
             else
               raise role.inspect
             end
