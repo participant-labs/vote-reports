@@ -113,7 +113,8 @@ namespace :gov_track do
   namespace :politicians do
     desc "Process Politicians"
     task :unpack => :environment do
-      doc = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/people.xml")))
+      data_path = ENV['MEETING'] ? "us/#{ENV['MEETING']}/people.xml" : "us/people.xml"
+      doc = Nokogiri::XML(open(gov_track_path(data_path)))
 
       ActiveRecord::Base.transaction do
         doc.xpath('people/person').each do |person|
