@@ -1,7 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
 
-MEETING = 111
 MEETINGS = 103..111
 
 namespace :gov_track do
@@ -28,18 +27,18 @@ namespace :gov_track do
 
   namespace :votes do
     def bill_ref(gov_track_bill_id)
-      gov_track_bill_id.to_s.match(/([a-z]+)#{MEETING}-(\d+)/).captures.join
+      gov_track_bill_id.to_s.match(/([a-z]+)#{@congress.meeting}-(\d+)/).captures.join
     end
     
     def opencongress_bill_id(gov_track_bill_id)
-      "#{MEETING}-#{bill_ref(gov_track_bill_id)}"
+      "#{@congress.meeting}-#{bill_ref(gov_track_bill_id)}"
     end
 
     def fetch_roll(gov_track_roll_id, attrs)
       if roll = Roll.find_by_opencongress_id(gov_track_roll_id)
         return roll
       else
-        data = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/rolls/#{gov_track_roll_id}.xml"))).at('roll')
+        data = Nokogiri::XML(open(gov_track_path("us/#{@congress.meeting}/rolls/#{gov_track_roll_id}.xml"))).at('roll')
         roll = Roll.create(attrs.symbolize_keys.merge(
           :opencongress_id => gov_track_roll_id,
           :congress => @congress,
@@ -73,10 +72,17 @@ namespace :gov_track do
     def fetch_bill(gov_track_bill_id)
       (Bill.find_by_opencongress_id(opencongress_bill_id(gov_track_bill_id)) \
         || Bill.new(:opencongress_id => opencongress_bill_id(gov_track_bill_id))).tap do |bill|
-        data = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/bills/#{bill_ref(gov_track_bill_id)}.xml"))).at('bill')
+        data =
+          begin
+            Nokogiri::XML(open(gov_track_path("us/#{@congress.meeting}/bills/#{bill_ref(gov_track_bill_id)}.xml"))).at('bill')
+          rescue => e
+            puts "#{e.inspect} #{gov_track_path("us/#{@congress.meeting}/bills/#{bill_ref(gov_track_bill_id)}.xml")}"
+            return nil
+          end
+        raise "Something is weird #{@congress.meeting} != #{data['session']}" if @congress.meeting != data['session'].to_i
         bill.update_attributes!(
           :gov_track_id => gov_track_bill_id,
-          :congress => Congress.find_by_meeting(data['session'].to_i),
+          :congress => @congress,
           :title => data.css('titles > title[type=official]').inner_text,
           :bill_type => data['type'].to_s,
           :bill_number => data['number'].to_s,
@@ -92,24 +98,27 @@ namespace :gov_track do
     desc "Process Votes"
     task :unpack => :environment do
       ActiveRecord::Base.transaction do
-        @congress = Congress.find_by_meeting(MEETING)
-        @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
-        doc = Nokogiri::XML(open(gov_track_path("us/#{MEETING}/votes.all.index.xml")))
-        doc.xpath('votes/vote').each do |vote|
-          next unless vote['bill']
-          bill = fetch_bill(vote.delete('bill').to_s)
-          vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts', 'title')
-          amendment_title = vote.delete('amendment_title').to_s
-          vote[:subject] =
-            if (amendment_id = vote.delete('amendment').to_s).present?
-              bill.amendments.first(:conditions => {:gov_track_id => amendment_id}) \
-                || bill.amendments.build(:gov_track_id => amendment_id, :title => amendment_title)
-            else
-              bill
-            end
-          fetch_roll(vote.delete('id').to_s, vote)
-          $stdout.print "."
-          $stdout.flush
+        MEETINGS.each do |meeting|
+          puts "Meeting #{meeting}"
+          @congress = Congress.find_or_create_by_meeting(meeting)
+          @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
+          doc = Nokogiri::XML(open(gov_track_path("us/#{meeting}/votes.all.index.xml")))
+          doc.xpath('votes/vote').each do |vote|
+            next unless vote['bill'].present? && bill = fetch_bill(vote.delete('bill').to_s)
+            vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts', 'title')
+            amendment_title = vote.delete('amendment_title').to_s
+            vote[:subject] =
+              if (amendment_id = vote.delete('amendment').to_s).present?
+                bill.amendments.first(:conditions => {:gov_track_id => amendment_id}) \
+                  || bill.amendments.build(:gov_track_id => amendment_id, :title => amendment_title)
+              else
+                bill
+              end
+            fetch_roll(vote.delete('id').to_s, vote)
+            $stdout.print "."
+            $stdout.flush
+          end
+          puts
         end
       end
     end
