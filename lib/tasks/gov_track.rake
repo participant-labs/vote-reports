@@ -120,6 +120,7 @@ namespace :gov_track do
           politician = Politician.find_or_create_by_gov_track_id(person['id'])
           politician.update_attributes({
               'lastname' => 'last_name',
+              'middlename' => 'middle_name',
               'firstname' => 'first_name',
               'bioguideid' => 'bioguide_id',
               'metavidid' => 'metavid_id',
