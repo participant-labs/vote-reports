@@ -2,10 +2,14 @@ require 'open-uri'
 require 'nokogiri'
 
 MEETING = 111
+MEETINGS = 101..111
 
 namespace :gov_track do
   task :download_all do
-    101.upto(111).each do |meeting|
+    Dir.chdir(Rails.root.join("data/gov_track/us/")) do
+      `wget -N http://www.govtrack.us/data/us/people.xml`
+    end
+    MEETINGS.each do |meeting|
       dest = Rails.root.join("data/gov_track/us/#{meeting}/")
       FileUtils.mkdir_p(dest)
       Dir.chdir(dest) do
