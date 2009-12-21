@@ -55,9 +55,14 @@ namespace :gov_track do
           :roll_type => data.at('type').inner_text,
           :congress => @congress)
         )
-        inserts = data.xpath('voter').map { |voter|
-          ["'#{voter['vote']}'", @politicians[voter['id'].to_i].id, roll.id].join(', ')
-        }.join("), (")
+        inserts = data.xpath('voter').map { |vote|
+          voter = @politicians[vote['id'].to_i]
+          if voter.nil?
+            puts "Ignoring #{vote.inspect}"
+            next
+          end
+          ["'#{vote['vote']}'", voter.id, roll.id].join(', ')
+        }.compact.join("), (")
         ActiveRecord::Base.connection.execute(%{
           INSERT INTO "votes" (vote, politician_id, roll_id) VALUES
             (#{ inserts });
