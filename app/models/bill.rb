@@ -28,6 +28,15 @@ class Bill < ActiveRecord::Base
   validates_uniqueness_of :gov_track_id
   validates_uniqueness_of :opencongress_id, :allow_nil => true
 
+  class << self
+    def paginated_search(params)
+      search do
+        fulltext params[:q]
+        paginate :page => params[:page], :per_page => PER_PAGE
+      end
+    end
+  end
+
   def bill_type
     self['bill_type'].gsub('.',' ').gsub('H Res','HR').gsub('H R','HR')
   end
