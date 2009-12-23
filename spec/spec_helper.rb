@@ -44,13 +44,17 @@ Spec::Runner.configure do |config|
   # RSpec uses it's own mocking framework by default. If you prefer to
   # use mocha, flexmock or RR, uncomment the appropriate line:
   #
-  config.mock_with :mocha
+  # config.mock_with :mocha
   # config.mock_with :flexmock
-  # config.mock_with :rr
+  config.mock_with :rr
   #
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
+
+  config.before do
+    activate_authlogic
+  end
 end
 
 
