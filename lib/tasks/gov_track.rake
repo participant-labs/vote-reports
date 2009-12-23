@@ -98,10 +98,10 @@ namespace :gov_track do
     desc "Process Votes"
     task :unpack => :environment do
       ActiveRecord::Base.transaction do
+        @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
         MEETINGS.each do |meeting|
           puts "Meeting #{meeting}"
           @congress = Congress.find_or_create_by_meeting(meeting)
-          @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
           doc = Nokogiri::XML(open(gov_track_path("us/#{meeting}/votes.all.index.xml")))
           doc.xpath('votes/vote').each do |vote|
             next unless vote['bill'].present? && bill = fetch_bill(vote.delete('bill').to_s)
