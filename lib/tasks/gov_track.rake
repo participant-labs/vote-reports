@@ -80,6 +80,7 @@ namespace :gov_track do
             return nil
           end
         raise "Something is weird #{@congress.meeting} != #{data['session']}" if @congress.meeting != data['session'].to_i
+        sponsor = data.at('sponsor')['none'].present? ? nil : @politicians.fetch(data.at('sponsor')['id'].to_i)
         bill.update_attributes!(
           :gov_track_id => gov_track_bill_id,
           :congress => @congress,
@@ -88,7 +89,7 @@ namespace :gov_track do
           :bill_number => data['number'].to_s,
           :updated_at => data['updated'].to_s,
           :introduced_on => data.at('introduced')['datetime'].to_s,
-          :sponsor => @politicians.fetch(data.at('sponsor')['id'].to_i),
+          :sponsor => sponsor,
           :summary => data.at('summary').inner_text.strip,
           :congress => @congress
         )
