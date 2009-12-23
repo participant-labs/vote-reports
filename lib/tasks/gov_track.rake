@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'nokogiri'
 
-MEETINGS = 103..111
+MEETINGS = 101..111
 
 namespace :gov_track do
   task :download_all do
@@ -101,8 +101,16 @@ namespace :gov_track do
         @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
         MEETINGS.each do |meeting|
           puts "Meeting #{meeting}"
+          doc =
+            begin
+              path = gov_track_path("us/#{meeting}/votes.all.index.xml")
+              Nokogiri::XML(open(path))
+            rescue
+              puts "File not found: #{path}\n\n"
+              next
+            end
+
           @congress = Congress.find_or_create_by_meeting(meeting)
-          doc = Nokogiri::XML(open(gov_track_path("us/#{meeting}/votes.all.index.xml")))
           doc.xpath('votes/vote').each do |vote|
             next unless vote['bill'].present? && bill = fetch_bill(vote.delete('bill').to_s)
             vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts', 'title')
