@@ -24,7 +24,7 @@ class Bill < ActiveRecord::Base
     }).extend(Vote::Support)
   end
 
-  validates_presence_of :bill_type, :congress, :sponsor, :gov_track_id
+  validates_presence_of :bill_type, :congress, :gov_track_id
   validates_uniqueness_of :gov_track_id
   validates_uniqueness_of :opencongress_id, :allow_nil => true
 
