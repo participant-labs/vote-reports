@@ -61,14 +61,12 @@ Fixjour :verify => true do
 
   define_builder(RepresentativeTerm) do |klass, overrides|
     klass.new(
-      :congress => Congress.find_or_create_by_meeting(111),
       :politician => new_politician
     )
   end
 
   define_builder(SenateTerm) do |klass, overrides|
     klass.new(
-      :congress => Congress.find_or_create_by_meeting(111),
       :politician => new_politician
     )
   end
