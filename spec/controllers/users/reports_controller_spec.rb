@@ -18,13 +18,13 @@ describe Users::ReportsController do
   describe "GET show" do
     context "when there is a better id for this report" do
       before do
-        @report = Factory.create(:report, :user => current_user)
-        mock(@report).has_better_id? { true }
+        @report = create_report(:user => current_user)
+        mock.instance_of(Report).has_better_id? { true }
       end
 
       it "should redirect" do
         get :show, :user_id => current_user, :id => @report
-        response.should_be redirect_to(user_report_path(current_user, @report))
+        response.should redirect_to(user_report_path(current_user, @report))
       end
     end
   end
@@ -32,13 +32,13 @@ describe Users::ReportsController do
   describe "GET edit" do
     context "when there is a better id for this report" do
       before do
-        @report = Factory.create(:report, :user => current_user)
-        mock(@report).has_better_id? { true }
+        @report = create_report(:user => current_user)
+        mock.instance_of(Report).has_better_id? { true }
       end
 
       it "should redirect" do
         get :edit, :user_id => current_user, :id => @report
-        response.should_be redirect_to(edit_user_report_path(current_user, @report))
+        response.should redirect_to(edit_user_report_path(current_user, @report))
       end
     end
   end

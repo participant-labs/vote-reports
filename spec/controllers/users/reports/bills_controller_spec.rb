@@ -17,13 +17,13 @@ describe Users::Reports::BillsController do
     context "when there is a better id for this report" do
       before do
         login
-        @report = Factory.create(:report, :user => current_user)
-        mock(@report).has_better_id? { true }
+        @report = create_report(:user => current_user)
+        mock.instance_of(Report).has_better_id? { true }
       end
 
       it "should redirect" do
         get :new, :user_id => current_user, :report_id => @report, :q => 'Smelly Roses'
-        response.should_be redirect_to(new_user_report_bills_path(current_user, @report))
+        response.should redirect_to(new_user_report_bills_path(current_user, @report))
       end
     end
   end
