@@ -10,7 +10,7 @@ class Users::ReportsController < ApplicationController
     @user = User.find(params[:user_id])
     @report = @user.reports.find(params[:id], :scope => @user)
     if @report.has_better_id?
-      redirect_to user_report_bills_path(@user, @report), :status => 301
+      redirect_to user_report_path(@user, @report), :status => 301
     end
   end
 
@@ -18,7 +18,7 @@ class Users::ReportsController < ApplicationController
     @user = User.find(params[:user_id])
     @report = @user.reports.find(params[:id], :scope => @user)
     if @report.has_better_id?
-      redirect_to user_report_bills_path(@user, @report), :status => 301
+      redirect_to edit_user_report_path(@user, @report), :status => 301
     end
   end
 
