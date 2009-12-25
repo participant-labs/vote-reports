@@ -24,9 +24,8 @@ class Bill < ActiveRecord::Base
     }).extend(Vote::Support)
   end
 
-  validates_presence_of :bill_type, :congress, :gov_track_id
-  validates_uniqueness_of :gov_track_id
-  validates_uniqueness_of :opencongress_id, :allow_nil => true
+  validates_presence_of :bill_type, :congress, :gov_track_id, :opencongress_id
+  validates_uniqueness_of :gov_track_id, :opencongress_id
 
   class << self
     def paginated_search(params)
