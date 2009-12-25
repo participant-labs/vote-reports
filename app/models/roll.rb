@@ -3,6 +3,6 @@ class Roll < ActiveRecord::Base
   belongs_to :subject, :polymorphic => true
   belongs_to :congress
 
-  validates_presence_of :subject, :opencongress_id, :congress
-  validates_uniqueness_of :opencongress_id
+  validates_presence_of :subject, :gov_track_id, :congress
+  validates_uniqueness_of :gov_track_id
 end
