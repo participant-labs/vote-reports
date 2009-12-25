@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'nokogiri'
 
-MEETINGS = 101..111
+MEETINGS = 102..111
 
 namespace :gov_track do
   task :download_all do
