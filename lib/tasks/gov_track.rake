@@ -11,6 +11,10 @@ namespace :gov_track do
     end
   end
 
+  task :politicians => :environment do
+    @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
+  end
+
   task :download_all do
     Dir.chdir(Rails.root.join("data/gov_track/us/")) do
       `wget -N http://www.govtrack.us/data/us/people.xml`
@@ -29,14 +33,6 @@ namespace :gov_track do
   end
 
   namespace :votes do
-    def bill_ref(gov_track_bill_id)
-      gov_track_bill_id.to_s.match(/([a-z]+)#{@congress.meeting}-(\d+)/).captures.join
-    end
-    
-    def opencongress_bill_id(gov_track_bill_id)
-      "#{@congress.meeting}-#{bill_ref(gov_track_bill_id)}"
-    end
-
     def fetch_roll(gov_track_roll_id, attrs)
       Roll.find_by_gov_track_id(gov_track_roll_id) || begin
         data = Nokogiri::XML(open(gov_track_path("us/#{@congress.meeting}/rolls/#{gov_track_roll_id}.xml"))).at('roll')
@@ -70,33 +66,6 @@ namespace :gov_track do
       end
     end
 
-    def fetch_bill(gov_track_bill_id)
-      (Bill.find_by_opencongress_id(opencongress_bill_id(gov_track_bill_id)) \
-        || Bill.new(:opencongress_id => opencongress_bill_id(gov_track_bill_id))).tap do |bill|
-        data =
-          begin
-            Nokogiri::XML(open(gov_track_path("us/#{@congress.meeting}/bills/#{bill_ref(gov_track_bill_id)}.xml"))).at('bill')
-          rescue => e
-            puts "#{e.inspect} #{gov_track_path("us/#{@congress.meeting}/bills/#{bill_ref(gov_track_bill_id)}.xml")}"
-            return nil
-          end
-        raise "Something is weird #{@congress.meeting} != #{data['session']}" if @congress.meeting != data['session'].to_i
-        sponsor = data.at('sponsor')['none'].present? ? nil : @politicians.fetch(data.at('sponsor')['id'].to_i)
-        bill.update_attributes!(
-          :gov_track_id => gov_track_bill_id,
-          :congress => @congress,
-          :title => data.css('titles > title[type=official]').inner_text,
-          :bill_type => data['type'].to_s,
-          :bill_number => data['number'].to_s,
-          :updated_at => data['updated'].to_s,
-          :introduced_on => data.at('introduced')['datetime'].to_s,
-          :sponsor => sponsor,
-          :summary => data.at('summary').inner_text.strip,
-          :congress => @congress
-        )
-      end
-    end
-
     def fetch_votes_via_votes_index(votes_index_path)
       puts "Fetching votes via vote index"
       Nokogiri::XML(open(votes_index_path)).xpath('votes/vote').each do |vote|
@@ -122,7 +91,7 @@ namespace :gov_track do
     end
 
     desc "Process Votes"
-    task :unpack => :support do
+    task :unpack => [:support, :politicians] do
       ActiveRecord::Base.transaction do
         @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
         MEETINGS.each do |meeting|
