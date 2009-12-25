@@ -4,6 +4,13 @@ require 'nokogiri'
 MEETINGS = 103..111
 
 namespace :gov_track do
+  task :support => :environment do
+    def gov_track_path(path)
+      local_path = Rails.root.join('data/gov_track', path)
+      File.exist?(local_path) ? local_path : "http://www.govtrack.us/data/#{path}"
+    end
+  end
+
   task :download_all do
     Dir.chdir(Rails.root.join("data/gov_track/us/")) do
       `wget -N http://www.govtrack.us/data/us/people.xml`
@@ -19,11 +26,6 @@ namespace :gov_track do
         `rsync -az govtrack.us::govtrackdata/us/#{meeting}/rolls .`
       end
     end
-  end
-
-  def gov_track_path(path)
-    local_path = Rails.root.join('data/gov_track', path)
-    File.exist?(local_path) ? local_path : "http://www.govtrack.us/data/#{path}"
   end
 
   namespace :votes do
@@ -120,7 +122,7 @@ namespace :gov_track do
     end
 
     desc "Process Votes"
-    task :unpack => :environment do
+    task :unpack => :support do
       ActiveRecord::Base.transaction do
         @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
         MEETINGS.each do |meeting|
@@ -133,60 +135,6 @@ namespace :gov_track do
             fetch_votes_via_directory_traversal
           end
           puts
-        end
-      end
-    end
-  end
-
-  namespace :politicians do
-    desc "Process Politicians"
-    task :unpack => :environment do
-      data_path = ENV['MEETING'] ? "us/#{ENV['MEETING']}/people.xml" : "us/people.xml"
-      doc = Nokogiri::XML(open(gov_track_path(data_path)))
-
-      ActiveRecord::Base.transaction do
-        doc.xpath('people/person').each do |person|
-          politician = Politician.find_or_create_by_gov_track_id(person['id'])
-          politician.update_attributes({
-              'lastname' => 'last_name',
-              'middlename' => 'middle_name',
-              'firstname' => 'first_name',
-              'bioguideid' => 'bioguide_id',
-              'metavidid' => 'metavid_id',
-              'osid' => 'open_secrets_id',
-              'birthday' => 'birthday',
-              'gender' => 'gender',
-              'religion' => 'religion'
-            }.inject({}) do |attrs, (attr, method)|
-              attrs[method] = person[attr] if person[attr].present?
-              attrs
-          end)
-
-          person.xpath('role').each do |role|
-            attrs = {
-              'startdate' => 'started_on',
-              'enddate' => 'ended_on',
-              'url' => 'url',
-              'party' => 'party'
-            }.inject({}) do |attrs, (attr, method)|
-              attrs[method] = role[attr] if role[attr].present?
-              attrs
-            end
-
-            case role['type']
-            when 'rep'
-              politician.representative_terms.find_or_create_by_started_on(role['startdate'].to_date) \
-                .update_attributes(attrs.merge(:district => role['district'], :state => role['state']))
-            when 'sen'
-              politician.senate_terms.find_or_create_by_started_on(role['startdate'].to_date) \
-                .update_attributes(attrs.merge(:senate_class => role['class'], :state => role['state']))
-            when 'prez'
-              politician.presidential_terms.find_or_create_by_started_on(role['startdate'].to_date) \
-                .update_attributes(attrs)
-            else
-              raise role.inspect
-            end
-          end
         end
       end
     end
