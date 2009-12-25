@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091221033056) do
+ActiveRecord::Schema.define(:version => 20091225185704) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id"
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(:version => 20091221033056) do
     t.string   "required"
     t.text     "question"
     t.string   "roll_type"
-    t.string   "opencongress_id"
+    t.string   "gov_track_id"
     t.integer  "subject_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(:version => 20091221033056) do
     t.string   "subject_type"
   end
 
-  add_index "rolls", ["opencongress_id"], :name => "index_rolls_on_opencongress_id", :unique => true
+  add_index "rolls", ["gov_track_id"], :name => "index_rolls_on_opencongress_id", :unique => true
 
   create_table "senate_terms", :force => true do |t|
     t.integer "politician_id"

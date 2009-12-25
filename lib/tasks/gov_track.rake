@@ -35,12 +35,10 @@ namespace :gov_track do
     end
 
     def fetch_roll(gov_track_roll_id, attrs)
-      if roll = Roll.find_by_opencongress_id(gov_track_roll_id)
-        return roll
-      else
+      Roll.find_by_gov_track_id(gov_track_roll_id) || begin
         data = Nokogiri::XML(open(gov_track_path("us/#{@congress.meeting}/rolls/#{gov_track_roll_id}.xml"))).at('roll')
         roll = Roll.create(attrs.symbolize_keys.merge(
-          :opencongress_id => gov_track_roll_id,
+          :gov_track_id => gov_track_roll_id,
           :congress => @congress,
           :where => data['where'].to_s,
           :voted_at => data['datetime'].to_s,
