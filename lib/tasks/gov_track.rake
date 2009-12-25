@@ -94,36 +94,42 @@ namespace :gov_track do
       end
     end
 
+    def fetch_votes_via_votes_index(votes_index_path)
+      puts "Fetching votes via vote index"
+      Nokogiri::XML(open(votes_index_path)).xpath('votes/vote').each do |vote|
+        next unless vote['bill'].present? && bill = fetch_bill(vote.delete('bill').to_s)
+        vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts', 'title')
+        amendment_title = vote.delete('amendment_title').to_s
+        vote[:subject] =
+          if (amendment_id = vote.delete('amendment').to_s).present?
+            bill.amendments.first(:conditions => {:gov_track_id => amendment_id}) \
+              || bill.amendments.build(:gov_track_id => amendment_id, :title => amendment_title)
+          else
+            bill
+          end
+        fetch_roll(vote.delete('id').to_s, vote)
+        $stdout.print "."
+        $stdout.flush
+      end
+    end
+
+    def fetch_votes_via_directory_traversal
+      puts "Fetching votes via directory traversal"
+      puts "Not implemented"
+    end
+
     desc "Process Votes"
     task :unpack => :environment do
       ActiveRecord::Base.transaction do
         @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
         MEETINGS.each do |meeting|
           puts "Meeting #{meeting}"
-          doc =
-            begin
-              path = gov_track_path("us/#{meeting}/votes.all.index.xml")
-              Nokogiri::XML(open(path))
-            rescue
-              puts "File not found: #{path}\n\n"
-              next
-            end
-
           @congress = Congress.find_or_create_by_meeting(meeting)
-          doc.xpath('votes/vote').each do |vote|
-            next unless vote['bill'].present? && bill = fetch_bill(vote.delete('bill').to_s)
-            vote = vote.attributes.except('roll', 'date', 'bill_title', 'counts', 'title')
-            amendment_title = vote.delete('amendment_title').to_s
-            vote[:subject] =
-              if (amendment_id = vote.delete('amendment').to_s).present?
-                bill.amendments.first(:conditions => {:gov_track_id => amendment_id}) \
-                  || bill.amendments.build(:gov_track_id => amendment_id, :title => amendment_title)
-              else
-                bill
-              end
-            fetch_roll(vote.delete('id').to_s, vote)
-            $stdout.print "."
-            $stdout.flush
+          votes_index_path = gov_track_path("us/#{meeting}/votes.all.index.xml")
+          if File.exist?(votes_index_path)
+            fetch_votes_via_votes_index(votes_index_path)
+          else
+            fetch_votes_via_directory_traversal
           end
           puts
         end
