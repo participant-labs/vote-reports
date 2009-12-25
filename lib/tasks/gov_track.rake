@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'nokogiri'
 
-MEETINGS = 102..111
+MEETINGS = 103..111
 
 namespace :gov_track do
   task :download_all do
@@ -15,6 +15,7 @@ namespace :gov_track do
         `wget -N http://www.govtrack.us/data/us/#{meeting}/votes.all.index.xml`
         `wget -N http://www.govtrack.us/data/us/#{meeting}/people.xml`
         `rsync -az govtrack.us::govtrackdata/us/#{meeting}/bills .`
+        `rsync -az govtrack.us::govtrackdata/us/#{meeting}/bills.amdt .`
         `rsync -az govtrack.us::govtrackdata/us/#{meeting}/rolls .`
       end
     end
