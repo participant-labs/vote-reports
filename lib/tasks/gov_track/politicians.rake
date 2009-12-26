@@ -48,6 +48,9 @@ namespace :gov_track do
               raise role.inspect
             end
           end
+
+          $stdout.print "."
+          $stdout.flush
         end
       end
     end
