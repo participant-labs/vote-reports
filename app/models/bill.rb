@@ -26,6 +26,8 @@ class Bill < ActiveRecord::Base
 
   validates_presence_of :bill_type, :congress, :gov_track_id, :opencongress_id
   validates_uniqueness_of :gov_track_id, :opencongress_id
+  validates_format_of :gov_track_id, :with => /[a-z]+\d\d\d-\d+/
+  validates_format_of :opencongress_id, :with => /\d\d\d-[a-z]+\d+/
 
   class << self
     def paginated_search(params)
