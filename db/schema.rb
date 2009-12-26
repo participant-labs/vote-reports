@@ -9,17 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091225233538) do
+ActiveRecord::Schema.define(:version => 20091226015752) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id"
-    t.string   "gov_track_id"
-    t.text     "title"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "number"
+    t.string   "chamber"
+    t.date     "offered_on"
+    t.integer  "sponsor_id"
+    t.text     "purpose"
+    t.integer  "sequence"
+    t.integer  "congress_id"
   end
-
-  add_index "amendments", ["gov_track_id"], :name => "index_amendments_on_gov_track_id", :unique => true
 
   create_table "bill_criteria", :force => true do |t|
     t.integer  "bill_id"
