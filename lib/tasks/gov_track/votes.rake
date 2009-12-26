@@ -17,10 +17,17 @@ namespace :gov_track do
                   subject =
                     if bill = data.at('bill')
                       bill = Bill.find_by_gov_track_id("#{bill['type']}#{bill['session']}-#{bill['number']}")
+                      if bill.nil?
+                        puts "#{data.at('bill')} not found"
+                        next
+                      end
                       if amendment = data.at('amendment')
                         p amendment['ref'].to_s if amendment['ref'].to_s != 'bill-serial'
                         bill.amendments.find_by_sequence(amendment['number']).tap do |amendment|
-                          raise "No amendment found for #{data}" if amendment.nil?
+                          if amendment.nil?
+                            puts "#{data.at('amendment')} for #{data.at('bill')} not found"
+                            next
+                          end
                         end
                       else
                         bill
