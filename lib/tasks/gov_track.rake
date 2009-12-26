@@ -9,6 +9,20 @@ namespace :gov_track do
       local_path = Rails.root.join('data/gov_track', path)
       File.exist?(local_path) ? local_path : "http://www.govtrack.us/data/#{path}"
     end
+
+    def meetings(&block)
+      MEETINGS.each do |meeting|
+        @congress = Congress.find_or_create_by_meeting(meeting)
+        Sunspot.batch do
+          ActiveRecord::Base.transaction do
+            Dir.chdir(Rails.root.join("data/gov_track/us/#{meeting}")) do
+              yield meeting
+            end
+          end
+        end
+      end
+    end
+
   end
 
   task :politicians => :environment do
