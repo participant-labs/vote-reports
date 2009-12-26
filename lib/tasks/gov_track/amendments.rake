@@ -39,7 +39,7 @@ namespace :gov_track do
                   :purpose => data.at('purpose').inner_text
                 )
 
-                $stdout.print "."
+                $stdout.print(sequence.nil? ? 'N' : ".")
                 $stdout.flush
               end
               puts
