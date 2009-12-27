@@ -11,7 +11,7 @@ namespace :gov_track do
     end
 
     def meetings(&block)
-      MEETINGS.each do |meeting|
+      (ENV['MEETING'].present? ? [ENV['MEETING'].to_i] : MEETINGS).each do |meeting|
         @congress = Congress.find_or_create_by_meeting(meeting)
         Sunspot.batch do
           ActiveRecord::Base.transaction do
