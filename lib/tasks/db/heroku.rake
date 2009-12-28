@@ -11,17 +11,10 @@ namespace :db do
     end
 
     task :reset do
-      unless ENV['VERSION'].present?
-        raise "VERSION argument required: supply the version of the DB that heroku is running"
-      end
       Rake::Task['db:drop'].invoke
       `sudo -u postgres createdb vote_reports_development`
 
-      Rake::Task['db:migrate'].invoke
       Rake::Task['db:heroku:pull'].invoke
-
-      ENV.delete('VERSION')
-      Rake::Task['db:migrate'].reenable
       Rake::Task['db:migrate'].invoke
     end
   end

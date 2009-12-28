@@ -139,9 +139,9 @@ ActiveRecord::Schema.define(:version => 20091226015752) do
     t.string   "roll_type"
     t.string   "gov_track_id"
     t.integer  "subject_id"
+    t.integer  "congress_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "congress_id"
     t.string   "subject_type"
   end
 
