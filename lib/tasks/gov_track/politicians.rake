@@ -52,6 +52,7 @@ namespace :gov_track do
           $stdout.print "."
           $stdout.flush
         end
+        puts
       end
     end
   end
