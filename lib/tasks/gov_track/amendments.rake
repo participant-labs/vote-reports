@@ -3,7 +3,7 @@ namespace :gov_track do
     task :unpack => [:'gov_track:support', :'gov_track:politicians'] do
       meetings do |meeting|
         puts "Fetching Amendments for Meeting #{meeting}"
-        Dir['bills.amdt/*'].each do |amendment_path|
+        Dir['bills.amdt/*.xml'].each do |amendment_path|
           chamber, number = amendment_path.match(%r{bills.amdt/([a-z]+)(\d+)\.xml}).captures
 
           data =
