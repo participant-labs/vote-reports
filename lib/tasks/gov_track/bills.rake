@@ -12,7 +12,7 @@ namespace :gov_track do
         :title,
         :bill_type,
         :bill_number,
-        :updated_at,
+        :gov_track_updated_at,
         :introduced_on,
         :sponsor_id,
         :summary
