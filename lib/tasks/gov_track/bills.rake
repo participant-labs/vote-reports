@@ -4,7 +4,6 @@ namespace :gov_track do
       require 'ar-extensions'
       require 'ar-extensions/import/postgresql'
 
-      existing_bills = Bill.all.index_by {|b| b.opencongress_id }
       columns = [
         :opencongress_id,
         :gov_track_id,
@@ -19,6 +18,8 @@ namespace :gov_track do
       ]
       meetings do |meeting|
         puts "Fetching Bills for Meeting #{meeting}"
+
+        existing_bills = Bill.all(:conditions => {:congress_id => @congress}).index_by {|b| b.opencongress_id }
         new_bills = []
         Dir['bills/*'].each do |bill_path|
           type, number = bill_path.match(%r{bills/([a-z]+)(\d+)\.xml}).captures
@@ -55,7 +56,8 @@ namespace :gov_track do
           $stdout.print "."
           $stdout.flush
         end
-        Bill.import columns, new_bills
+        puts "\nFound #{new_bills.size} new bills"
+        Bill.import_without_validations_or_callbacks columns, new_bills
         puts
       end
     end
