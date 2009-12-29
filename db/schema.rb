@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091228023004) do
+ActiveRecord::Schema.define(:version => 20091229174518) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id"
@@ -192,26 +192,5 @@ ActiveRecord::Schema.define(:version => 20091228023004) do
   end
 
   add_index "votes", ["roll_id", "politician_id"], :name => "index_votes_on_roll_id_and_politician_id", :unique => true
-
-  add_foreign_key "amendments", "bills", :name => "amendments_bill_id_fk", :dependent => :delete
-
-  add_foreign_key "bill_criteria", "bills", :name => "bill_criteria_bill_id_fk", :dependent => :delete
-  add_foreign_key "bill_criteria", "reports", :name => "bill_criteria_report_id_fk", :dependent => :delete
-
-  add_foreign_key "bills", "congresses", :name => "bills_congress_id_fk", :dependent => :delete
-  add_foreign_key "bills", "politicians", :name => "bills_sponsor_id_fk", :column => "sponsor_id", :dependent => :nullify
-
-  add_foreign_key "presidential_terms", "politicians", :name => "presidential_terms_politician_id_fk", :dependent => :delete
-
-  add_foreign_key "reports", "users", :name => "reports_user_id_fk", :dependent => :delete
-
-  add_foreign_key "representative_terms", "politicians", :name => "representative_terms_politician_id_fk", :dependent => :delete
-
-  add_foreign_key "rolls", "congresses", :name => "rolls_congress_id_fk", :dependent => :delete
-
-  add_foreign_key "senate_terms", "politicians", :name => "senate_terms_politician_id_fk", :dependent => :delete
-
-  add_foreign_key "votes", "politicians", :name => "votes_politician_id_fk", :dependent => :delete
-  add_foreign_key "votes", "rolls", :name => "votes_roll_id_fk", :dependent => :delete
 
 end
