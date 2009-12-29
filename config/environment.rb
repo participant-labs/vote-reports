@@ -33,7 +33,6 @@ Rails::Initializer.run do |config|
   config.gem 'gravtastic', :version => '>= 2.1.0'
   config.gem 'nokogiri'
   config.gem 'fastercsv'
-  config.gem "matthuhiggins-foreigner", :lib => "foreigner", :source => 'http://gemcutter.org'
   config.gem 'sunspot', :lib => 'sunspot'
   config.gem 'sunspot_rails', :lib => 'sunspot/rails'
   config.gem 'will_paginate'
