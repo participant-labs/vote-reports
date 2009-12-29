@@ -23,7 +23,7 @@ class AddForeignKeyConstraintsWhereAppropriate < ActiveRecord::Migration
     remove_foreign_key(:bills, :column => 'sponsor_id')
     remove_foreign_key(:reports, :column => 'user_id')
     remove_foreign_key(:representative_terms, :column => 'politician_id')
-    remove_foreign_key(:representative_terms, :column => 'congresse_id')
+    remove_foreign_key(:representative_terms, :column => 'congress_id')
     remove_foreign_key(:senate_terms, :column => 'politician_id')
     remove_foreign_key(:senate_terms, :column => 'congress_id')
     remove_foreign_key(:rolls, :column => 'congress_id')
