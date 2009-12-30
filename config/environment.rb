@@ -36,6 +36,7 @@ Rails::Initializer.run do |config|
   config.gem 'sunspot', :lib => 'sunspot'
   config.gem 'sunspot_rails', :lib => 'sunspot/rails'
   config.gem 'will_paginate'
+  config.gem 'sexy_pg_constraints'
 
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
