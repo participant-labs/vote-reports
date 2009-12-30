@@ -1,6 +1,4 @@
 class Politician < ActiveRecord::Base
-  strip_attributes!
-
   include Politician::GovTrack
   include Politician::SunlightLabs
 
