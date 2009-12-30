@@ -18,8 +18,8 @@ class BillCriterion < ActiveRecord::Base
     self[:support] = true if value == '1'
   end
 
-  validates_presence_of :bill, :report
+  validates_presence_of :bill, :report, :support
   validates_uniqueness_of :bill_id, :scope => "report_id"
-  
+
   accepts_nested_attributes_for :bill
 end
