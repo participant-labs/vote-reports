@@ -10,7 +10,6 @@ class CreatePresidentialTerms < ActiveRecord::Migration
 
         t.timestamps
       end
-      add_foreign_key(:presidential_terms, :politicians, :dependent => :delete)
     end
   end
 
