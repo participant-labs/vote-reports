@@ -11,11 +11,11 @@ class BillCriterion < ActiveRecord::Base
   end
 
   def oppose=(value)
-    self[:support] = false if value == '1'
+    self[:support] = false if value == '1' || value == true
   end
   
   def support=(value)
-    self[:support] = true if value == '1'
+    self[:support] = true if value == '1' || value == true
   end
 
   validates_presence_of :bill, :report, :support
