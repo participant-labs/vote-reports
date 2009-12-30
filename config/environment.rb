@@ -18,15 +18,8 @@ Rails::Initializer.run do |config|
 
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
-  config.gem 'opencongress-ruby', :lib => 'opencongress_ruby'
   config.gem 'json'
-  config.gem 'cachy', :version => '>=0.1.3'
-  config.gem 'votesmart'
-  config.gem 'sunlight'
-
-  config.gem 'crack'
   config.gem 'friendly_id'
-  config.gem 'httparty'
   config.gem 'ym4r'
   config.gem "authlogic", :version => '>=2.1.3'
   config.gem 'bluecloth', :version => '>=2.0.5'
