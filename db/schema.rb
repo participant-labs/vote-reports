@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091230221720) do
+ActiveRecord::Schema.define(:version => 20091230223524) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",     :null => false
@@ -104,9 +104,23 @@ ActiveRecord::Schema.define(:version => 20091230221720) do
   end
 
   add_index "politicians", ["bioguide_id"], :name => "index_politicians_on_bioguide_id", :unique => true
+  add_index "politicians", ["bioguide_id"], :name => "politicians_bioguide_id_unique", :unique => true
+  add_index "politicians", ["congresspedia_url"], :name => "politicians_congresspedia_url_unique", :unique => true
+  add_index "politicians", ["crp_id"], :name => "politicians_crp_id_unique", :unique => true
+  add_index "politicians", ["email"], :name => "politicians_email_unique", :unique => true
+  add_index "politicians", ["eventful_id"], :name => "politicians_eventful_id_unique", :unique => true
   add_index "politicians", ["fec_id"], :name => "index_politicians_on_fec_id", :unique => true
+  add_index "politicians", ["fec_id"], :name => "politicians_fec_id_unique", :unique => true
   add_index "politicians", ["gov_track_id"], :name => "index_politicians_on_gov_track_id", :unique => true
+  add_index "politicians", ["gov_track_id"], :name => "politicians_gov_track_id_unique", :unique => true
+  add_index "politicians", ["metavid_id"], :name => "politicians_metavid_id_unique", :unique => true
+  add_index "politicians", ["open_secrets_id"], :name => "politicians_open_secrets_id_unique", :unique => true
+  add_index "politicians", ["phone"], :name => "politicians_phone_unique", :unique => true
+  add_index "politicians", ["twitter_id"], :name => "politicians_twitter_id_unique", :unique => true
   add_index "politicians", ["vote_smart_id"], :name => "index_politicians_on_vote_smart_id", :unique => true
+  add_index "politicians", ["vote_smart_id"], :name => "politicians_vote_smart_id_unique", :unique => true
+  add_index "politicians", ["website"], :name => "politicians_website_unique", :unique => true
+  add_index "politicians", ["youtube_url"], :name => "politicians_youtube_url_unique", :unique => true
 
   create_table "presidential_terms", :force => true do |t|
     t.integer  "politician_id"
