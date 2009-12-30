@@ -4,3 +4,6 @@ Welcome to VoteReports
 To inform. To promote truth. To combat political apathy.
 
 Support non-politician sponsors for amendments
+Bill.find_by_gov_track_id('s109-2167').congress
+Bill#bill_number not-null validation
+Extract State and Party classes for associating terms and such
