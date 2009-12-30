@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091230001659) do
+ActiveRecord::Schema.define(:version => 20091230005000) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",     :null => false
@@ -30,13 +30,14 @@ ActiveRecord::Schema.define(:version => 20091230001659) do
   add_index "amendments", ["sequence", "bill_id"], :name => "amendments_sequence_bill_id_unique", :unique => true
 
   create_table "bill_criteria", :force => true do |t|
-    t.integer  "bill_id"
-    t.integer  "report_id"
-    t.boolean  "support"
+    t.integer  "bill_id",    :null => false
+    t.integer  "report_id",  :null => false
+    t.boolean  "support",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "bill_criteria", ["bill_id", "report_id"], :name => "bill_criteria_bill_id_report_id_unique", :unique => true
   add_index "bill_criteria", ["bill_id", "report_id"], :name => "index_bill_criteria_on_bill_id_and_report_id", :unique => true
 
   create_table "bills", :force => true do |t|
