@@ -53,6 +53,7 @@ Fixjour :verify => true do
       :opencongress_id => opencongress_id,
       :gov_track_id => gov_track_id,
       :bill_type => 'hr',
+      :bill_number => bill_number,
       :sponsor => new_politician,
       :congress => Congress.find_or_create_by_meeting(111)
     )
