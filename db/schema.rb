@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091230005000) do
+ActiveRecord::Schema.define(:version => 20091230221720) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",     :null => false
@@ -42,25 +42,30 @@ ActiveRecord::Schema.define(:version => 20091230005000) do
 
   create_table "bills", :force => true do |t|
     t.text     "title"
-    t.string   "bill_type"
-    t.string   "opencongress_id"
+    t.string   "bill_type",            :null => false
+    t.string   "opencongress_id",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "bill_number"
-    t.string   "gov_track_id"
-    t.integer  "congress_id"
+    t.string   "gov_track_id",         :null => false
+    t.integer  "congress_id",          :null => false
     t.integer  "sponsor_id"
     t.date     "introduced_on"
     t.text     "summary"
     t.datetime "gov_track_updated_at"
   end
 
+  add_index "bills", ["bill_type", "bill_number", "congress_id"], :name => "bills_bill_type_bill_number_congress_id_unique", :unique => true
+  add_index "bills", ["gov_track_id"], :name => "bills_gov_track_id_unique", :unique => true
   add_index "bills", ["gov_track_id"], :name => "index_bills_on_gov_track_id", :unique => true
+  add_index "bills", ["opencongress_id"], :name => "bills_opencongress_id_unique", :unique => true
   add_index "bills", ["opencongress_id"], :name => "index_bills_on_opencongress_id", :unique => true
 
   create_table "congresses", :force => true do |t|
     t.integer "meeting"
   end
+
+  add_index "congresses", ["meeting"], :name => "congresses_meeting_unique", :unique => true
 
   create_table "politicians", :force => true do |t|
     t.string   "first_name"
