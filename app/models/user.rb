@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
 
   has_many :reports
 
-  validates_uniqueness_of :username
+  validates_presence_of :username, :email
+  validates_uniqueness_of :username, :email
 
   def is_admin?
     false
