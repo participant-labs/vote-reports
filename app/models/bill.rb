@@ -41,12 +41,8 @@ class Bill < ActiveRecord::Base
     end
   end
 
-  def bill_type
-    self['bill_type'].gsub('.',' ').gsub('H Res','HR').gsub('H R','HR')
-  end
-
   def title_with_number
-    "#{bill_type}: #{title}"
+    "#{bill_type.upcase} #{bill_number} (#{introduced_on.year}): #{title}"
   end
 
   def opencongress_url
