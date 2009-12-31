@@ -2,6 +2,15 @@
 
 <%= link_to 'View on OpenCongress', @bill.opencongress_url %>
 
+<p>Introduced on <%= @bill.introduced_on.to_s(:long_ordinal) %>
+<%- if @bill.sponsor -%>
+  by <%= render @bill.sponsor %>
+<%- end -%>
+</p>
+
+<h3>Summary</h3>
+<p><%= @bill.summary %></p>
+
 <h3>Supporting Politicians</h3>
 <%- if (supporting = @bill.politicians.supporting).present? -%>
 <ul>
