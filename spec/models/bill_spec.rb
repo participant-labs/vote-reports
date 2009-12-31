@@ -57,6 +57,13 @@ describe Bill do
           }.should_not raise_error
         end
       end
+      context "with an equivalent value" do
+        it "should do nothing" do
+          proc {
+            @bill.update_attributes(:bill_number => @bill.bill_number.to_s)
+          }.should_not raise_error
+        end
+      end
     end
     context "when updating bill_type" do
       context "with a new value" do

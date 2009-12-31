@@ -74,7 +74,7 @@ class Bill < ActiveRecord::Base
   end
 
   def bill_number=(bill_number)
-    if !new_record? && self.bill_number && bill_number != self.bill_number
+    if !new_record? && self.bill_number && bill_number.to_i != self.bill_number
       raise ActiveRecord::ReadOnlyRecord, "Can't change bill number"
     end
     self[:bill_number] = bill_number
