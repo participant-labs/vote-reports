@@ -44,7 +44,9 @@ Fixjour :verify => true do
   end
 
   define_builder(Congress) do |klass, overrides|
-    klass.new(:meeting => rand(200))
+    meeting = rand(200)
+    meeting = rand(200) while Congress.find_by_meeting(meeting)
+    klass.new(:meeting => meeting)
   end
 
   define_builder(Bill) do |klass, overrides|
