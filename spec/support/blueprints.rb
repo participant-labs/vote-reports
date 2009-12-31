@@ -40,11 +40,11 @@ Fixjour :verify => true do
       :number => rand(1000),
       :offered_on => "12/13/2009",
       :chamber => ['h', 's'].rand,
-      :congress => Congress.find_or_create_by_meeting(109))
+      :congress => new_congress)
   end
 
   define_builder(Congress) do |klass, overrides|
-    klass.new(:meeting => 111)
+    klass.new(:meeting => rand(200))
   end
 
   define_builder(Bill) do |klass, overrides|
@@ -55,7 +55,7 @@ Fixjour :verify => true do
       :bill_type => 'hr',
       :bill_number => bill_number,
       :sponsor => new_politician,
-      :congress => Congress.find_or_create_by_meeting(111)
+      :congress => Congress.find_or_create_by_meeting(rand(200))
     )
   end
 
@@ -81,7 +81,7 @@ Fixjour :verify => true do
 
   define_builder(Roll) do |klass, overrides|
     klass.new(
-      :congress => Congress.find_or_create_by_meeting(111),
+      :congress => Congress.find_or_create_by_meeting(rand(200)),
       :subject => new_bill,
       :gov_track_id => Forgery(:basic).text
     )
@@ -89,13 +89,17 @@ Fixjour :verify => true do
 
   define_builder(RepresentativeTerm) do |klass, overrides|
     klass.new(
-      :politician => new_politician
+      :politician => new_politician,
+      :state => UsState::US_STATES.rand.last,
+      :district => rand(100)
     )
   end
 
   define_builder(SenateTerm) do |klass, overrides|
     klass.new(
-      :politician => new_politician
+      :politician => new_politician,
+      :senate_class => [1, 2, 3].rand,
+      :state => UsState::US_STATES.rand.last
     )
   end
 end
