@@ -38,13 +38,13 @@ namespace :gov_track do
           values = [
             opencongress_bill_id,
             gov_track_bill_id,
-            @congress,
+            @congress.id,
             data.css('titles > title[type=official]').inner_text,
             data['type'].to_s,
             data['number'].to_s,
             data['updated'].to_s,
             data.at('introduced')['datetime'].to_s,
-            sponsor,
+            sponsor && sponsor.id,
             data.at('summary').inner_text.strip
           ]
           if bill = existing_bills[opencongress_bill_id]
