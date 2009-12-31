@@ -32,6 +32,13 @@ describe Politician do
         @politician.bills.opposed.should =~ [@opposed.subject]
       end
     end
+
+    it "should return distinct bills" do
+      another_supported = create_roll(:subject => @supported.subject)
+      create_vote(:politician => @politician, :roll => another_supported, :vote => '+')
+      @politician.rolls.supported.should =~ [@supported, another_supported]
+      @politician.bills.supported.should =~ [@supported.subject]
+    end
   end
 
   describe "#headshot" do
