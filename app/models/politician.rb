@@ -28,7 +28,7 @@ class Politician < ActiveRecord::Base
   has_many :votes
   has_many :rolls, :through => :votes, :extend => Vote::Support
   def bills
-    Bill.scoped(:joins => {:rolls => :votes}, :conditions => {:'votes.politician_id' => self}).extend(Vote::Support)
+    Bill.scoped(:select => "DISTINCT bills.*", :joins => {:rolls => :votes}, :conditions => {:'votes.politician_id' => self}).extend(Vote::Support)
   end
 
   class << self
