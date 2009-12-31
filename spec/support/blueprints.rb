@@ -52,6 +52,7 @@ Fixjour :verify => true do
       :title => Forgery(:basic).text,
       :opencongress_id => opencongress_id,
       :gov_track_id => gov_track_id,
+      :introduced_on => '12/13/2009',
       :bill_type => 'hr',
       :bill_number => bill_number,
       :sponsor => new_politician,

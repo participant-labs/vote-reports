@@ -22,6 +22,12 @@ describe Bill do
     end
   end
 
+  describe "Validations" do
+    it "should validate presence of introduced_on" do
+      new_bill(:introduced_on => nil).should_not be_valid
+    end
+  end
+
   describe "Updates" do
     before do
       @bill = create_bill(:bill_type => 'h')

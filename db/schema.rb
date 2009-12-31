@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091230231752) do
+ActiveRecord::Schema.define(:version => 20091231185741) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",     :null => false
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20091230231752) do
     t.string   "gov_track_id",         :null => false
     t.integer  "congress_id",          :null => false
     t.integer  "sponsor_id"
-    t.date     "introduced_on"
+    t.date     "introduced_on",        :null => false
     t.text     "summary"
     t.datetime "gov_track_updated_at"
   end
