@@ -13,4 +13,17 @@ describe PoliticiansController do
     end
   end
 
+  describe "GET show" do
+    context "when there is a better id for this report" do
+      before do
+        @politician = create_politician
+        mock.instance_of(Report).has_better_id? { true }
+      end
+
+      it "should redirect" do
+        get :show, :id => @politician
+        response.should redirect_to(politician_path(@politician))
+      end
+    end
+  end
 end
