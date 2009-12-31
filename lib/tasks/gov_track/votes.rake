@@ -18,12 +18,16 @@ namespace :gov_track do
                   next
                 end
                 if amendment = data.at('amendment')
-                  p amendment['ref'].to_s if amendment['ref'].to_s != 'bill-serial'
-                  bill.amendments.find_by_sequence(amendment['number']).tap do |amendment|
-                    if amendment.nil?
-                      puts "#{data.at('amendment')} for #{data.at('bill')} not found"
-                      next
-                    end
+                  case amendment['ref'].to_s
+                  when 'bill-serial'
+                    bill.amendments.find_by_sequence(amendment['number'])
+                  when 'regular'
+                    chamber, number = amendment['number'].match(/(.*?)(\d+)/).captures
+                    Amendment.find_by_congress_id_and_chamber_and_number(@congress.id, chamber, number.to_i)
+                  else
+                    raise amendment.inspect
+                  end.tap do |amendment|
+                    puts "#{data.at('amendment')} for #{data.at('bill')} not found" if amendment.nil?
                   end
                 else
                   bill
@@ -63,7 +67,7 @@ namespace :gov_track do
           $stdout.print "."
           $stdout.flush
         end
-        puts
+        puts "\n"
       end
     end
 
