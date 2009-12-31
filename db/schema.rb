@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(:version => 20091230231752) do
     t.integer  "congress_id", :null => false
   end
 
-  add_index "amendments", ["number", "bill_id"], :name => "amendments_number_bill_id_unique", :unique => true
   add_index "amendments", ["number", "chamber", "congress_id"], :name => "amendments_number_chamber_congress_id_unique", :unique => true
   add_index "amendments", ["sequence", "bill_id"], :name => "amendments_sequence_bill_id_unique", :unique => true
 
