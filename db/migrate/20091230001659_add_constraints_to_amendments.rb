@@ -10,7 +10,6 @@ class AddConstraintsToAmendments < ActiveRecord::Migration
       t.offered_on :not_null => true
 
       t[:number, :chamber, :congress_id].all :unique => true
-      t[:number, :bill_id].all :unique => true
       t[:sequence, :bill_id].all :unique => true
     end
   end
@@ -26,7 +25,6 @@ class AddConstraintsToAmendments < ActiveRecord::Migration
       t.offered_on :not_null
 
       t[:number, :chamber, :congress_id].all :unique
-      t[:number, :bill_id].all :unique
       t[:sequence, :bill_id].all :unique
     end
   end
