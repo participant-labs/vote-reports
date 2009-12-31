@@ -11,6 +11,15 @@
 <h3>Summary</h3>
 <p><%= @bill.summary %></p>
 
+<%- if (amendments = @bill.amendments).present? -%>
+<h3>Amendments</h3>
+<ul>
+  <% amendments.each do |amendment|  %>
+    <li><%= render amendment %></li>
+  <% end %>
+</ul>
+<%- end -%>
+
 <h3>Supporting Politicians</h3>
 <%- if (supporting = @bill.politicians.supporting).present? -%>
 <ul>
