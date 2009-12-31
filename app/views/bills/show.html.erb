@@ -20,6 +20,15 @@
 </ul>
 <%- end -%>
 
+<%- if (rolls = @bill.rolls).present? -%>
+<h3>Votes</h3>
+<ul>
+  <% rolls.each do |roll|  %>
+    <li><%= render roll %></li>
+  <% end %>
+</ul>
+<%- end -%>
+
 <h3>Supporting Politicians</h3>
 <%- if (supporting = @bill.politicians.supporting).present? -%>
 <ul>
