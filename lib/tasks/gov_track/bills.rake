@@ -60,6 +60,7 @@ namespace :gov_track do
         Bill.import_without_validations_or_callbacks columns, new_bills
         puts
       end
+      Bill.reindex
     end
   end
 end
