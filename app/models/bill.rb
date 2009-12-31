@@ -1,5 +1,6 @@
 class Bill < ActiveRecord::Base
   PER_PAGE = 30
+  VALID_BILL_TYPES = %w[h hr s sj sc sr].freeze
 
   named_scope :recent, :limit => 25, :order => 'created_at DESC'
 
@@ -64,8 +65,10 @@ class Bill < ActiveRecord::Base
   end
 
   def bill_type=(bill_type)
-    if !new_record? && self.bill_type && bill_type != self.bill_type
-      raise ActiveRecord::ReadOnlyRecord, "Can't change bill type"
+    if !VALID_BILL_TYPES.include?(self.bill_type)
+      puts "bill type #{self.bill_type} -> #{bill_type}"
+    elsif !new_record? && bill_type != self.bill_type
+      raise ActiveRecord::ReadOnlyRecord, "Can't change bill type from #{self.bill_type} to #{bill_type}"
     end
     self[:bill_type] = bill_type
   end
