@@ -41,10 +41,6 @@ class Bill < ActiveRecord::Base
     end
   end
 
-  def title_with_number
-    "#{bill_type.upcase} #{bill_number} (#{introduced_on.year}): #{title}"
-  end
-
   def opencongress_url
     "http://www.opencongress.org/bill/#{opencongress_id}/show"
   end
