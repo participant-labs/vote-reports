@@ -1,15 +1,19 @@
 <h2><%= bill_title(@bill) %></h2>
 
-<%= link_to 'View on OpenCongress', @bill.opencongress_url %>
+<ul>
+  <li><%= link_to 'View on OpenCongress', @bill.opencongress_url %></li>
+  <li><%= link_to 'View Summary', '#', :'data-dialog' => '#bill_summary', :'data-dialog-title' => bill_title(@bill) %></li>
+</ul>
+
+<div id="bill_summary" class="hidden">
+  <%= to_html(@bill.summary) %>
+</div>
 
 <p>Introduced on <%= @bill.introduced_on.to_s(:long_ordinal) %>
 <%- if @bill.sponsor -%>
   by <%= render @bill.sponsor %>
 <%- end -%>
 </p>
-
-<h3>Summary</h3>
-<p><%= @bill.summary %></p>
 
 <%- if (amendments = @bill.amendments).present? -%>
 <h3>Amendments</h3>

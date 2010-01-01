@@ -13,6 +13,12 @@ module ApplicationHelper
     @page_title = page_title.to_s
   end
 
+  def to_html(text, html_attrs = {})
+    content_tag :div, text.split("\n").map {|paragraph|
+      content_tag :p, paragraph
+    }.join, html_attrs
+  end
+
   def flash_helper
     [:notice, :warning, :message].map { |f| content_tag(:div, flash[f], :class => [f, " flash"]) if flash[f] }
   end
