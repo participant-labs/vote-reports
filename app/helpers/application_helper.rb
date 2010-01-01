@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def to_html(text, html_attrs = {})
-    content_tag :div, text.split("\n").map {|paragraph|
+    content_tag :div, text.to_s.split("\n").map {|paragraph|
       content_tag :p, paragraph
     }.join, html_attrs
   end
