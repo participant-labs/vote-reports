@@ -49,9 +49,17 @@ Fixjour :verify => true do
     klass.new(:meeting => meeting)
   end
 
-  define_builder(Bill) do |klass, overrides|
+  define_builder(BillTitle) do |klass, overrides|
     klass.new(
       :title => Forgery(:basic).text,
+      :title_type => 'official',
+      :as => Forgery(:basic).text,
+      :bill => new_bill
+    )
+  end
+
+  define_builder(Bill) do |klass, overrides|
+    klass.new(
       :opencongress_id => opencongress_id,
       :gov_track_id => gov_track_id,
       :introduced_on => '12/13/2009',

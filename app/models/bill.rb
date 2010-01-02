@@ -50,7 +50,7 @@ class Bill < ActiveRecord::Base
   end
 
   def title(type = :official)
-    bill_titles.find(:first, :conditions => {:title_type => type})
+    bill_titles.find(:first, :conditions => {:title_type => type.to_s})
   end
 
   def opencongress_url
