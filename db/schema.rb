@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100102205825) do
+ActiveRecord::Schema.define(:version => 20100102211203) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",     :null => false
@@ -209,6 +209,10 @@ ActiveRecord::Schema.define(:version => 20100102205825) do
 
   add_index "slugs", ["name", "scope", "sequence", "sluggable_type"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
+
+  create_table "terms", :force => true do |t|
+    t.string "name", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",             :null => false

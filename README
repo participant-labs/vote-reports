@@ -9,3 +9,4 @@ Bill#bill_number not-null validation
 Extract State and Party classes for associating terms and such
 Amendment: t[:number, :bill_id].all :unique => true
 Whitelist for BillTitle#as #title_type
+script/generate rspec_model BillRelation from_id:integer to_id:integer relation:string
