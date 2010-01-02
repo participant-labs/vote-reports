@@ -14,6 +14,7 @@ class Bill < ActiveRecord::Base
   belongs_to :congress
   belongs_to :sponsor, :class_name => 'Politician'
 
+  has_many :bill_titles
   has_many :bill_criteria
   has_many :amendments, :dependent => :destroy
   has_many :rolls, :as => :subject, :dependent => :destroy
@@ -40,6 +41,10 @@ class Bill < ActiveRecord::Base
         paginate :page => params[:page], :per_page => PER_PAGE
       end
     end
+  end
+
+  def title(type = :official)
+    bill_titles.find(:first, :conditions => {:title_type => type})
   end
 
   def opencongress_url
