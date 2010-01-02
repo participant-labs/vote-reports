@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100102211628) do
+ActiveRecord::Schema.define(:version => 20100102215847) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",     :null => false
@@ -89,6 +89,15 @@ ActiveRecord::Schema.define(:version => 20100102211628) do
     t.datetime "updated_at"
   end
 
+  create_table "parties", :force => true do |t|
+    t.string   "name",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "parties", ["name"], :name => "index_parties_on_name", :unique => true
+  add_index "parties", ["name"], :name => "parties_name_unique", :unique => true
+
   create_table "politicians", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -110,7 +119,6 @@ ActiveRecord::Schema.define(:version => 20100102211628) do
     t.string   "middle_name"
     t.string   "name_suffix"
     t.string   "nickname"
-    t.string   "party"
     t.string   "phone"
     t.string   "state"
     t.string   "title"
@@ -149,10 +157,10 @@ ActiveRecord::Schema.define(:version => 20100102211628) do
     t.integer  "politician_id", :null => false
     t.date     "started_on"
     t.date     "ended_on"
-    t.string   "party",         :null => false
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "party_id"
   end
 
   create_table "reports", :force => true do |t|
@@ -169,9 +177,9 @@ ActiveRecord::Schema.define(:version => 20100102211628) do
     t.date    "started_on"
     t.date    "ended_on"
     t.integer "district",      :null => false
-    t.string  "party"
     t.string  "state",         :null => false
     t.string  "url"
+    t.integer "party_id"
   end
 
   create_table "rolls", :force => true do |t|
@@ -200,9 +208,9 @@ ActiveRecord::Schema.define(:version => 20100102211628) do
     t.date    "started_on"
     t.date    "ended_on"
     t.integer "senate_class",  :null => false
-    t.string  "party"
     t.string  "state",         :null => false
     t.string  "url"
+    t.integer "party_id"
   end
 
   create_table "slugs", :force => true do |t|
