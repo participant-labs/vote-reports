@@ -12,7 +12,10 @@ class Bill < ActiveRecord::Base
   end
 
   belongs_to :congress
+
   belongs_to :sponsor, :class_name => 'Politician'
+  has_many :cosponsorships
+  has_many :cosponsors, :through => :cosponsorships, :source => :politician
 
   has_many :bill_titles
   has_many :bill_criteria
