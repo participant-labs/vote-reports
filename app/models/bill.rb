@@ -1,6 +1,5 @@
 class Bill < ActiveRecord::Base
   PER_PAGE = 30
-  VALID_BILL_TYPES = %w[h hr s sj sc sr].freeze
 
   named_scope :recent, :limit => 25, :order => 'created_at DESC'
 
@@ -24,6 +23,8 @@ class Bill < ActiveRecord::Base
       :'rolls.subject_id' => self, :'rolls.subject_type' => 'Bill'
     }).extend(Vote::Support)
   end
+
+  composed_of :bill_type
 
   validates_presence_of :bill_type, :congress, :gov_track_id, :opencongress_id, :introduced_on
   validates_uniqueness_of :bill_number, :scope => [:congress_id, :bill_type]
@@ -57,14 +58,15 @@ class Bill < ActiveRecord::Base
   end
 
   def bill_type=(bill_type)
+    bill_type = bill_type.abbrev if bill_type.is_a?(BillType)
     if !new_record?
-      if !VALID_BILL_TYPES.include?(self.bill_type)
+      if !BillType::TYPES.has_key?(self.bill_type.abbrev)
         puts "bill type #{self.bill_type} -> #{bill_type}"
-      elsif bill_type != self.bill_type
+      elsif bill_type != self.bill_type.abbrev
         raise ActiveRecord::ReadOnlyRecord, "Can't change bill type from #{self.bill_type} to #{bill_type}"
       end
     end
-    self[:bill_type] = bill_type
+    super
   end
 
   def bill_number=(bill_number)
