@@ -8,3 +8,4 @@ Bill.find_by_gov_track_id('s109-2167').congress
 Bill#bill_number not-null validation
 Extract State and Party classes for associating terms and such
 Amendment: t[:number, :bill_id].all :unique => true
+Whitelist for BillTitle#as #title_type
