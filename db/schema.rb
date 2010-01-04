@@ -75,6 +75,19 @@ ActiveRecord::Schema.define(:version => 20100102215847) do
   add_index "bills", ["opencongress_id"], :name => "bills_opencongress_id_unique", :unique => true
   add_index "bills", ["opencongress_id"], :name => "index_bills_on_opencongress_id", :unique => true
 
+  create_table "committees", :force => true do |t|
+    t.string   "chamber"
+    t.string   "code",        :null => false
+    t.string   "name",        :null => false
+    t.string   "thomas_name", :null => false
+    t.string   "ancestry"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "committees", ["ancestry"], :name => "index_committees_on_ancestry"
+  add_index "committees", ["code"], :name => "committees_code_unique", :unique => true
+
   create_table "congresses", :force => true do |t|
     t.integer "meeting"
   end
@@ -227,6 +240,13 @@ ActiveRecord::Schema.define(:version => 20100102215847) do
 
   create_table "terms", :force => true do |t|
     t.string "name", :null => false
+  end
+
+  create_table "us_states", :force => true do |t|
+    t.string   "abbrev",     :null => false
+    t.string   "name",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

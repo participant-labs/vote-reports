@@ -18,6 +18,7 @@ Rails::Initializer.run do |config|
 
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
+  config.gem 'ancestry'
   config.gem 'json'
   config.gem 'friendly_id'
   config.gem 'ym4r'
