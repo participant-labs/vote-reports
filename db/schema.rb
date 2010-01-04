@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(:version => 20100102215847) do
     t.string   "chamber"
     t.string   "code",        :null => false
     t.string   "name",        :null => false
-    t.string   "thomas_name", :null => false
+    t.string   "thomas_name"
     t.string   "ancestry"
     t.datetime "created_at"
     t.datetime "updated_at"
