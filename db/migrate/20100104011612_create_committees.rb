@@ -10,8 +10,9 @@ class CreateCommittees < ActiveRecord::Migration
       t.timestamps
     end
     constrain :committees do |t|
-      t.code :not_blank => true, :unique => true
+      t.code :not_blank => true
       t.name :not_blank => true
+      t[:code, :ancestry].all :unique => true
     end
     add_index :committees, :ancestry
   end

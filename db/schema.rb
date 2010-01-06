@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(:version => 20100104081018) do
   end
 
   add_index "committees", ["ancestry"], :name => "index_committees_on_ancestry"
-  add_index "committees", ["code"], :name => "committees_code_unique", :unique => true
+  add_index "committees", ["code", "ancestry"], :name => "committees_code_ancestry_unique", :unique => true
 
   create_table "congresses", :force => true do |t|
     t.integer "meeting"
