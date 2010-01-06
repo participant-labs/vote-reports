@@ -26,6 +26,11 @@ namespace :gov_track do
   end
 
   task :politicians => :environment do
+    def politician(gov_track_id)
+      @politicians.fetch(gov_track_id.to_i) do
+        raise "Couldn't find politician: #{gov_track_id}"
+      end
+    end
     @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
   end
 
