@@ -1,5 +1,13 @@
 namespace :gov_track do
   namespace :politicians do
+    def party_id(name)
+      return nil if name.blank? || Party::BLACKLIST.include?(name)
+      @parties ||= Party.all.index_by(&:name)
+      @parties.fetch(name) do
+        @parties[name] = Party.create(:name => name)
+      end.id
+    end
+
     desc "Process Politicians"
     task :unpack => :'gov_track:support' do
       data_path = ENV['MEETING'] ? "us/#{ENV['MEETING']}/people.xml" : "us/people.xml"
@@ -33,6 +41,7 @@ namespace :gov_track do
               attrs[method] = role[attr] if role[attr].present?
               attrs
             end
+            attrs['party_id'] = party_id(attrs.delete('party'))
 
             case role['type']
             when 'rep'
