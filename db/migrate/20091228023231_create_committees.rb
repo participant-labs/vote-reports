@@ -3,8 +3,7 @@ class CreateCommittees < ActiveRecord::Migration
     create_table :committees do |t|
       t.string :chamber
       t.string :code, :null => false
-      t.string :name, :null => false
-      t.string :thomas_name
+      t.string :display_name, :null => false
       t.string :ancestry
 
       t.timestamps
@@ -15,9 +14,24 @@ class CreateCommittees < ActiveRecord::Migration
       t[:code, :ancestry].all :unique => true
     end
     add_index :committees, :ancestry
+
+    create_table :committee_names do |t|
+      t.string :name, :null => false
+      t.integer :congress_id, :null => false
+      t.integer :committee_id, :null => false
+
+      t.timestamps
+    end
+    constrain :committee_names do |t|
+      t.name :not_blank => true
+      t.congress_id :reference => {:congresses => :id, :on_delete => :cascade}
+      t.committee_id :reference => {:committees => :id, :on_delete => :cascade}
+      t[:congress_id, :committee_id].all :unique => true
+    end
   end
 
   def self.down
     drop_table :committees
+    drop_table :committee_names
   end
 end
