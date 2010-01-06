@@ -4,7 +4,7 @@ class CreateBillTitles < ActiveRecord::Migration
       create_table :bill_titles do |t|
         t.text :title, :null => false
         t.string :title_type, :null => false
-        t.string :as, :null => false
+        t.string :as
         t.integer :bill_id, :null => false
 
         t.timestamps
