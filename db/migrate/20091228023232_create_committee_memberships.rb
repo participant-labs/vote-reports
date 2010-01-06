@@ -12,6 +12,7 @@ class CreateCommitteeMemberships < ActiveRecord::Migration
       t.congress_id :reference => {:congresses => :id, :on_delete => :cascade}
       t.politician_id :reference => {:politicians => :id, :on_delete => :cascade}
       t.committee_id :reference => {:committees => :id, :on_delete => :cascade}
+      t[:politician_id, :congress_id, :committee_id].all :unique => true
     end
   end
 
