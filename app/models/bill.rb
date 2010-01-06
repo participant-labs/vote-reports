@@ -17,8 +17,8 @@ class Bill < ActiveRecord::Base
   has_many :cosponsorships
   has_many :cosponsors, :through => :cosponsorships, :source => :politician
 
-  has_many :subjects, :class_name => 'BillSubject'
-  has_many :terms, :through => :subjects
+  has_many :bill_subjects
+  has_many :subjects, :through => :bill_subjects
 
   has_many :bill_titles
   has_many :bill_criteria
