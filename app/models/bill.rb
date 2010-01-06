@@ -20,6 +20,9 @@ class Bill < ActiveRecord::Base
   has_many :bill_subjects
   has_many :subjects, :through => :bill_subjects
 
+  has_many :bill_committee_actions
+  has_many :committees, :through => :bill_committee_actions
+
   has_many :bill_titles
   has_many :bill_criteria
   has_many :amendments, :dependent => :destroy
