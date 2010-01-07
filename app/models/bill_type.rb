@@ -1,4 +1,4 @@
-class BillType
+class BillType < String
   TYPES = {
     'h' => {:long => 'House Bill', :short => 'H.R.'},
     'hr' => {:long => 'House Resolution', :short => 'H.Res.'},
@@ -11,19 +11,18 @@ class BillType
     'sc' => {:long => 'Senate Concurrent Resolution', :short => 'S.Con.Res.'}
   }.freeze
 
-  attr_reader :abbrev
-
-  def initialize(abbrev)
-    raise "Invalid bill type #{abbrev}" unless TYPES.has_key?(abbrev)
-    @abbrev = abbrev
+  class << self
+    def valid_types
+      @valid_types ||= TYPES.keys
+    end
   end
 
   def long_name
-    TYPES.fetch(@abbrev).fetch(:long)
+    TYPES.fetch(self).fetch(:long)
   end
 
   def short_name
-    TYPES.fetch(@abbrev).fetch(:short)
+    TYPES.fetch(self).fetch(:short)
   end
   alias_method :to_s, :short_name
 end

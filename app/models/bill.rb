@@ -40,6 +40,7 @@ class Bill < ActiveRecord::Base
   validates_uniqueness_of :bill_number, :scope => [:congress_id, :bill_type]
   validates_uniqueness_of :gov_track_id, :opencongress_id
 
+  validates_inclusion_of :bill_type, :in => BillType.valid_types
   validates_format_of :gov_track_id, :with => /[a-z]+\d\d\d-\d+/
   validates_format_of :opencongress_id, :with => /\d\d\d-[a-z]+\d+/
 
@@ -72,19 +73,14 @@ class Bill < ActiveRecord::Base
   end
 
   def bill_type=(bill_type)
-    bill_type = bill_type.abbrev if bill_type.is_a?(BillType)
-    if !new_record?
-      if !BillType::TYPES.has_key?(self.bill_type.abbrev)
-        puts "bill type #{self.bill_type} -> #{bill_type}"
-      elsif bill_type != self.bill_type.abbrev
-        raise ActiveRecord::ReadOnlyRecord, "Can't change bill type from #{self.bill_type} to #{bill_type}"
-      end
+    if !new_record? && self[:bill_type] && BillType.valid_types.include?(self.bill_type) && bill_type != self.bill_type
+      raise ActiveRecord::ReadOnlyRecord, "Can't change bill type from #{self.bill_type} to #{bill_type}"
     end
-    super
+    self[:bill_type] = bill_type
   end
 
   def bill_number=(bill_number)
-    if !new_record? && self.bill_number && bill_number.to_i != self.bill_number
+    if !new_record? && self[:bill_number] && bill_number.to_i != self[:bill_number]
       raise ActiveRecord::ReadOnlyRecord, "Can't change bill number"
     end
     self[:bill_number] = bill_number
