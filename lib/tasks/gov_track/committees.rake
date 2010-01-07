@@ -7,16 +7,15 @@ namespace :gov_track do
         committee.update_attributes!(
           :display_name => node['displayname'].to_s
         )
-        node.xpath('member').each do |member_node|
-          committee.memberships.find_or_create_by_politician_id_and_role_and_congress_id(
-            politician(member_node['id'].to_s).id,
-            member_node['role'].to_s,
-            @congress.id
-          )
-        end
         node.xpath('thomas-names/name').each do |name_node|
-          committee.names.find_or_create_by_congress_id(
+          committee.meetings.find_or_create_by_congress_id(
             Congress.find_or_create_by_meeting(name_node['session'].to_s.to_i).id).update_attribute(:name, name_node.inner_text)
+        end
+        node.xpath('member').each do |member_node|
+          committee.meetings.find_by_congress_id(@congress.id).memberships.find_or_create_by_politician_id_and_role(
+            politician(member_node['id'].to_s).id,
+            member_node['role'].to_s
+          )
         end
       end
 
