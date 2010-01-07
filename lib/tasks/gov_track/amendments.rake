@@ -37,10 +37,24 @@ namespace :gov_track do
           sequence = amends['sequence'].to_s
           sequence = nil if sequence.blank?
 
-          sponsor = data.at('sponsor')['none'].present? ? nil : @politicians.fetch(data.at('sponsor')['id'].to_i) do
-            puts "#{data.at('sponsor').to_s} not found"
-            nil
-          end
+          sponsor =
+            if data.at('sponsor')['none'].present?
+              nil
+            elsif sponsor_committee_name = data.at('sponsor')['committee']
+              Committee.with_name(sponsor_committee_name.to_s).first || begin
+                puts "Committee from #{data.at('sponsor').to_s} not found"
+                nil
+              end
+            elsif sponsor_politician_id = data.at('sponsor')['id']
+               @politicians.fetch(sponsor_politician_id.to_i) do
+                 puts "Politician from #{data.at('sponsor').to_s} not found"
+                 nil
+               end
+             else
+               puts "#{data.at('sponsor').to_s} not found"
+               nil
+             end
+
           values = [
             bills.fetch("#{amends['type']}#{@congress.meeting}-#{amends['number']}") do
               raise "#{amends['type']}#{@congress.meeting}-#{amends['number']} not found (#{amends.to_s})"
