@@ -4,22 +4,13 @@ namespace :gov_track do
       require 'ar-extensions'
       require 'ar-extensions/import/postgresql'
 
-      columns = [
-        :opencongress_id,
-        :gov_track_id,
-        :congress_id,
-        :title,
-        :bill_type,
-        :bill_number,
-        :gov_track_updated_at,
-        :introduced_on,
-        :sponsor_id,
-        :summary
-      ]
+      @subjects = Subject.all.index_by(&:name)
+      @committees = CommitteeName.all.inject {|hash, name| hash[name.name] = name.committee_id; hash }
+
+      existing_bills = Bill.all(:select => 'id, opencongress_id').index_by {|b| b.opencongress_id }
       meetings do |meeting|
         puts "Fetching Bills for Meeting #{meeting}"
 
-        existing_bills = Bill.all(:conditions => {:congress_id => @congress}).index_by {|b| b.opencongress_id }
         new_bills = []
         Dir['bills/*'].each do |bill_path|
           type, number = bill_path.match(%r{bills/([a-z]+)(\d+)\.xml}).captures
@@ -35,29 +26,74 @@ namespace :gov_track do
             end
           raise "Something is weird #{@congress.meeting} != #{data['session']}" if @congress.meeting != data['session'].to_i
           sponsor = data.at('sponsor')['none'].present? ? nil : @politicians.fetch(data.at('sponsor')['id'].to_i)
-          values = [
-            opencongress_bill_id,
-            gov_track_bill_id,
-            @congress.id,
-            data.css('titles > title[type=official]').inner_text,
-            data['type'].to_s,
-            data['number'].to_s,
-            data['updated'].to_s,
-            data.at('introduced')['datetime'].to_s,
-            sponsor && sponsor.id,
-            data.at('summary').inner_text.strip
-          ]
+          attrs = {
+            :opencongress_id => opencongress_bill_id,
+            :gov_track_id => gov_track_bill_id,
+            :congress_id => @congress.id,
+            :bill_type => data['type'].to_s,
+            :bill_number => data['number'].to_s,
+            :gov_track_updated_at => data['updated'].to_s,
+            :introduced_on => data.at('introduced')['datetime'].to_s,
+            :sponsor_id => sponsor && sponsor.id,
+            :summary => data.at('summary').inner_text.strip
+          }
           if bill = existing_bills[opencongress_bill_id]
-            bill.update_attributes!(Hash[columns.zip(values)])
+            bill.update_attributes!(attrs)
           else
-            new_bills << values
+            bill = Bill.create!(attrs)
+          end
+
+          new_titles = data.xpath('titles/title').map do |title_node|
+            as = title_node['as'].to_s
+            as = nil if as.blank?
+            [title_node.inner_text, title_node['type'].to_s, as, bill.id]
+          end
+          if new_titles.present?
+            BillTitle.import_without_validations_or_callbacks [:title, :title_type, :as, :bill_id], new_titles
+          end
+
+          new_subjects = data.xpath('subjects/term').map do |term_node|
+            name = term_node['name'].to_s
+            subject = @subjects.fetch(name) do
+              @subjects[name] = Subject.create(:name => name)
+            end
+            [subject.id, bill.id]
+          end
+          if new_subjects.present?
+            BillSubject.import_without_validations_or_callbacks [:subject_id, :bill_id], new_subjects
+          end
+
+          new_committee_actions = data.xpath('committees/committee').map do |committee_node|
+            committee_id = @committees[committee_node['name'].to_s]
+            if (subcommittee_name = committee_node['subcommittee']).present?
+              subcommittee_id = (committee_id && Committee.with_name(subcommittee_name).first(:conditions => {:ancestry => committee_id.to_s}).try(:id)) || @committees[subcommittee_name]
+              committee_id = subcommittee_id if subcommittee_id
+            end
+            if committee_id.nil?
+              if committee_node['name'].to_s != "House Administration"
+                puts
+                p committee_node
+              end
+              next
+            end
+            [committee_node['activity'].to_s, bill.id, committee_id]
+          end.compact
+          if new_committee_actions.present?
+            BillCommitteeAction.import_without_validations_or_callbacks [:action, :bill_id, :committee_id], new_committee_actions
+          end
+
+          new_cosponsors = data.xpath('cosponsors/cosponsor').map do |cosponsor_node|
+            joined = cosponsor_node['joined'].to_s
+            joined = nil if joined.blank?
+            [@politicians.fetch(cosponsor_node['id'].to_s.to_i), joined, bill.id]
+          end
+          if new_cosponsors.present?
+            Cosponsorship.import_without_validations_or_callbacks [:politician_id, :joined_on, :bill_id], new_cosponsors
           end
 
           $stdout.print "."
           $stdout.flush
         end
-        puts "\nFound #{new_bills.size} new bills"
-        Bill.import_without_validations_or_callbacks columns, new_bills
         puts
       end
       Bill.reindex
