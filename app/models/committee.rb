@@ -4,9 +4,7 @@ class Committee < ActiveRecord::Base
   has_many :names, :class_name => 'CommitteeName'
   has_many :memberships, :class_name => 'CommitteeMembership'
 
-  class << self
-    def find_by_name(name)
-      CommitteeName.first(:conditions => {:name => name}, :include => :committee).try(:committee)
-    end
-  end
+  named_scope :with_name, lambda {|name|
+    {:joins => :names, :conditions => {:'committee_names.name' => name}}
+  }
 end
