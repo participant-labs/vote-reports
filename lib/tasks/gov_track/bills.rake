@@ -5,7 +5,6 @@ namespace :gov_track do
       require 'ar-extensions/import/postgresql'
 
       @subjects = Subject.all.index_by(&:name)
-      @committees = CommitteeName.all.inject {|hash, name| hash[name.name] = name.committee_id; hash }
 
       existing_bills = Bill.all(:select => 'id, opencongress_id').index_by {|b| b.opencongress_id }
       meetings do |meeting|
@@ -13,6 +12,8 @@ namespace :gov_track do
 
         new_bills = []
         Dir['bills/*'].each do |bill_path|
+          @committees = CommitteeMeeting.all(:select => 'name, id', :conditions => {:congress_id => @congress.id}).index_by(&:name)
+
           type, number = bill_path.match(%r{bills/([a-z]+)(\d+)\.xml}).captures
           opencongress_bill_id = "#{meeting}-#{type}#{number}"
           gov_track_bill_id = "#{type}#{meeting}-#{number}"
@@ -64,22 +65,24 @@ namespace :gov_track do
           end
 
           new_committee_actions = data.xpath('committees/committee').map do |committee_node|
-            committee_id = @committees[committee_node['name'].to_s]
+            committee_meeting_id = @committees[committee_node['name'].to_s]
             if (subcommittee_name = committee_node['subcommittee']).present?
-              subcommittee_id = (committee_id && Committee.with_name(subcommittee_name).first(:conditions => {:ancestry => committee_id.to_s}).try(:id)) || @committees[subcommittee_name]
-              committee_id = subcommittee_id if subcommittee_id
+              subcommittee_id = (committee_id && CommitteeMeeting.first(
+                :joins => :committee, :conditions => {:name => subcommittee_name, :'committee.ancestry' => committee_id.to_s}
+              ).try(:id)) || @committees[subcommittee_name]
+              committee_meeting_id = subcommittee_id if subcommittee_id
             end
-            if committee_id.nil?
+            if committee_meeting_id.nil?
               if committee_node['name'].to_s != "House Administration"
                 puts
                 p committee_node
               end
               next
             end
-            [committee_node['activity'].to_s, bill.id, committee_id]
+            [committee_node['activity'].to_s, bill.id, committee_meeting_id]
           end.compact
           if new_committee_actions.present?
-            BillCommitteeAction.import_without_validations_or_callbacks [:action, :bill_id, :committee_id], new_committee_actions
+            BillCommitteeAction.import_without_validations_or_callbacks [:action, :bill_id, :committee_meeting_id], new_committee_actions
           end
 
           new_cosponsors = data.xpath('cosponsors/cosponsor').map do |cosponsor_node|

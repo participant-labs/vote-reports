@@ -15,14 +15,14 @@ class CreateCommittees < ActiveRecord::Migration
     end
     add_index :committees, :ancestry
 
-    create_table :committee_names do |t|
+    create_table :committee_meetings do |t|
       t.string :name, :null => false
       t.integer :congress_id, :null => false
       t.integer :committee_id, :null => false
 
       t.timestamps
     end
-    constrain :committee_names do |t|
+    constrain :committee_meetings do |t|
       t.name :not_blank => true
       t.congress_id :reference => {:congresses => :id, :on_delete => :cascade}
       t.committee_id :reference => {:committees => :id, :on_delete => :cascade}
@@ -31,7 +31,9 @@ class CreateCommittees < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :committees
-    drop_table :committee_names
+    transaction do
+      drop_table :committee_meetings
+      drop_table :committees
+    end
   end
 end
