@@ -65,11 +65,11 @@ namespace :gov_track do
           end
 
           new_committee_actions = data.xpath('committees/committee').map do |committee_node|
-            committee_meeting_id = @committees[committee_node['name'].to_s]
+            committee_meeting_id = find_committee(committee_node['name'].to_s)
             if (subcommittee_name = committee_node['subcommittee']).present?
               subcommittee_id = (committee_meeting_id && CommitteeMeeting.first(
                 :joins => :committee, :conditions => {:'committee_meetings.name' => subcommittee_name, :'committees.ancestry' => CommitteeMeeting.find(committee_meeting_id).committee_id.to_s}
-              ).try(:id)) || @committees[subcommittee_name]
+              ).try(:id)) || find_committee(subcommittee_name)
               committee_meeting_id = subcommittee_id if subcommittee_id
             end
             if committee_meeting_id.nil?
