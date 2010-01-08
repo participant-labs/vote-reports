@@ -6,6 +6,7 @@ class AddMissingGovTrackFieldsToAmendments < ActiveRecord::Migration
       add_column :amendments, :chamber, :string
       add_column :amendments, :offered_on, :date
       add_column :amendments, :sponsor_id, :integer
+      add_column :amendments, :sponsor_type, :string
       rename_column :amendments, :title, :description
       add_column :amendments, :purpose, :text
       add_column :amendments, :sequence, :integer
