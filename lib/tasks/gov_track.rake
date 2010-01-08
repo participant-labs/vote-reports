@@ -10,14 +10,14 @@ namespace :gov_track do
       File.exist?(local_path) ? local_path : "http://www.govtrack.us/data/#{path}"
     end
 
-    def find_committee(name)
+    def find_committee(name, source, node)
       @committees[name] || begin
         wrong_congress_meeting = CommitteeMeeting.first(:conditions => {:name => name})
         if wrong_congress_meeting.nil?
-          puts "Bill #{opencongress_bill_id} lised committee #{name} which wasn't found"
+          puts "#{source} listed committee '#{name}' via #{node} which wasn't found"
         else
           wrong_congress_meeting.committee.meetings.find_by_congress_id(@congress.id).tap do |right_congress_meeting|
-            puts "Bill #{opencongress_bill_id} listed committee #{wrong_congress_meeting.inspect}, when it should have listed #{right_congress_meeting.inspect}"
+            puts "#{source} listed committee #{wrong_congress_meeting.inspect} via #{node}, when it should have listed #{right_congress_meeting.inspect}"
           end
         end
       end
