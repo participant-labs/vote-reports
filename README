@@ -3,15 +3,12 @@ Welcome to VoteReports
 
 To inform. To promote truth. To combat political apathy.
 
-Support non-politician sponsors for amendments
-Bill.find_by_gov_track_id('s109-2167').congress
 Bill#bill_number not-null validation
 Extract State class for associating terms and such
 Amendment: t[:number, :bill_id].all :unique => true
 Whitelist for BillTitle#as #title_type
 script/generate rspec_model BillRelation from_id:integer to_id:integer relation:string
 Missing data model: related bills, actions, status
-Worry about committee thomasname attribute
 
 Full Bill Import:
 real	189m20.792s
