@@ -20,6 +20,7 @@ namespace :gov_track do
       meetings do |meeting|
         puts "Fetching Amendments for Meeting #{meeting}"
         bills = Bill.all(:conditions => {:congress_id => @congress}).index_by {|b| b.gov_track_id }
+        @committees = CommitteeMeeting.all(:select => 'name, id', :conditions => {:congress_id => @congress.id}).index_by(&:name)
 
         new_amendments = []
         Dir['bills.amdt/*.xml'].each do |amendment_path|
@@ -41,13 +42,13 @@ namespace :gov_track do
             if data.at('sponsor')['none'].present?
               nil
             elsif sponsor_committee_name = data.at('sponsor')['committee']
-              Committee.with_name(sponsor_committee_name.to_s).first || begin
-                puts "Committee from #{data.at('sponsor').to_s} not found"
+              find_committee(sponsor_committee_name.to_s) || begin
+                puts "Committee from #{data.at('sponsor').to_s} not found for #{amendment_path}"
                 nil
               end
             elsif sponsor_politician_id = data.at('sponsor')['id']
                @politicians.fetch(sponsor_politician_id.to_i) do
-                 puts "Politician from #{data.at('sponsor').to_s} not found"
+                 puts "Politician from #{data.at('sponsor').to_s} not found for #{amendment_path}"
                  nil
                end
              else
