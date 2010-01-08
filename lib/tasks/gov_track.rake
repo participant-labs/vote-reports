@@ -4,7 +4,7 @@ require 'nokogiri'
 MEETINGS = 103..111
 
 namespace :gov_track do
-  task :support => [:environment, :'sunspot:start'] do
+  task :support => [:environment, :'sunspot:solr:start'] do
     def gov_track_path(path)
       local_path = Rails.root.join('data/gov_track', path)
       File.exist?(local_path) ? local_path : "http://www.govtrack.us/data/#{path}"
