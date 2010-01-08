@@ -6,14 +6,17 @@ class AddConstraintsToAmendments < ActiveRecord::Migration
       t.change :number, :integer, :null => false
       t.change :chamber, :string, :null => false
       t.change :offered_on, :date, :null => false
+      t.change :sponsor_id, :integer, :null => false
+      t.change :sponsor_type, :string, :null => false
     end
 
     constrain :amendments do |t|
       t.bill_id :reference => {:bills => :id, :on_delete => :cascade}
       t.congress_id :reference => {:congresses => :id, :on_delete => 'SET NULL'}
-    
+
       t.chamber :whitelist => %w[h s]
-    
+      t.sponsor_type :whitelist => %w[Politician CommitteeMeeting]
+
       t[:number, :chamber, :congress_id].all :unique => true
       t[:number, :bill_id].all :unique => true
       t[:sequence, :bill_id].all :unique => true
