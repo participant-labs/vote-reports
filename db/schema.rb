@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100109193705) do
+ActiveRecord::Schema.define(:version => 20100109200439) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -143,6 +143,20 @@ ActiveRecord::Schema.define(:version => 20100109193705) do
 
   add_index "parties", ["name"], :name => "index_parties_on_name", :unique => true
 
+  create_table "politician_terms", :force => true do |t|
+    t.integer  "politician_id", :null => false
+    t.date     "started_on"
+    t.date     "ended_on"
+    t.integer  "district"
+    t.string   "state"
+    t.string   "url"
+    t.integer  "party_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "senate_class"
+    t.string   "type",          :null => false
+  end
+
   create_table "politicians", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -241,20 +255,6 @@ ActiveRecord::Schema.define(:version => 20100109193705) do
 
   create_table "subjects", :force => true do |t|
     t.string "name", :null => false
-  end
-
-  create_table "terms", :force => true do |t|
-    t.integer  "politician_id", :null => false
-    t.date     "started_on"
-    t.date     "ended_on"
-    t.integer  "district"
-    t.string   "state"
-    t.string   "url"
-    t.integer  "party_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "senate_class"
-    t.string   "type",          :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -1,4 +1,4 @@
-class Term < ActiveRecord::Base
+class PoliticianTerm < ActiveRecord::Base
   abstract_class = true
 
   belongs_to :politician
