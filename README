@@ -9,6 +9,7 @@ Amendment: t[:number, :bill_id].all :unique => true
 Whitelist for BillTitle#as #title_type
 script/generate rspec_model BillRelation from_id:integer to_id:integer relation:string
 Missing data model: related bills, actions, status
+Bill subcommittee references often don't exist: e.g. Bill 106-s68 listed committee 'International Security, Proliferation and Federal Services' via <committee name="Senate Governmental Affairs" subcommittee="International Security, Proliferation and Federal Services" activity="Referral"/> which wasn't found
 
 Full Bill Import:
 real	189m20.792s
@@ -19,3 +20,8 @@ Full Amendment Import:
 real	3m45.767s
 user	2m41.690s
 sys	0m9.823s
+
+Full Vote Import:
+real	30m32.227s
+user	14m5.166s
+sys	0m31.824s
