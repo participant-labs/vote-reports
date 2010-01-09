@@ -1,9 +1,7 @@
-module Term
-  def acts_as_term
-    belongs_to :politician
-    belongs_to :party
-    validates_presence_of :politician, :party
-  end
-end
+class Term < ActiveRecord::Base
+  abstract_class = true
 
-ActiveRecord::Base.extend Term
+  belongs_to :politician
+  belongs_to :party
+  validates_presence_of :politician
+end
