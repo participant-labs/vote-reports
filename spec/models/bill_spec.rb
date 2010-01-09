@@ -4,7 +4,8 @@ describe Bill do
   describe ".search" do
     integrate_sunspot
     before do
-      create_bill(:title => "USA PATRIOT Reauthorization Act of 2009")
+      bill = create_bill
+      create_bill_title(:bill => bill, :title => "USA PATRIOT Reauthorization Act of 2009")
       Bill.reindex
     end
 
@@ -24,7 +25,9 @@ describe Bill do
 
   describe "Validations" do
     it "should validate presence of introduced_on" do
-      new_bill(:introduced_on => nil).should_not be_valid
+      proc {
+        create_bill(:introduced_on => nil)
+      }.should raise_error(ActiveRecord::StatementInvalid)
     end
   end
 
