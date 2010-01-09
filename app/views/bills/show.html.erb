@@ -15,7 +15,7 @@
 <%- end -%>
 </p>
 
-<%- if (amendments = @bill.amendments).present? -%>
+<%- if (amendments = @bill.amendments.with_votes).present? -%>
 <h3>Amendments</h3>
 <ul>
   <% amendments.each do |amendment|  %>
