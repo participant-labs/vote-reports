@@ -273,6 +273,7 @@ ActiveRecord::Schema.define(:version => 20100109175957) do
     t.integer  "party_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "senate_class"
     t.string   "type",          :null => false
   end
 
