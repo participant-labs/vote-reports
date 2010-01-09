@@ -7,8 +7,15 @@ class Politician < ActiveRecord::Base
   has_many :representative_terms
   has_many :senate_terms
   has_many :presidential_terms
-  def terms
-    representative_terms | senate_terms | presidential_terms
+  has_many :politician_terms
+  alias_attribute :terms, :politician_terms
+
+  def state
+    terms.congressional.latest.try(:state)
+  end
+
+  def party
+    terms.latest.try(:party)
   end
 
   IDENTITY_STRING_FIELDS = [
