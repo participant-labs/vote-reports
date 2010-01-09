@@ -120,6 +120,13 @@ Fixjour :verify => true do
     )
   end
 
+  define_builder(PresidentialTerm) do |klass, overrides|
+    klass.new(
+      :politician => new_politician,
+      :party => new_party
+    )
+  end
+
   define_builder(RepresentativeTerm) do |klass, overrides|
     klass.new(
       :politician => new_politician,
