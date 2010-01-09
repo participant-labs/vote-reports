@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100109175957) do
+ActiveRecord::Schema.define(:version => 20100109193705) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -197,16 +197,6 @@ ActiveRecord::Schema.define(:version => 20100109175957) do
   add_index "politicians", ["website"], :name => "politicians_website_unique", :unique => true
   add_index "politicians", ["youtube_url"], :name => "politicians_youtube_url_unique", :unique => true
 
-  create_table "presidential_terms", :force => true do |t|
-    t.integer  "politician_id", :null => false
-    t.date     "started_on"
-    t.date     "ended_on"
-    t.string   "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "party_id",      :null => false
-  end
-
   create_table "reports", :force => true do |t|
     t.integer  "user_id",     :null => false
     t.string   "name",        :null => false
@@ -236,16 +226,6 @@ ActiveRecord::Schema.define(:version => 20100109175957) do
   end
 
   add_index "rolls", ["gov_track_id"], :name => "index_rolls_on_opencongress_id", :unique => true
-
-  create_table "senate_terms", :force => true do |t|
-    t.integer "politician_id", :null => false
-    t.date    "started_on"
-    t.date    "ended_on"
-    t.integer "senate_class",  :null => false
-    t.string  "state",         :null => false
-    t.string  "url"
-    t.integer "party_id"
-  end
 
   create_table "slugs", :force => true do |t|
     t.string   "name"
