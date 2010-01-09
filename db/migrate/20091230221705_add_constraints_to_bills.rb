@@ -29,7 +29,7 @@ class AddConstraintsToBills < ActiveRecord::Migration
 
     constrain :bills do |t|
       t.bill_type :not_blank
-      t.congress_id :not_null, :reference
+      t.congress_id :reference
       t[:bill_type, :bill_number, :congress_id].all :unique
       t.opencongress_id :unique, :not_blank
       t.gov_track_id :unique, :not_blank

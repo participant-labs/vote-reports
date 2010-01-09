@@ -9,24 +9,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100104081018) do
+ActiveRecord::Schema.define(:version => 20091231195003) do
 
   create_table "amendments", :force => true do |t|
-    t.integer  "bill_id",     :null => false
+    t.integer  "bill_id",      :null => false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "number",      :null => false
-    t.string   "chamber",     :null => false
-    t.date     "offered_on",  :null => false
-    t.integer  "sponsor_id"
+    t.integer  "number",       :null => false
+    t.string   "chamber",      :null => false
+    t.date     "offered_on",   :null => false
+    t.integer  "sponsor_id",   :null => false
+    t.string   "sponsor_type", :null => false
     t.text     "purpose"
     t.integer  "sequence"
-    t.integer  "congress_id", :null => false
+    t.integer  "congress_id",  :null => false
   end
 
+  add_index "amendments", ["number", "chamber", "bill_id"], :name => "amendments_number_chamber_bill_id_unique", :unique => true
   add_index "amendments", ["number", "chamber", "congress_id"], :name => "amendments_number_chamber_congress_id_unique", :unique => true
   add_index "amendments", ["sequence", "bill_id"], :name => "amendments_sequence_bill_id_unique", :unique => true
+
+  create_table "bill_committee_actions", :force => true do |t|
+    t.string   "action",               :null => false
+    t.integer  "committee_meeting_id", :null => false
+    t.integer  "bill_id",              :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "bill_criteria", :force => true do |t|
     t.integer  "bill_id",    :null => false
@@ -41,15 +51,17 @@ ActiveRecord::Schema.define(:version => 20100104081018) do
 
   create_table "bill_subjects", :force => true do |t|
     t.integer  "bill_id",    :null => false
-    t.integer  "term_id",    :null => false
+    t.integer  "subject_id", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "bill_subjects", ["bill_id", "subject_id"], :name => "bill_subjects_bill_id_subject_id_unique", :unique => true
+
   create_table "bill_titles", :force => true do |t|
     t.text     "title",      :null => false
     t.string   "title_type", :null => false
-    t.string   "as",         :null => false
+    t.string   "as"
     t.integer  "bill_id",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -75,20 +87,30 @@ ActiveRecord::Schema.define(:version => 20100104081018) do
   add_index "bills", ["opencongress_id"], :name => "bills_opencongress_id_unique", :unique => true
   add_index "bills", ["opencongress_id"], :name => "index_bills_on_opencongress_id", :unique => true
 
+  create_table "committee_meetings", :force => true do |t|
+    t.string   "name",         :null => false
+    t.integer  "congress_id",  :null => false
+    t.integer  "committee_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "committee_meetings", ["congress_id", "committee_id"], :name => "committee_meetings_congress_id_committee_id_unique", :unique => true
+
   create_table "committee_memberships", :force => true do |t|
-    t.integer  "congress_id",   :null => false
-    t.integer  "politician_id", :null => false
-    t.integer  "committee_id",  :null => false
+    t.integer  "politician_id",        :null => false
+    t.integer  "committee_meeting_id", :null => false
     t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "committee_memberships", ["politician_id", "committee_meeting_id"], :name => "committee_memberships_politician_id_committee_meeting_id_unique", :unique => true
+
   create_table "committees", :force => true do |t|
     t.string   "chamber"
-    t.string   "code",        :null => false
-    t.string   "name",        :null => false
-    t.string   "thomas_name"
+    t.string   "code",         :null => false
+    t.string   "display_name", :null => false
     t.string   "ancestry"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -106,10 +128,12 @@ ActiveRecord::Schema.define(:version => 20100104081018) do
   create_table "cosponsorships", :force => true do |t|
     t.integer  "bill_id",       :null => false
     t.integer  "politician_id", :null => false
-    t.date     "joined_on",     :null => false
+    t.date     "joined_on"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "cosponsorships", ["bill_id", "politician_id"], :name => "cosponsorships_bill_id_politician_id_unique", :unique => true
 
   create_table "parties", :force => true do |t|
     t.string   "name",       :null => false
@@ -118,7 +142,6 @@ ActiveRecord::Schema.define(:version => 20100104081018) do
   end
 
   add_index "parties", ["name"], :name => "index_parties_on_name", :unique => true
-  add_index "parties", ["name"], :name => "parties_name_unique", :unique => true
 
   create_table "politicians", :force => true do |t|
     t.string   "first_name"
@@ -182,7 +205,7 @@ ActiveRecord::Schema.define(:version => 20100104081018) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "party_id"
+    t.integer  "party_id",      :null => false
   end
 
   create_table "reports", :force => true do |t|
@@ -247,15 +270,8 @@ ActiveRecord::Schema.define(:version => 20100104081018) do
   add_index "slugs", ["name", "scope", "sequence", "sluggable_type"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
 
-  create_table "terms", :force => true do |t|
+  create_table "subjects", :force => true do |t|
     t.string "name", :null => false
-  end
-
-  create_table "us_states", :force => true do |t|
-    t.string   "abbrev",     :null => false
-    t.string   "name",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

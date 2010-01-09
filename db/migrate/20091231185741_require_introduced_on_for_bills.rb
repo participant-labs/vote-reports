@@ -1,13 +1,13 @@
 class RequireIntroducedOnForBills < ActiveRecord::Migration
   def self.up
-    constrain :bills do |t|
-      t.introduced_on :not_null => true
+    change_table :bills do |t|
+      t.change :introduced_on, :date, :null => false
     end
   end
 
   def self.down
-    deconstrain :bills do |t|
-      t.introduced_on :not_null
+    change_table :bills do |t|
+      t.change :introduced_on, :date, :null => true
     end
   end
 end
