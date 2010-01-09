@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe Term do
+describe PoliticianTerm do
 end
