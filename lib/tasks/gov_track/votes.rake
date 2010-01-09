@@ -3,6 +3,9 @@ namespace :gov_track do
 
     desc "Process Votes"
     task :unpack => [:support, :politicians] do
+      require 'ar-extensions'
+      require 'ar-extensions/import/postgresql'
+
       meetings do |meeting|
         puts "Meeting #{meeting}"
         Dir['rolls/*'].each do |roll_path|
@@ -56,12 +59,10 @@ namespace :gov_track do
                 puts "Ignoring #{vote.inspect}"
                 next
               end
-              ["'#{vote['vote']}'", voter.id, roll.id].join(', ')
-            }.compact.join("), (")
-            ActiveRecord::Base.connection.execute(%{
-              INSERT INTO "votes" (vote, politician_id, roll_id) VALUES
-                (#{ inserts });
-            })
+              [vote['vote'], voter.id, roll.id]
+            }.compact
+
+            Vote.import_without_validations_or_callbacks [:vote, :politician_id, :roll_id], inserts
           end
 
           $stdout.print "."
