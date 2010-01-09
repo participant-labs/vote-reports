@@ -2,4 +2,17 @@ class Congress < ActiveRecord::Base
   has_many :bills, :dependent => :destroy
 
   validates_uniqueness_of :meeting
+
+  class << self
+    def current_meeting
+      today = Date.today
+      meeting = (today.year - 1787) / 2
+      meeting -= 1 if today.month == 1 && today.day < 3
+      meeting
+    end
+  end
+
+  def current?
+    meeting == Congress.current_meeting
+  end
 end

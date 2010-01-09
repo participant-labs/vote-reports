@@ -56,7 +56,8 @@ class Bill < ActiveRecord::Base
   end
 
   def opencongress_url
-    "http://www.opencongress.org/bill/#{opencongress_id}/show"
+    # As of the 111th, OpenCongress only maintains pages for bills for the current meeting
+    "http://www.opencongress.org/bill/#{opencongress_id}/show" if congress.current?
   end
 
   def inspect
