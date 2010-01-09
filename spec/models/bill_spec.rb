@@ -18,7 +18,7 @@ describe Bill do
     context "when there are matches" do
       it "should return bills with titles matching the query" do
         bills = Bill.search { fulltext "Reauthorization" }
-        bills.results.map(&:title).should include("USA PATRIOT Reauthorization Act of 2009")
+        bills.results.map(&:title).map(&:title).should include("USA PATRIOT Reauthorization Act of 2009")
       end
     end
   end

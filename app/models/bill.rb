@@ -6,7 +6,10 @@ class Bill < ActiveRecord::Base
   has_friendly_id :opencongress_id
 
   searchable do
-    text :title, :summary, :gov_track_id, :opencongress_id
+    text :summary, :gov_track_id, :opencongress_id
+    text :bill_titles do
+      bill_titles.map(&:title) * ' '
+    end
     integer :bill_number
     time :introduced_on
   end
