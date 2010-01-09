@@ -18,7 +18,7 @@ class AddConstraintsToAmendments < ActiveRecord::Migration
       t.sponsor_type :whitelist => %w[Politician CommitteeMeeting]
 
       t[:number, :chamber, :congress_id].all :unique => true
-      t[:number, :bill_id].all :unique => true
+      t[:number, :chamber, :bill_id].all :unique => true
       t[:sequence, :bill_id].all :unique => true
     end
   end
@@ -37,9 +37,10 @@ class AddConstraintsToAmendments < ActiveRecord::Migration
       t.congress_id :reference
 
       t.chamber :whitelist
+      t.sponsor_type :whitelist
 
       t[:number, :chamber, :congress_id].all :unique
-      t[:number, :bill_id].all :unique
+      t[:number, :chamber, :bill_id].all :unique
       t[:sequence, :bill_id].all :unique
     end
   end
