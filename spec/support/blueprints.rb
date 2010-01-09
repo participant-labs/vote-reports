@@ -19,6 +19,27 @@ Fixjour :verify => true do
     "#{bill_type}#{meeting}-#{bill_number}"
   end
 
+  define_builder(Party) do |klass, overrides|
+    klass.new(
+      :name => Forgery(:basic).text
+    )
+  end
+
+  define_builder(Committee) do |klass, overrides|
+    klass.new(
+      :display_name => Forgery(:basic).text,
+      :code => Forgery(:basic).text
+    )
+  end
+
+  define_builder(CommitteeMeeting) do |klass, overrides|
+    klass.new(
+      :committee => new_committee,
+      :congress => new_congress,
+      :name => Forgery(:basic).text
+    )
+  end
+
   define_builder(User) do |klass, overrides|
     klass.new(
       :email => Forgery(:internet).email_address,
@@ -36,6 +57,7 @@ Fixjour :verify => true do
     klass.new(
       :purpose => Forgery(:basic).text,
       :description => Forgery(:basic).text,
+      :sponsor => send("create_#{%w[politician committee_meeting].rand}"),
       :bill => new_bill,
       :number => rand(1000),
       :offered_on => "12/13/2009",
@@ -101,6 +123,7 @@ Fixjour :verify => true do
   define_builder(RepresentativeTerm) do |klass, overrides|
     klass.new(
       :politician => new_politician,
+      :party => new_party,
       :state => UsState::US_STATES.rand.last,
       :district => rand(100)
     )
@@ -109,6 +132,7 @@ Fixjour :verify => true do
   define_builder(SenateTerm) do |klass, overrides|
     klass.new(
       :politician => new_politician,
+      :party => new_party,
       :senate_class => [1, 2, 3].rand,
       :state => UsState::US_STATES.rand.last
     )
