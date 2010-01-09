@@ -13,9 +13,6 @@ Feature: Bill viewing
     And I press "Search"
     And I should see "USA PATRIOT Reauthorization Act of 2009"
 
-    When I follow "USA PATRIOT Reauthorization Act of 2009"
-    Then I should see "View on OpenCongress"
-
   Scenario: User searches for and doesn't find a bills
     When I go to the bills page
     Then I should see "Recent Bills"
@@ -23,3 +20,8 @@ Feature: Bill viewing
     And I press "Search"
     Then I should see "Matching Bills"
     Then I should see "No matching bills found..."
+
+  Scenario: User browses from a current congress bill to OpenCongress
+    Given a current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
+    When I go to the bill page for "USA PATRIOT Reauthorization Act of 2009"
+    Then I should see "View on OpenCongress"
