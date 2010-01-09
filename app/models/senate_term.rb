@@ -1,5 +1,7 @@
+require 'term'
+
 class SenateTerm < ActiveRecord::Base
-  include Term
+  acts_as_term
 
   validates_presence_of :senate_class, :state
 

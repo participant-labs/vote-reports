@@ -1,5 +1,7 @@
+require 'term'
+
 class RepresentativeTerm < ActiveRecord::Base
-  include Term
+  acts_as_term
   validates_presence_of :state, :district
 
   def for
