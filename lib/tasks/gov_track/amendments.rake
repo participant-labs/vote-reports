@@ -5,17 +5,6 @@ namespace :gov_track do
       require 'ar-extensions/import/postgresql'
 
       existing_amendments = Amendment.all.index_by {|a| "#{meeting}-#{a.chamber}#{a.number}" }
-      columns = [
-        :bill_id,
-        :congress_id,
-        :chamber,
-        :number,
-        :offered_on,
-        :sponsor_id,
-        :sequence,
-        :description,
-        :purpose
-      ]
 
       meetings do |meeting|
         puts "Fetching Amendments for Meeting #{meeting}"
@@ -42,7 +31,7 @@ namespace :gov_track do
             if data.at('sponsor')['none'].present?
               nil
             elsif sponsor_committee_name = data.at('sponsor')['committee']
-              find_committee(sponsor_committee_name.to_s) || begin
+              find_committee(sponsor_committee_name.to_s, "Amendment #{meeting}-#{chamber}#{number}", data.at('sponsor')) || begin
                 puts "Committee from #{data.at('sponsor').to_s} not found for #{amendment_path}"
                 nil
               end
@@ -59,12 +48,13 @@ namespace :gov_track do
           values = [
             bills.fetch("#{amends['type']}#{@congress.meeting}-#{amends['number']}") do
               raise "#{amends['type']}#{@congress.meeting}-#{amends['number']} not found (#{amends.to_s})"
-            end,
-            @congress,
+            end.id,
+            @congress.id,
             chamber,
             number,
             data.at('offered')['datetime'].to_s,
-            sponsor,
+            sponsor && sponsor.id,
+            sponsor && sponsor.class.name,
             sequence,
             data.at('description').inner_text,
             data.at('purpose').inner_text
@@ -79,8 +69,21 @@ namespace :gov_track do
           $stdout.print(sequence.nil? ? 'N' : ".")
           $stdout.flush
         end
+        columns = [
+          :bill_id,
+          :congress_id,
+          :chamber,
+          :number,
+          :offered_on,
+          :sponsor_id,
+          :sponsor_type,
+          :sequence,
+          :description,
+          :purpose
+        ]
         Amendment.import_without_validations_or_callbacks columns, new_amendments
         puts
+        raise "Import failed (#{Amendment.count} not at least #{new_amendments.size})" if Amendment.count < new_amendments.size
       end
     end
   end
