@@ -10,17 +10,45 @@ namespace :gov_track do
       File.exist?(local_path) ? local_path : "http://www.govtrack.us/data/#{path}"
     end
 
+    def find_committee_meeting_by_committee(committee)
+      if committee
+        committee.meetings.find_by_congress_id(@congress.id) \
+          || committee.meetings.create!(:congress_id => @congress.id, :name => committee.display_name, :committee_id => committee.id)
+      end
+    end
+
     def find_committee(name, source, node)
+      if name == 'House Administration'
+        name = 'House House Administration'
+      end
+
       @committees[name] || begin
-        wrong_congress_meeting = CommitteeMeeting.first(:conditions => {:name => name})
-        if wrong_congress_meeting.nil?
-          puts "#{source} listed committee '#{name}' via #{node} which wasn't found"
-        else
-          wrong_congress_meeting.committee.meetings.find_by_congress_id(@congress.id).tap do |right_congress_meeting|
-            puts "#{source} listed committee #{wrong_congress_meeting.inspect} via #{node}, when it should have listed #{right_congress_meeting.inspect}"
+        congress_meeting = CommitteeMeeting.first(:conditions => {:name => name}) \
+          || find_committee_meeting_by_committee(Committee.find_by_display_name(name))
+        if congress_meeting.nil?
+          puts "#{source} committee '#{name}' not found for #{node}"
+          nil
+        elsif congress_meeting.congress != @congress
+          congress_meeting = find_committee_meeting_by_committee(congress_meeting.committee).tap do |right_congress_meeting|
+            if congress_meeting.name != right_congress_meeting.name
+              puts "#{source} listed committee #{congress_meeting.inspect} via #{node}, when it should have listed #{right_congress_meeting.inspect}"
+            end
           end
         end
+        congress_meeting
       end
+    end
+
+    def find_subcommittee(committee_name, subcommittee_name, source, node)
+      subcommittee_meeting = find_committee(subcommittee_name, source, node)
+      if subcommittee_meeting
+        parent = subcommittee_meeting.committee.parent
+        unless [parent.display_name, *parent.meetings.map(&:name)].compact.include?(committee_name)
+          puts "Skipping subcommittee '#{subcommittee_meeting.name}' which wasn't found under '#{committee_name}', but under '#{parent.display_name}' / '#{parent.meetings.find_by_congress_id(@congress.id).try(:name) }'"
+          return nil
+        end
+      end
+      subcommittee_meeting
     end
 
     def meetings(&block)

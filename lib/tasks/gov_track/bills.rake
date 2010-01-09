@@ -12,7 +12,7 @@ namespace :gov_track do
 
         new_bills = []
         Dir['bills/*'].each do |bill_path|
-          @committees = CommitteeMeeting.all(:select => 'name, id', :conditions => {:congress_id => @congress.id}).index_by(&:name)
+          @committees = CommitteeMeeting.all(:conditions => {:congress_id => @congress.id}).index_by(&:name)
 
           type, number = bill_path.match(%r{bills/([a-z]+)(\d+)\.xml}).captures
           opencongress_bill_id = "#{meeting}-#{type}#{number}"
@@ -65,11 +65,12 @@ namespace :gov_track do
           end
 
           new_committee_actions = data.xpath('committees/committee').map do |committee_node|
-            committee_meeting_id = find_committee(committee_node['name'].to_s, "Bill #{opencongress_bill_id}", committee_node)
+            committee_name = committee_node['name'].to_s
+            committee_meeting_id = find_committee(committee_name, "Bill #{opencongress_bill_id}", committee_node)
             if (subcommittee_name = committee_node['subcommittee']).present?
               subcommittee_id = (committee_meeting_id && CommitteeMeeting.first(
                 :joins => :committee, :conditions => {:'committee_meetings.name' => subcommittee_name, :'committees.ancestry' => CommitteeMeeting.find(committee_meeting_id).committee_id.to_s}
-              ).try(:id)) || find_committee(subcommittee_name, "Bill #{opencongress_bill_id}", committee_node)
+              ).try(:id)) || find_subcommittee(committee_name, subcommittee_name, "Bill #{opencongress_bill_id}", committee_node)
               committee_meeting_id = subcommittee_id if subcommittee_id
             end
             if committee_meeting_id.nil?
