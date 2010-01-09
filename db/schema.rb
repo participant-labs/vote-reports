@@ -221,25 +221,26 @@ ActiveRecord::Schema.define(:version => 20100109200439) do
   end
 
   create_table "rolls", :force => true do |t|
-    t.string   "where"
+    t.string   "where",        :null => false
     t.datetime "voted_at"
-    t.integer  "aye"
-    t.integer  "nay"
-    t.integer  "not_voting"
-    t.integer  "present"
-    t.string   "result"
-    t.string   "required"
-    t.text     "question"
-    t.string   "roll_type"
-    t.string   "gov_track_id"
-    t.integer  "subject_id"
-    t.integer  "congress_id"
+    t.integer  "aye",          :null => false
+    t.integer  "nay",          :null => false
+    t.integer  "not_voting",   :null => false
+    t.integer  "present",      :null => false
+    t.string   "result",       :null => false
+    t.string   "required",     :null => false
+    t.text     "question",     :null => false
+    t.string   "roll_type",    :null => false
+    t.string   "gov_track_id", :null => false
+    t.integer  "subject_id",   :null => false
+    t.integer  "congress_id",  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "subject_type"
+    t.string   "subject_type", :null => false
   end
 
   add_index "rolls", ["gov_track_id"], :name => "index_rolls_on_opencongress_id", :unique => true
+  add_index "rolls", ["gov_track_id"], :name => "rolls_gov_track_id_unique", :unique => true
 
   create_table "slugs", :force => true do |t|
     t.string   "name"
