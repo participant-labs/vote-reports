@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100109071806) do
+ActiveRecord::Schema.define(:version => 20100109175957) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -216,16 +216,6 @@ ActiveRecord::Schema.define(:version => 20100109071806) do
     t.string   "cached_slug"
   end
 
-  create_table "representative_terms", :force => true do |t|
-    t.integer "politician_id", :null => false
-    t.date    "started_on"
-    t.date    "ended_on"
-    t.integer "district",      :null => false
-    t.string  "state",         :null => false
-    t.string  "url"
-    t.integer "party_id"
-  end
-
   create_table "rolls", :force => true do |t|
     t.string   "where"
     t.datetime "voted_at"
@@ -271,6 +261,19 @@ ActiveRecord::Schema.define(:version => 20100109071806) do
 
   create_table "subjects", :force => true do |t|
     t.string "name", :null => false
+  end
+
+  create_table "terms", :force => true do |t|
+    t.integer  "politician_id", :null => false
+    t.date     "started_on"
+    t.date     "ended_on"
+    t.integer  "district"
+    t.string   "state"
+    t.string   "url"
+    t.integer  "party_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "type",          :null => false
   end
 
   create_table "users", :force => true do |t|
