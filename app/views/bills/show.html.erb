@@ -1,7 +1,9 @@
 <h2><%= bill_title(@bill) %></h2>
 
 <ul>
+  <%- if @bill.opencongress_url -%>
   <li><%= link_to 'View on OpenCongress', @bill.opencongress_url %></li>
+  <%- end -%>
   <li><%= link_to 'View Summary', '#', :'data-dialog' => '#bill_summary', :'data-dialog-title' => bill_title(@bill) %></li>
 </ul>
 
