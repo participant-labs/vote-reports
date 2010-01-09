@@ -8,6 +8,8 @@ Amendment: t[:number, :bill_id].all :unique => true
 script/generate rspec_model BillRelation from_id:integer to_id:integer relation:string
 Missing data model: related bills, actions, status
 Bill subcommittee references often don't exist: e.g. Bill 106-s68 listed committee 'International Security, Proliferation and Federal Services' via <committee name="Senate Governmental Affairs" subcommittee="International Security, Proliferation and Federal Services" activity="Referral"/> which wasn't found
+Constrain Roll#roll_type to not-blank (deal with: 103/rolls/h1994-68.xml)
+
 
 Full Bill Import:
 real	189m20.792s
@@ -23,3 +25,16 @@ Full Vote Import:
 real	30m32.227s
 user	14m5.166s
 sys	0m31.824s
+
+>> Roll.all(:conditions => {:roll_type => ''})
+=> [#<Roll id: 963, where: "house", voted_at: "1994-03-18 00:12:00", aye: 175, nay: 240, not_voting: 18, present: 0, result: "Failed", required: "1/2", question: ": S 636", roll_type: "", gov_track_id: "h1994-68", subject_id: 29701, congress_id: 2, created_at: "2010-01-09 04:10:13", updated_at: "2010-01-09 04:10:13", subject_type: "Bill">]
+>> exit
+[~/Projects/vote-reports (gov_track_votes)⚡] $ sc
+Loading development environment (Rails 2.3.5)
+WARNING: Nokogiri was built against LibXML version 2.7.5, but has dynamically loaded 2.7.6
+** Erubis 2.6.5
+>> Roll.all(:conditions => {:roll_type => ''}).congress
+NoMethodError: undefined method `congress' for #<Array:0x103110360>
+	from (irb):1
+>> Roll.all(:conditions => {:roll_type => ''}).first.congress
+=> #<Congress id: 2, meeting: 103>
