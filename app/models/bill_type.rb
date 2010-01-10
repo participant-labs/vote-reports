@@ -24,5 +24,5 @@ class BillType < String
   def short_name
     TYPES.fetch(self).fetch(:short)
   end
-  alias_method :to_s, :short_name
+  alias to_s short_name
 end

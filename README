@@ -9,7 +9,7 @@ script/generate rspec_model BillRelation from_id:integer to_id:integer relation:
 Missing data model: related bills, actions, status
 Bill subcommittee references often don't exist: e.g. Bill 106-s68 listed committee 'International Security, Proliferation and Federal Services' via <committee name="Senate Governmental Affairs" subcommittee="International Security, Proliferation and Federal Services" activity="Referral"/> which wasn't found
 Constrain Roll#roll_type to not-blank (deal with: 103/rolls/h1994-68.xml)
-
+BillType is dangerous in that you must call #to_s to get the expected view string
 
 Full Bill Import:
 real	189m20.792s
