@@ -27,11 +27,33 @@ class Bill < ActiveRecord::Base
   has_many :bill_subjects
   has_many :subjects, :through => :bill_subjects
 
-
-  has_many :bill_titles
-  has_many :bill_criteria
   has_many :committee_actions, :class_name => 'BillCommitteeActions'
   has_many :committees, :through => :committee_actions
+
+  has_many :titles, :class_name => 'BillTitle' do
+    TITLE_PREFERENCE = [
+      'enacted',
+      'agreed to by house and senate',
+      'passed house',
+      'passed senate',
+      'amended by senate',
+      'amended by house',
+      'reported to senate',
+      'reported to house',
+      'introduced'
+    ].freeze
+
+    def best
+      TITLE_PREFERENCE.each do |as|
+        title = first(:conditions => {:title_type => 'short', :as => as}) \
+             || first(:conditions => {:title_type => 'official', :as => as})
+        return title if title
+      end
+      notify_exceptional(RuntimeExcption.new("Title for #{proxy_owner.opencongress_id} not found via title preferences")
+      first
+    end
+  end
+  has_many :bill_criteria, :dependent => :destroy
   has_many :amendments, :dependent => :destroy
   has_many :rolls, :as => :subject, :dependent => :destroy
   has_many :votes, :through => :rolls
@@ -58,17 +80,13 @@ class Bill < ActiveRecord::Base
     end
   end
 
-  def title(type = :official)
-    bill_titles.find(:first, :conditions => {:title_type => type.to_s})
-  end
-
   def opencongress_url
     # As of the 111th, OpenCongress only maintains pages for bills for the current meeting
     "http://www.opencongress.org/bill/#{opencongress_id}/show" if congress.current?
   end
 
   def inspect
-    %{#<Bill #{gov_track_id} - "#{title}">}
+    %{#<Bill #{gov_track_id} - "#{titles.best}">}
   end
 
   def congress=(congress)
