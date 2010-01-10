@@ -116,7 +116,16 @@ Fixjour :verify => true do
     klass.new(
       :congress => Congress.find_or_create_by_meeting(rand(200)),
       :subject => new_bill,
-      :gov_track_id => Forgery(:basic).text
+      :gov_track_id => Forgery(:basic).text,
+      :where => Forgery(:basic).text,
+      :result => Forgery(:basic).text,
+      :required => Forgery(:basic).text,
+      :question => Forgery(:basic).text,
+      :roll_type => Forgery(:basic).text,
+      :aye => rand(500),
+      :nay => rand(500),
+      :not_voting => rand(500),
+      :present => rand(500)
     )
   end
 
