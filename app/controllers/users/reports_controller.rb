@@ -27,7 +27,7 @@ class Users::ReportsController < ApplicationController
     @report = @user.reports.find(params[:id], :scope => @user)
     if @report.update_attributes(params[:report])
       flash[:notice] = "Successfully updated report."
-      redirect_to @user
+      redirect_to [@user, @report]
     else
       render :action => 'edit'
     end

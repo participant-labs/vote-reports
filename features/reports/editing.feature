@@ -9,7 +9,7 @@ Feature: User edits reports
       | name      | description                |
       | My Report | I made this because I care |
 
-  Scenario: User edits a report
+  Scenario: User edits a report and is redirected to the same on success
     When I go to my reports page
     And I follow "My Report"
     And I follow "edit"
@@ -17,6 +17,7 @@ Feature: User edits reports
     And I fill in "Description" with "You should read this because I'm awesome"
     And I press "Save"
     Then I should see "Successfully updated report."
+    And I should be on my report page for "My Best Report"
     And I should see "My Best Report"
     And I should see "You should read this because I'm awesome"
     And I should not see "My Report"
@@ -47,3 +48,4 @@ Feature: User edits reports
     And I fill in "Name" with ""
     And I press "Save"
     Then I should see "Name can't be blank"
+    And I should not see "Successfully updated report."
