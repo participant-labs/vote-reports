@@ -1,29 +1,34 @@
 <h2>Declare Your Opposition/Support to Bills</h2>
-<% form_for [@report.user, @report] do |f| %>
-  <table>
-    <thead>
-      <th>Bill</th>
-      <th>Support/Oppose</th>
-    </thead>
-    <tbody>
-      <%- build_criteria_for(@report, @bills).each do |criterion| -%>
-        <%- f.fields_for :bill_criteria, criterion do |bill_criteria_fields| -%>
-          <tr>
-            <td>
-              <%= render 'bills/bill', :bill => criterion.bill %>
-              <%= bill_criteria_fields.hidden_field :bill_id %>
-              <%= bill_criteria_fields.hidden_field :id unless criterion.new_record? %>
-            </td>
-            <td>
-              <%= bill_criteria_fields.label :support %>
-              <%= bill_criteria_fields.check_box :support %><br />
-              <%= bill_criteria_fields.label :oppose %>
-              <%= bill_criteria_fields.check_box :oppose %>
-            </td>
-          </tr>
+<%- if @bills.empty? -%>
+  <p>No bills found</p>
+  <%= link_to 'Back', :back %>
+<%- else -%>
+  <% form_for [@report.user, @report] do |f| %>
+    <table>
+      <thead>
+        <th>Bill</th>
+        <th>Support/Oppose</th>
+      </thead>
+      <tbody>
+        <%- build_criteria_for(@report, @bills).each do |criterion| -%>
+          <%- f.fields_for :bill_criteria, criterion do |bill_criteria_fields| -%>
+            <tr>
+              <td>
+                <%= render 'bills/bill', :bill => criterion.bill %>
+                <%= bill_criteria_fields.hidden_field :bill_id %>
+                <%= bill_criteria_fields.hidden_field :id unless criterion.new_record? %>
+              </td>
+              <td>
+                <%= bill_criteria_fields.label :support %>
+                <%= bill_criteria_fields.check_box :support %><br />
+                <%= bill_criteria_fields.label :oppose %>
+                <%= bill_criteria_fields.check_box :oppose %>
+              </td>
+            </tr>
+          <%- end -%>
         <%- end -%>
-      <%- end -%>
-    </tbody>
-  </table>
-  <%= f.submit 'Save Bills', :class => 'submit' %>
-<% end %>
+      </tbody>
+    </table>
+    <%= f.submit 'Save Bills', :class => 'submit' %>
+  <% end %>
+<%- end -%>
