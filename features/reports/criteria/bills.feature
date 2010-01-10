@@ -3,12 +3,14 @@ Feature: Adding Bill Criteria to Reports
   As a user
   I want to add bills to my report
 
-  Scenario: User adds a bill to a report
+  Background:
     Given I am signed in
-    And a bill named "USA PATRIOT Reauthorization Act of 2009"
     And I have a report named "My report"
     When I go to my report page for "My report"
-    And I fill in "Add Bills" with "patriot"
+
+  Scenario Outline: User adds a bill to a report
+    Given <bill type> named "USA PATRIOT Reauthorization Act of 2009"
+    When I fill in "Add Bills" with "patriot"
     And I press "Search"
     And I check "Support"
     And I press "Save Bills"
@@ -16,3 +18,18 @@ Feature: Adding Bill Criteria to Reports
     And I should be on my report page for "My report"
     And I should see "Support -"
     And I should see "USA PATRIOT Reauthorization Act of 2009"
+
+  Examples:
+    | bill type                          |
+    | a voted, current-congress bill     |
+    | an un-voted, current-congress bill |
+    | a voted, previous-congress bill    |
+
+  Scenario: Search should not return an unvoted bill from a previous congress
+    Given an un-voted, previous-congress bill named "USA PATRIOT Reauthorization Act of 2009"
+    When I fill in "Add Bills" with "patriot"
+    And I press "Search"
+    Then I should not see "USA PATRIOT Reauthorization Act of 2009"
+    And I should see "No bills found"
+    When I follow "Back"
+    Then I should be on my report page for "My report"
