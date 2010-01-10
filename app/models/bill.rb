@@ -6,16 +6,28 @@ class Bill < ActiveRecord::Base
   has_friendly_id :opencongress_id
 
   searchable do
-    text :summary, :gov_track_id, :opencongress_id
-    text :bill_titles do
-      bill_titles.map(&:title) * ' '
+    text :summary, :gov_track_id, :opencongress_id, :bill_number
+    text :bill_type do
+      [bill_type.short_name, bill_type.long_name].join(' ')
+    end
+    text :titles do
+      titles.map(&:title) * ' '
+    end
+    text :introduced_on do
+      introduced_on.to_s(:long)
     end
     integer :bill_number
     boolean :old_and_unvoted do
       congress.meeting != Congress.current_meeting \
-        && !Roll.exists?(:subject_id => self, :subject_type => self.class.name)
+        && rolls.empty?
     end
     time :introduced_on
+  end
+
+  class << self
+    def reindex(opts = {})
+      super(opts.reverse_merge(:include => [:titles, :rolls, :congress]))
+    end
   end
 
   belongs_to :congress
