@@ -11,6 +11,10 @@ class Bill < ActiveRecord::Base
       bill_titles.map(&:title) * ' '
     end
     integer :bill_number
+    boolean :old_and_unvoted do
+      congress.meeting != Congress.current_meeting \
+        && !Roll.exists?(:subject_id => self, :subject_type => self.class.name)
+    end
     time :introduced_on
   end
 
@@ -47,6 +51,9 @@ class Bill < ActiveRecord::Base
       search do
         fulltext params[:q]
         paginate :page => params[:page], :per_page => PER_PAGE
+        if params[:exclude_old_and_unvoted]
+          without :old_and_unvoted, true
+        end
       end
     end
   end
