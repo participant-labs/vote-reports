@@ -43,8 +43,7 @@
 <%- end -%>
 
 <%- if @report.user == current_user -%>
-  <h3>Add Bills to Report</h3>
-  <%= render 'bills/search', :label => '', :path => new_user_report_bills_path(@report.user, @report) %>
+  <%= render 'bills/search', :label => 'Add Bills', :path => new_user_report_bills_path(@report.user, @report) %>
 <%- end -%>
 
 <p>
