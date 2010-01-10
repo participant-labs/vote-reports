@@ -4,6 +4,6 @@ class Users::Reports::BillsController < ApplicationController
     if @report.has_better_id?
       redirect_to new_user_report_bills_path(current_user, @report), :status => 301
     end
-    @bills = Bill.paginated_search(params)
+    @bills = Bill.paginated_search(params).results
   end
 end
