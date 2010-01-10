@@ -11,8 +11,7 @@ class Report < ActiveRecord::Base
     attributes['support'] == '0' && attributes['oppose'] == '0'
   }
 
-  named_scope :published, :select => 'DISTINCT reports.*', :joins => :bill_criteria,
-                          :conditions => 'bill_criteria.bill_id IS NOT NULL'
+  named_scope :published, :select => 'DISTINCT reports.*', :joins => :bill_criteria
   named_scope :recent, :limit => 10, :order => 'updated_at DESC'
 
   def description
