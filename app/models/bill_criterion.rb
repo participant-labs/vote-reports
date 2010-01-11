@@ -14,4 +14,22 @@ class BillCriterion < ActiveRecord::Base
   def oppose?
     !support
   end
+
+  def aligns?(vote)
+    (support? && vote.aye?) || (oppose? && vote.nay?)
+  end
+
+  def contradicts?(vote)
+    (support? && vote.nay?) || (oppose? && vote.aye?)
+  end
+
+  def score(vote)
+    if aligns?(vote)
+      1.0
+    elsif contradicts?(vote)
+      0.0
+    else
+      0.5
+    end
+  end
 end
