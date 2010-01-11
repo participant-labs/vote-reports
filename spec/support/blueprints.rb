@@ -161,4 +161,10 @@ Fixjour :verify => true do
       :state => UsState::US_STATES.rand.last
     )
   end
+
+  def create_published_report(attrs)
+    bill = create_bill
+    report = create_report(attrs)
+    create_bill_criterion(:bill => bill, :report => report)
+  end
 end
