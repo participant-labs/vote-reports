@@ -17,16 +17,15 @@ class Report < ActiveRecord::Base
   end
 
   def generate_scores!
-    all_scores = bill_criteria.inject({}) do |scores, bill_criterion|
+    all_scores = bill_criteria.inject(Hash.new(0.0)) do |scores, bill_criterion|
       votes = bill_criterion.bill.votes
       votes.each do |vote|
-        scores[vote.politician] ||= 0
-        scores[vote.politician] += 1 if (bill_criterion.support? && vote.aye?) || (bill_criterion.oppose? && vote.nay?)
+        scores[vote.politician] += bill_criterion.score(vote)
       end
       scores
     end
     all_scores.each_pair do |politician, score|
-      all_scores[politician] = (score * 100) / bill_criteria.count
+      all_scores[politician] = (score / bill_criteria.count) * 100
     end
     all_scores.to_a.sort_by(&:last).reverse
   end

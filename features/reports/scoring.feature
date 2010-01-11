@@ -23,6 +23,6 @@ Feature: Scoring Reports
       | George Foreman | -    |
     When I go to my report page for "Active Report"
     Then I should see "Michael Jordan" has the score "100"
-    And I should see "Tiger Woods" has the score "0"
-    And I should see "Bill Cosby" has the score "0"
+    And I should see "Tiger Woods" has the score "50"
+    And I should see "Bill Cosby" has the score "50"
     And I should see "George Foreman" has the score "0"
