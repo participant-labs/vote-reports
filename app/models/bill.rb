@@ -61,7 +61,7 @@ class Bill < ActiveRecord::Base
              || first(:conditions => {:title_type => 'official', :as => as})
         return title if title
       end
-      notify_exceptional(RuntimeExcption.new("Title for #{proxy_owner.opencongress_id} not found via title preferences")
+      notify_exceptional "Title for #{proxy_owner.opencongress_id} not found via title preferences"
       first
     end
   end

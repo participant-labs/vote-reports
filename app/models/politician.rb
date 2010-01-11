@@ -66,8 +66,8 @@ class Politician < ActiveRecord::Base
     if rep_states.present? && senate_states.present?
       most_states = rep_states.size > senate_states.size ? rep_states.size : senate_states.size
       if (rep_states | senate_states).size > most_states
-        notify_exceptional(ArgumentError.new(
-          "#{id} #{full_name} has different term states; senate: #{senate_states.join(', ')} representative: #{rep_states.join(', ')}"))
+        notify_exceptional(
+          "#{id} #{full_name} has different term states; senate: #{senate_states.join(', ')} representative: #{rep_states.join(', ')}")
       end
     end
   end
