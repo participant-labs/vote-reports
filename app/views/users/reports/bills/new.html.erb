@@ -1,5 +1,5 @@
 <h2>Declare Your Opposition/Support to Bills</h2>
-<p>You searched for: <q><%= @q %></q></p>
+<%= render 'users/reports/bills/search', :report => @report %>
 <%- if @bills.empty? -%>
   <p>No bills found</p>
   <%= link_to 'Back', :back %>
