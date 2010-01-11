@@ -2,6 +2,9 @@ class Bill < ActiveRecord::Base
   PER_PAGE = 30
 
   named_scope :recent, :limit => 25, :order => 'created_at DESC'
+  named_scope :with_title, lambda {|title|
+    {:joins => :titles, :conditions => {:'bill_titles.title' => title}}
+  }
 
   has_friendly_id :opencongress_id
 
