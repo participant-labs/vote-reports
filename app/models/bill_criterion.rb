@@ -27,9 +27,9 @@ class BillCriterion < ActiveRecord::Base
     if aligns?(vote)
       1.0
     elsif contradicts?(vote)
-      0.0
+      -1.0
     else
-      0.5
+      0.0
     end
   end
 end

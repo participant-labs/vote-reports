@@ -9,24 +9,15 @@
 <blockquote><%= raw @report.description %></blockquote>
 <%- end -%>
 
-<%- top_scores = scores[0..20] -%>
-<%- if top_scores.present? -%>
-  <h3>Top Scores</h3>
+<h3>Scores</h3>
+<%- if scores.present? -%>
   <ol>
-    <%- top_scores.each do |(politician, score)| -%>
-      <li><%= render 'politicians/politician', :politician => politician %>: <%= score %></li>
+    <%- scores.each do |(politician, score)| -%>
+      <li><%= render 'politicians/politician', :politician => politician %>: <%= score.round %>%</li>
     <%- end -%>
   </ol>
-<%- end -%>
-
-<%- lowest_scores = scores[-20..-1] -%>
-<%- if lowest_scores.present? -%>
-  <h3>Lowest Scores</h3>
-  <ol>
-    <%- lowest_scores.each do |(politician, score)| -%>
-      <li><%= render 'politicians/politician', :politician => politician %>: <%= score %></li>
-    <%- end -%>
-  </ol>
+<%- else -%>
+  <p>No scores yet, as this report has no criteria to judge representatives by.</p>
 <%- end -%>
 
 <h3>Bill Criteria</h3>
