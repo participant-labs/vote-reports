@@ -4,7 +4,7 @@ class Politician < ActiveRecord::Base
 
     def headshot_url(type = nil)
       if gov_track_id.blank?
-        notify_exceptional(ArgumentError.new("Unable to fetch headshot, no gov_track_id for: #{inspect}"))
+        notify_exceptional("Unable to fetch headshot, no gov_track_id for: #{inspect}")
         return nil
       end
       ::GovTrack::Politician.new(gov_track_id).headshot_url(HEADSHOT_TYPE_TO_SIZE[type])
