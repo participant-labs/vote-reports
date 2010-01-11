@@ -9,10 +9,10 @@ Feature: Browsing Politicians
     Then I should be on the politicians page
 
   Scenario: Browsing to a Politician from the Politicians Page
-    Given the following politician:
-      | first_name | last_name   | gov_track_id |
-      | Ron        | Wyden       | 300100       |
-      | Bob        | Barr        |              |
+    Given the following politician records:
+      | name      | gov_track_id |
+      | Ron Wyden | 300100       |
+      | Bob Barr  |              |
     When I go to the politicians page
     Then I should see "Ron Wyden"
 
@@ -23,8 +23,8 @@ Feature: Browsing Politicians
 
   Scenario: Viewing representative terms from the Politicians Page
     Given the following politician records:
-      | first_name | last_name   | gov_track_id |
-      | Ron        | Wyden       | 300100       |
+      | name      | gov_track_id |
+      | Ron Wyden | 300100       |
     And the following representative terms for "Ron Wyden":
       | district | state |
       | 3        | IA    |

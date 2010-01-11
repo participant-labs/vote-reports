@@ -97,6 +97,13 @@ Fixjour :verify => true do
   end
 
   define_builder(Politician) do |klass, overrides|
+    overrides.process(:name) do |name|
+      first_name, last_name = name.split(' ', 2)
+      overrides.merge!(
+        :first_name => first_name,
+        :last_name => last_name)
+    end
+
     klass.new(
       :gov_track_id => rand(1000000),
       :first_name => Forgery(:name).first_name,
