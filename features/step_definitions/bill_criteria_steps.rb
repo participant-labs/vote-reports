@@ -1,7 +1,6 @@
-And /^(report "[^\"]*") has the following bill criteria:$/ do |report, table|
+And /^(report "[^\"]*") has the following bill criteri(?:a|on):$/ do |report, table|
+  table.map_column!('bill') {|title| Bill.with_title(title).first }
   table.hashes.each do |attrs|
-    attrs['report'] = report
-    attrs['bill'] = Bill.with_title(attrs['bill']).first
-    create_bill_criterion(attrs.symbolize_keys)
+    create_bill_criterion(attrs.symbolize_keys.merge(:report => report))
   end
 end

@@ -28,6 +28,9 @@ Given /^the following published reports by me:$/ do |table|
   end
 end
 
-Then /^I should see "([^\"]*)" has the score "([^\"]*)"$/ do |politician_name, score|
-  response.should contain("#{politician_name}: #{score}")
+Then /^I should see the following scores:$/ do |table|
+  table.map_column!('politician') {|name| Politician.with_name(name).first }
+  table.hashes.each do |hash|
+    response.should contain("#{hash['politician'].full_name}: #{hash['score']}%")
+  end
 end
