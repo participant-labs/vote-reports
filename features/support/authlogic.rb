@@ -1,5 +1,7 @@
-module AuthlogicSupport
-  require Rails.root.join('spec/support/authlogic')
+require Rails.root.join('spec/support/authlogic')
+
+Before do
+  activate_authlogic
 end
 
-World(AuthlogicSupport)
+World(Authlogic::Test)
