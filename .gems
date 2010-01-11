@@ -1,11 +1,5 @@
 authlogic --version '>=2.1.3'
 bluecloth --version '>=2.0.5'
-crack
 erubis
 friendly_id
 gravtastic --version '>= 2.1.0'
-httparty
-ym4r
-nokogiri
-fastercsv
-matthuhiggins-foreigner --source 'http://gemcutter.org'
