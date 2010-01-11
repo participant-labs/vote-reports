@@ -6,6 +6,5 @@ When /^I log in as "(.*)\/(.*)"$/ do |email, password|
 end
 
 Given /^I am signed in$/ do
-  @current_user = create_user
-  When %{I log in as "#{@current_user.email}/#{@current_user.password}"}
+  When %{I log in as "#{current_user.email}/#{current_user.password}"}
 end
