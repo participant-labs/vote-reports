@@ -5,4 +5,12 @@ class Vote < ActiveRecord::Base
   validates_uniqueness_of :roll_id, :scope => :politician_id
   validates_presence_of :politician, :roll
   validates_inclusion_of :vote, :in => %w[ + - P 0 ]
+
+  def aye?
+    vote == '+'
+  end
+
+  def nay?
+    vote == '-'
+  end
 end

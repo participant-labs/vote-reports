@@ -1,3 +1,7 @@
+Transform /bill "([^\"]*)"/ do |title|
+  Bill.with_title(title).first
+end
+
 Given /^an? (.*)bill named "([^\"]*)"$/ do |attrs, title|
   create_bill_roll = false
   bill = new_bill(

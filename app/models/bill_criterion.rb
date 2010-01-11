@@ -6,4 +6,12 @@ class BillCriterion < ActiveRecord::Base
   validates_uniqueness_of :bill_id, :scope => "report_id"
 
   accepts_nested_attributes_for :bill
+
+  def support?
+    support
+  end
+
+  def oppose?
+    !support
+  end
 end
