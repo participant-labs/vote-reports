@@ -5,11 +5,9 @@ class Report < ActiveRecord::Base
   has_many :bill_criteria
   has_many :bills, :through => :bill_criteria
 
-  validates_presence_of :user, :name
+  accepts_nested_attributes_for :bill_criteria
 
-  accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes|
-    attributes['support'] == '0' && attributes['oppose'] == '0'
-  }
+  validates_presence_of :user, :name
 
   named_scope :published, :select => 'DISTINCT reports.*', :joins => :bill_criteria
   named_scope :recent, :limit => 10, :order => 'updated_at DESC'
