@@ -104,7 +104,7 @@ describe Bill do
   end
 
   describe "#politicians" do
-    before(:all) do
+    before do
       @supporting = create_politician
       @opposing = create_politician
       @unconnected = create_politician
