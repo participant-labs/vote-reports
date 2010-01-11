@@ -1,8 +1,8 @@
 When /^I log in as "(.*)\/(.*)"$/ do |email, password|
-  When %{I go to the login page}
-  And %{I fill in "Email" with "#{email}"}
-  And %{I fill in "Password" with "#{password}"}
-  And %{I press "Log in"}
+  visit path_to('the login page')
+  fill_in "Email", :with => email
+  fill_in "Password", :with => password
+  click_button "Log in"
 end
 
 Given /^I am signed in$/ do
