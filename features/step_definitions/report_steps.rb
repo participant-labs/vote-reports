@@ -22,7 +22,7 @@ Given /^I have a published report named "([^\"]*)"$/ do |name|
   create_bill_criterion(:bill => bill, :report => report)
 end
 
-Given /^the following published reports by me:$/ do |table|
+Given /^I have the following published reports?:$/ do |table|
   table.hashes.each do |row|
     create_report(row.symbolize_keys.merge(:user => current_user))
   end

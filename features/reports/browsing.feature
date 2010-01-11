@@ -23,7 +23,7 @@ Feature: Browsing Reports
 
   Scenario: View Report name and Description on the report page
     Given I am signed in
-    And the following published reports by me:
+    And I have the following published report:
       | name      | description                |
       | My Report | I made this because I care |
     When I go to my reports page

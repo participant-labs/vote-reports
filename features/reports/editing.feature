@@ -5,7 +5,7 @@ Feature: User edits reports
 
   Background:
     Given I am signed in
-    And the following published reports by me:
+    And I have the following published reports:
       | name      | description                |
       | My Report | I made this because I care |
 
