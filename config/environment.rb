@@ -29,6 +29,7 @@ Rails::Initializer.run do |config|
   config.gem 'fastercsv'
   config.gem 'sunspot', :lib => 'sunspot'
   config.gem 'sunspot_rails', :lib => 'sunspot/rails'
+  config.gem 'websolr-rails'
   config.gem 'will_paginate'
   config.gem 'sexy_pg_constraints'
 
