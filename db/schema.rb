@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100109200439) do
+ActiveRecord::Schema.define(:version => 20100111051850) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(:version => 20100109200439) do
 
   create_table "rolls", :force => true do |t|
     t.string   "where",        :null => false
-    t.datetime "voted_at"
+    t.datetime "voted_at",     :null => false
     t.integer  "aye",          :null => false
     t.integer  "nay",          :null => false
     t.integer  "not_voting",   :null => false
