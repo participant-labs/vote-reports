@@ -11,11 +11,11 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
     when /my reports page/i
-      user_reports_path(@current_user)
+      user_reports_path(current_user)
     when /my report page for "(.+)"/i
-      user_report_path(@current_user, Report.find_by_name($1))
+      user_report_path(current_user, Report.find_by_name($1))
     when /my profile page/i
-      user_path(@current_user)
+      user_path(current_user)
     when /the politician page for "(.+)"/
       politician_path(Politician.find_by_full_name($1))
     when /the bill page for "(.+)"/
