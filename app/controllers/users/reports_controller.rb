@@ -1,5 +1,5 @@
 class Users::ReportsController < ApplicationController
-  before_filter :login_required, :except => [:index, :show]
+  before_filter :is_report_owner, :except => [:index, :show]
 
   def index
     @user = User.find(params[:user_id])
@@ -54,5 +54,18 @@ class Users::ReportsController < ApplicationController
     @user.reports.find(params[:id], :scope => @user).destroy
     flash[:notice] = "Successfully destroyed report."
     redirect_to user_reports_url(@user)
+  end
+
+  private
+
+  def is_report_owner
+    return if login_required == false
+    report_owner = User.find(params[:user_id])
+    unless current_user.admin? || (current_user == report_owner)
+      notify_exceptional("User #{current_user.inspect} attempted to access protected page #{request.path}")
+      flash[:notice] = "You may not access this page"
+      redirect_to user_report_path(report_owner, Report.find(params[:id]))
+      return false
+    end
   end
 end
