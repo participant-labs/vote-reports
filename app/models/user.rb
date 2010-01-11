@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates_presence_of :username, :email
   validates_uniqueness_of :username, :email
 
-  def is_admin?
+  def admin?
     false
   end
 end
