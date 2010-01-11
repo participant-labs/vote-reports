@@ -23,6 +23,7 @@ Feature: Deleting Reports
     And I follow "My Report"
     Then I should not see "destroy"
 
+  @wip
   Scenario: Attempting to deleting a report while logged out
     Given a published report named "My Report"
     When I go to the report page for "My Report"
