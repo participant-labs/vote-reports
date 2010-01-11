@@ -20,10 +20,10 @@
                 <%= bill_criteria_fields.hidden_field :id unless criterion.new_record? %>
               </td>
               <td>
-                <%= bill_criteria_fields.label :support %>
-                <%= bill_criteria_fields.check_box :support %><br />
-                <%= bill_criteria_fields.label :oppose %>
-                <%= bill_criteria_fields.check_box :oppose %>
+                <%= bill_criteria_fields.label :support_true, 'Support' %>
+                <%= bill_criteria_fields.radio_button :support, true %><br />
+                <%= bill_criteria_fields.label :support_false, 'Oppose' %>
+                <%= bill_criteria_fields.radio_button :support, false %>
               </td>
             </tr>
           <%- end -%>
