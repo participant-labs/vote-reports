@@ -129,6 +129,7 @@ Fixjour :verify => true do
       :required => Forgery(:basic).text,
       :question => Forgery(:basic).text,
       :roll_type => Forgery(:basic).text,
+      :voted_at => '11/15/2003',
       :aye => rand(500),
       :nay => rand(500),
       :not_voting => rand(500),
