@@ -26,6 +26,13 @@ Feature: Adding Bill Criteria to Reports
     | an un-voted, current-congress bill |
     | a voted, previous-congress bill    |
 
+  Scenario: User cancels a bill search
+    Given a voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
+    When I fill in "Add Bills" with "patriot"
+    And I press "Search"
+    And I follow "cancel"
+    Then I should be on my report page for "My report"
+
   Scenario: Search should not return an unvoted bill from a previous congress
     Given an un-voted, previous-congress bill named "USA PATRIOT Reauthorization Act of 2009"
     When I fill in "Add Bills" with "patriot"

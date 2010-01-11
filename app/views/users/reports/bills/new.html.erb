@@ -2,7 +2,7 @@
 <p>You searched for: <q><%= @q %></q></p>
 <%- if @bills.empty? -%>
   <p>No bills found</p>
-  <%= link_to 'cancel', :back %>
+  <%= link_to 'Back', :back %>
 <%- else -%>
   <% form_for [@report.user, @report] do |f| %>
     <table>
@@ -30,6 +30,6 @@
         <%- end -%>
       </tbody>
     </table>
-    <%= f.submit 'Save Bills', :class => 'submit' %> - <%= link_to 'Back', :back %>
+    <%= f.submit 'Save Bills', :class => 'submit' %> - <%= link_to 'cancel', :back %>
   <% end %>
 <%- end -%>
