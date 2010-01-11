@@ -11,5 +11,6 @@ class BillsController < ApplicationController
 
   def show
     @bill = Bill.find(params[:id])
+    @rolls = @bill.rolls.by_voted_at
   end
 end

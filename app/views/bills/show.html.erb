@@ -26,10 +26,10 @@
 </ul>
 <%- end -%>
 
-<%- if (rolls = @bill.rolls).present? -%>
+<%- if @rolls.present? -%>
 <h3>Votes</h3>
 <ul>
-  <% rolls.each do |roll|  %>
+  <% @rolls.each do |roll|  %>
     <li><%= render roll %></li>
   <% end %>
 </ul>
