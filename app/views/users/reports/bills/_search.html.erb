@@ -1,0 +1,7 @@
+<%- label ||= 'Search' -%>
+
+<% form_tag new_user_report_bills_path(report.user, report), :method => :get do %>
+  <%= label_tag :q, label %>
+  <%= text_field_tag :q, @q, :class => "text" %>
+  <%= submit_tag 'Search', :class => 'submit' %>
+<% end %>
