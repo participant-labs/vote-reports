@@ -30,15 +30,38 @@ describe Users::ReportsController do
   end
 
   describe "GET edit" do
+    before do
+      @report = create_report(:user => current_user)
+    end
+
     context "when there is a better id for this report" do
       before do
-        @report = create_report(:user => current_user)
         mock.instance_of(Report).has_better_id? { true }
       end
 
       it "should redirect" do
         get :edit, :user_id => current_user, :id => @report
         response.should redirect_to(edit_user_report_path(current_user, @report))
+      end
+    end
+
+    context "when I am not logged in" do
+      it "should deny access" do
+        logout
+        get :edit, :user_id => @report.user, :id => @report
+        response.should redirect_to(login_path(:return_to => edit_user_report_path(@report.user, @report)))
+      end
+    end
+
+    context "when I am not the owner" do
+      before do
+        login(create_user)
+        current_user.should_not == @report.user
+      end
+
+      it "should deny access" do
+        get :edit, :user_id => @report.user, :id => @report
+        response.should redirect_to(user_report_path(@report.user, @report))
       end
     end
   end

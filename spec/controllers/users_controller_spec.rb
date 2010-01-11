@@ -14,4 +14,40 @@ describe UsersController do
     end
 
   end
+
+  describe "GET index" do
+    it "should reject me if I'm not logged in" do
+      get :index
+      flash[:notice].should == "You must be logged in to access this page"
+      response.should redirect_to(login_path(:return_to => '/users'))
+    end
+
+    it "should reject me if I'm not an admin" do
+      login
+      get :index
+      flash[:notice].should == "You may not access this page"
+      response.should redirect_to(user_path(current_user))
+    end
+  end
+
+  describe "GET edit" do
+    before do
+      @user = create_user
+    end
+
+    it "should reject me if I'm not logged in" do
+      logout
+      get :edit, :id => @user
+      response.should redirect_to(login_path(:return_to => %Q{/users/#{@user.username}/edit}))
+      flash[:notice].should == "You must be logged in to access this page"
+    end
+
+    it "should reject me if I'm not the user being edited" do
+      current = create_user
+      login(current)
+      get :edit, :id => @user
+      response.should redirect_to(user_path(current))
+      flash[:notice].should == "You may not access this page"
+    end
+  end
 end

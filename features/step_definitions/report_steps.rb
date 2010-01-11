@@ -24,7 +24,13 @@ Given /^I have the following published reports?:$/ do |table|
   end
 end
 
-Then /^I should see the following scores:$/ do |table|
+Given /^the following published reports?:$/ do |table|
+  table.hashes.each do |row|
+    create_published_report(row.symbolize_keys)
+  end
+end
+
+Then /^I should see the following scores?:$/ do |table|
   table.map_column!('politician') {|name| Politician.with_name(name).first }
   table.hashes.each do |hash|
     response.should contain("#{hash['politician'].full_name}: #{hash['score']}%")
