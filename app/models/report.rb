@@ -21,7 +21,7 @@ class Report < ActiveRecord::Base
       votes = bill_criterion.bill.votes
       votes.each do |vote|
         scores[vote.politician] ||= 0
-        scores[vote.politician] += 1 if (bill_criterion.support && vote.vote) || (bill_criterion.oppose && !vote.vote)
+        scores[vote.politician] += 1 if (bill_criterion.support? && vote.aye?) || (bill_criterion.oppose? && vote.nay?)
       end
       scores
     end

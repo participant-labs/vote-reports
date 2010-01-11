@@ -1,3 +1,7 @@
+Transform /report "([^\"]*)"/ do |name|
+  Report.find_by_name(name)
+end
+
 Given /^a report named "([^\"]*)"$/ do |name|
   create_report(:name => name)
 end
@@ -22,4 +26,8 @@ Given /^the following published reports by me:$/ do |table|
   table.hashes.each do |row|
     create_report(row.symbolize_keys.merge(:user => current_user))
   end
+end
+
+Then /^I should see "([^\"]*)" has the score "([^\"]*)"$/ do |politician_name, score|
+  response.should contain("#{politician_name}: #{score}")
 end
