@@ -38,12 +38,10 @@ class Politician < ActiveRecord::Base
     Bill.scoped(:select => "DISTINCT bills.*", :joins => {:rolls => :votes}, :conditions => {:'votes.politician_id' => self}).extend(Vote::Support)
   end
 
-  class << self
-    def find_by_full_name(name)
-      first, last = name.split(' ')
-      first(:conditions => {:first_name => first, :last_name => last})
-    end
-  end
+  named_scope :with_name, lambda {|name|
+    first, last = name.split(' ', 2)
+    {:conditions => {:first_name => first, :last_name => last}}
+  }
 
   def full_name= full_name
     self.last_name, self.first_name = full_name.split(', ', 2)

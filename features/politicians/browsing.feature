@@ -25,7 +25,7 @@ Feature: Browsing Politicians
     Given the following politician records:
       | name      | gov_track_id |
       | Ron Wyden | 300100       |
-    And the following representative terms for "Ron Wyden":
+    And the following representative terms for politician "Ron Wyden":
       | district | state |
       | 3        | IA    |
     When I go to the politician page for "Ron Wyden"
@@ -36,7 +36,7 @@ Feature: Browsing Politicians
     Given the following politician records:
       | first_name | last_name   | gov_track_id | district    |
       | Ron        | Wyden       | 300100       | Senior Seat |
-    And the following senate terms for "Ron Wyden":
+    And the following senate terms for politician "Ron Wyden":
       | senate_class | state |
       | 3            | IA    |
     When I go to the politician page for "Ron Wyden"
