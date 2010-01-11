@@ -3,7 +3,7 @@ class Bill < ActiveRecord::Base
 
   named_scope :recent, :limit => 25, :order => 'created_at DESC'
   named_scope :with_title, lambda {|title|
-    {:joins => :titles, :conditions => {:'bill_titles.title' => title}}
+    {:select => 'DISTINCT bills.*', :joins => :titles, :conditions => {:'bill_titles.title' => title}}
   }
 
   has_friendly_id :opencongress_id
