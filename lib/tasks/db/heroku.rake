@@ -7,7 +7,11 @@ namespace :db do
     end
 
     task :pull do
-      `heroku db:pull #{db_url('development')}`
+      puts "heroku db:pull #{db_url('development')}"
+    end
+
+    task :push do
+      puts "heroku db:push #{db_url('development')}"
     end
 
     task :reset do
