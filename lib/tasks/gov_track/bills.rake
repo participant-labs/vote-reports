@@ -6,7 +6,6 @@ namespace :gov_track do
 
       @subjects = Subject.all.index_by(&:name)
 
-      existing_bills = Bill.all(:select => 'id, opencongress_id').index_by {|b| b.opencongress_id }
       meetings do |meeting|
         puts "Fetching Bills for Meeting #{meeting}"
 
@@ -38,7 +37,7 @@ namespace :gov_track do
             :sponsor_id => sponsor && sponsor.id,
             :summary => data.at('summary').inner_text.strip
           }
-          if bill = existing_bills[opencongress_bill_id]
+          if bill = Bill.find_by_opencongress_id(opencongress_bill_id)
             bill.update_attributes!(attrs)
           else
             bill = Bill.create!(attrs)
