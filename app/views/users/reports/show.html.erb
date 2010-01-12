@@ -16,8 +16,10 @@
       <li><%= render 'politicians/politician', :politician => politician %>: <%= score.round %>%</li>
     <%- end -%>
   </ol>
-<%- else -%>
+<%- elsif @report.bill_criteria.blank? -%>
   <p>No scores yet, as this report has no criteria to judge representatives by.</p>
+<%- else -%>
+  <p>No scores yet, as the associated bills have not been voted on.</p>
 <%- end -%>
 
 <h3>Bill Criteria</h3>
