@@ -1,4 +1,6 @@
 authlogic --version '>=2.1.3'
+ancestry
+sexy_pg_constraints
 bluecloth --version '>=2.0.5'
 erubis
 friendly_id
@@ -6,3 +8,4 @@ gravtastic --version '>= 2.1.0'
 sunspot
 sunspot_rails
 websolr-rails
+will_paginate
