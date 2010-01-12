@@ -9,4 +9,6 @@ require 'rake/rdoctask'
 
 require 'tasks/rails'
 
+task :spec => [:'sunspot:start']
+task :cucumber => [:'sunspot:start']
 task :default => [:spec, :cucumber]
