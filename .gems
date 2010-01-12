@@ -9,3 +9,5 @@ sunspot
 sunspot_rails
 websolr-rails
 will_paginate
+nokogiri
+fastercsv
