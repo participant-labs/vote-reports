@@ -6,4 +6,8 @@ namespace :sunspot do
     `rake sunspot:solr:start RAILS_ENV=test`
     `rake sunspot:solr:start RAILS_ENV=production`
   end
+
+  task :reindex => :environment do
+    Bill.reindex
+  end
 end
