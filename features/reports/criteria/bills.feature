@@ -33,6 +33,13 @@ Feature: Adding Bill Criteria to Reports
     And I follow "cancel"
     Then I should be on my report page for "My report"
 
+  Scenario: User saves an empty bill search
+    Given a voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
+    When I fill in "Add Bills" with "patriot"
+    And I press "Search"
+    And I press "Save"
+    Then I should be on my report page for "My report"
+
   Scenario: User tries a new bill search from the results page
     Given a voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
     Given a voted, current-congress bill named "Bovine Security Act of 2009"
