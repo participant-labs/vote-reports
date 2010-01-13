@@ -46,6 +46,7 @@ Feature: Scoring Reports
       | USA PATRIOT Reauthorization Act of 2009 | false   |
     When I go to my report page for "Active Report"
     Then I should see "No scores yet, as the associated bills have not been voted on."
+    And I should see "(unvoted)"
 
   Scenario: Bill Criteria report generates scores
     Given report "Active Report" has the following bill criterion:
