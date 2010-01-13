@@ -1,4 +1,3 @@
-<h3><%= title %></h3>
 <%- if reports.present? -%>
   <ol>
     <%- reports.each do |report| -%>
@@ -6,7 +5,7 @@
     <%- end -%>
   </ol>
 <%- else -%>
-  <p>No <%= title.downcase %> found...</p>
+  <p>No reports found...</p>
 <%- end -%>
 
 <%= will_paginate reports %>
