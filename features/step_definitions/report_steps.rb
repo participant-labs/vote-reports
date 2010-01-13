@@ -2,7 +2,7 @@ Transform /report "([^\"]*)"/ do |name|
   Report.find_by_name(name)
 end
 
-Given /^a report named "([^\"]*)"$/ do |name|
+Given /^an? (?:unpublished )?report named "([^\"]*)"$/ do |name|
   create_report(:name => name)
 end
 
@@ -12,6 +12,12 @@ end
 
 Given /^a published report named "([^\"]*)"$/ do |name|
   create_published_report(:name => name)
+end
+
+Given /^(\d+) published reports$/ do |count|
+  count.to_i.times do
+    create_published_report
+  end
 end
 
 Given /^a scored report named "([^\"]*)"$/ do |name|

@@ -1,6 +1,12 @@
-<h2><%= title %></h2>
-<ol>
-  <%- reports.each do |report| -%>
-    <li><%= render 'users/reports/report', :report => report %></li>
-  <%- end -%>
-</ol>
+<h3><%= title %></h3>
+<%- if reports.present? -%>
+  <ol>
+    <%- reports.each do |report| -%>
+      <li><%= render 'users/reports/report', :report => report %></li>
+    <%- end -%>
+  </ol>
+<%- else -%>
+  <p>No <%= title.downcase %> found...</p>
+<%- end -%>
+
+<%= will_paginate reports %>

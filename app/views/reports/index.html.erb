@@ -1,1 +1,7 @@
-<%= render 'reports/list', :title => 'Recent Reports', :reports => @recent_reports %>
+<% title "Reports" %>
+
+<h2>Report Search</h2>
+
+<%= render 'reports/search' %>
+
+<%= render 'reports/list', :title => @title, :reports => @reports %>

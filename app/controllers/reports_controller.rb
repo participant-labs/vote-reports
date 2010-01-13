@@ -6,6 +6,12 @@ class ReportsController < ApplicationController
   end
 
   def index
-    @recent_reports = Report.recent.published
+    if @q = params[:q]
+      @title = 'Matching Reports'
+      @reports = Report.paginated_search(params).results
+    else
+      @title = 'Recent Reports'
+      @reports = Report.published.by_updated_at.paginate(:page => params[:page], :per_page => Report::PER_PAGE)
+    end
   end
 end
