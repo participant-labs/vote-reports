@@ -25,4 +25,4 @@ Feature: Report Searching
     And I fill in "Search" with "smelly roses"
     And I press "Search"
     Then I should see "Matching Reports"
-    Then I should see "No matching reports found..."
+    Then I should see "No reports found..."
