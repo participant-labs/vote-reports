@@ -43,7 +43,7 @@ Fixjour :verify => true do
   define_builder(User) do |klass, overrides|
     klass.new(
       :email => Forgery(:internet).email_address,
-      :username => Forgery(:internet).user_name,
+      :username => Forgery(:basic).text,
       :password => 'password',
       :password_confirmation => 'password'
     )
