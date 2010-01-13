@@ -26,7 +26,13 @@
 <%- if @report.bill_criteria.present? -%>
   <ul>
     <%- @report.bill_criteria.each do |criterion| -%>
-      <li><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %></li>
+      <li>
+        <%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %>
+        <%- if @report.user == current_user -%>
+          <%= link_to('delete', user_report_bill_path(current_user, @report, criterion.bill), :method => :delete,
+                                :title => "Delete '#{criterion.bill.titles.best}' criterion") %>
+        <%- end -%>
+      </li>
     <%- end -%>
   </ul>
 <%- elsif @report.user == current_user -%>
