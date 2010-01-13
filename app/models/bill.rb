@@ -10,6 +10,9 @@ class Bill < ActiveRecord::Base
 
   searchable do
     text :summary, :gov_track_id, :opencongress_id, :bill_number
+    text :subjects do
+      subjects.map(&:name) * ' '
+    end
     text :bill_type do
       [bill_type.short_name, bill_type.long_name].join(' ')
     end
