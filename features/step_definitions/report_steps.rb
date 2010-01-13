@@ -14,6 +14,10 @@ Given /^a published report named "([^\"]*)"$/ do |name|
   create_published_report(:name => name)
 end
 
+Given /^a scored report named "([^\"]*)"$/ do |name|
+  create_scored_report(:name => name)
+end
+
 Given /^I have a published report named "([^\"]*)"$/ do |name|
   create_published_report(:name => name, :user => current_user)
 end

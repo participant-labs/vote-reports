@@ -10,6 +10,7 @@ class Report < ActiveRecord::Base
   validates_presence_of :user, :name
 
   named_scope :published, :select => 'DISTINCT reports.*', :joins => :bill_criteria
+  named_scope :scored, :select => 'DISTINCT reports.*', :joins => {:bill_criteria => {:bill => :rolls}}
   named_scope :recent, :limit => 10, :order => 'updated_at DESC'
 
   def description

@@ -163,8 +163,14 @@ Fixjour :verify => true do
   end
 
   def create_published_report(attrs)
-    bill = create_bill
-    report = create_report(attrs)
-    create_bill_criterion(:bill => bill, :report => report)
+    create_report(attrs).tap do |report|
+      create_bill_criterion(:report => report)
+    end
+  end
+
+  def create_scored_report(attrs)
+    create_published_report(attrs).tap do |report|
+      create_roll(:subject => report.bill_criteria.first.bill)
+    end
   end
 end
