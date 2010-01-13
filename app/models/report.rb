@@ -1,6 +1,24 @@
 class Report < ActiveRecord::Base
+  PER_PAGE = 10
+
   belongs_to :user
   has_friendly_id :name, :use_slug => true, :scope => :user
+
+  searchable do
+    text :name, :description
+    text :username do
+      user.username
+    end
+  end
+
+  class << self
+    def paginated_search(params)
+      search do
+        fulltext params[:q]
+        paginate :page => params[:page], :per_page => PER_PAGE
+      end
+    end
+  end
 
   has_many :bill_criteria
   has_many :bills, :through => :bill_criteria
@@ -11,7 +29,7 @@ class Report < ActiveRecord::Base
 
   named_scope :published, :select => 'DISTINCT reports.*', :joins => :bill_criteria
   named_scope :scored, :select => 'DISTINCT reports.*', :joins => {:bill_criteria => {:bill => :rolls}}
-  named_scope :recent, :limit => 10, :order => 'updated_at DESC'
+  named_scope :by_updated_at, :order => 'updated_at DESC'
 
   def description
     BlueCloth::new(self[:description].to_s).to_html
