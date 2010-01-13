@@ -28,4 +28,18 @@ describe Report do
       Report.published.should == [published_report]
     end
   end
+
+  describe ".scored" do
+    it "should return reports with voted bill_criteria" do
+      create_report
+      published_report = create_report
+      create_bill_criterion(:report => published_report)
+      scored_report = create_report
+      bill = create_bill
+      create_bill_criterion(:report => scored_report, :bill => bill)
+      create_roll(:subject => bill)
+
+      Report.scored.should == [scored_report]
+    end
+  end
 end
