@@ -1,5 +1,42 @@
 namespace :gov_track do
   namespace :bills do
+    namespace :titles do
+      task :unpack => :'gov_track:support' do
+        require 'ar-extensions'
+        require 'ar-extensions/import/postgresql'
+
+        ActiveRecord::Base.transaction do
+          BillTitle.delete_all
+          meetings do |meeting|
+            puts "Loading bill titles for meeting: #{meeting}"
+
+            new_titles = @congress.bills.inject([]) do |new_titles, bill|
+              bill_path = Rails.root.join('data/gov_track/us', @congress.meeting.to_s, 'bills', "#{bill.ref}.xml")
+              titles =
+                begin
+                  Nokogiri::XML(open(bill_path)).xpath('bill/titles/title')
+                rescue => e
+                  puts "#{e.inspect} #{bill_path}"
+                  next
+                end
+              $stdout.print '.'
+              $stdout.flush
+              new_titles + titles.map do |title_node|
+                as = title_node['as'].to_s
+                as = nil if as.blank?
+                [title_node.inner_text, title_node['type'].to_s, as, bill.id]
+              end
+            end
+            if new_titles.present?
+              BillTitle.import_without_validations_or_callbacks [:title, :title_type, :as, :bill_id], new_titles
+            end
+            puts
+          end
+        end
+        
+      end
+    end
+    
     task :unpack => [:'gov_track:support', :'gov_track:politicians'] do
       require 'ar-extensions'
       require 'ar-extensions/import/postgresql'

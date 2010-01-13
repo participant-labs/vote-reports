@@ -104,6 +104,10 @@ class Bill < ActiveRecord::Base
     %{#<Bill #{gov_track_id} - "#{titles.best}">}
   end
 
+  def ref
+    "#{bill_type}#{bill_number}"
+  end
+
   def congress=(congress)
     if !new_record? && self.congress && congress != self.congress
       raise ActiveRecord::ReadOnlyRecord, "Can't change bill congress"
