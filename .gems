@@ -7,7 +7,7 @@ friendly_id
 gravtastic --version '>= 2.1.0'
 sunspot
 sunspot_rails
-websolr-rails
+websolr-rails --version '>= 2.4.0'
 will_paginate
 nokogiri
 fastercsv
