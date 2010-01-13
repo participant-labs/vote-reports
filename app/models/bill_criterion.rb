@@ -7,6 +7,10 @@ class BillCriterion < ActiveRecord::Base
 
   accepts_nested_attributes_for :bill
 
+  def unvoted?
+    !bill.rolls.exists?
+  end
+
   def support?
     support
   end
