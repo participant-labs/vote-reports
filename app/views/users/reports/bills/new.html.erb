@@ -30,6 +30,7 @@
         <%- end -%>
       </tbody>
     </table>
+    <%= will_paginate @bills %>
     <%= f.submit 'Save Bills', :class => 'submit' %> - <%= link_to 'cancel', :back %>
   <% end %>
 <%- end -%>
