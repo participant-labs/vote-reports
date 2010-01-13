@@ -14,16 +14,39 @@ describe Users::Reports::BillsController do
   end
 
   describe "GET new" do
+    before do
+      login
+      @report = create_report(:user => current_user)
+    end
+
     context "when there is a better id for this report" do
       before do
-        login
-        @report = create_report(:user => current_user)
         mock.instance_of(Report).has_better_id? { true }
       end
 
       it "should redirect" do
         get :new, :user_id => current_user, :report_id => @report, :q => 'Smelly Roses'
         response.should redirect_to(new_user_report_bills_path(current_user, @report))
+      end
+    end
+
+    context "when I am not logged in" do
+      it "should deny access" do
+        logout
+        get :new, :user_id => @report.user, :report_id => @report, :q => 'searchy!'
+        response.should redirect_to(login_path(:return_to => new_user_report_bills_path(@report.user, @report)))
+      end
+    end
+
+    context "when I am not the owner" do
+      before do
+        login(create_user)
+        current_user.should_not == @report.user
+      end
+
+      it "should deny access" do
+        get :new, :user_id => @report.user, :report_id => @report, :q => 'searchy!'
+        response.should redirect_to(user_report_path(@report.user, @report))
       end
     end
   end

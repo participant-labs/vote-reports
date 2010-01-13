@@ -55,17 +55,4 @@ class Users::ReportsController < ApplicationController
     flash[:notice] = "Successfully destroyed report."
     redirect_to user_reports_url(@user)
   end
-
-  private
-
-  def is_report_owner
-    return if login_required == false
-    report_owner = User.find(params[:user_id])
-    unless current_user.admin? || (current_user == report_owner)
-      notify_exceptional("User #{current_user.inspect} attempted to access protected page #{request.path}")
-      flash[:notice] = "You may not access this page"
-      redirect_to user_report_path(report_owner, Report.find(params[:id]))
-      return false
-    end
-  end
 end
