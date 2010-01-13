@@ -38,7 +38,7 @@ describe UsersController do
     it "should reject me if I'm not logged in" do
       logout
       get :edit, :id => @user
-      response.should redirect_to(login_path(:return_to => %Q{/users/#{@user.username}/edit}))
+      response.should redirect_to(login_path(:return_to => %Q{/users/#{@user.to_param}/edit}))
       flash[:notice].should == "You must be logged in to access this page"
     end
 
