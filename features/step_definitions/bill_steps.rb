@@ -9,10 +9,16 @@ Given /^an? (.*)bill named "([^\"]*)"$/ do |attrs, title|
       case attr.strip
       when 'current-congress'
         meeting = Congress.current_meeting
-        attrs.merge!(:congress => Congress.find_by_meeting(meeting) || create_congress(:meeting => meeting))
+        attrs.merge!(
+          :congress => Congress.find_by_meeting(meeting) || create_congress(:meeting => meeting),
+          :introduced_on => Date.today
+        )
       when 'previous-congress'
         meeting = Congress.current_meeting - 1
-        attrs.merge!(:congress => Congress.find_by_meeting(meeting) || create_congress(:meeting => meeting))
+        attrs.merge!(
+          :congress => Congress.find_by_meeting(meeting) || create_congress(:meeting => meeting),
+          :introduced_on => 2.years.ago.to_date
+        )
       when 'un-voted'
       when 'voted'
         create_bill_roll = true

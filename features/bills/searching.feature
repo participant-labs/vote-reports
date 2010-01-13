@@ -4,7 +4,7 @@ Feature: Bill Searching
   I want to search bills
 
   Scenario: User searches for and views a specific bill
-    Given a bill named "USA PATRIOT Reauthorization Act of 2009"
+    Given a previous-congress bill named "USA PATRIOT Reauthorization Act of 2009"
     And 30 recent bills
     When I go to the bills page
     Then I should not see "USA PATRIOT Reauthorization Act of 2009"

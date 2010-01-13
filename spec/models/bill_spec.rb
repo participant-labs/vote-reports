@@ -93,13 +93,12 @@ describe Bill do
     end
   end
 
-  describe ".recent" do
+  describe ".by_introduced_on" do
     it "should return bills with the most recent first" do
-      prior_bills = Bill.recent.all
-      bill1 = create_bill
-      bill2 = create_bill
-      bill3 = create_bill
-      Bill.recent.should == [bill3, bill2, bill1, *prior_bills]
+      bill1 = create_bill(:introduced_on => 1.year.ago)
+      bill2 = create_bill(:introduced_on => 2.years.ago)
+      bill3 = create_bill(:introduced_on => 1.month.ago)
+      Bill.by_introduced_on.should == [bill3, bill1, bill2]
     end
   end
 

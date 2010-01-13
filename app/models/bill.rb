@@ -1,7 +1,7 @@
 class Bill < ActiveRecord::Base
   PER_PAGE = 30
 
-  named_scope :recent, :limit => 25, :order => 'created_at DESC'
+  named_scope :by_introduced_on, :order => 'introduced_on DESC'
   named_scope :with_title, lambda {|title|
     {:select => 'DISTINCT bills.*', :joins => :titles, :conditions => {:'bill_titles.title' => title}}
   }
