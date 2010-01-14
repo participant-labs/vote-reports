@@ -147,8 +147,9 @@ Fixjour :verify => false do
     klass.new(
       :congress => Congress.find_or_create_by_meeting(rand(200)),
       :subject => new_bill,
-      :gov_track_id => Forgery(:basic).text,
-      :where => Forgery(:basic).text,
+      :year => 2009,
+      :number => rand(1000),
+      :where => ['house', 'senate'].rand,
       :result => Forgery(:basic).text,
       :required => Forgery(:basic).text,
       :question => Forgery(:basic).text,
