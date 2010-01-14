@@ -16,6 +16,6 @@ class Roll < ActiveRecord::Base
   end
 
   def friendly_id
-    "#{year}-#{where.first}#{number}"
+    "#{year}-#{where.first}#{number}" if year.present? && where.present? && number.present?
   end
 end
