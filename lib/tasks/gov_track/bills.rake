@@ -1,5 +1,19 @@
 namespace :gov_track do
   namespace :bills do
+    def title_columns
+      [:title, :title_type, :as, :bill_id]
+    end
+
+    def title_attrs(bill, title_node)
+      as = title_node['as'].to_s
+      type = title_node['type'].to_s
+      if type == 'popular'
+        as = 'popular'
+        type = 'short'
+      end
+      [title_node.inner_text, type, as, bill.id]
+    end
+
     namespace :titles do
       task :unpack => :'gov_track:support' do
         require 'ar-extensions'
@@ -22,13 +36,11 @@ namespace :gov_track do
               $stdout.print '.'
               $stdout.flush
               new_titles + titles.map do |title_node|
-                as = title_node['as'].to_s
-                as = nil if as.blank?
-                [title_node.inner_text, title_node['type'].to_s, as, bill.id]
+                title_attrs(bill, title_node)
               end
             end
             if new_titles.present?
-              BillTitle.import_without_validations_or_callbacks [:title, :title_type, :as, :bill_id], new_titles
+              BillTitle.import_without_validations_or_callbacks title_columns, new_titles
             end
             puts
           end
@@ -81,12 +93,10 @@ namespace :gov_track do
           end
 
           new_titles = data.xpath('titles/title').map do |title_node|
-            as = title_node['as'].to_s
-            as = nil if as.blank?
-            [title_node.inner_text, title_node['type'].to_s, as, bill.id]
+            title_attrs(bill, title_node)
           end
           if new_titles.present?
-            BillTitle.import_without_validations_or_callbacks [:title, :title_type, :as, :bill_id], new_titles
+            BillTitle.import_without_validations_or_callbacks title_columns, new_titles
           end
 
           new_subjects = data.xpath('subjects/term').map do |term_node|
