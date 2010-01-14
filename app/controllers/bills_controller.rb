@@ -5,7 +5,7 @@ class BillsController < ApplicationController
       @bills = Bill.paginated_search(params).results
     else
       @title = 'Recent Bills'
-      @bills = Bill.by_introduced_on.paginate :page => params[:page], :per_page => Bill::PER_PAGE
+      @bills = Bill.by_introduced_on.paginate :page => params[:page]
     end
   end
 

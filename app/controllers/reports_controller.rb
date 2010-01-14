@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
       @reports = Report.paginated_search(params).results
     else
       @title = 'Recent Reports'
-      @reports = Report.published.by_updated_at.paginate(:page => params[:page], :per_page => Report::PER_PAGE)
+      @reports = Report.published.by_updated_at.paginate(:page => params[:page])
     end
   end
 end
