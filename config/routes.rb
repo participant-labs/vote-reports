@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
+  map.resources :rolls, :only => [:show]
   map.resources :bills, :only => [:index, :show]
   map.resources :politicians, :only => [:index, :show]
 

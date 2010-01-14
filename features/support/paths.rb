@@ -18,6 +18,8 @@ module NavigationHelpers
       user_path(current_user)
     when /the politician page for "(.+)"/
       politician_path(Politician.with_name($1).first)
+    when /the roll on the question "(.+)"/
+      roll_path(Roll.find_by_question($1))
     when /the report page for "(.+)"/
       report = Report.find_by_name($1)
       user_report_path(report.user, report)

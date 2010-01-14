@@ -16,8 +16,8 @@ describe Roll do
   describe "friendly_id" do
     it "should work" do
       roll = create_roll(:year => 1990, :number => 5, :where => 'house')
-      roll.gov_track_id.should == 'h1990-5'
-      Roll.find('h1990-5').should == roll
+      roll.friendly_id.should == '1990-h5'
+      Roll.find('1990-h5').should == roll
     end
   end
 end
