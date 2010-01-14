@@ -50,7 +50,7 @@
 <%- if (supported = @politician.bills.supported).present? -%>
 <ul>
   <% supported.each do |bill|  %>
-    <li><%= link_to bill.title, bill%></li>
+    <li><%= link_to bill.titles.best, bill%></li>
   <% end %>
 </ul>
 <%- else -%>
@@ -61,7 +61,7 @@
 <%- if (opposed = @politician.bills.opposed).present? -%>
 <ul>
   <% opposed.each do |bill|  %>
-    <li><%= link_to bill.title, bill%></li>
+    <li><%= link_to bill.titles.best, bill%></li>
   <% end %>
 </ul>
 <%- else -%>
