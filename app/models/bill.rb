@@ -46,29 +46,7 @@ class Bill < ActiveRecord::Base
   has_many :committee_actions, :class_name => 'BillCommitteeActions'
   has_many :committees, :through => :committee_actions
 
-  has_many :titles, :class_name => 'BillTitle' do
-    TITLE_PREFERENCE = [
-      'enacted',
-      'agreed to by house and senate',
-      'passed house',
-      'passed senate',
-      'amended by senate',
-      'amended by house',
-      'reported to senate',
-      'reported to house',
-      'introduced'
-    ].freeze
-
-    def best
-      TITLE_PREFERENCE.each do |as|
-        title = first(:conditions => {:title_type => 'short', :as => as}) \
-             || first(:conditions => {:title_type => 'official', :as => as})
-        return title if title
-      end
-      notify_exceptional "Title for #{proxy_owner.opencongress_id} not found via title preferences"
-      first
-    end
-  end
+  has_many :titles, :class_name => 'BillTitle'
   has_many :bill_criteria, :dependent => :destroy
   has_many :amendments, :dependent => :destroy
   has_many :rolls, :as => :subject, :dependent => :destroy
@@ -102,7 +80,7 @@ class Bill < ActiveRecord::Base
   end
 
   def inspect
-    %{#<Bill #{gov_track_id} - "#{titles.best}">}
+    %{#<Bill #{gov_track_id} - "#{titles.first}">}
   end
 
   def ref
