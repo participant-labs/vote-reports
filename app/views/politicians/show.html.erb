@@ -47,23 +47,29 @@
 <%- end -%>
 
 <h3>Supported Bills</h3>
-<%- if (supported = @politician.bills.supported).present? -%>
-<ul>
-  <% supported.each do |bill|  %>
-    <li><%= link_to bill.titles.best, bill%></li>
-  <% end %>
-</ul>
+<%- if @supported_bills.present? -%>
+  <ul>
+    <% @supported_bills.each do |bill|  %>
+      <li><%= link_to bill.titles.best, bill%></li>
+    <% end %>
+  </ul>
+  <%= will_paginate @supported_bills,
+      :param_name => :supported_page,
+      :params => {:opposed_page => @opposed_bills.current_page }  %>
 <%- else -%>
   <p>We have no record of support from this politician</p>
 <%- end -%>
 
 <h3>Opposed Bills</h3>
-<%- if (opposed = @politician.bills.opposed).present? -%>
-<ul>
-  <% opposed.each do |bill|  %>
-    <li><%= link_to bill.titles.best, bill%></li>
-  <% end %>
-</ul>
+<%- if @opposed_bills.present? -%>
+  <ul>
+    <% @opposed_bills.each do |bill|  %>
+      <li><%= link_to bill.titles.best, bill%></li>
+    <% end %>
+  </ul>
+  <%= will_paginate @supported_bills,
+      :param_name => :opposed_page,
+      :params => {:supported_page => @supported_bills.current_page }  %>
 <%- else -%>
   <p>We have no record of opposition from this politician</p>
 <%- end -%>
