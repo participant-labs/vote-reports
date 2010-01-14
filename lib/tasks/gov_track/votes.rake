@@ -9,10 +9,10 @@ namespace :gov_track do
       meetings do |meeting|
         puts "Meeting #{meeting}"
         Dir['rolls/*'].each do |roll_path|
-          gov_track_roll_id = roll_path.match(%r{rolls/(.+)\.xml}).captures.first
+          where, year, number = roll_path.match(%r{rolls/(.)(\d+)-(\d+)\.xml}).captures
 
-          Roll.find_by_gov_track_id(gov_track_roll_id) || begin
-            data = Nokogiri::XML(open(gov_track_path("us/#{@congress.meeting}/rolls/#{gov_track_roll_id}.xml"))).at('roll')
+          Roll.find_by_where_and_year_and_number(where == 'h' ? 'house' : 'senate', year, number) || begin
+            data = Nokogiri::XML(open(gov_track_path("us/#{@congress.meeting}/rolls/#{where}#{year}-#{number}.xml"))).at('roll')
             subject =
               if bill = data.at('bill')
                 bill = Bill.find_by_gov_track_id("#{bill['type']}#{bill['session']}-#{bill['number']}")
@@ -38,7 +38,8 @@ namespace :gov_track do
               end
             next if subject.nil?
             roll = Roll.create(
-              :gov_track_id => gov_track_roll_id,
+              :year => year,
+              :number => number,
               :subject => subject,
               :congress => @congress,
               :where => data['where'].to_s,
