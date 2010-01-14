@@ -22,11 +22,12 @@ Feature: Browsing Politicians
       | name      | gov_track_id |
       | Ron Wyden | 300100       |
     And the following representative terms for politician "Ron Wyden":
-      | district | state |
-      | 3        | IA    |
+      | district | state | party      |
+      | 3        | IA    | Republican |
     When I go to the politician page for "Ron Wyden"
     Then I should see "Terms in Congress"
     And I should see "representing the 3rd district of Iowa"
+    And I should see "Ron Wyden  (R - IA)"
 
   Scenario: Viewing senate terms from the Politicians Page
     Given the following politician records:
