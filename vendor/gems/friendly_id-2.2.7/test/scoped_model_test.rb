@@ -18,6 +18,11 @@ class ScopedModelTest < Test::Unit::TestCase
       Slug.delete_all
     end
 
+    should "properly save scope when scoped attribute is a new_record" do
+      new_resident = Resident.create!(:name => 'Lord Willoughby', :country => Country.new(:name => 'England'))
+      assert_equal new_resident, Resident.find(new_resident.to_param, :scope => new_resident.country)
+    end
+
     should "should not show the scope in the friendly_id" do
       assert_equal "john-smith", @resident.friendly_id
       assert_equal "john-smith", @resident2.friendly_id

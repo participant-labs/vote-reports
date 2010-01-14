@@ -1,7 +1,7 @@
 --- !ruby/object:Gem::Specification 
 name: friendly_id
 version: !ruby/object:Gem::Version 
-  version: 2.2.6
+  version: 2.2.7
 platform: ruby
 authors: 
 - Norman Clarke
@@ -11,7 +11,7 @@ autorequire:
 bindir: bin
 cert_chain: []
 
-date: 2009-12-09 00:00:00 -05:00
+date: 2010-01-13 00:00:00 -05:00
 default_executable: 
 dependencies: 
 - !ruby/object:Gem::Dependency 
@@ -44,36 +44,6 @@ dependencies:
       - !ruby/object:Gem::Version 
         version: "0"
     version: 
-- !ruby/object:Gem::Dependency 
-  name: sqlite3-ruby
-  type: :development
-  version_requirement: 
-  version_requirements: !ruby/object:Gem::Requirement 
-    requirements: 
-    - - ">="
-      - !ruby/object:Gem::Version 
-        version: "0"
-    version: 
-- !ruby/object:Gem::Dependency 
-  name: rcov
-  type: :development
-  version_requirement: 
-  version_requirements: !ruby/object:Gem::Requirement 
-    requirements: 
-    - - ">="
-      - !ruby/object:Gem::Version 
-        version: "0"
-    version: 
-- !ruby/object:Gem::Dependency 
-  name: yard
-  type: :development
-  version_requirement: 
-  version_requirements: !ruby/object:Gem::Requirement 
-    requirements: 
-    - - ">="
-      - !ruby/object:Gem::Version 
-        version: "0"
-    version: 
 description: "    FriendlyId is the \"Swiss Army bulldozer\" of slugging and permalink\n    plugins for Ruby on Rails. It allows you to create pretty URL\xE2\x80\x99s\n    and work with human-friendly strings as if they were numeric ids for\n    ActiveRecord models.\n"
 email: 
 - norman@njclarke.com
@@ -96,6 +66,7 @@ files:
 - lib/friendly_id/tasks.rb
 - lib/friendly_id/version.rb
 - lib/friendly_id.rb
+- lib/tasks/friendly_id.rake
 - init.rb
 - README.rdoc
 - History.txt
