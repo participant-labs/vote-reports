@@ -12,4 +12,12 @@ describe Roll do
       Roll.by_voted_at.should == [@recent, @middle, @old]
     end
   end
+
+  describe "friendly_id" do
+    it "should work" do
+      roll = create_roll(:year => 1990, :number => 5, :where => 'house')
+      roll.gov_track_id.should == 'h1990-5'
+      Roll.find('h1990-5').should == roll
+    end
+  end
 end

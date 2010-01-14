@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100114205244) do
+ActiveRecord::Schema.define(:version => 20100114223827) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -238,7 +238,6 @@ ActiveRecord::Schema.define(:version => 20100114205244) do
     t.string   "required",     :null => false
     t.text     "question",     :null => false
     t.string   "roll_type",    :null => false
-    t.string   "gov_track_id", :null => false
     t.integer  "subject_id",   :null => false
     t.integer  "congress_id",  :null => false
     t.datetime "created_at"
@@ -248,8 +247,6 @@ ActiveRecord::Schema.define(:version => 20100114205244) do
     t.integer  "number",       :null => false
   end
 
-  add_index "rolls", ["gov_track_id"], :name => "index_rolls_on_opencongress_id", :unique => true
-  add_index "rolls", ["gov_track_id"], :name => "rolls_gov_track_id_unique", :unique => true
   add_index "rolls", ["number", "year", "where"], :name => "rolls_number_year_where_unique", :unique => true
 
   create_table "slugs", :force => true do |t|
