@@ -2,8 +2,8 @@ namespace :friendly_id do
   desc "Make slugs for a model."
   task :make_slugs => :environment do
     validate_model_given
-    FriendlyId::Tasks.make_slugs(ENV["MODEL"]) do |r|
-      puts "%s(%d) friendly_id set to '%s'" % [r.class.to_s, r.id, r.slug.name]
+    FriendlyId::Tasks.make_slugs(ENV["MODEL"]) do |r, slug_name|
+      puts "%s(%d) friendly_id set to '%s'" % [r.class.to_s, r.id, slug_name]
     end
   end
 
@@ -16,7 +16,7 @@ namespace :friendly_id do
 
   desc "Kill obsolete slugs older than DAYS=45 days."
   task :remove_old_slugs => :environment do
-    FriendlyId::Task.delete_old_slugs(ENV["DAYS"], ENV["MODEL"])
+    FriendlyId::Tasks.delete_old_slugs(ENV["DAYS"], ENV["MODEL"])
   end
 end
 
