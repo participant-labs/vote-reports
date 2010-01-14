@@ -68,6 +68,9 @@ Feature: Scoring Reports
       | Edward Kaufman       | 0    |
     And I should not see "Connie Mack"
 
+    When I follow "Piyush Jindal"
+    Then I should be on the politician page for "Piyush Jindal"
+
   Scenario: Bill Criteria report scores combine
     Given report "Active Report" has the following bill criteria:
       | bill                                    | support |
