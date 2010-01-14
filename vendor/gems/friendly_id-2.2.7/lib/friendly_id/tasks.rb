@@ -3,55 +3,44 @@ module FriendlyId
     class << self
 
       def make_slugs(klass, options = {})
+        klass = parse_class_name(klass)
+        validate_uses_slugs(klass)
+        options = {:limit => 100, :include => :slugs, :conditions => "slugs.id IS NULL"}.merge(options)
         begin
-          import_slugs(klass, options)
+          adapter = ActiveRecord::Base.connection.adapter_name.downcase
+          require 'ar-extensions'
+          require "ar-extensions/adapters/#{adapter}"
+          require "ar-extensions/import/#{adapter}"
+
+          columns = Slug.columns_hash.except('id').keys
+          while records = klass.all(options) do
+            break if records.size == 0
+            slugs = records.map do |r|
+              if klass.columns_hash.has_key?('cached_slug')
+                klass.update_all({:cached_slug => r.slug_text}, :id => r.id)
+              end
+              slug = r.slugs.build :name => r.slug_text
+              r.instance_eval do
+                if friendly_id_options[:scope]
+                  scope = send(friendly_id_options[:scope])
+                  slug.scope = scope.respond_to?(:to_param) ? scope.to_param : scope.to_s
+                end
+              end
+              slug.send :initialize_sequence
+              yield(r, slug['name']) if block_given?
+              columns.map {|c| slug[c] }
+            end
+            Slug.import columns, slugs, :validate => false
+          end
         rescue LoadError
           puts "Please install ar-extensions if you want to use friendly_id:make_slugs_faster or friendly_id:redo_slugs_faster tasks."
-          create_slugs(klass, options)
-        end
-      end
-
-      def create_slugs(klass, options = {})
-        klass = parse_class_name(klass)
-        validate_uses_slugs(klass)
-        options = {:limit => 100, :include => :slugs, :conditions => "slugs.id IS NULL"}.merge(options)
-        while records = klass.find(:all, options) do
-          break if records.size == 0
-          records.each do |r|
-            r.save!
-            yield(r) if block_given?
-          end
-        end
-      end
-
-      def import_slugs(klass, options = {})
-        adapter = ActiveRecord::Base.connection.adapter_name.downcase
-        require 'ar-extensions'
-        require "ar-extensions/adapters/#{adapter}"
-        require "ar-extensions/import/#{adapter}"
-
-        klass = parse_class_name(klass)
-        validate_uses_slugs(klass)
-        options = {:limit => 100, :include => :slugs, :conditions => "slugs.id IS NULL"}.merge(options)
-        columns = Slug.columns_hash.except('id').keys
-        while records = klass.find(:all, options) do
-          break if records.size == 0
-          slugs = records.map do |r|
-            if klass.columns_hash.has_key?('cached_slug')
-              klass.update_all({:cached_slug => r.slug_text}, :id => r.id)
+          while records = klass.all(options) do
+            break if records.size == 0
+            records.each do |r|
+              r.save!
+              yield(r, r.slug.name) if block_given?
             end
-            slug = r.slugs.build :name => r.slug_text
-            r.instance_eval do
-              if friendly_id_options[:scope]
-                scope = send(friendly_id_options[:scope])
-                slug.scope = scope.respond_to?(:to_param) ? scope.to_param : scope.to_s
-              end
-            end
-            slug.send :initialize_sequence
-            yield(r) if block_given?
-            columns.map {|c| slug[c] }
           end
-          Slug.import columns, slugs, :validate => false
         end
       end
 
