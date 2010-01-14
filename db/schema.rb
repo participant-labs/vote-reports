@@ -66,12 +66,12 @@ ActiveRecord::Schema.define(:version => 20100114175702) do
   end
 
   create_table "bill_titles", :force => true do |t|
-    t.text     "title",      :null => false
-    t.string   "title_type", :null => false
-    t.string   "as",         :null => false
-    t.integer  "bill_id",    :null => false
+    t.text     "title",            :null => false
+    t.string   "title_type",       :null => false
+    t.integer  "bill_id",          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "bill_title_as_id", :null => false
   end
 
   create_table "bills", :force => true do |t|
