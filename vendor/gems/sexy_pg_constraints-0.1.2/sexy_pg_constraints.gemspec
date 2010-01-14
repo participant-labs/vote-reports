@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Maxim Chernyak"]
-  s.date = %q{2010-01-02}
+  s.date = %q{2010-01-14}
   s.description = %q{Use migrations and simple syntax to manage constraints in PostgreSQL DB.}
   s.email = %q{max@bitsonnet.com}
   s.extra_rdoc_files = ["CHANGELOG.rdoc", "README.rdoc", "lib/constrainer.rb", "lib/constraints.rb", "lib/deconstrainer.rb", "lib/helpers.rb", "lib/sexy_pg_constraints.rb"]

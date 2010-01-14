@@ -824,6 +824,32 @@ class SexyPgConstraintsTest < Test::Unit::TestCase
     end
   end
 
+  def test_multicolumn_constraint
+    ActiveRecord::Migration.constrain :books, [:from, :as], :unique => true
+
+    assert_allows Book do |book|
+      book.from = 1
+      book.as = 'bar'
+    end
+
+    assert_allows Book do |book|
+      book.from = 1
+      book.as = 'foo'
+    end
+
+    assert_prohibits Book, [:from, :as], :unique, 'unique' do |book|
+      book.from = 1
+      book.as = 'bar'
+    end
+
+    ActiveRecord::Migration.deconstrain :books, [:from, :as], :unique
+
+    assert_allows Book do |book|
+      book.from = 1
+      book.as = 'bar'
+    end
+  end
+
   def test_multicolumn_constraint_block_syntax
     ActiveRecord::Migration.constrain :books do |t|
       t[:title, :isbn].all :unique => true
