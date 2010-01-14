@@ -1,6 +1,4 @@
 class Report < ActiveRecord::Base
-  PER_PAGE = 10
-
   belongs_to :user
   has_friendly_id :name, :use_slug => true, :scope => :user
 
@@ -12,10 +10,14 @@ class Report < ActiveRecord::Base
   end
 
   class << self
+    def per_page
+      10
+    end
+
     def paginated_search(params)
       search do
         fulltext params[:q]
-        paginate :page => params[:page], :per_page => PER_PAGE
+        paginate :page => params[:page], :per_page => Report.per_page
       end
     end
   end

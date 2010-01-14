@@ -1,6 +1,4 @@
 class Bill < ActiveRecord::Base
-  PER_PAGE = 30
-
   named_scope :by_introduced_on, :order => 'introduced_on DESC'
   named_scope :with_title, lambda {|title|
     {:select => 'DISTINCT bills.*', :joins => :titles, :conditions => {:'bill_titles.title' => title}}
@@ -90,7 +88,7 @@ class Bill < ActiveRecord::Base
     def paginated_search(params)
       search do
         fulltext params[:q]
-        paginate :page => params[:page], :per_page => PER_PAGE
+        paginate :page => params[:page], :per_page => Bill.per_page
         if params[:exclude_old_and_unvoted]
           without :old_and_unvoted, true
         end
