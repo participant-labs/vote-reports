@@ -31,8 +31,8 @@
         <%- if @report.user == current_user -%>
           <%= raw button_to('delete', user_report_bill_path(current_user, @report, criterion.bill),
                                 :method => :delete,
-                                :title => "Delete criterion for '#{criterion.bill.titles.best}'",
-                                :confirm => "Are you sure you want to delete the criterion for '#{criterion.bill.titles.best}'?") %>
+                                :title => "Delete criterion for '#{criterion.bill.titles.first}'",
+                                :confirm => "Are you sure you want to delete the criterion for '#{criterion.bill.titles.first}'?") %>
         <%- end -%>
       </li>
     <%- end -%>

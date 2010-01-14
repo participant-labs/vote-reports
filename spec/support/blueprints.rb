@@ -72,10 +72,32 @@ Fixjour :verify => false do
   end
 
   define_builder(BillTitle) do |klass, overrides|
+    if BillTitleAs.count == 0
+      [
+        'enacted',
+        'agreed to by house and senate',
+        'passed house',
+        'passed senate',
+        'amended by senate',
+        'amended by house',
+        'reported to senate',
+        'reported to house',
+        'introduced',
+        'popular'
+      ].each_with_index do |as, index|
+        BillTitleAs.create(:as => as, :sort_order => index)
+      end
+    end
+
+    overrides.process(:as) do |as|
+      overrides[:as] = BillTitleAs.find_by_as(as)
+    end
+
     klass.new(
       :title => Forgery(:basic).text,
       :title_type => 'official',
-      :as => Forgery(:basic).text,
+      :as => BillTitleAs.find_by_as(["reported to senate", "agreed to by house and senate", "amended by house",
+        "passed senate", "amended by senate", "introduced", "enacted", "reported to house", "passed house", 'popular'].rand),
       :bill => new_bill
     )
   end
