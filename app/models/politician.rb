@@ -27,9 +27,8 @@ class Politician < ActiveRecord::Base
 
   validates_length_of IDENTITY_STRING_FIELDS, :minimum => 1, :allow_nil => true
   validates_uniqueness_of IDENTITY_FIELDS, :allow_nil => true
-  validate :name_shouldnt_contain_nickname
-  validate :terms_should_most_likely_be_from_the_same_state
 
+  validate :name_shouldnt_contain_nickname
   before_validation :extract_nickname_from_first_name_if_present
 
   has_many :votes
@@ -55,19 +54,6 @@ class Politician < ActiveRecord::Base
 
   def name_shouldnt_contain_nickname
     errors.add(:first_name, "shouldn't contain nickname") if first_name =~ /\s?(.+)\s'(.+)'\s?/
-  end
-
-  def terms_should_most_likely_be_from_the_same_state
-    rep_states = representative_terms.map(&:state).uniq
-    senate_states = senate_terms.map(&:state).uniq
-
-    if rep_states.present? && senate_states.present?
-      most_states = rep_states.size > senate_states.size ? rep_states.size : senate_states.size
-      if (rep_states | senate_states).size > most_states
-        notify_exceptional(
-          "#{id} #{full_name} has different term states; senate: #{senate_states.join(', ')} representative: #{rep_states.join(', ')}")
-      end
-    end
   end
 
   def extract_nickname_from_first_name_if_present
