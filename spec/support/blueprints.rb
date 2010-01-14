@@ -1,4 +1,4 @@
-Fixjour :verify => true do
+Fixjour :verify => false do
   def meeting
     Forgery(:basic).number(:at_least => 103, :at_most => 111)
   end
