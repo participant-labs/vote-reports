@@ -50,7 +50,7 @@ Fixjour :verify => false do
   end
 
   define_builder(Report) do |klass, overrides|
-    klass.new(:name => Forgery(:basic).text, :user => new_user)
+    klass.new(:name => Forgery(:basic).text, :user => create_user)
   end
 
   define_builder(Amendment) do |klass, overrides|
