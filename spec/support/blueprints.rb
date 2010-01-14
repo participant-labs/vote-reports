@@ -145,6 +145,11 @@ Fixjour :verify => false do
   end
 
   define_builder(RepresentativeTerm) do |klass, overrides|
+    overrides.process(:party) do |party|
+      party = Party.find_or_create_by_name(party) if party.is_a?(String)
+      overrides[:party] = party
+    end
+
     klass.new(
       :politician => new_politician,
       :party => new_party,
