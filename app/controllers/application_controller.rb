@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     unless current_user.admin? || (current_user == report_owner)
       notify_exceptional("User #{current_user.inspect} attempted to access protected page #{request.path}")
       flash[:notice] = "You may not access this page"
-      redirect_to user_report_path(report_owner, Report.find(params[:report_id] || params[:id]))
+      redirect_to user_report_path(report_owner, report_owner.reports.find(params[:report_id] || params[:id], :scope => report_owner))
       return false
     end
   end

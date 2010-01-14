@@ -3,7 +3,6 @@ Feature: Deleting Criteria from Reports
   As a user
   I want to delete criteria from my report
 
-  @wip
   Scenario: Non-owner deletes an existing bill criterion
     Given a bill named "Bovine Security Act of 2009"
     And a report named "Active Report"
