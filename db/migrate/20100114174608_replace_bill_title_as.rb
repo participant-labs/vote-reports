@@ -2,13 +2,6 @@ class ReplaceBillTitleAs < ActiveRecord::Migration
   def self.up
     transaction do
       add_column :bill_titles, :bill_title_as_id, :integer
-      deconstrain :bill_title_as do |t|
-        t.as :whitelist
-      end
-      constrain :bill_title_as do |t|
-        t.as :whitelist => ["reported to senate", "agreed to by house and senate", "amended by house",
-          "passed senate", "amended by senate", "introduced", "enacted", "reported to house", "passed house", 'popular']
-      end
 
       [
         'enacted',
