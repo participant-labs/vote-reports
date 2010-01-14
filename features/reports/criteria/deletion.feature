@@ -22,7 +22,7 @@ Feature: Deleting Criteria from Reports
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
-    And I follow "Delete 'Bovine Security Act of 2009' criterion"
+    And I press "delete"
     Then I should see "Successfully deleted report criterion"
     And I should be on the report page for "Active Report"
     And I should not see "Bovine Security Act of 2009"

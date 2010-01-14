@@ -563,10 +563,13 @@ body.three-col #content {
   body.three-col #content p, body.three-col #content form {
     padding: 5px; }
   /* line 110, ../../../app/stylesheets/screen.sass */
+  body.three-col #content li.bill_criterion form.button-to {
+    display: inline-block; }
+  /* line 114, ../../../app/stylesheets/screen.sass */
   body.three-col #content .welcome p {
     font-size: 14px;
     margin-bottom: 0.5em; }
-  /* line 114, ../../../app/stylesheets/screen.sass */
+  /* line 118, ../../../app/stylesheets/screen.sass */
   body.three-col #content #errorExplanation h2 {
     background-color: #fff;
     color: #150c15; }
