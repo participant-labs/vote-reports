@@ -360,11 +360,13 @@ particular from the following people:
 * Adam Cigánek
 * Alistair Holt
 * Andrew Loe III
+* Ben Woosley
 * Bence Nagy
 * Bruno Michel
 * Chris Nolan
 * David Ramalho
 * Diego Carrion
+* Diego R. V.
 * Florian Aßmann
 * Harry Love
 * Jesse Crouch

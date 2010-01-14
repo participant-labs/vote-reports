@@ -83,9 +83,9 @@ module FriendlyId
       # Returns the friendly id, or if none is available, the numeric id.
       def to_param
         if cache_column
-          read_attribute(cache_column) || id.to_s
+          read_attribute(cache_column) || slug_text
         else
-          slug ? slug.to_friendly_id : id.to_s
+          slug ? slug.to_friendly_id : slug_text
         end
       end
 

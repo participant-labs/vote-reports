@@ -222,19 +222,6 @@ class SluggedModelTest < Test::Unit::TestCase
       end
     end
 
-    context "that doesn't have a slug" do
-
-      setup do
-        @post.slug.destroy
-        @post = Post.find(@post.id)
-      end
-
-      should "have a to_param method that returns the id cast to a string" do
-        assert_equal @post.id.to_s, @post.to_param
-      end
-
-    end
-
     context "when found using its friendly_id" do
       setup do
         @post = Post.find(@post.friendly_id)
