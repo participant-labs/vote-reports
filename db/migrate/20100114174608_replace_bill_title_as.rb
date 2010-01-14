@@ -28,6 +28,7 @@ class ReplaceBillTitleAs < ActiveRecord::Migration
 
       end
 
+      raise BillTitle.all(:conditions => {:bill_title_as_id => nil}).inspect
       change_column :bill_titles, :bill_title_as_id, :integer, :null => false
       constrain :bill_titles do |t|
         t.bill_title_as_id :reference => {:bill_title_as => :id}
