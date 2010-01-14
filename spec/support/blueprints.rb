@@ -97,6 +97,8 @@ Fixjour :verify => false do
   end
 
   define_builder(Politician) do |klass, overrides|
+    Party.find_or_create_by_name('Independent')
+
     overrides.process(:name) do |name|
       first_name, last_name = name.split(' ', 2)
       overrides.merge!(

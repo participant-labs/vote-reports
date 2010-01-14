@@ -15,7 +15,7 @@ class Politician < ActiveRecord::Base
   end
 
   def party
-    terms.latest.try(:party)
+    terms.latest.try(:party) || Party.find_by_name('Independent')
   end
 
   IDENTITY_STRING_FIELDS = [
