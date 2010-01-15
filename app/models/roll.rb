@@ -9,12 +9,12 @@ class Roll < ActiveRecord::Base
 
   class << self
     def find_by_friendly_id(friendly_id, options = {})
-      if match = friendly_id.match(/(\d+)-([hs])(\d+)/)
+      if match = friendly_id.to_s.match(/(\d+)-([hs])(\d+)/)
         year, where, number = match.captures
         where = (where == 'h' ? 'house' : 'senate')
         find_by_where_and_year_and_number(where, year, number, options)
       else
-        find(friendly_id, options = {})
+        find_by_id(friendly_id, options = {})
       end
     end
   end
