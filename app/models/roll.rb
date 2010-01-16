@@ -6,6 +6,12 @@ class Roll < ActiveRecord::Base
   has_friendly_id :friendly_id
 
   named_scope :by_voted_at, :order => "voted_at DESC"
+  named_scope :on_passage, :conditions => {:roll_type => [
+    "On Passage", "Passage, Objections of the President Notwithstanding", "On Agreeing to the Resolution",
+    "On Agreeing to the Resolution, as Amended", "On Motion to Suspend the Rules and Agree",
+    "On Motion to Suspend the Rules and Agree, as Amended", "On Motion to Suspend the Rules and Pass",
+    "On Motion to Suspend the Rules and Pass, as Amended", "On the Cloture Motion", "On Cloture on the Motion to Proceed"
+  ]}
 
   class << self
     def find_by_friendly_id(friendly_id, options = {})
@@ -18,7 +24,7 @@ class Roll < ActiveRecord::Base
       end
     end
   end
-  
+
   def friendly_id
     "#{year}-#{where.first}#{number}" if year.present? && where.present? && number.present?
   end

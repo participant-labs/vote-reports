@@ -39,9 +39,8 @@ class Report < ActiveRecord::Base
 
   def generate_scores!
     all_scores = bill_criteria.inject(Hash.new(0.0)) do |scores, bill_criterion|
-      votes = bill_criterion.bill.votes
-      votes.each do |vote|
-        scores[vote.politician] += bill_criterion.score(vote)
+      bill_criterion.score.each_pair do |politician, score|
+        scores[politician] += score
       end
       scores
     end

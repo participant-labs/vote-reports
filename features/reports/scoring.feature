@@ -52,7 +52,7 @@ Feature: Scoring Reports
     Given report "Active Report" has the following bill criterion:
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
-    And bill "Bovine Security Act of 2009" has the following votes:
+    And bill "Bovine Security Act of 2009" has the following bill passage votes:
       | politician     | vote |
       | Piyush Jindal  | +    |
       | J. Kerrey      | P    |
@@ -76,7 +76,7 @@ Feature: Scoring Reports
       | bill                                    | support |
       | Bovine Security Act of 2009             | true    |
       | USA PATRIOT Reauthorization Act of 2009 | false   |
-    And the following votes:
+    And the following bill passage votes:
       | politician     | Bovine Security Act of 2009  | USA PATRIOT Reauthorization Act of 2009 |
       | Piyush Jindal         | + | + |
       | J. Kerrey             | + | P |
@@ -131,3 +131,30 @@ Feature: Scoring Reports
       | James Barrett        | 50    |
       | Roscoe Bartlett      | 75    |
     And I should not see "Joe Barton"
+
+  Scenario: Bill Criteria report generate scores from passing roles only
+    Given report "Active Report" has the following bill criterion:
+      | bill                        | support |
+      | Bovine Security Act of 2009 | true    |
+    And bill "Bovine Security Act of 2009" has the following rolls:
+      | roll_type                                          |
+      | On Passage                                         |
+      | On the Cloture Motion                              |
+      | On Agreeing to the Amendments en bloc, as modified |
+    And bill "Bovine Security Act of 2009" has the following roll votes:
+      | politician       | On Passage | On the Cloture Motion | On Agreeing to the Amendments en bloc, as modified |
+      | Piyush Jindal    | + | + | + |
+      | J. Kerrey        | P | - | + |
+      | Martin Sabo      | 0 | + | - |
+      | Edward Kaufman   | - | + | + |
+      | Connie Mack      |   | P | - |
+      | Neil Abercrombie | - | - | 0 |
+    When I go to my report page for "Active Report"
+    Then I should see the following scores:
+      | politician           | score |
+      | Piyush Jindal        | 100   |
+      | J. Kerrey            | 25    |
+      | Martin Sabo          | 75    |
+      | Edward Kaufman       | 50    |
+      | Connie Mack          | 50    |
+      | Neil Abercrombie     | 0     |
