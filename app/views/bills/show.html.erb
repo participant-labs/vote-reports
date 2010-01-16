@@ -1,4 +1,9 @@
 <h2><%= bill_title(@bill) %></h2>
+<p>Introduced on <%= @bill.introduced_on.to_s(:long_ordinal) %>
+<%- if @bill.sponsor -%>
+  by <%= render @bill.sponsor %>
+<%- end -%>
+</p>
 
 <ul>
   <%- if @bill.opencongress_url -%>
@@ -10,12 +15,6 @@
 <div id="bill_summary" class="hidden">
   <%= to_html(@bill.summary) %>
 </div>
-
-<p>Introduced on <%= @bill.introduced_on.to_s(:long_ordinal) %>
-<%- if @bill.sponsor -%>
-  by <%= render @bill.sponsor %>
-<%- end -%>
-</p>
 
 <%- if (amendments = @bill.amendments.with_votes).present? -%>
 <h3>Amendments</h3>
