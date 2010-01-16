@@ -40,3 +40,7 @@ Given /^(\d+) recent bills$/ do |count|
     create_bill
   end
 end
+
+Given /^(bill "[^\"]*") has a title "([^\"]*)"$/ do |bill, title|
+  create_bill_title(:bill => bill, :title => title)
+end
