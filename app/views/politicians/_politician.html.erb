@@ -1,2 +1,2 @@
-<%= image_tag politician.headshot_url(:small), :alt => politician.full_name if politician.headshot_url(:small) %>
+<%= image_tag politician.headshot_url(:small) if politician.headshot_url(:small) %>
 <%= link_to politician.full_name, politician  %>
