@@ -13,8 +13,6 @@
 !normal = #150C15
 !hover = #635254
 
-
-
 //Recommended Blueprint configuration with scoping and semantic layout:
 +blueprint-typography("body.bp")
 +blueprint-scaffolding("body.bp")
@@ -23,9 +21,23 @@ body.bp
   +blueprint-debug
   +blueprint-interaction
 
+  q:before, q:after
+    content: '"'
+
   a
     +link-colors(!normal, !hover, !hover, !normal, !hover)
     //link-colors(!normal, !hover = false, !active = false, !visited = false, !focus = false)
+
+  dl
+    dl
+      dt:after
+        content: ':'
+
+  h2
+    .bill_titles
+      font-size: 20px
+    a
+      +link-colors(!second_header_background)
 
   h3
     padding: 5px 10px
