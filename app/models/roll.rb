@@ -22,4 +22,8 @@ class Roll < ActiveRecord::Base
   def friendly_id
     "#{year}-#{where.first}#{number}" if year.present? && where.present? && number.present?
   end
+
+  def opencongress_url
+    "http://www.opencongress.org/vote/#{year}/#{where.first}/#{number}" if congress.current?
+  end
 end
