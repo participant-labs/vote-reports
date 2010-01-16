@@ -48,6 +48,25 @@ Feature: Scoring Reports
     Then I should see "No scores yet, as the associated bills have not been voted on."
     And I should see "(unvoted)"
 
+  Scenario: With Criteria on bills without passage rolls, I should see message noting the bills are unvoted, and so no scores exist
+    Given report "Active Report" has the following bill criteria:
+      | bill                                    | support |
+      | Bovine Security Act of 2009             | true    |
+    And bill "Bovine Security Act of 2009" has the following rolls:
+      | roll_type                                          |
+      | On Agreeing to the Amendments en bloc, as modified |
+    And bill "Bovine Security Act of 2009" has the following roll votes:
+      | politician       | On Agreeing to the Amendments en bloc, as modified |
+      | Piyush Jindal    | + |
+      | J. Kerrey        | P |
+      | Martin Sabo      | 0 |
+      | Edward Kaufman   | - |
+      | Connie Mack      |   |
+      | Neil Abercrombie | - |
+    When I go to my report page for "Active Report"
+    Then I should see "No scores yet, as the associated bills have not been voted on."
+    And I should see "(unvoted)"
+
   Scenario: Bill Criteria report generates scores
     Given report "Active Report" has the following bill criterion:
       | bill                        | support |
