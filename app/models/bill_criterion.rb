@@ -27,13 +27,21 @@ class BillCriterion < ActiveRecord::Base
     (support? && vote.nay?) || (oppose? && vote.aye?)
   end
 
-  def score(vote)
-    if aligns?(vote)
-      1.0
-    elsif contradicts?(vote)
-      -1.0
-    else
-      0.0
+  def score
+    rolls = bill.rolls.on_passage
+    roll_count = rolls.count
+    rolls.inject(Hash.new(0.0)) do |scores, roll|
+      roll.votes.each do |vote|
+        scores[vote.politician] +=
+          if aligns?(vote)
+            1.0
+          elsif contradicts?(vote)
+            -1.0
+          else
+            0.0
+          end / roll_count
+      end
+      scores
     end
   end
 end
