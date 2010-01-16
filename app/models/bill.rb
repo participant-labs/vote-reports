@@ -1,4 +1,5 @@
 class Bill < ActiveRecord::Base
+  default_scope :include => :titles
   named_scope :by_introduced_on, :order => 'introduced_on DESC'
   named_scope :with_title, lambda {|title|
     {:select => 'DISTINCT bills.*', :joins => :titles, :conditions => {:'bill_titles.title' => title}}
