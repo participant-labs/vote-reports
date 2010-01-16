@@ -4,3 +4,32 @@
   <dt>Subject</dt>
   <dd><%= render @roll.subject %></dd>
 </dl>
+
+<ul>
+  <li><%= @roll.roll_type %></li>
+  <li><%= @roll.required %> required</li>
+  <li>Result: <%= @roll.result %></li>
+  <%- if @roll.opencongress_url -%>
+  <li><%= link_to 'View on OpenCongress', @roll.opencongress_url %></li>
+  <%- end -%>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>For: <%= @roll.aye %></th>
+      <th>Against: <%= @roll.nay %></th>
+      <th>Present: <%= @roll.present %></th>
+      <th>Not Voting: <%= @roll.not_voting %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @roll.votes.aye.zip(@roll.votes.nay, @roll.votes.present, @roll.votes.not_voting).each do |row| -%>
+      <tr>
+        <%- row.each do |vote| -%>
+          <td><%= render vote.politician if vote %></td>
+        <%- end -%>
+      </tr>
+    <%- end -%>
+  </tbody>
+</table>
