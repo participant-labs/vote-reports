@@ -47,14 +47,14 @@ Feature: Browsing Politicians
     And the following politician records:
       | name                  |
       | Piyush Jindal         |
-    And bill "Bovine Security Act of 2009" has the following votes:
+    And bill "Bovine Security Act of 2009" has the following passage votes:
       | politician     | vote |
       | Piyush Jindal  | +    |
     When I go to the politician page for "Piyush Jindal"
     Then I should see "Supported Bills"
     And I should see "Bovine Security Act of 2009"
 
-    Given bill "USA PATRIOT Reauthorization Act of 2009" has the following votes:
+    Given bill "USA PATRIOT Reauthorization Act of 2009" has the following passage votes:
       | politician     | vote |
       | Piyush Jindal  | -    |
     When I go to the politician page for "Piyush Jindal"

@@ -71,7 +71,7 @@ Feature: Scoring Reports
     Given report "Active Report" has the following bill criterion:
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
-    And bill "Bovine Security Act of 2009" has the following bill passage votes:
+    And bill "Bovine Security Act of 2009" has the following passage votes:
       | politician     | vote |
       | Piyush Jindal  | +    |
       | J. Kerrey      | P    |

@@ -1,4 +1,4 @@
-Given /^(bill "[^\"]*") has the following bill passage votes:$/ do |bill, table|
+Given /^(bill "[^\"]*") has the following passage votes:$/ do |bill, table|
   roll = create_roll(:subject => bill, :roll_type => "On Passage")
   table.map_column!('politician') {|name| Politician.with_name(name).first }
   table.hashes.each do |attrs|
