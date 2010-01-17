@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100116015937) do
+ActiveRecord::Schema.define(:version => 20100117085203) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -26,9 +26,12 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
     t.integer  "congress_id",  :null => false
   end
 
+  add_index "amendments", ["bill_id"], :name => "index_amendments_on_bill_id"
+  add_index "amendments", ["congress_id"], :name => "index_amendments_on_congress_id"
   add_index "amendments", ["number", "chamber", "bill_id"], :name => "amendments_number_chamber_bill_id_unique", :unique => true
   add_index "amendments", ["number", "chamber", "congress_id"], :name => "amendments_number_chamber_congress_id_unique", :unique => true
   add_index "amendments", ["sequence", "bill_id"], :name => "amendments_sequence_bill_id_unique", :unique => true
+  add_index "amendments", ["sponsor_id", "sponsor_type"], :name => "index_amendments_on_sponsor_id_and_sponsor_type"
 
   create_table "bill_committee_actions", :force => true do |t|
     t.string   "action",               :null => false
@@ -37,6 +40,9 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "bill_committee_actions", ["bill_id"], :name => "index_bill_committee_actions_on_bill_id"
+  add_index "bill_committee_actions", ["committee_meeting_id"], :name => "index_bill_committee_actions_on_committee_meeting_id"
 
   create_table "bill_criteria", :force => true do |t|
     t.integer  "bill_id",    :null => false
@@ -48,6 +54,8 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
 
   add_index "bill_criteria", ["bill_id", "report_id"], :name => "bill_criteria_bill_id_report_id_unique", :unique => true
   add_index "bill_criteria", ["bill_id", "report_id"], :name => "index_bill_criteria_on_bill_id_and_report_id", :unique => true
+  add_index "bill_criteria", ["bill_id"], :name => "index_bill_criteria_on_bill_id"
+  add_index "bill_criteria", ["support"], :name => "index_bill_criteria_on_support"
 
   create_table "bill_subjects", :force => true do |t|
     t.integer  "bill_id",    :null => false
@@ -57,6 +65,8 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
   end
 
   add_index "bill_subjects", ["bill_id", "subject_id"], :name => "bill_subjects_bill_id_subject_id_unique", :unique => true
+  add_index "bill_subjects", ["bill_id"], :name => "index_bill_subjects_on_bill_id"
+  add_index "bill_subjects", ["subject_id"], :name => "index_bill_subjects_on_subject_id"
 
   create_table "bill_title_as", :force => true do |t|
     t.string   "as",         :null => false
@@ -64,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "bill_title_as", ["as"], :name => "index_bill_title_as_on_as"
 
   create_table "bill_titles", :force => true do |t|
     t.text     "title",            :null => false
@@ -73,6 +85,9 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
     t.datetime "updated_at"
     t.integer  "bill_title_as_id", :null => false
   end
+
+  add_index "bill_titles", ["bill_id"], :name => "index_bill_titles_on_bill_id"
+  add_index "bill_titles", ["bill_title_as_id"], :name => "index_bill_titles_on_bill_title_as_id"
 
   create_table "bills", :force => true do |t|
     t.string   "bill_type",            :null => false
@@ -89,10 +104,12 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
   end
 
   add_index "bills", ["bill_type", "bill_number", "congress_id"], :name => "bills_bill_type_bill_number_congress_id_unique", :unique => true
+  add_index "bills", ["congress_id"], :name => "index_bills_on_congress_id"
   add_index "bills", ["gov_track_id"], :name => "bills_gov_track_id_unique", :unique => true
   add_index "bills", ["gov_track_id"], :name => "index_bills_on_gov_track_id", :unique => true
   add_index "bills", ["opencongress_id"], :name => "bills_opencongress_id_unique", :unique => true
   add_index "bills", ["opencongress_id"], :name => "index_bills_on_opencongress_id", :unique => true
+  add_index "bills", ["sponsor_id"], :name => "index_bills_on_sponsor_id"
 
   create_table "committee_meetings", :force => true do |t|
     t.string   "name",         :null => false
@@ -102,7 +119,9 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
     t.datetime "updated_at"
   end
 
+  add_index "committee_meetings", ["committee_id"], :name => "index_committee_meetings_on_committee_id"
   add_index "committee_meetings", ["congress_id", "committee_id"], :name => "committee_meetings_congress_id_committee_id_unique", :unique => true
+  add_index "committee_meetings", ["congress_id"], :name => "index_committee_meetings_on_congress_id"
 
   create_table "committee_memberships", :force => true do |t|
     t.integer  "politician_id",        :null => false
@@ -112,7 +131,9 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
     t.datetime "updated_at"
   end
 
+  add_index "committee_memberships", ["committee_meeting_id"], :name => "index_committee_memberships_on_committee_meeting_id"
   add_index "committee_memberships", ["politician_id", "committee_meeting_id"], :name => "committee_memberships_politician_id_committee_meeting_id_unique", :unique => true
+  add_index "committee_memberships", ["politician_id"], :name => "index_committee_memberships_on_politician_id"
 
   create_table "committees", :force => true do |t|
     t.string   "chamber"
@@ -141,6 +162,8 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
   end
 
   add_index "cosponsorships", ["bill_id", "politician_id"], :name => "cosponsorships_bill_id_politician_id_unique", :unique => true
+  add_index "cosponsorships", ["bill_id"], :name => "index_cosponsorships_on_bill_id"
+  add_index "cosponsorships", ["politician_id"], :name => "index_cosponsorships_on_politician_id"
 
   create_table "parties", :force => true do |t|
     t.string   "name",       :null => false
@@ -163,6 +186,9 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
     t.integer  "senate_class"
     t.string   "type",          :null => false
   end
+
+  add_index "politician_terms", ["party_id"], :name => "index_politician_terms_on_party_id"
+  add_index "politician_terms", ["politician_id"], :name => "index_politician_terms_on_politician_id"
 
   create_table "politicians", :force => true do |t|
     t.string   "first_name"
@@ -227,6 +253,8 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
     t.string   "cached_slug"
   end
 
+  add_index "reports", ["user_id"], :name => "index_reports_on_user_id"
+
   create_table "rolls", :force => true do |t|
     t.string   "where",        :null => false
     t.datetime "voted_at",     :null => false
@@ -247,7 +275,12 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
     t.integer  "number",       :null => false
   end
 
+  add_index "rolls", ["congress_id"], :name => "index_rolls_on_congress_id"
   add_index "rolls", ["number", "year", "where"], :name => "rolls_number_year_where_unique", :unique => true
+  add_index "rolls", ["roll_type"], :name => "index_rolls_on_roll_type"
+  add_index "rolls", ["subject_id"], :name => "index_rolls_on_subject_id"
+  add_index "rolls", ["subject_type", "subject_id"], :name => "index_rolls_on_subject_type_and_subject_id"
+  add_index "rolls", ["subject_type"], :name => "index_rolls_on_subject_type"
 
   create_table "slugs", :force => true do |t|
     t.string   "name"
@@ -264,6 +297,8 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
   create_table "subjects", :force => true do |t|
     t.string "name", :null => false
   end
+
+  add_index "subjects", ["name"], :name => "index_subjects_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",             :null => false
@@ -288,6 +323,9 @@ ActiveRecord::Schema.define(:version => 20100116015937) do
     t.string   "vote"
   end
 
+  add_index "votes", ["politician_id"], :name => "index_votes_on_politician_id"
   add_index "votes", ["roll_id", "politician_id"], :name => "index_votes_on_roll_id_and_politician_id", :unique => true
+  add_index "votes", ["roll_id"], :name => "index_votes_on_roll_id"
+  add_index "votes", ["vote"], :name => "index_votes_on_vote"
 
 end
