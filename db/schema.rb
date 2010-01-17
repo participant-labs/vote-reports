@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100117085203) do
+ActiveRecord::Schema.define(:version => 20100117223316) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -57,6 +57,17 @@ ActiveRecord::Schema.define(:version => 20100117085203) do
   add_index "bill_criteria", ["bill_id"], :name => "index_bill_criteria_on_bill_id"
   add_index "bill_criteria", ["support"], :name => "index_bill_criteria_on_support"
 
+  create_table "bill_oppositions", :force => true do |t|
+    t.integer  "politician_id", :null => false
+    t.integer  "bill_id",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bill_oppositions", ["bill_id"], :name => "index_bill_oppositions_on_bill_id"
+  add_index "bill_oppositions", ["politician_id", "bill_id"], :name => "bill_oppositions_politician_id_bill_id_unique", :unique => true
+  add_index "bill_oppositions", ["politician_id"], :name => "index_bill_oppositions_on_politician_id"
+
   create_table "bill_subjects", :force => true do |t|
     t.integer  "bill_id",    :null => false
     t.integer  "subject_id", :null => false
@@ -67,6 +78,17 @@ ActiveRecord::Schema.define(:version => 20100117085203) do
   add_index "bill_subjects", ["bill_id", "subject_id"], :name => "bill_subjects_bill_id_subject_id_unique", :unique => true
   add_index "bill_subjects", ["bill_id"], :name => "index_bill_subjects_on_bill_id"
   add_index "bill_subjects", ["subject_id"], :name => "index_bill_subjects_on_subject_id"
+
+  create_table "bill_supports", :force => true do |t|
+    t.integer  "politician_id", :null => false
+    t.integer  "bill_id",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bill_supports", ["bill_id"], :name => "index_bill_supports_on_bill_id"
+  add_index "bill_supports", ["politician_id", "bill_id"], :name => "bill_supports_politician_id_bill_id_unique", :unique => true
+  add_index "bill_supports", ["politician_id"], :name => "index_bill_supports_on_politician_id"
 
   create_table "bill_title_as", :force => true do |t|
     t.string   "as",         :null => false
