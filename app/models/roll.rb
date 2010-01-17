@@ -23,6 +23,10 @@ class Roll < ActiveRecord::Base
         find_by_id(friendly_id, options = {})
       end
     end
+
+    def bills
+      Bill.scoped(:conditions => {:id => all(:select => 'subject_id', :conditions => {:subject_type => 'Bill'}).map {|r| r.subject_id }})
+    end
   end
 
   def friendly_id

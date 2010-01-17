@@ -47,16 +47,33 @@ Feature: Browsing Politicians
     And the following politician records:
       | name                  |
       | Piyush Jindal         |
-    And bill "Bovine Security Act of 2009" has the following passage votes:
-      | politician     | vote |
-      | Piyush Jindal  | +    |
+      | Ron Wyden             |
+    And bill "Bovine Security Act of 2009" has the following rolls:
+      | roll_type                                          |
+      | On Passage                                         |
+      | On the Cloture Motion                              |
+      | On Agreeing to the Amendments en bloc, as modified |
+    And bill "Bovine Security Act of 2009" has the following roll votes:
+      | politician       | On Passage | On the Cloture Motion | On Agreeing to the Amendments en bloc, as modified |
+      | Piyush Jindal    | + | + | - |
     When I go to the politician page for "Piyush Jindal"
     Then I should see "Supported Bills"
     And I should see "Bovine Security Act of 2009"
+    And I should see "We have no record of opposition from this politician"
 
+    Given bill "USA PATRIOT Reauthorization Act of 2009" has the following rolls:
+      | roll_type                                          |
+      | On Passage                                         |
+      | On the Cloture Motion                              |
+      | On Agreeing to the Amendments en bloc, as modified |
+    And bill "USA PATRIOT Reauthorization Act of 2009" has the following roll votes:
+      | politician   | On Passage | On the Cloture Motion | On Agreeing to the Amendments en bloc, as modified |
+      | Ron Wyden    | - | + | - |
     Given bill "USA PATRIOT Reauthorization Act of 2009" has the following passage votes:
-      | politician     | vote |
-      | Piyush Jindal  | -    |
-    When I go to the politician page for "Piyush Jindal"
+      | politician | vote |
+      | Ron Wyden  | -    |
+    When I go to the politician page for "Ron Wyden"
     Then I should see "Opposed Bills"
     And I should see "USA PATRIOT Reauthorization Act of 2009"
+    And I should not see "We have no record of opposition from this politician"
+    And I should not see "We have no record of support from this politician"

@@ -40,20 +40,20 @@ describe Politician do
 
     it "returns all politicians with connecting votes" do
       @politician.rolls.should =~ [@supported, @opposed]
-      @politician.bills.should =~ [@supported.subject, @opposed.subject]
+      @politician.rolls.bills.should =~ [@supported.subject, @opposed.subject]
     end
 
     describe "#supported" do
       it "returns all politicians with supporting votes" do
         @politician.rolls.supported.should =~ [@supported]
-        @politician.bills.supported.should =~ [@supported.subject]
+        @politician.rolls.supported.bills.should =~ [@supported.subject]
       end
     end
 
     describe "#opposed" do
       it "returns all politicians with supporting votes" do
         @politician.rolls.opposed.should =~ [@opposed]
-        @politician.bills.opposed.should =~ [@opposed.subject]
+        @politician.rolls.opposed.bills.should =~ [@opposed.subject]
       end
     end
 
@@ -61,7 +61,7 @@ describe Politician do
       another_supported = create_roll(:subject => @supported.subject)
       create_vote(:politician => @politician, :roll => another_supported, :vote => '+')
       @politician.rolls.supported.should =~ [@supported, another_supported]
-      @politician.bills.supported.should =~ [@supported.subject]
+      @politician.rolls.supported.bills.should =~ [@supported.subject]
     end
   end
 
