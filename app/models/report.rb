@@ -47,7 +47,7 @@ class Report < ActiveRecord::Base
     end
     total = criteria.size
     all_scores.each_pair do |politician, score|
-      all_scores[politician] = ((score + total)/(total * 2)) * 100
+      all_scores[politician] = (50.0 * score)/total + 50.0
     end
     all_scores.to_a.sort_by(&:last).reverse
   end
