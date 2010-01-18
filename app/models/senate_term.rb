@@ -3,6 +3,6 @@ class SenateTerm < PoliticianTerm
   validates_presence_of :senate_class, :state
 
   def for
-    "the #{politician.district} for #{UsState.name_from_abbrev(state)}"
+    "Senator for #{UsState.name_from_abbrev(state)}, as a #{party}"
   end
 end

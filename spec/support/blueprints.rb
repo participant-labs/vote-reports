@@ -177,9 +177,13 @@ Fixjour :verify => false do
   end
 
   define_builder(PresidentialTerm) do |klass, overrides|
+    started_on = rand(50).years.ago
+
     klass.new(
       :politician => new_politician,
-      :party => new_party
+      :party => new_party,
+      :started_on => started_on,
+      :ended_on => started_on + (rand(2) * 4).years
     )
   end
 
@@ -189,20 +193,33 @@ Fixjour :verify => false do
       overrides[:party] = party
     end
 
+    started_on = rand(50).years.ago
+
     klass.new(
       :politician => new_politician,
       :party => new_party,
       :state => UsState::US_STATES.rand.last,
-      :district => rand(100)
+      :district => rand(100),
+      :started_on => started_on,
+      :ended_on => started_on + 2.years
     )
   end
 
   define_builder(SenateTerm) do |klass, overrides|
+    overrides.process(:party) do |party|
+      party = Party.find_or_create_by_name(party) if party.is_a?(String)
+      overrides[:party] = party
+    end
+
+    started_on = rand(50).years.ago
+
     klass.new(
       :politician => new_politician,
       :party => new_party,
       :senate_class => [1, 2, 3].rand,
-      :state => UsState::US_STATES.rand.last
+      :state => UsState::US_STATES.rand.last,
+      :started_on => started_on,
+      :ended_on => started_on + 6.years
     )
   end
 
