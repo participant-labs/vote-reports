@@ -5,12 +5,12 @@ class BillsController < ApplicationController
       @bills = Bill.paginated_search(params).results
     else
       @title = 'Recent Bills'
-      @bills = Bill.by_introduced_on.paginate :page => params[:page]
+      @bills = Bill.by_introduced_on.paginate :page => params[:page], :include => :titles
     end
   end
 
   def show
-    @bill = Bill.find(params[:id])
+    @bill = Bill.find(params[:id], :include => :titles)
     @titles =  @bill.titles
     @rolls = @bill.rolls.by_voted_at
   end

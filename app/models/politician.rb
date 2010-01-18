@@ -34,6 +34,11 @@ class Politician < ActiveRecord::Base
   has_many :votes
   has_many :rolls, :through => :votes, :extend => Vote::Support
 
+  has_many :bill_supports
+  has_many :supported_bills, :through => :bill_supports, :source => :bill
+  has_many :bill_oppositions
+  has_many :opposed_bills, :through => :bill_oppositions, :source => :bill
+
   named_scope :with_name, lambda {|name|
     first, last = name.split(' ', 2)
     {:conditions => {:first_name => first, :last_name => last}}
