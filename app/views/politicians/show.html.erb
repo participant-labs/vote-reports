@@ -67,7 +67,7 @@
       <li><%= link_to bill.titles.first, bill%></li>
     <% end %>
   </ul>
-  <%= will_paginate @supported_bills,
+  <%= will_paginate @opposed_bills,
       :param_name => :opposed_page,
       :params => {:supported_page => @supported_bills.current_page }  %>
 <%- else -%>
