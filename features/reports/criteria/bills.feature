@@ -19,13 +19,14 @@ Feature: Adding Bill Criteria to Reports
     And I should be on my report page for "My report"
     And I should see "Support -"
     And I should see "USA PATRIOT Reauthorization Act of 2009"
+    And I <not yet voted> see "not yet voted"
 
   Examples:
-    | bill type                            |
-    | a pass-voted, current-congress bill  |
-    | an voted, current-congress bill      |
-    | an un-voted, current-congress bill   |
-    | a pass-voted, previous-congress bill |
+    | bill type                            | not yet voted |
+    | a pass-voted, current-congress bill  | should not    |
+    | a voted, current-congress bill       | should        |
+    | an un-voted, current-congress bill   | should        |
+    | a pass-voted, previous-congress bill | should not    |
 
   Scenario Outline: User is unable to select an invalid bill for report
     Given an <bill type> bill named "USA PATRIOT Reauthorization Act of 2009"

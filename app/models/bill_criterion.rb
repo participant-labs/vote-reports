@@ -11,6 +11,12 @@ class BillCriterion < ActiveRecord::Base
     !bill.rolls.on_bill_passage.exists?
   end
 
+  def status
+    if unvoted?
+      bill.congress.current? ? "(not yet voted)" : "(unvoted)"
+    end
+  end
+
   def support?
     support
   end
