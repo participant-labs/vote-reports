@@ -39,16 +39,15 @@ Feature: Scoring Reports
     When I go to my report page for "Active Report"
     Then I should see "No scores yet, as this report has no criteria to judge representatives by."
 
-  Scenario: With Criteria on unvoted bills, I should see message noting the bills are unvoted, and so no scores exist
+  Scenario: With Criteria on unvoted bills, I should see message noting that as the bills are unvoted, no scores exist
     Given report "Active Report" has the following bill criteria:
       | bill                                    | support |
       | Bovine Security Act of 2009             | true    |
       | USA PATRIOT Reauthorization Act of 2009 | false   |
     When I go to my report page for "Active Report"
     Then I should see "No scores yet, as the associated bills have not been voted on."
-    And I should see "(unvoted)"
 
-  Scenario: With Criteria on bills without passage rolls, I should see message noting the bills are unvoted, and so no scores exist
+  Scenario: With Criteria on bills without passage rolls, I should see message noting that as the bills are unvoted, no scores exist
     Given report "Active Report" has the following bill criteria:
       | bill                                    | support |
       | Bovine Security Act of 2009             | true    |
@@ -65,7 +64,6 @@ Feature: Scoring Reports
       | Neil Abercrombie | - |
     When I go to my report page for "Active Report"
     Then I should see "No scores yet, as the associated bills have not been voted on."
-    And I should see "(unvoted)"
 
   Scenario: Bill Criteria report generates scores
     Given report "Active Report" has the following bill criterion:

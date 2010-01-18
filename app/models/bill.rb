@@ -81,7 +81,7 @@ class Bill < ActiveRecord::Base
   end
 
   def old_and_unvoted?
-    (congress.meeting != Congress.current_meeting) & rolls.on_bill_passage.empty?
+    !congress.current? & rolls.on_bill_passage.empty?
   end
 
   def congress=(congress)
