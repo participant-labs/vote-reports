@@ -22,5 +22,7 @@ class PopulateBillOppositionAndSupport < ActiveRecord::Migration
   end
 
   def self.down
+    BillSupport.delete_all
+    BillOpposition.delete_all
   end
 end
