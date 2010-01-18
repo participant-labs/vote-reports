@@ -12,11 +12,26 @@ class Vote < ActiveRecord::Base
   named_scope :present, :conditions => {:vote => 'P'}
   named_scope :not_voting, :conditions => {:vote => '0'}
 
+  unless Rails.env.development?
+    after_create :create_bill_support_or_opposition
+  end
+
   def aye?
     vote == '+'
   end
 
   def nay?
     vote == '-'
+  end
+
+  private
+
+  unless Rails.env.development?
+    def create_bill_support_or_opposition
+      if roll.passage?
+        BillOpposition.find_or_create_by_bill_id_and_politician_id(roll.subject.id, politician.id) if nay?
+        BillSupport.find_or_create_by_bill_id_and_politician_id(roll.subject.id, politician.id) if aye?
+      end
+    end
   end
 end

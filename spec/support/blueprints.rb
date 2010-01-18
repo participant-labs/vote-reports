@@ -143,6 +143,20 @@ Fixjour :verify => false do
     )
   end
 
+  define_builder(BillSupport) do |klass, overrides|
+    klass.new(
+      :politician => new_politician,
+      :bill => new_bill
+    )
+  end
+
+  define_builder(BillOpposition) do |klass, overrides|
+    klass.new(
+      :politician => new_politician,
+      :bill => new_bill
+    )
+  end
+
   define_builder(Roll) do |klass, overrides|
     klass.new(
       :congress => Congress.find_or_create_by_meeting(rand(200)),

@@ -29,7 +29,7 @@ describe Politician do
     end
   end
 
-  describe "#bills" do
+  describe "#rolls" do
     before do
       @supported = create_roll
       @opposed = create_roll
@@ -40,28 +40,40 @@ describe Politician do
 
     it "returns all politicians with connecting votes" do
       @politician.rolls.should =~ [@supported, @opposed]
-      @politician.rolls.bills.should =~ [@supported.subject, @opposed.subject]
     end
 
     describe "#supported" do
       it "returns all politicians with supporting votes" do
         @politician.rolls.supported.should =~ [@supported]
-        @politician.rolls.supported.bills.should =~ [@supported.subject]
       end
     end
 
     describe "#opposed" do
       it "returns all politicians with supporting votes" do
         @politician.rolls.opposed.should =~ [@opposed]
-        @politician.rolls.opposed.bills.should =~ [@opposed.subject]
+      end
+    end
+  end
+
+  describe "#supported/opposed_bills" do
+    before do
+      @supported = create_roll(:subject => create_bill, :roll_type => 'On Passage')
+      @opposed = create_roll(:subject => create_bill, :roll_type => 'On Passage')
+      @unconnected = create_roll(:subject => create_bill, :roll_type => 'On Passage')
+      create_vote(:politician => @politician, :roll => @supported, :vote => '+')
+      create_vote(:politician => @politician, :roll => @opposed, :vote => '-')
+    end
+
+    describe "#supported" do
+      it "returns all politicians with supporting votes" do
+        @politician.supported_bills.should =~ [@supported.subject]
       end
     end
 
-    it "should return distinct bills" do
-      another_supported = create_roll(:subject => @supported.subject)
-      create_vote(:politician => @politician, :roll => another_supported, :vote => '+')
-      @politician.rolls.supported.should =~ [@supported, another_supported]
-      @politician.rolls.supported.bills.should =~ [@supported.subject]
+    describe "#opposed" do
+      it "returns all politicians with supporting votes" do
+        @politician.opposed_bills.should =~ [@opposed.subject]
+      end
     end
   end
 

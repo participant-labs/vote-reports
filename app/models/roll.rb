@@ -6,12 +6,12 @@ class Roll < ActiveRecord::Base
   has_friendly_id :friendly_id
 
   named_scope :by_voted_at, :order => "voted_at DESC"
-  named_scope :on_passage, :conditions => {:roll_type => [
+  named_scope :on_bill_passage, :conditions => {:roll_type => [
     "On Passage", "Passage, Objections of the President Notwithstanding", "On Agreeing to the Resolution",
     "On Agreeing to the Resolution, as Amended", "On Motion to Suspend the Rules and Agree",
     "On Motion to Suspend the Rules and Agree, as Amended", "On Motion to Suspend the Rules and Pass",
     "On Motion to Suspend the Rules and Pass, as Amended", "On the Cloture Motion", "On Cloture on the Motion to Proceed"
-  ]}
+  ], :subject_type => 'Bill'}
 
   class << self
     def find_by_friendly_id(friendly_id, options = {})
@@ -23,14 +23,19 @@ class Roll < ActiveRecord::Base
         find_by_id(friendly_id, options = {})
       end
     end
-
-    def bills
-      Bill.scoped(:conditions => {:id => all(:select => 'subject_id', :conditions => {:subject_type => 'Bill'}).map {|r| r.subject_id }})
-    end
   end
 
   def friendly_id
     "#{year}-#{where.first}#{number}" if year.present? && where.present? && number.present?
+  end
+
+  def passage?
+    [
+      "On Passage", "Passage, Objections of the President Notwithstanding", "On Agreeing to the Resolution",
+      "On Agreeing to the Resolution, as Amended", "On Motion to Suspend the Rules and Agree",
+      "On Motion to Suspend the Rules and Agree, as Amended", "On Motion to Suspend the Rules and Pass",
+      "On Motion to Suspend the Rules and Pass, as Amended", "On the Cloture Motion", "On Cloture on the Motion to Proceed"
+    ].include?(roll_type)
   end
 
   def opencongress_url

@@ -8,7 +8,7 @@ class BillCriterion < ActiveRecord::Base
   accepts_nested_attributes_for :bill
 
   def unvoted?
-    !bill.rolls.on_passage.exists?
+    !bill.rolls.on_bill_passage.exists?
   end
 
   def support?
@@ -28,7 +28,7 @@ class BillCriterion < ActiveRecord::Base
   end
 
   def score
-    rolls = bill.rolls.on_passage
+    rolls = bill.rolls.on_bill_passage
     roll_count = rolls.count
     rolls.inject(Hash.new(0.0)) do |scores, roll|
       roll.votes.each do |vote|
