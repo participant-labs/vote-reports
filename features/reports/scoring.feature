@@ -7,6 +7,7 @@ Feature: Scoring Reports
     Given I have a report named "Active Report"
     And an un-voted, current-congress bill named "Bovine Security Act of 2009"
     And an un-voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
+    And an un-voted, current-congress bill named "Honoring Miss America Act of 2009"
     And the following politician records:
       | name                  |
       | Piyush Jindal         |
@@ -93,6 +94,7 @@ Feature: Scoring Reports
       | bill                                    | support |
       | Bovine Security Act of 2009             | true    |
       | USA PATRIOT Reauthorization Act of 2009 | false   |
+      | Honoring Miss America Act of 2009       | true   |
     And the following bill passage votes:
       | politician     | Bovine Security Act of 2009  | USA PATRIOT Reauthorization Act of 2009 |
       | Piyush Jindal         | + | + |
