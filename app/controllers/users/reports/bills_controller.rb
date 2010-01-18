@@ -7,7 +7,7 @@ class Users::Reports::BillsController < ApplicationController
       redirect_to new_user_report_bills_path(current_user, @report), :status => 301
     end
     @q = params[:q]
-    @bills = Bill.paginated_search(params.merge(:exclude_old_and_unvoted => true)).results
+    @bills = Bill.paginated_search(params).results
   end
 
   def destroy

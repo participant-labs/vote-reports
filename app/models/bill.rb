@@ -21,10 +21,6 @@ class Bill < ActiveRecord::Base
       introduced_on.to_s(:long)
     end
     integer :bill_number
-    boolean :old_and_unvoted do
-      congress.meeting != Congress.current_meeting \
-        && rolls.empty?
-    end
     time :introduced_on
   end
 
@@ -67,9 +63,6 @@ class Bill < ActiveRecord::Base
       search do
         fulltext params[:q]
         paginate :page => params[:page], :per_page => Bill.per_page
-        if params[:exclude_old_and_unvoted]
-          without :old_and_unvoted, true
-        end
       end
     end
   end
@@ -85,6 +78,10 @@ class Bill < ActiveRecord::Base
 
   def ref
     "#{bill_type}#{bill_number}"
+  end
+
+  def old_and_unvoted?
+    (congress.meeting != Congress.current_meeting) & rolls.on_bill_passage.empty?
   end
 
   def congress=(congress)
