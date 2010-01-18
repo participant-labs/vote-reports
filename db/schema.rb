@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100117224654) do
+ActiveRecord::Schema.define(:version => 20100118222252) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -197,8 +197,8 @@ ActiveRecord::Schema.define(:version => 20100117224654) do
 
   create_table "politician_terms", :force => true do |t|
     t.integer  "politician_id", :null => false
-    t.date     "started_on"
-    t.date     "ended_on"
+    t.date     "started_on",    :null => false
+    t.date     "ended_on",      :null => false
     t.integer  "district"
     t.string   "state"
     t.string   "url"
