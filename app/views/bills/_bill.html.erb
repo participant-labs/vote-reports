@@ -1,3 +1,24 @@
+<%- year = true unless defined?(year) -%>
+
 <span class="bill">
-  <span class="title"><%= link_to "#{bill.bill_type.to_s} #{bill.bill_number} (#{bill.introduced_on.year}): #{bill.titles.first}", bill_path(bill) %></span>
+  <%= link_to_unless_current "#{bill.bill_type.to_s} #{bill.bill_number}#{" (#{bill.introduced_on.year})" if year}: #{bill.titles.first}", bill, :class => 'title' %>
+  <%- if bill.titles.size > 1 -%>
+    (<%= link_to 'all titles', '#', :'data-dialog' => "##{dom_id(bill, :titles)}", :'data-dialog-title' => %Q{Bill Titles for "#{bill.titles.first}"}, :class => 'bill_titles' %>)
+  <%- end -%>
 </span>
+
+<%- if bill.titles.size > 1 -%>
+  <dl id="<%= dom_id(bill, :titles) %>" class="hidden">
+    <%- bill.titles.group_by {|t| t.as }.each_pair do |as, as_titles| -%>
+    <dt><%= as %></dt>
+    <dd><dl>
+      <%- as_titles.group_by {|t| t.title_type }.each do |title_type, type_titles| -%>
+        <dt><%= title_type %></dt>
+        <%- type_titles.each do |title| -%>
+          <dd><q><%= title.title %></q></dd>
+        <%- end -%>
+      <%- end -%>
+    </dl></dd>
+    <%- end -%>
+  </dl>
+<%- end -%>

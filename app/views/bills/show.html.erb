@@ -1,8 +1,4 @@
-<h2><%= "#{@bill.bill_type.to_s} #{@bill.bill_number}: #{@titles.first}" %>
-  <%- if @titles.size > 1 -%>
-    <%= link_to '(all titles)', '#', :'data-dialog' => '#bill_titles', :'data-dialog-title' => "Bill Titles", :class => 'bill_titles' %>
-  <%- end -%>
-</h2>
+<h2><%= render @bill, :year => false %></h2>
 <p>Introduced on <%= @bill.introduced_on.to_s(:long_ordinal) %>
 <%- if @bill.sponsor -%>
   by <%= render @bill.sponsor %>
@@ -19,22 +15,6 @@
 <div id="bill_summary" class="hidden">
   <%= to_html(@bill.summary) %>
 </div>
-
-<%- if @titles.size > 1 -%>
-  <dl id="bill_titles" class="hidden">
-    <%- @titles.group_by {|t| t.as }.each_pair do |as, as_titles| -%>
-    <dt><%= as %></dt>
-    <dd><dl>
-      <%- as_titles.group_by {|t| t.title_type }.each do |title_type, type_titles| -%>
-        <dt><%= title_type %></dt>
-        <%- type_titles.each do |title| -%>
-          <dd><q><%= title.title %></q></dd>
-        <%- end -%>
-      <%- end -%>
-    </dl></dd>
-    <%- end -%>
-  </dl>
-<%- end -%>
 
 <%- if (amendments = @bill.amendments.with_votes).present? -%>
 <h3>Amendments</h3>
