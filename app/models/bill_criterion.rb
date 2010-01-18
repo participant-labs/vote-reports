@@ -7,6 +7,10 @@ class BillCriterion < ActiveRecord::Base
 
   accepts_nested_attributes_for :bill
 
+  named_scope :active, :select => 'DISTINCT bill_criteria.*',
+    :joins => {:bill => :rolls},
+    :conditions => Roll.on_bill_passage.proxy_options[:conditions]
+
   def unvoted?
     !bill.rolls.on_bill_passage.exists?
   end
