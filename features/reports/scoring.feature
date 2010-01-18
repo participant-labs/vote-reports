@@ -129,7 +129,7 @@ Feature: Scoring Reports
       | J. Kerrey            | 75    |
       | Martin Sabo          | 75    |
       | Edward Kaufman       | 100   |
-      | Connie Mack          | 75    |
+      | Connie Mack          | 100   |
       | Neil Abercrombie     | 25    |
       | Aníbal Acevedo-Vilá  | 50    |
       | Julia Carson         | 50    |
@@ -144,11 +144,11 @@ Feature: Scoring Reports
       | Spencer Bachus       | 25    |
       | Brian Baird          | 25    |
       | Richard Baker        | 50    |
-      | Tammy Baldwin        | 25    |
-      | Frank Ballance       | 25    |
+      | Tammy Baldwin        | 0     |
+      | Frank Ballance       | 0     |
       | Cass Ballenger       | 50    |
       | James Barrett        | 50    |
-      | Roscoe Bartlett      | 75    |
+      | Roscoe Bartlett      | 100   |
     And I should not see "Joe Barton"
 
   Scenario: Bill Criteria report generate scores from passing roles only
