@@ -40,18 +40,22 @@ class BillCriterion < ActiveRecord::Base
   def score
     rolls = bill.rolls.on_bill_passage
     roll_count = rolls.count
-    rolls.inject(Hash.new(0.0)) do |scores, roll|
+    rolls.inject(Hash.new([])) do |scores, roll|
       roll.votes.each do |vote|
-        scores[vote.politician] +=
+        scores[vote.politician] += [
           if aligns?(vote)
             1.0
           elsif contradicts?(vote)
             -1.0
           else
             0.0
-          end / roll_count
+          end
+        ]
       end
       scores
+    end.inject({}) do |result, (politician, scores)|
+      result[politician] = (scores.sum / scores.size)
+      result
     end
   end
 end
