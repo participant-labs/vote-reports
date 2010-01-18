@@ -72,6 +72,7 @@ namespace :gov_track do
         puts "\n"
       end
       `rake db:migrate:redo VERSION=20100116015937`
+      `rake db:migrate:redo VERSION=20100117224654`
     end
 
   end
