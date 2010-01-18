@@ -3,7 +3,7 @@ Transform /bill "([^\"]*)"/ do |title|
 end
 
 Given /^an? (.*)bill named "([^\"]*)"$/ do |attrs, title|
-  create_bill_roll = false
+  create_bill_roll = create_pass_bill_roll = false
   bill = new_bill(
     attrs.split(', ').inject({}) do |attrs, attr|
       case attr.strip
@@ -22,6 +22,8 @@ Given /^an? (.*)bill named "([^\"]*)"$/ do |attrs, title|
       when 'un-voted'
       when 'voted'
         create_bill_roll = true
+      when 'pass-voted'
+        create_pass_bill_roll = true
       else
         raise "Unrecognize bill attr: #{attr}"
       end
@@ -31,6 +33,9 @@ Given /^an? (.*)bill named "([^\"]*)"$/ do |attrs, title|
   title = create_bill_title(:title => title, :bill => bill)
   if create_bill_roll
     create_roll(:subject => title.bill)
+  end
+  if create_pass_bill_roll
+    create_roll(:subject => title.bill, :roll_type => 'On Passage')
   end
   Bill.reindex
 end

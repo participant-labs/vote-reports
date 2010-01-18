@@ -21,6 +21,12 @@ describe Bill do
         bills.results.map {|bill| bill.titles.first.to_s }.should include("USA PATRIOT Reauthorization Act of 2009")
       end
     end
+
+    it "should match on bill number" do
+      bill = create_bill(:bill_number => 4472)
+      Bill.reindex
+      Bill.search { fulltext "4472" }.results.should == [bill]
+    end
   end
 
   describe "Validations" do

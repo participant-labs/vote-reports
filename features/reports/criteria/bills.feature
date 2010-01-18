@@ -21,10 +21,27 @@ Feature: Adding Bill Criteria to Reports
     And I should see "USA PATRIOT Reauthorization Act of 2009"
 
   Examples:
-    | bill type                          |
-    | a voted, current-congress bill     |
-    | an un-voted, current-congress bill |
-    | a voted, previous-congress bill    |
+    | bill type                            |
+    | a pass-voted, current-congress bill  |
+    | an voted, current-congress bill      |
+    | an un-voted, current-congress bill   |
+    | a pass-voted, previous-congress bill |
+
+  Scenario Outline: User is unable to select an invalid bill for report
+    Given an <bill type> bill named "USA PATRIOT Reauthorization Act of 2009"
+    When I fill in "Add Bills" with "patriot"
+    And I press "Search"
+    Then the "Search" field should contain "patriot"
+    And I should see "USA PATRIOT Reauthorization Act of 2009"
+    And I should see "unvoted"
+    And I should not see "No bills found"
+    When I follow "cancel"
+    Then I should be on my report page for "My report"
+
+  Examples:
+    | bill type                   |
+    | voted, previous-congress    |
+    | un-voted, previous-congress |
 
   Scenario: User cancels a bill search
     Given a voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
@@ -55,13 +72,3 @@ Feature: Adding Bill Criteria to Reports
     And I should be on my report page for "My report"
     And I should see "Support -"
     And I should see "Bovine Security Act of 2009"
-
-  Scenario: Search should not return an unvoted bill from a previous congress
-    Given an un-voted, previous-congress bill named "USA PATRIOT Reauthorization Act of 2009"
-    When I fill in "Add Bills" with "patriot"
-    And I press "Search"
-    Then the "Search" field should contain "patriot"
-    And I should not see "USA PATRIOT Reauthorization Act of 2009"
-    And I should see "No bills found"
-    When I follow "Back"
-    Then I should be on my report page for "My report"
