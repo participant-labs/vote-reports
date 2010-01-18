@@ -177,3 +177,30 @@ Feature: Scoring Reports
       | Edward Kaufman       | 50    |
       | Connie Mack          | 50    |
       | Neil Abercrombie     | 0     |
+
+  Scenario: Bill Criteria report doesn't dilute scores with rolls which don't apply to a given pol
+    Given report "Active Report" has the following bill criterion:
+      | bill                        | support |
+      | Bovine Security Act of 2009 | true    |
+    And bill "Bovine Security Act of 2009" has the following rolls:
+      | roll_type                                            |
+      | On Passage                                           |
+      | On the Cloture Motion                                |
+      | Passage, Objections of the President Notwithstanding |
+    And bill "Bovine Security Act of 2009" has the following roll votes:
+      | politician       | On Passage | On the Cloture Motion | Passage, Objections of the President Notwithstanding |
+      | Piyush Jindal    | + | + |   |
+      | J. Kerrey        | P | - |   |
+      | Martin Sabo      | 0 | + |   |
+      | Edward Kaufman   | - |   | + |
+      | Connie Mack      |   |   | P |
+      | Neil Abercrombie | - |   | - |
+    When I go to my report page for "Active Report"
+    Then I should see the following scores:
+      | politician           | score |
+      | Piyush Jindal        | 100   |
+      | J. Kerrey            | 25    |
+      | Martin Sabo          | 75    |
+      | Edward Kaufman       | 50    |
+      | Connie Mack          | 50    |
+      | Neil Abercrombie     | 0     |
