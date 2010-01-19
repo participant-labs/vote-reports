@@ -52,6 +52,7 @@ class CreateUsStates < ActiveRecord::Migration
     UsState.create(:abbreviation => 'PW', :full_name => 'Palau')
     UsState.create(:abbreviation => 'PA', :full_name => 'Pennsylvania')
     UsState.create(:abbreviation => 'PR', :full_name => 'Puerto Rico')
+    UsState.create(:abbreviation => 'PI', :full_name => 'Philippine Islands')
     UsState.create(:abbreviation => 'RI', :full_name => 'Rhode Island')
     UsState.create(:abbreviation => 'SC', :full_name => 'South Carolina')
     UsState.create(:abbreviation => 'SD', :full_name => 'South Dakota')
@@ -65,6 +66,10 @@ class CreateUsStates < ActiveRecord::Migration
     UsState.create(:abbreviation => 'WV', :full_name => 'West Virginia')
     UsState.create(:abbreviation => 'WI', :full_name => 'Wisconsin')
     UsState.create(:abbreviation => 'WY', :full_name => 'Wyoming')
+
+    UsState.create(:abbreviation => 'OL', :full_name => 'Territory of Orleans')
+    UsState.create(:abbreviation => 'DK', :full_name => 'Territory of Dakota')
+
     UsState.create(:abbreviation => 'AE', :full_name => 'Armed Forces Africa, Canada, Europe and Middle East')
     UsState.create(:abbreviation => 'AA', :full_name => 'Armed Forces Americas (except Canada)')
     UsState.create(:abbreviation => 'AP', :full_name => 'Armed Forces Pacific')

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100119163411) do
+ActiveRecord::Schema.define(:version => 20100119164157) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -200,13 +200,13 @@ ActiveRecord::Schema.define(:version => 20100119163411) do
     t.date     "started_on",    :null => false
     t.date     "ended_on",      :null => false
     t.integer  "district"
-    t.string   "state"
     t.string   "url"
     t.integer  "party_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "senate_class"
     t.string   "type",          :null => false
+    t.integer  "us_state_id"
   end
 
   add_index "politician_terms", ["party_id"], :name => "index_politician_terms_on_party_id"
