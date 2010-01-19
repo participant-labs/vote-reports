@@ -11,7 +11,7 @@ class Politician < ActiveRecord::Base
   alias_attribute :terms, :politician_terms
 
   def state
-    terms.congressional.latest.try(:state)
+    terms.latest(:joins => :state).try(:state)
   end
 
   def party
