@@ -1,11 +1,11 @@
 namespace :gov_track do
   namespace :politicians do
-    def party_id(name)
+    def party(name)
       return nil if name.blank? || Party::BLACKLIST.include?(name)
       @parties ||= Party.all.index_by(&:name)
       @parties.fetch(name) do
         @parties[name] = Party.create(:name => name)
-      end.id
+      end
     end
 
     desc "Process Politicians"
@@ -38,23 +38,31 @@ namespace :gov_track do
               'url' => 'url',
               'party' => 'party'
             }.inject({}) do |attrs, (attr, method)|
-              attrs[method] = role[attr] if role[attr].present?
+              attrs[method] = role[attr].to_s if role[attr].present?
               attrs
             end
-            attrs['party_id'] = party_id(attrs.delete('party'))
+            attrs['party'] = party(attrs.delete('party'))
+            attrs.symbolize_keys!
 
             case role['type']
             when 'rep'
-              politician.representative_terms.find_or_create_by_started_on(role['startdate'].to_date) \
-                .update_attributes(attrs.merge(:district => role['district'], :state => role['state']))
+              attrs.merge!(:district => role['district'], :state => role['state'])
+              politician.representative_terms.find_by_started_on(role['startdate'].to_date).tap do |term|
+                term && term.update_attributes(attrs)
+              end || politician.representative_terms.create(attrs)
             when 'sen'
-              politician.senate_terms.find_or_create_by_started_on(role['startdate'].to_date) \
-                .update_attributes(attrs.merge(:senate_class => role['class'], :state => role['state']))
+              attrs.merge!(:senate_class => role['class'], :state => role['state'])
+              politician.senate_terms.find_by_started_on(role['startdate'].to_date).tap do |term|
+                term && term.update_attributes(attrs)
+              end || politician.senate_terms.create(attrs)
             when 'prez'
-              politician.presidential_terms.find_or_create_by_started_on(role['startdate'].to_date) \
-                .update_attributes(attrs)
+              politician.presidential_terms.find_by_started_on(role['startdate'].to_date).tap do |term|
+                term && term.update_attributes(attrs)
+              end || politician.presidential_terms.create(attrs)
             else
               raise role.inspect
+            end.tap do |term|
+              $stdout.print "P" if term.party.nil?
             end
           end
 
