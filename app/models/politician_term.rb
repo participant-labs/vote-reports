@@ -13,4 +13,9 @@ class PoliticianTerm < ActiveRecord::Base
       by_ended_on.first
     end
   end
+
+  def describe
+    party = "; #{self.party}" if self.party
+    "#{title} #{place}#{party}"
+  end
 end
