@@ -1,4 +1,4 @@
-<h2><%= @politician.title %> <%= @politician.full_name %>  (<%= @politician.party.abbrev %> - <%= @politician.state %>)</h2>
+<h2><%= render @politician, :no_image => true %></h2>
 <%= image_tag @politician.headshot_url(:large), :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' if @politician.headshot_url(:large) %>
 
 <dl>

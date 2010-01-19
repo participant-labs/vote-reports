@@ -27,7 +27,7 @@ Feature: Browsing Politicians
     When I go to the politician page for "Ron Wyden"
     Then I should see "Terms in Congress"
     And I should see "<description>"
-    And I should see "Ron Wyden  (<party_abbrev> - <state>)"
+    And I should see "Ron Wyden (<state>)"
 
   Examples:
     | district | state | party      | party_abbrev | description |
@@ -39,14 +39,27 @@ Feature: Browsing Politicians
 
   Scenario: Viewing senate terms from the Politicians Page
     Given the following politician records:
-      | first_name | last_name   | gov_track_id | district    |
-      | Ron        | Wyden       | 300100       | Senior Seat |
+      | first_name | last_name   |
+      | Ron        | Wyden       |
     And the following senate terms for politician "Ron Wyden":
       | senate_class | state | party      |
       | 3            | IA    | Republican |
     When I go to the politician page for "Ron Wyden"
     Then I should see "Terms in Congress"
     And I should see "Senator for Iowa; Republican"
+    And I should see "Ron Wyden (IA)"
+
+  Scenario: Viewing presidential terms from the Politicians Page
+    Given the following politician records:
+      | first_name | last_name   | gov_track_id |
+      | Ron        | Wyden       | 300100       |
+    And the following senate terms for politician "Ron Wyden":
+      | senate_class | state | party      |
+      | 3            | IA    | Republican |
+    When I go to the politician page for "Ron Wyden"
+    Then I should see "Terms in Congress"
+    And I should see "Senator for Iowa; Republican"
+    And I should see "Ron Wyden"
 
   Scenario: Viewing supported bills from the Politicians Page
     Given I have a report named "Active Report"
