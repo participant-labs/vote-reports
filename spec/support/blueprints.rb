@@ -189,6 +189,7 @@ Fixjour :verify => false do
 
   define_builder(RepresentativeTerm) do |klass, overrides|
     overrides.process(:party) do |party|
+      party = nil if party.blank?
       party = Party.find_or_create_by_name(party) if party.is_a?(String)
       overrides[:party] = party
     end
@@ -207,6 +208,7 @@ Fixjour :verify => false do
 
   define_builder(SenateTerm) do |klass, overrides|
     overrides.process(:party) do |party|
+      party = nil if party.blank?
       party = Party.find_or_create_by_name(party) if party.is_a?(String)
       overrides[:party] = party
     end

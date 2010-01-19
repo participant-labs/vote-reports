@@ -17,17 +17,25 @@ Feature: Browsing Politicians
     And I follow "Ron Wyden"
     Then I should be on the politician page for "Ron Wyden"
 
-  Scenario: Viewing representative terms from the Politicians Page
+  Scenario Outline: Viewing representative terms from the Politicians Page
     Given the following politician records:
       | name      | gov_track_id |
       | Ron Wyden | 300100       |
     And the following representative terms for politician "Ron Wyden":
-      | district | state | party      |
-      | 3        | IA    | Republican |
+      | district   | state   | party   |
+      | <district> | <state> | <party> |
     When I go to the politician page for "Ron Wyden"
     Then I should see "Terms in Congress"
-    And I should see "Representative for the 3rd district of Iowa, as a Republican"
-    And I should see "Ron Wyden  (R - IA)"
+    And I should see "<description>"
+    And I should see "Ron Wyden  (<party_abbrev> - <state>)"
+
+  Examples:
+    | district | state | party      | party_abbrev | description |
+    | 3        | IA    | Republican | R            | Representative for the 3rd district of Iowa; Republican |
+    | 0        | TX    | Republican | R            | Representative for the at-large district of Texas; Republican |
+    |          | TX    | Republican | R            | Representative for Texas; Republican |
+    |          | TX    |            | I            | Representative for Texas |
+    | 3        | IA    |            | I            | Representative for the 3rd district of Iowa |
 
   Scenario: Viewing senate terms from the Politicians Page
     Given the following politician records:
@@ -38,7 +46,7 @@ Feature: Browsing Politicians
       | 3            | IA    | Republican |
     When I go to the politician page for "Ron Wyden"
     Then I should see "Terms in Congress"
-    And I should see "Senator for Iowa, as a Republican"
+    And I should see "Senator for Iowa; Republican"
 
   Scenario: Viewing supported bills from the Politicians Page
     Given I have a report named "Active Report"
