@@ -7,12 +7,15 @@ describe Politician do
 
   describe "#state" do
     it "should be sourced from the latest term" do
+      state = create_us_state
+      @politician.state.should_not == state
       proc {
-        create_representative_term(:state => "TX", :politician => @politician, :ended_on => 1.year.ago)
-      }.should change(@politician, :state).to("TX")
+        create_representative_term(:state => state, :politician => @politician, :ended_on => 1.year.ago)
+      }.should change(@politician, :state).to(state)
+      new_state = create_us_state
       proc {
-        create_senate_term(:state => "IA", :politician => @politician, :ended_on => 1.year.from_now)
-      }.should change(@politician, :state).to("IA")
+        create_senate_term(:state => new_state, :politician => @politician, :ended_on => 1.year.from_now)
+      }.should change(@politician, :state).to(new_state)
     end
   end
 

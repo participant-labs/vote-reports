@@ -1,4 +1,26 @@
 Fixjour :verify => false do
+  STATES = [
+      ["Alaska", "AK"], ["Alabama", "AL"], ["Arkansas", "AR"], ["Arizona", "AZ"], 
+      ["California", "CA"], ["Colorado", "CO"], ["Connecticut", "CT"], ["District of Columbia", "DC"], 
+      ["Delaware", "DE"], ["Florida", "FL"], ["Georgia", "GA"], ["Hawaii", "HI"], ["Iowa", "IA"], 
+      ["Idaho", "ID"], ["Illinois", "IL"], ["Indiana", "IN"], ["Kansas", "KS"], ["Kentucky", "KY"], 
+      ["Louisiana", "LA"], ["Massachusetts", "MA"], ["Maryland", "MD"], ["Maine", "ME"], ["Michigan", "MI"], 
+      ["Minnesota", "MN"], ["Missouri", "MO"], ["Mississippi", "MS"], ["Montana", "MT"], ["North Carolina", "NC"], 
+      ["North Dakota", "ND"], ["Nebraska", "NE"], ["New Hampshire", "NH"], ["New Jersey", "NJ"], 
+      ["New Mexico", "NM"], ["Nevada", "NV"], ["New York", "NY"], ["Ohio", "OH"], ["Oklahoma", "OK"], 
+      ["Oregon", "OR"], ["Pennsylvania", "PA"], ["Rhode Island", "RI"], ["South Carolina", "SC"], ["South Dakota", "SD"], 
+      ["Tennessee", "TN"], ["Texas", "TX"], ["Utah", "UT"], ["Virginia", "VA"], ["Vermont", "VT"], 
+      ["Washington", "WA"], ["Wisconsin", "WI"], ["West Virginia", "WV"], ["Wyoming", "WY"]
+  ]
+  
+  def us_state(state)
+    return state if state.is_a?(UsState)
+    state =STATES.assoc(state) || STATES.rassoc(state)
+    new_us_state(
+      :full_name => state.first,
+      :abbreviation => state.last)
+  end
+
   def meeting
     Forgery(:basic).number(:at_least => 103, :at_most => 111)
   end
@@ -187,6 +209,15 @@ Fixjour :verify => false do
     )
   end
 
+  define_builder(UsState) do |klass, overrides|
+    state = STATES.rand
+    
+    klass.new(
+      :full_name => state.first,
+      :abbreviation => state.last
+    )
+  end
+
   define_builder(RepresentativeTerm) do |klass, overrides|
     overrides.process(:party) do |party|
       party = nil if party.blank?
@@ -194,12 +225,16 @@ Fixjour :verify => false do
       overrides[:party] = party
     end
 
+    overrides.process(:state) do |state|
+      overrides[:state] = us_state(state)
+    end
+
     started_on = rand(50).years.ago
 
     klass.new(
       :politician => new_politician,
       :party => new_party,
-      :state => UsState::US_STATES.rand.last,
+      :state => new_us_state,
       :district => rand(100),
       :started_on => started_on,
       :ended_on => started_on + 2.years
@@ -213,13 +248,17 @@ Fixjour :verify => false do
       overrides[:party] = party
     end
 
+    overrides.process(:state) do |state|
+      overrides[:state] = us_state(state)
+    end
+
     started_on = rand(50).years.ago
 
     klass.new(
       :politician => new_politician,
       :party => new_party,
       :senate_class => [1, 2, 3].rand,
-      :state => UsState::US_STATES.rand.last,
+      :state => new_us_state,
       :started_on => started_on,
       :ended_on => started_on + 6.years
     )
