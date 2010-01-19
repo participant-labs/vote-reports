@@ -1,7 +1,7 @@
-<%- year = true unless defined?(year) -%>
+<%- hide_year ||= false -%>
 
 <span class="bill">
-  <%= link_to_unless_current "#{bill.bill_type.to_s} #{bill.bill_number}#{" (#{bill.introduced_on.year})" if year}: #{bill.titles.first}", bill, :class => 'title' %>
+  <%= link_to_unless_current "#{bill.bill_type.to_s} #{bill.bill_number}#{" (#{bill.introduced_on.year})" unless hide_year }: #{bill.titles.first}", bill, :class => 'title' %>
   <%- if bill.titles.size > 1 -%>
     (<%= link_to 'all titles', '#', :'data-dialog' => "##{dom_id(bill, :titles)}", :'data-dialog-title' => %Q{Bill Titles for "#{bill.titles.first}"}, :class => 'bill_titles' %>)
   <%- end -%>
