@@ -36,9 +36,9 @@
 
 <hr />
 <h3>Terms in Congress</h3>
-<%- if (terms = @politician.terms.by_ended_on).present? -%>
+<%- if @terms.present? -%>
 <ul>
-  <% terms.each do |term|  %>
+  <% @terms.each do |term|  %>
     <li><%= render 'politicians/terms/term', :term => term %></li>
   <% end %>
 </ul>
