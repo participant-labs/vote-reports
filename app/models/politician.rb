@@ -18,6 +18,10 @@ class Politician < ActiveRecord::Base
     terms.latest.try(:party) || Party.find_by_name('Independent')
   end
 
+  def title
+    terms.latest.try(:title)
+  end
+
   IDENTITY_STRING_FIELDS = [
     :vote_smart_id, :bioguide_id, :eventful_id, :twitter_id, :email, :metavid_id,
     :congresspedia_url, :open_secrets_id, :crp_id, :fec_id, :phone, :website, :youtube_url

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100119210527) do
+ActiveRecord::Schema.define(:version => 20100119213212) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -234,7 +234,6 @@ ActiveRecord::Schema.define(:version => 20100119210527) do
     t.string   "name_suffix"
     t.string   "nickname"
     t.string   "phone"
-    t.string   "title"
     t.string   "twitter_id"
     t.string   "webform"
     t.string   "website"
