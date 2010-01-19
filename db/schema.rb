@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100119213212) do
+ActiveRecord::Schema.define(:version => 20100119215625) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -328,6 +328,11 @@ ActiveRecord::Schema.define(:version => 20100119213212) do
     t.datetime "updated_at"
     t.string   "state_type",                :null => false
   end
+
+  add_index "us_states", ["abbreviation"], :name => "index_us_states_on_abbreviation", :unique => true
+  add_index "us_states", ["full_name"], :name => "index_us_states_on_full_name", :unique => true
+  add_index "us_states", ["id"], :name => "index_us_states_on_id", :unique => true
+  add_index "us_states", ["state_type"], :name => "index_us_states_on_state_type"
 
   create_table "users", :force => true do |t|
     t.string   "email",             :null => false
