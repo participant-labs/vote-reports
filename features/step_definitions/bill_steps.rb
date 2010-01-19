@@ -25,7 +25,14 @@ Given /^an? (.*)bill named "([^\"]*)"$/ do |attrs, title|
       when 'pass-voted'
         create_pass_bill_roll = true
       else
-        raise "Unrecognize bill attr: #{attr}"
+        year = Integer(attr) rescue nil
+        if year
+          attrs.merge!(
+            :introduced_on => "#{year}/5/4"
+          )
+        else
+          raise "Unrecognize bill attr: #{attr}"
+        end
       end
       attrs
     end

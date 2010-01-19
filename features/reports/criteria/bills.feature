@@ -44,6 +44,12 @@ Feature: Adding Bill Criteria to Reports
     | voted, previous-congress    |
     | un-voted, previous-congress |
 
+  Scenario Outline: User views bill year on search
+    Given a 1997 bill named "USA PATRIOT Reauthorization Act of 2009"
+    When I fill in "Add Bills" with "patriot"
+    And I press "Search"
+    Then I should see "(1997)"
+
   Scenario: User cancels a bill search
     Given a voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
     When I fill in "Add Bills" with "patriot"
