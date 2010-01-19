@@ -1,2 +1,4 @@
-<%= image_tag politician.headshot_url(:small) if politician.headshot_url(:small) %>
-<%= link_to politician.full_name, politician  %>
+<%- no_image ||= false -%>
+<%- state = " (#{politician.state.abbreviation})" if politician.state -%>
+<%= image_tag politician.headshot_url(:small) if !no_image && politician.headshot_url(:small) %>
+<%= link_to_unless_current "#{politician.title} #{politician.full_name}#{state}", politician  %>
