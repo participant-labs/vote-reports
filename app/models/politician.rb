@@ -10,17 +10,7 @@ class Politician < ActiveRecord::Base
   has_many :politician_terms
   alias_attribute :terms, :politician_terms
 
-  def state
-    terms.latest(:joins => :state).try(:state)
-  end
-
-  def party
-    terms.latest.try(:party) || Party.find_by_name('Independent')
-  end
-
-  def title
-    terms.latest.try(:title)
-  end
+  belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
 
   IDENTITY_STRING_FIELDS = [
     :vote_smart_id, :bioguide_id, :eventful_id, :twitter_id, :email, :metavid_id,

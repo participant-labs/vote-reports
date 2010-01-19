@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100119215625) do
+ActiveRecord::Schema.define(:version => 20100119221313) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -244,6 +244,8 @@ ActiveRecord::Schema.define(:version => 20100119215625) do
     t.string   "official_rss"
     t.string   "open_secrets_id"
     t.string   "cached_slug"
+    t.string   "title"
+    t.integer  "us_state_id"
   end
 
   add_index "politicians", ["bioguide_id"], :name => "index_politicians_on_bioguide_id", :unique => true
