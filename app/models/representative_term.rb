@@ -1,8 +1,4 @@
 class RepresentativeTerm < PoliticianTerm
   attr_accessible :politician, :district, :state, :started_on, :ended_on, :created_on, :updated_on, :url, :party
-  validates_presence_of :state, :district
-
-  def for
-    "Representative for the #{district.ordinalize} district of #{UsState.name_from_abbrev(state)}, as a #{party}"
-  end
+  validates_presence_of :state
 end
