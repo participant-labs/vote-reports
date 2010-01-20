@@ -12,6 +12,7 @@ class Users::ReportsController < ApplicationController
     if @report.has_better_id?
       redirect_to user_report_path(@user, @report), :status => 301
     end
+    @scores = @report.generate_scores!
   end
 
   def edit
