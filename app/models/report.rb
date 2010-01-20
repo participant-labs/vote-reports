@@ -40,7 +40,10 @@ class Report < ActiveRecord::Base
   def generate_scores!
     politician_scores = bill_criteria.active.map(&:scores).flatten.group_by(&:politician)
     politician_scores.inject({}) do |result_scores, (politician, bill_scores)|
-      scores = bill_scores.map(&:score)
+      bill_baseline = bill_scores.map(&:average_base)
+      bill_baseline = bill_baseline.sum / bill_baseline.size
+
+      scores = bill_scores.map {|s| s.score * s.average_base / bill_baseline }
       result_scores[politician] = scores.sum / scores.size
       result_scores
     end.to_a.sort_by(&:last).reverse
