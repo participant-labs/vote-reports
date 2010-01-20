@@ -46,8 +46,8 @@ class Politician < ActiveRecord::Base
     [first_name, last_name].join(" ")
   end
 
-  def title
-    self[:title].to_s
+  def short_title
+    title.present? ? "#{title.to(2)}." : ''
   end
 
   private
