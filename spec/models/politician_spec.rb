@@ -19,19 +19,6 @@ describe Politician do
     end
   end
 
-  describe "#party" do
-    it "should be sourced from the latest term" do
-      democratic_party = create_party(:name => "Democrat")
-      republican_party = create_party(:name => "Republican")
-      proc {
-        create_representative_term(:party => democratic_party, :politician => @politician, :ended_on => 1.year.ago)
-      }.should change(@politician, :party).to(democratic_party)
-      proc {
-        create_senate_term(:party => republican_party, :politician => @politician, :ended_on => 1.year.from_now)
-      }.should change(@politician, :party).to(republican_party)
-    end
-  end
-
   describe "#rolls" do
     before do
       @supported = create_roll
