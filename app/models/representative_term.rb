@@ -7,7 +7,9 @@ class RepresentativeTerm < PoliticianTerm
   end
 
   def district
-    self[:district] == 0 ? 'at-large' : self[:district].ordinalize
+    if self[:district]
+      self[:district] == 0 ? 'at-large' : self[:district].ordinalize
+    end
   end
 
   def place
