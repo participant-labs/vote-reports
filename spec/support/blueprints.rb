@@ -12,13 +12,14 @@ Fixjour :verify => false do
       ["Tennessee", "TN"], ["Texas", "TX"], ["Utah", "UT"], ["Virginia", "VA"], ["Vermont", "VT"], 
       ["Washington", "WA"], ["Wisconsin", "WI"], ["West Virginia", "WV"], ["Wyoming", "WY"]
   ]
-  
+
   def us_state(state)
     return state if state.is_a?(UsState)
     state =STATES.assoc(state) || STATES.rassoc(state)
     new_us_state(
       :full_name => state.first,
-      :abbreviation => state.last)
+      :abbreviation => state.last,
+      :state_type => 'state')
   end
 
   def meeting
@@ -214,7 +215,8 @@ Fixjour :verify => false do
     
     klass.new(
       :full_name => state.first,
-      :abbreviation => state.last
+      :abbreviation => state.last,
+      :state_type => 'state'
     )
   end
 
