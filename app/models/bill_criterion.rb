@@ -1,4 +1,6 @@
 class BillCriterion < ActiveRecord::Base
+  DISCOUNTING_RATE = 0.07
+
   belongs_to :bill
   belongs_to :report
 
@@ -39,7 +41,9 @@ class BillCriterion < ActiveRecord::Base
 
   def score
     rolls = bill.rolls.on_bill_passage.all(:include => {:votes => {:politician => :state}})
+    bases = Hash.new([])
     rolls.inject(Hash.new([])) do |scores, roll|
+      base = (1 - DISCOUNTING_RATE) ** roll.voted_at.to_date.years_until(Date.today)
       roll.votes.each do |vote|
         scores[vote.politician] += [
           if aligns?(vote)
@@ -48,12 +52,13 @@ class BillCriterion < ActiveRecord::Base
             0.0
           else
             50.0
-          end
+          end * base
         ]
+        bases[vote.politician] += [base]
       end
       scores
     end.inject({}) do |result, (politician, scores)|
-      result[politician] = scores.sum / scores.size
+      result[politician] = scores.sum / bases[politician].sum
       result
     end
   end
