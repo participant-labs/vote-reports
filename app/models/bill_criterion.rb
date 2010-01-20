@@ -34,7 +34,7 @@ class BillCriterion < ActiveRecord::Base
   end
 
   def scores
-    bill.rolls.on_bill_passage.all(:include => {:votes => {:politician => :state}}).map(&:votes).flatten.group_by(&:politician).map do |politician, votes|
+    bill.rolls.on_bill_passage.all(:include => {:votes => [{:politician => :state}, :roll]}).map(&:votes).flatten.group_by(&:politician).map do |politician, votes|
       BillCriterionScore.new(:bill_criterion => self, :votes => votes, :politician => politician)
     end
   end
