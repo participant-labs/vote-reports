@@ -16,6 +16,13 @@ class Vote < ActiveRecord::Base
     after_create :create_bill_support_or_opposition
   end
 
+  def position
+    {'+' => 'Aye',
+     '-' => 'Nay',
+     'P' => 'Present',
+     '0' => 'Not Voting'}[vote]
+  end
+
   def aye?
     vote == '+'
   end

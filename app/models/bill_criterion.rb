@@ -21,6 +21,10 @@ class BillCriterion < ActiveRecord::Base
     end
   end
 
+  def position
+    support ? 'Support' : 'Oppose'
+  end
+
   def support?
     support
   end

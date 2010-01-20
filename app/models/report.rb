@@ -44,8 +44,11 @@ class Report < ActiveRecord::Base
       bill_baseline = bill_baseline.sum / bill_baseline.size
 
       scores = bill_scores.map {|s| s.score * s.average_base / bill_baseline }
-      result_scores[politician] = scores.sum / scores.size
+      result_scores[politician] = {
+        :score => scores.sum / scores.size,
+        :evidence => bill_scores
+      }
       result_scores
-    end.to_a.sort_by(&:last).reverse
+    end.to_a.sort_by {|s| s.last[:score] }.reverse
   end
 end

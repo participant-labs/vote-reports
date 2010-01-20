@@ -2,6 +2,7 @@ class BillCriterionScore
   DISCOUNTING_RATE = 0.07
 
   attr_reader :politician, :bill_criterion, :vote_scores
+  delegate :bill, :to => :bill_criterion
 
   def initialize(args)
     @politician = args.fetch(:politician)
@@ -13,6 +14,10 @@ class BillCriterionScore
       }
       scores
     end
+  end
+
+  def votes
+    @vote_scores.keys
   end
 
   def average_base
