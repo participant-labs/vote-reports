@@ -12,7 +12,7 @@ class BillCriterion < ActiveRecord::Base
     :conditions => Roll.on_bill_passage.proxy_options[:conditions]
 
   def unvoted?
-    !bill.rolls.on_bill_passage.exists?
+    bill.passage_rolls.empty?
   end
 
   def status
@@ -34,7 +34,7 @@ class BillCriterion < ActiveRecord::Base
   end
 
   def scores
-    bill.rolls.on_bill_passage.all(:include => {:votes => [{:politician => :state}, :roll]}).map(&:votes).flatten.group_by(&:politician).map do |politician, votes|
+    bill.passage_rolls.all(:include => {:votes => [{:politician => :state}, :roll]}).map(&:votes).flatten.group_by(&:politician).map do |politician, votes|
       BillCriterionScore.new(:bill_criterion => self, :votes => votes, :politician => politician)
     end
   end
