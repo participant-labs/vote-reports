@@ -43,17 +43,17 @@ class BillCriterion < ActiveRecord::Base
       roll.votes.each do |vote|
         scores[vote.politician] += [
           if aligns?(vote)
-            1.0
+            100.0
           elsif contradicts?(vote)
-            -1.0
-          else
             0.0
+          else
+            50.0
           end
         ]
       end
       scores
     end.inject({}) do |result, (politician, scores)|
-      result[politician] = (scores.sum / scores.size)
+      result[politician] = scores.sum / scores.size
       result
     end
   end
