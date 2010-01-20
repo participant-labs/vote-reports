@@ -39,7 +39,6 @@ class BillCriterion < ActiveRecord::Base
 
   def score
     rolls = bill.rolls.on_bill_passage.all(:include => {:votes => {:politician => :state}})
-    roll_count = rolls.count
     rolls.inject(Hash.new([])) do |scores, roll|
       roll.votes.each do |vote|
         scores[vote.politician] += [
