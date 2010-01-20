@@ -46,6 +46,10 @@ class Politician < ActiveRecord::Base
     [first_name, last_name].join(" ")
   end
 
+  def title
+    self[:title].to_s
+  end
+
   private
 
   def name_shouldnt_contain_nickname
