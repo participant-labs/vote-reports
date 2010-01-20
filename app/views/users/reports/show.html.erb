@@ -13,7 +13,24 @@
 <%- if scores.present? -%>
   <ol>
     <%- scores.each do |(politician, score)| -%>
-      <li><%= render 'politicians/politician', :politician => politician %>: <%= score.round %>%</li>
+      <li><%= render 'politicians/politician', :politician => politician %>: <%= score[:score].round %>%
+         (<%= link_to 'votes', '#',
+         :'data-dialog' => "##{dom_id(politician, :report_score_evidence)}",
+         :'data-dialog-title' => "Significant Votes for #{politician.full_name} on '#{@report.name}'" %>)
+
+        <dl id="<%= dom_id(politician, :report_score_evidence) %>" class="hidden">
+          <%- score[:evidence].each do |bill_score| -%>
+          <dt><%= render 'bills/bill', :bill => bill_score.bill %>:
+            <%= bill_score.bill_criterion.position %></dt>
+          <dd><dl>
+            <%- bill_score.votes.sort_by {|v| v.roll.voted_at }.each do |vote| -%>
+              <dt><%= render 'rolls/roll', :roll => vote.roll %></dt>
+              <dd><%= vote.position %></dd>
+            <%- end -%>
+          </dl></dd>
+          <%- end -%>
+        </dl>
+      </li>
     <%- end -%>
   </ol>
 <%- elsif @report.bill_criteria.blank? -%>
