@@ -1,5 +1,4 @@
 <% title "Report - #{h @report.name}" %>
-<% scores = @report.generate_scores! %>
 
 <h2><%= @report.name %></h2>
 
@@ -10,9 +9,9 @@
 <%- end -%>
 
 <h3>Scores</h3>
-<%- if scores.present? -%>
+<%- if @scores.present? -%>
   <ol>
-    <%- scores.each do |(politician, score)| -%>
+    <%- @scores.each do |(politician, score)| -%>
       <li><%= render 'politicians/politician', :politician => politician %>: <%= score[:score].round %>%
          (<%= link_to 'votes', '#',
          :'data-dialog' => "##{dom_id(politician, :report_score_evidence)}",
