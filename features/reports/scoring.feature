@@ -231,3 +231,47 @@ Feature: Scoring Reports
       | Edward Kaufman       | 53    |
       | Connie Mack          | 50    |
       | Neil Abercrombie     | 0     |
+
+  Scenario: Bill Criteria report discounts the impact of past votes between criterions
+    Given a 2005 bill named "Honoring Bo Jackson Act of 2005"
+    Given report "Active Report" has the following bill criterion:
+      | bill                            | support |
+      | Bovine Security Act of 2009     | true    |
+      | Honoring Bo Jackson Act of 2005 | false   |
+    And bill "Bovine Security Act of 2009" has the following rolls:
+      | roll_type                                            | voted_at     |
+      | On Passage                                           | 2.years.ago  |
+      | On the Cloture Motion                                | 1.year.ago   |
+      | Passage, Objections of the President Notwithstanding | 6.months.ago |
+    # Base = (((1 - 0.07) ^ 2) + ((1 - 0.07) ^ 1)  + ((1 - 0.07) ^ .5)) / 3 = 91.9755025
+    And bill "Honoring Bo Jackson Act of 2005" has the following rolls:
+      | roll_type             | voted_at     |
+      | On Passage            | 3.years.ago  |
+      | On the Cloture Motion | (1.year + 6.months).ago |
+    # Base = (((1 - 0.07) ^ 3) + ((1 - 0.07) ^ 1.5)) / 2 = 85.060826
+    # Relative Base = 91.9755025 + 85.060826 / 2 = 88.5181643
+    And bill "Bovine Security Act of 2009" has the following roll votes:
+      | politician       | On Passage | On the Cloture Motion | Passage, Objections of the President Notwithstanding |
+      | Piyush Jindal    | + | + |   |
+      | J. Kerrey        | P | - |   |
+      | Martin Sabo      | 0 | + |   |
+      | Edward Kaufman   | - |   | + |
+      | Connie Mack      |   |   | P |
+      | Neil Abercrombie | - |   | - |
+    And bill "Honoring Bo Jackson Act of 2005" has the following roll votes:
+      | politician       | On Passage | On the Cloture Motion |
+      | Piyush Jindal    | - | - |
+      | J. Kerrey        | + | P |
+      | Martin Sabo      | + | 0 |
+      | Edward Kaufman   | - | 0 |
+      | Connie Mack      | + | + |
+      | Neil Abercrombie | + |   |
+    When I go to my report page for "Active Report"
+    Then I should see the following scores:
+      | politician           | score |
+      | Piyush Jindal        | 100   |
+      | J. Kerrey            | 25    |
+      | Martin Sabo          | 52    |
+      | Edward Kaufman       | 63    |
+      | Connie Mack          | 27    |
+      | Neil Abercrombie     | 0     |

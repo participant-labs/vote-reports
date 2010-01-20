@@ -15,6 +15,13 @@ class BillCriterionScore
     end
   end
 
+  def average_base
+    @average_base ||= begin
+      bases = @vote_scores.values.map {|score| score[:base] }
+      bases.sum / bases.size
+    end
+  end
+
   def score
     scores = @vote_scores.values.map {|s| s[:score] * s[:base] }.sum
     bases = @vote_scores.values.map {|s| s[:base] }.sum
