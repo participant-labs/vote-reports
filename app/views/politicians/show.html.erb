@@ -1,5 +1,5 @@
 <h2><%= render @politician, :no_image => true %></h2>
-<%= image_tag @politician.headshot_url(:large), :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' if @politician.headshot_url(:large) %>
+<%= image_tag @politician.headshot_url(:large), :size => '200x245', :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' if @politician.headshot_url(:large) %>
 
 <dl>
   <%- if @politician.email.present? -%>
