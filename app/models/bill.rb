@@ -47,6 +47,9 @@ class Bill < ActiveRecord::Base
   has_many :bill_criteria, :dependent => :destroy
   has_many :amendments, :dependent => :destroy
   has_many :rolls, :as => :subject, :dependent => :destroy
+  has_many :passage_rolls, :as => :subject, :class_name => 'Roll', :conditions => {
+    :'rolls.roll_type' => Roll::PASSAGE_TYPES,
+  }
   has_many :votes, :through => :rolls
   def politicians
     Politician.scoped(:select => 'DISTINCT politicians.*', :joins => {:votes => :roll}, :conditions => {
@@ -82,7 +85,7 @@ class Bill < ActiveRecord::Base
   end
 
   def old_and_unvoted?
-    !congress.current? & rolls.on_bill_passage.empty?
+    !congress.current? & passage_rolls.empty?
   end
 
   def congress=(congress)

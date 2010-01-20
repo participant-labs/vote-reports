@@ -41,7 +41,7 @@
 <h3 id="bill_criteria">Bill Criteria</h3>
 <%- if @report.bill_criteria.present? -%>
   <ul>
-    <%- @report.bill_criteria.each do |criterion| -%>
+    <%- @report.bill_criteria.all(:include => {:bill => [:congress, {:titles => :as}, :passage_rolls]}).each do |criterion| -%>
       <li class="bill_criterion">
         <%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %>
         <%- if @report.user == current_user -%>

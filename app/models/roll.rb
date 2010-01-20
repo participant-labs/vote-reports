@@ -1,4 +1,8 @@
 class Roll < ActiveRecord::Base
+  PASSAGE_TYPES = [
+    "On Passage", "Passage, Objections of the President Notwithstanding", "On Agreeing to the Resolution", "On Agreeing to the Resolution, as Amended", "On Motion to Suspend the Rules and Agree", "On Motion to Suspend the Rules and Agree, as Amended", "On Motion to Suspend the Rules and Pass", "On Motion to Suspend the Rules and Pass, as Amended", "On the Cloture Motion", "On Cloture on the Motion to Proceed"
+  ]
+
   has_many :votes, :dependent => :destroy
   belongs_to :subject, :polymorphic => true
   belongs_to :congress
@@ -6,12 +10,8 @@ class Roll < ActiveRecord::Base
   has_friendly_id :friendly_id
 
   named_scope :by_voted_at, :order => "voted_at DESC"
-  named_scope :on_bill_passage, :conditions => {:'rolls.roll_type' => [
-    "On Passage", "Passage, Objections of the President Notwithstanding", "On Agreeing to the Resolution",
-    "On Agreeing to the Resolution, as Amended", "On Motion to Suspend the Rules and Agree",
-    "On Motion to Suspend the Rules and Agree, as Amended", "On Motion to Suspend the Rules and Pass",
-    "On Motion to Suspend the Rules and Pass, as Amended", "On the Cloture Motion", "On Cloture on the Motion to Proceed"
-  ], :'rolls.subject_type' => 'Bill'}
+  named_scope :on_bill_passage, :conditions => {
+    :'rolls.roll_type' => PASSAGE_TYPES, :'rolls.subject_type' => 'Bill'}
 
   class << self
     def find_by_friendly_id(friendly_id, options = {})
