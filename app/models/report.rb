@@ -38,15 +38,11 @@ class Report < ActiveRecord::Base
   end
 
   def generate_scores!
-    all_scores = bill_criteria.active.inject(Hash.new([])) do |scores, bill_criterion|
-      bill_criterion.score.each_pair do |politician, score|
-        scores[politician] += [score]
-      end
-      scores
-    end
-    all_scores.each_pair do |politician, scores|
-      all_scores[politician] = scores.sum / scores.size
-    end
-    all_scores.to_a.sort_by(&:last).reverse
+    politician_scores = bill_criteria.active.map(&:scores).flatten.group_by(&:politician)
+    politician_scores.inject({}) do |result_scores, (politician, bill_scores)|
+      scores = bill_scores.map(&:score)
+      result_scores[politician] = scores.sum / scores.size
+      result_scores
+    end.to_a.sort_by(&:last).reverse
   end
 end

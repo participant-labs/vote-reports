@@ -1,6 +1,4 @@
 class BillCriterion < ActiveRecord::Base
-  DISCOUNTING_RATE = 0.07
-
   belongs_to :bill
   belongs_to :report
 
@@ -31,35 +29,9 @@ class BillCriterion < ActiveRecord::Base
     !support
   end
 
-  def aligns?(vote)
-    (support? && vote.aye?) || (oppose? && vote.nay?)
-  end
-
-  def contradicts?(vote)
-    (support? && vote.nay?) || (oppose? && vote.aye?)
-  end
-
-  def score
-    rolls = bill.rolls.on_bill_passage.all(:include => {:votes => {:politician => :state}})
-    bases = Hash.new([])
-    rolls.inject(Hash.new([])) do |scores, roll|
-      base = (1 - DISCOUNTING_RATE) ** roll.voted_at.to_date.years_until(Date.today)
-      roll.votes.each do |vote|
-        scores[vote.politician] += [
-          if aligns?(vote)
-            100.0
-          elsif contradicts?(vote)
-            0.0
-          else
-            50.0
-          end * base
-        ]
-        bases[vote.politician] += [base]
-      end
-      scores
-    end.inject({}) do |result, (politician, scores)|
-      result[politician] = scores.sum / bases[politician].sum
-      result
+  def scores
+    bill.rolls.on_bill_passage.all(:include => {:votes => {:politician => :state}}).map(&:votes).flatten.group_by(&:politician).map do |politician, votes|
+      BillCriterionScore.new(:bill_criterion => self, :votes => votes, :politician => politician)
     end
   end
 end
