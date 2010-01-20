@@ -1,4 +1,7 @@
-<%- hide_year ||= false -%>
+<%-
+  hide_year ||= false
+  @bill_titles_rendered ||= []
+-%>
 
 <span class="bill">
   <%= link_to_unless_current "#{bill.bill_type.to_s} #{bill.bill_number}#{" (#{bill.introduced_on.year})" unless hide_year }: #{bill.titles.first}", bill, :class => 'title' %>
@@ -7,7 +10,8 @@
   <%- end -%>
 </span>
 
-<%- if bill.titles.size > 1 -%>
+<%- if bill.titles.size > 1 && !@bill_titles_rendered.include?(bill) -%>
+  <%- @bill_titles_rendered << bill -%>
   <dl id="<%= dom_id(bill, :titles) %>" class="hidden">
     <%- bill.titles.group_by {|t| t.as }.each_pair do |as, as_titles| -%>
     <dt><%= as %></dt>
