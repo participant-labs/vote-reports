@@ -4,7 +4,6 @@ Welcome to VoteReports
 To inform. To promote truth. To combat political apathy.
 
 Extract State class for associating terms and such
-Amendment: t[:number, :bill_id].all :unique => true
 script/generate rspec_model BillRelation from_id:integer to_id:integer relation:string
 Missing data model: related bills, actions, status
 Bill subcommittee references often don't exist: e.g. Bill 106-s68 listed committee 'International Security, Proliferation and Federal Services' via <committee name="Senate Governmental Affairs" subcommittee="International Security, Proliferation and Federal Services" activity="Referral"/> which wasn't found
