@@ -25,6 +25,8 @@ class Report < ActiveRecord::Base
   has_many :bill_criteria
   has_many :bills, :through => :bill_criteria
 
+  has_many :scores, :class_name => 'ReportScore'
+
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
 
   validates_presence_of :user, :name
@@ -38,17 +40,17 @@ class Report < ActiveRecord::Base
   end
 
   def generate_scores!
-    politician_scores = bill_criteria.active.map(&:scores).flatten.group_by(&:politician)
-    politician_scores.inject({}) do |result_scores, (politician, bill_scores)|
+    bill_criteria.active.map(&:scores).flatten.group_by(&:politician).each_pair do |politician, bill_scores|
       bill_baseline = bill_scores.map(&:average_base)
       bill_baseline = bill_baseline.sum / bill_baseline.size
 
       scores = bill_scores.map {|s| s.score * s.average_base / bill_baseline }
-      result_scores[politician] = {
-        :score => scores.sum / scores.size,
-        :evidence => bill_scores
-      }
-      result_scores
-    end.to_a.sort_by {|s| s.last[:score] }.reverse
+      score = self.scores.create(:politician => politician, :score => scores.sum / scores.size)
+      bill_scores.each do |bill_score|
+        bill_score.votes.each do |vote|
+          score.evidence.create(:vote => vote, :bill_criterion => bill_score.bill_criterion)
+        end
+      end
+    end
   end
 end
