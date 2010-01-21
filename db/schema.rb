@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100120220507) do
+ActiveRecord::Schema.define(:version => 20100121031547) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -267,6 +267,22 @@ ActiveRecord::Schema.define(:version => 20100120220507) do
   add_index "politicians", ["vote_smart_id"], :name => "politicians_vote_smart_id_unique", :unique => true
   add_index "politicians", ["website"], :name => "politicians_website_unique", :unique => true
   add_index "politicians", ["youtube_url"], :name => "politicians_youtube_url_unique", :unique => true
+
+  create_table "report_score_evidences", :force => true do |t|
+    t.integer  "report_score_id",   :null => false
+    t.integer  "vote_id",           :null => false
+    t.integer  "bill_criterion_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "report_scores", :force => true do |t|
+    t.integer  "politician_id", :null => false
+    t.integer  "report_id",     :null => false
+    t.float    "score",         :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "reports", :force => true do |t|
     t.integer  "user_id",     :null => false
