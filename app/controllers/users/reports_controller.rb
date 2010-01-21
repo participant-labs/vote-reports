@@ -12,9 +12,10 @@ class Users::ReportsController < ApplicationController
     if @report.has_better_id?
       redirect_to user_report_path(@user, @report), :status => 301
     end
+    @report.generate_scores!
     @bill_criteria = @report.bill_criteria.all(
         :include => {:bill => [:congress, {:titles => :as}, :passage_rolls]})
-    @scores = @report.generate_scores!
+    @scores = @report.scores.all(:include => :evidence)
   end
 
   def edit
