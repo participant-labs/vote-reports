@@ -25,7 +25,7 @@ class Report < ActiveRecord::Base
   has_many :bill_criteria
   has_many :bills, :through => :bill_criteria
 
-  has_many :scores, :class_name => 'ReportScore'
+  has_many :scores, :class_name => 'ReportScore', :dependent => :destroy
 
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
 
@@ -39,7 +39,8 @@ class Report < ActiveRecord::Base
     BlueCloth::new(self[:description].to_s).to_html
   end
 
-  def generate_scores!
+  def rescore!
+    self.scores.clear
     bill_criteria.active.map(&:scores).flatten.group_by(&:politician).each_pair do |politician, bill_scores|
       bill_baseline = bill_scores.map(&:average_base)
       bill_baseline = bill_baseline.sum / bill_baseline.size

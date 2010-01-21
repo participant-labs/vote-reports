@@ -49,10 +49,7 @@ Feature: Scoring Reports
     Then I should see "No scores yet, as the associated bills have not been voted on."
 
   Scenario: With Criteria on bills without passage rolls, I should see message noting that as the bills are unvoted, no scores exist
-    Given report "Active Report" has the following bill criteria:
-      | bill                                    | support |
-      | Bovine Security Act of 2009             | true    |
-    And bill "Bovine Security Act of 2009" has the following rolls:
+    Given bill "Bovine Security Act of 2009" has the following rolls:
       | roll_type                                          |
       | On Agreeing to the Amendments en bloc, as modified |
     And bill "Bovine Security Act of 2009" has the following roll votes:
@@ -63,20 +60,23 @@ Feature: Scoring Reports
       | Edward Kaufman   | - |
       | Connie Mack      |   |
       | Neil Abercrombie | - |
+    And report "Active Report" has the following bill criteria:
+      | bill                                    | support |
+      | Bovine Security Act of 2009             | true    |
     When I go to my report page for "Active Report"
     Then I should see "No scores yet, as the associated bills have not been voted on."
 
   Scenario: Bill Criteria report generates scores
-    Given report "Active Report" has the following bill criterion:
-      | bill                        | support |
-      | Bovine Security Act of 2009 | true    |
-    And bill "Bovine Security Act of 2009" has the following passage votes:
+    Given bill "Bovine Security Act of 2009" has the following passage votes:
       | politician     | vote |
       | Piyush Jindal  | +    |
       | J. Kerrey      | P    |
       | Martin Sabo    | 0    |
       | Edward Kaufman | -    |
       | Connie Mack    |      |
+    And report "Active Report" has the following bill criterion:
+      | bill                        | support |
+      | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
@@ -90,12 +90,7 @@ Feature: Scoring Reports
     Then I should be on the politician page for "Piyush Jindal"
 
   Scenario: Bill Criteria report scores combine
-    Given report "Active Report" has the following bill criteria:
-      | bill                                    | support |
-      | Bovine Security Act of 2009             | true    |
-      | USA PATRIOT Reauthorization Act of 2009 | false   |
-      | Honoring Miss America Act of 2009       | true   |
-    And the following bill passage votes:
+    Given the following bill passage votes:
       | politician     | Bovine Security Act of 2009  | USA PATRIOT Reauthorization Act of 2009 |
       | Piyush Jindal         | + | + |
       | J. Kerrey             | + | P |
@@ -122,6 +117,11 @@ Feature: Scoring Reports
       | James Barrett         |   | 0 |
       | Roscoe Bartlett       |   | - |
       | Joe Barton            |   |   |
+    And report "Active Report" has the following bill criteria:
+      | bill                                    | support |
+      | Bovine Security Act of 2009             | true    |
+      | USA PATRIOT Reauthorization Act of 2009 | false   |
+      | Honoring Miss America Act of 2009       | true   |
     When I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
@@ -152,10 +152,7 @@ Feature: Scoring Reports
     And I should not see "Joe Barton"
 
   Scenario: Bill Criteria report generate scores from passing roles only
-    Given report "Active Report" has the following bill criterion:
-      | bill                        | support |
-      | Bovine Security Act of 2009 | true    |
-    And bill "Bovine Security Act of 2009" has the following rolls:
+    Given bill "Bovine Security Act of 2009" has the following rolls:
       | roll_type                                          |
       | On Passage                                         |
       | On the Cloture Motion                              |
@@ -168,6 +165,9 @@ Feature: Scoring Reports
       | Edward Kaufman   | - | + | + |
       | Connie Mack      |   | P | - |
       | Neil Abercrombie | - | - | 0 |
+    And report "Active Report" has the following bill criterion:
+      | bill                        | support |
+      | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
@@ -179,10 +179,7 @@ Feature: Scoring Reports
       | Neil Abercrombie     | 0     |
 
   Scenario: Bill Criteria report doesn't dilute scores with rolls which don't apply to a given pol
-    Given report "Active Report" has the following bill criterion:
-      | bill                        | support |
-      | Bovine Security Act of 2009 | true    |
-    And bill "Bovine Security Act of 2009" has the following rolls:
+    Given bill "Bovine Security Act of 2009" has the following rolls:
       | roll_type                                            |
       | On Passage                                           |
       | On the Cloture Motion                                |
@@ -195,6 +192,9 @@ Feature: Scoring Reports
       | Edward Kaufman   | - |   | + |
       | Connie Mack      |   |   | P |
       | Neil Abercrombie | - |   | - |
+    And report "Active Report" has the following bill criterion:
+      | bill                        | support |
+      | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
@@ -206,10 +206,7 @@ Feature: Scoring Reports
       | Neil Abercrombie     | 0     |
 
   Scenario: Bill Criteria report discounts the impact of past votes within the same criterion
-    Given report "Active Report" has the following bill criterion:
-      | bill                        | support |
-      | Bovine Security Act of 2009 | true    |
-    And bill "Bovine Security Act of 2009" has the following rolls:
+    Given bill "Bovine Security Act of 2009" has the following rolls:
       | roll_type                                            | voted_at     |
       | On Passage                                           | 2.years.ago  |
       | On the Cloture Motion                                | 1.year.ago   |
@@ -222,6 +219,9 @@ Feature: Scoring Reports
       | Edward Kaufman   | - |   | + |
       | Connie Mack      |   |   | P |
       | Neil Abercrombie | - |   | - |
+    And report "Active Report" has the following bill criterion:
+      | bill                        | support |
+      | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
@@ -234,10 +234,6 @@ Feature: Scoring Reports
 
   Scenario: Bill Criteria report discounts the impact of past votes between criterions
     Given a 2005 bill named "Honoring Bo Jackson Act of 2005"
-    Given report "Active Report" has the following bill criterion:
-      | bill                            | support |
-      | Bovine Security Act of 2009     | true    |
-      | Honoring Bo Jackson Act of 2005 | false   |
     And bill "Bovine Security Act of 2009" has the following rolls:
       | roll_type                                            | voted_at     |
       | On Passage                                           | 2.years.ago  |
@@ -266,6 +262,10 @@ Feature: Scoring Reports
       | Edward Kaufman   | - | 0 |
       | Connie Mack      | + | + |
       | Neil Abercrombie | + |   |
+    And report "Active Report" has the following bill criterion:
+      | bill                            | support |
+      | Bovine Security Act of 2009     | true    |
+      | Honoring Bo Jackson Act of 2005 | false   |
     When I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |

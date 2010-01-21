@@ -11,6 +11,8 @@ class BillCriterion < ActiveRecord::Base
     :joins => {:bill => :rolls},
     :conditions => Roll.on_bill_passage.proxy_options[:conditions]
 
+  after_save :rescore_report
+
   def unvoted?
     bill.passage_rolls.empty?
   end
@@ -37,5 +39,11 @@ class BillCriterion < ActiveRecord::Base
     bill.passage_rolls.all(:include => {:votes => [{:politician => :state}, :roll]}).map(&:votes).flatten.group_by(&:politician).map do |politician, votes|
       BillCriterionScore.new(:bill_criterion => self, :votes => votes, :politician => politician)
     end
+  end
+
+  private
+
+  def rescore_report
+    report.rescore!
   end
 end
