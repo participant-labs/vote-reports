@@ -23,5 +23,17 @@ namespace :db do
       end
       puts "#{invalid_bills.size} Invalid Bills"
     end
+
+    desc "Check Amendments"
+    task :amendments => :environment do
+      invalid_amendments = Amendment.all.reject(&:valid?)
+      invalid_amendments.each do |amendment|
+        puts "#{amendment.id} #{amendment.title} is invalid:"
+        amendment.errors.full_messages.each do |message|
+          puts " * #{message}"
+        end
+      end
+      puts "#{invalid_amendments.size} Invalid Bills"
+    end
   end
 end
