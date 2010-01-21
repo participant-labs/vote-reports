@@ -22,7 +22,7 @@ describe BillCriterion do
       1.year.ago.to_date.years_until(Date.today).should == 1.0
       5.years.ago.to_date.years_until(Date.today).should == 5.0
       (5.years + 3.months).ago.to_date.years_until(Date.today).should == 5.25
-      (5.years + 3.months + (36.5).days).ago.to_date.years_until(Date.today).should be_close( 5.35249828884326, 0.0005)
+      (5.years + 3.months + (36.5).days).ago.to_date.years_until(Date.today).should be_close(5.35, 0.002)
     end
   end
 end
