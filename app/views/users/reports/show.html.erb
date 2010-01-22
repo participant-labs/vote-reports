@@ -2,16 +2,16 @@
 
 <h2><%= @report.name %></h2>
 
-<p>Created by <%= render 'users/user', :user => @report.user %></p>
+<p>Created by <%= render 'users/user', :user => @user %></p>
 
 <%- unless @report.description.blank? -%>
 <blockquote><%= raw @report.description %></blockquote>
 <%- end -%>
 
 <h3>Scores</h3>
-<%- if @scores.present? -%>
+<%- if @report.scores.present? -%>
   <ol>
-    <%- @scores.each do |score| -%>
+    <%- @report.scores.each do |score| -%>
       <li><%= render 'politicians/politician', :politician => score.politician %>: <%= score.score.round %>%
          (<%= link_to 'votes', '#',
          :'data-dialog' => "##{dom_id(score.politician, :report_score_evidence)}",
@@ -39,9 +39,9 @@
 <%- end -%>
 
 <h3 id="bill_criteria">Bill Criteria</h3>
-<%- if @bill_criteria.present? -%>
+<%- if @report.bill_criteria.present? -%>
   <ul>
-    <%- @bill_criteria.each do |criterion| -%>
+    <%- @report.bill_criteria.each do |criterion| -%>
       <li class="bill_criterion">
         <%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %>
         <%- if @report.user == current_user -%>
