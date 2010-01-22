@@ -2,7 +2,7 @@
 
 <h2><%= @report.name %></h2>
 
-<p>Created by <%= render 'users/user', :user => @user %></p>
+<p>Created by <%= render 'users/user', :user => @report.user %></p>
 
 <%- unless @report.description.blank? -%>
 <blockquote><%= raw @report.description %></blockquote>

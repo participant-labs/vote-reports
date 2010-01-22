@@ -15,7 +15,7 @@ class Users::ReportsController < ApplicationController
       },
       :scores => {
         :politician => :state,
-        :evidence => [{:roll => {:subject => {:titles => :as}}}, :bill_criterion]
+        :evidence => [{:vote => {:roll => {:subject => {:titles => :as}}}}, :bill_criterion]
     }})
     if @report.has_better_id?
       redirect_to user_report_path(@user, @report), :status => 301
