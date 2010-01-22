@@ -1,7 +1,7 @@
 class SiteController < ApplicationController
 
   def index
-    @recent_reports = Report.scored.by_updated_at.all(:limit => Report.per_page).paginate
+    @recent_reports = Report.scored.by_updated_at.paginate(:page => params[:page])
   end
 
   def about

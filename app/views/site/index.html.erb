@@ -19,3 +19,4 @@
 
 <h2>Recent Reports</h2>
 <%= render 'reports/list', :reports => @recent_reports %>
+<%= will_paginate @recent_reports %>
