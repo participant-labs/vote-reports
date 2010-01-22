@@ -8,7 +8,15 @@ class Users::ReportsController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
-    @report = @user.reports.find(params[:id], :scope => @user, :include => {:scores => [{:politician => :state, :evidence => [{:roll => {:subject => {:titles => :as}}}, :bill_criterion]}]})
+    @report = @user.reports.find(params[:id], :scope => @user, :include => {
+      :user => nil,
+      :bill_criteria => {
+        :bill => [{:titles => :as}, :congress, :passage_rolls]
+      },
+      :scores => {
+        :politician => :state,
+        :evidence => [{:roll => {:subject => {:titles => :as}}}, :bill_criterion]
+    }})
     if @report.has_better_id?
       redirect_to user_report_path(@user, @report), :status => 301
     end
