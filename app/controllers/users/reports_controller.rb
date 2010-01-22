@@ -14,11 +14,18 @@ class Users::ReportsController < ApplicationController
         :bill => [{:titles => :as}, :congress, :passage_rolls]
       }
     })
-    @scores = @report.scores.paginate(:page => params[:page],
-      :include => {
-        :politician => :state,
-        :evidence => [{:vote => {:roll => {:subject => {:titles => :as}}}}, :bill_criterion]
-    })
+    score_count = (@report.scores.count + 1) / 2
+    includes = {
+      :politician => :state,
+      :evidence => [{:vote => {:roll => {:subject => {:titles => :as}}}}, :bill_criterion]
+    }
+    @top_scores = @report.scores.paginate(:page => params[:top_page],
+      :total_entries => score_count,
+      :include => includes)
+    @bottom_scores = @report.scores.paginate(:page => params[:bottom_page],
+      :total_entries => score_count,
+      :order => :score,
+      :include => includes)
     if @report.has_better_id?
       redirect_to user_report_path(@user, @report), :status => 301
     end

@@ -9,13 +9,31 @@
 <%- end -%>
 
 <h3>Scores</h3>
-<%- if @scores.present? -%>
-  <ol>
-    <%- @scores.each do |score| -%>
-      <li><%= render 'reports/scores/score', :score => score %></li>
-    <%- end -%>
-  </ol>
-  <%= will_paginate @scores %>
+<%- if @top_scores.present? || @bottom_scores.present? -%>
+  <table>
+    <thead>
+      <tr>
+        <th>Top Scores</th>
+        <th>Bottom Scores</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @top_scores.zip(@bottom_scores).each do |(top_score, bottom_score)| -%>
+        <tr>
+          <td><%= render 'reports/scores/score', :score => top_score %></td>
+          <td><%= render 'reports/scores/score', :score => bottom_score %></td>
+        </tr>
+      <%- end -%>
+      <tr>
+        <td><%= will_paginate @top_scores,
+                :param_name => :top_page,
+                :params => {:bottom_page => @bottom_scores.current_page } %></td>
+        <td><%= will_paginate @bottom_scores,
+                :param_name => :bottom_page,
+                :params => {:top_page => @top_scores.current_page } %></td>
+      </tr>
+    </tbody>
+  </table>
 <%- elsif @report.bill_criteria.blank? -%>
   <p>No scores yet, as this report has no criteria to judge representatives by.</p>
 <%- else -%>
