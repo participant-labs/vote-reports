@@ -8,6 +8,16 @@
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td><%= will_paginate top_scores,
+                :param_name => :top_page,
+                :params => {:bottom_page => bottom_scores.current_page},
+                :'data-replace' => '#report_scores' %></td>
+        <td><%= will_paginate bottom_scores,
+                :param_name => :bottom_page,
+                :params => {:top_page => top_scores.current_page},
+                :'data-replace' => '#report_scores' %></td>
+      </tr>
       <%- top_scores.zip(bottom_scores).each do |(top_score, bottom_score)| -%>
         <tr>
           <td><%= render 'reports/scores/score', :score => top_score %></td>
