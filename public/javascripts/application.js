@@ -27,6 +27,16 @@
         return false;
     });
 
+    $('[data-replace] a').live('click', function(event) {
+      var target = $(event.target);
+      $(target.closest('[data-replace]').attr('data-replace')).load(target.attr('href'));
+
+      return false;
+    })
+
+  });
+  $.ajaxSetup({
+    'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
   });
 })(jQuery);
 

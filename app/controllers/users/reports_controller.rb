@@ -24,6 +24,14 @@ class Users::ReportsController < ApplicationController
       :total_entries => score_count,
       :order => :score)
 
+    respond_to do |format|
+      format.html
+      format.js {
+        render :partial => 'reports/scores/table', :locals => {
+          :report => @report, :top_scores => @top_scores, :bottom_scores => @bottom_scores
+        }
+      }
+    end
   end
 
   def edit

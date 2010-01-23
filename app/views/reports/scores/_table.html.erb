@@ -17,10 +17,12 @@
       <tr>
         <td><%= will_paginate top_scores,
                 :param_name => :top_page,
-                :params => {:bottom_page => bottom_scores.current_page } %></td>
+                :params => {:bottom_page => bottom_scores.current_page},
+                :'data-replace' => '#report_scores' %></td>
         <td><%= will_paginate bottom_scores,
                 :param_name => :bottom_page,
-                :params => {:top_page => top_scores.current_page } %></td>
+                :params => {:top_page => top_scores.current_page},
+                :'data-replace' => '#report_scores' %></td>
       </tr>
     </tbody>
   </table>
