@@ -19,7 +19,7 @@ Feature: Adding Bill Criteria to Reports
     And I should be on my report page for "My report"
     And I should see "Support -"
     And I should see "USA PATRIOT Reauthorization Act of 2009"
-    And I <not yet voted> see "not yet voted"
+    And I <not yet voted> see "no votes yet"
 
   Examples:
     | bill type                            | not yet voted |

@@ -17,12 +17,6 @@ class BillCriterion < ActiveRecord::Base
     bill.passage_rolls.empty?
   end
 
-  def status
-    if unvoted?
-      bill.congress.current? ? "(not yet voted)" : "(unvoted)"
-    end
-  end
-
   def position
     support ? 'Support' : 'Oppose'
   end
