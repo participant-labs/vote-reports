@@ -25,7 +25,7 @@ class Report < ActiveRecord::Base
   has_many :bill_criteria
   has_many :bills, :through => :bill_criteria
 
-  has_many :scores, :class_name => 'ReportScore', :dependent => :destroy, :order => 'score DESC'
+  has_many :scores, :class_name => 'ReportScore', :dependent => :destroy
 
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
 
