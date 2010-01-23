@@ -14,15 +14,15 @@ class Users::ReportsController < ApplicationController
         :bill => [{:titles => :as}, :congress, :passage_rolls]
       }
     })
-    score_count = (@report.scores.count + 1) / 2
-    @top_scores = @report.scores.with_evidence.paginate(:page => params[:top_page],
-      :total_entries => score_count)
-    @bottom_scores = @report.scores.with_evidence.paginate(:page => params[:bottom_page],
-      :total_entries => score_count,
-      :order => :score)
     if @report.has_better_id?
       redirect_to user_report_path(@user, @report), :status => 301
     end
+    score_count = (@report.scores.count + 1) / 2
+    @top_scores = @report.scores.with_evidence.paginate(:page => params[:top_page],
+      :total_entries => score_count)
+    @bottom_scores = @report.scores.bottom.with_evidence.paginate(:page => params[:bottom_page],
+      :total_entries => score_count)
+
   end
 
   def edit
