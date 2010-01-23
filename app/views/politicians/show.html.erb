@@ -32,7 +32,7 @@
   <%- end -%>
 </dl>
 
-<%= link_to 'View on Congresspedia', @politician.congresspedia_url %>
+<%= link_to 'View on Congresspedia', @politician.congresspedia_url if @politician.congresspedia_url %>
 
 <hr />
 <h3>Terms in Congress</h3>
