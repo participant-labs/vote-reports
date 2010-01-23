@@ -1,0 +1,31 @@
+Feature: Deleting Criteria from Reports
+  In order to correct mistaken criteria additions
+  As a user
+  I want to delete criteria from my report
+
+  Scenario: Non-owner edits an existing bill criterion
+    Given a bill named "Bovine Security Act of 2009"
+    And a report named "Active Report"
+    And report "Active Report" has the following bill criterion:
+      | bill                        | support |
+      | Bovine Security Act of 2009 | true    |
+    And I am signed in
+    When I go to the report page for "Active Report"
+    Then I should not see "Edit Bill Criteria"
+
+  Scenario: Report owner adds an explanatory url to an existing bill criterion
+    Given I am signed in as "Empact"
+    And a bill named "Bovine Security Act of 2009"
+    And I have a report named "Active Report"
+    And I have a report named "Target Report"
+    And report "Active Report" has the following bill criterion:
+      | bill                        | support |
+      | Bovine Security Act of 2009 | true    |
+    When I go to my report page for "Active Report"
+    And I follow "Edit Bill Criteria"
+    And I fill in "Explanatory Link" with "http://example.com/reports/empact/target-report"
+    And I press "Save Bill Criteria"
+    Then I should see "Successfully updated report"
+    And I should be on my report page for "Active Report"
+    When I follow "Support"
+    Then I should be on my report page for "Target Report"

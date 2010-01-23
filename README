@@ -13,8 +13,7 @@ Push back sunspot retry logic to github: /opt/local/lib/ruby/gems/1.8/gems/rsolr
 /opt/local/lib/ruby/gems/1.8/gems/sunspot_rails-0.11.4/lib/sunspot/rails/searchable.rb:200:in `reindex'
 Should use offset:
 /opt/local/lib/ruby/gems/1.8/gems/sunspot_rails-0.11.4/lib/sunspot/rails/searchable.rb:200:in `reindex'
-Make Bill#titles#best an :order statement, with best being the first
-
+Add ability to report a report (for misuse)
 
 Full Bill Import:
 real	189m20.792s

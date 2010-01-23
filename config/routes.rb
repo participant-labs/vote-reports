@@ -26,6 +26,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.new_user_report_bills "reports/:user_id/:report_id/bills/new",
     :controller => 'users/reports/bills', :action => 'new', :conditions => { :method => :get }
+  map.edit_user_report_bills "reports/:user_id/:report_id/bills/edit",
+    :controller => 'users/reports/bills', :action => 'edit', :conditions => { :method => :get }
   map.user_report_bill "reports/:user_id/:report_id/bills/:id",
     :controller => 'users/reports/bills', :action => 'destroy', :conditions => { :method => :delete }
 
