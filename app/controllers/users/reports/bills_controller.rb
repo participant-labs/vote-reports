@@ -12,7 +12,7 @@ class Users::Reports::BillsController < ApplicationController
 
   def destroy
     @report = current_user.reports.find(params[:report_id], :scope => current_user)
-    @report.bill_criteria.find_by_bill_id(Bill.find(params[:id])).destroy
+    @report.bill_criteria.find(params[:id]).destroy
     flash[:notice] = "Successfully deleted report criterion"
     redirect_to :back
   end
