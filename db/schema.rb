@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100121175240) do
+ActiveRecord::Schema.define(:version => 20100123030357) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -46,11 +46,12 @@ ActiveRecord::Schema.define(:version => 20100121175240) do
   add_index "bill_committee_actions", ["committee_meeting_id"], :name => "index_bill_committee_actions_on_committee_meeting_id"
 
   create_table "bill_criteria", :force => true do |t|
-    t.integer  "bill_id",    :null => false
-    t.integer  "report_id",  :null => false
-    t.boolean  "support",    :null => false
+    t.integer  "bill_id",         :null => false
+    t.integer  "report_id",       :null => false
+    t.boolean  "support",         :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "explanatory_url"
   end
 
   add_index "bill_criteria", ["bill_id", "report_id"], :name => "bill_criteria_bill_id_report_id_unique", :unique => true

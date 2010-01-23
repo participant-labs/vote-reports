@@ -1,0 +1,39 @@
+<h2 id="bill_criteria">Edit Bill Criteria</h2>
+<%- if @report.bill_criteria.empty? -%>
+  <p>This report doesn't have any bills selected</p>
+  <%= link_to 'Back', :back %>
+<%- else -%>
+  <% form_for [@report.user, @report] do |f| %>
+    <table>
+      <thead>
+        <th>Bill</th>
+        <th>Support/Oppose</th>
+        <th>Explanatory Link</th>
+      </thead>
+      <tbody>
+        <%- @report.bill_criteria.each do |criterion| -%>
+          <%- f.fields_for :bill_criteria, criterion do |bill_criteria_fields| -%>
+            <tr>
+              <td>
+                <%= render 'bills/bill', :bill => criterion.bill %>
+                <%= bill_criteria_fields.hidden_field :bill_id %>
+                <%= bill_criteria_fields.hidden_field :id unless criterion.new_record? %>
+              </td>
+              <td>
+                <%= bill_criteria_fields.label :support_true, 'Support' %>
+                <%= bill_criteria_fields.radio_button :support, true %><br />
+                <%= bill_criteria_fields.label :support_false, 'Oppose' %>
+                <%= bill_criteria_fields.radio_button :support, false %>
+              </td>
+              <td>
+                <%= bill_criteria_fields.label :explanatory_url, 'Explanatory Link', :class => 'hidden' %>
+                <%= bill_criteria_fields.text_field :explanatory_url %>
+              </td>
+            </tr>
+          <%- end -%>
+        <%- end -%>
+      </tbody>
+    </table>
+    <%= f.submit 'Save Bill Criteria', :class => 'submit' %> - <%= link_to 'cancel', :back %>
+  <% end %>
+<%- end -%>

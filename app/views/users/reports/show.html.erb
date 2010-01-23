@@ -33,6 +33,9 @@
       </li>
     <%- end -%>
   </ul>
+  <%- if @report.user == current_user -%>
+    <p><%= link_to "Edit Bill Criteria", edit_user_report_bills_path(current_user, @report) %></p>
+  <%- end -%>
 <%- elsif @report.user == current_user -%>
   <p>You need to add bills to this report in order to generate a score:</p>
 <%- else -%>
