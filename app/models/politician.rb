@@ -37,6 +37,7 @@ class Politician < ActiveRecord::Base
     first, last = name.split(' ', 2)
     {:conditions => {:first_name => first, :last_name => last}}
   }
+  named_scope :by_birth_date, :order => 'birthday DESC'
 
   def full_name= full_name
     self.last_name, self.first_name = full_name.split(', ', 2)
