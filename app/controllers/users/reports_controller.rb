@@ -16,6 +16,7 @@ class Users::ReportsController < ApplicationController
     })
     if @report.has_better_id?
       redirect_to user_report_path(@user, @report), :status => 301
+      return
     end
     score_count = (@report.scores.count + 1) / 2
     @top_scores = @report.scores.with_evidence.paginate(:page => params[:top_page],
