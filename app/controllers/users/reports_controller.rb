@@ -20,8 +20,9 @@ class Users::ReportsController < ApplicationController
     score_count = (@report.scores.count + 1) / 2
     @top_scores = @report.scores.with_evidence.paginate(:page => params[:top_page],
       :total_entries => score_count)
-    @bottom_scores = @report.scores.bottom.with_evidence.paginate(:page => params[:bottom_page],
-      :total_entries => score_count)
+    @bottom_scores = @report.scores.with_evidence.paginate(:page => params[:bottom_page],
+      :total_entries => score_count,
+      :order => :score)
 
   end
 
