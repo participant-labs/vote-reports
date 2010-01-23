@@ -1,7 +1,7 @@
 class PoliticiansController < ApplicationController
 
   def index
-    @politicians = Politician.all
+    @politicians = Politician.by_birth_date.paginate(:page => params[:page])
   end
 
   def show
