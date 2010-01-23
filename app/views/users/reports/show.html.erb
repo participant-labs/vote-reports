@@ -8,6 +8,13 @@
 <blockquote><%= raw @report.description %></blockquote>
 <%- end -%>
 
+<%- if @report.user == current_user -%>
+<p>
+  <%= link_to "Edit Name & Description", edit_user_report_path(current_user, @report) %> |
+  <%= link_to "Delete this Report", [current_user, @report], :confirm => 'Are you sure?', :method => :delete %>
+</p>
+<%- end -%>
+
 <h3>Scores</h3>
 <%= render 'reports/scores/table', :report => @report, :top_scores => @top_scores, :bottom_scores => @bottom_scores %>
 
@@ -35,11 +42,3 @@
 <%- if @report.user == current_user -%>
   <%= render 'users/reports/bills/search', :label => 'Add Bills', :report => @report %>
 <%- end -%>
-
-<p>
-  <%- if @report.user == current_user -%>
-    <%= link_to "Edit", edit_user_report_path(current_user, @report) %> |
-    <%= link_to "Destroy", [current_user, @report], :confirm => 'Are you sure?', :method => :delete %> |
-  <%- end -%>
-  <%= link_to "View All", reports_path %>
-</p>
