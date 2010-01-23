@@ -30,6 +30,11 @@ real	30m32.227s
 user	14m5.166s
 sys	0m31.824s
 
+* [H.R. 4472, the Children's Safety and Violent Crime Reduction Act of 2005](http://votereports.org/bills/109-h4472) - [Oppose](http://www.aclu.org/racial-justice_prisoners-rights_drug-law-reform_immigrants-rights/aclu-letter-house-representatives-1) (unvoted)
+* [H.R. 4545, the Drug Sentencing Reform and Cocaine Kingpin Trafficking Act of 2007](http://votereports.org/bills/110-h4545) - [Support](http://www.aclu.org/racial-justice_prisoners-rights_drug-law-reform_immigrants-rights/aclu-letter-house-members-urging-s) (unvoted)
+* [S 557 Civil Rights Tax Relief Act](http://votereports.org/bills/108-s557) - [Support](http://www.aclu.org/racial-justice_womens-rights/aclu-letter-senate-urging-support-s-557-civil-rights-tax-relief-act) (unvoted)
+* [H.R. 1155, the Civil Rights Tax Relief Act](http://votereports.org/bills/108-h1155) - [Support](http://www.aclu.org/racial-justice_womens-rights/aclu-letter-house-urging-support-hr-1155-civil-rights-tax-relief-act) (unvoted)
+
 >> Roll.all(:conditions => {:roll_type => ''})
 => [#<Roll id: 963, where: "house", voted_at: "1994-03-18 00:12:00", aye: 175, nay: 240, not_voting: 18, present: 0, result: "Failed", required: "1/2", question: ": S 636", roll_type: "", gov_track_id: "h1994-68", subject_id: 29701, congress_id: 2, created_at: "2010-01-09 04:10:13", updated_at: "2010-01-09 04:10:13", subject_type: "Bill">]
 >> exit
