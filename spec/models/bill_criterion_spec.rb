@@ -19,10 +19,10 @@ describe BillCriterion do
 
   describe "#years_between" do
     it "should calculate years" do
-      1.year.ago.to_date.years_until(Date.today).should == 1.0
-      5.years.ago.to_date.years_until(Date.today).should == 5.0
-      (5.years + 3.months).ago.to_date.years_until(Date.today).should == 5.25
-      (5.years + 3.months + (36.5).days).ago.to_date.years_until(Date.today).should be_close(5.35, 0.002)
+      1.year.ago.to_date.years_until(Date.today).should be_close(1.0, 0.003)
+      5.years.ago.to_date.years_until(Date.today).should be_close(5.0, 0.003)
+      (5.years + 3.months).ago.to_date.years_until(Date.today).should be_close(5.25, 0.003)
+      (5.years + 3.months + (36.5).days).ago.to_date.years_until(Date.today).should be_close(5.35, 0.003)
     end
   end
 end
