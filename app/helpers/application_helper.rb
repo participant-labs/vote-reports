@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def page_title
-    @page_title || 'Vote Reports'
+    ['VoteReports', @page_title].compact.join(' :: ')
   end
 
   def title(page_title)
