@@ -10,7 +10,7 @@ Feature: Deleting Reports
       | My Report | I made this because I care |
     When I go to my reports page
     And I follow "My Report"
-    And I follow "destroy"
+    And I follow "Delete this Report"
     Then I should see "Successfully destroyed report."
     And I should not see "My Report"
 
