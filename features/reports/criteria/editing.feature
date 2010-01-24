@@ -27,6 +27,7 @@ Feature: Deleting Criteria from Reports
     When I follow "Support"
     Then I should be on my report page for "Target Report"
 
+  @wip
   Scenario: Report owner adds a bad explanatory url to an existing bill criterion
     When I go to my report page for "Active Report"
     And I follow "Edit Bill Criteria"
