@@ -16,7 +16,8 @@ namespace :vlad do
     run [
       "ln -s #{shared_path}/config/database.yml #{current_release}/config/database.yml",
       "ln -s #{shared_path}/bundler/gems #{current_release}/vendor/bundler_gems",
-      "ln -s #{shared_path}/bundler/bin #{current_release}/bin"
+      "ln -s #{shared_path}/bundler/bin #{current_release}/bin",
+      "ln -sf #{current_release}/Gemfile #{shared_path}/Gemfile"
     ].join(' && ')
   end
 
