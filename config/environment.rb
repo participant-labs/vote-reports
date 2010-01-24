@@ -29,8 +29,6 @@ Rails::Initializer.run do |config|
   config.gem 'websolr-rails'
   config.gem 'will_paginate'
   config.gem 'sexy_pg_constraints'
-  config.gem 'nokogiri'
-  config.gem 'fastercsv'
 
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
