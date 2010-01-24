@@ -35,9 +35,7 @@
     })
 
   });
-  $.ajaxSetup({
-    'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
-  });
+  $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script;
 })(jQuery);
 
 
