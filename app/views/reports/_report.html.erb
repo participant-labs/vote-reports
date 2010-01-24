@@ -1,5 +1,4 @@
 <%= link_to report.name, [report.user, report] %>
-<%= link_to "Edit", edit_user_report_path(current_user, report) if report.user == current_user  %>
 <%- if report.description.present? -%>
   - <q><%= truncate(strip_tags(report.description), :length => 100) %></q>
 <%- end -%>
