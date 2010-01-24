@@ -16,7 +16,7 @@ Fixjour :verify => false do
   def us_state(state)
     return state if state.is_a?(UsState)
     state =STATES.assoc(state) || STATES.rassoc(state)
-    new_us_state(
+    UsState.find_by_abbreviation(state.last) || new_us_state(
       :full_name => state.first,
       :abbreviation => state.last,
       :state_type => 'state')
