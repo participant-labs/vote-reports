@@ -1,4 +1,4 @@
-<% title "User" %>
+<% title "User - #{h(@user.username)}" %>
 
 <h2><%= render 'users/user_token', :user => @user, :thumbnail_size => 50 %></h2>
 
