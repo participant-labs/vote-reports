@@ -38,6 +38,6 @@ class BillCriterion < ActiveRecord::Base
   private
 
   def rescore_report
-    report.rescore!
+    report.rescore! if new_record? || support_changed?
   end
 end
