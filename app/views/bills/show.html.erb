@@ -1,3 +1,5 @@
+<% title %Q{Bill - "#{h @bill.titles.first}"} %>
+
 <h2><%= render @bill, :hide_year => true %></h2>
 <p>Introduced on <%= @bill.introduced_on.to_s(:long_ordinal) %>
 <%- if @bill.sponsor -%>
