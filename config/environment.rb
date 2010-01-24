@@ -26,7 +26,6 @@ Rails::Initializer.run do |config|
   config.gem 'gravtastic', :version => '>= 2.1.0'
   config.gem 'sunspot', :lib => 'sunspot'
   config.gem 'sunspot_rails', :lib => 'sunspot/rails'
-  config.gem 'websolr-rails'
   config.gem 'will_paginate'
   config.gem 'sexy_pg_constraints'
 
