@@ -46,6 +46,7 @@
         <ul class="sidebar-links">
           <li><%= link_to_unless_current "About us", about_path %></li>
           <li><%= link_to 'Our Blog', blog_path %></li>
+          <li><%= link_to 'We Welcome Feedback', get_satisfaction_path %></li>
           <li><%= mail_to 'votereports@gmail.com', "Contact us" %></li>
         </ul>
         <%= render 'layouts/mailchimp_signup' %>

@@ -5,6 +5,10 @@ module ApplicationHelper
     'http://blog.votereports.org/'
   end
 
+  def get_satisfaction_path
+    'http://getsatisfaction.com/votereports'
+  end
+
   def page_title
     ['VoteReports', @page_title].compact.join(' :: ')
   end
