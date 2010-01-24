@@ -1,4 +1,4 @@
-<% title "Search Results" %>
+<% title @q.present? ? %Q{Bill Search Results for "#{h @q}"} : 'Bills' %>
 
 <h2>Bill Search</h2>
 
