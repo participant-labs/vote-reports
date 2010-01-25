@@ -4,11 +4,32 @@ Feature: Adding Bill Criteria to Reports
   I want to add bills to my report
 
   Background:
-    Given I am signed in
+    Given I am signed in as "Empact"
     And I have a report named "My report"
     When I go to my report page for "My report"
 
   Scenario Outline: User adds a bill to a report
+    Given I have a report named "Target Report"
+    And <bill type> named "USA PATRIOT Reauthorization Act of 2009"
+    When I fill in "Add Bills" with "patriot"
+    And I press "Search"
+    Then the "Search" field should contain "patriot"
+    When I choose "Support"
+    And I fill in "Explanatory Link" with "http://example.com/reports/empact/target-report"
+    And I press "Save Bills"
+    Then I should see "Successfully updated report."
+    And I should be on my report page for "My report"
+    And I should see "USA PATRIOT Reauthorization Act of 2009"
+    And I should not see "no votes yet"
+    When I follow "Support"
+    Then I should be on my report page for "Target Report"
+
+  Examples:
+    | bill type                            |
+    | a pass-voted, current-congress bill  |
+    | a pass-voted, previous-congress bill |
+
+  Scenario Outline: User can't add an unvoted bill to a report
     Given <bill type> named "USA PATRIOT Reauthorization Act of 2009"
     When I fill in "Add Bills" with "patriot"
     And I press "Search"
@@ -19,14 +40,12 @@ Feature: Adding Bill Criteria to Reports
     And I should be on my report page for "My report"
     And I should see "Support -"
     And I should see "USA PATRIOT Reauthorization Act of 2009"
-    And I <not yet voted> see "no votes yet"
+    And I should see "no votes yet"
 
   Examples:
-    | bill type                            | not yet voted |
-    | a pass-voted, current-congress bill  | should not    |
-    | a voted, current-congress bill       | should        |
-    | an un-voted, current-congress bill   | should        |
-    | a pass-voted, previous-congress bill | should not    |
+    | bill type                            |
+    | a voted, current-congress bill       |
+    | an un-voted, current-congress bill   |
 
   Scenario Outline: User is unable to select an invalid bill for report
     Given an <bill type> bill named "USA PATRIOT Reauthorization Act of 2009"
