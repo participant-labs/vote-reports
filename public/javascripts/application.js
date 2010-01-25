@@ -27,6 +27,11 @@
         return false;
     });
 
+    $('[data-toggle]').click(function(event) {
+      $($(event.target).attr('data-toggle')).toggle();
+      return false;
+    })
+
     $('[data-replace] a').live('click', function(event) {
       var target = $(event.target);
       $(target.closest('[data-replace]').attr('data-replace')).load(target.attr('href'));
