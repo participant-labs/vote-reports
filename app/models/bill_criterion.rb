@@ -1,6 +1,7 @@
 class BillCriterion < ActiveRecord::Base
   belongs_to :bill
   belongs_to :report
+  has_many :evidence, :class_name => 'ReportScoreEvidence', :dependent => :destroy
 
   validates_presence_of :bill, :report
   validates_uniqueness_of :bill_id, :scope => "report_id"
@@ -33,6 +34,10 @@ class BillCriterion < ActiveRecord::Base
     bill.passage_rolls.all(:include => {:votes => [{:politician => :state}, :roll]}).map(&:votes).flatten.group_by(&:politician).map do |politician, votes|
       BillCriterionScore.new(:bill_criterion => self, :votes => votes, :politician => politician)
     end
+  end
+
+  def after_destroy
+    report.rescore!
   end
 
   private
