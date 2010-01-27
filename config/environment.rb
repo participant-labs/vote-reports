@@ -23,6 +23,7 @@ Rails::Initializer.run do |config|
   config.gem 'friendly_id'
   config.gem "authlogic", :version => '>=2.1.3'
   config.gem 'bluecloth', :version => '>=2.0.5'
+  config.gem 'erubis'
   config.gem 'gravtastic', :version => '>= 2.1.0'
   config.gem 'pg'
   config.gem 'sunspot', :lib => 'sunspot'
