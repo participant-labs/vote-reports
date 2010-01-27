@@ -7,7 +7,7 @@ set :revision, "origin/rimu"
 
 namespace :vlad do
   desc "custom deploy"
-  task :deploy => [:update, :symlinks, :gem_bundle, :migrate, :touch_restart]
+  task :deploy => [:update, :symlinks, :install_gems, :migrate, :touch_restart]
 
   remote_task :touch_restart, :roles => :app do
     run "touch #{current_release}/tmp/restart.txt"
@@ -16,13 +16,10 @@ namespace :vlad do
   remote_task :symlinks, :roles => :app do
     run [
       "ln -s #{current_release}/config/database.rimu.yml #{current_release}/config/database.yml",
-      "ln -s #{shared_path}/bundler/gems #{current_release}/vendor/bundler_gems",
-      "ln -s #{shared_path}/bundler/bin #{current_release}/bin",
-      "ln -sf #{current_release}/Gemfile #{shared_path}/Gemfile"
     ].join(' && ')
   end
 
-  remote_task :gem_bundle, :roles => :app do
-    run "cd #{current_release} && gem bundle --build-options #{shared_path}/bundler/build_options.yml"
+  remote_task :install_gems, :roles => :app do
+    run "cd #{current_release} && rake gems:install"
   end
 end
