@@ -1,10 +1,10 @@
-require 'open-uri'
-require 'nokogiri'
-
-MEETINGS = 103..111
-
 namespace :gov_track do
   task :support => :environment do
+    require 'open-uri'
+    require 'nokogiri'
+
+    MEETINGS = 103..111
+
     def gov_track_path(path)
       local_path = Rails.root.join('data/gov_track', path)
       File.exist?(local_path) ? local_path : "http://www.govtrack.us/data/#{path}"

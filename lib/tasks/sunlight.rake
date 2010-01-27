@@ -1,6 +1,3 @@
-require 'fastercsv'
-require 'open-uri'
-
 namespace :sunlight do
   namespace :politicians do
     DATA_PATH = Rails.root.join('data/sunlight_labs/legislators/legislators.csv')
@@ -14,6 +11,9 @@ namespace :sunlight do
 
     desc "Process Politicians"
     task :unpack => :environment do
+      require 'fastercsv'
+      require 'open-uri'
+
       ActiveRecord::Base.transaction do
         FasterCSV.new(open(DATA_PATH), :headers => true, :skip_blanks => true).each do |row|
           row = row.to_hash.except('senate_class', 'state')
