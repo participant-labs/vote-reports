@@ -5,6 +5,7 @@ development:
     host: localhost
     port: 5432
     username: postgres
+    password: monkey7paris
     database: vote_reports_development
     encoding: utf8
 
@@ -16,6 +17,7 @@ test: &TEST
     host: localhost
     port: 5432
     username: postgres
+    password: monkey7paris
     database: vote_reports_test
     encoding: utf8
 
@@ -24,6 +26,7 @@ production:
     host: localhost
     port: 5432
     username: postgres
+    password: monkey7paris
     database: vote_reports_production
     encoding: utf8
 
