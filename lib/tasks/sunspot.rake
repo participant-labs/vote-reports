@@ -1,4 +1,8 @@
-require 'sunspot/rails/tasks'
+begin
+  require 'sunspot/rails/tasks'
+rescue LoadError
+  # do nothing
+end
 
 namespace :sunspot do
   task :start do
