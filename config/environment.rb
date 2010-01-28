@@ -28,6 +28,7 @@ Rails::Initializer.run do |config|
   config.gem 'pg'
   config.gem 'sunspot', :lib => 'sunspot'
   config.gem 'sunspot_rails', :lib => 'sunspot/rails'
+  config.gem 'whenever', :lib => false
   config.gem 'will_paginate'
   config.gem 'sexy_pg_constraints'
 
