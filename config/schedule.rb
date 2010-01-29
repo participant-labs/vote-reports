@@ -12,9 +12,9 @@
 #   runner "MyModel.some_method"
 #   rake "some:great:rake:task"
 # end
-#
-# every 4.days do
-#   runner "AnotherModel.prune_old_records"
-# end
+
+every 7.days do
+  rake "db:backup:full"
+end
 
 # Learn more: http://github.com/javan/whenever
