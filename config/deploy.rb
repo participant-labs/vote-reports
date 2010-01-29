@@ -7,7 +7,7 @@ set :revision, "origin/rimu"
 
 namespace :vlad do
   desc "custom deploy"
-  task :deploy => [:update, :symlinks, :install_gems, :migrate, :setup_scheduling, :touch_restart]
+  task :deploy => [:update, :symlinks, :install_gems, :migrate, :setup_scheduling, :start_solr, :touch_restart]
 
   remote_task :touch_restart, :roles => :app do
     run "touch #{current_release}/tmp/restart.txt"
@@ -21,6 +21,10 @@ namespace :vlad do
 
   remote_task :install_gems, :roles => :app do
     run "cd #{current_release} && rake gems:install"
+  end
+
+  remote_task :start_solr, :roles => :app do
+    run "cd #{current_release} && rake sunspot:solr:start RAILS_ENV=production"
   end
 
   remote_task :setup_scheduling, :roles => :app do
