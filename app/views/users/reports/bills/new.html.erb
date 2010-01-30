@@ -48,6 +48,6 @@
       </tbody>
     </table>
     <%= will_paginate @bills %>
-    <%= f.submit (@new_report ? 'Create Report' : 'Save Bills to Report'), :class => 'submit' %> - <%= link_to 'cancel', :back %>
+    <%= f.submit @new_report ? 'Create Report' : 'Save Bills to Report', :class => 'submit' %> - <%= link_to 'cancel', :back %>
   <% end %>
 <%- end -%>
