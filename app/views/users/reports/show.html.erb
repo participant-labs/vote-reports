@@ -16,9 +16,19 @@
 <%- end -%>
 
 <h3>Scores</h3>
+<p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#bill_criteria' %> lead to a high score, votes against, a low one.</p>
 <%= render 'reports/scores/table', :report => @report, :top_scores => @top_scores, :bottom_scores => @bottom_scores %>
 
 <h3 id="bill_criteria">Bill Criteria</h3>
+<p>Learn more about the bills in this report:</p>
+<blockquote>
+  <ul>
+    <%- if @report.bill_criteria.any? {|bc| bc.explanatory_url? }  -%>
+    <li>Follow the Support/Oppose links on the left to see the report creator's explanation</li>
+    <%- end -%>
+    <li>Click on the bill to see it's details</li>
+  </ul>
+</blockquote>
 <%- if @report.bill_criteria.present? -%>
   <ul>
     <%- @report.bill_criteria.each do |criterion| -%>
