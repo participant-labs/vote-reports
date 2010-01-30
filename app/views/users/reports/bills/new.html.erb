@@ -5,12 +5,8 @@
 <h3><small style="color:gray">Step 1: Name &amp; Describe your report,</small> Step 2: Select the Bills to include in your report:</h3>
 <%- end -%>
 
-
 <%= render 'users/reports/bills/search', :report => @report %>
-<%- if @bills.empty? -%>
-  <p>No bills found</p>
-  <%= link_to 'Back', :back %>
-<%- else -%>
+<%- if @bills.present? -%>
   <% form_for [@report.user, @report] do |f| %>
     <table>
       <thead>
@@ -48,6 +44,12 @@
       </tbody>
     </table>
     <%= will_paginate @bills %>
-    <%= f.submit @new_report ? 'Create Report' : 'Save Bills to Report', :class => 'submit' %> - <%= link_to 'cancel', :back %>
+    <%= f.submit 'Save Bills to Report', :class => 'submit' %> - <%= link_to 'cancel', :back %>
   <% end %>
+<%- elsif @new_report -%>
+  <p>No bills found. Try another search!</p>
+  <%= link_to 'Done', user_report_path(current_user, @report) %>
+<%- else -%>
+  <p>No bills found</p>
+  <%= link_to 'Back', :back %>
 <%- end -%>

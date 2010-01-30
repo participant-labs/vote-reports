@@ -10,10 +10,10 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
-    when /my reports page/i
-      user_reports_path(current_user)
     when /my report page for "(.+)"/i
       user_report_path(current_user, Report.find_by_name($1))
+    when /my reports page/i
+      user_reports_path(current_user)
     when /my profile page/i
       user_path(current_user)
     when /the politician page for "(.+)"/
