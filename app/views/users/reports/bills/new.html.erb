@@ -1,6 +1,11 @@
 <% title "Report - #{h @report.name} - Add Criteria" %>
 
 <h2>Declare Your Opposition/Support to Bills</h2>
+<%- if @new_report -%>
+<h3><small style="color:gray">Step 1: Name &amp; Describe your report,</small> Step 2: Select the Bills to include in your report:</h3>
+<%- end -%>
+
+
 <%= render 'users/reports/bills/search', :report => @report %>
 <%- if @bills.empty? -%>
   <p>No bills found</p>
@@ -43,6 +48,6 @@
       </tbody>
     </table>
     <%= will_paginate @bills %>
-    <%= f.submit 'Save Bills', :class => 'submit' %> - <%= link_to 'cancel', :back %>
+    <%= f.submit (@new_report ? 'Create Report' : 'Save Bills to Report'), :class => 'submit' %> - <%= link_to 'cancel', :back %>
   <% end %>
 <%- end -%>
