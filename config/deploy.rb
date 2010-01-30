@@ -3,7 +3,6 @@ set :user, "root"
 set :domain, "#{user}@74.50.53.183"
 set :deploy_to, "/var/www/votereports/production/"
 set :repository, 'git@github.com:Empact/vote-reports.git'
-set :revision, "origin/rimu"
 
 namespace :vlad do
   desc "custom deploy"
