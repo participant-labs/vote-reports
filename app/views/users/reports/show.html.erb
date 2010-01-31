@@ -21,6 +21,7 @@
   Show Representatives:
   <%= label_tag :from_where, 'From Where?' %>
   <%= text_field_tag :from_where, @from_where %>
+  <small>(e.g. HI, Ohio, nebraska)</small>
   <%= submit_tag 'Go!' %>
 <% end %>
 <%= render 'reports/scores/table', :report => @report, :scores => @scores, :from_where => @from_where %>
