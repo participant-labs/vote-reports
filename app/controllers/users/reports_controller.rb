@@ -18,12 +18,14 @@ class Users::ReportsController < ApplicationController
       redirect_to user_report_path(@user, @report), :status => 301
       return
     end
-    score_count = (@report.scores.count + 1) / 2
-    @top_scores = @report.scores.with_evidence.paginate(:page => params[:top_page],
-      :total_entries => score_count)
-    @bottom_scores = @report.scores.with_evidence.paginate(:page => params[:bottom_page],
-      :total_entries => score_count,
-      :order => :score)
+
+    @from_where = params[:from_where]
+    @scores =
+      if @from_where
+        @report.scores.on_politicians_from(params[:from_where])
+      else
+        @report.scores
+      end
 
     respond_to do |format|
       format.html

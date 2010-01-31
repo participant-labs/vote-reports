@@ -1,10 +1,19 @@
+<%- score_count = (scores.count + 1) -%>
+
 <div id="report_scores">
-<%- if top_scores.present? || bottom_scores.present? -%>
+<%- if score_count >= 50 -%>
+<%-
+  top_scores = scores.with_evidence.paginate(:page => params[:top_page],
+    :total_entries => score_count / 2)
+  bottom_scores = scores.with_evidence.paginate(:page => params[:bottom_page],
+    :total_entries => score_count / 2,
+    :order => :score)
+-%>
   <table>
     <thead>
       <tr>
-        <th>Agrees With Report</th>
-        <th>Disagrees With Report</th>
+        <th>Agree With Report</th>
+        <th>Disagree With Report</th>
       </tr>
     </thead>
     <tbody>
@@ -36,6 +45,24 @@
       </tr>
     </tbody>
   </table>
+<%- elsif score_count > 1 -%>
+  <%- scores = scores.with_evidence.paginate(:page => params[:bottom_page], :total_entries => score_count) -%>
+  <table>
+    <thead>
+      <tr>
+        <th>All Scores<%= %Q{ for Representatives from "#{from_where}"} if from_where.present? %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- scores.each do |score| -%>
+        <tr>
+          <td><%= render 'reports/scores/score', :score => score %></td>
+        </tr>
+      <%- end -%>
+    </tbody>
+  </table>
+<%- elsif from_where.present? -%>
+  <p>No scores found for: "<%= from_where %>"</p>
 <%- elsif report.bill_criteria.blank? -%>
   <p>No scores yet, as this report has no criteria to judge representatives by.</p>
 <%- else -%>
