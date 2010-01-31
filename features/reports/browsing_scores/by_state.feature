@@ -49,7 +49,7 @@ Feature: Browsing Reports
       | Edward Kaufman       | 53    |
       | Connie Mack          | 50    |
       | Neil Abercrombie     | 0     |
-    When I fill in "From Where?" with "<location>"
+    When I fill in "From Which State?" with "<location>"
     And I press "Go!"
     Then I should see the following scores:
       | politician           | score |
@@ -63,5 +63,6 @@ Feature: Browsing Reports
   Examples:
     | location |
     | TX       |
+    | tx       |
     | Texas    |
     | texas    |
