@@ -39,7 +39,7 @@ class Politician < ActiveRecord::Base
   }
   named_scope :by_birth_date, :order => 'birthday DESC NULLS LAST'
   named_scope :from, lambda {|from_where, params|
-    from_where.upcase!
+    from_where = from_where.upcase
     if state = UsState.first(:conditions => ["abbreviation = ? OR UPPER(full_name) = ?", from_where, from_where])
       {:select => 'DISTINCT politicians.*', :conditions => {:'politician_terms.us_state_id' => state}, :joins => :politician_terms}.merge(params)
     else
