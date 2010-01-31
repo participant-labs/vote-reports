@@ -17,7 +17,13 @@
 
 <h3>Scores</h3>
 <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#bill_criteria' %> lead to a high score, votes against, a low one.</p>
-<%= render 'reports/scores/table', :report => @report, :top_scores => @top_scores, :bottom_scores => @bottom_scores %>
+<% form_tag user_report_path(@report.user, @report), :method => :get do %>
+  Show Representatives:
+  <%= label_tag :from_where, 'From Where?' %>
+  <%= text_field_tag :from_where, @from_where %>
+  <%= submit_tag 'Go!' %>
+<% end %>
+<%= render 'reports/scores/table', :report => @report, :scores => @scores, :from_where => @from_where %>
 
 <h3 id="bill_criteria">Bill Criteria</h3>
 <p>Learn more about the bills in this report:</p>

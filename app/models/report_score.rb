@@ -11,6 +11,10 @@ class ReportScore < ActiveRecord::Base
     :evidence => [{:vote => {:roll => {:subject => {:titles => :as}}}}, :bill_criterion]
   }
 
+  named_scope :on_politicians_from, lambda {|from_where|
+    {:conditions => {:politician_id => Politician.from(from_where, :select => 'politicians.id').map {|p| p.id }}}
+  }
+
   class << self
     def per_page
       20

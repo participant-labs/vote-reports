@@ -231,6 +231,10 @@ Fixjour :verify => false do
       overrides[:state] = us_state(state)
     end
 
+    overrides.process(:name) do |name|
+      overrides[:politician] = Politician.with_name(name).first
+    end
+
     started_on = rand(50).years.ago
 
     klass.new(
@@ -252,6 +256,10 @@ Fixjour :verify => false do
 
     overrides.process(:state) do |state|
       overrides[:state] = us_state(state)
+    end
+
+    overrides.process(:name) do |name|
+      overrides[:politician] = Politician.with_name(name).first
     end
 
     started_on = rand(50).years.ago
