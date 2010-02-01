@@ -19,7 +19,7 @@
 <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#bill_criteria' %> lead to a high score, votes against, a low one.</p>
 <% form_tag user_report_path(@report.user, @report), :method => :get do %>
   Show Representatives:
-  <%= label_tag :from_where, 'From Which State?' %>
+  <%= label_tag :from_where, 'From Where?' %>
   <%= text_field_tag :from_where, @from_where %>
   <small>(e.g. HI, Ohio, nebraska)</small>
   <%= submit_tag 'Go!' %>
