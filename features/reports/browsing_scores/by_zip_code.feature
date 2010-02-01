@@ -3,7 +3,7 @@ Feature: Browsing Report Scores by State
   As a user
   I want to view a report's scores for reps of a given state
 
-  Scenario: Narrow report results to those within a certain zip code
+  Scenario Outline: Narrow report results to those within a certain zip code
     Given I have a report named "Active Report"
     And an un-voted, current-congress bill named "Bovine Security Act of 2009"
     And the following politician records:
@@ -54,7 +54,7 @@ Feature: Browsing Report Scores by State
       | Kay Hutchison        | 53    |
       | Connie Mack          | 50    |
       | Neil Abercrombie     | 0     |
-    When I fill in "From Where?" with "75028"
+    When I fill in "From Where?" with "<zip code input>"
     And I press "Go!"
     Then I should see the following scores:
       | politician           | score |
@@ -64,6 +64,12 @@ Feature: Browsing Report Scores by State
     But I should not see "J. Kerrey"
     But I should not see "Connie Mack"
     But I should not see "Neil Abercrombie"
+
+  Examples:
+    | zip code input |
+    | 75028          |
+    | 75028-1422     |
+    | 75028  1422    |
 
   Scenario Outline: Narrow report results to those within a certain zip code + 4
     Given I have a report named "Active Report"
