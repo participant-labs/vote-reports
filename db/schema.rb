@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100201012831) do
+ActiveRecord::Schema.define(:version => 20100201015235) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -150,6 +150,16 @@ ActiveRecord::Schema.define(:version => 20100201012831) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "district_zip_codes", :force => true do |t|
+    t.integer  "district_id", :null => false
+    t.integer  "zip_code",    :null => false
+    t.integer  "plus_4"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "district_zip_codes", ["district_id", "zip_code", "plus_4"], :name => "district_zip_codes_district_id_zip_code_plus_4_unique", :unique => true
 
   create_table "districts", :force => true do |t|
     t.integer  "us_state_id", :null => false
