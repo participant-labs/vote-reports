@@ -1,7 +1,7 @@
-Feature: Browsing Reports
-  In order to find interesting reports
+Feature: Browsing Report Scores by State
+  In order to find report scores for my representative
   As a user
-  I want to browse reports
+  I want to view a report's scores for reps of a given state
 
   Scenario Outline: Narrow report results to those within a certain zip code
     Given I have a report named "Active Report"
@@ -49,7 +49,7 @@ Feature: Browsing Reports
       | Edward Kaufman       | 53    |
       | Connie Mack          | 50    |
       | Neil Abercrombie     | 0     |
-    When I fill in "From Which State?" with "<location>"
+    When I fill in "From Where?" with "<location>"
     And I press "Go!"
     Then I should see the following scores:
       | politician           | score |
