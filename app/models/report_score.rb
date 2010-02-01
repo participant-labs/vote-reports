@@ -12,7 +12,11 @@ class ReportScore < ActiveRecord::Base
   }
 
   named_scope :on_politicians_from, lambda {|from_where|
-    {:conditions => {:politician_id => Politician.from(from_where).scoped(:select => 'DISTINCT politicians.id').map {|p| p.id }}}
+    if politicians = Politician.from(from_where)
+      {:conditions => {:politician_id => politicians.scoped(:select => 'DISTINCT politicians.id').map {|p| p.id }}}
+    else
+      {:conditions => '0 = 1'}
+    end
   }
 
   class << self

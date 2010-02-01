@@ -48,8 +48,14 @@ class Politician < ActiveRecord::Base
   }
 
   class << self
+    def from_zip_code(zip_code)
+      District.with_zip(zip_code).first.try(:politicians)
+    end
+
     def from(from_where)
-      from_state(from_where)
+      results = from_state(from_where)
+      results = from_zip_code(from_where) if results.blank?
+      results
     end
   end
 
