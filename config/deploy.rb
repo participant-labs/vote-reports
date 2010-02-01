@@ -15,6 +15,7 @@ namespace :vlad do
   remote_task :symlinks, :roles => :app do
     run [
       "ln -s #{current_release}/config/database.rimu.yml #{current_release}/config/database.yml",
+      "ln -s #{shared_path}/data #{current_release}/data"
     ].join(' && ')
   end
 
