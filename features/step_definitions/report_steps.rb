@@ -43,6 +43,6 @@ end
 Then /^I should see the following scores?:$/ do |table|
   table.map_column!('politician') {|name| Politician.with_name(name).first }
   table.hashes.each do |hash|
-    response.should contain(/#{hash['politician'].full_name} .*: #{hash['score']}%/)
+    response.should contain(/#{hash['politician'].full_name}(?:| .*): #{hash['score']}%/)
   end
 end
