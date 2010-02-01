@@ -5,9 +5,15 @@ class District < ActiveRecord::Base
   named_scope :with_zip, lambda {|zip_code|
     zip_code, plus_4 = zip_code.strip.split(/[-\s]+/)
     if plus_4
-      {:joins => :zip_codes, :conditions => {:'zip_codes.code' => zip_code, :'zip_codes.plus_4' => plus_4}}
+      {:joins => :zip_codes, :conditions => {:'district_zip_codes.zip_code' => zip_code, :'district_zip_codes.plus_4' => plus_4}}
     else
-      {:joins => :zip_codes, :conditions => {:'zip_codes.code' => zip_code}}
+      {:joins => :zip_codes, :conditions => {:'district_zip_codes.zip_code' => zip_code}}
     end
   }
+
+  def politicians
+    Politician.scoped(:conditions => [
+      "politician_terms.us_state_id = ? AND (politician_terms.type = 'SenateTerm' OR (politician_terms.type = 'RepresentativeTerm' AND politician_terms.district = ?))", us_state_id, district
+    ], :joins => :politician_terms)
+  end
 end
