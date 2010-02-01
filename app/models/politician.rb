@@ -38,14 +38,20 @@ class Politician < ActiveRecord::Base
     {:conditions => {:first_name => first, :last_name => last}}
   }
   named_scope :by_birth_date, :order => 'birthday DESC NULLS LAST'
-  named_scope :from, lambda {|from_where, params|
-    from_where = from_where.upcase
-    if state = UsState.first(:conditions => ["abbreviation = ? OR UPPER(full_name) = ?", from_where, from_where])
-      {:select => 'DISTINCT politicians.*', :conditions => {:'politician_terms.us_state_id' => state}, :joins => :politician_terms}.merge(params)
+  named_scope :from_state, lambda {|state|
+    state = UsState.first(:conditions => ["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]) if state.is_a?(String)
+    if state
+      {:select => 'DISTINCT politicians.*', :conditions => {:'politician_terms.us_state_id' => state}, :joins => :politician_terms}
     else
       {:conditions => '0 = 1'}
     end
   }
+
+  class << self
+    def from(from_where)
+      from_state(from_where)
+    end
+  end
 
   def full_name= full_name
     self.last_name, self.first_name = full_name.split(', ', 2)
