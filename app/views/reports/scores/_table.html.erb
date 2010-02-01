@@ -46,7 +46,7 @@
     </tbody>
   </table>
 <%- elsif score_count > 1 -%>
-  <%- scores = scores.with_evidence.paginate(:page => params[:bottom_page], :total_entries => score_count) -%>
+  <%- scores = scores.with_evidence.paginate(:page => params[:page], :total_entries => score_count) -%>
   <table>
     <thead>
       <tr>
@@ -54,11 +54,17 @@
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td><%= will_paginate scores, :'data-replace' => '#report_scores' %></td>
+      </tr>
       <%- scores.each do |score| -%>
         <tr>
           <td><%= render 'reports/scores/score', :score => score %></td>
         </tr>
       <%- end -%>
+      <tr>
+        <td><%= will_paginate scores, :'data-replace' => '#report_scores' %></td>
+      </tr>
     </tbody>
   </table>
 <%- elsif from_where.present? -%>

@@ -140,15 +140,18 @@ Feature: Scoring Reports
       | Rodney Alexander     | 50    |
       | Thomas Allen         | 75    |
       | Robert Andrews       | 50    |
-      | Joe Baca             | 0     |
-      | Spencer Bachus       | 25    |
       | Brian Baird          | 25    |
       | Richard Baker        | 50    |
-      | Tammy Baldwin        | 0     |
-      | Frank Ballance       | 0     |
       | Cass Ballenger       | 50    |
       | James Barrett        | 50    |
       | Roscoe Bartlett      | 100   |
+    When I follow "Next"
+    Then I should see the following scores:
+      | politician           | score |
+      | Spencer Bachus       | 25    |
+      | Joe Baca             | 0     |
+      | Tammy Baldwin        | 0     |
+      | Frank Ballance       | 0     |
     And I should not see "Joe Barton"
 
   Scenario: Bill Criteria report generate scores from passing roles only
