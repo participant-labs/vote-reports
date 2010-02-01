@@ -54,3 +54,9 @@ NoMethodError: undefined method `congress' for #<Array:0x103110360>
 	from (irb):1
 >> Roll.all(:conditions => {:roll_type => ''}).first.congress
 => #<Congress id: 2, meeting: 103>
+
+
+
+if results.blank? && location = Geokit::Geocoders::MultiGeocoder.geocode(from_where)
+  results = location.zip.present? ? from_zip_code(location.zip)) : from_state(location.state)
+end
