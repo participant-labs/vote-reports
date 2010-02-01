@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100123030357) do
+ActiveRecord::Schema.define(:version => 20100201012831) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -26,12 +26,12 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.integer  "congress_id",  :null => false
   end
 
+  add_index "amendments", ["bill_id", "chamber", "number"], :name => "amendments_number_bill_id_chamber_unique", :unique => true
+  add_index "amendments", ["bill_id", "chamber", "number"], :name => "amendments_number_chamber_bill_id_unique", :unique => true
+  add_index "amendments", ["bill_id", "sequence"], :name => "amendments_sequence_bill_id_unique", :unique => true
   add_index "amendments", ["bill_id"], :name => "index_amendments_on_bill_id"
+  add_index "amendments", ["chamber", "congress_id", "number"], :name => "amendments_number_chamber_congress_id_unique", :unique => true
   add_index "amendments", ["congress_id"], :name => "index_amendments_on_congress_id"
-  add_index "amendments", ["number", "bill_id", "chamber"], :name => "amendments_number_bill_id_chamber_unique", :unique => true
-  add_index "amendments", ["number", "chamber", "bill_id"], :name => "amendments_number_chamber_bill_id_unique", :unique => true
-  add_index "amendments", ["number", "chamber", "congress_id"], :name => "amendments_number_chamber_congress_id_unique", :unique => true
-  add_index "amendments", ["sequence", "bill_id"], :name => "amendments_sequence_bill_id_unique", :unique => true
   add_index "amendments", ["sponsor_id", "sponsor_type"], :name => "index_amendments_on_sponsor_id_and_sponsor_type"
 
   create_table "bill_committee_actions", :force => true do |t|
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.datetime "updated_at"
   end
 
+  add_index "bill_oppositions", ["bill_id", "politician_id"], :name => "bill_oppositions_politician_id_bill_id_unique", :unique => true
   add_index "bill_oppositions", ["bill_id"], :name => "index_bill_oppositions_on_bill_id"
-  add_index "bill_oppositions", ["politician_id", "bill_id"], :name => "bill_oppositions_politician_id_bill_id_unique", :unique => true
   add_index "bill_oppositions", ["politician_id"], :name => "index_bill_oppositions_on_politician_id"
 
   create_table "bill_subjects", :force => true do |t|
@@ -77,10 +77,6 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.datetime "updated_at"
   end
 
-  add_index "bill_subjects", ["bill_id", "subject_id"], :name => "bill_subjects_bill_id_subject_id_unique", :unique => true
-  add_index "bill_subjects", ["bill_id"], :name => "index_bill_subjects_on_bill_id"
-  add_index "bill_subjects", ["subject_id"], :name => "index_bill_subjects_on_subject_id"
-
   create_table "bill_supports", :force => true do |t|
     t.integer  "politician_id", :null => false
     t.integer  "bill_id",       :null => false
@@ -88,18 +84,12 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.datetime "updated_at"
   end
 
-  add_index "bill_supports", ["bill_id"], :name => "index_bill_supports_on_bill_id"
-  add_index "bill_supports", ["politician_id", "bill_id"], :name => "bill_supports_politician_id_bill_id_unique", :unique => true
-  add_index "bill_supports", ["politician_id"], :name => "index_bill_supports_on_politician_id"
-
   create_table "bill_title_as", :force => true do |t|
     t.string   "as",         :null => false
     t.integer  "sort_order", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "bill_title_as", ["as"], :name => "index_bill_title_as_on_as"
 
   create_table "bill_titles", :force => true do |t|
     t.text     "title",            :null => false
@@ -109,9 +99,6 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.datetime "updated_at"
     t.integer  "bill_title_as_id", :null => false
   end
-
-  add_index "bill_titles", ["bill_id"], :name => "index_bill_titles_on_bill_id"
-  add_index "bill_titles", ["bill_title_as_id"], :name => "index_bill_titles_on_bill_title_as_id"
 
   create_table "bills", :force => true do |t|
     t.string   "bill_type",            :null => false
@@ -127,14 +114,6 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.datetime "gov_track_updated_at"
   end
 
-  add_index "bills", ["bill_type", "bill_number", "congress_id"], :name => "bills_bill_type_bill_number_congress_id_unique", :unique => true
-  add_index "bills", ["congress_id"], :name => "index_bills_on_congress_id"
-  add_index "bills", ["gov_track_id"], :name => "bills_gov_track_id_unique", :unique => true
-  add_index "bills", ["gov_track_id"], :name => "index_bills_on_gov_track_id", :unique => true
-  add_index "bills", ["opencongress_id"], :name => "bills_opencongress_id_unique", :unique => true
-  add_index "bills", ["opencongress_id"], :name => "index_bills_on_opencongress_id", :unique => true
-  add_index "bills", ["sponsor_id"], :name => "index_bills_on_sponsor_id"
-
   create_table "committee_meetings", :force => true do |t|
     t.string   "name",         :null => false
     t.integer  "congress_id",  :null => false
@@ -143,10 +122,6 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.datetime "updated_at"
   end
 
-  add_index "committee_meetings", ["committee_id"], :name => "index_committee_meetings_on_committee_id"
-  add_index "committee_meetings", ["congress_id", "committee_id"], :name => "committee_meetings_congress_id_committee_id_unique", :unique => true
-  add_index "committee_meetings", ["congress_id"], :name => "index_committee_meetings_on_congress_id"
-
   create_table "committee_memberships", :force => true do |t|
     t.integer  "politician_id",        :null => false
     t.integer  "committee_meeting_id", :null => false
@@ -154,10 +129,6 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "committee_memberships", ["committee_meeting_id"], :name => "index_committee_memberships_on_committee_meeting_id"
-  add_index "committee_memberships", ["politician_id", "committee_meeting_id"], :name => "committee_memberships_politician_id_committee_meeting_id_unique", :unique => true
-  add_index "committee_memberships", ["politician_id"], :name => "index_committee_memberships_on_politician_id"
 
   create_table "committees", :force => true do |t|
     t.string   "chamber"
@@ -168,14 +139,9 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.datetime "updated_at"
   end
 
-  add_index "committees", ["ancestry"], :name => "index_committees_on_ancestry"
-  add_index "committees", ["code", "ancestry"], :name => "committees_code_ancestry_unique", :unique => true
-
   create_table "congresses", :force => true do |t|
     t.integer "meeting"
   end
-
-  add_index "congresses", ["meeting"], :name => "congresses_meeting_unique", :unique => true
 
   create_table "cosponsorships", :force => true do |t|
     t.integer  "bill_id",       :null => false
@@ -185,17 +151,20 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.datetime "updated_at"
   end
 
-  add_index "cosponsorships", ["bill_id", "politician_id"], :name => "cosponsorships_bill_id_politician_id_unique", :unique => true
-  add_index "cosponsorships", ["bill_id"], :name => "index_cosponsorships_on_bill_id"
-  add_index "cosponsorships", ["politician_id"], :name => "index_cosponsorships_on_politician_id"
+  create_table "districts", :force => true do |t|
+    t.integer  "us_state_id", :null => false
+    t.integer  "district",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "districts", ["us_state_id", "district"], :name => "districts_us_state_id_district_unique", :unique => true
 
   create_table "parties", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "parties", ["name"], :name => "index_parties_on_name", :unique => true
 
   create_table "politician_terms", :force => true do |t|
     t.integer  "politician_id", :null => false
@@ -210,9 +179,6 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.string   "type",          :null => false
     t.integer  "us_state_id"
   end
-
-  add_index "politician_terms", ["party_id"], :name => "index_politician_terms_on_party_id"
-  add_index "politician_terms", ["politician_id"], :name => "index_politician_terms_on_politician_id"
 
   create_table "politicians", :force => true do |t|
     t.string   "first_name"
@@ -250,25 +216,6 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.integer  "us_state_id"
   end
 
-  add_index "politicians", ["bioguide_id"], :name => "index_politicians_on_bioguide_id", :unique => true
-  add_index "politicians", ["bioguide_id"], :name => "politicians_bioguide_id_unique", :unique => true
-  add_index "politicians", ["congresspedia_url"], :name => "politicians_congresspedia_url_unique", :unique => true
-  add_index "politicians", ["crp_id"], :name => "politicians_crp_id_unique", :unique => true
-  add_index "politicians", ["email"], :name => "politicians_email_unique", :unique => true
-  add_index "politicians", ["eventful_id"], :name => "politicians_eventful_id_unique", :unique => true
-  add_index "politicians", ["fec_id"], :name => "index_politicians_on_fec_id", :unique => true
-  add_index "politicians", ["fec_id"], :name => "politicians_fec_id_unique", :unique => true
-  add_index "politicians", ["gov_track_id"], :name => "index_politicians_on_gov_track_id", :unique => true
-  add_index "politicians", ["gov_track_id"], :name => "politicians_gov_track_id_unique", :unique => true
-  add_index "politicians", ["metavid_id"], :name => "politicians_metavid_id_unique", :unique => true
-  add_index "politicians", ["open_secrets_id"], :name => "politicians_open_secrets_id_unique", :unique => true
-  add_index "politicians", ["phone"], :name => "politicians_phone_unique", :unique => true
-  add_index "politicians", ["twitter_id"], :name => "politicians_twitter_id_unique", :unique => true
-  add_index "politicians", ["vote_smart_id"], :name => "index_politicians_on_vote_smart_id", :unique => true
-  add_index "politicians", ["vote_smart_id"], :name => "politicians_vote_smart_id_unique", :unique => true
-  add_index "politicians", ["website"], :name => "politicians_website_unique", :unique => true
-  add_index "politicians", ["youtube_url"], :name => "politicians_youtube_url_unique", :unique => true
-
   create_table "report_score_evidences", :force => true do |t|
     t.integer  "report_score_id",   :null => false
     t.integer  "vote_id",           :null => false
@@ -294,8 +241,6 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.string   "cached_slug"
   end
 
-  add_index "reports", ["user_id"], :name => "index_reports_on_user_id"
-
   create_table "rolls", :force => true do |t|
     t.string   "where",        :null => false
     t.datetime "voted_at",     :null => false
@@ -316,13 +261,6 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.integer  "number",       :null => false
   end
 
-  add_index "rolls", ["congress_id"], :name => "index_rolls_on_congress_id"
-  add_index "rolls", ["number", "year", "where"], :name => "rolls_number_year_where_unique", :unique => true
-  add_index "rolls", ["roll_type"], :name => "index_rolls_on_roll_type"
-  add_index "rolls", ["subject_id"], :name => "index_rolls_on_subject_id"
-  add_index "rolls", ["subject_type", "subject_id"], :name => "index_rolls_on_subject_type_and_subject_id"
-  add_index "rolls", ["subject_type"], :name => "index_rolls_on_subject_type"
-
   create_table "slugs", :force => true do |t|
     t.string   "name"
     t.integer  "sluggable_id"
@@ -332,14 +270,9 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.datetime "created_at"
   end
 
-  add_index "slugs", ["name", "scope", "sequence", "sluggable_type"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
-  add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
-
   create_table "subjects", :force => true do |t|
     t.string "name", :null => false
   end
-
-  add_index "subjects", ["name"], :name => "index_subjects_on_name", :unique => true
 
   create_table "us_states", :force => true do |t|
     t.string   "abbreviation", :limit => 2, :null => false
@@ -348,11 +281,6 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.datetime "updated_at"
     t.string   "state_type",                :null => false
   end
-
-  add_index "us_states", ["abbreviation"], :name => "index_us_states_on_abbreviation", :unique => true
-  add_index "us_states", ["full_name"], :name => "index_us_states_on_full_name", :unique => true
-  add_index "us_states", ["id"], :name => "index_us_states_on_id", :unique => true
-  add_index "us_states", ["state_type"], :name => "index_us_states_on_state_type"
 
   create_table "users", :force => true do |t|
     t.string   "email",             :null => false
@@ -365,10 +293,6 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.string   "cached_slug"
   end
 
-  add_index "users", ["email"], :name => "users_email_unique", :unique => true
-  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
-  add_index "users", ["username"], :name => "users_username_unique", :unique => true
-
   create_table "votes", :force => true do |t|
     t.integer  "politician_id"
     t.datetime "created_at"
@@ -376,10 +300,5 @@ ActiveRecord::Schema.define(:version => 20100123030357) do
     t.integer  "roll_id"
     t.string   "vote"
   end
-
-  add_index "votes", ["politician_id"], :name => "index_votes_on_politician_id"
-  add_index "votes", ["roll_id", "politician_id"], :name => "index_votes_on_roll_id_and_politician_id", :unique => true
-  add_index "votes", ["roll_id"], :name => "index_votes_on_roll_id"
-  add_index "votes", ["vote"], :name => "index_votes_on_vote"
 
 end
