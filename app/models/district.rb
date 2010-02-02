@@ -3,13 +3,15 @@ class District < ActiveRecord::Base
   has_many :zip_codes, :class_name => 'DistrictZipCode'
 
   named_scope :with_zip, lambda {|zip_code|
-    zip_code, plus_4 = zip_code.strip.split(/[-\s]+/)
-    if plus_4
+    zip_code, plus_4 = zip_code.match(/(\d\d\d\d\d)[-\s]*(\d{0,4})/).try(:captures)
+    if zip_code.blank?
+      {:conditions => '0 = 1'}
+    elsif plus_4.blank?
+      {:joins => :zip_codes, :conditions => {:'district_zip_codes.zip_code' => zip_code}}
+    else
       {:joins => :zip_codes, :conditions => [
         "district_zip_codes.zip_code = ? AND (district_zip_codes.plus_4 = ? OR district_zip_codes.plus_4 IS NULL)", zip_code, plus_4
       ]}
-    else
-      {:joins => :zip_codes, :conditions => {:'district_zip_codes.zip_code' => zip_code}}
     end
   }
 
