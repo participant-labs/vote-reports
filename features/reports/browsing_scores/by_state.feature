@@ -3,7 +3,7 @@ Feature: Browsing Report Scores by State
   As a user
   I want to view a report's scores for reps of a given state
 
-  Scenario Outline: Narrow report results to those within a certain zip code
+  Background:
     Given I have a report named "Active Report"
     And an un-voted, current-congress bill named "Bovine Security Act of 2009"
     And the following politician records:
@@ -40,6 +40,8 @@ Feature: Browsing Report Scores by State
     And report "Active Report" has the following bill criterion:
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
+
+  Scenario: When unscoped, report scores should be proper and complete
     When I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
@@ -49,7 +51,10 @@ Feature: Browsing Report Scores by State
       | Edward Kaufman       | 53    |
       | Connie Mack          | 50    |
       | Neil Abercrombie     | 0     |
-    When I fill in "From Where?" with "<location>"
+
+  Scenario Outline: Narrow report results to those within a certain zip code
+    When I go to my report page for "Active Report"
+    And I fill in "From Where?" with "<location>"
     And I press "Go!"
     Then I should see the following scores:
       | politician           | score |
