@@ -202,6 +202,12 @@ Fixjour :verify => false do
   define_builder(PresidentialTerm) do |klass, overrides|
     started_on = rand(50).years.ago
 
+    overrides.process(:party) do |party|
+      party = nil if party.blank?
+      party = Party.find_or_create_by_name(party) if party.is_a?(String)
+      overrides[:party] = party
+    end
+
     klass.new(
       :politician => new_politician,
       :party => new_party,

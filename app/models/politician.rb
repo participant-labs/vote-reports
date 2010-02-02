@@ -68,7 +68,12 @@ class Politician < ActiveRecord::Base
   end
 
   def short_title
-    title.present? ? "#{title.to(2)}." : ''
+    return '' if title.blank?
+    if title == 'President'
+      'Pres.'
+    else
+      "#{title.to(2)}."
+    end
   end
 
   private
