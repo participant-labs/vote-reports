@@ -55,6 +55,16 @@ class Politician < ActiveRecord::Base
     def from(from_where)
       results = from_state(from_where)
       results = from_zip_code(from_where) if results.blank?
+
+      if results.blank?
+        location = Geokit::Geocoders::MultiGeocoder.geocode(from_where)
+        if location.zip.present?
+          results = from_zip_code(location.zip)
+        elsif location.state.present?
+          results = from_state(location.state)
+        end
+      end
+
       results
     end
   end

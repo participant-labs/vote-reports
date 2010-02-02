@@ -22,8 +22,13 @@ Feature: Browsing Report Scores by State
     And the following senate term records:
       | name                  | state |
       | Martin Sabo           | TX    |
-      | Edward Kaufman        | HI    |
+      | Edward Kaufman        | TX    |
       | Connie Mack           | OH    |
+    Given the following district zip code records:
+      | state | district | zip_code | plus_4 |
+      | TX    | 26       | 75028    |        |
+      | TX    | 11       | 75028    | 7      |
+      | NY    | 7        | 11111    | 111    |
     And bill "Bovine Security Act of 2009" has the following rolls:
       | roll_type                                            | voted_at     |
       | On Passage                                           | 2.years.ago  |
@@ -59,15 +64,31 @@ Feature: Browsing Report Scores by State
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
-      | J. Kerrey            | 24    |
+      | Edward Kaufman       | 53    |
       | Martin Sabo          | 76    |
-    But I should not see "Edward Kaufman"
-    But I should not see "Connie Mack"
-    But I should not see "Neil Abercrombie"
+    But I should not see "J. Kerrey"
+    And I should not see "Connie Mack"
+    And I should not see "Neil Abercrombie"
 
   Examples:
     | location                         |
     | 1115 Oak Drive, Flower Mound, TX |
-    | Flower Mound, TX                 |
     | Flower Mound 75028               |
     | 1115 oak drive flower mound      |
+
+  Scenario Outline: Narrow report results to a state through imprecise language
+    When I go to my report page for "Active Report"
+    And I fill in "From Where?" with "<location>"
+    And I press "Go!"
+    Then I should see the following scores:
+      | politician           | score |
+      | Piyush Jindal        | 100   |
+      | Edward Kaufman       | 53    |
+      | Martin Sabo          | 76    |
+      | J. Kerrey            | 24    |
+    But I should not see "Connie Mack"
+    And I should not see "Neil Abercrombie"
+
+  Examples:
+    | location                         |
+    | Flower Mound, TX                 |
