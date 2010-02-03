@@ -39,6 +39,13 @@
       return false;
     })
 
+    $('form[data-replace]').submit(function(event){
+      var target = $(event.target);
+      $(target.attr('data-replace')).load(target.attr('action') + '?' + target.serialize());
+
+      return false;
+    });
+
   });
   $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script;
 })(jQuery);
