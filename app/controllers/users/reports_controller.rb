@@ -31,7 +31,7 @@ class Users::ReportsController < ApplicationController
       format.html
       format.js {
         render :partial => 'reports/scores/table', :locals => {
-          :report => @report, :top_scores => @top_scores, :bottom_scores => @bottom_scores
+          :report => @report, :scores => @scores, :from_where => @from_where
         }
       }
     end
