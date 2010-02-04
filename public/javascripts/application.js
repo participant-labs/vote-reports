@@ -32,7 +32,7 @@
       return false;
     })
 
-    $('[data-replace] a').live('click', function(event) {
+    $('[data-replace] a, a[data-replace]').live('click', function(event) {
       var target = $(event.target);
       $(target.closest('[data-replace]').attr('data-replace')).load(target.attr('href'));
 
