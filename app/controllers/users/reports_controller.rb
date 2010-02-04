@@ -24,6 +24,7 @@ class Users::ReportsController < ApplicationController
         @from_where = params[:from_where]
         @report.scores.on_politicians_from(@from_where)
       elsif !params.has_key?(:from_where) && session[:geo_location]
+        @from_where = session[:geo_location].full_address
         @report.scores.on_politicians_from(session[:geo_location])
       else
         @report.scores
