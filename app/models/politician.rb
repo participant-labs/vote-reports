@@ -52,20 +52,30 @@ class Politician < ActiveRecord::Base
       District.with_zip(zip_code).first.try(:politicians)
     end
 
-    def from(from_where)
-      results = from_state(from_where)
-      results = from_zip_code(from_where) if results.blank?
-
-      if results.blank?
-        location = Geokit::Geocoders::MultiGeocoder.geocode(from_where)
-        if location.zip.present?
-          results = from_zip_code(location.zip)
-        elsif location.state.present?
-          results = from_state(location.state)
-        end
+    def from_location(state = nil, zip_code = nil)
+      if zip_code.present?
+        from_zip_code(zip_code)
+      elsif state.present?
+        from_state(state)
       end
+    end
 
-      results
+    def from(from_where)
+      if from_where.is_a?(Hash)
+        from_location(from_where['State'], from_where['Zip'])
+      elsif from_where.is_a?(Geokit::GeoLoc)
+        from_location(from_where.state, from_where.zip)
+      else
+        results = from_state(from_where)
+        results = from_zip_code(from_where) if results.blank?
+
+        if results.blank?
+          location = Geokit::Geocoders::MultiGeocoder.geocode(from_where)
+          results = from_location(location.state, location.zip)
+        end
+
+        results
+      end
     end
   end
 
