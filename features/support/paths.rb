@@ -3,7 +3,7 @@ module NavigationHelpers
   #
   #   When /^I go to (.+)$/ do |page_name|
   #
-  # step definition in webrat_steps.rb
+  # step definition in web_steps.rb
   #
   def path_to(page_name)
     case page_name
@@ -18,7 +18,7 @@ module NavigationHelpers
       user_path(current_user)
     when /the politician page for "(.+)"/
       politician_path(Politician.with_name($1).first)
-    when /the roll on the question "(.+)"/
+    when /the roll page for "(.+)"/
       roll_path(Roll.find_by_question($1))
     when /the report page for "(.+)"/
       report = Report.find_by_name($1)
