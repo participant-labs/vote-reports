@@ -50,7 +50,12 @@
   <table>
     <thead>
       <tr>
-        <th>All Scores<%= %Q{ for Representatives from "#{from_where}"} if from_where.present? %></th>
+        <th>All Scores
+          <%- if from_where.present? -%>
+          for Representatives from "<%= from_where %>"
+          <%= link_to 'show all', user_report_path(@report.user, @report, :from_where => ''), :'data-replace' => '#report_scores' %>
+          <%- end -%>
+        </th>
       </tr>
     </thead>
     <tbody>

@@ -78,5 +78,18 @@ Feature: Browsing Report Scores by IP Address
       | Kay Hutchison        | 53    |
       | John Cornyn          | 76    |
     But I should not see "J. Kerrey"
-    But I should not see "Connie Mack"
-    But I should not see "Neil Abercrombie"
+    And I should not see "Connie Mack"
+    And I should not see "Neil Abercrombie"
+
+    But I should see "Flower Mound, TX, 75028, US"
+    When I follow "show all"
+    Then I should not see "Flower Mound, TX, 75028, US"
+    And I should see the following scores:
+      | politician           | score |
+      | Michael Burgess      | 100   |
+      | J. Kerrey            | 24    |
+      | John Cornyn          | 76    |
+      | Kay Hutchison        | 53    |
+      | Connie Mack          | 50    |
+      | Neil Abercrombie     | 0     |
+    
