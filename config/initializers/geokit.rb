@@ -35,4 +35,4 @@ Geokit::Geocoders::provider_order = [:google,:us,:ca]
 
 # The IP provider order. Valid symbols are :ip,:geo_plugin.
 # As before, make sure you read up on relevant Terms of Use for each.
-Geokit::Geocoders::ip_provider_order = [:ip, :geo_plugin]
+Geokit::Geocoders::ip_provider_order = [:geo_plugin, :ip]
