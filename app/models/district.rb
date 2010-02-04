@@ -3,7 +3,7 @@ class District < ActiveRecord::Base
   has_many :zip_codes, :class_name => 'DistrictZipCode'
 
   named_scope :with_zip, lambda {|zip_code|
-    zip_code, plus_4 = zip_code.match(/(?:^|[^\d])(\d\d\d\d\d)[-\s]*(\d{0,4})\s*$/).try(:captures)
+    zip_code, plus_4 = zip_code.to_s.match(/(?:^|[^\d])(\d\d\d\d\d)[-\s]*(\d{0,4})\s*$/).try(:captures)
     if zip_code.blank?
       {:conditions => '0 = 1'}
     elsif plus_4.blank?
