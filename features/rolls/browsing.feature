@@ -7,7 +7,7 @@ Scenario: Browsing Rolls
   And bill "Bovine Security Act of 2009" has the following rolls:
     | question   | voted_at   |
     | On Passage | 12/24/2009 |
-  And I go to the roll on the question "On Passage"
+  And I go to the roll page for "On Passage"
   Then I should see "On Passage"
   And I should see "December 24, 2009"
   And I should see "Subject"
