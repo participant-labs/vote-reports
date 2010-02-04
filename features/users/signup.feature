@@ -18,4 +18,4 @@ Feature: Sign up
       And I fill in "Password" with "password"
       And I fill in "Password Confirmation" with "password"
       And I press "Sign up"
-      Then I should see "Thanks for signing up.  Welcome to Vote Reports"
+      Then I should see "Thanks for signing up. Welcome to VoteReports."
