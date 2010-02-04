@@ -11,7 +11,15 @@
     }, when);
     return $this;
   };
-  
+
+  function replaceWith(target, url) {
+    target = $(target);
+    target.block({message: '<h1>Loading</h1>'});
+    target.load(url, function() {
+      target.unblock();
+    });
+  }
+
   $(document).ready(function(){
 
     $('.flash').fadeOutSoon(1000);
@@ -34,15 +42,13 @@
 
     $('[data-replace] a, a[data-replace]').live('click', function(event) {
       var target = $(event.target);
-      $(target.closest('[data-replace]').attr('data-replace')).load(target.attr('href'));
-
+      replaceWith(target.closest('[data-replace]').attr('data-replace'), target.attr('href'));
       return false;
     })
 
     $('form[data-replace]').submit(function(event){
-      var target = $(event.target);
-      $(target.attr('data-replace')).load(target.attr('action') + '?' + target.serialize());
-
+      var source = $(event.target);
+      replaceWith(source.attr('data-replace'), source.attr('action') + '?' + source.serialize());
       return false;
     });
 
