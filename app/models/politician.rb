@@ -61,9 +61,7 @@ class Politician < ActiveRecord::Base
     end
 
     def from(from_where)
-      if from_where.is_a?(Hash)
-        from_location(from_where['State'], from_where['Zip'])
-      elsif from_where.is_a?(Geokit::GeoLoc)
+      if from_where.is_a?(Geokit::GeoLoc)
         from_location(from_where.state, from_where.zip)
       else
         results = from_state(from_where)

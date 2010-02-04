@@ -10,5 +10,5 @@ Given /^my (location is "[^"]*")$/ do |address|
 end
 
 Given /^my stored (location is "[^"]*")$/ do |address|
-  cookies[:geo_location] = address
+  cookies[:geo_location] = address.to_yaml
 end
