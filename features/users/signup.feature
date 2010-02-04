@@ -16,6 +16,6 @@ Feature: Sign up
       And I fill in "Username" with "James"
       And I fill in "Email" with "email@person.com"
       And I fill in "Password" with "password"
-      And I fill in "Password Confirmation" with "password"
+      And I fill in "Password confirmation" with "password"
       And I press "Sign up"
       Then I should see "Thanks for signing up. Welcome to VoteReports."
