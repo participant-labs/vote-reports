@@ -15,4 +15,5 @@ end
 When /^I debug$/ do
   require 'ruby-debug'
   debugger
+  x = 1 + 1
 end
