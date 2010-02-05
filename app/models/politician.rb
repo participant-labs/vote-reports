@@ -2,7 +2,7 @@ class Politician < ActiveRecord::Base
   include Politician::GovTrack
   include Politician::SunlightLabs
 
-  has_friendly_id :full_name, :use_slug => true
+  has_friendly_id :full_name, :use_slug => true, :strip_diacritics => true
 
   has_many :representative_terms
   has_many :senate_terms
