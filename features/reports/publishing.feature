@@ -25,7 +25,7 @@ Feature: Browsing Reports
     When I go to my report page for "My Report"
     Then I should see the button "Publish this Report"
     When I press "Publish"
-    Then I should see "Successfully published report"
+    Then I should see "Successfully updated report"
     And I should see "The report is public, so it will show up in lists or searches."
 
   Scenario: Published report is unpublishable after deleting all criteria
@@ -41,7 +41,7 @@ Feature: Browsing Reports
     Given I have a scored report named "My Report"
     When I go to my report page for "My Report"
     And I press "Publish this Report"
-    Then I should see "Successfully published report."
+    Then I should see "Successfully updated report."
     When I press "Remove this Bill"
     Then I should see "Successfully deleted report criterion"
     And I should see "The report is private, so it will not show up in lists or searches. However, anyone can access it at this url."
