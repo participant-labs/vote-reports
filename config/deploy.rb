@@ -9,11 +9,10 @@ namespace :vlad do
   task :update_symlinks => :internal_symlinks
   task :deploy => [:update, :install_gems, :migrate, :setup_scheduling, :start_solr, :start]
 
-  set :shared_paths, get(:shared_paths).merge(:data => :data)
-
   remote_task :internal_symlinks, :roles => :app do
     run [
       "ln -s #{latest_release}/config/database.rimu.yml #{latest_release}/config/database.yml",
+      "ln -s #{shared_path}/data #{latest_release}/data"
     ].join(' && ')
   end
 
