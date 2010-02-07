@@ -10,7 +10,7 @@
     <%= content_tag :p, @report.status if @report.status.present? %>
     <%= content_tag :p, @report.next_steps if @report.next_steps.present? %>
     <%- if @report.publishable? -%>
-      <%= raw button_to("Publish this Report", user_report_path(current_user, @report, :publish => true), :confirm => 'Publish this Report?  It will then be publicly viewable.', :method => :put) %>
+      <%= raw button_to("Publish this Report", user_report_path(current_user, @report, :report => {:state_event => 'publish'}), :confirm => 'Publish this Report?  It will then be publicly viewable.', :method => :put) %>
     <%- end -%>
   </div>
 <%- end -%>
