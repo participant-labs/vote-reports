@@ -4,6 +4,10 @@
 
 <p>Created by <%= render 'users/user', :user => @report.user %></p>
 
+<%- unless @report.description.blank? -%>
+<blockquote><%= raw @report.description %></blockquote>
+<%- end -%>
+
 <%- if @report.user == current_user -%>
 <p>
   <%= link_to "Edit Name & Description", edit_user_report_path(current_user, @report) %> |
@@ -18,10 +22,6 @@
     <%= raw button_to("Publish this Report", user_report_path(current_user, @report, :report => {:state_event => 'publish'}), :confirm => 'Publish this Report?  It will then be publicly viewable.', :method => :put) %>
   <%- end -%>
 </div>
-<%- end -%>
-
-<%- unless @report.description.blank? -%>
-<blockquote><%= raw @report.description %></blockquote>
 <%- end -%>
 
 <h3>Scores</h3>
