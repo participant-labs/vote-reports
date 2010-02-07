@@ -3,17 +3,13 @@ Feature: Browsing the Home Page
   As a user
   I want to access reports via the home page
 
-  Scenario: Home page excludes empty reports
+  Scenario: Browse excludes unpublished reports
     Given a report named "Empty Report"
-    When I go to the reports page
-    Then I should not see "Empty Report"
-
-  Scenario: Home page excludes published reports
-    Given a published report named "Active Report"
-    When I go to the reports page
+    And an unscored report named "Unscored Report"
+    And a scored report named "Scored Report"
+    And a published report named "Active Report"
+    When I go to the home page
     Then I should see "Active Report"
-
-  Scenario: Home page includes scored reports
-    Given a scored report named "Scored Report"
-    When I go to the reports page
-    Then I should see "Scored Report"
+    But I should not see "Empty Report"
+    And I should not see "Unscored Report"
+    And I should not see "Scored Report"
