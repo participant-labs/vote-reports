@@ -67,6 +67,7 @@ class Report < ActiveRecord::Base
 
   validates_presence_of :user, :name
 
+  named_scope :published, :conditions => {:state => 'published'}
   named_scope :with_criteria, :select => 'DISTINCT reports.*', :joins => :bill_criteria
   named_scope :scored, :select => 'DISTINCT reports.*', :joins => {:bill_criteria => {:bill => :rolls}}
   named_scope :by_updated_at, :order => 'updated_at DESC'
