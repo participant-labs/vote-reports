@@ -384,19 +384,22 @@ body.bp a {
   body.bp a:active {
     color: #635254; }
 /* line 31, ../../../app/stylesheets/screen.sass */
+body.bp p {
+  margin-bottom: 0.5em; }
+/* line 34, ../../../app/stylesheets/screen.sass */
 body.bp .info {
   border-bottom: 1px dotted;
   cursor: help; }
-/* line 37, ../../../app/stylesheets/screen.sass */
+/* line 40, ../../../app/stylesheets/screen.sass */
 body.bp dl dl dt:after {
   content: ':'; }
-/* line 41, ../../../app/stylesheets/screen.sass */
+/* line 44, ../../../app/stylesheets/screen.sass */
 body.bp h2 .bill_titles {
   font-size: 20px; }
-/* line 43, ../../../app/stylesheets/screen.sass */
+/* line 46, ../../../app/stylesheets/screen.sass */
 body.bp h2 a {
   color: #787878; }
-/* line 46, ../../../app/stylesheets/screen.sass */
+/* line 49, ../../../app/stylesheets/screen.sass */
 body.bp h3 {
   padding: 5px 10px;
   margin-bottom: 2px; }
@@ -465,7 +468,7 @@ form select {
   form textarea:focus,
   form select:focus {
     border: 1px solid #635254; }
-/* line 56, ../../../app/stylesheets/screen.sass */
+/* line 59, ../../../app/stylesheets/screen.sass */
 form input.submit {
   background-color: #382841;
   border-color: #605F5F;
@@ -477,7 +480,7 @@ form input.submit {
   padding-top: 0.3333em;
   text-decoration: none; }
 
-/* line 70, ../../../app/stylesheets/screen.sass */
+/* line 73, ../../../app/stylesheets/screen.sass */
 body.three-col #container {
   width: 950px;
   margin: 0 auto;
@@ -487,7 +490,7 @@ body.three-col #container {
   /* line 5, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
   body.three-col #container {
     display: block; }
-/* line 73, ../../../app/stylesheets/screen.sass */
+/* line 76, ../../../app/stylesheets/screen.sass */
 body.three-col #header {
   margin-bottom: 10px;
   display: inline;
@@ -497,7 +500,7 @@ body.three-col #header {
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
   * html body.three-col #header {
     overflow-x: hidden; }
-/* line 76, ../../../app/stylesheets/screen.sass */
+/* line 79, ../../../app/stylesheets/screen.sass */
 body.three-col #footer {
   display: inline;
   float: left;
@@ -507,23 +510,23 @@ body.three-col #footer {
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
   * html body.three-col #footer {
     overflow-x: hidden; }
-/* line 80, ../../../app/stylesheets/screen.sass */
+/* line 83, ../../../app/stylesheets/screen.sass */
 body.three-col #sidebar-left h3, body.three-col #sidebar-right h3 {
   background-color: #150c15;
   color: white;
   padding: 5px 10px;
   margin-bottom: 2px; }
-/* line 85, ../../../app/stylesheets/screen.sass */
+/* line 88, ../../../app/stylesheets/screen.sass */
 body.three-col #sidebar-left p, body.three-col #sidebar-right p {
   padding: 10px 10px; }
-/* line 87, ../../../app/stylesheets/screen.sass */
+/* line 90, ../../../app/stylesheets/screen.sass */
 body.three-col #sidebar-left ul, body.three-col #sidebar-right ul {
   margin-left: 5px; }
   /* line 8, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.sass */
   body.three-col #sidebar-left ul li, body.three-col #sidebar-right ul li {
     list-style-type: none;
     margin-left: 0px; }
-/* line 91, ../../../app/stylesheets/screen.sass */
+/* line 94, ../../../app/stylesheets/screen.sass */
 body.three-col #sidebar-left {
   display: inline;
   float: left;
@@ -532,14 +535,14 @@ body.three-col #sidebar-left {
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
   * html body.three-col #sidebar-left {
     overflow-x: hidden; }
-/* line 96, ../../../app/stylesheets/screen.sass */
+/* line 99, ../../../app/stylesheets/screen.sass */
 body.three-col .flash {
   text-align: center;
   position: fixed;
   z-index: 1001;
   top: 0px;
   width: 100%; }
-/* line 103, ../../../app/stylesheets/screen.sass */
+/* line 106, ../../../app/stylesheets/screen.sass */
 body.three-col #sidebar-right {
   display: inline;
   float: left;
@@ -548,19 +551,19 @@ body.three-col #sidebar-right {
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
   * html body.three-col #sidebar-right {
     overflow-x: hidden; }
-  /* line 107, ../../../app/stylesheets/screen.sass */
+  /* line 110, ../../../app/stylesheets/screen.sass */
   body.three-col #sidebar-right ul.sidebar-links a {
     text-decoration: none; }
     /* line 4, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/links/_hover_link.sass */
     body.three-col #sidebar-right ul.sidebar-links a:hover {
       text-decoration: underline; }
-  /* line 109, ../../../app/stylesheets/screen.sass */
+  /* line 112, ../../../app/stylesheets/screen.sass */
   body.three-col #sidebar-right form {
     padding-bottom: 15px; }
-    /* line 112, ../../../app/stylesheets/screen.sass */
+    /* line 115, ../../../app/stylesheets/screen.sass */
     body.three-col #sidebar-right form input.text {
       width: 125px; }
-/* line 115, ../../../app/stylesheets/screen.sass */
+/* line 118, ../../../app/stylesheets/screen.sass */
 body.three-col #content {
   display: inline;
   float: left;
@@ -569,23 +572,22 @@ body.three-col #content {
   /* line 101, ../../../vendor/gems/chriseppstein-compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
   * html body.three-col #content {
     overflow-x: hidden; }
-  /* line 118, ../../../app/stylesheets/screen.sass */
+  /* line 121, ../../../app/stylesheets/screen.sass */
   body.three-col #content h2 {
     background-color: #150c15;
     color: white;
     padding: 5px 10px;
     margin-bottom: 2px; }
-  /* line 123, ../../../app/stylesheets/screen.sass */
+  /* line 126, ../../../app/stylesheets/screen.sass */
   body.three-col #content p, body.three-col #content form {
     padding: 5px; }
-  /* line 126, ../../../app/stylesheets/screen.sass */
+  /* line 129, ../../../app/stylesheets/screen.sass */
   body.three-col #content li.bill_criterion form.button-to {
     display: inline-block; }
-  /* line 130, ../../../app/stylesheets/screen.sass */
+  /* line 133, ../../../app/stylesheets/screen.sass */
   body.three-col #content .welcome p {
-    font-size: 14px;
-    margin-bottom: 0.5em; }
-  /* line 134, ../../../app/stylesheets/screen.sass */
+    font-size: 14px; }
+  /* line 136, ../../../app/stylesheets/screen.sass */
   body.three-col #content #errorExplanation h2 {
     background-color: #fff;
     color: #150c15; }
