@@ -18,6 +18,6 @@ class District < ActiveRecord::Base
   def politicians
     Politician.scoped(:conditions => [
       "politician_terms.us_state_id = ? AND (politician_terms.type = 'SenateTerm' OR (politician_terms.type = 'RepresentativeTerm' AND politician_terms.district = ?))", us_state_id, district
-    ], :joins => :politician_terms)
+    ], :joins => :politician_terms, :select => 'DISTINCT politicians.*')
   end
 end
