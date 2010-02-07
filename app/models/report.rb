@@ -14,6 +14,10 @@ class Report < ActiveRecord::Base
       transition :private => :published
     end
 
+    event :unpublish do
+      transition :published => :private
+    end
+
     state :private do
       def status
         "The report is private, so it will not show up in lists or searches. However, anyone can access it at this url."
@@ -95,5 +99,7 @@ class Report < ActiveRecord::Base
         end
       end
     end
+    unpublish if self.scores.empty? && can_unpublish?
+    nil
   end
 end
