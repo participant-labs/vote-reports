@@ -3,7 +3,7 @@ class Users::ReportsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @reports = @user.reports
+    @reports = @user.reports.published
   end
 
   def show
