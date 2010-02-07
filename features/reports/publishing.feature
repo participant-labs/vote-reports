@@ -26,7 +26,15 @@ Feature: Browsing Reports
     Then I should see the button "Publish this Report"
     When I press "Publish"
     Then I should see "Successfully updated report"
-    And I should see "The report is public, so it will show up in lists or searches."
+    And I should see "The report is public, so it will show up in lists and searches."
+
+  Scenario: User unpublishes a published report
+    Given I have a published report named "My Report"
+    When I go to my report page for "My Report"
+    Then I should see the button "Unpublish this Report"
+    When I press "Unpublish"
+    Then I should see "Successfully updated report"
+    And I should see "The report is private, so it will not show up in lists or searches. However, anyone can access it at this url."
 
   Scenario: Published report is unpublishable after deleting all criteria
     Given I have a scored report named "My Report"
