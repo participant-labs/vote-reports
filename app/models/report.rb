@@ -9,6 +9,17 @@ class Report < ActiveRecord::Base
     end
   end
 
+  state_machine :initial => :private do
+    event :publish do
+      transition :private => :published
+    end
+
+    state :published do
+      validates_presence_of :bill_criteria
+      validates_presence_of :scores
+    end
+  end
+
   class << self
     def per_page
       10
@@ -31,12 +42,22 @@ class Report < ActiveRecord::Base
 
   validates_presence_of :user, :name
 
-  named_scope :published, :select => 'DISTINCT reports.*', :joins => :bill_criteria
+  named_scope :with_criteria, :select => 'DISTINCT reports.*', :joins => :bill_criteria
   named_scope :scored, :select => 'DISTINCT reports.*', :joins => {:bill_criteria => {:bill => :rolls}}
   named_scope :by_updated_at, :order => 'updated_at DESC'
 
   def description
     BlueCloth::new(self[:description].to_s).to_html
+  end
+
+  def publishable?
+    return false unless can_publish?
+    current_state_event = self.state_event
+    self.state_event = "publish"
+    result = self.valid?
+    self.errors.clear
+    self.state_event = current_state_event
+    result
   end
 
   def rescore!

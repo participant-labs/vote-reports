@@ -2,30 +2,16 @@ Transform /report "([^\"]*)"/ do |name|
   Report.find_by_name(name)
 end
 
-Given /^an? (?:unpublished )?report named "([^\"]*)"$/ do |name|
-  create_report(:name => name)
-end
-
-Given /^I have a report named "([^\"]*)"$/ do |name|
-  create_report(:name => name, :user => current_user)
-end
-
-Given /^a published report named "([^\"]*)"$/ do |name|
-  create_published_report(:name => name)
+Given /^(I have |)an? (.*?) ?report named "([^\"]*)"$/ do |mine, type, name|
+  params = mine.present? ? {:user => current_user} : {}
+  creator = type.present? ? :"create_#{type}_report" : :create_report
+  send(creator, params.merge(:name => name))
 end
 
 Given /^(\d+) published reports$/ do |count|
   count.to_i.times do
     create_published_report
   end
-end
-
-Given /^a scored report named "([^\"]*)"$/ do |name|
-  create_scored_report(:name => name)
-end
-
-Given /^I have a published report named "([^\"]*)"$/ do |name|
-  create_published_report(:name => name, :user => current_user)
 end
 
 Given /^I have the following published reports?:$/ do |table|
