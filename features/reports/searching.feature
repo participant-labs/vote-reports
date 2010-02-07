@@ -3,8 +3,8 @@ Feature: Report Searching
   As a user
   I want to search reports
 
-  Scenario Outline: User searches for and views a specific report
-    Given a <report type> report named "My Views"
+  Scenario: User searches for and views a specific report
+    Given a published report named "My Views"
     And 30 published reports
     When I go to the reports page
     Then I should not see "My Views"
@@ -12,11 +12,6 @@ Feature: Report Searching
     When I fill in "Search" with "Views"
     And I press "Search"
     And I should see "My Views"
-
-  Examples:
-    | report type |
-    | published   |
-    | unpublished |
 
   Scenario: User searches for and doesn't find a reports
     Given 30 published reports
