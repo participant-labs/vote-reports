@@ -17,6 +17,40 @@ Feature: Browsing Politicians
     And I follow "Ron Wyden"
     Then I should be on the politician page for "Ron Wyden"
 
+  Scenario: Browsing to a Politician from the Politicians Page
+    Given the following politician records:
+      | name                  |
+      | Michael Burgess       |
+      | J. Kerrey             |
+      | John Cornyn           |
+      | Kay Hutchison         |
+      | Connie Mack           |
+      | Neil Abercrombie      |
+    And the following representative term records:
+      | name                  | state | district |
+      | Michael Burgess       | TX    | 26       |
+      | J. Kerrey             | TX    | 11       |
+      | Neil Abercrombie      | NY    | 7        |
+    And the following senate term records:
+      | name                  | state |
+      | John Cornyn           | TX    |
+      | Kay Hutchison         | TX    |
+      | Connie Mack           | OH    |
+    And the following district zip code records:
+      | state | district | zip_code |
+      | TX    | 26       | 75028    |
+      | TX    | 11       | 78704    |
+      | NY    | 7        | 11111    |
+    When I go to the politicians page
+    And I fill in "From Where" with "75028"
+    And I press "Go!"
+    Then I should see "Michael Burgess"
+    And I should see "Kay Hutchison"
+    And I should see "John Cornyn"
+    But I should not see "J. Kerrey"
+    And I should not see "Connie Mack"
+    And I should not see "Neil Abercrombie"
+
   Scenario Outline: Viewing representative terms from the Politicians Page
     Given the following politician records:
       | name      | gov_track_id |

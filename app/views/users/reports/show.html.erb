@@ -24,12 +24,7 @@
 <h3>Scores</h3>
 <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#bill_criteria' %> lead to a high score, votes against, a low one.</p>
 <%- if @report.scores.present? -%>
-  <% form_tag user_report_path(@report.user, @report), :method => :get, :'data-replace' => '#report_scores' do %>
-    Show Representatives:
-    <%= label_tag :from_where, 'From Where?' %>
-    <%= text_field_tag :from_where, @from_where %>
-    <%= submit_tag 'Go!' %>
-  <% end %>
+  <%= render 'politicians/search', :url => user_report_path(@report.user, @report), :replace => '#report_scores' %>
 <%- end -%>
 <%= render 'reports/scores/table', :report => @report, :scores => @scores, :from_where => @from_where %>
 
