@@ -7,6 +7,9 @@ class Report < ActiveRecord::Base
     text :username do
       user.username
     end
+    boolean :published do
+      published?
+    end
   end
 
   state_machine :initial => :private do
@@ -65,6 +68,7 @@ class Report < ActiveRecord::Base
     def paginated_search(params)
       search do
         fulltext params[:q]
+        with(:published, true)
         paginate :page => params[:page], :per_page => Report.per_page
       end
     end
