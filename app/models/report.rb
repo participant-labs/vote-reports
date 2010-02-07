@@ -23,11 +23,18 @@ class Report < ActiveRecord::Base
         "The report is private, so it will not show up in lists or searches. However, anyone can access it at this url."
       end
 
-      def next_steps
+      def next_step
         if bill_criteria.blank?
           "You'll need to add bills to this report in order to publish this report."
         elsif scores.blank?
           "None of the added bills have passage roll call votes associated. You'll need to add a voted bill to publish this report."
+        else
+          notify_exceptional("Invalid publishable state for report #{inspect}") unless publishable?
+          {
+            :text => 'Publish this Report',
+            :state_event => 'publish',
+            :confirm => 'Publish this Report?  It will then show up in lists and searches.'
+          }
         end
       end
     end
@@ -37,10 +44,15 @@ class Report < ActiveRecord::Base
       validates_presence_of :scores
 
       def status
-        "The report is public, so it will show up in lists or searches."
+        "The report is public, so it will show up in lists and searches."
       end
 
-      def next_steps
+      def next_step
+        {
+          :text => 'Unpublish this Report',
+          :state_event => 'unpublish',
+          :confirm => 'Unpublish this Report?  It will no longer show up in lists or searchese.'
+        }
       end
     end
   end
