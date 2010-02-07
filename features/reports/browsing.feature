@@ -14,6 +14,21 @@ Feature: Browsing Reports
     And I should not see "Unscored Report"
     And I should not see "Scored Report"
 
+  Scenario: User reports view excludes unpublished reports
+    Given I am signed in as "Empact"
+    And I have a report named "Empty Report"
+    And I have an unscored report named "Unscored Report"
+    And I have a scored report named "Scored Report"
+    And I have a published report named "Active Report"
+    When I go to my reports page
+    Then I should see "Published Reports"
+    And I should see "Active Report"
+    But I should not see "Empty Report"
+    And I should not see "Unscored Report"
+    And I should not see "Scored Report"
+    When I follow "View All Reports"
+    Then I should be on my profile page
+
   Scenario: My Reports doesn't exclude empty reports
     Given I am signed in
     And I have a report named "Empty Report"

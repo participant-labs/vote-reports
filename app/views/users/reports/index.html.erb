@@ -1,9 +1,13 @@
-<% title "#{@user.username}'s Reports" %>
+<% title "#{@user.username}'s Published Reports" %>
 
-<h2><%= render 'users/user_token', :user => @user, :thumbnail_size => 50, :no_links => true %>'s Reports</h2>
+<h2><%= render 'users/user_token', :user => @user, :thumbnail_size => 50, :no_links => true %>'s Published Reports</h2>
 
 <%- if @reports.empty? -%>
-  <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
+  <%- if @user == current_user -%>
+    <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
+  <%- else -%>
+    <p><%= @user.username %> hasn't created any reports yet</p>
+  <%- end -%>
 <%- else -%>
   <ul>
   <% @reports.each do |report| %>
@@ -12,4 +16,9 @@
   </ul>
 <%- end -%>
 
-<p><%= link_to "New Report", new_user_report_path(@user) if current_user == @user %></p>
+<%- if current_user == @user -%>
+<p>
+  <%= link_to "New Report", new_user_report_path(@user) %> |
+  <%= link_to "View All Reports", user_path(@user) %>
+</p>
+<%- end -%>
