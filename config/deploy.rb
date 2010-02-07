@@ -6,28 +6,26 @@ set :repository, 'git@github.com:Empact/vote-reports.git'
 
 namespace :vlad do
   desc "custom deploy"
-  task :deploy => [:update, :symlinks, :install_gems, :migrate, :setup_scheduling, :start_solr, :touch_restart]
+  task :update_symlinks => :internal_symlinks
+  task :deploy => [:update, :install_gems, :migrate, :setup_scheduling, :start_solr, :start]
 
-  remote_task :touch_restart, :roles => :app do
-    run "touch #{current_release}/tmp/restart.txt"
-  end
+  set :shared_paths, get(:shared_paths).merge(:data => :data)
 
-  remote_task :symlinks, :roles => :app do
+  remote_task :internal_symlinks, :roles => :app do
     run [
-      "ln -s #{current_release}/config/database.rimu.yml #{current_release}/config/database.yml",
-      "ln -s #{shared_path}/data #{current_release}/data"
+      "ln -s #{latest_release}/config/database.rimu.yml #{latest_release}/config/database.yml",
     ].join(' && ')
   end
 
   remote_task :install_gems, :roles => :app do
-    run "cd #{current_release} && rake gems:install"
+    run "cd #{latest_release} && rake gems:install"
   end
 
   remote_task :start_solr, :roles => :app do
-    run "cd #{current_release} && rake sunspot:solr:start RAILS_ENV=production"
+    run "cd #{latest_release} && rake sunspot:solr:start RAILS_ENV=production"
   end
 
   remote_task :setup_scheduling, :roles => :app do
-    run "cd #{current_release} && whenever --update-crontab #{application}"
+    run "cd #{latest_release} && whenever --update-crontab #{application}"
   end
 end
