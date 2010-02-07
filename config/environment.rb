@@ -33,6 +33,7 @@ Rails::Initializer.run do |config|
   config.gem 'whenever', :lib => false
   config.gem 'will_paginate'
   config.gem 'sexy_pg_constraints'
+  config.gem 'state_machine'
 
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"

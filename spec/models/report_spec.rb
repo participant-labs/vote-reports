@@ -19,13 +19,13 @@ describe Report do
     end
   end
 
-  describe ".published" do
+  describe ".with_criteria" do
     it "should return reports with bill_criteria" do
       create_report
       published_report = create_report
       create_bill_criterion(:report => published_report)
 
-      Report.published.should == [published_report]
+      Report.with_criteria.should == [published_report]
     end
   end
 

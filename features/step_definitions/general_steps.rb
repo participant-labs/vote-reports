@@ -17,3 +17,12 @@ When /^I debug$/ do
   debugger
   x = 1 + 1
 end
+
+Then /^I should( not|) see the button "(.*)"$/ do |should_not, button_text|
+  selector = "[value='#{button_text.strip}'][type=submit]"
+  if should_not.present?
+    response.should_not have_selector(selector)
+  else
+    response.should have_selector(selector)
+  end
+end

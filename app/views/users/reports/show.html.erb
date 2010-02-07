@@ -12,6 +12,9 @@
 <p>
   <%= link_to "Edit Name & Description", edit_user_report_path(current_user, @report) %> |
   <%= link_to "Delete this Report", [current_user, @report], :confirm => 'Are you sure?', :method => :delete %>
+  <%- if @report.publishable? -%>
+    <%= raw button_to("Publish this Report", user_report_path(current_user, @report, :publish => true), :confirm => 'Publish this Report?  It will then be publicly viewable.', :method => :put) %>
+  <%- end -%>
 </p>
 <%- end -%>
 
@@ -41,7 +44,7 @@
       <li class="bill_criterion">
         <%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %>
         <%- if @report.user == current_user -%>
-          <%= raw button_to('delete', user_report_bill_path(current_user, @report, criterion),
+          <%= raw button_to('Remove this Bill', user_report_bill_path(current_user, @report, criterion),
                                 :method => :delete,
                                 :title => "Delete criterion for '#{criterion.bill.titles.first}'",
                                 :confirm => "Are you sure you want to delete the criterion for '#{criterion.bill.titles.first}'?") %>

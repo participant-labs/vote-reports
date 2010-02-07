@@ -1,10 +1,12 @@
 class Vote < ActiveRecord::Base
+  POSSIBLE_VALUES = %w[ + - P 0 ]
+
   belongs_to :politician
   belongs_to :roll
 
   validates_uniqueness_of :roll_id, :scope => :politician_id
   validates_presence_of :politician, :roll
-  validates_inclusion_of :vote, :in => %w[ + - P 0 ]
+  validates_inclusion_of :vote, :in => POSSIBLE_VALUES
 
   default_scope :include => :politician
   named_scope :aye, :conditions => {:vote => '+'}

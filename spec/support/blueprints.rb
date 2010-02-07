@@ -298,15 +298,27 @@ Fixjour :verify => false do
     )
   end
 
-  def create_published_report(attrs = {})
+  alias create_empty_report create_report
+
+  def create_unscored_report(attrs = {})
     create_report(attrs).tap do |report|
       create_bill_criterion(:report => report)
     end
   end
 
   def create_scored_report(attrs = {})
-    create_published_report(attrs).tap do |report|
-      create_roll(:subject => report.bill_criteria.first.bill)
+    create_unscored_report(attrs).tap do |report|
+      roll = create_roll(:subject => report.bill_criteria.first.bill, :roll_type => "On Passage")
+      Politician.all.each do |p|
+        create_vote(:roll => roll, :politician => p, :vote => Vote::POSSIBLE_VALUES.rand)
+      end
+      report.rescore!
+    end
+  end
+
+  def create_published_report(attrs = {})
+    create_scored_report(attrs).tap do |report|
+      report.publish
     end
   end
 end
