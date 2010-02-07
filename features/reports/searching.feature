@@ -21,3 +21,16 @@ Feature: Report Searching
     And I press "Search"
     Then I should see "Matching Reports"
     Then I should see "No reports found..."
+
+  Scenario: Search excludes unpublished reports
+    Given a report named "Empty Report"
+    And an unscored report named "Unscored Report"
+    And a scored report named "Scored Report"
+    And a published report named "Active Report"
+    When I go to the reports page
+    And I fill in "Search" with "Report"
+    And I press "Search"
+    Then I should see "Active Report"
+    But I should not see "Empty Report"
+    And I should not see "Unscored Report"
+    And I should not see "Scored Report"
