@@ -14,9 +14,30 @@ class Report < ActiveRecord::Base
       transition :private => :published
     end
 
+    state :private do
+      def status
+        "The report is private, so it will not show up in lists or searches. However, anyone can access it at this url."
+      end
+
+      def next_steps
+        if bill_criteria.blank?
+          "You'll need to add bills to this report in order to publish this report."
+        elsif scores.blank?
+          "None of the added bills have passage roll call votes associated. You'll need to add a voted bill to publish this report."
+        end
+      end
+    end
+
     state :published do
       validates_presence_of :bill_criteria
       validates_presence_of :scores
+
+      def status
+        "The report is public, so it will show up in lists or searches."
+      end
+
+      def next_steps
+      end
     end
   end
 

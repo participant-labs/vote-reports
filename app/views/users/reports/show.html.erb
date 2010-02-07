@@ -4,6 +4,17 @@
 
 <p>Created by <%= render 'users/user', :user => @report.user %></p>
 
+<%- if @report.user == current_user -%>
+  <div class="report_status <%= @report.state %>">
+    <span class="report_state"><%= @report.state.capitalize %></span>
+    <%= content_tag :p, @report.status if @report.status.present? %>
+    <%= content_tag :p, @report.next_steps if @report.next_steps.present? %>
+    <%- if @report.publishable? -%>
+      <%= raw button_to("Publish this Report", user_report_path(current_user, @report, :publish => true), :confirm => 'Publish this Report?  It will then be publicly viewable.', :method => :put) %>
+    <%- end -%>
+  </div>
+<%- end -%>
+
 <%- unless @report.description.blank? -%>
 <blockquote><%= raw @report.description %></blockquote>
 <%- end -%>
@@ -12,9 +23,6 @@
 <p>
   <%= link_to "Edit Name & Description", edit_user_report_path(current_user, @report) %> |
   <%= link_to "Delete this Report", [current_user, @report], :confirm => 'Are you sure?', :method => :delete %>
-  <%- if @report.publishable? -%>
-    <%= raw button_to("Publish this Report", user_report_path(current_user, @report, :publish => true), :confirm => 'Publish this Report?  It will then be publicly viewable.', :method => :put) %>
-  <%- end -%>
 </p>
 <%- end -%>
 
