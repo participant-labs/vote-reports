@@ -1,9 +1,5 @@
 <% title 'Politicians' %>
 
-<h2>Politicians</h2>
-<ul>
-  <% @politicians.each do |politician| %>
-    <li><%= render 'politicians/politician', :politician => politician %></li>
-  <% end %>
-</ul>
-<%= will_paginate @politicians %>
+<%= render 'politicians/search', :url => politicians_path, :replace => '#politicians' %>
+
+<%= render 'politicians/list', :politicians => @politicians %>

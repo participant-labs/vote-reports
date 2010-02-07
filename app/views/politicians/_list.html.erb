@@ -1,0 +1,9 @@
+<div id="politicians">
+  <h2>Politicians<%= %Q{ from "#{@from_where}"} if @from_where.present? %></h2>
+  <ul>
+    <% politicians.each do |politician| %>
+      <li><%= render 'politicians/politician', :politician => politician %></li>
+    <% end %>
+  </ul>
+  <%= will_paginate politicians %>
+</div>

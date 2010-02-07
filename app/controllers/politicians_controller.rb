@@ -1,7 +1,22 @@
 class PoliticiansController < ApplicationController
 
   def index
-    @politicians = Politician.by_birth_date.paginate(:page => params[:page])
+    @politicians =
+      if params[:from_where].present?
+        @from_where = params[:from_where]
+        Politician.from(params[:from_where]).paginate(:page => params[:page])
+      else
+        Politician.by_birth_date.paginate(:page => params[:page])
+      end
+
+    respond_to do |format|
+      format.html
+      format.js {
+        render :partial => 'politicians/list', :locals => {
+          :politicians => @politicians
+        }
+      }
+    end
   end
 
   def show

@@ -1,0 +1,6 @@
+<% form_tag url, :method => :get, :'data-replace' => replace do %>
+  Show Representatives:
+  <%= label_tag :from_where, 'From Where?' %>
+  <%= text_field_tag :from_where, @from_where %>
+  <%= submit_tag 'Go!' %>
+<% end %>
