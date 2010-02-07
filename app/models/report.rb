@@ -12,18 +12,18 @@ class Report < ActiveRecord::Base
     end
   end
 
-  state_machine :initial => :private do
+  state_machine :initial => :personal do
     event :publish do
-      transition :private => :published
+      transition :personal => :published
     end
 
     event :unpublish do
-      transition :published => :private
+      transition :published => :personal
     end
 
-    state :private do
+    state :personal do
       def status
-        "The report is private, so it will not show up in lists or searches. However, anyone can access it at this url."
+        "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
       end
 
       def next_step
@@ -36,7 +36,7 @@ class Report < ActiveRecord::Base
           {
             :text => 'Publish this Report',
             :state_event => 'publish',
-            :confirm => 'Publish this Report?  It will then show up in lists and searches.'
+            :confirm => 'Publish this Report?  It will then show up in lists and searches on this site.'
           }
         end
       end
@@ -47,14 +47,14 @@ class Report < ActiveRecord::Base
       validates_presence_of :scores
 
       def status
-        "The report is public, so it will show up in lists and searches."
+        "This report is public, so it will show up in lists and searches on this site."
       end
 
       def next_step
         {
           :text => 'Unpublish this Report',
           :state_event => 'unpublish',
-          :confirm => 'Unpublish this Report?  It will no longer show up in lists or searchese.'
+          :confirm => 'Unpublish this Report? It will no longer show up in lists or searches on this site.'
         }
       end
     end

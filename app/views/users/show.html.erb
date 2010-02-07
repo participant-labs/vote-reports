@@ -16,7 +16,7 @@
   <%- end -%>
 
   <%- if @reports.unpublished.present? -%>
-    <h3>Private Reports</h3>
+    <h3>Personal Reports</h3>
     <ul>
     <% @reports.unpublished.each do |report| %>
       <li><%= render 'reports/report', :report => report %></li>
