@@ -10,14 +10,14 @@ Feature: Browsing Reports
     Given I have an empty report named "My Report"
     When I go to my report page for "My Report"
     Then I should not see the button "Publish this Report"
-    And I should see "The report is private, so it will not show up in lists or searches. However, anyone can access it at this url."
+    And I should see "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
     And I should see "You'll need to add bills to this report in order to publish this report."
 
   Scenario: User can't publish an unscored report
     Given I have an unscored report named "My Report"
     When I go to my report page for "My Report"
     Then I should not see the button "Publish this Report"
-    And I should see "The report is private, so it will not show up in lists or searches. However, anyone can access it at this url."
+    And I should see "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
     And I should see "None of the added bills have passage roll call votes associated. You'll need to add a voted bill to publish this report."
 
   Scenario: User publishes a scored report
@@ -26,7 +26,7 @@ Feature: Browsing Reports
     Then I should see the button "Publish this Report"
     When I press "Publish"
     Then I should see "Successfully updated report"
-    And I should see "The report is public, so it will show up in lists and searches."
+    And I should see "This report is public, so it will show up in lists and searches on this site."
 
   Scenario: User unpublishes a published report
     Given I have a published report named "My Report"
@@ -34,7 +34,7 @@ Feature: Browsing Reports
     Then I should see the button "Unpublish this Report"
     When I press "Unpublish"
     Then I should see "Successfully updated report"
-    And I should see "The report is private, so it will not show up in lists or searches. However, anyone can access it at this url."
+    And I should see "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
 
   Scenario: Published report is unpublishable after deleting all criteria
     Given I have a scored report named "My Report"
@@ -52,6 +52,6 @@ Feature: Browsing Reports
     Then I should see "Successfully updated report."
     When I press "Remove this Bill"
     Then I should see "Successfully deleted report criterion"
-    And I should see "The report is private, so it will not show up in lists or searches. However, anyone can access it at this url."
+    And I should see "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
     And I should see "You'll need to add bills to this report in order to publish this report."
     And I should not see the button "Publish this Report"
