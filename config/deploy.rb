@@ -9,6 +9,8 @@ namespace :vlad do
   task :update_symlinks => :internal_symlinks
   task :deploy => [:update, :install_gems, :migrate, :setup_scheduling, :start_solr, :start]
 
+  set :web_command, "apache2ctl"
+
   remote_task :internal_symlinks, :roles => :app do
     run [
       "ln -s #{latest_release}/config/database.rimu.yml #{latest_release}/config/database.yml",
