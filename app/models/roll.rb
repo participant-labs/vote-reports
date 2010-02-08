@@ -30,12 +30,7 @@ class Roll < ActiveRecord::Base
   end
 
   def passage?
-    [
-      "On Passage", "Passage, Objections of the President Notwithstanding", "On Agreeing to the Resolution",
-      "On Agreeing to the Resolution, as Amended", "On Motion to Suspend the Rules and Agree",
-      "On Motion to Suspend the Rules and Agree, as Amended", "On Motion to Suspend the Rules and Pass",
-      "On Motion to Suspend the Rules and Pass, as Amended", "On the Cloture Motion", "On Cloture on the Motion to Proceed"
-    ].include?(roll_type)
+    PASSAGE_TYPES.include?(roll_type)
   end
 
   def opencongress_url
