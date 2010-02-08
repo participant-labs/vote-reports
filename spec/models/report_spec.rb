@@ -30,16 +30,26 @@ describe Report do
   end
 
   describe ".scored" do
-    it "should return reports with voted bill_criteria" do
+    before do
       create_report
       published_report = create_report
       create_bill_criterion(:report => published_report)
-      scored_report = create_report
-      bill = create_bill
-      create_bill_criterion(:report => scored_report, :bill => bill)
-      create_roll(:subject => bill)
+      @report = create_report
+      @bill = create_bill
+      create_bill_criterion(:report => @report, :bill => @bill)
+    end
 
-      Report.scored.should == [scored_report]
+    it "should not return reports with non-passage votes" do
+      roll = create_roll(:subject => @bill)
+      Roll::PASSAGE_TYPES.should_not include(roll.roll_type)
+
+      Report.scored.should == []
+    end
+
+    it "should return reports with voted bill_criteria" do
+      create_roll(:subject => @bill, :roll_type => Roll::PASSAGE_TYPES.rand)
+
+      Report.scored.should == [@report]
     end
   end
 end
