@@ -27,6 +27,7 @@ Rails::Initializer.run do |config|
   config.gem 'erubis'
   config.gem 'geokit'
   config.gem 'gravtastic', :version => '>= 2.1.0'
+  config.gem 'newrelic_rpm'
   config.gem 'pg'
   config.gem 'sunspot', :lib => 'sunspot'
   config.gem 'sunspot_rails', :lib => 'sunspot/rails'
