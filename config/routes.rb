@@ -35,5 +35,8 @@ ActionController::Routing::Routes.draw do |map|
   map.signup "/signup", :controller => "users", :action => "new"  
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"  
+
+  Jammit::Routes.draw(map)
+
   map.root :controller => "site", :action => 'index'
 end

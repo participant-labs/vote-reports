@@ -20,6 +20,7 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   config.gem 'ancestry'
   config.gem 'exceptional'
+  config.gem 'jammit'
   config.gem 'json'
   config.gem 'friendly_id'
   config.gem "authlogic", :version => '>=2.1.3'
