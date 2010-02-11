@@ -20,11 +20,11 @@
       <div id="inner">
         <%= flash_helper %>
         <div id="header">
-          <%= link_to image_tag('logo.png', :size => '1024x174'), root_path %>
+          <%= link_to_unless_current image_tag('logo.png', :size => '612x176'), root_path %>
         </div>
 
         <ul id="menu">
-          <li><h2><%= link_to 'Home', root_path %></h2></li>
+          <li><h2><%= link_to_unless_current 'Home', root_path %></h2></li>
           <li>
             <h2>Learn</h2>
             <ul class="dropdown">

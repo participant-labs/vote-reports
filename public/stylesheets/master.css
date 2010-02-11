@@ -3,7 +3,10 @@
 }
 
 ul#menu {
-  background: #989895;
+  border-top: solid 1px #D5D5D5;
+  border-bottom: solid 1px #D5D5D5;
+  margin-left: 0;
+  text-align: center;
 }
 
 ul#menu li {
@@ -19,6 +22,7 @@ ul#menu li h2:hover {
 ul#menu li h2 {
   background: transparent url(arrow.gif) center right no-repeat;
   padding: 0 1.2em;
+  font-size: 1.7em;
 }
 
 ul#menu li .dropdown {
@@ -30,6 +34,7 @@ ul#menu li .dropdown {
   padding: 1.3em;
   background: #ffc;
   color: #930;
+  text-align: left;
 }
 
 ul#menu li .dropdown a {
