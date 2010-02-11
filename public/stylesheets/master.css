@@ -2,6 +2,17 @@
   display: none;
 }
 
+#account {
+  position: absolute;
+  right: 0;
+  margin-right: 70px;
+  margin-top: 10px;
+}
+
+#account li {
+  display: inline;
+}
+
 table {
   margin: .5em;
   width: 100%;
