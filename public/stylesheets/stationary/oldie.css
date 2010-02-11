@@ -72,19 +72,12 @@ h1 a:hover {
 	letter-spacing: 0.4em;
 }
 
-#sidebar {
-	float: right;
-	display: inline;
-	width: 250px;
-}
-
-#inner-sidebar {
-	padding: 30px 20px;
-	border-left: 1px solid #EEE;
+#menu {
+	border-bottom: 1px solid #EEE;
 }
 
 #content {
-	width: 510px;
+	width: 760px;
 	margin: 0 0 0 20px;
 }
 
@@ -187,12 +180,12 @@ ol, ul, dt {
 	margin: 0 8px 8px 0;
 }
 
-.content a, .meta a, #sidebar a, .page-navigation a {
+.content a, .meta a, #menu a, .page-navigation a {
 	color: #42403D;
 	border-bottom: 1px dotted #524F4B;
 }
 
-.content a:hover, .meta a:hover, #sidebar a:hover, .page-navigation a:hover {
+.content a:hover, .meta a:hover, #menu a:hover, .page-navigation a:hover {
 	border-bottom: 1px solid #6C6A67;
 	background-color: #FFF;
 }
@@ -248,7 +241,7 @@ ol, ul, dt {
 	clear: none;
 }
 
-#sidebar h3 {
+#menu h3 {
 	margin: 8px 0;
 	font: normal 16px/24px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
 }
