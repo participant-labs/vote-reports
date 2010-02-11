@@ -1,3 +1,56 @@
 .hidden {
   display: none;
 }
+
+ul#menu {
+  background: #989895;
+}
+
+ul#menu li {
+  display: inline;
+  margin: 0.1em 1em;
+  position: relative;
+}
+
+ul#menu li h2:hover {
+  text-decoration: underline;
+}
+
+ul#menu li h2 {
+  background: transparent url(arrow.gif) center right no-repeat;
+  padding: 0 1.2em;
+}
+
+ul#menu li ul.dropdown {
+  border: 1px solid #dda;
+  width: 18em;
+  position: absolute;
+  top: 1.6em;
+  left: 0em;
+  padding: 1.3em;
+  background: #ffc;
+  color: #930;
+}
+
+ul#menu li ul.dropdown a {
+color: #300;
+padding: 0;
+background-image: none;
+text-decoration: underline;
+}
+
+ul#menu li h2 {
+  display: inline;
+}
+
+ul#menu ul.dropdown {
+  display: none;
+  width: 18em;
+  position: absolute;
+  top: 1.6em;
+  left: 0em;
+}
+
+ul#menu li.hovering ul.dropdown {
+  display: block;
+}

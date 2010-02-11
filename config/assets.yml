@@ -5,6 +5,7 @@ javascripts:
     - public/javascripts/jquery-1.3.2.min.js
     - public/javascripts/jquery-ui-1.7.2.custom.min.js
     - public/javascripts/jquery.blockUI.js
+    - public/javascripts/jquery.hoverIntent.js
     - public/javascripts/application.js
 
 stylesheets:
