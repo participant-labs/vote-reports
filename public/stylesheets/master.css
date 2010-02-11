@@ -21,7 +21,7 @@ ul#menu li h2 {
   padding: 0 1.2em;
 }
 
-ul#menu li ul.dropdown {
+ul#menu li .dropdown {
   border: 1px solid #dda;
   width: 18em;
   position: absolute;
@@ -32,7 +32,7 @@ ul#menu li ul.dropdown {
   color: #930;
 }
 
-ul#menu li ul.dropdown a {
+ul#menu li .dropdown a {
 color: #300;
 padding: 0;
 background-image: none;
@@ -43,7 +43,7 @@ ul#menu li h2 {
   display: inline;
 }
 
-ul#menu ul.dropdown {
+ul#menu .dropdown {
   display: none;
   width: 18em;
   position: absolute;
@@ -51,6 +51,6 @@ ul#menu ul.dropdown {
   left: 0em;
 }
 
-ul#menu li.hovering ul.dropdown {
+ul#menu li.hovering .dropdown {
   display: block;
 }

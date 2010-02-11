@@ -24,7 +24,7 @@
         </div>
 
         <ul id="menu">
-          <li><%= link_to 'Home', root_path %></li>
+          <li><h2><%= link_to 'Home', root_path %></h2></li>
           <li>
             <h2>Learn</h2>
             <ul class="dropdown">
@@ -39,8 +39,25 @@
               <li><%= link_to_unless_current "Create a Report", current_user ? new_user_report_path(current_user) : new_report_path %></li>
             </ul>
           </li>
-          <li><%= link_to 'Our Blog', blog_path %></li>
-          <li><%= render 'layouts/mailchimp_signup' %></li>
+          <li>
+            <h2>Stay in Touch</h2>
+            <ul class="dropdown">
+              <li><%= link_to 'Our Blog', blog_path %></li>
+              <li>
+                <h3>Our Newsletter</h3>
+                <form action="http://votereports.us1.list-manage.com/subscribe/post?u=7a5f531cddf4733361c3c56b4&amp;id=6ed81c914b" method="post" id="mc-embedded-subscribe-form" class="validate">
+                    <div id="mce-responses">
+                      <div class="response" id="mce-error-response" style="display:none"></div>
+                      <div class="response" id="mce-success-response" style="display:none"></div>
+                    </div>
+                    <div class="mc-field-group">
+                      <input type="text" value="" name="EMAIL" class="required email text" id="mce-EMAIL" />
+                    </div>
+                    <div><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn submit" /></div>
+                </form>
+              </li>
+            </ul>
+          </li>
         </ul>
 
         <div id="content">
