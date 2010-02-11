@@ -1,21 +1,23 @@
 <% title "Users" %>
 
-<table>
-  <tr>
-    <th>Email</th>
-    <th>Password</th>
-    <th>Username</th>
-  </tr>
-  <% for user in @users %>
+<div class="section">
+  <table>
     <tr>
-      <td><%= user.email %></td>
-      <td><%= user.password %></td>
-      <td><%= user.username %></td>
-      <td><%= link_to "Show", user %></td>
-      <td><%= link_to "Edit", edit_user_path(user) %></td>
-      <td><%= link_to "Destroy", user, :confirm => 'Are you sure?', :method => :delete %></td>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Username</th>
     </tr>
-  <% end %>
-</table>
+    <% for user in @users %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.password %></td>
+        <td><%= user.username %></td>
+        <td><%= link_to "Show", user %></td>
+        <td><%= link_to "Edit", edit_user_path(user) %></td>
+        <td><%= link_to "Destroy", user, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
 
-<p><%= link_to "New User", new_user_path %></p>
+  <p><%= link_to "New User", new_user_path %></p>
+</div>

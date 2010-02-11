@@ -6,51 +6,51 @@
     <%= raw include_stylesheets(:common, :media => 'all') %>
     <%= render 'layouts/google_analytics' %>
   </head>
-  <body class="bp three-col">
-    <%= flash_helper %>
-    <div id="container">
-      <div id="header">
-        <%= link_to image_tag('logo.png', :size => '1024x174'), root_path %>
-      </div>
-      <!--
-      <div id="sidebar-left">
-      </div>
-      --> 
-      <div id="content">
-        <%= yield %>
-      </div>
-      <div id="sidebar-right">
+  <body>
+    <div id="main">
+      <div id="inner">
+        <%= flash_helper %>
+        <div id="header">
+          <%= link_to image_tag('logo.png', :size => '1024x174'), root_path %>
+        </div>
 
-        <h3>Act</h3>
-        <ul class="sidebar-links">
-          <li><%= link_to_unless_current "Create a Report", current_user ? new_user_report_path(current_user) : new_report_path %></li>
-          <% if current_user %>
-            <li><%= link_to_unless_current "My reports", user_reports_path(current_user) %></li>
-            <li><%= link_to_unless_current "Log out", logout_path %></li>
-          <% else %>
-            <li><%= link_to_unless_current "Log in", login_path %></li>
-            <li><%= link_to_unless_current "Sign up", signup_path %></li>
-          <% end %>
-        </ul>
+        <div id="sidebar">
+          <div id="inner-sidebar">
+            <h3>Act</h3>
+            <ul class="sidebar-links">
+              <li><%= link_to_unless_current "Create a Report", current_user ? new_user_report_path(current_user) : new_report_path %></li>
+              <% if current_user %>
+                <li><%= link_to_unless_current "My reports", user_reports_path(current_user) %></li>
+                <li><%= link_to_unless_current "Log out", logout_path %></li>
+              <% else %>
+                <li><%= link_to_unless_current "Log in", login_path %></li>
+                <li><%= link_to_unless_current "Sign up", signup_path %></li>
+              <% end %>
+            </ul>
 
-        <h3>Learn</h3>
-        <ul class="sidebar-links">
-          <li><%= link_to_unless_current "Reports", reports_path %></li>
-          <li><%= link_to_unless_current "Politicians", politicians_path %></li>
-          <li><%= link_to_unless_current "Bills", bills_path %></li>
-        </ul>
+            <h3>Learn</h3>
+            <ul class="sidebar-links">
+              <li><%= link_to_unless_current "Reports", reports_path %></li>
+              <li><%= link_to_unless_current "Politicians", politicians_path %></li>
+              <li><%= link_to_unless_current "Bills", bills_path %></li>
+            </ul>
 
-        <h3>VoteReports</h3>
-        <ul class="sidebar-links">
-          <li><%= link_to 'We Welcome Feedback', get_satisfaction_path %></li>
-          <li><%= link_to_unless_current "About us", about_path %></li>
-          <li><%= link_to 'Our Blog', blog_path %></li>
-          <li><%= mail_to 'votereports@gmail.com', "Contact us" %></li>
-        </ul>
-        <%= render 'layouts/mailchimp_signup' %>
+            <h3>VoteReports</h3>
+            <ul class="sidebar-links">
+              <li><%= link_to 'We Welcome Feedback', get_satisfaction_path %></li>
+              <li><%= link_to_unless_current "About us", about_path %></li>
+              <li><%= link_to 'Our Blog', blog_path %></li>
+              <li><%= mail_to 'votereports@gmail.com', "Contact us" %></li>
+            </ul>
+            <%= render 'layouts/mailchimp_signup' %>
+          </div>
+        </div>
+        <div id="content">
+          <%= yield %>
+        </div>
 
+        <div id="footer">VoteReports &copy; <%= Date.today.year %></div>
       </div>
-      <div id="footer">VoteReports &copy; <%= Date.today.year %></div>
     </div>
 
     <%= raw include_javascripts(:common) %>

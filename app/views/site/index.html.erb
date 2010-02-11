@@ -1,27 +1,25 @@
-<div class="welcome">
+<div class="section">
   <h2>Use VoteReports to see if your representatives truly represent you</h2>
   <p>How it works:</p>
 
-  <blockquote>
-    <ol>
-      <li><%= link_to 'Find reports', reports_path %> on the issues important to you</li>
-      <li>Tell us who represents you</li>
-      <li>We'll tell you how well they represent you, really</li>
-    </ol>
-  </blockquote>
+  <ol>
+    <li><%= link_to 'Find reports', reports_path %> on the issues important to you</li>
+    <li>Tell us who represents you</li>
+    <li>We'll tell you how well they represent you, really</li>
+  </ol>
 
   <p>Our reports are created by people like you to condense all the complexity of politics to simple letter grades.  You can:</p>
 
-  <blockquote>
   <ul>
     <li><%= link_to 'Find reports on the subjects you care about', reports_path %>. Use them to know how your rep is voting</li>
     <li><%= link_to 'Create a report', new_report_path %> to easily spread the word about who's voting right on the issues you care about</li>
   </ul>
-  </blockquote>
 
   <p>Know how your representatives stand on <em>your</em> issues</p>
 </div>
 
-<h2>Recent Reports</h2>
-<%= render 'reports/list', :reports => @recent_reports %>
-<%= will_paginate @recent_reports %>
+<div class="section">
+  <h2>Recent Reports</h2>
+  <%= render 'reports/list', :reports => @recent_reports %>
+  <%= will_paginate @recent_reports %>
+</div>

@@ -1,66 +1,72 @@
 <% title "Report - #{h @report.name}" %>
 
-<h2><%= @report.name %></h2>
+<div class="section">
+  <h2><%= @report.name %></h2>
 
-<p>Created by <%= render 'users/user', :user => @report.user %></p>
+  <p>Created by <%= render 'users/user', :user => @report.user %></p>
 
-<%- unless @report.description.blank? -%>
-<blockquote><%= raw @report.description %></blockquote>
-<%- end -%>
-
-<%- if @report.user == current_user -%>
-<p>
-  <%= link_to "Edit Name & Description", edit_user_report_path(current_user, @report) %> |
-  <%= link_to "Delete this Report", [current_user, @report], :confirm => 'Are you sure?', :method => :delete %>
-</p>
-
-<div class="report_status <%= @report.state %>">
-  <h3>Visibility: <%= @report.state.capitalize %></h3>
-  <%= content_tag :p, @report.status if @report.status.present? %>
-  <%= report_next_step(@report) %>
-</div>
-<%- end -%>
-
-<h3>Scores</h3>
-<p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#bill_criteria' %> lead to a high score, votes against, a low one.</p>
-<%- if @report.scores.present? -%>
-  <%= render 'politicians/search', :url => user_report_path(@report.user, @report), :replace => '#report_scores' %>
-<%- end -%>
-<%= render 'reports/scores/table', :report => @report, :scores => @scores, :from_where => @from_where %>
-
-<h3 id="bill_criteria">Bill Criteria</h3>
-<p>Learn more about the bills in this report:</p>
-<blockquote>
-  <ul>
-    <%- if @report.bill_criteria.any? {|bc| bc.explanatory_url? }  -%>
-    <li>Follow the Support/Oppose links on the left to see the report creator's explanation</li>
-    <%- end -%>
-    <li>Click on the bill to see it's details</li>
-  </ul>
-</blockquote>
-<%- if @report.bill_criteria.present? -%>
-  <ul>
-    <%- @report.bill_criteria.each do |criterion| -%>
-      <li class="bill_criterion">
-        <%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %>
-        <%- if @report.user == current_user -%>
-          <%= raw button_to('Remove this Bill', user_report_bill_path(current_user, @report, criterion),
-                                :method => :delete,
-                                :title => "Delete criterion for '#{criterion.bill.titles.first}'",
-                                :confirm => "Are you sure you want to delete the criterion for '#{criterion.bill.titles.first}'?") %>
-        <%- end -%>
-      </li>
-    <%- end -%>
-  </ul>
-  <%- if @report.user == current_user -%>
-    <p><%= link_to "Edit Bill Criteria", edit_user_report_bills_path(current_user, @report) %></p>
+  <%- unless @report.description.blank? -%>
+  <blockquote><%= raw @report.description %></blockquote>
   <%- end -%>
-<%- elsif @report.user == current_user -%>
-  <p>You need to add bills to this report in order to generate a score:</p>
-<%- else -%>
-  <p>This report doesn't have any bills selected</p>
-<%- end -%>
 
-<%- if @report.user == current_user -%>
-  <%= render 'users/reports/bills/search', :label => 'Add Bills', :report => @report %>
-<%- end -%>
+  <%- if @report.user == current_user -%>
+    <p>
+      <%= link_to "Edit Name & Description", edit_user_report_path(current_user, @report) %> |
+      <%= link_to "Delete this Report", [current_user, @report], :confirm => 'Are you sure?', :method => :delete %>
+    </p>
+
+  <div class="report_status <%= @report.state %>">
+    <h3>Visibility: <%= @report.state.capitalize %></h3>
+    <%= content_tag :p, @report.status if @report.status.present? %>
+    <%= report_next_step(@report) %>
+  </div>
+  <%- end -%>
+</div>
+
+<div class="section">
+  <h2>Scores</h2>
+  <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#bill_criteria' %> lead to a high score, votes against, a low one.</p>
+  <%- if @report.scores.present? -%>
+    <%= render 'politicians/search', :url => user_report_path(@report.user, @report), :replace => '#report_scores' %>
+  <%- end -%>
+  <%= render 'reports/scores/table', :report => @report, :scores => @scores, :from_where => @from_where %>
+</div>
+
+<div class="section">
+  <h2 id="bill_criteria">Bill Criteria</h2>
+  <p>Learn more about the bills in this report:</p>
+  <blockquote>
+    <ul>
+      <%- if @report.bill_criteria.any? {|bc| bc.explanatory_url? }  -%>
+      <li>Follow the Support/Oppose links on the left to see the report creator's explanation</li>
+      <%- end -%>
+      <li>Click on the bill to see it's details</li>
+    </ul>
+  </blockquote>
+  <%- if @report.bill_criteria.present? -%>
+    <ul>
+      <%- @report.bill_criteria.each do |criterion| -%>
+        <li class="bill_criterion">
+          <%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %>
+          <%- if @report.user == current_user -%>
+            <%= raw button_to('Remove this Bill', user_report_bill_path(current_user, @report, criterion),
+                                  :method => :delete,
+                                  :title => "Delete criterion for '#{criterion.bill.titles.first}'",
+                                  :confirm => "Are you sure you want to delete the criterion for '#{criterion.bill.titles.first}'?") %>
+          <%- end -%>
+        </li>
+      <%- end -%>
+    </ul>
+    <%- if @report.user == current_user -%>
+      <p><%= link_to "Edit Bill Criteria", edit_user_report_bills_path(current_user, @report) %></p>
+    <%- end -%>
+  <%- elsif @report.user == current_user -%>
+    <p>You need to add bills to this report in order to generate a score:</p>
+  <%- else -%>
+    <p>This report doesn't have any bills selected</p>
+  <%- end -%>
+
+  <%- if @report.user == current_user -%>
+    <%= render 'users/reports/bills/search', :label => 'Add Bills', :report => @report %>
+  <%- end -%>
+</div>

@@ -1,28 +1,29 @@
 <% title "User - #{h(@user.username)}" %>
 
-<h2><%= render 'users/user_token', :user => @user, :thumbnail_size => 50 %></h2>
+<div class="section">
+  <h2><%= render 'users/user_token', :user => @user, :thumbnail_size => 50 %></h2>
 
+  <%- if @reports.empty? -%>
+    <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
+  <%- else -%>
+    <%- if @reports.published.present? -%>
+      <h3>Published Reports</h3>
+      <ul>
+      <% @reports.published.each do |report| %>
+        <li><%= render 'reports/report', :report => report %></li>
+      <% end %>
+      </ul>
+    <%- end -%>
 
-<%- if @reports.empty? -%>
-  <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
-<%- else -%>
-  <%- if @reports.published.present? -%>
-    <h3>Published Reports</h3>
-    <ul>
-    <% @reports.published.each do |report| %>
-      <li><%= render 'reports/report', :report => report %></li>
-    <% end %>
-    </ul>
+    <%- if @reports.unpublished.present? -%>
+      <h3>Personal Reports</h3>
+      <ul>
+      <% @reports.unpublished.each do |report| %>
+        <li><%= render 'reports/report', :report => report %></li>
+      <% end %>
+      </ul>
+    <%- end -%>
   <%- end -%>
 
-  <%- if @reports.unpublished.present? -%>
-    <h3>Personal Reports</h3>
-    <ul>
-    <% @reports.unpublished.each do |report| %>
-      <li><%= render 'reports/report', :report => report %></li>
-    <% end %>
-    </ul>
-  <%- end -%>
-<%- end -%>
-
-<p><%= link_to "Create a report", new_user_report_path(@user) %></p>
+  <p><%= link_to "Create a report", new_user_report_path(@user) %></p>
+</div>

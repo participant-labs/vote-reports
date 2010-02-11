@@ -1,77 +1,84 @@
 <% title "Politician - #{h politician_title(@politician)}" %>
 
-<h2><%= render @politician, :no_image => true %></h2>
-<%= image_tag @politician.headshot_url(:large), :size => '200x245', :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' if @politician.headshot_url(:large) %>
+<div class="section">
+  <h2><%= render @politician, :no_image => true %></h2>
+  <%= image_tag @politician.headshot_url(:large), :size => '200x245', :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' if @politician.headshot_url(:large) %>
 
-<dl>
-  <%- if @politician.email.present? -%>
-    <dt>Email</dt>
-    <dd><%= mail_to @politician.email %></dd>
-  <%- end -%>
-  <%- if @politician.twitter_id.present? -%>
-    <dt>Twitter</dt>
-    <dd><%= link_to "@#{@politician.twitter_id}", "http://twitter.com/#{@politician.twitter_id}" %></dd>
-  <%- end -%>
-  <%- if @politician.webform.present? -%>
-    <dt>Contact Form</dt>
-    <dd><%= link_to @politician.webform, @politician.webform %></dd>
-  <%- end -%>
-  <%- if @politician.website.present? -%>
-    <dt>Website</dt>
-    <dd><%= link_to @politician.website, @politician.website %></dd>
-  <%- end -%>
-  <%- if @politician.youtube_url.present? -%>
-    <dt>Youtube</dt>
-    <dd><%= link_to @politician.youtube_url, @politician.youtube_url %></dd>
-  <%- end -%>
-  <%- if @politician.phone.present? -%>
-    <dt>Phone</dt>
-    <dd><%= @politician.phone %></dd>
-  <%- end -%>
-  <%- if @politician.fax.present? -%>
-    <dt>Fax</dt>
-    <dd><%= @politician.fax %></dd>
-  <%- end -%>
-</dl>
+  <dl>
+    <%- if @politician.email.present? -%>
+      <dt>Email</dt>
+      <dd><%= mail_to @politician.email %></dd>
+    <%- end -%>
+    <%- if @politician.twitter_id.present? -%>
+      <dt>Twitter</dt>
+      <dd><%= link_to "@#{@politician.twitter_id}", "http://twitter.com/#{@politician.twitter_id}" %></dd>
+    <%- end -%>
+    <%- if @politician.webform.present? -%>
+      <dt>Contact Form</dt>
+      <dd><%= link_to @politician.webform, @politician.webform %></dd>
+    <%- end -%>
+    <%- if @politician.website.present? -%>
+      <dt>Website</dt>
+      <dd><%= link_to @politician.website, @politician.website %></dd>
+    <%- end -%>
+    <%- if @politician.youtube_url.present? -%>
+      <dt>Youtube</dt>
+      <dd><%= link_to @politician.youtube_url, @politician.youtube_url %></dd>
+    <%- end -%>
+    <%- if @politician.phone.present? -%>
+      <dt>Phone</dt>
+      <dd><%= @politician.phone %></dd>
+    <%- end -%>
+    <%- if @politician.fax.present? -%>
+      <dt>Fax</dt>
+      <dd><%= @politician.fax %></dd>
+    <%- end -%>
+  </dl>
 
-<%= link_to 'View on Congresspedia', @politician.congresspedia_url if @politician.congresspedia_url %>
+  <%= link_to 'View on Congresspedia', @politician.congresspedia_url if @politician.congresspedia_url %>
+</div>
 
-<hr />
-<h3>Terms in Office</h3>
-<%- if @terms.present? -%>
-<ul>
-  <% @terms.each do |term|  %>
-    <li><%= render 'politicians/terms/term', :term => term %></li>
-  <% end %>
-</ul>
-<%- else -%>
-  <p>We have no record of elections for this politician</p>
-<%- end -%>
-
-<h3>Supported Bills</h3>
-<%- if @supported_bills.present? -%>
+<div class="section">
+  <h3>Terms in Office</h3>
+  <%- if @terms.present? -%>
   <ul>
-    <% @supported_bills.each do |bill|  %>
-      <li><%= render bill %></li>
+    <% @terms.each do |term|  %>
+      <li><%= render 'politicians/terms/term', :term => term %></li>
     <% end %>
   </ul>
-  <%= will_paginate @supported_bills,
-      :param_name => :supported_page,
-      :params => {:opposed_page => @opposed_bills.current_page }  %>
-<%- else -%>
-  <p>We have no record of support from this politician</p>
-<%- end -%>
+  <%- else -%>
+    <p>We have no record of elections for this politician</p>
+  <%- end -%>
+</div>
 
-<h3>Opposed Bills</h3>
-<%- if @opposed_bills.present? -%>
-  <ul>
-    <% @opposed_bills.each do |bill|  %>
-      <li><%= render bill %></li>
-    <% end %>
-  </ul>
-  <%= will_paginate @opposed_bills,
-      :param_name => :opposed_page,
-      :params => {:supported_page => @supported_bills.current_page }  %>
-<%- else -%>
-  <p>We have no record of opposition from this politician</p>
+<div class="section">
+  <h3>Supported Bills</h3>
+  <%- if @supported_bills.present? -%>
+    <ul>
+      <% @supported_bills.each do |bill|  %>
+        <li><%= render bill %></li>
+      <% end %>
+    </ul>
+    <%= will_paginate @supported_bills,
+        :param_name => :supported_page,
+        :params => {:opposed_page => @opposed_bills.current_page }  %>
+  <%- else -%>
+    <p>We have no record of support from this politician</p>
+  <%- end -%>
+</div>
+
+<div class="section">
+  <h3>Opposed Bills</h3>
+  <%- if @opposed_bills.present? -%>
+    <ul>
+      <% @opposed_bills.each do |bill|  %>
+        <li><%= render bill %></li>
+      <% end %>
+    </ul>
+    <%= will_paginate @opposed_bills,
+        :param_name => :opposed_page,
+        :params => {:supported_page => @supported_bills.current_page }  %>
+  <%- else -%>
+    <p>We have no record of opposition from this politician</p>
 <%- end -%>
+</div>

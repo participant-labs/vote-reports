@@ -1,5 +1,7 @@
 <% title 'Politicians' %>
 
-<%= render 'politicians/search', :url => politicians_path, :replace => '#politicians' %>
+<div class="section">
+  <%= render 'politicians/search', :url => politicians_path, :replace => '#politicians' %>
 
-<%= render 'politicians/list', :politicians => @politicians %>
+  <%= render 'politicians/list', :politicians => @politicians %>
+</div>
