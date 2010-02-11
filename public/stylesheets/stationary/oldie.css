@@ -25,11 +25,6 @@ body {
 	background: #f9f9f9 url(http://static.tumblr.com/j8lh0bq/eU5krye5g/master.jpg) repeat-y 0 0;
 }
 
-a {
-	text-decoration: none;
-	color: #656463;
-}
-
 #header {
 	text-align: center;
 	text-shadow: #FFF 0 1px 0;
@@ -61,7 +56,6 @@ h1 a {
 
 h1 a:hover {
 	border-bottom: 1px solid #E4E0DA;
-	background-color: #FFF;
 }
 
 .tagline {
@@ -88,8 +82,8 @@ blockquote {
 
 .section {
 	clear: left;
-	margin: 30px 0;
-	padding-bottom: 30px;
+	margin: 10px 0;
+	padding-bottom: 20px;
 	border-bottom: 1px dotted #d5d5d5;
 }
 
@@ -118,7 +112,6 @@ h2 a {
 
 h2 a:hover {
 	border-bottom: 1px solid #E4E0DA;
-	background-color: #FFF;
 	color: #111;
 }
 
@@ -180,14 +173,18 @@ ol, ul, dt {
 	margin: 0 8px 8px 0;
 }
 
-.content a, .meta a, #menu a, .page-navigation a {
+a {
 	color: #42403D;
 	border-bottom: 1px dotted #524F4B;
+	text-decoration: none;
 }
 
-.content a:hover, .meta a:hover, #menu a:hover, .page-navigation a:hover {
+a:hover {
 	border-bottom: 1px solid #6C6A67;
-	background-color: #FFF;
+}
+
+#header a, #header a:hover {
+  border: 0;
 }
 
 .chat ul {

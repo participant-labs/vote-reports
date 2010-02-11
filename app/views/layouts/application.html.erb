@@ -24,24 +24,23 @@
         </div>
 
         <ul id="menu">
-          <li><h2><%= link_to_unless_current 'Home', root_path %></h2></li>
-          <li>
+          <li class="dropdown">
             <h2>Learn</h2>
-            <ul class="dropdown">
-              <li><%= link_to_unless_current "Reports", reports_path %></li>
-              <li><%= link_to_unless_current "Politicians", politicians_path %></li>
-              <li><%= link_to_unless_current "Bills", bills_path %></li>
+            <ul>
+              <li><%= link_to_unless_current "View Reports", reports_path %></li>
+              <li><%= link_to_unless_current "Browse Politicians", politicians_path %></li>
+              <li><%= link_to_unless_current "Research Bills", bills_path %></li>
             </ul>
           </li>
-          <li>
+          <li class="dropdown">
             <h2>Act</h2>
-            <ul class="dropdown">
+            <ul>
               <li><%= link_to_unless_current "Create a Report", current_user ? new_user_report_path(current_user) : new_report_path %></li>
             </ul>
           </li>
-          <li>
-            <h2>Stay in Touch</h2>
-            <ul class="dropdown">
+          <li class="dropdown">
+            <h2>Follow</h2>
+            <ul>
               <li><%= link_to 'Our Blog', blog_path %></li>
               <li>
                 <h3>Our Newsletter</h3>
