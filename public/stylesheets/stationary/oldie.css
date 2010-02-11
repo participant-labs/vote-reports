@@ -33,7 +33,7 @@ a {
 #header {
 	text-align: center;
 	text-shadow: #FFF 0 1px 0;
-	padding: 18px 0 22px;
+	padding: 18px 0 0;
 	margin: 0 20px;
 	border-bottom: 1px solid #EEE;
 }
