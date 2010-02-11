@@ -1,38 +1,43 @@
 <% title %Q{Bill - "#{h @bill.titles.first}"} %>
 
-<h2><%= render @bill, :hide_year => true %></h2>
-<p>Introduced on <%= @bill.introduced_on.to_s(:long_ordinal) %>
-<%- if @bill.sponsor -%>
-  by <%= render @bill.sponsor %>
-<%- end -%>
-</p>
-
-<ul>
-  <%- if @bill.opencongress_url -%>
-  <li><%= link_to 'View on OpenCongress', @bill.opencongress_url %></li>
+<div class="section">
+  <h2><%= render @bill, :hide_year => true %></h2>
+  <p>Introduced on <%= @bill.introduced_on.to_s(:long_ordinal) %>
+  <%- if @bill.sponsor -%>
+    by <%= render @bill.sponsor %>
   <%- end -%>
-  <li><%= link_to 'View Summary', '#', :'data-dialog' => '#bill_summary', :'data-dialog-title' => "Bill Summary" %></li>
-</ul>
+  </p>
 
-<div id="bill_summary" class="hidden">
-  <%= to_html(@bill.summary) %>
+  <ul>
+    <%- if @bill.opencongress_url -%>
+    <li><%= link_to 'View on OpenCongress', @bill.opencongress_url %></li>
+    <%- end -%>
+    <li><%= link_to 'View Summary', '#', :'data-dialog' => '#bill_summary', :'data-dialog-title' => "Bill Summary" %></li>
+  </ul>
+
+  <div id="bill_summary" class="hidden">
+    <%= to_html(@bill.summary) %>
+  </div>
 </div>
 
 <%- if (amendments = @bill.amendments.with_votes).present? -%>
-<h3>Amendments</h3>
-<ul>
-  <% amendments.each do |amendment|  %>
-    <li><%= render amendment %></li>
-  <% end %>
-</ul>
+<div class="section">
+  <h3>Amendments</h3>
+  <ul>
+    <% amendments.each do |amendment|  %>
+      <li><%= render amendment %></li>
+    <% end %>
+  </ul>
+</div>
 <%- end -%>
 
 <%- if @rolls.present? -%>
-<h3>Votes</h3>
-<ul>
-  <% @rolls.each do |roll|  %>
-    <li><%= render roll %></li>
-  <% end %>
-</ul>
+<div class="section">
+  <h3>Votes</h3>
+  <ul>
+    <% @rolls.each do |roll|  %>
+      <li><%= render roll %></li>
+    <% end %>
+  </ul>
+</div>
 <%- end -%>
-

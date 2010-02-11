@@ -1,7 +1,9 @@
 <% title @q.present? ? %Q{Bill Search Results for "#{h @q}"} : 'Bills' %>
 
-<h2>Bill Search</h2>
+<div class="section">
+  <h2>Bill Search</h2>
 
-<%= render 'bills/search' %>
+  <%= render 'bills/search' %>
 
-<%= render 'bills/list', :bills => @bills, :title => @title  %>
+  <%= render 'bills/list', :bills => @bills, :title => @title  %>
+</div>

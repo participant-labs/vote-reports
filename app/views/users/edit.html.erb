@@ -1,8 +1,10 @@
 <% title "User - #{h(@user.username)} - Edit" %>
 
-<%= render 'users/form', :user => @user %>
+<div class="section">
+  <%= render 'users/form', :user => @user %>
 
-<p>
-  <%= link_to "Show", @user %> |
-  <%= link_to "View All", users_path %>
-</p>
+  <p>
+    <%= link_to "Show", @user %> |
+    <%= link_to "View All", users_path %>
+  </p>
+</div>
