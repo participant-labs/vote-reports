@@ -103,6 +103,10 @@ class Report < ActiveRecord::Base
     result
   end
 
+  def image_path
+ 'http://images.ted.com/images/ted/conference/TED2010/speakers/over/kevin_bales-over.jpg'
+  end
+
   def rescore!
     self.scores.clear
     bill_criteria.active.map(&:scores).flatten.group_by(&:politician).each_pair do |politician, bill_scores|
