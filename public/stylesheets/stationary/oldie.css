@@ -87,7 +87,6 @@ blockquote {
 }
 
 .section:last-child {
-	padding-bottom: 50px;
 	border-bottom: none;
 }
 
