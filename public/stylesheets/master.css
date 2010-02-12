@@ -46,6 +46,10 @@ thead th {
   background: #C3D9FF none repeat scroll 0 0;
 }
 
+.loading {
+  font-size: 1.4em;
+}
+
 ul#menu {
   border-top: solid 1px #D5D5D5;
   border-bottom: solid 1px #D5D5D5;

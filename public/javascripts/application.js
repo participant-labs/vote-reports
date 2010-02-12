@@ -14,7 +14,7 @@
 
   function replaceWith(target, url) {
     target = $(target);
-    target.block({message: '<h1>Loading</h1>'});
+    target.block({message: '<p class="loading">Loading...</p>'});
     target.load(url, function() {
       target.unblock();
     });
