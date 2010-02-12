@@ -2,10 +2,14 @@
   display: none;
 }
 
+#inner {
+  position: relative;
+}
+
 #account {
   position: absolute;
   right: 0;
-  margin-right: 70px;
+  margin-right: 15px;
   margin-top: 10px;
 }
 
