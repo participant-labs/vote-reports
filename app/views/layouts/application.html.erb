@@ -38,7 +38,7 @@
 
         <ul id="menu">
           <li class="dropdown">
-            <h2>Learn</h2>
+            <h2><%= link_to_unless_current 'Learn', reports_path %></h2>
             <ul>
               <li><%= link_to_unless_current "View Reports", reports_path %></li>
               <li><%= link_to_unless_current "Browse Politicians", politicians_path %></li>
@@ -46,13 +46,13 @@
             </ul>
           </li>
           <li class="dropdown">
-            <h2>Act</h2>
+            <h2><%= link_to_unless_current "Act", new_report_path %></h2>
             <ul>
-              <li><%= link_to_unless_current "Create a Report", current_user ? new_user_report_path(current_user) : new_report_path %></li>
+              <li><%= link_to_unless_current "Create a Report", new_report_path %></li>
             </ul>
           </li>
           <li class="dropdown">
-            <h2>Follow</h2>
+            <h2><%= link_to 'Follow', blog_path %></h2>
             <ul>
               <li><%= link_to 'Our Blog', blog_path %></li>
               <li>
