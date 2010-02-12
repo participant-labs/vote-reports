@@ -1,6 +1,6 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-// 
+//
 ;(function($) {
   $.fn.fadeOutSoon = function(when, length) {
     if (typeof when == "undefined") when = 5000;
@@ -52,13 +52,16 @@
       return false;
     });
 
-    $('ul#menu > li').hoverIntent({     
-       interval: 500, 
+    $('ul#menu > li').hoverIntent({
+       interval: 500,
        sensitivity: 4,
        over: function() { $(this).addClass("hovering"); },
-       timeout: 500, 
+       timeout: 500,
        out: function() { $(this).removeClass("hovering"); }
      });
+
+     $('#mce-EMAIL').fieldtag();
+     $('[for=mce-EMAIL]').hide();
 
   });
   $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script;
