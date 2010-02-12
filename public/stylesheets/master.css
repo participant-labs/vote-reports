@@ -18,7 +18,7 @@
   font-size: 13px;
 }
 
-#footer li + li:before {
+#footer li + li:before, #account li + li:before {
   content: " / ";
 }
 
