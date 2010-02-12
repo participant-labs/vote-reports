@@ -1,20 +1,20 @@
 <% title "Log in" %>
 
-<h2>Log in</h2>
+<div class="section">
+  <h2>Log in</h2>
 
-<% form_for @user_session do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email, :class => "text" %><br />
+  <% form_for @user_session do |f| %>
+    <%= f.error_messages %>
+    <p>
+      <%= f.label :email %><br />
+      <%= f.text_field :email, :class => "text" %><br />
 
-    <%= f.label :password %><br />
-    <%= f.password_field :password, :class => "text" %><br />
-    
-    <%= hidden_field_tag :return_to, @return_to %>
+      <%= f.label :password %><br />
+      <%= f.password_field :password, :class => "text" %><br />
 
-    <%= f.submit "Log in", :class => 'submit' %>
-  </p>
-<% end %>
+      <%= hidden_field_tag :return_to, @return_to %>
 
-
+      <%= f.submit "Log in", :class => 'submit' %>
+    </p>
+  <% end %>
+</div>
