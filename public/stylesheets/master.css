@@ -2,6 +2,26 @@
   display: none;
 }
 
+#footer {
+  text-align: center;
+  padding-bottom: 1em;
+  padding-top: .8em;
+  border-top: 1px solid #D5D5D5;
+}
+
+#footer h3, #footer p, #footer ul, #footer li {
+  display:inline;
+}
+
+#footer ul {
+  margin-right: 30px;
+  font-size: 13px;
+}
+
+#footer li + li:before {
+  content: " / ";
+}
+
 #inner {
   position: relative;
 }
