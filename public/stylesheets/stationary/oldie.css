@@ -12,7 +12,7 @@ body {
 #main {
 	width: 848px;
 	margin: 20px auto 0 auto;
-	background: url(http://static.tumblr.com/j8lh0bq/2G3krye69/paper.png) no-repeat right top;
+	background: url(../../images/stationary/paper.png) no-repeat right top;
 }
 
 #inner {
@@ -22,7 +22,7 @@ body {
 	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0 1px 9px rgba(0, 0, 0, 0.2);
 	-webkit-box-shadow: 0 1px 9px rgba(0, 0, 0, 0.2);
-	background: #f9f9f9 url(http://static.tumblr.com/j8lh0bq/eU5krye5g/master.jpg) repeat-y 0 0;
+	background: #f9f9f9 url(../../images/stationary/master.jpg) repeat-y 0 0;
 }
 
 #header {
@@ -37,12 +37,12 @@ body {
 }
 
 .minimeta img {
-	background: url(http://static.tumblr.com/j8lh0bq/2vikrymgn/pointer-bg.png) repeat top right;
+	background: url(../../images/stationary/pointer-bg.png) repeat top right;
 	-webkit-transition: background 0.5s ease-in-out;
 }
 
 .minimeta img:hover {
-	background: url(http://static.tumblr.com/j8lh0bq/2vikrymgn/pointer-bg.png) repeat top left;
+	background: url(../../images/stationary/pointer-bg.png) repeat top left;
 }
 
 h1 {
