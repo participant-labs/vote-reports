@@ -53,8 +53,9 @@ ul#menu li.dropdown h2 {
 }
 
 ul#menu li.dropdown > ul {
+  display: none;
   border: 1px solid #dda;
-  width: 18em;
+  min-width: 10em;
   position: absolute;
   top: 1.6em;
   left: 0em;
@@ -73,14 +74,6 @@ text-decoration: underline;
 
 ul#menu li h2 {
   display: inline;
-}
-
-ul#menu li.dropdown > ul {
-  display: none;
-  width: 18em;
-  position: absolute;
-  top: 1.6em;
-  left: 0em;
 }
 
 ul#menu li.hovering.dropdown > ul {
