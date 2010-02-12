@@ -72,7 +72,7 @@
             <li><%= mail_to 'votereports@gmail.com', "Contact us" %></li>
             <li><%= link_to 'Feedback', get_satisfaction_path, :title => 'We welcome it' %></li>
           </ul>
-          <p id="copy">&copy; <%= Date.today.year %></p>
+          <p id="copy"><%= link_to "&copy; #{Date.today.year}", participant_labs_path %></p>
         </div>
       </div>
     </div>

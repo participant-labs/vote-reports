@@ -1,6 +1,10 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
+  def participant_labs_path
+    'http://participantlabs.com/'
+  end
+
   def blog_path
     'http://blog.votereports.org/'
   end
