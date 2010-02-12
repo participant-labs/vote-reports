@@ -7,19 +7,20 @@
     <%= render 'layouts/google_analytics' %>
   </head>
   <body>
-    <ul id="account">
-      <% if current_user %>
-        <li><%= link_to_unless_current "Your reports", user_reports_path(current_user) %></li>
-        <li><%= link_to_unless_current "Log out", logout_path %></li>
-      <% else %>
-        <li><%= link_to_unless_current "Log in", login_path %></li>
-        <li><%= link_to_unless_current "Sign up", signup_path %></li>
-      <% end %>
-    </ul>
+    <%= flash_helper %>
 
     <div id="main">
       <div id="inner">
-        <%= flash_helper %>
+        <ul id="account">
+          <% if current_user %>
+            <li><%= link_to_unless_current "Your reports", user_reports_path(current_user) %></li>
+            <li><%= link_to_unless_current "Log out", logout_path %></li>
+          <% else %>
+            <li><%= link_to_unless_current "Log in", login_path %></li>
+            <li><%= link_to_unless_current "Sign up", signup_path %></li>
+          <% end %>
+        </ul>
+
         <div id="header">
           <%= link_to_unless_current image_tag('logo.png', :size => '521x150'), root_path %>
         </div>
