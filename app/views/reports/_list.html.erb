@@ -1,7 +1,7 @@
 <%- if reports.present? -%>
   <ol>
     <%- reports.each do |report| -%>
-      <li><%= render 'users/reports/report', :report => report %></li>
+      <li><%= render report %></li>
     <%- end -%>
   </ol>
 <%- else -%>

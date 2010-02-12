@@ -118,3 +118,37 @@ dl dt {
 dd {
   margin-left: 1.5em; }
 
+.report_image {
+  float: left;
+  padding-right: .5em;
+  border-bottom: 0;
+}
+
+.report_attrs {
+  margin-left: 110px;
+}
+
+.report_attrs blockquote, .report_creator {
+  margin-top: 5px;
+}
+
+.report_title {
+  font-size: 2em;
+}
+
+.report_description {
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.report_creator {
+  display: inline-block;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
