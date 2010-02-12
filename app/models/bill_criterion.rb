@@ -30,6 +30,14 @@ class BillCriterion < ActiveRecord::Base
     !support
   end
 
+  def aligns?(vote)
+    (support? && vote.aye?) || (oppose? && vote.nay?)
+  end
+
+  def contradicts?(vote)
+    (support? && vote.nay?) || (oppose? && vote.aye?)
+  end
+
   def scores
     bill.passage_rolls.all(:include => {:votes => [{:politician => :state}, :roll]}).map(&:votes).flatten.group_by(&:politician).map do |politician, votes|
       BillCriterionScore.new(:bill_criterion => self, :votes => votes, :politician => politician)
