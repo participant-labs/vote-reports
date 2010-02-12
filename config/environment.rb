@@ -17,23 +17,23 @@ Rails::Initializer.run do |config|
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
   config.gem 'ancestry'
-  config.gem 'exceptional'
-  config.gem 'jammit'
-  config.gem 'json'
-  config.gem 'friendly_id'
   config.gem "authlogic", :version => '>=2.1.3'
   config.gem 'bluecloth', :version => '>=2.0.5'
   config.gem 'erubis'
+  config.gem 'exceptional'
+  config.gem 'friendly_id'
   config.gem 'geokit'
   config.gem 'gravtastic', :version => '>= 2.1.0'
+  config.gem 'jammit'
+  config.gem 'json'
   config.gem 'newrelic_rpm'
   config.gem 'pg'
+  config.gem 'sexy_pg_constraints'
+  config.gem 'state_machine'
   config.gem 'sunspot', :lib => 'sunspot'
   config.gem 'sunspot_rails', :lib => 'sunspot/rails'
   config.gem 'whenever', :lib => false
   config.gem 'will_paginate'
-  config.gem 'sexy_pg_constraints'
-  config.gem 'state_machine'
 
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
