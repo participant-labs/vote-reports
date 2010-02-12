@@ -39,6 +39,9 @@ Feature: Browsing Reports
     Then I should not see "Empty Report"
     And I should see "Active Report"
     When I go to my reports page
+    Then I should not see "Empty Report"
+    And I should see "Active Report"
+    When I go to my profile page
     Then I should see "Empty Report"
     And I should see "Unscored Report"
     And I should see "Scored Report"
