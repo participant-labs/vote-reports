@@ -33,18 +33,10 @@ class BillCriterionScore
     scores / bases
   end
 
-  def aligns?(vote)
-    (@bill_criterion.support? && vote.aye?) || (@bill_criterion.oppose? && vote.nay?)
-  end
-
-  def contradicts?(vote)
-    (@bill_criterion.support? && vote.nay?) || (@bill_criterion.oppose? && vote.aye?)
-  end
-
   def score_vote(vote)
-    if aligns?(vote)
+    if @bill_criterion.aligns?(vote)
       100.0
-    elsif contradicts?(vote)
+    elsif @bill_criterion.contradicts?(vote)
       0.0
     else
       50.0
