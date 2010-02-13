@@ -1,5 +1,5 @@
 <% div_for(report, :class => 'clearfix') do %>
-  <%= link_to image_tag(report.thumbnail.url(:thumbnail), :size => '110x83'), [report.user, report], :class => 'report_image' %>
+  <%= link_to image_tag(report.thumbnail.url, :size => '110x83'), [report.user, report], :class => 'report_image' %>
   <div class="report_attrs">
     <%= link_to report.name, [report.user, report], :class => 'report_title' %>
       <% description = truncate(strip_tags(report.description), :length => 180) %>

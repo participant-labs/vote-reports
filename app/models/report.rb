@@ -84,7 +84,8 @@ class Report < ActiveRecord::Base
                      :thumbnail => '110x83#',
                      :small => "55x41#" },
         :processors => [:jcropper],
-        :default_url => "/images/reports/default_thumbnail.jpg"
+        :default_url => "/images/reports/default_thumbnail.jpg",
+        :default_style => :thumbnail
 
   validates_attachment_content_type :thumbnail, :content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png']
 
