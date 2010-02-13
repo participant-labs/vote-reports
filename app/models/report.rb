@@ -1,6 +1,4 @@
 class Report < ActiveRecord::Base
-  include Thumbnail
-
   belongs_to :user
   has_friendly_id :name, :use_slug => true, :scope => :user
 
@@ -81,6 +79,18 @@ class Report < ActiveRecord::Base
 
   has_many :scores, :class_name => 'ReportScore', :dependent => :destroy
 
+  has_attached_file :thumbnail,
+        :styles => { :normal => "240x240>",
+                     :small => "55x55#" },
+        :processors => [:jcropper],
+        :default_url => "/images/reports/default_thumbnail.jpg"
+
+  validates_attachment_content_type :thumbnail, :content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png']
+
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+
+  after_update :reprocess_thumbnail, :if => :cropping?
+
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
 
   validates_presence_of :user, :name
@@ -105,10 +115,6 @@ class Report < ActiveRecord::Base
     result
   end
 
-  def image_path
- 'http://images.ted.com/images/ted/conference/TED2010/speakers/over/kevin_bales-over.jpg'
-  end
-
   def rescore!
     self.scores.clear
     bill_criteria.active.map(&:scores).flatten.group_by(&:politician).each_pair do |politician, bill_scores|
@@ -125,5 +131,21 @@ class Report < ActiveRecord::Base
     end
     unpublish if self.scores.empty? && can_unpublish?
     nil
+  end
+
+  def cropping?
+    !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+  end
+
+  # helper method used by the cropper view to get the real image geometry
+  def thumbnail_geometry(style = :original)
+    @geometry ||= {}
+    @geometry[style] ||= Paperclip::Geometry.from_file thumbnail.path(style)
+  end
+
+private
+
+  def reprocess_thumbnail
+    thumbnail.reprocess!
   end
 end
