@@ -27,6 +27,7 @@ Rails::Initializer.run do |config|
   config.gem 'jammit'
   config.gem 'json'
   config.gem 'newrelic_rpm'
+  config.gem 'paperclip'
   config.gem 'pg'
   config.gem 'sexy_pg_constraints'
   config.gem 'state_machine'
