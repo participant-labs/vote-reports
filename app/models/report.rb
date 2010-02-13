@@ -80,8 +80,9 @@ class Report < ActiveRecord::Base
   has_many :scores, :class_name => 'ReportScore', :dependent => :destroy
 
   has_attached_file :thumbnail,
-        :styles => { :normal => "240x240>",
-                     :small => "55x55#" },
+        :styles => { :normal => "330x248>",
+                     :thumbnail => '110x83#',
+                     :small => "55x41#" },
         :processors => [:jcropper],
         :default_url => "/images/reports/default_thumbnail.jpg"
 
