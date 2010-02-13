@@ -122,6 +122,10 @@ dd {
   border-bottom: 0;
 }
 
+.report_image:hover {
+  border-bottom: 0;
+}
+
 .report_image {
   float: left;
   padding-right: .5em;
