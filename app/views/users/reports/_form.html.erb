@@ -6,9 +6,32 @@
     <%= f.label :description %> <span class="small">(you can use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>)</span><br />
     <%= f.text_area :description %><br />
 
-    <%= image_tag @report.thumbnail.url(:normal), :size => '330x248' %><br />
-    <%= f.label :thumbnail_file_name %><br />
-    <%= f.file_field :thumbnail %><br />
+    <h2>Current Thumbnail</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Cropped</th>
+          <th>Original</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= image_tag @report.thumbnail.url, :size => '110x83' %>
+          </td>
+          <td>
+            <%= image_tag @report.thumbnail.url(:original), :style => 'max-width: 400px;' %><br />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p><%= link_to 'Crop this Image', edit_user_report_thumbnail_path(@user, @report) %></p>
+
+    <h3>Replace Thumbnail</h3>
+    <p>
+      <%= f.label :thumbnail_file_name %><br />
+      <%= f.file_field :thumbnail %>
+    </p>
 
     <%= f.submit @report.new_record? ? "Continue to Last Step" : "Update Report", :class => 'submit' %> |
     <%= link_to 'cancel', :back %>

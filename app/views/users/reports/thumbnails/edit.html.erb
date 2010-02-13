@@ -1,0 +1,62 @@
+<% title %Q{Crop Thumbnail for "#{@report.name}"} %>
+
+<% content_for :javascript_area do %>
+<% javascript_tag do %>
+
+(function($) {
+  function showPreview(coords)
+  {
+    <%- thumb_width, thumb_height = @report.thumbnail.styles[:thumbnail][:geometry].split('x').map(&:to_i) -%>
+
+    var rx = <%= thumb_width %> / coords.w;
+    var ry = <%= thumb_height %> / coords.h;
+
+    $('#preview').css({
+      width: Math.round(rx * <%= @report.thumbnail_geometry(:original).width.to_i %>) + 'px',
+      height: Math.round(ry * <%= @report.thumbnail_geometry(:original).height.to_i %>) + 'px',
+      marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+      marginTop: '-' + Math.round(ry * coords.y) + 'px'
+    });
+
+    $('#crop_x').val(Math.round(coords.x));
+    $('#crop_y').val(Math.round(coords.y));
+    $('#crop_w').val(Math.round(coords.w));
+    $('#crop_h').val(Math.round(coords.h));
+  }
+
+  $(function() {
+    $('#cropbox').Jcrop({
+        onSelect: showPreview,
+        onChange: showPreview,
+        aspectRatio: <%= thumb_width %>/<%= thumb_height %>,
+        bgColor: '#F9F9F9'
+      });
+  });
+})(jQuery);
+
+<% end %>
+<% end %>
+
+<p>
+  <b>Report:</b>
+  <%= @report.name %>
+</p>
+
+<p>
+  <b>Thumbnail:</b>
+  <%= image_tag @report.thumbnail.url(:original), :id => 'cropbox' %>
+<div style="width:<%= thumb_width %>px;height:<%= thumb_height %>px;overflow:hidden">
+  <%= image_tag @report.thumbnail.url(:original), :id => 'preview' %>
+</div>
+</p>
+
+<% form_for [@report.user, @report] do |f| %>
+  <%= f.text_field :crop_x, :id => 'crop_x' %><br />
+  <%= f.text_field :crop_y, :id => 'crop_y' %><br />
+  <%= f.text_field :crop_w, :id => 'crop_w' %><br />
+  <%= f.text_field :crop_h, :id => 'crop_h' %><br />
+  <%= f.submit "Crop!" %>
+<% end %>
+
+<%= link_to 'Back to Edit', edit_user_report_path(@report.user, @report) %> |
+<%= link_to 'Back to Report', user_report_path(@report.user, @report) %>

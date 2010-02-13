@@ -7,6 +7,7 @@ javascripts:
     - public/javascripts/jquery.blockUI.js
     - public/javascripts/jquery.hoverIntent.js
     - public/javascripts/jquery.fieldtag.js
+    - public/javascripts/jquery.Jcrop.js
     - public/javascripts/application.js
 
 stylesheets:
@@ -16,3 +17,4 @@ stylesheets:
     - public/stylesheets/smoothness/jquery-ui-1.7.2.custom.css
     - public/stylesheets/master.css
     - public/stylesheets/interaction.css
+    - public/stylesheets/jquery.Jcrop.css
