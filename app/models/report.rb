@@ -1,4 +1,6 @@
 class Report < ActiveRecord::Base
+  include Thumbnail
+
   belongs_to :user
   has_friendly_id :name, :use_slug => true, :scope => :user
 
