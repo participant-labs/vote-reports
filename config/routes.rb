@@ -33,7 +33,7 @@ ActionController::Routing::Routes.draw do |map|
   map.user_report_bill "reports/:user_id/:report_id/bills/:id",
     :controller => 'users/reports/bills', :action => 'destroy', :conditions => { :method => :delete }
 
-  map.about "about", :controller => "site", :action => "about"  
+  map.about "about", :controller => "site", :action => "show"  
   map.signup "/signup", :controller => "users", :action => "new"  
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"  
