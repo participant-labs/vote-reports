@@ -66,5 +66,3 @@
   });
   $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script;
 })(jQuery);
-
-

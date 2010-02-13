@@ -136,7 +136,7 @@ class Report < ActiveRecord::Base
   end
 
   def cropping?
-    !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+    [crop_x, crop_y, crop_w, crop_h].all?(&:present?)
   end
 
   # helper method used by the cropper view to get the real image geometry

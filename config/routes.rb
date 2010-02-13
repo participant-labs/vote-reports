@@ -22,7 +22,9 @@ ActionController::Routing::Routes.draw do |map|
   map.user_report  "reports/:user_id/:id",
     :controller => 'users/reports', :action => 'destroy', :conditions => { :method => :delete }
   map.edit_user_report  "reports/:user_id/:id/edit",
-    :controller => 'users/reports', :action => 'edit', :conditions => { :method => :get }
+    :controller => 'users/reports', :action => 'edit', :conditions =>  { :method => :get }
+  map.edit_user_report_thumbnail  "reports/:user_id/:report_id/thumbnail/edit",
+    :controller => 'users/reports/thumbnails', :action => 'edit', :conditions => { :method => :get }
 
   map.new_user_report_bills "reports/:user_id/:report_id/bills/new",
     :controller => 'users/reports/bills', :action => 'new', :conditions => { :method => :get }

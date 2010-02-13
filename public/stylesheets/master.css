@@ -37,7 +37,7 @@
   display: inline;
 }
 
-table {
+.report_scores table {
   margin: .5em;
   width: 100%;
 }
