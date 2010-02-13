@@ -6,14 +6,7 @@
     <%= f.label :description %> <span class="small">(you can use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>)</span><br />
     <%= f.text_area :description %><br />
 
-    <%- if @report.new_record? -%>
-      <p>
-        <%= f.label :thumbnail_file_name, 'Thumbnail (optional)' %><br />
-        <%= f.file_field :thumbnail %>
-      </p>
-    <%- end -%>
-
-    <%= f.submit @report.new_record? ? "Continue to Last Step" : "Update Report", :class => 'submit' %> |
+    <%= f.submit @report.new_record? ? "Create Report" : "Update Report", :class => 'submit' %> |
     <%= link_to 'cancel', :back %>
   </p>
 <% end %>

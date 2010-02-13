@@ -9,7 +9,7 @@ Feature: User create report
       And I follow "Create a report"
       And I fill in "Name" with "My report"
       And I fill in "Description" with "I made this because I care"
-      And I press "Continue to Last Step"
+      And I press "Create Report"
       Then I should see "Successfully created report."
       When I follow "Done"
       Then I should be on the report page for "My report"
@@ -24,7 +24,7 @@ Feature: User create report
       Given I am signed in
       When I go to my profile page
       And I follow "Create a report"
-      And I press "Continue to Last Step"
+      And I press "Create Report"
       Then I should see "Name can't be blank"
 
     Scenario: User tries to create a report with a reserved name
@@ -32,6 +32,6 @@ Feature: User create report
       When I go to my profile page
       And I follow "Create a report"
       And I fill in "Name" with "New"
-      And I press "Continue to Last Step"
+      And I press "Create Report"
       Then I should see "Name can not be "
       And I should not see "Slugs is invalid"
