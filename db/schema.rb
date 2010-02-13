@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100213003908) do
+ActiveRecord::Schema.define(:version => 20100213203457) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -201,7 +201,6 @@ ActiveRecord::Schema.define(:version => 20100213003908) do
     t.string   "congress_office"
     t.string   "congresspedia_url"
     t.string   "crp_id"
-    t.string   "district"
     t.string   "email"
     t.string   "eventful_id"
     t.string   "fax"
@@ -224,6 +223,7 @@ ActiveRecord::Schema.define(:version => 20100213003908) do
     t.string   "cached_slug"
     t.string   "title"
     t.integer  "us_state_id"
+    t.integer  "district"
   end
 
   create_table "report_score_evidences", :force => true do |t|
