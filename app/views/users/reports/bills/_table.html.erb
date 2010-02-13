@@ -1,0 +1,49 @@
+<div id="report_bills_results_table">
+  <%- if bills.present? -%>
+    <% form_for [report.user, report] do |f| %>
+      <table>
+        <thead>
+          <th>Bill</th>
+          <th>Support/Oppose</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <%- build_criteria_for(report, bills).each do |criterion| -%>
+            <%- f.fields_for :bill_criteria, criterion do |bill_criteria_fields| -%>
+              <tr>
+                <td>
+                  <%= render 'bills/bill', :bill => criterion.bill %>
+                  <%= bill_criteria_fields.hidden_field :bill_id %>
+                  <%= bill_criteria_fields.hidden_field :id unless criterion.new_record? %>
+                </td>
+                <td>
+                  <%- if criterion.bill.old_and_unvoted? -%>
+                    <span class="info" title="This bill has no roll-call votes to score by">unvoted</span>
+                  <%- else -%>
+                    <%= bill_criteria_fields.label :support_true, 'Support' %>
+                    <%= bill_criteria_fields.radio_button :support, true %><br />
+                    <%= bill_criteria_fields.label :support_false, 'Oppose' %>
+                    <%= bill_criteria_fields.radio_button :support, false %>
+                    <a href="" title="Show additional options" data-toggle="#<%= dom_id(criterion.bill, :extra_fields) %>">+</a>
+                  <%- end -%>
+                </td>
+                <td id="<%= dom_id(criterion.bill, :extra_fields) %>" class="hidden">
+                  <%= bill_criteria_fields.label :explanatory_url, 'Explanatory Link' %>
+                  <%= bill_criteria_fields.text_field :explanatory_url %>
+                </td>
+              </tr>
+            <%- end -%>
+          <%- end -%>
+        </tbody>
+      </table>
+      <%= will_paginate bills, :'data-replace' => '#report_bills_results_table' %>
+      <%= f.submit 'Save Bills to Report', :class => 'submit' %> - <%= link_to 'cancel', user_report_path(current_user, report) %>
+    <% end %>
+  <%- elsif @new_report -%>
+    <p>No bills found for "<%= @q %>". Try another search!</p>
+    <%= link_to 'Done', user_report_path(current_user, report) %>
+  <%- else -%>
+    <p>No bills found</p>
+    <%= link_to 'Back', :back %>
+  <%- end -%>
+</div>

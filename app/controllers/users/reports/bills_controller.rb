@@ -9,6 +9,15 @@ class Users::Reports::BillsController < ApplicationController
     end
     @q = params[:q]
     @bills = Bill.paginated_search(params).results
+
+    respond_to do |format|
+      format.html
+      format.js {
+        render :partial => 'users/reports/bills/table', :locals => {
+          :report => @report, :bills => @bills
+        }
+      }
+    end
   end
 
   def edit
