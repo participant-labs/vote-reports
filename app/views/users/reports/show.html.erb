@@ -1,12 +1,7 @@
 <% title "Report - #{h @report.name}" %>
 
 <div class="section report_show">
-  <div class="clearfix report_description">
-    <%= image_tag(@report.thumbnail.url, :size => '110x83', :class => 'report_image') %>
-    <h2 class="report_title<%= ' big' if @report.name.length < 14 %>"><%= @report.name %></h2>
-  </div>
-
-  <p>Created by <%= render 'users/user', :user => @report.user %></p>
+  <%= render 'reports/header', :report => @report %>
 
   <%- unless @report.description.blank? -%>
   <blockquote><%= raw @report.description %></blockquote>
@@ -15,14 +10,15 @@
   <%- if @report.user == current_user -%>
     <p>
       <%= link_to "Edit Name & Description", edit_user_report_path(current_user, @report) %> |
+      <%= link_to 'Edit Thumbnail', edit_user_report_thumbnail_path(current_user, @report) %> |
       <%= link_to "Delete this Report", [current_user, @report], :confirm => 'Are you sure?', :method => :delete %>
     </p>
 
-  <div class="report_status <%= @report.state %>">
-    <h3>Visibility: <%= @report.state.capitalize %></h3>
-    <%= content_tag :p, @report.status if @report.status.present? %>
-    <%= report_next_step(@report) %>
-  </div>
+    <div class="report_status <%= @report.state %>">
+      <h3>Visibility: <%= @report.state.capitalize %></h3>
+      <%= content_tag :p, @report.status if @report.status.present? %>
+      <%= report_next_step(@report) %>
+    </div>
   <%- end -%>
 </div>
 

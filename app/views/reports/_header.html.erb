@@ -1,0 +1,6 @@
+<div class="clearfix report_description">
+  <%= image_tag(report.thumbnail.url, :size => '110x83', :class => 'report_image') %>
+  <h2 class="report_title<%= ' big' if report.name.length < 14 %>"><%= report.name %></h2>
+</div>
+
+<p>Created by <%= render 'users/user', :user => report.user %></p>
