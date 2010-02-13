@@ -122,7 +122,7 @@ dd {
   border-bottom: 0;
 }
 
-.report_image:hover {
+.report_image:hove {
   border-bottom: 0;
 }
 
@@ -143,6 +143,10 @@ dd {
   font-size: 2em;
 }
 
+.report_title.big {
+  font-size: 4em;
+}
+
 .report_description {
   display: inline-block;
   padding-bottom: 5px;
@@ -153,9 +157,14 @@ dd {
 }
 
 .clearfix:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
+  content:"\0020";
+  display:block;
+  height:0;
+  clear:both;
+  visibility:hidden;
+  overflow:hidden;
+}
+
+.clearfix {
+  display:block;
 }
