@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100214075313) do
+ActiveRecord::Schema.define(:version => 20100214075915) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -262,6 +262,17 @@ ActiveRecord::Schema.define(:version => 20100214075313) do
     t.string   "thumbnail_file_name"
     t.string   "thumbnail_content_type"
     t.string   "thumbnail_file_size"
+  end
+
+  create_table "representative_terms", :force => true do |t|
+    t.integer  "politician_id", :null => false
+    t.date     "started_on"
+    t.date     "ended_on"
+    t.integer  "party_id"
+    t.integer  "district_id",   :null => false
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "rolls", :force => true do |t|
