@@ -1,5 +1,5 @@
 class PresidentialTerm < ActiveRecord::Base
-  include PoliticianTermStuff
+  include PoliticianTerm
 
   def title
     "President"

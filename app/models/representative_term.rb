@@ -1,5 +1,5 @@
 class RepresentativeTerm < ActiveRecord::Base
-  include PoliticianTermStuff
+  include PoliticianTerm
 
   belongs_to :district
   validates_presence_of :district
