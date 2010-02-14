@@ -1,4 +1,6 @@
 class Report < ActiveRecord::Base
+  DEFAULT_THUMBNAIL_PATH = "/images/reports/default_thumbnail.jpg"
+
   belongs_to :user
   has_friendly_id :name, :use_slug => true, :scope => :user
 
@@ -84,7 +86,7 @@ class Report < ActiveRecord::Base
                      :thumbnail => '110x83#',
                      :small => "55x41#" },
         :processors => [:jcropper],
-        :default_url => "/images/reports/default_thumbnail.jpg",
+        :default_url => DEFAULT_THUMBNAIL_PATH,
         :default_style => :thumbnail
 
   validates_attachment_content_type :thumbnail, :content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png']
@@ -142,7 +144,12 @@ class Report < ActiveRecord::Base
   # helper method used by the cropper view to get the real image geometry
   def thumbnail_geometry(style = :original)
     @geometry ||= {}
-    @geometry[style] ||= Paperclip::Geometry.from_file thumbnail.path(style)
+    path = thumbnail.path(style)
+    if path.present?
+      @geometry[style] ||= Paperclip::Geometry.from_file path
+    else
+      @default_geometry ||= Paperclip::Geometry.from_file Rails.root.join('public', DEFAULT_THUMBNAIL_PATH)
+    end
   end
 
 private
