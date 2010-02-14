@@ -20,4 +20,10 @@ class District < ActiveRecord::Base
       "politician_terms.us_state_id = ? AND (politician_terms.type = 'SenateTerm' OR (politician_terms.type = 'RepresentativeTerm' AND politician_terms.district = ?))", us_state_id, district
     ], :joins => :politician_terms, :select => 'DISTINCT politicians.*')
   end
+
+  def full_name
+    district = self.district == 0 ? 'at-large' : self.district.ordinalize if self.district
+    district = "the #{district} district of " if district
+    "#{district}#{state.full_name}"
+  end
 end

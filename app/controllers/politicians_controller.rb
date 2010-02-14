@@ -29,10 +29,11 @@ class PoliticiansController < ApplicationController
       redirect_to politician_path(@politician), :status => 301
       return
     end
-    @terms = @politician.representative_terms.all(:include => [:party, :district])  +
-             @politician.senate_terms.all(:include => [:party, :state]) +
-             @politician.presidential_terms.all(:include => :party)
-    @terms.sort_by!(&:ended_on)
+    @terms = (
+      @politician.representative_terms.all(:include => [:party, :district])  +
+      @politician.senate_terms.all(:include => [:party, :state]) +
+      @politician.presidential_terms.all(:include => :party)
+    ).sort_by(&:ended_on).reverse
     per_page = Bill.per_page / 2
     @supported_bills = @politician.supported_bills.paginate(:page => params[:supported_page], :per_page => per_page, :include => {:titles => :as})
     @opposed_bills = @politician.opposed_bills.paginate(:page => params[:opposed_page], :per_page => per_page, :include => {:titles => :as})

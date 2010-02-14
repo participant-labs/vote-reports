@@ -16,7 +16,7 @@ Fixjour :verify => false do
   def us_state(state)
     return state if state.is_a?(UsState)
     state =STATES.assoc(state) || STATES.rassoc(state)
-    UsState.find_by_abbreviation(state.last) || new_us_state(
+    UsState.find_by_abbreviation(state.last) || create_us_state(
       :full_name => state.first,
       :abbreviation => state.last,
       :state_type => 'state')
@@ -243,6 +243,10 @@ Fixjour :verify => false do
 
   define_builder(RepresentativeTerm) do |klass, overrides|
     politician_term_overrides(overrides, 2)
+
+    overrides.process(:state) do |state|
+      overrides[:district] = District.find_or_create_by_us_state_id_and_district(state.id, overrides[:district].present? ? overrides[:district].to_i : nil)
+    end
 
     started_on = rand(50).years.ago
     ended_on = started_on + 2.years
