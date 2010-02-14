@@ -7,7 +7,6 @@ class PoliticianTerm < ActiveRecord::Base
   validates_presence_of :politician
 
   named_scope :by_ended_on, :order => "ended_on DESC"
-  named_scope :congressional, :conditions => {:type => ['RepresentativeTerm', 'SenateTerm']}
 
   unless Rails.env.development?
     after_create :update_politician_state_and_title

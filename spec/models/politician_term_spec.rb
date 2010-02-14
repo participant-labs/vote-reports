@@ -18,10 +18,4 @@ describe PoliticianTerm do
       PoliticianTerm.latest.should == @latest
     end
   end
-
-  describe ".congressional" do
-    it "should return representative and senate terms, but not presidential" do
-      PoliticianTerm.congressional.should =~ [@senate, @representative]
-    end
-  end
 end
