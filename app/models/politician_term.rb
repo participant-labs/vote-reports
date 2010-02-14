@@ -8,7 +8,7 @@ class PoliticianTerm < ActiveRecord::Base
 
   named_scope :by_ended_on, :order => "ended_on DESC"
 
-  unless Rails.env.development?
+  unless Rails.env.development? || Rails.env.production?
     after_create :update_politician_state_and_title
   end
 
@@ -20,7 +20,7 @@ class PoliticianTerm < ActiveRecord::Base
 
   private
 
-  unless Rails.env.development?
+  unless Rails.env.development? || Rails.env.production?
     def update_politician_state_and_title
       latest = politician.terms.latest
       return if latest.nil?
