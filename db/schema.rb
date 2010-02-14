@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100214184545) do
+ActiveRecord::Schema.define(:version => 20100214192821) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -160,6 +160,9 @@ ActiveRecord::Schema.define(:version => 20100214184545) do
   end
 
   add_index "district_zip_codes", ["district_id", "zip_code", "plus_4"], :name => "district_zip_codes_district_id_zip_code_plus_4_unique", :unique => true
+  add_index "district_zip_codes", ["district_id"], :name => "index_district_zip_codes_on_district_id"
+  add_index "district_zip_codes", ["zip_code", "plus_4"], :name => "index_district_zip_codes_on_zip_code_and_plus_4"
+  add_index "district_zip_codes", ["zip_code"], :name => "index_district_zip_codes_on_zip_code"
 
   create_table "districts", :force => true do |t|
     t.integer  "us_state_id", :null => false
@@ -169,6 +172,7 @@ ActiveRecord::Schema.define(:version => 20100214184545) do
   end
 
   add_index "districts", ["us_state_id", "district"], :name => "districts_us_state_id_district_unique", :unique => true
+  add_index "districts", ["us_state_id"], :name => "index_districts_on_us_state_id"
 
   create_table "parties", :force => true do |t|
     t.string   "name",       :null => false
