@@ -27,6 +27,7 @@ Feature: Browsing Report Scores by State
     And the following district zip code records:
       | state | district | zip_code |
       | TX    | 26       | 75028    |
+      | TX    | 11       | 75028    |
       | TX    | 11       | 78704    |
       | NY    | 7        | 11111    |
     And bill "Bovine Security Act of 2009" has the following rolls:
@@ -64,11 +65,11 @@ Feature: Browsing Report Scores by State
     Then I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 100   |
+      | J. Kerrey            | 24    |
       | Kay Hutchison        | 53    |
       | John Cornyn          | 76    |
-    But I should not see "J. Kerrey"
     But I should not see "Connie Mack"
-    But I should not see "Neil Abercrombie"
+    And I should not see "Neil Abercrombie"
 
   Examples:
     | zip code input |

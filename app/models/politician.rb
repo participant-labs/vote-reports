@@ -56,6 +56,16 @@ class Politician < ActiveRecord::Base
     {:conditions => {:first_name => first, :last_name => last}}
   }
   named_scope :by_birth_date, :order => 'birthday DESC NULLS LAST'
+  named_scope :from_district, lambda {|districts|
+    {:conditions => [
+        "(senate_terms.us_state_id IN(?) OR representative_terms.district_id IN(?))",
+         Array(districts).map(&:us_state_id), districts
+      ], :joins => [
+        %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
+        %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
+      ], :select => 'DISTINCT politicians.*'
+    }
+  }
   named_scope :from_state, lambda {|state|
     state = UsState.first(:conditions => ["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]) if state.is_a?(String)
     if state
@@ -73,7 +83,7 @@ class Politician < ActiveRecord::Base
 
   class << self
     def from_zip_code(zip_code)
-      District.with_zip(zip_code).first.try(:politicians)
+      from_district(District.with_zip(zip_code))
     end
 
     def from_location(state = nil, zip_code = nil)
