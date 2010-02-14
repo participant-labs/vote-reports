@@ -6,14 +6,9 @@ class RepresentativeTerm < PoliticianTerm
     "#{'Delegate ' if state.unincorporated? }Representative"
   end
 
-  def district
-    if self[:district]
-      self[:district] == 0 ? 'at-large' : self[:district].ordinalize
-    end
-  end
-
   def place
-    district = "the #{self.district} district of " if self.district
+    district = self.district == 0 ? 'at-large' : self.district.ordinalize if self.district
+    district = "the #{district} district of " if district
     "for #{district}#{state.full_name}"
   end
 end
