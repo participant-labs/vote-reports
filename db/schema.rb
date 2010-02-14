@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100213203457) do
+ActiveRecord::Schema.define(:version => 20100214021533) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -206,7 +206,6 @@ ActiveRecord::Schema.define(:version => 20100213203457) do
     t.string   "fax"
     t.string   "fec_id"
     t.string   "gender"
-    t.string   "in_office"
     t.string   "middle_name"
     t.string   "name_suffix"
     t.string   "nickname"
