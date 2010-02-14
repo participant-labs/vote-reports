@@ -21,9 +21,12 @@ module PoliticianTerm
 
       unless Rails.env.development? || Rails.env.production?
         def update_politician_state_and_title
-          latest = politician.terms.latest
+          latest = politician.latest_term
           return if latest.nil?
-          state = politician.terms.latest(:joins => :state).try(:state)
+          state = (
+            politician.representative_terms.all(:joins => :district) +
+            politician.senate_terms.all(:joins => :state)
+          ).sort_by(&:ended_on).reverse.detect(&:state).try(:state)
           politician.update_attributes!(:state => state, :title => latest.title)
         end
       end
