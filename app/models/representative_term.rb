@@ -1,6 +1,8 @@
-class RepresentativeTerm < PoliticianTerm
-  attr_accessible :politician, :district, :state, :started_on, :ended_on, :created_on, :updated_on, :url, :party
-  validates_presence_of :state
+class RepresentativeTerm < ActiveRecord::Base
+  include PoliticianTermStuff
+
+  belongs_to :district
+  validates_presence_of :district
 
   def title
     "#{'Delegate ' if state.unincorporated? }Representative"
