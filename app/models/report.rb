@@ -89,7 +89,7 @@ class Report < ActiveRecord::Base
         :default_url => DEFAULT_THUMBNAIL_PATH,
         :default_style => :thumbnail
 
-  validates_attachment_content_type :thumbnail, :content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png']
+  validates_attachment_content_type :thumbnail, :content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-png']
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
