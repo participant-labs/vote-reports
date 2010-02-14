@@ -63,7 +63,65 @@ Feature: Adding Bill Criteria to Reports
     | voted, previous-congress    |
     | un-voted, previous-congress |
 
-  Scenario Outline: User views bill year on search
+  Scenario Outline: User can search voted bills only
+    Given a <bill type> bill named "USA PATRIOT Reauthorization Act of 2009"
+    When I fill in "Add Bills" with "patriot"
+    And I check "Voted Bills Only"
+    And I press "Search"
+    Then I should see "USA PATRIOT Reauthorization Act of 2009"
+    And I should not see "unvoted"
+    And I should not see "No bills found"
+
+  Examples:
+    | bill type                          |
+    | pass-voted, current-congress       |
+    | pass-voted, previous-congress      |
+
+  Scenario Outline: User will not see unvoted bills when searching voted bills only
+    Given a <bill type> bill named "USA PATRIOT Reauthorization Act of 2009"
+    When I fill in "Add Bills" with "patriot"
+    And I check "Voted Bills Only"
+    And I press "Search"
+    Then I should not see "USA PATRIOT Reauthorization Act of 2009"
+    And I should not see "unvoted"
+    But I should see "No bills found"
+
+  Examples:
+    | bill type                   |
+    | voted, previous-congress    |
+    | un-voted, previous-congress |
+    | voted, current-congress     |
+    | un-voted, current-congress  |
+
+  Scenario Outline: User can search current bills only
+    Given a <bill type> bill named "USA PATRIOT Reauthorization Act of 2009"
+    When I fill in "Add Bills" with "patriot"
+    And I check "Current Bills Only"
+    And I press "Search"
+    Then I should see "USA PATRIOT Reauthorization Act of 2009"
+    And I should not see "No bills found"
+
+  Examples:
+    | bill type                    |
+    | pass-voted, current-congress |
+    | voted, current-congress      |
+    | un-voted, current-congress   |
+
+  Scenario Outline: User will not see old bills when searching current bills only
+    Given a <bill type> bill named "USA PATRIOT Reauthorization Act of 2009"
+    When I fill in "Add Bills" with "patriot"
+    And I check "Current Bills Only"
+    And I press "Search"
+    Then I should not see "USA PATRIOT Reauthorization Act of 2009"
+    But I should see "No bills found"
+
+  Examples:
+    | bill type                     |
+    | voted, previous-congress      |
+    | un-voted, previous-congress   |
+    | pass-voted, previous-congress |
+
+  Scenario: User views bill year on search
     Given a 1997 bill named "USA PATRIOT Reauthorization Act of 2009"
     When I fill in "Add Bills" with "patriot"
     And I press "Search"
