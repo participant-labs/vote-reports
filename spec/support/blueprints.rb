@@ -250,8 +250,7 @@ Fixjour :verify => false do
     klass.new(
       :politician => new_politician,
       :party => new_party,
-      :state => new_us_state,
-      :district => rand(100),
+      :district => new_district,
       :started_on => started_on,
       :ended_on => ended_on
     )
