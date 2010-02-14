@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100214080558) do
+ActiveRecord::Schema.define(:version => 20100214184545) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -176,20 +176,6 @@ ActiveRecord::Schema.define(:version => 20100214080558) do
     t.datetime "updated_at"
   end
 
-  create_table "politician_terms", :force => true do |t|
-    t.integer  "politician_id", :null => false
-    t.date     "started_on",    :null => false
-    t.date     "ended_on",      :null => false
-    t.integer  "district"
-    t.string   "url"
-    t.integer  "party_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "senate_class"
-    t.string   "type",          :null => false
-    t.integer  "us_state_id"
-  end
-
   create_table "politicians", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -235,6 +221,9 @@ ActiveRecord::Schema.define(:version => 20100214080558) do
     t.datetime "updated_at"
   end
 
+  add_index "presidential_terms", ["party_id"], :name => "index_presidential_terms_on_party_id"
+  add_index "presidential_terms", ["politician_id"], :name => "index_presidential_terms_on_politician_id"
+
   create_table "report_score_evidences", :force => true do |t|
     t.integer  "report_score_id",   :null => false
     t.integer  "vote_id",           :null => false
@@ -275,6 +264,10 @@ ActiveRecord::Schema.define(:version => 20100214080558) do
     t.datetime "updated_at"
   end
 
+  add_index "representative_terms", ["district_id"], :name => "index_representative_terms_on_district_id"
+  add_index "representative_terms", ["party_id"], :name => "index_representative_terms_on_party_id"
+  add_index "representative_terms", ["politician_id"], :name => "index_representative_terms_on_politician_id"
+
   create_table "rolls", :force => true do |t|
     t.string   "where",        :null => false
     t.datetime "voted_at",     :null => false
@@ -306,6 +299,10 @@ ActiveRecord::Schema.define(:version => 20100214080558) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "senate_terms", ["party_id"], :name => "index_senate_terms_on_party_id"
+  add_index "senate_terms", ["politician_id"], :name => "index_senate_terms_on_politician_id"
+  add_index "senate_terms", ["us_state_id"], :name => "index_senate_terms_on_us_state_id"
 
   create_table "slugs", :force => true do |t|
     t.string   "name"
