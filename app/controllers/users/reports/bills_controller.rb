@@ -10,6 +10,9 @@ class Users::Reports::BillsController < ApplicationController
     @q = params[:q]
     @bills = Bill.paginated_search(params).results
 
+    @current = params[:current]
+    @voted = params[:voted]
+
     respond_to do |format|
       format.html
       format.js {

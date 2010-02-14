@@ -21,6 +21,12 @@ class Bill < ActiveRecord::Base
     text :introduced_on do
       introduced_on.to_s(:long)
     end
+    boolean :current do
+      congress.current?
+    end
+    boolean :voted do
+      voted?
+    end
     integer :bill_number
     time :introduced_on
   end
@@ -67,6 +73,12 @@ class Bill < ActiveRecord::Base
       search do
         fulltext params[:q]
         paginate :page => params[:page], :per_page => Bill.per_page
+        if params[:voted]
+          without :voted, false
+        end
+        if params[:current]
+          without :current, false
+        end
       end
     end
   end
@@ -84,8 +96,12 @@ class Bill < ActiveRecord::Base
     "#{bill_type}#{bill_number}"
   end
 
+  def voted?
+    passage_rolls.present?
+  end
+
   def old_and_unvoted?
-    !congress.current? & passage_rolls.empty?
+    !congress.current? & !voted?
   end
 
   def congress=(congress)
