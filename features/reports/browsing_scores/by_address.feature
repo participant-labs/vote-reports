@@ -64,10 +64,10 @@ Feature: Browsing Report Scores by State
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
+      | J. Kerrey            | 24    |
       | Edward Kaufman       | 53    |
       | Martin Sabo          | 76    |
-    But I should not see "J. Kerrey"
-    And I should not see "Connie Mack"
+    But I should not see "Connie Mack"
     And I should not see "Neil Abercrombie"
 
   Examples:
