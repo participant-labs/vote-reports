@@ -8,6 +8,10 @@ class District < ActiveRecord::Base
       {:conditions => '0 = 1'}
     elsif plus_4.blank?
       {:joins => :zip_codes, :conditions => {:'district_zip_codes.zip_code' => zip_code}}
+    elsif DistrictZipCode.exists?(:zip_code => zip_code, :plus_4 => plus_4)
+      {:joins => :zip_codes, :conditions => {
+        :'district_zip_codes.zip_code' => zip_code, :'district_zip_codes.plus_4' => plus_4
+      }}
     else
       {:joins => :zip_codes, :conditions => [
         "district_zip_codes.zip_code = ? AND (district_zip_codes.plus_4 = ? OR district_zip_codes.plus_4 IS NULL)", zip_code, plus_4
@@ -16,12 +20,7 @@ class District < ActiveRecord::Base
   }
 
   def politicians
-    Politician.scoped(:conditions => [
-      "(senate_terms.us_state_id = ? OR representative_terms.district_id = ?)", us_state_id, id
-    ], :joins => [
-      %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
-      %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
-    ], :select => 'DISTINCT politicians.*')
+    Politician.from_districts(self)
   end
 
   def full_name
