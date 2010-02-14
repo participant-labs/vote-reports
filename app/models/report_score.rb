@@ -11,11 +11,11 @@ class ReportScore < ActiveRecord::Base
     :evidence => [{:vote => {:roll => {:subject => {:titles => :as}}}}, :bill_criterion]
   }
 
-  named_scope :on_politicians_from, lambda {|from_where|
-    if politicians = Politician.from(from_where)
-      {:conditions => {:politician_id => politicians.scoped(:select => 'DISTINCT politicians.id').map {|p| p.id }}}
+  named_scope :for_politicians, lambda {|politicians|
+    if politicians == Politician
+      {}
     else
-      {:conditions => '0 = 1'}
+      {:conditions => {:politician_id => politicians}}
     end
   }
 

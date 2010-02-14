@@ -2,5 +2,7 @@
   Show Representatives:
   <%= label_tag :from_where, 'From Where?' %>
   <%= text_field_tag :from_where, @from_where %>
+  <%= check_box_tag :in_office, '1', @in_office %>
+  <%= label_tag :in_office, 'In Office Only' %>
   <%= submit_tag 'Go!' %>
 <% end %>

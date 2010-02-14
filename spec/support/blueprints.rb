@@ -200,19 +200,16 @@ Fixjour :verify => false do
   end
 
   define_builder(PresidentialTerm) do |klass, overrides|
-    started_on = rand(50).years.ago
+    politician_term_overrides(overrides, rand(2) * 4)
 
-    overrides.process(:party) do |party|
-      party = nil if party.blank?
-      party = Party.find_or_create_by_name(party) if party.is_a?(String)
-      overrides[:party] = party
-    end
+    started_on = rand(50).years.ago
+    ended_on = started_on + 4.years
 
     klass.new(
       :politician => new_politician,
       :party => new_party,
       :started_on => started_on,
-      :ended_on => started_on + (rand(2) * 4).years
+      :ended_on => ended_on
     )
   end
 
@@ -245,21 +242,10 @@ Fixjour :verify => false do
   end
 
   define_builder(RepresentativeTerm) do |klass, overrides|
-    overrides.process(:party) do |party|
-      party = nil if party.blank?
-      party = Party.find_or_create_by_name(party) if party.is_a?(String)
-      overrides[:party] = party
-    end
-
-    overrides.process(:state) do |state|
-      overrides[:state] = us_state(state)
-    end
-
-    overrides.process(:name) do |name|
-      overrides[:politician] = Politician.with_name(name).first
-    end
+    politician_term_overrides(overrides, 2)
 
     started_on = rand(50).years.ago
+    ended_on = started_on + 2.years
 
     klass.new(
       :politician => new_politician,
@@ -267,11 +253,27 @@ Fixjour :verify => false do
       :state => new_us_state,
       :district => rand(100),
       :started_on => started_on,
-      :ended_on => started_on + 2.years
+      :ended_on => ended_on
     )
   end
 
   define_builder(SenateTerm) do |klass, overrides|
+    politician_term_overrides(overrides, 6)
+
+    started_on = rand(50).years.ago
+    ended_on = started_on + 6.years
+
+    klass.new(
+      :politician => new_politician,
+      :party => new_party,
+      :senate_class => [1, 2, 3].rand,
+      :state => new_us_state,
+      :started_on => started_on,
+      :ended_on => ended_on
+    )
+  end
+
+  def politician_term_overrides(overrides, years)
     overrides.process(:party) do |party|
       party = nil if party.blank?
       party = Party.find_or_create_by_name(party) if party.is_a?(String)
@@ -286,16 +288,15 @@ Fixjour :verify => false do
       overrides[:politician] = Politician.with_name(name).first
     end
 
-    started_on = rand(50).years.ago
-
-    klass.new(
-      :politician => new_politician,
-      :party => new_party,
-      :senate_class => [1, 2, 3].rand,
-      :state => new_us_state,
-      :started_on => started_on,
-      :ended_on => started_on + 6.years
-    )
+    overrides.process(:in_office) do |in_office|
+      if in_office == 'true'
+        overrides[:started_on] = 1.year.ago
+        overrides[:ended_on] = 1.year.ago + years.years
+      else
+        overrides[:started_on] = 14.years.ago
+        overrides[:ended_on] = 14.years.ago + years.years
+      end
+    end
   end
 
   alias create_empty_report create_report
