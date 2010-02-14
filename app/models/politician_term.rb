@@ -19,11 +19,6 @@ class PoliticianTerm < ActiveRecord::Base
     end
   end
 
-  def describe
-    party = "; #{self.party}" if self.party
-    "#{title} #{place}#{party}"
-  end
-
   private
 
   unless Rails.env.development?
