@@ -40,9 +40,15 @@ class Politician < ActiveRecord::Base
   named_scope :in_office, lambda {
     {
       :select => 'DISTINCT politicians.*',
-      :joins => :politician_terms, :conditions => [
-      '(politician_terms.started_on, politician_terms.ended_on) OVERLAPS (DATE(?), DATE(?))',
-      Date.yesterday, Date.tomorrow
+      :joins => [
+        %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
+        %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
+        %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id}],
+      :conditions => [
+        '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
+        '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
+        '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
+      {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
     ]}
   }
   named_scope :with_name, lambda {|name|
@@ -53,7 +59,13 @@ class Politician < ActiveRecord::Base
   named_scope :from_state, lambda {|state|
     state = UsState.first(:conditions => ["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]) if state.is_a?(String)
     if state
-      {:select => 'DISTINCT politicians.*', :conditions => {:'politician_terms.us_state_id' => state}, :joins => :politician_terms}
+      {:select => 'DISTINCT politicians.*', :conditions => [
+        'senate_terms.us_state_id = ? OR districts.us_state_id = ?', state, state
+      ], :joins => [
+        %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
+        %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
+        %{LEFT OUTER JOIN "districts" ON representative_terms.district_id = districts.id},
+      ]}
     else
       {:conditions => '0 = 1'}
     end
