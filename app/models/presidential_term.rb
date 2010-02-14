@@ -1,5 +1,5 @@
-class PresidentialTerm < PoliticianTerm
-  attr_accessible :politician, :started_on, :ended_on, :created_on, :updated_on, :url, :party
+class PresidentialTerm < ActiveRecord::Base
+  include PoliticianTermStuff
 
   def title
     "President"
