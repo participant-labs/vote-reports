@@ -46,12 +46,16 @@ namespace :gov_track do
 
             case role['type']
             when 'rep'
-              attrs.merge!(:district => role['district'], :state => role['state'])
+              state = UsState.find_by_abbreviation(role['state']) || raise("Unknown state #{role['state']}")
+              district = District.first(:conditions => {:us_state_id => state, :district => role['district'].to_i}) \
+                || District.create(:state => state, :district => role['district'].to_i)
+              attrs.merge!(:district => district)
               politician.representative_terms.find_by_started_on(role['startdate'].to_date).tap do |term|
                 term && term.update_attributes(attrs)
               end || politician.representative_terms.create(attrs)
             when 'sen'
-              attrs.merge!(:senate_class => role['class'], :state => role['state'])
+              state = UsState.find_by_abbreviation(role['state']) || raise("Unknown state #{role['state']}")
+              attrs.merge!(:senate_class => role['class'], :state => state)
               politician.senate_terms.find_by_started_on(role['startdate'].to_date).tap do |term|
                 term && term.update_attributes(attrs)
               end || politician.senate_terms.create(attrs)
