@@ -20,7 +20,7 @@ class District < ActiveRecord::Base
   }
 
   def politicians
-    Politician.from_districts(self)
+    Politician.from_district(self)
   end
 
   def full_name
