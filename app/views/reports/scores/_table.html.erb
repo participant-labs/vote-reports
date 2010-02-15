@@ -76,7 +76,9 @@
   <p>No scores found for: "<%= from_where %>"</p>
 <%- elsif report.bill_criteria.blank? -%>
   <p>No scores yet, as this report has no criteria to judge representatives by.</p>
-<%- else -%>
+<%- elsif report.bill_criteria.count(:joins => {:bill => :passage_rolls}) == 0 -%>
   <p>No scores yet, as the associated bills have not been voted on.</p>
+<%- else -%>
+  <p>No scores found</p>
 <%- end -%>
 </div>
