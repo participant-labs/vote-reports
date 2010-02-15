@@ -1,7 +1,7 @@
 <%- score_count = (scores.count + 1) -%>
 
 <div id="report_scores">
-<%- if score_count >= 50 -%>
+<%- if score_count >= 25 -%>
 <%-
   top_scores = scores.with_evidence.paginate(:page => params[:top_page],
     :total_entries => score_count / 2)
