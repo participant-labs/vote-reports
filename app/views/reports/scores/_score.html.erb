@@ -1,7 +1,14 @@
-<%= render 'politicians/politician', :politician => score.politician %>: <%= score.score.round %>%
-   (<%= link_to 'votes', '#',
-   :'data-dialog' => "##{dom_id(score.politician, :report_score_evidence)}",
-   :'data-dialog-title' => "Significant Votes for #{score.politician.full_name} on '#{@report.name}'" %>)
+<%= render 'politicians/politician', :politician => score.politician %>
+<div class="report_score hoverable">
+  <%= link_to "#{score.score.round}%", '#', :class => 'score',
+    :'data-dialog' => "##{dom_id(score.politician, :report_score_evidence)}",
+    :'data-dialog-title' => "Significant Votes for #{score.politician.full_name} on '#{@report.name}'" %>
+  <div class="report_score_evidence_link">
+    based on <%= link_to pluralize(score.evidence.size, 'vote'), '#',
+    :'data-dialog' => "##{dom_id(score.politician, :report_score_evidence)}",
+    :'data-dialog-title' => "Significant Votes for #{score.politician.full_name} on '#{@report.name}'" %>
+  </div>
+</div>
 
 <dl id="<%= dom_id(score.politician, :report_score_evidence) %>" class="hidden">
   <%- score.evidence.group_by(&:subject).each_pair do |bill, bill_scores| -%>

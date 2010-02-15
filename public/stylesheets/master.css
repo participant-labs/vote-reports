@@ -46,6 +46,36 @@ form {
   width: 100%;
 }
 
+.report_scores .politician_name {
+  font-size: 1.3em;
+}
+
+.report_score {
+  position: relative;
+}
+
+.report_score > .score {
+  font-size: 2em;
+  position: relative;
+  top: -55px;
+  left: 75px;
+}
+
+.report_score > .report_score_evidence_link {
+  display: none;
+  border: 1px solid #dda;
+  position: absolute;
+  top: -30px;
+  left: 75px;
+  padding: 1em;
+  background: #ffc;
+  color: #930;
+}
+
+.report_score.hovering > .report_score_evidence_link {
+  display: block;
+}
+
 thead th {
   background: #C3D9FF none repeat scroll 0 0;
 }
