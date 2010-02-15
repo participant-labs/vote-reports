@@ -1,5 +1,5 @@
 class Report < ActiveRecord::Base
-  DEFAULT_THUMBNAIL_PATH = "/images/reports/default_thumbnail.jpg"
+  DEFAULT_THUMBNAIL_PATH = "images/reports/default_thumbnail.jpg"
 
   belongs_to :user
   has_friendly_id :name, :use_slug => true, :scope => :user
@@ -86,7 +86,7 @@ class Report < ActiveRecord::Base
                      :thumbnail => '110x83#',
                      :small => "55x41#" },
         :processors => [:jcropper],
-        :default_url => DEFAULT_THUMBNAIL_PATH,
+        :default_url => ('/' + DEFAULT_THUMBNAIL_PATH),
         :default_style => :thumbnail
 
   validates_attachment_content_type :thumbnail, :content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-png']
