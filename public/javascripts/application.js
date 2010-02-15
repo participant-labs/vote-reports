@@ -52,10 +52,11 @@
       return false;
     });
 
-    $('ul#menu > li').hoverIntent({
-       over: function() { $(this).addClass("hovering"); },
-       out: function() { $(this).removeClass("hovering"); }
-     });
+    $('.hoverable, .dropdown').hoverIntent({
+      timeout: 500,
+      over: function() { $(this).addClass("hovering"); },
+      out: function() { $(this).removeClass("hovering"); }
+    });
 
      $('#mce-EMAIL').fieldtag();
      $('[for=mce-EMAIL]').hide();
