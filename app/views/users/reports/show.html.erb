@@ -24,15 +24,26 @@
 
 <div class="section report_scores">
   <h2>Scores</h2>
-  <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#bill_criteria' %> lead to a high score, votes against, a low one.</p>
+  <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#', :'data-dialog' => "#bill_criteria",
+:'data-dialog-title' => "Bill Criteria for #{@report.name}" %> lead to a high score, votes against, a low one.</p>
   <%- if @report.scores.present? -%>
     <%= render 'politicians/search', :url => user_report_path(@report.user, @report), :replace => '#report_scores' %>
   <%- end -%>
   <%= render 'reports/scores/table', :report => @report, :scores => @scores, :from_where => @from_where %>
 </div>
 
-<div class="section">
-  <h2 id="bill_criteria">Bill Criteria</h2>
+<div class="footer">
+  <ul>
+    <li><%= link_to 'Learn more about this Report', '#',
+    :'data-dialog' => "#bill_criteria",
+  :'data-dialog-title' => "Bill Criteria for #{@report.name}" %></li>
+    <li><%= link_to 'Find another Report', reports_path %></li>
+    <li><%= link_to 'Create a new Report', new_report_path %></li>
+  </ul>
+</div>
+
+<div class="section"  id="bill_criteria">
+  <h2>Bill Criteria</h2>
   <p>Learn more about the bills in this report:</p>
   <blockquote>
     <ul>
