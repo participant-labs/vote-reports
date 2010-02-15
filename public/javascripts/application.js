@@ -53,10 +53,7 @@
     });
 
     $('ul#menu > li').hoverIntent({
-       interval: 500,
-       sensitivity: 4,
        over: function() { $(this).addClass("hovering"); },
-       timeout: 500,
        out: function() { $(this).removeClass("hovering"); }
      });
 
