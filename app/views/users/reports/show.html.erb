@@ -11,6 +11,9 @@
     <p>
       <%= link_to "Edit Name & Description", edit_user_report_path(current_user, @report) %> |
       <%= link_to 'Edit Thumbnail', edit_user_report_thumbnail_path(current_user, @report) %> |
+      <%= link_to 'Edit Bill Criteria', '#',
+      :'data-dialog' => "#bill_criteria",
+    :'data-dialog-title' => "Bill Criteria for #{@report.name}" %> |
       <%= link_to "Delete this Report", [current_user, @report], :confirm => 'Are you sure?', :method => :delete %>
     </p>
 
