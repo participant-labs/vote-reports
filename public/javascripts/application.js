@@ -52,10 +52,16 @@
       return false;
     });
 
-    $('.hoverable, .dropdown').hoverIntent({
-      timeout: 500,
-      over: function() { $(this).addClass("hovering"); },
-      out: function() { $(this).removeClass("hovering"); }
+    $('.hoverable, .dropdown').live('mouseover', function() {
+      if (!$(this).data('init')) {
+        $(this).data('init', true);
+        $(this).hoverIntent({
+          timeout: 500,
+          over: function() { $(this).addClass("hovering"); },
+          out: function() { $(this).removeClass("hovering"); }
+        });
+        $(this).trigger('mouseover');
+      }
     });
 
      $('#mce-EMAIL').fieldtag();
