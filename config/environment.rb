@@ -19,6 +19,7 @@ Rails::Initializer.run do |config|
   config.gem 'ancestry'
   config.gem "authlogic", :version => '>=2.1.3'
   config.gem 'bluecloth', :version => '>=2.0.5'
+  config.gem 'delayed_job'
   config.gem 'erubis'
   config.gem 'exceptional'
   config.gem 'friendly_id'
