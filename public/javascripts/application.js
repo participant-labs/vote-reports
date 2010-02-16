@@ -24,18 +24,18 @@
 
     $('.flash').fadeOutSoon(1000);
 
-    $('[data-dialog]').each(function() {
+    $('[data-dialog]').live('mouseover', function() {
         $($(this).attr('data-dialog')).dialog({
           autoOpen: false,
           title: $(this).attr('data-dialog-title'),
           width: 800});
     });
-    $('[data-dialog]').click(function(event) {
+    $('[data-dialog]').live('click', function(event) {
         $($(event.target).attr('data-dialog')).dialog('open');
         return false;
     });
 
-    $('[data-toggle]').click(function(event) {
+    $('[data-toggle]').live('click', function(event) {
       $($(event.target).attr('data-toggle')).toggle();
       return false;
     })
