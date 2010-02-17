@@ -77,7 +77,7 @@ Feature: Scoring Reports
     And report "Active Report" has the following bill criterion:
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
-    When I wait 240 seconds
+    When I wait for delayed job to finish
     And I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
@@ -125,38 +125,27 @@ Feature: Scoring Reports
       | Honoring Miss America Act of 2009       | true   |
     When I go to my report page for "Active Report"
     Then I should see "Scores are being generated. Please try again in a moment."
-    When I wait 5 seconds
-    And refresh the page
+    When I wait for delayed job to finish
+    And I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
-      | Piyush Jindal        | 50    |
+      | Connie Mack          | 100   |
+      | Roscoe Bartlett      | 100   |
+      | Edward Kaufman       | 100   |
+      | Frank Ballance       | 0     |
+      | Tammy Baldwin        | 0     |
       | J. Kerrey            | 75    |
       | Martin Sabo          | 75    |
-      | Edward Kaufman       | 100   |
-      | Connie Mack          | 100   |
       | Neil Abercrombie     | 25    |
       | Aníbal Acevedo-Vilá  | 50    |
-      | Julia Carson         | 50    |
       | Brad Carson          | 75    |
-      | Gary Ackerman        | 50    |
       | Robert Aderholt      | 25    |
       | W. Akin              | 50    |
-      | Rodney Alexander     | 50    |
       | Thomas Allen         | 75    |
-      | Robert Andrews       | 50    |
       | Brian Baird          | 25    |
-      | Richard Baker        | 50    |
-      | Cass Ballenger       | 50    |
-      | James Barrett        | 50    |
-      | Roscoe Bartlett      | 100   |
-    When I follow "Next"
-    Then I should see the following scores:
-      | politician           | score |
       | Spencer Bachus       | 25    |
       | Joe Baca             | 0     |
-      | Tammy Baldwin        | 0     |
-      | Frank Ballance       | 0     |
-    And I should not see "Joe Barton"
+    And I should see "Next"
 
   Scenario: Bill Criteria report generate scores from passing roles only
     Given bill "Bovine Security Act of 2009" has the following rolls:
@@ -177,8 +166,8 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
     Then I should see "Scores are being generated. Please try again in a moment."
-    When I wait 5 seconds
-    And refresh the page
+    When I wait for delayed job to finish
+    And I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -207,8 +196,8 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
     Then I should see "Scores are being generated. Please try again in a moment."
-    When I wait 5 seconds
-    And refresh the page
+    When I wait for delayed job to finish
+    And I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -237,8 +226,8 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
     Then I should see "Scores are being generated. Please try again in a moment."
-    When I wait 5 seconds
-    And refresh the page
+    When I wait for delayed job to finish
+    And I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -284,8 +273,8 @@ Feature: Scoring Reports
       | Honoring Bo Jackson Act of 2005 | false   |
     When I go to my report page for "Active Report"
     Then I should see "Scores are being generated. Please try again in a moment."
-    When I wait 5 seconds
-    And refresh the page
+    When I wait for delayed job to finish
+    And I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |

@@ -37,6 +37,9 @@ class Politician < ActiveRecord::Base
   has_many :bill_oppositions
   has_many :opposed_bills, :through => :bill_oppositions, :source => :bill
 
+  has_many :report_scores
+  has_many :reports, :through => :report_scores
+
   named_scope :in_office, lambda {
     {
       :select => 'DISTINCT politicians.*',

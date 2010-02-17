@@ -29,6 +29,8 @@ end
 Then /^I should see the following scores?:$/ do |table|
   table.map_column!('politician') {|name| Politician.with_name(name).first }
   table.hashes.each do |hash|
-    response.should contain(/#{hash['politician'].full_name}(?:| .*): #{hash['score']}%/)
+    response.should contain(hash['politician'].full_name)
+    response.should contain(hash['score'])
+    hash['politician'].report_scores.map {|s| s.score.round }.should include(hash['score'].to_i)
   end
 end

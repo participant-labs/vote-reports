@@ -13,6 +13,10 @@ When /^I wait (\d+) seconds$/ do |seconds|
   sleep seconds.to_i
 end
 
+When /^I wait for delayed job to finish$/ do
+  Delayed::Job.reserve_and_run_one_job
+end
+
 When /^I console$/ do
   console_for(binding)
 end
