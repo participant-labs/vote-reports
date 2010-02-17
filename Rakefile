@@ -9,13 +9,6 @@ require 'rake/rdoctask'
 
 require 'tasks/rails'
 
-begin
-  require 'vlad'
-  Vlad.load :scm => :git
-rescue LoadError
-  # do nothing
-end
-
 task :spec => [:'sunspot:start']
 task :cucumber => [:'sunspot:start']
 task :default => [:spec, :cucumber]
