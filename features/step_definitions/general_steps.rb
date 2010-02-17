@@ -8,6 +8,11 @@ Given /^the following (.+) records?:$/ do |type, table|
   end
 end
 
+When /^I wait (\d+) seconds$/ do |seconds|
+  print seconds
+  sleep seconds.to_i
+end
+
 When /^I console$/ do
   console_for(binding)
 end

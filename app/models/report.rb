@@ -120,22 +120,25 @@ class Report < ActiveRecord::Base
   end
 
   def rescore!
-    self.scores.clear
-    bill_criteria.active.map(&:scores).flatten.group_by(&:politician).each_pair do |politician, bill_scores|
-      bill_baseline = bill_scores.map(&:average_base)
-      bill_baseline = bill_baseline.sum / bill_baseline.size
+    transaction do
+      self.scores.clear
+      bill_criteria.active.map(&:scores).flatten.group_by(&:politician).each_pair do |politician, bill_scores|
+        bill_baseline = bill_scores.map(&:average_base)
+        bill_baseline = bill_baseline.sum / bill_baseline.size
 
-      scores = bill_scores.map {|s| s.score * s.average_base / bill_baseline }
-      score = self.scores.create(:politician => politician, :score => scores.sum / scores.size)
-      bill_scores.each do |bill_score|
-        bill_score.votes.each do |vote|
-          score.evidence.create(:vote => vote, :bill_criterion => bill_score.bill_criterion)
+        scores = bill_scores.map {|s| s.score * s.average_base / bill_baseline }
+        score = self.scores.create(:politician => politician, :score => scores.sum / scores.size)
+        bill_scores.each do |bill_score|
+          bill_score.votes.each do |vote|
+            score.evidence.create(:vote => vote, :bill_criterion => bill_score.bill_criterion)
+          end
         end
       end
+      unpublish if self.scores.empty? && can_unpublish?
     end
-    unpublish if self.scores.empty? && can_unpublish?
     nil
   end
+  handle_asynchronously :rescore!
 
   def cropping?
     [crop_x, crop_y, crop_w, crop_h].all?(&:present?)
