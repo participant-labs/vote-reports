@@ -77,7 +77,8 @@ Feature: Scoring Reports
     And report "Active Report" has the following bill criterion:
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
-    When I go to my report page for "Active Report"
+    When I wait 240 seconds
+    And I go to my report page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -123,6 +124,9 @@ Feature: Scoring Reports
       | USA PATRIOT Reauthorization Act of 2009 | false   |
       | Honoring Miss America Act of 2009       | true   |
     When I go to my report page for "Active Report"
+    Then I should see "Scores are being generated. Please try again in a moment."
+    When I wait 5 seconds
+    And refresh the page
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 50    |
@@ -172,6 +176,9 @@ Feature: Scoring Reports
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
+    Then I should see "Scores are being generated. Please try again in a moment."
+    When I wait 5 seconds
+    And refresh the page
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -199,6 +206,9 @@ Feature: Scoring Reports
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
+    Then I should see "Scores are being generated. Please try again in a moment."
+    When I wait 5 seconds
+    And refresh the page
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -226,6 +236,9 @@ Feature: Scoring Reports
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
+    Then I should see "Scores are being generated. Please try again in a moment."
+    When I wait 5 seconds
+    And refresh the page
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -270,6 +283,9 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009     | true    |
       | Honoring Bo Jackson Act of 2005 | false   |
     When I go to my report page for "Active Report"
+    Then I should see "Scores are being generated. Please try again in a moment."
+    When I wait 5 seconds
+    And refresh the page
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
