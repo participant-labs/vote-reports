@@ -5,7 +5,15 @@ class Report < ActiveRecord::Base
   has_friendly_id :name, :use_slug => true, :scope => :user
 
   has_many :report_delayed_jobs
-  has_many :delayed_jobs, :through => :report_delayed_jobs
+  has_many :delayed_jobs, :through => :report_delayed_jobs do
+    def failing
+      scoped(:conditions => 'delayed_jobs.last_error IS NOT NULL')
+    end
+
+    def passing
+      scoped(:conditions => {:last_error => nil})
+    end
+  end
 
   searchable do
     text :name, :description
