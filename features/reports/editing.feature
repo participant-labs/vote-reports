@@ -32,7 +32,7 @@ Feature: User edits reports
     And I press "Update Report"
     Then I should see "Successfully updated report."
     And I should see "You should read this because I'm awesome"
-    And I should not see "#"
+    And I should not see "# You"
     And I should not see "<h1>"
     When I go to my reports page
     Then I should not see "<h1>"
