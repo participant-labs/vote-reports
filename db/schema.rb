@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100216081326) do
+ActiveRecord::Schema.define(:version => 20100219023746) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -240,6 +240,11 @@ ActiveRecord::Schema.define(:version => 20100216081326) do
 
   add_index "presidential_terms", ["party_id"], :name => "index_presidential_terms_on_party_id"
   add_index "presidential_terms", ["politician_id"], :name => "index_presidential_terms_on_politician_id"
+
+  create_table "report_delayed_jobs", :force => true do |t|
+    t.integer "report_id",      :null => false
+    t.integer "delayed_job_id", :null => false
+  end
 
   create_table "report_score_evidences", :force => true do |t|
     t.integer  "report_score_id",   :null => false
