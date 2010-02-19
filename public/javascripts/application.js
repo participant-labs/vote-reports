@@ -14,10 +14,14 @@
 
   function replaceWith(target, url) {
     target = $(target);
+    if (target.length == 0) {
+      return true;
+    }
     target.block({message: '<p class="loading">Loading...</p>'});
     target.load(url, function() {
       target.unblock();
     });
+    return false;
   }
 
   $(document).ready(function(){
@@ -42,14 +46,12 @@
 
     $('[data-replace] a, a[data-replace]').live('click', function(event) {
       var target = $(event.target);
-      replaceWith(target.closest('[data-replace]').attr('data-replace'), target.attr('href'));
-      return false;
+      return replaceWith(target.closest('[data-replace]').attr('data-replace'), target.attr('href'));
     })
 
     $('form[data-replace]').submit(function(event){
       var source = $(event.target);
-      replaceWith(source.attr('data-replace'), source.attr('action') + '?' + source.serialize());
-      return false;
+      return replaceWith(source.attr('data-replace'), source.attr('action') + '?' + source.serialize());
     });
 
     $('.hoverable, .dropdown').live('mouseover', function() {
