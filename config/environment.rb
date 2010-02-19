@@ -18,6 +18,7 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   config.gem 'ancestry'
   config.gem "authlogic", :version => '>=2.1.3'
+  config.gem 'authlogic_rpx', :version => '>= 1.1.1'
   config.gem 'bluecloth', :version => '>=2.0.5'
   config.gem 'delayed_job'
   config.gem 'erubis'
@@ -30,6 +31,7 @@ Rails::Initializer.run do |config|
   config.gem 'newrelic_rpm'
   config.gem 'paperclip'
   config.gem 'pg'
+  config.gem 'rpx_now', :version => '>= 0.6.12'
   config.gem 'sexy_pg_constraints'
   config.gem 'state_machine'
   config.gem 'sunspot', :lib => 'sunspot'
