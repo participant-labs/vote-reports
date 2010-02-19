@@ -1,0 +1,1 @@
+RPX_API_KEY = ENV['RPX_API_KEY']
