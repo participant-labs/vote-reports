@@ -78,7 +78,9 @@
   <p>No scores yet, as this report has no criteria to judge representatives by.</p>
 <%- elsif report.bills.scoped(:joins => :passage_rolls).empty? -%>
   <p>No scores yet, as the associated bills have not been voted on.</p>
-<%- else -%>
+<%- elsif report.delayed_jobs.present? -%>
   <p>Scores are being generated. Please try again in a moment.</p>
+<%- else -%>
+  <p>No scores found</p>
 <%- end -%>
 </div>
