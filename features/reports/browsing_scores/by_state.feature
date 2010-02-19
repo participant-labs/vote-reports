@@ -40,6 +40,7 @@ Feature: Browsing Report Scores by State
     And report "Active Report" has the following bill criterion:
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
+    And I wait for delayed job to finish
 
   Scenario: When unscoped, report scores should be proper and complete
     When I go to my report page for "Active Report"

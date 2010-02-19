@@ -307,6 +307,7 @@ Fixjour :verify => false do
   def create_unscored_report(attrs = {})
     create_report(attrs).tap do |report|
       create_bill_criterion(:report => report)
+      Delayed::Job.reserve_and_run_one_job
     end
   end
 
@@ -317,6 +318,7 @@ Fixjour :verify => false do
         create_vote(:roll => roll, :politician => p, :vote => Vote::POSSIBLE_VALUES.rand)
       end
       report.rescore!
+      Delayed::Job.reserve_and_run_one_job
     end
   end
 
