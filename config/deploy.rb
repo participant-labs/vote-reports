@@ -7,7 +7,7 @@ set :repository, 'git@github.com:Empact/vote-reports.git'
 namespace :vlad do
   desc "custom deploy"
   task :update_symlinks => :internal_symlinks
-  task :deploy => [:update, :install_gems, :migrate, :setup_scheduling, :start_solr, :setup_assets, :start]
+  task :deploy => [:update, :install_gems, :migrate, :setup_scheduling, :start_solr, :start_dj, :setup_assets, :start]
 
   set :web_command, "apache2ctl"
 
@@ -25,6 +25,10 @@ namespace :vlad do
 
   remote_task :start_solr, :roles => :app do
     run "cd #{latest_release} && rake sunspot:solr:start RAILS_ENV=production"
+  end
+
+  remote_task :start_dj, :roles => :app do
+    run "cd #{latest_release} && RAILS_ENV=production script/delayed_job start"
   end
 
   remote_task :setup_scheduling, :roles => :app do
