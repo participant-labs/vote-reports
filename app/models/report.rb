@@ -120,21 +120,22 @@ class Report < ActiveRecord::Base
   end
 
   def rescore!
-    transaction do
-      self.scores.clear
-      bill_criteria.active.map(&:scores).flatten.group_by(&:politician).each_pair do |politician, bill_scores|
-        bill_baseline = bill_scores.map(&:average_base)
-        bill_baseline = bill_baseline.sum / bill_baseline.size
+    bill_criteria.active.map(&:scores).flatten.group_by(&:politician).each_pair do |politician, bill_scores|
+      bill_baseline = bill_scores.map(&:average_base)
+      bill_baseline = bill_baseline.sum / bill_baseline.size
 
-        scores = bill_scores.map {|s| s.score * s.average_base / bill_baseline }
-        score = self.scores.create(:politician => politician, :score => scores.sum / scores.size)
-        bill_scores.each do |bill_score|
-          bill_score.votes.each do |vote|
-            score.evidence.create(:vote => vote, :bill_criterion => bill_score.bill_criterion)
-          end
+      scores = bill_scores.map {|s| s.score * s.average_base / bill_baseline }
+      score = self.scores.build(:politician => politician, :score => scores.sum / scores.size)
+      bill_scores.each do |bill_score|
+        bill_score.votes.each do |vote|
+          score.evidence.build(:vote => vote, :bill_criterion => bill_score.bill_criterion)
         end
       end
-      unpublish if self.scores.empty? && can_unpublish?
+    end
+    transaction do
+      ReportScore.delete_all(:report_id => self)
+      save!
+      unpublish if scores.empty? && can_unpublish?
     end
     nil
   end
