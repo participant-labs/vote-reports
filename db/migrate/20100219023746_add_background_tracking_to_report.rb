@@ -5,8 +5,8 @@ class AddBackgroundTrackingToReport < ActiveRecord::Migration
       t.integer :delayed_job_id, :null => false
     end
     constrain :report_delayed_jobs do |t|
-      t.report_id :reference => {:reports => :id}
-      t.delayed_job_id :reference => {:delayed_jobs => :id}
+      t.report_id :reference => {:reports => :id, :on_delete => :cascade}
+      t.delayed_job_id :reference => {:delayed_jobs => :id, :on_delete => :cascade}
     end
   end
 
