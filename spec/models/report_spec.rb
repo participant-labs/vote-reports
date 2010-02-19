@@ -74,6 +74,12 @@ describe Report do
           Delayed::Job.reserve_and_run_one_job
         }.should change(@report.delayed_jobs, :count).by(-1)
       end
+
+      it "should not create duplicate jobs for the pending action" do
+        lambda {
+          @report.rescore!
+        }.should_not change(@report.delayed_jobs, :count)
+      end
     end
   end
 end

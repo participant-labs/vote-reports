@@ -13,6 +13,10 @@ class Report < ActiveRecord::Base
     def passing
       scoped(:conditions => {:last_error => nil})
     end
+
+    def unlocked
+      scoped(:conditions => {:locked_at => nil})
+    end
   end
 
   searchable do
@@ -131,7 +135,9 @@ class Report < ActiveRecord::Base
   end
 
   def rescore!
-    delayed_jobs << Delayed::Job.enqueue(Report::Scorer.new(id))
+    unless delayed_jobs.unlocked.present?
+      delayed_jobs << Delayed::Job.enqueue(Report::Scorer.new(id))
+    end
   end
 
   def cropping?
