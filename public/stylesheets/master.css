@@ -50,6 +50,11 @@ form {
   width: 100%;
 }
 
+.report_scores .scores_generating {
+  font-weight: bold;
+  text-align: center;
+}
+
 .report_scores .politician_name {
   font-size: 1.3em;
 }
