@@ -5,7 +5,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :politicians, :only => [:index, :show]
 
   map.resources :user_sessions
-  map.resources :users
+  map.resources :users do |user|
+    user.resources :rpx_identities, :only => [:create], :controller => 'users/rpx_identities'
+  end
 
   map.resources :reports, :only => [:index, :new]
 
