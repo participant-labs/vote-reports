@@ -19,8 +19,11 @@ class Report
       end
       ActiveRecord::Base.transaction do
         ReportScore.delete_all(:report_id => report)
-        report.save!
-        report.unpublish if report.scores.empty? && report.can_unpublish?
+        if report.scores.empty? && report.can_unpublish?
+          report.unpublish
+        else
+          report.save!
+        end
       end
     end
   end
