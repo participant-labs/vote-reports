@@ -52,4 +52,28 @@ describe Report do
       Report.scored.should == [@report]
     end
   end
+
+  describe "#rescore!" do
+    before do
+      @report = create_report
+    end
+
+    it "should create a delayed job accessible via #delayed_jobs" do
+      lambda {
+        @report.rescore!
+      }.should change(@report.delayed_jobs, :count).by(1)
+    end
+
+    context "when a rescore is active" do
+      before do
+        @report.rescore!
+      end
+
+      it "completeing the rescore should remove it from the active jobs" do
+        lambda {
+          Delayed::Job.reserve_and_run_one_job
+        }.should change(@report.delayed_jobs, :count).by(-1)
+      end
+    end
+  end
 end
