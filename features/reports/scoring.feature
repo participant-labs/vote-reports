@@ -137,10 +137,8 @@ Feature: Scoring Reports
       | J. Kerrey            | 75    |
       | Martin Sabo          | 75    |
       | Neil Abercrombie     | 25    |
-      | Aníbal Acevedo-Vilá  | 50    |
       | Brad Carson          | 75    |
       | Robert Aderholt      | 25    |
-      | W. Akin              | 50    |
       | Thomas Allen         | 75    |
       | Brian Baird          | 25    |
       | Spencer Bachus       | 25    |
