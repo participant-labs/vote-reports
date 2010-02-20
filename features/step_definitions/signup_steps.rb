@@ -1,7 +1,5 @@
-Given /^I signed up as "(.*)\/(.*)"$/ do |email, password|
-  create_user(
-    :email                 => email, 
-    :password              => password,
-    :password_confirmation => password
-  )
+Given /^I signed up as:$/ do |table|
+  table.hashes.each do |hash|
+    create_user(hash.merge('password_confirmation' => hash['password']))
+  end
 end
