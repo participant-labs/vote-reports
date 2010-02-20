@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100219023746) do
+ActiveRecord::Schema.define(:version => 20100220185831) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -348,15 +348,27 @@ ActiveRecord::Schema.define(:version => 20100219023746) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",             :null => false
+    t.string   "email",                             :null => false
     t.string   "crypted_password"
     t.string   "salt"
     t.string   "persistence_token"
-    t.string   "username",          :null => false
+    t.string   "username",                          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cached_slug"
+    t.string   "state"
+    t.integer  "login_count",        :default => 0, :null => false
+    t.integer  "failed_login_count", :default => 0, :null => false
+    t.datetime "last_request_at"
+    t.datetime "last_login_at"
+    t.datetime "current_login_at"
+    t.string   "last_login_ip"
+    t.string   "current_login_ip"
   end
+
+  add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
+  add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
+  add_index "users", ["username"], :name => "index_users_on_username"
 
   create_table "votes", :force => true do |t|
     t.integer  "politician_id"
