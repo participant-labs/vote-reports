@@ -29,6 +29,7 @@ module FriendlyId
 
         if result = with_scope(:find => find_options) { find_initial(options) }
           result.finder_slug_name = id_or_name
+          result.finder_slug_scope = scope
           result
         elsif id_or_name.to_i.to_s != id_or_name
           raise ActiveRecord::RecordNotFound
