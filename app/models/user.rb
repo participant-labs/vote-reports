@@ -2,9 +2,18 @@ class User < ActiveRecord::Base
   is_gravtastic!
   has_friendly_id :username, :use_slug => true
 
-  acts_as_authentic
+  acts_as_authentic do |c|
+    c.account_mapping_mode :auto
+    c.account_merge_enabled true
+  end
 
   has_many :reports
+
+  state_machine :initial => :active do
+    event :disable do
+      transition :active => :disabled
+    end
+  end
 
   class << self
     def find_by_username_or_email(login)
@@ -14,5 +23,19 @@ class User < ActiveRecord::Base
 
   def admin?
     false
+  end
+
+  private
+
+  def before_merge_rpx_data(from_user, to_user)
+    notify_exceptional "merging user #{from_user.to_param} into #{to_user.to_param}"
+    to_user.reports << from_user.reports
+    to_user.slugs << from_user.slugs
+    to_user.reports.each {|report| report.save! }
+  end
+
+  def after_merge_rpx_data(from_user, to_user)
+    notify_exceptional "disabling login for #{from_user.to_param}"
+    from_user.disable!
   end
 end
