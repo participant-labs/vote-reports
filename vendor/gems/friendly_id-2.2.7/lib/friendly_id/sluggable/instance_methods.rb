@@ -29,7 +29,7 @@ module FriendlyId
         end
       end
 
-      attr_accessor :finder_slug_name
+      attr_accessor :finder_slug_name, :finder_slug_scope
 
       def finder_slug
         @finder_slug ||= init_finder_slug or nil
@@ -47,13 +47,13 @@ module FriendlyId
 
       # Was the record found using an old friendly id?
       def found_using_outdated_friendly_id?
-        return false if cache_column && send(cache_column) == @finder_slug_name
+        return false if cache_column && !@finder_slug_scope.present? && send(cache_column) == @finder_slug_name
         finder_slug.id != slug.id
       end
 
       # Was the record found using an old friendly id, or its numeric id?
       def has_better_id?
-        has_a_slug? and found_using_numeric_id? || found_using_outdated_friendly_id?
+        has_a_slug? and (found_using_numeric_id? || found_using_outdated_friendly_id?)
       end
 
       # Does the record have (at least) one slug?
@@ -122,7 +122,9 @@ module FriendlyId
       def init_finder_slug
         return false if !@finder_slug_name
         name, sequence = Slug.parse(@finder_slug_name)
-        slug = Slug.find(:first, :conditions => {:sluggable_id => id, :name => name, :sequence => sequence, :sluggable_type => self.class.base_class.name })
+        conditions = {:sluggable_id => id, :name => name, :sequence => sequence, :sluggable_type => self.class.base_class.name }
+        conditions.merge!(:scope => @finder_slug_scope) if @finder_slug_scope
+        slug = Slug.find(:first, :conditions => conditions)
         finder_slug = slug
       end
 

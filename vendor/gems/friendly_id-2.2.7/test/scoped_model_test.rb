@@ -29,9 +29,15 @@ class ScopedModelTest < Test::Unit::TestCase
     end
 
     should "generate a new slug when the slugged object is updated" do
+      assert_equal false, Resident.find(@resident.to_param, :scope => @usa.to_param).has_better_id?
+
       @resident.country = @canada
       @resident.save!
+      assert_equal @resident, Resident.find(@resident.to_param, :scope => @usa.to_param)
       assert_equal @resident, Resident.find(@resident.to_param, :scope => @canada.to_param)
+
+      res = Resident.find(@resident.to_param, :scope => @usa.to_param)
+      assert_equal true, res.has_better_id?
 
       @usa.residents << @resident
       @usa.save!

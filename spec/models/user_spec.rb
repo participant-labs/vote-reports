@@ -30,10 +30,19 @@ describe User do
       @from_user.reports(true).should be_empty
     end
 
+    it "should generate new slugs for reports" do
+      lambda {
+        @from_user.send(:before_merge_rpx_data, @from_user, @to_user)
+      }.should change(Slug, :count).by(@from_user.reports.count)
+    end
+
     it "should transfer slugs" do
+      @from_user.to_param.should_not == @to_user.to_param
       @from_user.send(:before_merge_rpx_data, @from_user, @to_user)
-      Report.find(@from_report.to_param, :scope => @from_user.to_param)
-      Report.find(@from_report.to_param, :scope => @to_user.to_param)
+      report = Report.find(@from_report.to_param, :scope => @from_user.to_param)
+      Report.find(@from_report.to_param, :scope => @to_user.to_param).should_not 
+      report.user.should == @to_user
+      report.should be_has_better_id
     end
 
     it "should disable the account" do

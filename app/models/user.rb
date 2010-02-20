@@ -31,7 +31,6 @@ class User < ActiveRecord::Base
     notify_exceptional "merging user #{from_user.to_param} into #{to_user.to_param}"
     to_user.reports << from_user.reports
     to_user.slugs << from_user.slugs
-    to_user.reports.each {|report| report.save! }
   end
 
   def after_merge_rpx_data(from_user, to_user)
