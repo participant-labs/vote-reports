@@ -70,7 +70,7 @@ module FriendlyId
       # Has the basis of our friendly id changed, requiring the generation of a
       # new slug?
       def new_slug_needed?
-        !slug || slug_text != slug.name
+        !slug || slug_text != slug.name || scope_object.to_param != slug.scope.to_s
       end
 
       # Returns the most recent slug, which is used to determine the friendly
@@ -94,6 +94,10 @@ module FriendlyId
         self.slug_normalizer_block.call(
           send(friendly_id_options[:method])
         ).mb_chars.to(friendly_id_options[:max_length] - 1)
+      end
+
+      def scope_object
+        friendly_id_options[:scope] && send(friendly_id_options[:scope])
       end
 
     private
@@ -128,8 +132,7 @@ module FriendlyId
           @most_recent_slug = nil
           slug_attributes = {:name => slug_text, :sluggable => self}
           slug_attributes[:scope] =
-            if friendly_id_options[:scope]
-              scope = send(friendly_id_options[:scope])
+            if scope = scope_object
               scope.respond_to?(:to_param) ? scope.to_param : scope.to_s
             end
           # If we're renaming back to a previously used friendly_id, delete the

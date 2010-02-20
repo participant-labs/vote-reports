@@ -9,7 +9,7 @@ class ScopedModelTest < Test::Unit::TestCase
       @usa = Country.create!(:name => "USA")
       @canada = Country.create!(:name => "Canada")
       @resident = Resident.create!(:name => "John Smith", :country => @usa)
-      @resident2 = Resident.create!(:name => "John Smith", :country => @canada)
+      @resident2 = Resident.create!(:name => "Josh Smith", :country => @canada)
     end
 
     teardown do
@@ -25,7 +25,17 @@ class ScopedModelTest < Test::Unit::TestCase
 
     should "should not show the scope in the friendly_id" do
       assert_equal "john-smith", @resident.friendly_id
-      assert_equal "john-smith", @resident2.friendly_id
+      assert_equal "josh-smith", @resident2.friendly_id
+    end
+
+    should "generate a new slug when the slugged object is updated" do
+      @resident.country = @canada
+      @resident.save!
+      assert_equal @resident, Resident.find(@resident.to_param, :scope => @canada.to_param)
+
+      @usa.residents << @resident
+      @usa.save!
+      assert_equal @resident, Resident.find(@resident.to_param, :scope => @usa.to_param)
     end
 
     should "find all scoped records without scope" do
