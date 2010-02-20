@@ -15,7 +15,9 @@ Feature: User create report
       Then I should be on the report page for "My report"
 
     Scenario: User signs in to create a report
-      Given I signed up as "email@person.com/password"
+      Given I signed up as:
+        | email            | password |
+        | email@person.com | password |
       When I go to the home page
       And I follow "Create a report"
       And I log in as "email@person.com/password"

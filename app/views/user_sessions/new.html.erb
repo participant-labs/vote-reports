@@ -6,15 +6,15 @@
   <% form_for @user_session do |f| %>
     <%= f.error_messages %>
     <p>
-      <%= f.label :email %><br />
-      <%= f.text_field :email, :class => "text" %><br />
+      <%= f.label :username, 'Username/Email' %><br />
+      <%= f.text_field :username %><br />
 
       <%= f.label :password %><br />
-      <%= f.password_field :password, :class => "text" %><br />
+      <%= f.password_field :password %><br />
 
       <%= hidden_field_tag :return_to, @return_to %>
 
-      <%= f.submit "Log in", :class => 'submit' %>
+      <%= f.submit "Log in" %>
     </p>
   <% end %>
 </div>
