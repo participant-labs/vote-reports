@@ -33,7 +33,7 @@ class Bill < ActiveRecord::Base
 
   class << self
     def reindex(opts = {})
-      super(opts.reverse_merge(:include => [:titles, :rolls, :congress]))
+      super(opts.reverse_merge(:include => [:titles, :rolls, :congress, :subjects]))
     end
   end
 
