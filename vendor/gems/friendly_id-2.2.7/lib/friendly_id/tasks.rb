@@ -21,8 +21,7 @@ module FriendlyId
               end
               slug = r.slugs.build :name => r.slug_text
               r.instance_eval do
-                if friendly_id_options[:scope]
-                  scope = send(friendly_id_options[:scope])
+                if scope = scope_object
                   slug.scope = scope.respond_to?(:to_param) ? scope.to_param : scope.to_s
                 end
               end
