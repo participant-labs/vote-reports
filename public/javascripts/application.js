@@ -31,8 +31,7 @@
     $('[data-dialog]').live('mouseover', function() {
         $($(this).attr('data-dialog')).dialog({
           autoOpen: false,
-          title: $(this).attr('data-dialog-title'),
-          width: 800});
+          title: $(this).attr('data-dialog-title')});
     });
     $('[data-dialog]').live('click', function(event) {
         $($(event.target).attr('data-dialog')).dialog('open');
