@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :user_sessions
   map.resources :users do |user|
-    user.resources :rpx_identities, :only => [:create], :controller => 'users/rpx_identities'
+    user.resources :rpx_identities, :only => [:create, :destroy], :controller => 'users/rpx_identities'
   end
 
   map.resources :reports, :only => [:index, :new]

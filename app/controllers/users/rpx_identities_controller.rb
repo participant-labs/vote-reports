@@ -10,4 +10,12 @@ class Users::RpxIdentitiesController < ApplicationController
     end
     redirect_to user_path(current_user)
   end
+
+  def destroy
+    @user = current_user
+    @identifier = @user.rpx_identifiers.find(params[:id])
+    @identifier.destroy
+    flash[:notice] = "Successfully removed login."
+    redirect_to edit_user_path(current_user)
+  end
 end

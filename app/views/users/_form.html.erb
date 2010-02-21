@@ -17,6 +17,6 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %><br />
 
-    <%= f.submit "Sign up" %>
+    <%= f.submit @user.new_record? ? "Sign up" : "Save Changes" %>
   </p>
 <% end %>
