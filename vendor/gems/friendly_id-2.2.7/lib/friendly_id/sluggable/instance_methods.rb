@@ -145,6 +145,7 @@ module FriendlyId
       end
 
       def set_slug_cache
+        slug || create_slug
         if cache_column
           current_friendly_id = slug.to_friendly_id
           send("#{cache_column}=", current_friendly_id) if send(cache_column) != current_friendly_id
