@@ -8,7 +8,3 @@ end
 Given /^my (location is "[^"]*")$/ do |address|
   mock(Geokit::Geocoders::MultiGeocoder).geocode(anything) { address }
 end
-
-Given /^my stored (location is "[^"]*")$/ do |address|
-  cookies[:geo_location] = address.to_yaml
-end

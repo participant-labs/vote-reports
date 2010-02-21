@@ -3,6 +3,7 @@ Feature: Deleting Reports
   As a user
   I want to delete my reports
 
+  @emulate_rails_javascript
   Scenario: Deleting my report from the show page
     Given I am signed in
     And I have the following published report:
