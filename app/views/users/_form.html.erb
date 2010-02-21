@@ -1,18 +1,22 @@
 <% form_for user do |f| %>
   <%= f.error_messages %>
   <p>
+    <%= f.label :username %><br />
+    <%= f.text_field :username %><br />
+
     <%= f.label :email %><br />
-    <%= f.text_field :email, :class => "text" %><br />
+    <%= f.text_field :email %><br />
+
+    <%- if user.rpx_identifiers.present? -%>
+      <p>You've linked an existing account to log in with, so the password below is optional.</p>
+    <%- end -%>
 
     <%= f.label :password %><br />
-    <%= f.password_field :password, :class => "text" %><br />
+    <%= f.password_field :password %><br />
 
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, :class => "text" %><br />
+    <%= f.password_field :password_confirmation %><br />
 
-    <%= f.label :username %><br />
-    <%= f.text_field :username, :class => "text" %><br />
-  
-    <%= f.submit "Sign up", :class => 'submit' %>
+    <%= f.submit "Sign up" %>
   </p>
 <% end %>

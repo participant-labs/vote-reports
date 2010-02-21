@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   acts_as_authentic
 
+  has_many :rpx_identifiers, :class_name => 'RPXIdentifier'
   has_many :reports
 
   state_machine :initial => :active do
