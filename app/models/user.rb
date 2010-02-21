@@ -2,10 +2,7 @@ class User < ActiveRecord::Base
   is_gravtastic!
   has_friendly_id :username, :use_slug => true
 
-  acts_as_authentic do |c|
-    c.account_mapping_mode :auto
-    c.account_merge_enabled true
-  end
+  acts_as_authentic
 
   has_many :reports
 
