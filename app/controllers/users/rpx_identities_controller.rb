@@ -1,4 +1,6 @@
 class Users::RpxIdentitiesController < ApplicationController
+  before_filter :is_current_user?
+
   def create
     @user = current_user
     if @user.save
