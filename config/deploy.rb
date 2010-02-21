@@ -6,20 +6,17 @@ set :repository, 'git@github.com:Empact/vote-reports.git'
 
 namespace :vlad do
   desc "custom deploy"
-  task :update_symlinks => [:internal_symlinks, :source_env_variables]
+  task :update_symlinks => [:internal_symlinks]
   task :deploy => [:update, :install_gems, :migrate, :setup_scheduling, :start_solr, :start_dj, :setup_assets, :start]
 
   set :web_command, "apache2ctl"
-
-  remote_task :source_env_variables, :roles => :app do
-    run "cd #{latest_release} && . #{shared_path}/config/env_variables.bash"
-  end
 
   remote_task :internal_symlinks, :roles => :app do
     run [
       "ln -s #{latest_release}/config/database.rimu.yml #{latest_release}/config/database.yml",
       "ln -s #{shared_path}/data #{latest_release}/data",
-      "ln -s #{shared_path}/assets #{latest_release}/public/assets"
+      "ln -s #{shared_path}/assets #{latest_release}/public/assets",
+      "ln -s #{shared_path}/config/secure_variables.rb #{latest_release}/config/secure_variables.rb"
     ].join(' && ')
   end
 
