@@ -25,7 +25,7 @@ class PoliticiansController < ApplicationController
 
   def show
     @politician = Politician.find(params[:id], :include => :state)
-    if @politician.has_better_id?
+    if !@report.friendly_id_status.best?
       redirect_to politician_path(@politician), :status => 301
       return
     end

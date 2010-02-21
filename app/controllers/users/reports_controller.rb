@@ -14,7 +14,7 @@ class Users::ReportsController < ApplicationController
         :bill => [{:titles => :as}, :congress, :passage_rolls]
       }
     })
-    if @report.has_better_id?
+    if !@report.friendly_id_status.best?
       redirect_to user_report_path(@user, @report), :status => 301
       return
     end
@@ -52,7 +52,7 @@ class Users::ReportsController < ApplicationController
   def edit
     @user = User.find(params[:user_id])
     @report = @user.reports.find(params[:id], :scope => @user)
-    if @report.has_better_id?
+    if !@report.friendly_id_status.best?
       redirect_to edit_user_report_path(@user, @report), :status => 301
     end
   end
