@@ -24,17 +24,4 @@ class User < ActiveRecord::Base
   def admin?
     false
   end
-
-  private
-
-  def before_merge_rpx_data(from_user, to_user)
-    notify_exceptional "merging user #{from_user.to_param} into #{to_user.to_param}"
-    to_user.reports << from_user.reports
-    to_user.slugs << from_user.slugs
-  end
-
-  def after_merge_rpx_data(from_user, to_user)
-    notify_exceptional "disabling login for #{from_user.to_param}"
-    from_user.disable!
-  end
 end
