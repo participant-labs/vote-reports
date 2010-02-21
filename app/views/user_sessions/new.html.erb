@@ -1,20 +1,23 @@
 <% title "Log in" %>
 
 <div class="section">
-  <h2>Log in</h2>
+  <%= raw rpx_embed(:app_name => RPX_APP_NAME, :return_url => user_sessions_url) %><br />
 
-  <% form_for @user_session do |f| %>
-    <%= f.error_messages %>
-    <p>
-      <%= f.label :username, 'Username/Email' %><br />
-      <%= f.text_field :username %><br />
+  <h3><%= link_to 'Or, Sign in using your email address', '#', :'data-dialog' => '#email_signin', :'data-dialog-title' => 'Sign in using your email address' %></h3>
+  <div id="email_signin" class="hidden">
+    <% form_for @user_session do |f| %>
+      <%= f.error_messages %>
+      <p>
+        <%= f.label :username, 'Username/Email' %><br />
+        <%= f.text_field :username %><br />
 
-      <%= f.label :password %><br />
-      <%= f.password_field :password %><br />
+        <%= f.label :password %><br />
+        <%= f.password_field :password %><br />
 
-      <%= hidden_field_tag :return_to, @return_to %>
+        <%= hidden_field_tag :return_to, @return_to %>
 
-      <%= f.submit "Log in" %>
-    </p>
-  <% end %>
+        <%= f.submit "Log in" %>
+      </p>
+    <% end %>
+  </div>
 </div>
