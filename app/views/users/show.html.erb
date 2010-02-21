@@ -3,10 +3,7 @@
 <div class="section">
   <h2><%= render 'users/user_token', :user => @user, :thumbnail_size => 50 %></h2>
 
-  <p>
-    <a href="http://en.gravatar.com/">Change your Avatar at gravatar.com</a> |
-    <%= raw rpx_popup(:link_text => "Add another login to this account", :app_name => RPX_APP_NAME, :return_url => user_rpx_identities_url(current_user), :add_rpx => true, :unobtrusive => false) %>
-  </p>
+  <p><%= link_to 'Edit Profile', edit_user_path(current_user) %></p>
 
   <%- if @reports.empty? -%>
     <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
