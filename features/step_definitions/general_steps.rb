@@ -30,8 +30,8 @@ end
 Then /^I should( not|) see the button "(.*)"$/ do |should_not, button_text|
   selector = "[value='#{button_text.strip}'][type=submit]"
   if should_not.present?
-    response.should_not have_selector(selector)
+    page.should_not have_css(selector)
   else
-    response.should have_selector(selector)
+    page.should have_css(selector)
   end
 end
