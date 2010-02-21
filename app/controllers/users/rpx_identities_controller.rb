@@ -5,10 +5,9 @@ class Users::RpxIdentitiesController < ApplicationController
     @user = current_user
     if @user.save
       flash[:notice] = "Successfully added login to this account."
-      redirect_to user_path(current_user)
     else
-      flash[:error] = "Was unable to add login to this account: #{@user.errors.full_messages}"
-      render 'users/edit'
+      flash[:error] = "Unable to add login because it is already associated with another account"
     end
+    redirect_to user_path(current_user)
   end
 end

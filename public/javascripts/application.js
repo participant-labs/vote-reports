@@ -5,11 +5,11 @@
   $.fn.fadeOutSoon = function(when, length) {
     if (typeof when == "undefined") when = 5000;
     if (typeof length == "undefined") length = 1000;
-    var $this = $(this);
+    var self = $(this);
     setTimeout(function() {
-      $this.fadeOut(length)
+      self.fadeOut(length)
     }, when);
-    return $this;
+    return self;
   };
 
   function replaceWith(target, url) {
@@ -25,8 +25,8 @@
   }
 
   $(document).ready(function(){
-
-    $('.flash').fadeOutSoon(1000);
+    $('.flash.notice, .flash.message').fadeOutSoon(1000);
+    $('.flash.error, .flash.warning').fadeOutSoon(5000, 5000);
 
     $('[data-dialog]').live('mouseover', function() {
         $($(this).attr('data-dialog')).dialog({
