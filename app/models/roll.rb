@@ -13,6 +13,8 @@ class Roll < ActiveRecord::Base
   named_scope :on_bill_passage, :conditions => {
     :'rolls.roll_type' => PASSAGE_TYPES, :'rolls.subject_type' => 'Bill'}
 
+  before_validation :set_friendly_id
+
   class << self
     def find_by_friendly_id(friendly_id, options = {})
       if match = friendly_id.to_s.match(/(\d+)-([hs])(\d+)/)
@@ -25,15 +27,17 @@ class Roll < ActiveRecord::Base
     end
   end
 
-  def friendly_id
-    "#{year}-#{where.first}#{number}" if year.present? && where.present? && number.present?
-  end
-
   def passage?
     PASSAGE_TYPES.include?(roll_type)
   end
 
   def opencongress_url
     "http://www.opencongress.org/vote/#{year}/#{where.first}/#{number}" if congress.current?
+  end
+
+private
+
+  def set_friendly_id
+    self.friendly_id = "#{year}-#{where.first}#{number}" if year.present? && where.present? && number.present?
   end
 end
