@@ -1,5 +1,6 @@
 <% title "Sign up" %>
 
+<%- target ||= users_path -%>
 <div class="section">
   <%- unless @user.errors.present? -%>
     <h2>Sign up using an Existing Account</h2>
@@ -8,6 +9,5 @@
     <h2>Or, Sign up using your email address</h2>
   <%- end -%>
 
-  <%= render 'users/form', :user => @user %>
+  <%= render 'users/form', :user => @user, :target => target %>
 </div>
-
