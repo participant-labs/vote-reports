@@ -35,5 +35,5 @@ Feature: User create report
       And I follow "Create a Report"
       And I fill in "Name" with "New"
       And I press "Create Report"
-      Then I should see "Name can not be "
+      Then I should see "Name is reserved"
       And I should not see "Slugs is invalid"

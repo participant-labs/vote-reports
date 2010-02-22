@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :reports
 
   validates_uniqueness_of :username, :email, :case_sensitive => false
+  validate :username_not_reserved
 
   state_machine :initial => :active do
     event :disable do
@@ -23,5 +24,13 @@ class User < ActiveRecord::Base
 
   def admin?
     false
+  end
+
+private
+
+  def username_not_reserved
+    if %w[new edit].include?(username.to_s.downcase)
+      errors.add(:username, "is reserved")
+    end
   end
 end

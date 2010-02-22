@@ -104,6 +104,7 @@ class Report < ActiveRecord::Base
         :default_url => ('/' + DEFAULT_THUMBNAIL_PATH),
         :default_style => :thumbnail
 
+  validate :name_not_reserved
   validates_attachment_content_type :thumbnail, :content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-png']
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
@@ -159,5 +160,11 @@ private
 
   def reprocess_thumbnail
     thumbnail.reprocess!
+  end
+
+  def name_not_reserved
+    if %w[new edit].include?(name.to_s.downcase)
+      errors.add(:name, "is reserved")
+    end
   end
 end
