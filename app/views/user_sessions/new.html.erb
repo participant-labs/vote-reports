@@ -1,12 +1,13 @@
 <% title "Log in" %>
 
 <div class="section">
+  <%= error_messages_for(:user_session) %>
+
   <%= raw rpx_embed(:app_name => RPX_APP_NAME, :return_url => user_sessions_url) %><br />
 
   <h3><%= link_to 'Or, Sign in using your email address', '#', :'data-dialog' => '#email_signin', :'data-dialog-title' => 'Sign in using your email address', :'data-dialog-width' => '280' %></h3>
   <div id="email_signin" class="hidden">
     <% form_for @user_session do |f| %>
-      <%= f.error_messages %>
       <p>
         <%= f.label :username, 'Username/Email' %><br />
         <%= f.text_field :username %><br />

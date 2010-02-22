@@ -2,6 +2,7 @@ class UserSession < Authlogic::Session::Base
   find_by_login_method :find_by_username_or_email
   generalize_credentials_error_messages true
   rpx_key RPX_API_KEY
+  validate :user_is_valid
 
 private
 
@@ -17,5 +18,9 @@ private
     if attempted_record.send(klass.email_field).blank?
       attempted_record.send(:"#{klass.email_field}=", @rpx_data['profile']['email'] ) 
     end
+  end
+
+  def user_is_valid
+    errors.add(:user, "is invalid") if user && !user.valid?
   end
 end
