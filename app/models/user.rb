@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
 
   acts_as_authentic
 
-  has_many :rpx_identifiers, :class_name => 'RPXIdentifier'
   has_many :reports
 
   validates_uniqueness_of :username, :email, :case_sensitive => false
