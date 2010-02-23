@@ -25,7 +25,7 @@
   }
 
   $(document).ready(function(){
-    $('.flash.notice, .flash.message').fadeOutSoon(1000);
+    $('.flash.notice, .flash.message').fadeOutSoon(3000);
     $('.flash.error, .flash.warning').fadeOutSoon(5000, 5000);
 
     $('[data-dialog]').live('mouseover', function() {
