@@ -1,27 +1,3 @@
-<% title "Sign up" %>
+<%- title "Just a few details..." -%>
 
-<%- target ||= users_path -%>
-<div class="section">
-  <% form_for @user, :url => user_sessions_path(params.slice(:user_session)) do |f| %>
-    <%= f.error_messages %>
-    <p>
-      <%= f.label :username %><br />
-      <%= f.text_field :username %><br />
-
-      <%= f.label :email %><br />
-      <%= f.text_field :email %><br />
-
-      <%- if @user.rpx_identifiers.present? -%>
-        <p>You've linked an existing account to log in with, so the password below is optional.</p>
-      <%- end -%>
-
-      <%= f.label :password %><br />
-      <%= f.password_field :password %><br />
-
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation %><br />
-
-      <%= f.submit @user.new_record? ? "Sign up" : "Save Changes" %>
-    </p>
-  <% end %>
-</div>
+<%= render 'users/form', :user => @user, :url => user_sessions_path, :pass_through => true %>

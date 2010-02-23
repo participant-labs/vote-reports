@@ -1,4 +1,9 @@
-<% form_for user do |f| %>
+<%-
+  pass_through ||= false
+  url ||= users_path
+-%>
+
+<% form_for user, :url => url do |f| %>
   <%= f.error_messages %>
   <p>
     <%= f.label :username %><br />
@@ -8,15 +13,21 @@
     <%= f.text_field :email %><br />
 
     <%- if user.rpx_identifiers.present? -%>
-      <p>You've linked an existing account to log in with, so the password below is optional.</p>
+      <p>You've linked to an existing account to log in with, so no other password is needed.</p>
+    <%- else -%>
+      <%= f.label :password %><br />
+      <%= f.password_field :password %><br />
+
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %><br />
     <%- end -%>
 
-    <%= f.label :password %><br />
-    <%= f.password_field :password %><br />
+    <%- if pass_through -%>
+      <%- params.each_pair do |key, value| -%>
+        <%= hidden_field_tag key, value %>
+      <%- end -%>
+    <%- end -%>
 
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %><br />
-
-    <%= f.submit @user.new_record? ? "Sign up" : "Save Changes" %>
+    <%= f.submit user.new_record? ? "Sign up" : "Save Changes" %>
   </p>
 <% end %>
