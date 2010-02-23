@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @user.valid?
+    @new_user = true if params[:new_user]
   end
 
   def update

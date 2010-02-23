@@ -5,6 +5,9 @@
   <p><a href="http://en.gravatar.com/">Change your Avatar at gravatar.com</a></p>
 
   <%= render 'users/form', :user => @user %>
+  <%- if @new_user -%>
+    <%= raw link_to('Looks Good, take me to my Profile', user_path(@user)) %>
+  <%- end -%>
 
   <%- if @user.valid? -%>
     <h2>Associated Logins</h2>
