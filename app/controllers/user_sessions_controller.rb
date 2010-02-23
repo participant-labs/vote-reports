@@ -7,21 +7,18 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     
-    if @user_session.valid? && @user_session.attempted_record && !@user_session.attempted_record.valid?
+    if @user_session.registration_incomplete?
       @current_user_session = @user_session
       @user = @user_session.attempted_record
-      flash[:notice] = "Welcome! As a new user, please review your registration details before continuing.."
+      flash[:notice] = "Alright! Almost there, just a few details to correct before we can move on:"
       render 'users/new_from_rpx'
     elsif @user_session.save
       if @user_session.new_registration?
         flash[:notice] = "Welcome! As a new user, please review your registration details before continuing.."
-        redirect_to new_user_path
-      elsif @user_session.registration_complete?
+        redirect_to edit_user_path(@user_session.record)
+      else
         flash[:notice] = "Logged in successfully"
         redirect_to (params[:return_to].present? ? params[:return_to] : current_user)
-      else
-        flash[:notice] = "Welcome back! Please complete required registration details before continuing.."
-        redirect_to edit_user_path(current_user)
       end
     else
       flash[:error] = "Failed to login or register."
