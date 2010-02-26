@@ -51,6 +51,7 @@ class Bill < ActiveRecord::Base
 
   has_many :titles, :class_name => 'BillTitle'
   has_many :bill_criteria, :dependent => :destroy
+  has_many :reports, :through => :bill_criteria
   has_many :amendments, :dependent => :destroy
   has_many :rolls, :as => :subject, :dependent => :destroy
   has_many :passage_rolls, :as => :subject, :class_name => 'Roll', :conditions => {

@@ -19,6 +19,10 @@ class Report < ActiveRecord::Base
     end
   end
 
+  def subjects
+    Subject.for_report(self)
+  end
+
   searchable do
     text :name, :description
     text :username do

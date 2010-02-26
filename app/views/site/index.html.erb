@@ -9,6 +9,10 @@
     <li>We'll tell you how well they represent you, really</li>
   </ol>
 
+  <% tag_cloud(@subjects, %w(css1 css2 css3 css4)) do |subject, css_class| %>
+    <%= link_to subject.name, '#', :class => css_class %>
+  <% end %>
+
   <p>Use VoteReports to see if your representatives truly represent you!</p>
 </div>
 
