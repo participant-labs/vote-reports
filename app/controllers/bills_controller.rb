@@ -10,7 +10,7 @@ class BillsController < ApplicationController
   end
 
   def show
-    @bill = Bill.find(params[:id], :include => :titles)
+    @bill = Bill.find(params[:id], :include => [{:sponsor => :state}, :titles, :amendments, :rolls, {:bill_criteria => {:report => :user}}])
     @titles =  @bill.titles
     @rolls = @bill.rolls.by_voted_at
   end

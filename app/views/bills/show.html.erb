@@ -21,8 +21,8 @@
 </div>
 
 <%- if (amendments = @bill.amendments.with_votes).present? -%>
-<div class="section">
-  <h3>Amendments</h3>
+<div class="section" id="amendments">
+  <h2>Amendments</h2>
   <ul>
     <% amendments.each do |amendment|  %>
       <li><%= render amendment %></li>
@@ -32,12 +32,23 @@
 <%- end -%>
 
 <%- if @rolls.present? -%>
-<div class="section">
-  <h3>Votes</h3>
+<div class="section" id="votes">
+  <h2>Votes</h2>
   <ul>
     <% @rolls.each do |roll|  %>
       <li><%= render roll %></li>
     <% end %>
+  </ul>
+</div>
+<%- end -%>
+
+<%- if @bill.bill_criteria.present? -%>
+<div class="section" id="reports">
+  <h2>Reports</h2>
+  <ul>
+    <%- @bill.bill_criteria.each do |criterion| -%>
+      <li><%= render 'reports/report', :report => criterion.report %></li>
+    <%- end -%>
   </ul>
 </div>
 <%- end -%>
