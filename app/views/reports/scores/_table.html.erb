@@ -41,8 +41,8 @@
       </tr>
       <%- top_scores.zip(bottom_scores).each do |(top_score, bottom_score)| -%>
         <tr>
-          <td><%= render 'reports/scores/score', :score => top_score %></td>
-          <td><%= render 'reports/scores/score', :score => bottom_score %></td>
+          <td><%= render 'politicians/score', :score => top_score %></td>
+          <td><%= render 'politicians/score', :score => bottom_score %></td>
         </tr>
       <%- end -%>
       <tr>
@@ -76,7 +76,7 @@
       </tr>
       <%- scores.each do |score| -%>
         <tr>
-          <td><%= render 'reports/scores/score', :score => score %></td>
+          <td><%= render 'politicians/score', :score => score %></td>
         </tr>
       <%- end -%>
       <tr>

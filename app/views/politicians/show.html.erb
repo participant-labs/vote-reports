@@ -52,33 +52,21 @@
 </div>
 
 <div class="section">
-  <h3>Supported Bills</h3>
-  <%- if @supported_bills.present? -%>
-    <ul>
-      <% @supported_bills.each do |bill|  %>
-        <li><%= render bill %></li>
-      <% end %>
-    </ul>
-    <%= will_paginate @supported_bills,
-        :param_name => :supported_page,
-        :params => {:opposed_page => @opposed_bills.current_page }  %>
-  <%- else -%>
-    <p>We have no record of support from this politician</p>
-  <%- end -%>
-</div>
-
-<div class="section">
-  <h3>Opposed Bills</h3>
-  <%- if @opposed_bills.present? -%>
-    <ul>
-      <% @opposed_bills.each do |bill|  %>
-        <li><%= render bill %></li>
-      <% end %>
-    </ul>
-    <%= will_paginate @opposed_bills,
-        :param_name => :opposed_page,
-        :params => {:supported_page => @supported_bills.current_page }  %>
-  <%- else -%>
-    <p>We have no record of opposition from this politician</p>
-<%- end -%>
+  <h2>Reports</h2>
+  <table id="reports">
+    <thead>
+      <tr>
+        <th>Report</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @politician.report_scores.each do |report_score| -%>
+      <tr>
+        <td><%= render 'reports/report', :report => report_score.report %></td>
+        <td><%= render 'reports/scores/score', :score => report_score %></td>
+      </tr>
+      <%- end -%>
+    </tbody>
+  </table>
 </div>
