@@ -8,6 +8,19 @@ class Subject < ActiveRecord::Base
       :conditions => {:'bill_subjects.subject_id' => self})
   end
 
+  named_scope :for_report, lambda {|reports|
+    {
+      :joins => {:bills => :reports},
+      :conditions => {:'reports.id' => reports}
+    }
+  }
+
+  named_scope :for_tag_cloud,
+    :select => "subjects.*, COUNT(*) AS count",
+    :group => "subjects.id, subjects.name",
+    :having => "COUNT(*) > 0",
+    :order => 'count DESC'
+
   named_scope :by_popularity,
     :joins => :bill_subjects,
     :select => "DISTINCT(subjects.*), COUNT(bill_subjects.bill_id) AS count",
