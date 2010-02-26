@@ -65,6 +65,13 @@ form {
 
 .report_score > .score {
   font-size: 2em;
+}
+
+table#reports td {
+  padding: 1em 0.5em;
+}
+
+.politician_score > .report_score > .score {
   position: relative;
   top: -55px;
   left: 75px;
