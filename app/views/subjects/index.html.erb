@@ -1,0 +1,11 @@
+<% title "Subjects" %>
+
+<div class="section">
+  <h2>Find subjects you care about</h2>
+
+  <%= render 'subjects/search', :replace => '#subjects' %>
+</div>
+
+<div class="section">
+  <%= render 'subjects/list', :subjects => @subjects, :title => @title %>
+</div>

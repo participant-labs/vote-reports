@@ -3,12 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :rolls, :only => [:show]
   map.resources :bills, :only => [:index, :show]
   map.resources :politicians, :only => [:index, :show]
-
-  map.resources :user_sessions
-  map.resources :users do |user|
-    user.resources :rpx_identities, :only => [:create, :destroy], :controller => 'users/rpx_identities'
-  end
-
+  map.resources :subjects, :only => [:index, :show]
   map.resources :reports, :only => [:index, :new]
 
   map.user_reports "reports/:user_id",
@@ -36,6 +31,12 @@ ActionController::Routing::Routes.draw do |map|
     :controller => 'users/reports/bills', :action => 'destroy', :conditions => { :method => :delete }
 
   map.about "about", :controller => "site", :action => "show"  
+
+  map.resources :user_sessions
+  map.resources :users do |user|
+    user.resources :rpx_identities, :only => [:create, :destroy], :controller => 'users/rpx_identities'
+  end
+
   map.signup "/signup", :controller => "users", :action => "new"  
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"  

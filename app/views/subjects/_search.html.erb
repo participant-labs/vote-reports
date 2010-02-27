@@ -1,0 +1,5 @@
+<% form_tag subjects_path, :method => :get, :'data-replace' => replace do %>
+  <%= label_tag :q, 'Search' %>
+  <%= text_field_tag :q, @q %>
+  <%= submit_tag 'Search' %>
+<% end %>

@@ -1,3 +1,4 @@
+<%- param_name ||= :page -%>
 <h3><%= title %></h3>
 <%- if bills.present? -%>
   <ul>
@@ -9,4 +10,4 @@
   <p>No <%= title.downcase %> found...</p>
 <%- end -%>
 
-<%= will_paginate bills %>
+<%= will_paginate bills, :param_name => param_name %>

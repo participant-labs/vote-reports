@@ -1,3 +1,5 @@
+<%- param_name ||= :page -%>
+
 <%- if reports.present? -%>
   <ol class="reports">
     <%- reports.each do |report| -%>
@@ -8,4 +10,4 @@
   <p>No reports found...</p>
 <%- end -%>
 
-<%= will_paginate reports %>
+<%= will_paginate reports, :param_name => param_name %>

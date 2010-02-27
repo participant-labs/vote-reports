@@ -1,0 +1,16 @@
+<%- param_name ||= :page -%>
+<div id="subjects">
+  <h3><%= title %></h3>
+  <%- if subjects.present? -%>
+    <ul>
+      <%- subjects.each do |subject| -%>
+        <li><%= link_to subject.name, subject %></li>
+      <%- end -%>
+    </ul>
+  <%- else -%>
+    <p>No <%= title.downcase %> found...</p>
+  <%- end -%>
+
+  <%= will_paginate subjects, :param_name => param_name,
+      :'data-replace' => '#subjects' %>
+</div>
