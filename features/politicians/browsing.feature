@@ -61,7 +61,7 @@ Feature: Browsing Politicians
     And I should see "President of these United States; Republican"
     And I should see "Pres. Ron Wyden"
 
-  Scenario: Viewing supported bills from the Politicians Page
+  Scenario: Viewing related reports from the Politicians Page
     Given I have a report named "Active Report"
     And an un-voted, current-congress bill named "Bovine Security Act of 2009"
     And an un-voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
@@ -77,24 +77,24 @@ Feature: Browsing Politicians
     And bill "Bovine Security Act of 2009" has the following roll votes:
       | politician       | On Passage | On the Cloture Motion | On Agreeing to the Amendments en bloc, as modified |
       | Piyush Jindal    | + | + | - |
+      | Ron Wyden        | - | + | - |
+    And report "Active Report" has the following bill criterion:
+      | bill                        | support |
+      | Bovine Security Act of 2009 | true    |
+    When I wait for delayed job to finish
     When I go to the politician page for "Piyush Jindal"
-    Then I should see "Supported Bills"
-    And I should see "Bovine Security Act of 2009"
-    And I should see "We have no record of opposition from this politician"
+    Then I should see "Active Report"
+    And I should see "100%"
 
     Given bill "USA PATRIOT Reauthorization Act of 2009" has the following rolls:
       | roll_type                                          |
       | On Passage                                         |
       | On the Cloture Motion                              |
       | On Agreeing to the Amendments en bloc, as modified |
-    And bill "USA PATRIOT Reauthorization Act of 2009" has the following roll votes:
-      | politician   | On Passage | On the Cloture Motion | On Agreeing to the Amendments en bloc, as modified |
-      | Ron Wyden    | - | + | - |
     Given bill "USA PATRIOT Reauthorization Act of 2009" has the following passage votes:
       | politician | vote |
       | Ron Wyden  | -    |
     When I go to the politician page for "Ron Wyden"
-    Then I should see "Opposed Bills"
-    And I should see "USA PATRIOT Reauthorization Act of 2009"
-    And I should not see "We have no record of opposition from this politician"
-    And I should not see "We have no record of support from this politician"
+    Then I should see "Active Report"
+    And I should see "50%"
+    And I should not see "Piyush Jindal"
