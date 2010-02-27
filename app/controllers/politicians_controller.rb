@@ -1,13 +1,7 @@
 class PoliticiansController < ApplicationController
 
   def index
-    @politicians = Politician
-    if params[:from_where].present?
-      @politicians = @politicians.from(params[:from_where])
-    end
-    @politicians = @politicians.in_office(params[:in_office])
-
-    @politicians = @politicians.by_birth_date.paginate(:page => params[:page])
+    @politicians = sought_politicians.by_birth_date.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html
