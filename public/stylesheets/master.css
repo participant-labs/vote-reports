@@ -45,6 +45,10 @@ form {
   display: inline;
 }
 
+.report_scores {
+  padding-bottom: 20px;
+}
+
 .report_scores table {
   margin: .5em;
   width: 100%;
