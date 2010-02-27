@@ -231,6 +231,12 @@ Fixjour :verify => false do
     )
   end
 
+  define_builder(Subject) do |klass, overrides|
+    klass.new(
+      :name => Forgery::LoremIpsum.words(4)
+    )
+  end
+
   define_builder(DistrictZipCode) do |klass, overrides|
     overrides.process(:district) do |district|
       overrides[:district] = District.find_or_create_by_us_state_id_and_district(us_state(overrides.send(:delete, :state)).id, district)

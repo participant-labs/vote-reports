@@ -25,6 +25,8 @@ module NavigationHelpers
       user_report_path(report.user, report)
     when /the bill page for "(.+)"/
       bill_path(BillTitle.find_by_title($1).bill)
+    when /the subject page for "(.+)"/
+      subject_path(Subject.find_by_name($1))
 
     when /the (.+) page/i
       send("#{$1}_path")

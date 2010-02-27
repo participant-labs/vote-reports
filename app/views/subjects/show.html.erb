@@ -1,0 +1,12 @@
+<% title "Subject - #{h @subject.name}" %>
+
+<div class="section">
+  <h2><%= @subject.name %></h2>
+
+  <h3>Reports on "<%= @subject.name %>"</h3>
+  <%= render 'reports/list', :reports => @reports, :param_name => :report_page %>
+</div>
+
+<div class="section">
+  <%= render 'bills/list', :bills => @bills, :title => %Q{Bills on "#{@subject.name}"}, :param_name => :bill_page %>
+</div>
