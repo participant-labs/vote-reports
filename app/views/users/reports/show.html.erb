@@ -32,7 +32,7 @@
   <%- if @report.scores.present? -%>
     <%= render 'politicians/search', :url => user_report_path(@report.user, @report), :replace => '#report_scores' %>
   <%- end -%>
-  <%= render 'reports/scores/table', :report => @report, :scores => @scores, :from_where => @from_where %>
+  <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
 </div>
 
 <div class="footer">
