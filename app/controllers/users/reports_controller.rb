@@ -21,10 +21,9 @@ class Users::ReportsController < ApplicationController
 
     politicians =
       if params[:from_where].present?
-        @from_where = params[:from_where]
-        Politician.from(@from_where)
+        Politician.from(params[:from_where])
       elsif !params.has_key?(:from_where) && session[:geo_location]
-        @from_where = session[:geo_location].full_address
+        params[:from_where] = session[:geo_location].full_address
         Politician.from(session[:geo_location])
       else
         Politician
@@ -32,7 +31,6 @@ class Users::ReportsController < ApplicationController
 
     @scores = @report.scores.for_politicians(
       if params[:in_office]
-        @in_office = true
         politicians.in_office
       else
         politicians
@@ -43,7 +41,7 @@ class Users::ReportsController < ApplicationController
       format.html
       format.js {
         render :partial => 'reports/scores/table', :locals => {
-          :report => @report, :scores => @scores, :from_where => @from_where
+          :report => @report, :scores => @scores
         }
       }
     end

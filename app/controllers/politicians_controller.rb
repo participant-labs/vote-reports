@@ -3,11 +3,9 @@ class PoliticiansController < ApplicationController
   def index
     @politicians = Politician
     if params[:from_where].present?
-      @from_where = params[:from_where]
       @politicians = @politicians.from(params[:from_where])
     end
     if params[:in_office]
-      @in_office = params[:in_office]
       @politicians = @politicians.in_office
     end
 

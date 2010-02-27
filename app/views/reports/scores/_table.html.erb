@@ -63,8 +63,8 @@
     <thead>
       <tr>
         <th>All Scores
-          <%- if from_where.present? -%>
-          for Representatives from "<%= from_where %>"
+          <%- if params[:from_where].present? -%>
+          for Representatives from "<%= params[:from_where] %>"
           <%= link_to 'show all', user_report_path(@report.user, @report, :from_where => ''), :'data-replace' => '#report_scores' %>
           <%- end -%>
         </th>
@@ -84,8 +84,8 @@
       </tr>
     </tbody>
   </table>
-<%- elsif from_where.present? -%>
-  <p>No scores found for: "<%= from_where %>"</p>
+<%- elsif params[:from_where].present? -%>
+  <p>No scores found for: "<%= params[:from_where] %>"</p>
 <%- elsif report.bill_criteria.blank? -%>
   <p>No scores yet, as this report has no criteria to judge representatives by.</p>
 <%- elsif report.bills.scoped(:joins => :passage_rolls).empty? -%>
