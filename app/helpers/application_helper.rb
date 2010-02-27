@@ -38,11 +38,12 @@ module ApplicationHelper
   def tag_cloud(tags, classes)
     return [] if tags.empty?
 
-    max_count = tags.sort_by(&:count).last.count.to_f
+    max = tags.first.count.to_i
+    min = tags.last.count.to_i
+    divisor = ((max - min) / classes.size) + 1
 
     tags.each do |tag|
-      index = ((tag.count.to_f / max_count) * (classes.size - 1)).round
-      yield tag, classes[index]
+      yield tag, classes[(tag.count.to_i - min) / divisor]
     end
   end
 
