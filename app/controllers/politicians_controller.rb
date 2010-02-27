@@ -5,9 +5,7 @@ class PoliticiansController < ApplicationController
     if params[:from_where].present?
       @politicians = @politicians.from(params[:from_where])
     end
-    if params[:in_office]
-      @politicians = @politicians.in_office
-    end
+    @politicians = @politicians.in_office(params[:in_office])
 
     @politicians = @politicians.by_birth_date.paginate(:page => params[:page])
 
