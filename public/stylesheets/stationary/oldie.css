@@ -12,6 +12,7 @@ body {
 #main {
 	width: 848px;
 	margin: 20px auto 0 auto;
+	padding-bottom: 20px;
 	background: url(../../images/stationary/paper.png) no-repeat right top;
 }
 
