@@ -40,19 +40,24 @@ class Politician < ActiveRecord::Base
   has_many :report_scores
   has_many :reports, :through => :report_scores
 
-  named_scope :in_office, lambda {
-    {
-      :select => 'DISTINCT politicians.*',
-      :joins => [
-        %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
-        %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
-        %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id}],
-      :conditions => [
-        '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
-        '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
-        '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
-      {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
-    ]}
+  named_scope :in_office, lambda { |in_office_only|
+      if in_office_only.present?
+        {
+          :select => 'DISTINCT politicians.*',
+          :joins => [
+            %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
+            %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
+            %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id}],
+          :conditions => [
+            '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
+            '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
+            '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
+            {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
+          ]
+        }
+      else
+        {}
+      end
   }
   named_scope :with_name, lambda {|name|
     first, last = name.split(' ', 2)

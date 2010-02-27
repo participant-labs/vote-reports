@@ -30,11 +30,7 @@ class Users::ReportsController < ApplicationController
       end
 
     @scores = @report.scores.for_politicians(
-      if params[:in_office]
-        politicians.in_office
-      else
-        politicians
-      end
+        politicians.in_office(params[:in_office])
     )
 
     respond_to do |format|
