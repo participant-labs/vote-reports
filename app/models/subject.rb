@@ -16,9 +16,9 @@ class Subject < ActiveRecord::Base
   }
 
   named_scope :for_tag_cloud,
-    :select => "subjects.*, COUNT(*) AS count",
+    :select => "subjects.*, COUNT(subjects.*) AS count",
     :group => "subjects.id, subjects.name",
-    :having => "COUNT(*) > 0",
+    :having => "COUNT(subjects.*) > 0",
     :order => 'count DESC'
 
   named_scope :by_popularity,
