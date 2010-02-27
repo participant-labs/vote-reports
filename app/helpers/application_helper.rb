@@ -42,7 +42,7 @@ module ApplicationHelper
     min = tags.last.count.to_i
     divisor = ((max - min) / classes.size) + 1
 
-    tags.each do |tag|
+    tags.sort_by(&:name).each do |tag|
       yield tag, classes[(tag.count.to_i - min) / divisor]
     end
   end
