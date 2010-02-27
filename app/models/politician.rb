@@ -40,6 +40,8 @@ class Politician < ActiveRecord::Base
   has_many :report_scores
   has_many :reports, :through => :report_scores
 
+  default_scope :include => :state
+
   named_scope :in_office, lambda { |in_office_only|
       if in_office_only.present?
         {
