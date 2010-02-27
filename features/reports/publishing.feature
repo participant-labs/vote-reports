@@ -26,7 +26,7 @@ Feature: Browsing Reports
     Then I should see the button "Publish this Report"
     When I press "Publish"
     Then I should see "Successfully updated report"
-    And I should see "This report is public, so it will show up in lists and searches on this site."
+    And I should see "This report is published, so it will show up in lists and searches on this site."
 
   Scenario: User unpublishes a published report
     Given I have a published report named "My Report"

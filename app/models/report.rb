@@ -64,7 +64,7 @@ class Report < ActiveRecord::Base
       validates_presence_of :scores
 
       def status
-        "This report is public, so it will show up in lists and searches on this site."
+        "This report is published, so it will show up in lists and searches on this site."
       end
 
       def next_step
