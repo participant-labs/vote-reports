@@ -19,19 +19,7 @@ class Users::ReportsController < ApplicationController
       return
     end
 
-    politicians =
-      if params[:from_where].present?
-        Politician.from(params[:from_where])
-      elsif !params.has_key?(:from_where) && session[:geo_location]
-        params[:from_where] = session[:geo_location].full_address
-        Politician.from(session[:geo_location])
-      else
-        Politician
-      end
-
-    @scores = @report.scores.for_politicians(
-        politicians.in_office(params[:in_office])
-    )
+    @scores = @report.scores.for_politicians(sought_politicians)
 
     respond_to do |format|
       format.html
