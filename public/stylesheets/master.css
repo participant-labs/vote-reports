@@ -222,3 +222,7 @@ dd {
 .clearfix {
   display:block;
 }
+
+#fdbk_container a {
+  border-bottom: 0;
+}
