@@ -7,7 +7,7 @@ set :repository, 'git@github.com:Empact/vote-reports.git'
 namespace :vlad do
   desc "custom deploy"
   task :update_symlinks => [:internal_symlinks]
-  task :deploy => [:update, :install_gems, :migrate, :setup_scheduling, :start_solr, :start_dj, :setup_assets, :start]
+  task :deploy => [:update, :install_gems, :migrate, :setup_scheduling, :start_dj, :setup_assets, :start]
 
   set :web_command, "apache2ctl"
 
@@ -16,17 +16,12 @@ namespace :vlad do
       "ln -s #{latest_release}/config/database.rimu.yml #{latest_release}/config/database.yml",
       "ln -s #{shared_path}/data #{latest_release}/data",
       "ln -s #{shared_path}/assets #{latest_release}/public/assets",
-      "ln -s #{shared_path}/config/secure_variables.rb #{latest_release}/config/secure_variables.rb",
-      "ln -s #{shared_path}/solr #{latest_release}/solr"
+      "ln -s #{shared_path}/config/secure_variables.rb #{latest_release}/config/secure_variables.rb"
     ].join(' && ')
   end
 
   remote_task :install_gems, :roles => :app do
     run "cd #{latest_release} && rake gems:install"
-  end
-
-  remote_task :start_solr, :roles => :app do
-    run "cd #{latest_release} && rake sunspot:solr:start RAILS_ENV=production"
   end
 
   remote_task :start_dj, :roles => :app do
