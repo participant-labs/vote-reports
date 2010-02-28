@@ -1,1 +1,0 @@
-Sunspot.config.http_client = :curb
