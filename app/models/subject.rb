@@ -15,6 +15,10 @@ class Subject < ActiveRecord::Base
     }
   }
 
+  named_scope :on_published_reports,
+    :joins => {:bills => :reports},
+    :conditions => {:'reports.state' => 'published'}
+
   named_scope :for_tag_cloud,
     :select => "DISTINCT(subjects.*), COUNT(bills.id) AS count",
     :group => "subjects.id, subjects.name",
