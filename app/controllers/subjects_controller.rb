@@ -5,7 +5,7 @@ class SubjectsController < ApplicationController
       @subjects = Subject.paginated_search(params).results
     else
       @title = 'Popular Subjects'
-      @subjects = Subject.by_popularity.paginate :page => params[:page]
+      @subjects = Subject.for_report(Report.published).for_tag_cloud.scoped(:limit => 80)
     end
 
     respond_to do |format|

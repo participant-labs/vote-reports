@@ -7,5 +7,10 @@
 </div>
 
 <div class="section">
-  <%= render 'subjects/list', :subjects => @subjects, :title => @title %>
+  <%- if @q -%>
+    <%= render 'subjects/list', :subjects => @subjects, :title => @title %>
+  <%- else -%>
+    <h3><%= @title %></h3>
+    <%= render 'subjects/cloud', :subjects => @subjects %>
+  <%- end -%>
 </div>
