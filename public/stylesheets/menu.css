@@ -28,7 +28,7 @@ ul#menu li.dropdown h2 {
   background: transparent url(../images/bullet_arrow_down.png) center right no-repeat;
 }
 
-ul#menu li.dropdown > ul {
+ul#menu li.dropdown > .dropdown_target {
   display: none;
   border: 1px solid #dda;
   min-width: 10em;
@@ -41,7 +41,7 @@ ul#menu li.dropdown > ul {
   text-align: left;
 }
 
-ul#menu li.dropdown > ul a {
+ul#menu li.dropdown > .dropdown_target a {
 color: #300;
 padding: 0;
 background-image: none;
@@ -51,7 +51,7 @@ ul#menu li h2 {
   display: inline;
 }
 
-ul#menu li.hovering.dropdown > ul {
+ul#menu li.hovering.dropdown > .dropdown_target {
   display: block;
 }
 

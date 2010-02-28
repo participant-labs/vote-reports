@@ -39,22 +39,25 @@
         <ul id="menu">
           <li class="dropdown">
             <h2><%= link_to_unless_current 'Learn', reports_path %></h2>
-            <ul>
-              <li><%= link_to_unless_current "View Reports", reports_path %></li>
-              <li><%= link_to_unless_current "Browse Politicians", politicians_path %></li>
-              <li><%= link_to_unless_current "Browse Subjects", subjects_path %></li>
-              <li><%= link_to_unless_current "Research Bills", bills_path %></li>
-            </ul>
+            <div class="dropdown_target">
+              Browse our:
+              <ul>
+                <li><%= link_to_unless_current "Reports", reports_path %></li>
+                <li><%= link_to_unless_current "Politicians", politicians_path %></li>
+                <li><%= link_to_unless_current "Subjects", subjects_path %></li>
+                <li><%= link_to_unless_current "Bills", bills_path %></li>
+              </ul>
+            </div>
           </li>
           <li class="dropdown">
             <h2><%= link_to_unless_current "Act", new_report_path %></h2>
-            <ul>
+            <ul class="dropdown_target">
               <li><%= link_to_unless_current "Create a Report", new_report_path %></li>
             </ul>
           </li>
           <li class="dropdown">
             <h2><%= link_to 'Follow', blog_path %></h2>
-            <ul>
+            <ul class="dropdown_target">
               <li><%= link_to 'Our Blog', blog_path %></li>
               <li>
                 <form action="http://votereports.us1.list-manage.com/subscribe/post?u=7a5f531cddf4733361c3c56b4&amp;id=6ed81c914b" method="post" id="mc-embedded-subscribe-form" class="validate">
