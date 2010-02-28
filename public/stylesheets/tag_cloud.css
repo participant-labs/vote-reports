@@ -1,15 +1,25 @@
 ol.tag_cloud {
   list-style-type: none;
+  text-align: center;
 }
 
 ol.tag_cloud li {
   display: inline-block;
   padding: 0.2em;
+  text-transform: uppercase;
 }
 
-.tag1 {font-size: 1.0em;}
-.tag2 {font-size: 1.3em;}
-.tag3 {font-size: 1.5em;}
-.tag4 {font-size: 1.7em;}
-.tag5 {font-size: 1.9em;}
-.tag6 {font-size: 2.1em;}
+ol.tag_cloud li a {
+  border-bottom-width: 0;
+}
+
+ol.tag_cloud li a:hover {
+  border-bottom-width: 1px;
+}
+
+.tag1 a {font-size: 1.0em; color: #000;}
+.tag2 a {font-size: 1.3em; color: #111;}
+.tag3 a {font-size: 1.6em; color: #222;}
+.tag4 a {font-size: 1.9em; color: #333;}
+.tag5 a {font-size: 2.2em; color: #444;}
+.tag6 a {font-size: 2.5em; color: #666;}
