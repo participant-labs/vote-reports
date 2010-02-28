@@ -17,4 +17,5 @@ stylesheets:
     - public/stylesheets/smoothness/jquery-ui-1.7.2.custom.css
     - public/stylesheets/master.css
     - public/stylesheets/interaction.css
+    - public/stylesheets/menu.css
     - public/stylesheets/jquery.Jcrop.css
