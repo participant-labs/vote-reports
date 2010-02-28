@@ -4,6 +4,7 @@ class Subject < ActiveRecord::Base
 
   def reports
     Report.scoped(
+      :select => 'DISTINCT reports.*',
       :joins => {:bills => :bill_subjects},
       :conditions => {:'bill_subjects.subject_id' => self})
   end
