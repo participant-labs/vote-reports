@@ -87,7 +87,7 @@ blockquote {
 	border-bottom: 1px dotted #d5d5d5;
 }
 
-.section:last-child {
+.section:last-child, .section.last {
 	border-bottom: none;
 }
 

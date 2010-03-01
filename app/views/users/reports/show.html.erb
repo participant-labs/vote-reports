@@ -25,7 +25,7 @@
   <%- end -%>
 </div>
 
-<div class="report_scores">
+<div class="section report_scores">
   <h2>Scores</h2>
   <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#', :'data-dialog' => "#bill_criteria",
 :'data-dialog-title' => "Bill Criteria for #{@report.name}" %> lead to a high score, votes against, a low one.</p>
@@ -35,17 +35,7 @@
   <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
 </div>
 
-<div class="footer">
-  <ul>
-    <li><%= link_to 'Learn about this Report', '#',
-    :'data-dialog' => "#bill_criteria",
-  :'data-dialog-title' => "Bill Criteria for #{@report.name}" %></li>
-    <li><%= link_to 'View another Report', reports_path %></li>
-    <li><%= link_to 'Create a new Report', new_report_path %></li>
-  </ul>
-</div>
-
-<div class="section"  id="bill_criteria">
+<div id="bill_criteria">
   <h2>Bill Criteria</h2>
   <p>Learn more about the bills in this report:</p>
   <blockquote>
@@ -82,4 +72,20 @@
   <%- if @report.user == current_user -%>
     <%= render 'users/reports/bills/search', :label => 'Add Bills', :report => @report %>
   <%- end -%>
+</div>
+
+<div class="section last report_subjects">
+  <h2>Subjects</h2>
+  <p>Subjects for this report are drawn from the associated bills.  Follow the links below to find reports on related subjects.</p>
+  <%= render 'subjects/cloud', :subjects => @subjects %>
+</div>
+
+<div class="footer">
+  <ul>
+    <li><%= link_to 'Learn about this Report', '#',
+    :'data-dialog' => "#bill_criteria",
+  :'data-dialog-title' => "Bill Criteria for #{@report.name}" %></li>
+    <li><%= link_to 'View another Report', reports_path %></li>
+    <li><%= link_to 'Create a new Report', new_report_path %></li>
+  </ul>
 </div>
