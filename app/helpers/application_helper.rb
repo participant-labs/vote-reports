@@ -38,14 +38,21 @@ module ApplicationHelper
   def tag_cloud(tags, classes)
     return [] if tags.empty?
 
-    min = tags.last.count.to_f
-    spread = tags.first.count.to_f - min
-    max_index = classes.size - 1
+    if tags.first.respond_to?(:count)
+      min = tags.last.count.to_f
+      spread = tags.first.count.to_f - min
+      spread = 1 if spread == 0
+      max_index = classes.size - 1
 
-    tags.sort_by(&:name).each do |tag|
-      index = (((tag.count.to_f - min) / spread) * max_index).round
-      raise "Bad index #{index} from #{tag.count}, #{tags.first.count}, #{tags.last.count}" if index > max_index
-      yield tag, classes[index]
+      tags.sort_by(&:name).each do |tag|
+        index = (((tag.count.to_f - min) / spread) * max_index).round
+        raise "Bad index #{index} from #{tag.count}, #{tags.first.count}, #{tags.last.count}" if index > max_index
+        yield tag, classes[index]
+      end
+    else
+      tags.sort_by(&:name).each do |tag|
+        yield tag, classes.first
+      end
     end
   end
 
