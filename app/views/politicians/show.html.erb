@@ -61,7 +61,7 @@
       </tr>
     </thead>
     <tbody>
-      <%- @politician.report_scores.each do |report_score| -%>
+      <%- @politician.report_scores.published.each do |report_score| -%>
       <tr>
         <td><%= render 'reports/report', :report => report_score.report %></td>
         <td><%= render 'reports/scores/score', :score => report_score %></td>

@@ -11,6 +11,8 @@ class ReportScore < ActiveRecord::Base
     :evidence => [{:vote => {:roll => {:subject => {:titles => :as}}}}, :bill_criterion]
   }
 
+  named_scope :published, :joins => :report, :conditions => {:'reports.state' => 'published'}
+
   named_scope :for_politicians, lambda {|politicians|
     if politicians == Politician
       {}
