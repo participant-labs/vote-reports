@@ -1,6 +1,7 @@
 ol.tag_cloud {
   list-style-type: none;
   text-align: center;
+  margin-left: 0;
 }
 
 ol.tag_cloud li {
