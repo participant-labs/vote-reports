@@ -21,6 +21,6 @@ class SubjectsController < ApplicationController
   def show
     @subject = Subject.find(params[:id])
     @bills = @subject.bills.paginate :page => params[:bill_page]
-    @reports = @subject.reports.paginate :page => params[:report_page]
+    @reports = @subject.reports.published.paginate :page => params[:report_page]
   end
 end
