@@ -4,6 +4,23 @@ class Subject < ActiveRecord::Base
 
   has_friendly_id :name, :use_slug => true
 
+  searchable do
+    text :name
+  end
+
+  class << self
+    def paginated_search(params)
+      search do
+        fulltext params[:q]
+        paginate :page => params[:subject_page]
+      end
+    end
+
+    def qualified_column_names
+      column_names.collect {|c| "subjects.#{c}"}.join(",")
+    end
+  end
+
   def reports
     Report.scoped(
       :select => 'DISTINCT reports.*',
@@ -24,25 +41,12 @@ class Subject < ActiveRecord::Base
 
   named_scope :for_tag_cloud,
     :select => "DISTINCT(subjects.*), COUNT(bills.id) AS count",
-    :group => "subjects.id, subjects.name",
+    :group => qualified_column_names,
     :order => 'count DESC'
 
   named_scope :by_popularity,
     :joins => :bill_subjects,
     :select => "DISTINCT(subjects.*), COUNT(bill_subjects.bill_id) AS count",
-    :group => "subjects.id, subjects.name",
+    :group => qualified_column_names,
     :order => "count DESC"
-
-  searchable do
-    text :name
-  end
-
-  class << self
-    def paginated_search(params)
-      search do
-        fulltext params[:q]
-        paginate :page => params[:subject_page]
-      end
-    end
-  end
 end
