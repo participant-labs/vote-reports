@@ -18,3 +18,22 @@ Given /^(\d+) bills? with (subject "[^\"]*")$/ do |bill_count, subject|
     create_bill(:subjects => [subject])
   end
 end
+
+Given /^(\d+) report bills? with (subject "[^\"]*")$/ do |report_bill_count, subject|
+  report = create_published_report
+  report_bill_count.to_i.times do
+    bill = create_bill(:subjects => [subject])
+    create_bill_criterion(:bill => bill, :report => report)
+  end
+end
+
+Given /^(\d+) subjects? with (\d+) report bills? each$/ do |subject_count, report_bill_count|
+  report = create_published_report
+  subject_count.to_i.times do
+    bills = ([nil] * report_bill_count.to_i).map { new_bill }
+    create_subject(:bills => bills)
+    bills.each do |bill|
+      create_bill_criterion(:bill => bill, :report => report)
+    end
+  end
+end
