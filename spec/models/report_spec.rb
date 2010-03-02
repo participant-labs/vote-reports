@@ -19,6 +19,17 @@ describe Report do
     end
   end
 
+  describe "destruction" do
+    it "should delete related criteria" do
+      report = create_published_report
+      criteria = report.bill_criteria
+      criteria.should_not be_empty
+      lambda {
+        report.destroy
+      }.should change(BillCriterion, :count).by(-criteria.count)
+    end
+  end
+
   describe ".with_criteria" do
     it "should return reports with bill_criteria" do
       create_report
