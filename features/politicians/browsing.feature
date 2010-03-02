@@ -62,7 +62,7 @@ Feature: Browsing Politicians
     And I should see "Pres. Ron Wyden"
 
   Scenario: Viewing related reports from the Politicians Page
-    Given I have a report named "Active Report"
+    Given I have a published report named "Active Report"
     And an un-voted, current-congress bill named "Bovine Security Act of 2009"
     And an un-voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
     And the following politician records:

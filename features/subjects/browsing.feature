@@ -8,7 +8,7 @@ Feature: Subject viewing
     And bill "Bovine Security Act of 2009" has a subject "Cows"
 
   Scenario: Follow a report related through a bill criterion to its page
-    Given a report named "Active Report"
+    Given a published report named "Active Report"
     And report "Active Report" has the following bill criteria:
       | bill                                    | support |
       | Bovine Security Act of 2009             | true    |
