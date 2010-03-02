@@ -2,6 +2,8 @@ class Subject < ActiveRecord::Base
   has_many :bill_subjects
   has_many :bills, :through => :bill_subjects
 
+  has_friendly_id :name, :use_slug => true
+
   def reports
     Report.scoped(
       :select => 'DISTINCT reports.*',

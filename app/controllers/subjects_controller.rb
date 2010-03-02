@@ -20,6 +20,10 @@ class SubjectsController < ApplicationController
 
   def show
     @subject = Subject.find(params[:id])
+    if !@subject.friendly_id_status.best?
+      redirect_to subject_path(@subject), :status => 301
+      return
+    end
     @bills = @subject.bills.paginate :page => params[:bill_page]
     @reports = @subject.reports.published.paginate :page => params[:report_page]
   end
