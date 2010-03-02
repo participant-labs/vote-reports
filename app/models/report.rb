@@ -95,7 +95,7 @@ class Report < ActiveRecord::Base
     end
   end
 
-  has_many :bill_criteria
+  has_many :bill_criteria, :dependent => :destroy
   has_many :bills, :through => :bill_criteria
 
   has_many :scores, :class_name => 'ReportScore', :dependent => :destroy
