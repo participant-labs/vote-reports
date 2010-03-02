@@ -9,6 +9,7 @@ namespace :vlad do
   task :update_symlinks => [:internal_symlinks]
   task :deploy => [:update, :install_gems, :migrate, :setup_scheduling, :start_dj, :setup_assets, :start]
 
+  set :rake_cmd, 'nice -n 3 rake'
   set :web_command, "apache2ctl"
 
   remote_task :internal_symlinks, :roles => :app do
