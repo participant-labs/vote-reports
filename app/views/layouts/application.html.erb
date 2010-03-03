@@ -84,7 +84,7 @@
           <h3><%= link_to_unless_current 'VoteReports', root_path %></h3>
           <ul class="sidebar-links">
             <li><%= link_to_unless_current "About us", about_path %></li>
-            <li><%= mail_to 'votereports@gmail.com', "Contact us" %></li>
+            <li><%= mail_to 'all_ears@votereports.org', "Contact us" %></li>
             <li><%= link_to 'Feedback', get_satisfaction_path, :title => 'We welcome it' %></li>
           </ul>
           <p id="copy"><%= link_to "&copy; #{Date.today.year}", participant_labs_path %></p>
