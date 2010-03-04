@@ -22,10 +22,7 @@ class Subject < ActiveRecord::Base
   end
 
   def reports
-    Report.scoped(
-      :select => 'DISTINCT reports.*',
-      :joins => {:bills => :bill_subjects},
-      :conditions => {:'bill_subjects.subject_id' => self})
+    Report.with_subject(self)
   end
 
   named_scope :for_report, lambda {|reports|
