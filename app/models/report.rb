@@ -126,11 +126,19 @@ class Report < ActiveRecord::Base
   named_scope :by_updated_at, :order => 'updated_at DESC'
 
   named_scope :with_subject, lambda {|subject|
-    {
-      :select => 'DISTINCT reports.*',
-      :joins => {:bills => :bill_subjects},
-      :conditions => {:'bill_subjects.subject_id' => subject})
-    }
+    if subject.is_a?(String)
+      {
+        :select => 'DISTINCT reports.*',
+        :joins => {:bills => :subjects},
+        :conditions => {:'subjects.name' => subject})
+      }
+    else
+      {
+        :select => 'DISTINCT reports.*',
+        :joins => {:bills => :bill_subjects},
+        :conditions => {:'bill_subjects.subject_id' => subject})
+      }
+    end
   }
 
   def description
