@@ -130,13 +130,25 @@ class Report < ActiveRecord::Base
       {
         :select => 'DISTINCT reports.*',
         :joins => {:bills => :subjects},
-        :conditions => {:'subjects.name' => subject})
+        :conditions => {:'subjects.name' => subject}
       }
     else
       {
         :select => 'DISTINCT reports.*',
         :joins => {:bills => :bill_subjects},
-        :conditions => {:'bill_subjects.subject_id' => subject})
+        :conditions => {:'bill_subjects.subject_id' => subject}
+      }
+    end
+  }
+
+  named_scope :with_scores_for, lambda {|politicians|
+    if politicians.blank?
+      {}
+    else
+      {
+        :select => 'DISTINCT reports.*',
+        :joins => :scores,
+        :conditions => {:'report_scores.politician_id' => politicians}
       }
     end
   }

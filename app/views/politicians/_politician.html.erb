@@ -1,5 +1,5 @@
 <%- no_image ||= false -%>
 <% div_for politician do %>
-  <%= image_tag politician.headshot_url(:small), :size => '50x60', :alt => '' if !no_image && politician.headshot_url(:small) %>
+  <%= image_tag politician.headshot_url(:small), :size => '50x60', :alt => '' if !no_image && politician.headshot_url(:small) %><br />
   <%= link_to_unless_current politician_title(politician), politician, :class => 'politician_name'  %>
 <% end %>

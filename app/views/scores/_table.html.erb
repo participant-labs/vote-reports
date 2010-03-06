@@ -1,0 +1,26 @@
+<table id="scores">
+  <%- if @politicians -%>
+    <thead>
+      <tr>
+        <%- if @topical_reports -%>
+          <td></td>
+        <%- end -%>
+        <%- @politicians.each do |politician| -%>
+          <th><%= render politician %></th>
+        <%- end -%>
+      </tr>
+    </thead>
+  <%- end -%>
+  <%- if @topical_reports -%>
+    <tbody>
+      <%- @topical_reports.each do |report| -%>
+        <tr>
+          <th><%= render 'reports/report', :report => report, :no_description => true %></th>
+          <%- report.scores.for_politicians(@politicians).each do |score| -%>
+            <td><%= render 'reports/scores/score', :score => score %></td>
+          <%- end -%>
+        </tr>
+      <%- end -%>
+    </tbody>
+  <%- end -%>
+</table>
