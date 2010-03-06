@@ -1,7 +1,8 @@
+<%- target ||= lambda {|subject| subject } -%>
 <%- classes = subjects.size > 40 ? %w(tag1 tag2 tag3 tag4 tag5 tag6) : %w(tag1 tag2 tag3 tag4) -%>
 
 <ol class="tag_cloud">
 <% tag_cloud(subjects, classes) do |subject, css_class| %>
-  <li class="<%= css_class %>"><%= link_to subject.name, subject %></li>
+  <li class="<%= css_class %>"><%= link_to subject.name, target.call(subject)  %></li>
 <% end %>
 </ol>

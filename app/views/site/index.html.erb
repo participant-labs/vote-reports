@@ -5,17 +5,17 @@
 
   <% form_tag root_url, :method => :get, :'data-replace' => '#scores_table' do %>
     <dl>
-      <dt>1) <%= link_to 'Find reports', reports_path %> on the issues important to you</dt>
-      <dd><%= render 'subjects/cloud', :subjects => @subjects %></dd>
-      <dt>2) Tell us who represents you</dt>
+      <dt>1) Tell us who represents you</dt>
       <dd>
           <%= label_tag :from_where, 'From Where?' %>
-          <%= text_field_tag :from_where, @from_where %>
+          <%= text_field_tag :from_where, params[:from_where] %>
           <%= hidden_field_tag :in_office, true %>
           <%= submit_tag 'Go!' %>
       </dd>
+      <dt>2) Tell us what you care about</dt>
+      <dd><%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|tag| root_path(:tag => tag, :from_where => params[:from_where], :in_office => true) } %></dd>
       <dt>3) We'll tell you how well they represent you, really</dt>
-      <dd><%= render 'scores/table', :scores => @scores %></dd>
+      <dd><%= render 'scores/table' %></dd>
     </dl>
   <% end %>
 

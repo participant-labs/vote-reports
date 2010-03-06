@@ -13,6 +13,22 @@ class ReportScore < ActiveRecord::Base
 
   named_scope :published, :joins => :report, :conditions => {:'reports.state' => 'published'}
 
+  named_scope :for_reports_with_subject, lambda {|subject|
+    if subject.is_a?(String)
+      {
+        :select => 'DISTINCT report_scores.*',
+        :joins => {:report => {:bills => :subjects}},
+        :conditions => {:'subjects.name' => subject}
+      }
+    else
+      {
+        :select => 'DISTINCT report_scores.*',
+        :joins => {:report => {:bills => :bill_subjects}},
+        :conditions => {:'bill_subjects.subject_id' => subject}
+      }
+    end
+  }
+
   named_scope :for_politicians, lambda {|politicians|
     if politicians == Politician
       {}
