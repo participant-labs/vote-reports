@@ -125,18 +125,20 @@ class Report < ActiveRecord::Base
   named_scope :scored, :select => 'DISTINCT reports.*', :joins => {:bill_criteria => {:bill => :passage_rolls}}
   named_scope :by_updated_at, :order => 'updated_at DESC'
 
-  named_scope :with_subject, lambda {|subject|
-    if subject.is_a?(String)
+  named_scope :with_subjects, lambda {|subjects|
+    subjects = Array(subjects)
+    if subjects.first.is_a?(String)
       {
         :select => 'DISTINCT reports.*',
         :joins => {:bills => :subjects},
-        :conditions => ["subjects.name = ? OR subjects.cached_slug = ?", subject, subject]
+        :conditions => ["subjects.name IN(:subjects) OR subjects.cached_slug IN(:subjects)",
+          {:subjects => subjects}]
       }
     else
       {
         :select => 'DISTINCT reports.*',
         :joins => {:bills => :bill_subjects},
-        :conditions => {:'bill_subjects.subject_id' => subject}
+        :conditions => {:'bill_subjects.subject_id' => subjects}
       }
     end
   }
