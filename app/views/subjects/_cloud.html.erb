@@ -15,9 +15,9 @@
         params[:subjects] + [slug]
       end
 -%>
-    <li class="subject <%= classes.join(' ') %>"><%= link_to subject.name, target.call(subjects)  %></li>
+    <li class="subject <%= classes.join(' ') %>"><%= link_to subject.name, *target.call(subjects)  %></li>
   <%- else -%>
-    <li class="subject <%= css_class %>"><%= link_to subject.name, target.call(subject)  %></li>
+    <li class="subject <%= css_class %>"><%= link_to subject.name, *target.call(subject)  %></li>
   <%- end -%>
 <% end %>
 </ol>

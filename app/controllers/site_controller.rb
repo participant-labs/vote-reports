@@ -2,7 +2,6 @@ class SiteController < ApplicationController
 
   def index
     params[:subjects] ||= []
-    @recent_reports = Report.published.by_updated_at.paginate(:page => params[:page], :include => :user)
     if params[:from_where].present?
       @politicians = sought_politicians
       @topical_reports = topical_reports.with_scores_for(@politicians)
@@ -15,6 +14,15 @@ class SiteController < ApplicationController
       else
         Subject.on_published_reports
       end.for_tag_cloud.all(:limit => 20)
+
+    respond_to do |format|
+      format.html {
+        @recent_reports = Report.published.by_updated_at.paginate(:page => params[:page], :include => :user)
+      }
+      format.js {
+        render :partial => 'site/instant_gratification'
+      }
+    end
   end
 
   def about
