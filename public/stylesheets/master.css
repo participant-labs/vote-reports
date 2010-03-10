@@ -115,6 +115,15 @@ dl dt {
 dd {
   margin-left: 1.5em; }
 
+#instant_gratification dt {
+  padding: 10px;
+  font: normal normal normal 24px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+}
+
+#instant_gratification dt:after {
+  content: ':';
+}
+
 .report_image {
   border-bottom: 0;
 }
