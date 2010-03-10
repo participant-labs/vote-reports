@@ -130,7 +130,7 @@ class Report < ActiveRecord::Base
       {
         :select => 'DISTINCT reports.*',
         :joins => {:bills => :subjects},
-        :conditions => {:'subjects.name' => subject}
+        :conditions => ["subjects.name = ? OR subjects.cached_slug = ?", subject, subject]
       }
     else
       {
