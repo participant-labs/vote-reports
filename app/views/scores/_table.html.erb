@@ -16,8 +16,8 @@
       <%- @topical_reports.each do |report| -%>
         <tr>
           <th><%= render 'reports/report', :report => report, :no_description => true %></th>
-          <%- report.scores.for_politicians(@politicians).each do |score| -%>
-            <td><%= render 'reports/scores/score', :score => score %></td>
+          <%- @politicians.each do |politician| -%>
+            <td><%= render 'reports/scores/score', :score => report.scores.for_politicians(politician).first %></td>
           <%- end -%>
         </tr>
       <%- end -%>
