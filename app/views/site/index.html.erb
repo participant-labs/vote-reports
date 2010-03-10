@@ -13,7 +13,10 @@
           <%= submit_tag 'Go!' %>
       </dd>
       <dt>2) Tell us what you care about</dt>
-      <dd><%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|tag| root_path(:tag => tag, :from_where => params[:from_where], :in_office => true) } %></dd>
+      <dd><%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|tag|
+        tag = tag.to_param
+        tags = params[:tags].include?(tag.to_param) ? params[:tags] - [tag] : params[:tags] + [tag]
+        root_path(:tags => tags, :from_where => params[:from_where], :in_office => true) } %></dd>
       <dt>3) We'll tell you how well they represent you, really</dt>
       <dd><%= render 'scores/table' %></dd>
     </dl>

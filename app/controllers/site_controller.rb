@@ -1,11 +1,12 @@
 class SiteController < ApplicationController
 
   def index
+    params[:tags] ||= []
     @recent_reports = Report.published.by_updated_at.paginate(:page => params[:page], :include => :user)
     if params[:from_where].present?
       @politicians = sought_politicians
       @topical_reports = topical_reports.with_scores_for(@politicians)
-    elsif params[:tag].present?
+    elsif params[:tags].present?
       @topical_reports = topical_reports
     end
     @subjects =
@@ -22,8 +23,8 @@ class SiteController < ApplicationController
 private
 
   def topical_reports
-    if params[:tag].present?
-      Report.published.with_subject(params[:tag])
+    if params[:tags].present?
+      Report.published.with_subjects(params[:tags])
     elsif params[:from_where].present?
       Report.published
     end

@@ -22,7 +22,7 @@ class Subject < ActiveRecord::Base
   end
 
   def reports
-    Report.with_subject(self)
+    Report.with_subjects(self)
   end
 
   named_scope :for_report, lambda {|reports|
