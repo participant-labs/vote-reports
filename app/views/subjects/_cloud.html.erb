@@ -3,6 +3,21 @@
 
 <ol class="tag_cloud">
 <% tag_cloud(subjects, classes) do |subject, css_class| %>
-  <li class="<%= css_class %>"><%= link_to subject.name, target.call(subject)  %></li>
+<%-
+  if params[:subjects]
+    classes = [css_class]
+    slug = subject.to_param
+    subjects =
+      if params[:subjects].include?(slug)
+        classes << 'selected'
+        params[:subjects] - [slug]
+      else
+        params[:subjects] + [slug]
+      end
+-%>
+    <li class="subject <%= classes.join(' ') %>"><%= link_to subject.name, target.call(subjects)  %></li>
+  <%- else -%>
+    <li class="subject <%= css_class %>"><%= link_to subject.name, target.call(subject)  %></li>
+  <%- end -%>
 <% end %>
 </ol>
