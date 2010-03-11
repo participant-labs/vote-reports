@@ -92,6 +92,11 @@ table#reports td {
   color: #930;
 }
 
+#scores .report_score > .report_score_evidence_link {
+  top: 30px;
+  left: 0px;
+}
+
 .report_score.hovering > .report_score_evidence_link {
   display: block;
 }
