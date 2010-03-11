@@ -1,5 +1,5 @@
 <div class="report_score hoverable">
-  <%= link_to "#{score.score.round}%", '#', :class => 'score',
+  <%= content_tag :span, "#{score.score.round}%", :class => 'score',
     :'data-dialog' => "##{dom_id(score.politician, :report_score_evidence)}",
     :'data-dialog-title' => "Significant Votes for #{score.politician.full_name} on '#{score.report.name}'" %>
   <div class="report_score_evidence_link">
