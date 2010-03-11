@@ -1,5 +1,5 @@
 class Report < ActiveRecord::Base
-  DEFAULT_THUMBNAIL_PATH = "images/reports/default_thumbnail.jpg"
+  DEFAULT_THUMBNAIL_PATH = "reports/default_thumbnail.jpg"
 
   belongs_to :user
   has_friendly_id :name, :use_slug => true, :scope => :user
@@ -105,7 +105,7 @@ class Report < ActiveRecord::Base
                      :thumbnail => '110x83#',
                      :small => "55x41#" },
         :processors => [:jcropper],
-        :default_url => ('/' + DEFAULT_THUMBNAIL_PATH),
+        :default_url => ('/images/' + DEFAULT_THUMBNAIL_PATH),
         :default_style => :thumbnail
 
   validate :name_not_reserved
@@ -186,7 +186,7 @@ class Report < ActiveRecord::Base
     if path.present?
       @geometry[style] ||= Paperclip::Geometry.from_file path
     else
-      @default_geometry ||= Paperclip::Geometry.from_file Rails.root.join('public', DEFAULT_THUMBNAIL_PATH)
+      @default_geometry ||= Paperclip::Geometry.from_file Rails.root.join('public/images', DEFAULT_THUMBNAIL_PATH)
     end
   end
 
