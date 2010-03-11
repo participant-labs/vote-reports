@@ -44,7 +44,7 @@
       return false;
     })
 
-    $('[data-replace] a, a[data-replace]').live('click', function(event) {
+    $('[data-replace] > a, a[data-replace]').live('click', function(event) {
       var target = $(event.target);
       return replaceWith(target.closest('[data-replace]').attr('data-replace'), target.attr('href'));
     })
