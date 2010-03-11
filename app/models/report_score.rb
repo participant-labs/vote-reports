@@ -37,6 +37,14 @@ class ReportScore < ActiveRecord::Base
     end
   }
 
+  named_scope :for_reports, lambda {|reports|
+    if reports == Report
+      {}
+    else
+      {:conditions => {:report_id => reports}}
+    end
+  }
+
   class << self
     def per_page
       10
