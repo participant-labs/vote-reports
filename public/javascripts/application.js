@@ -49,7 +49,7 @@
       return replaceWith(target.closest('[data-replace]').attr('data-replace'), target.attr('href'));
     })
 
-    $('form[data-replace]').submit(function(event){
+    $('form[data-replace]').live('submit', function(event){
       var source = $(event.target);
       return replaceWith(source.attr('data-replace'), source.attr('action') + '?' + source.serialize());
     });
