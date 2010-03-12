@@ -126,6 +126,15 @@ dl dt {
 dd {
   margin-left: 1.5em; }
 
+#instant_gratification > dl > dt:first-of-type {
+  display: inline;
+}
+
+#instant_gratification > dl > dd:first-of-type {
+  display: inline;
+  margin-left: 0;
+}
+
 #instant_gratification dt {
   padding: 10px;
   font: normal normal normal 24px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
