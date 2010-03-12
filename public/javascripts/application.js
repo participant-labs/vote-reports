@@ -29,10 +29,11 @@
     $('.flash.error, .flash.warning').fadeOutSoon(5000, 5000);
 
     $('[data-dialog]').live('focusin', function() {
-      $($(this).attr('data-dialog')).dialog({
+      var target = $($(this).attr('data-dialog'));
+      target.dialog({
         autoOpen: false,
-        title: $(this).attr('data-dialog-title'),
-        width: $(this).attr('data-dialog-width') || 740});
+        title: target.attr('data-dialog-title'),
+        width: target.attr('data-dialog-width') || 740});
     });
     $('[data-dialog]').live('click', function(event) {
       $($(event.target).attr('data-dialog')).dialog('open');
