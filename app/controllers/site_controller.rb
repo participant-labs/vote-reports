@@ -2,6 +2,8 @@ class SiteController < ApplicationController
 
   def index
     params[:subjects] ||= []
+    params[:in_office] = true if params[:in_office].nil?
+
     if params[:from_where].present?
       @politicians = sought_politicians
       @topical_reports = topical_reports.with_scores_for(@politicians)
