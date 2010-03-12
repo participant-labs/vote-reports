@@ -2,12 +2,12 @@
   <dl>
     <dt>1) Tell us your zip code</dt>
     <dd>
-        <%= text_field_tag :from_where, params[:from_where], :tabindex => 1 %>
+        <%= text_field_tag :representing, params[:representing], :tabindex => 1 %>
         <%= submit_tag 'Go!' %>
     </dd>
     <dt>2) Tell us what you care about</dt>
     <dd><%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
-      [root_path(:subjects => subjects, :from_where => params[:from_where], :in_office => true),
+      [root_path(:subjects => subjects, :representing => params[:representing], :in_office => true),
       {:'data-replace' => '#instant_gratification'}] } %></dd>
     <dt>3) We'll tell you how well they represent you, really</dt>
     <dd><%= render 'scores/table' %></dd>
