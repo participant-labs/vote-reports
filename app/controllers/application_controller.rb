@@ -12,10 +12,10 @@ class ApplicationController < ActionController::Base
   private
 
   def sought_politicians
-    if params[:from_where].present?
-      Politician.from(params[:from_where])
-    elsif !params.has_key?(:from_where) && session[:geo_location]
-      params[:from_where] = session[:geo_location].full_address
+    if params[:representing].present?
+      Politician.from(params[:representing])
+    elsif !params.has_key?(:representing) && session[:geo_location]
+      params[:representing] = session[:geo_location].full_address
       Politician.from(session[:geo_location])
     else
       Politician
