@@ -1,9 +1,8 @@
 <% form_tag root_url, :method => :get, :'data-replace' => '#instant_gratification', :id => 'instant_gratification' do %>
   <dl>
-    <dt>1) Tell us who represents you</dt>
+    <dt>1) Tell us your zip code</dt>
     <dd>
-        <%= label_tag :from_where, 'From Where?' %>
-        <%= text_field_tag :from_where, params[:from_where] %>
+        <%= text_field_tag :from_where, params[:from_where], :tabindex => 1 %>
         <%= hidden_field_tag :in_office, true %>
         <%= submit_tag 'Go!' %>
     </dd>
