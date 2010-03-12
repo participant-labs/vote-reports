@@ -29,14 +29,14 @@
     $('.flash.error, .flash.warning').fadeOutSoon(5000, 5000);
 
     $('[data-dialog]').live('focusin', function() {
-        $($(this).attr('data-dialog')).dialog({
-          autoOpen: false,
-          title: $(this).attr('data-dialog-title'),
-          width: $(this).attr('data-dialog-width') || 740});
+      $($(this).attr('data-dialog')).dialog({
+        autoOpen: false,
+        title: $(this).attr('data-dialog-title'),
+        width: $(this).attr('data-dialog-width') || 740});
     });
     $('[data-dialog]').live('click', function(event) {
-        $($(event.target).attr('data-dialog')).dialog('open');
-        return false;
+      $($(event.target).attr('data-dialog')).dialog('open');
+      return false;
     });
 
     $('[data-toggle]').live('click', function(event) {
