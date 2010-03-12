@@ -144,7 +144,7 @@ dd {
   content: ':';
 }
 
-.report_image {
+.report_image, .ui-dialog-titlebar-close {
   border-bottom: 0;
 }
 
