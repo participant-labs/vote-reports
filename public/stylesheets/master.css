@@ -90,6 +90,7 @@ table#reports td {
   padding: 1em;
   background: #ffc;
   color: #930;
+  text-align: center;
 }
 
 #scores .report_score {
@@ -97,8 +98,9 @@ table#reports td {
 }
 
 #scores .report_score > .report_score_evidence_link {
-  top: 30px;
-  left: 0px;
+  top: 3em;
+  left: 0;
+  width: 131%;
 }
 
 .report_score.hovering > .report_score_evidence_link {
