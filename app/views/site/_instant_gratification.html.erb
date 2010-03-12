@@ -9,7 +9,7 @@
     <dd><%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
       [root_path(:subjects => subjects, :representing => params[:representing]),
       {:'data-replace' => '#instant_gratification'}] } %></dd>
-    <dt>3) We'll tell you how well they represent you, really</dt>
+    <dt>3) We'll tell you how they represent you</dt>
     <dd><%= render 'scores/table' %></dd>
   </dl>
 <% end %>
