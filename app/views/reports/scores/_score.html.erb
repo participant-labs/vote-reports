@@ -1,15 +1,16 @@
+<%- score_id = "#{score.report.to_param}_evidence_for_#{score.politician.to_param}" -%>
 <div class="report_score hoverable">
   <%= content_tag :span, "#{score.score.round}%", :class => 'score',
-    :'data-dialog' => "##{dom_id(score.politician, :report_score_evidence)}",
+    :'data-dialog' => "##{score_id}",
     :'data-dialog-title' => "Significant Votes for #{score.politician.full_name} on '#{score.report.name}'" %>
   <div class="report_score_evidence_link">
     based on <%= link_to pluralize(score.evidence.size, 'vote'), '#',
-    :'data-dialog' => "##{dom_id(score.politician, :report_score_evidence)}",
+    :'data-dialog' => "##{score_id}",
     :'data-dialog-title' => "Significant Votes for #{score.politician.full_name} on '#{score.report.name}'" %>
   </div>
 </div>
 
-<dl id="<%= dom_id(score.politician, :report_score_evidence) %>" class="hidden">
+<dl id="<%= score_id %>" class="hidden">
   <%- score.evidence.group_by(&:subject).each_pair do |bill, bill_scores| -%>
   <dt><%= render 'bills/bill', :bill => bill %>:
     <%= bill_scores.first.bill_criterion.position %></dt>
