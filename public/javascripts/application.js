@@ -12,8 +12,21 @@
     return self;
   };
 
-  function replaceWith(target, url) {
-    target = $(target);
+  $.address.init(function(event) {
+    if (event.value.length > 1) {
+      var values = event.value.substring(1).split('/');
+      var target_id = values.shift();
+      var url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + values.shift();
+      replaceWith(target_id, url);
+    }
+  });
+
+  function params_to_path(target_id, url) {
+    return target_id + '/' + url.substring(url.indexOf('?') + 1);
+  }
+
+  function replaceWith(target_id, url) {
+    target = $(target_id);
     if (target.length == 0) {
       return true;
     }
@@ -21,6 +34,7 @@
     target.load(url, function() {
       target.unblock();
     });
+    $.address.value(params_to_path(target_id, url));
     return false;
   }
 
