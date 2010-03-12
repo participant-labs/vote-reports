@@ -92,6 +92,10 @@ table#reports td {
   color: #930;
 }
 
+#scores .report_score {
+  padding: 1em;
+}
+
 #scores .report_score > .report_score_evidence_link {
   top: 30px;
   left: 0px;
