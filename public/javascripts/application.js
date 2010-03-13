@@ -39,7 +39,7 @@
   }
 
   $(document).ready(function(){
-    $('.flash.notice, .flash.message').fadeOutSoon(3000);
+    $('.flash.success, .flash.notice, .flash.message').fadeOutSoon(3000);
     $('.flash.error, .flash.warning').fadeOutSoon(5000, 5000);
 
     $('[data-dialog]').live('focusin', function() {
