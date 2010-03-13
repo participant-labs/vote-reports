@@ -23,13 +23,16 @@
     <div id="main">
       <div id="inner">
         <ul id="account">
-          <% if current_user %>
+          <%- if current_user -%>
             <li><%= link_to_unless_current "Your reports", user_path(current_user) %></li>
             <li><%= link_to_unless_current "Log out", logout_path %></li>
-          <% else %>
+          <%- else -%>
             <li><%= link_to_unless_current "Log in", login_path %></li>
             <li><%= link_to_unless_current "Sign up", signup_path %></li>
-          <% end %>
+          <%- end -%>
+          <%- if session[:zip_code].present? -%>
+            <li>Zip: <%= session[:zip_code] %></li>
+          <%- end -%>
         </ul>
 
         <div id="header">
