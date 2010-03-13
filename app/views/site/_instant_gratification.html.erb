@@ -1,4 +1,4 @@
-<% form_tag root_url, :method => :get, :'data-replace' => '#instant_gratification', :id => 'instant_gratification' do %>
+<% form_tag root_url, :method => :get, :'data-replace' => 'instant_gratification', :id => 'instant_gratification' do %>
   <dl>
     <dt>1) Tell us your zip code</dt>
     <dd>
@@ -8,7 +8,7 @@
     <dt>2) Tell us what you care about</dt>
     <dd><%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
       [root_path(:subjects => subjects, :representing => params[:representing]),
-      {:'data-replace' => '#instant_gratification'}] } %></dd>
+      {:'data-replace' => 'instant_gratification'}] } %></dd>
     <dt>3) We'll tell you how they represent you</dt>
     <dd><%= render 'scores/table' %></dd>
   </dl>

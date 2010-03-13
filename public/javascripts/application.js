@@ -26,7 +26,7 @@
   }
 
   function replaceWith(target_id, url) {
-    target = $(target_id);
+    target = $('#' + target_id);
     if (target.length == 0) {
       return true;
     }

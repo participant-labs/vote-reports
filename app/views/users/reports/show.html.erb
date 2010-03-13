@@ -27,7 +27,7 @@
   <h2>Scores</h2>
   <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#', :'data-dialog' => "#bill_criteria" %> lead to a high score, votes against, a low one.</p>
   <%- if @report.scores.present? -%>
-    <%= render 'politicians/search', :url => user_report_path(@report.user, @report), :replace => '#report_scores' %>
+    <%= render 'politicians/search', :url => user_report_path(@report.user, @report), :replace => 'report_scores' %>
   <%- end -%>
   <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
 </div>
