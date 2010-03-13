@@ -1,6 +1,10 @@
 class SiteController < ApplicationController
 
   def index
+    if params[:representing].present? && zip_code?(params[:representing])
+      session[:zip_code] ||= params[:representing]
+    end
+
     params[:subjects] ||= []
     params[:in_office] = true if params[:in_office].nil?
 
