@@ -18,4 +18,8 @@ Feature: Browsing the Home Page
     When I go to the home page
     And I fill in "Zip Code" with "75028"
     And I press "Go!"
-    And I should see "Zip: 75028"
+    Then I should see "Zip: 75028"
+
+    When I fill in "Zip Code" with "90210"
+    And I press "Update"
+    Then I should see "Zip: 90210"
