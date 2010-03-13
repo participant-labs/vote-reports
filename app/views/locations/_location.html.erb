@@ -1,0 +1,5 @@
+<%- if session[:zip_code].present? -%>
+  <li>Zip: <%= session[:zip_code] %></li>
+<%- else -%>
+  <li><%= link_to 'Set your location!', new_location_path(:return_to => request.request_uri) %></li>
+<%- end -%>

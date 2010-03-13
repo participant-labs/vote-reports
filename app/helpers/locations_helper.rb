@@ -1,6 +1,6 @@
 module LocationsHelper
   def zip_code?(location)
-    location =~ /\d{5}(\-\d{4})?/
+    (location =~ /\d{5}(\-\d{4})?/).present?
   end
 
   def politicians_sought?
