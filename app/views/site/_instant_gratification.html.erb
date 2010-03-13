@@ -3,7 +3,7 @@
     <dt>1) Tell us your zip code</dt>
     <dd>
       <%= label_tag :representing, 'Zip Code', :class => 'hidden' %>
-      <%= text_field_tag :representing, requested_location, :tabindex => 1 %>
+      <%= text_field_tag :representing, requested_location, :tabindex => 1, :size => 10 %>
       <%= submit_tag requested_location.present? ? 'Update' : 'Go!' %>
     </dd>
     <dt>2) Tell us what you care about</dt>
