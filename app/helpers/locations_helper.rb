@@ -4,10 +4,6 @@ module LocationsHelper
   end
 
   def politicians_sought?
-    if params[:representing].present? && zip_code?(params[:representing])
-      session[:zip_code] ||= params[:representing]
-    end
-
     params[:representing].present? || session[:zip_code].present?
   end
 
