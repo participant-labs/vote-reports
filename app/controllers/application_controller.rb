@@ -2,6 +2,8 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  include LocationsHelper
+
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   geocode_ip_address
@@ -10,17 +12,6 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
 
   private
-
-  def sought_politicians
-    if params[:representing].present?
-      Politician.from(params[:representing])
-    elsif !params.has_key?(:representing) && session[:geo_location]
-      params[:representing] = session[:geo_location].full_address
-      Politician.from(session[:geo_location])
-    else
-      Politician
-    end.in_office(params[:in_office])
-  end
 
   def login_required
     unless current_user

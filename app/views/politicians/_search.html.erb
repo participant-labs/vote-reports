@@ -1,7 +1,7 @@
 <% form_tag url, :method => :get, :'data-replace' => replace do %>
   Show Representatives:
   <%= label_tag :representing, 'From Where?' %>
-  <%= text_field_tag :representing, params[:representing] %>
+  <%= text_field_tag :representing, requested_location %>
   <%= check_box_tag :in_office, '1', params[:in_office] %>
   <%= label_tag :in_office, 'In Office Only' %>
   <%= submit_tag 'Go!' %>
