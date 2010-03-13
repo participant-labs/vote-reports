@@ -30,9 +30,7 @@
             <li><%= link_to_unless_current "Log in", login_path %></li>
             <li><%= link_to_unless_current "Sign up", signup_path %></li>
           <%- end -%>
-          <%- if session[:zip_code].present? -%>
-            <li>Zip: <%= session[:zip_code] %></li>
-          <%- end -%>
+          <%= render 'locations/location' %>
         </ul>
 
         <div id="header">

@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :politicians, :only => [:index, :show]
   map.resources :subjects, :only => [:index, :show]
   map.resources :reports, :only => [:index, :new]
+  map.resource :location
 
   map.user_reports "reports/:user_id",
     :controller => 'users/reports',:action => 'index', :conditions => { :method => :get }
