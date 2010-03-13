@@ -13,3 +13,9 @@ Feature: Browsing the Home Page
     But I should not see "Empty Report"
     And I should not see "Unscored Report"
     And I should not see "Scored Report"
+
+  Scenario: User sets their zip code from the instant grat section
+    When I go to the home page
+    And I fill in "Zip Code" with "75028"
+    And I press "Go!"
+    And I should see "Zip: 75028"

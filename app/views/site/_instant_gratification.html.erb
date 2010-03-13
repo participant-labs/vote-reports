@@ -2,8 +2,9 @@
   <dl>
     <dt>1) Tell us your zip code</dt>
     <dd>
-        <%= text_field_tag :representing, params[:representing], :tabindex => 1 %>
-        <%= submit_tag 'Go!' %>
+      <%= label_tag :representing, 'Zip Code', :class => 'hidden' %>
+      <%= text_field_tag :representing, params[:representing], :tabindex => 1 %>
+      <%= submit_tag 'Go!' %>
     </dd>
     <dt>2) Tell us what you care about</dt>
     <dd><%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
