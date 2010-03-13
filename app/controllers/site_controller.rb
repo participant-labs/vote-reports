@@ -2,7 +2,7 @@ class SiteController < ApplicationController
 
   def index
     if params[:representing].present? && zip_code?(params[:representing])
-      session[:zip_code] ||= params[:representing]
+      session[:zip_code] = params[:representing]
     end
 
     params[:subjects] ||= []
