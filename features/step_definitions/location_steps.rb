@@ -8,3 +8,9 @@ end
 Given /^my (location is "[^"]*")$/ do |address|
   mock(Geokit::Geocoders::MultiGeocoder).geocode(anything) { address }
 end
+
+Given /^my location is set to "([^"]*)"/ do |zip|
+  visit new_location_path
+  fill_in 'Zip Code', :with => zip
+  click_button 'Save'
+end
