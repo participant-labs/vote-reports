@@ -55,7 +55,7 @@
     });
 
     $('[data-toggle]').live('click', function(event) {
-      $($(event.target).attr('data-toggle')).toggle();
+      $('#' + $(event.target).attr('data-toggle')).toggle();
       return false;
     })
 
