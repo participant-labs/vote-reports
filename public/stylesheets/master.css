@@ -202,3 +202,19 @@ dd {
 #fdbk_container a {
   border-bottom: 0;
 }
+
+#data ul {
+  list-style-type: none;
+}
+
+#data ul > li {
+  display: inline;
+}
+
+#data ul > li + li {
+  padding-left: 3em;
+}
+
+#data ul > li > a {
+  border-bottom: 0;
+}
