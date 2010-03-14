@@ -1,0 +1,19 @@
+<%- title @title -%>
+
+<div class="section">
+  <h2><%= @title %></h2>
+
+  <h3>Senators (<%= @senators.count %>)</h3>
+  <ul>
+    <%- @senators.each do |senator| -%>
+      <li><%= render 'politicians/politician', :politician => senator %></li>
+    <%- end -%>
+  </ul>
+
+  <h3>Representatives (<%= @representative.count %>)</h3>
+  <ul>
+    <%- @representative.each do |representative| -%>
+      <li><%= render 'politicians/politician', :politician => representative %></li>
+    <%- end -%>
+  </ul>
+</div>

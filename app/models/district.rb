@@ -2,6 +2,19 @@ class District < ActiveRecord::Base
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
   has_many :zip_codes, :class_name => 'DistrictZipCode'
 
+  has_many :representative_terms
+  has_many :representatives, :through => :representative_terms, :source => :politician, :uniq => true do
+    def in_office
+      scoped(
+      :conditions => [
+        '((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow)))',
+        {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
+      ])
+    end
+  end
+
+  delegate :senators, :to => :state
+
   named_scope :with_zip, lambda {|zip_code|
     zip_code, plus_4 = zip_code.to_s.match(/(?:^|[^\d])(\d\d\d\d\d)[-\s]*(\d{0,4})\s*$/).try(:captures)
     if zip_code.blank?
