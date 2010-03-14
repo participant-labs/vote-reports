@@ -81,8 +81,8 @@
       }
     });
 
-     $('#mce-EMAIL').fieldtag();
-     $('[for=mce-EMAIL]').hide();
+     $('.fieldtag').fieldtag();
+     $('label.fieldtag').hide();
 
   });
   $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script;
