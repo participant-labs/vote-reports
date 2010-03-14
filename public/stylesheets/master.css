@@ -6,6 +6,10 @@ form {
   padding-bottom: 10px;
 }
 
+input.tagged {
+  color: gray;
+}
+
 #bill_criteria {
   display: none;
 }
