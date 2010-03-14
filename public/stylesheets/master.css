@@ -203,18 +203,18 @@ dd {
   border-bottom: 0;
 }
 
-#data ul {
+#data_sources {
   list-style-type: none;
 }
 
-#data ul > li {
+#data_sources > li {
   display: inline;
 }
 
-#data ul > li + li {
+#data_sources > li + li {
   padding-left: 3em;
 }
 
-#data ul > li > a {
+#data_sources > li > a {
   border-bottom: 0;
 }
