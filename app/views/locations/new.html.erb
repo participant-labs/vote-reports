@@ -10,6 +10,9 @@
   <% form_tag location_path do %>
     <%= label_tag :zip_code, "Zip Code" %>
     <%= text_field_tag :zip_code %>
+    <%- if params[:return_to].present? -%>
+      <%= hidden_field_tag :return_to, params[:return_to] %>
+    <%- end -%>
     <%= submit_tag 'Save' %>
   <% end %>
 </div>

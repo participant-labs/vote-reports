@@ -3,14 +3,19 @@ Feature: User Location
   A user
   Should have their location stored, and modifiable
 
-  Scenario: User with no location stored can follow a link to set it
-    When I go to the home page
+  Scenario Outline: User with no location stored can follow a link to set it
+    When I go to <page>
     And I follow "Set your location"
     And I fill in "Zip Code" with "75028"
     And I press "Save"
-    Then I should be on the home page
+    Then I should be on <page>
     And I should see "Successfully set location"
     And I should see "Zip: 75028"
+
+  Examples:
+    | page             |
+    | the home page    |
+    | the reports page |
 
   @emulate_rails_javascript
   Scenario: User should be able to clear existing location
