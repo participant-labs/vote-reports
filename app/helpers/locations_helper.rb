@@ -8,11 +8,11 @@ module LocationsHelper
   end
 
   def sought_politicians
-    if params[:representing].present?
+    if params.has_key?(:representing)
       Politician.from(params[:representing])
     elsif session[:zip_code].present?
       Politician.from(session[:zip_code])
-    elsif !params.has_key?(:representing) && session[:geo_location]
+    elsif session[:geo_location]
       params[:representing] = session[:geo_location].full_address
       Politician.from(session[:geo_location])
     else
