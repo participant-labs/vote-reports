@@ -105,7 +105,9 @@ class Politician < ActiveRecord::Base
     end
 
     def from(representing)
-      if representing.is_a?(Geokit::GeoLoc)
+      if representing.blank?
+        self
+      elsif representing.is_a?(Geokit::GeoLoc)
         from_location(representing.state, representing.zip)
       else
         results = from_state(representing)
