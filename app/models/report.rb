@@ -116,12 +116,11 @@ class Report < ActiveRecord::Base
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
-  before_validation_on_create :add_creator_to_followers
   after_update :reprocess_thumbnail, :if => :cropping?
 
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
 
-  validates_presence_of :user, :name, :followers
+  validates_presence_of :user, :name
 
   named_scope :published, :conditions => {:state => 'published'}
   named_scope :unpublished, :conditions => "reports.state != 'published'"
@@ -195,12 +194,6 @@ class Report < ActiveRecord::Base
   end
 
 private
-
-  def add_creator_to_followers
-    if user
-      self.followers << user
-    end
-  end
 
   def reprocess_thumbnail
     thumbnail.reprocess!
