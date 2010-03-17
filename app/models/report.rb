@@ -191,8 +191,9 @@ class Report < ActiveRecord::Base
 
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
 
-  validates_presence_of :owner, :name
+  validates_presence_of :owner, :name, :followers
   validate :ensure_only_one_owner
+  before_validation_on_create :add_creator_to_followers
 
   named_scope :random, :order => 'random()'
 
@@ -284,6 +285,12 @@ class Report < ActiveRecord::Base
   end
 
 private
+
+  def add_creator_to_followers
+    if user
+      self.followers << user
+    end
+  end
 
   def ensure_only_one_owner
     if [user, interest_group, cause].compact.size > 1

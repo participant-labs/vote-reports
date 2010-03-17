@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def follows?(report)
-    false
+    followed_reports.include?(report)
   end
 
 private
