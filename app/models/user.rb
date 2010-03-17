@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_one :moderatorship
   has_many :reports
 
+  has_many :report_follows
+  has_many :followed_reports, :through => :report_follows, :source => :report
+
   validates_uniqueness_of :username, :email, :case_sensitive => false
   validate :username_not_reserved
 
