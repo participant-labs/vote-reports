@@ -23,7 +23,7 @@ ActionController::Routing::Routes.draw do |map|
     :controller => 'users/reports', :action => 'edit', :conditions =>  { :method => :get }
 
   map.user_report_follows  "reports/:user_id/:report_id/follows",
-    :controller => 'users/reports/follows', :action => 'create', :conditions => { :method => :post }
+    :controller => 'users/reports/follows', :action => 'create', :conditions => { :method => [:post, :get] }
   map.edit_user_report_thumbnail  "reports/:user_id/:report_id/thumbnail/edit",
     :controller => 'users/reports/thumbnails', :action => 'edit', :conditions => { :method => :get }
 
