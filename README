@@ -1,6 +1,15 @@
 Welcome to VoteReports
 ======================
 
+dimensions for images
+logged-in user shouldn't be able to view signup/login
+
+letsvotefor
+letsvotesmart
+youreontheballot
+voteforwhatmatters
+areyouontheballot
+
 To inform. To promote truth. To combat political apathy.
 
 Extract State class for associating terms and such
