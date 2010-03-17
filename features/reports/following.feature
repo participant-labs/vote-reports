@@ -15,6 +15,16 @@ Feature: Report Following
     And I should be on the report page for "Published Report"
     And I should see "You're following this report"
 
+  Scenario: Logged-out report creator follows their own report
+    Given I am signed in as "Empact"
+    And I have a published report named "Published Report"
+    And I sign out
+    When I go to the report page for "Published Report"
+    And I press "Follow this Report"
+    And I enter my credentials "Empact/password"
+    Then I should see "You are already following this report"
+    And I should be on the report page for "Published Report"
+
   Scenario: Logged-in user follows a report
     Given a published report named "Published Report"
     And I am signed in as "Empact"
