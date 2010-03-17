@@ -98,6 +98,9 @@ class Report < ActiveRecord::Base
   has_many :bill_criteria, :dependent => :destroy
   has_many :bills, :through => :bill_criteria
 
+  has_many :follows, :class_name => 'ReportFollow'
+  has_many :followers, :through => :follows, :source => :user
+
   has_many :scores, :class_name => 'ReportScore', :dependent => :destroy
 
   has_attached_file :thumbnail,
