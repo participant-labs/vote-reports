@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     role_symbols.include?(:admin)
   end
 
+  def follows?(report)
+    false
+  end
+
 private
 
   def username_not_reserved
