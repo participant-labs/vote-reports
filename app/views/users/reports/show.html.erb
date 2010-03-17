@@ -19,6 +19,11 @@
       <%= content_tag :p, @report.status if @report.status.present? %>
       <%= report_next_step(@report) %>
     </div>
+  <%- elsif current_user.try(:follows?, @report) -%>
+    <p>You're following this report</p>
+  <%- else -%>
+    <p>Like this report?  Following reports gives you access to special report features and updates.</p>
+    <%= raw button_to('Follow this Report', user_report_follows_path(@report.user, @report)) %>
   <%- end -%>
 </div>
 

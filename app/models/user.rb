@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
     false
   end
 
+  def follows?(report)
+    false
+  end
+
 private
 
   def username_not_reserved
