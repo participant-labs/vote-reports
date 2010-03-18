@@ -30,7 +30,7 @@ Feature: Browsing Politicians
 
   Scenario: Browsing to a Politician from the Politicians Page
     When I go to the politicians page
-    And I fill in "From Where" with "75028"
+    And I fill in "From" with "75028"
     And I press "Go!"
     Then I should see "Michael Burgess"
     And I should see "Kay Hutchison"
@@ -49,7 +49,7 @@ Feature: Browsing Politicians
     But I should not see "J. Kerrey"
     And I should not see "Kay Hutchison"
     And I should not see "Connie Mack"
-    When I fill in "From Where" with "TX"
+    When I fill in "From" with "TX"
     And I press "Go!"
     Then I should see "Michael Burgess"
     And I should see "John Cornyn"
