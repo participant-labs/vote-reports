@@ -1,3 +1,4 @@
+<%- if @politicians || @topical_reports -%>
 <table id="scores">
   <%- if @politicians -%>
     <thead>
@@ -43,3 +44,4 @@
     </tbody>
   <%- end -%>
 </table>
+<%- end -%>
