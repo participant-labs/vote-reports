@@ -7,6 +7,15 @@ module ReportsHelper
     end
   end
 
+  def follower_count(report, other = false)
+    followers = report.followers.count
+    if other
+      content_tag :p, "#{pluralize(followers - 1, 'other user')} following this report" if followers > 1
+    elsif followers > 0
+      content_tag :p, "#{pluralize(followers, 'user')} #{followers > 1 ? 'follow' : 'follows'} this report"
+    end
+  end
+
   def build_criteria_for(report, bills)
     bills.map do |bill|
       report.bill_criteria.find_by_bill_id(bill.id) ||
