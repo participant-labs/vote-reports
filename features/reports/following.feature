@@ -34,6 +34,15 @@ Feature: Report Following
     And I should be on the report page for "Published Report"
     And I should see "You're following this report"
 
+  Scenario: Followed reports show up on user page, not reports page
+    Given a published report named "A Certain Published Report"
+    And I am signed in as "Empact"
+    And user "Empact" is following report "A Certain Published Report"
+    When I go to my profile page
+    Then I should see "A Certain Published Report"
+    When I go to my reports page
+    Then I should not see "A Certain Published Report"
+
   Scenario: Report creator can't follow their own report
     Given I am signed in
     And I have a published report named "Published Report"
