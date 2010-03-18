@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :require_no_user, :only => [:new, :create]
   before_filter :is_admin?, :only => [:index, :destroy]
   before_filter :is_current_user?, :only => [:edit, :update]
 
