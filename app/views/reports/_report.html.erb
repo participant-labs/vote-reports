@@ -9,8 +9,8 @@
         <br />
         <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
       <%- else -%>
-        By <%= render 'users/user', :user => report.user %>
-        <blockquote><%= description %></blockquote>
+        <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
+        <blockquote><p><%= description %></p></blockquote>
       <%- end -%>
   </div>
 <% end %>

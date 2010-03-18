@@ -1,3 +1,0 @@
-<%- thumbnail_size ||= 25 -%>
-
-<%= link_to_unless_current raw(image_tag(user.gravatar_url(:size => thumbnail_size, :default => "identicon"), :size => "#{thumbnail_size}x#{thumbnail_size}", :alt => '') + " " + h(user.username)), user_path(user) %>
