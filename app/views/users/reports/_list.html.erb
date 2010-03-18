@@ -1,0 +1,8 @@
+<%- if reports.present? -%>
+  <h3><%= title %></h3>
+  <ul>
+  <% reports.each do |report| %>
+    <li><%= render 'reports/report', :report => report %></li>
+  <% end %>
+  </ul>
+<%- end -%>
