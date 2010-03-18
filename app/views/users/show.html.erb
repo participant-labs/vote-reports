@@ -8,24 +8,11 @@
   <%- if @reports.empty? -%>
     <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
   <%- else -%>
-    <%- if @reports.published.present? -%>
-      <h3>Published Reports</h3>
-      <ul>
-      <% @reports.published.each do |report| %>
-        <li><%= render 'reports/report', :report => report %></li>
-      <% end %>
-      </ul>
-    <%- end -%>
-
-    <%- if @reports.unpublished.present? -%>
-      <h3>Personal Reports</h3>
-      <ul>
-      <% @reports.unpublished.each do |report| %>
-        <li><%= render 'reports/report', :report => report %></li>
-      <% end %>
-      </ul>
-    <%- end -%>
+    <%= render 'users/reports/list', :reports => @reports.published, :title => 'Published Reports' %>
+    <%= render 'users/reports/list', :reports => @reports.unpublished, :title => 'Personal Reports' %>
   <%- end -%>
 
-  <p><%= link_to "Create a Report", new_user_report_path(@user) %></p>
+  <%= render 'users/reports/list', :reports => @user.followed_reports, :title => 'Followed Reports' %>
+
+  <p><%= link_to "Create a report", new_user_report_path(@user) %></p>
 </div>
