@@ -67,7 +67,7 @@ Feature: Browsing Report Scores by State
       | Neil Abercrombie     | 0     |
     And I should not see "J. Kerrey"
     And I should not see "Kay Hutchison"
-    When I fill in "From Where" with "TX"
+    When I fill in "From" with "TX"
     And I press "Go!"
     Then I should see the following scores:
       | politician           | score |
