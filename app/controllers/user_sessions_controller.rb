@@ -1,4 +1,6 @@
 class UserSessionsController < ApplicationController
+  before_filter :require_no_user, :only => [:new, :create]
+
   def new
     @return_to = params[:return_to]
     @user_session = UserSession.new
