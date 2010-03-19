@@ -55,7 +55,7 @@ Feature: Adding Bill Criteria to Reports
     And I should see "USA PATRIOT Reauthorization Act of 2009"
     And I should see "unvoted"
     And I should not see "No bills found"
-    When I follow "cancel"
+    When I follow "Back to Report"
     Then I should be on my report page for "My report"
 
   Examples:
@@ -131,7 +131,7 @@ Feature: Adding Bill Criteria to Reports
     Given a voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
     When I fill in "Search" with "patriot"
     And I press "Search"
-    And I follow "cancel"
+    And I follow "Back to Report"
     Then I should be on my report page for "My report"
 
   Scenario: User saves an empty bill search

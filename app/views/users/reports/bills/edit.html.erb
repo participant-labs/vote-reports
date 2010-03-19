@@ -44,9 +44,10 @@
           <%- end -%>
         </tbody>
       </table>
-      <ul class="actions_menu" style="padding-top: 20px;">
+      <ul class="actions_menu">
         <li><%= f.submit 'Save Bill Criteria' %></li>
-        <li><%= link_to 'cancel', edit_user_report_path(current_user, @report) %></li>
+        <li><%= link_to 'Back to Edit', edit_user_report_path(@report.user, @report) %></li>
+        <li><%= link_to 'Back to Report', user_report_path(@report.user, @report) %></li>
       </ul>
     <% end %>
   <%- end -%>

@@ -37,7 +37,11 @@
         </tbody>
       </table>
       <%= will_paginate bills, :'data-replace' => 'report_bills_results_table' %>
-      <%= f.submit 'Save Bills to Report' %> - <%= link_to 'cancel', user_report_path(current_user, report) %>
+      <ul class="actions_menu">
+        <li><%= f.submit 'Save Bills to Report' %></li>
+        <li><%= link_to 'Back to Edit', edit_user_report_path(@report.user, @report) %></li>
+        <li><%= link_to 'Back to Report', user_report_path(@report.user, @report) %></li>
+      </ul>
     <% end %>
   <%- elsif @new_report -%>
     <p>No bills found for "<%= @q %>". Try another search!</p>
