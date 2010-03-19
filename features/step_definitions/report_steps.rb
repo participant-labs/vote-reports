@@ -1,4 +1,4 @@
-Transform /report "([^\"]*)"/ do |name|
+Transform /^report "([^\"]*)"$/ do |name|
   Report.find_by_name(name)
 end
 

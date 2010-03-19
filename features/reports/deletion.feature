@@ -3,7 +3,6 @@ Feature: Deleting Reports
   As a user
   I want to delete my reports
 
-  @emulate_rails_javascript
   Scenario: Deleting my report from the show page
     Given I am signed in
     And I have the following published report:
@@ -11,20 +10,18 @@ Feature: Deleting Reports
       | My Report | I made this because I care |
     When I go to my reports page
     And I follow "My Report"
-    And I follow "Delete this Report"
+    And I press "Delete Report"
     Then I should see "Successfully destroyed report."
     And I should not see "My Report"
 
   Scenario: Attempting to deleting someone else's report from the show page
-    Given I am signed in
-    And I have the following published report:
-      | name      | description                |
-      | My Report | I made this because I care |
-    When I go to my reports page
+    Given a published report named "My Report"
+    And I am signed in
+    When I go to the reports page
     And I follow "My Report"
-    Then I should not see "destroy"
+    Then I should not see the button "Delete Report"
 
   Scenario: Attempting to deleting a report while logged out
     Given a published report named "My Report"
     When I go to the report page for "My Report"
-    Then I should not see "destroy"
+    Then I should not see the button "Delete Report"

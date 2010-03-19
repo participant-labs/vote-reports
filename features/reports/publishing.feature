@@ -40,9 +40,9 @@ Feature: Browsing Reports
     Given I have a scored report named "My Report"
     When I go to my report page for "My Report"
     Then I should see the button "Publish this Report"
-    When I press "Remove this Bill"
-    Then I should see "Successfully deleted report criterion"
-    And I should not see the button "Publish this Report"
+    When I remove a bill criterion from report "My Report"
+    And I go to my report page for "My Report"
+    Then I should not see the button "Publish this Report"
     And I should see "You'll need to add bills to this report in order to publish this report."
 
   Scenario: Published report is unpublished on deleting all scores
@@ -50,9 +50,9 @@ Feature: Browsing Reports
     When I go to my report page for "My Report"
     And I press "Publish this Report"
     Then I should see "Successfully updated report."
-    When I press "Remove this Bill"
-    Then I should see "Successfully deleted report criterion"
-    And I should see "Updates have been made to this report, and its scores are being updated."
+    When I remove a bill criterion from report "My Report"
+    And I go to my report page for "My Report"
+    Then I should see "Updates have been made to this report, and its scores are being updated."
     When I wait for delayed job to finish
     And I go to my report page for "My Report"
     And I should see "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."

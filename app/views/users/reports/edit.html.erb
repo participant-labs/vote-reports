@@ -2,6 +2,11 @@
 
 <div class="section">
   <h2>Edit Report</h2>
+  <ul class="actions_menu">
+    <li><%= link_to 'Edit Thumbnail', edit_user_report_thumbnail_path(current_user, @report) %></li>
+    <li><%= link_to 'Add New Criteria', new_user_report_bills_path(current_user, @report) %></li>
+    <li><%= link_to 'Edit Existing Criteria', edit_user_report_bills_path(current_user, @report) %></li>
+  </ul>
 
   <%= render :partial => 'form' %>
 </div>
