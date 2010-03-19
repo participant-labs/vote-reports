@@ -1,5 +1,9 @@
-When /^I log in as "(.*)\/(.*)"$/ do |email, password|
-  visit path_to('the login page')
+When /^I log in as "(.*)"$/ do |credentials|
+  visit login_path
+  And %Q{I enter my credentials "#{credentials}"}
+end
+
+When /^I enter my credentials "(.*)\/(.*)"/ do |email, password|
   fill_in "Username/Email", :with => email
   fill_in "Password", :with => password
   click_button "Log in"
