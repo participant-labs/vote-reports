@@ -54,23 +54,24 @@
 
 <div class="section">
   <h2>Crop Thumbnail</h2>
-  <p>
-    <b>Thumbnail:</b>
-    <%= image_tag @report.thumbnail.url(:original), :id => 'cropbox' %>
-    <b>Cropped Result:</b>
-  <div style="width:<%= thumb_width %>px;height:<%= thumb_height %>px;overflow:hidden">
-    <%= image_tag @report.thumbnail.url(:original), :id => 'preview' %>
-  </div>
-  </p>
+  <p>Use your mouse to select the thumbnail from the original image below</p>
+  <dl>
+    <dt>Original Image</dt>
+    <dd><%= image_tag @report.thumbnail.url(:original), :id => 'cropbox' %></dd>
 
-  <% form_for [@report.user, @report] do |f| %>
-    <%= f.hidden_field :crop_x, :id => 'crop_x' %>
-    <%= f.hidden_field :crop_y, :id => 'crop_y' %>
-    <%= f.hidden_field :crop_w, :id => 'crop_w' %>
-    <%= f.hidden_field :crop_h, :id => 'crop_h' %>
-    <%= f.submit "Crop!" %>
-  <% end %>
+    <dt>Cropped Result</dt>
+    <dd style="width:<%= thumb_width %>px;height:<%= thumb_height %>px;overflow:hidden"><%= image_tag @report.thumbnail.url(:original), :id => 'preview' %></dd>
+  </dl>
 
-  <%= link_to 'Back to Edit', edit_user_report_path(@report.user, @report) %> |
-  <%= link_to 'Back to Report', user_report_path(@report.user, @report) %>
+  <ul class="actions_menu">
+    <li><% form_for [@report.user, @report] do |f| %>
+      <%= f.hidden_field :crop_x, :id => 'crop_x' %>
+      <%= f.hidden_field :crop_y, :id => 'crop_y' %>
+      <%= f.hidden_field :crop_w, :id => 'crop_w' %>
+      <%= f.hidden_field :crop_h, :id => 'crop_h' %>
+      <%= f.submit "Crop!" %>
+    <% end %></li>
+    <li><%= link_to 'Back to Edit', edit_user_report_path(@report.user, @report) %></li>
+    <li><%= link_to 'Back to Report', user_report_path(@report.user, @report) %></li>
+  </ul>
 </div>
