@@ -223,7 +223,7 @@ dd {
   margin-left: 0;
 }
 
-.actions_menu li, .actions_menu li form, .actions_menu li div {
+.actions_menu li, .actions_menu li form, .actions_menu li div, .actions_menu li h2 {
   display: inline;
 }
 

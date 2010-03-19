@@ -1,7 +1,6 @@
 <% title %Q{Crop Thumbnail for "#{@report.name}"} %>
 <%- thumb_width, thumb_height = @report.thumbnail.styles[:thumbnail][:geometry].split('x').map(&:to_i) -%>
 
-
 <% content_for :javascript_area do %>
 <% javascript_tag do %>
 
@@ -39,16 +38,18 @@
 
 <div class="section">
   <%= render 'reports/header', :report => @report %>
-</div>
 
-<div class="section">
   <h2>Replace Thumbnail</h2>
   <% form_for [@report.user, @report], :html => { :multipart => true } do |f| %>
     <p>
       <%= f.label :thumbnail_file_name, 'Thumbnail' %><br />
       <%= f.file_field :thumbnail %><br />
-      <%= f.submit "Replace!" %>
     </p>
+    <ul class="actions_menu">
+      <li><%= f.submit "Replace!" %></li>
+      <li><%= link_to 'Back to Edit', edit_user_report_path(@report.user, @report) %></li>
+      <li><%= link_to 'Back to Report', user_report_path(@report.user, @report) %></li>
+    </ul>
   <% end %>
 </div>
 
