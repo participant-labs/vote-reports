@@ -16,6 +16,8 @@ module NavigationHelpers
       user_reports_path(current_user)
     when /my profile page/i
       user_path(current_user)
+    when /the user page for "(.+)"/i
+      user_path(User.find_by_username($1))
     when /the politician page for "(.+)"/
       politician_path(Politician.with_name($1).first)
     when /the roll page for "(.+)"/

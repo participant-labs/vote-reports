@@ -19,3 +19,16 @@ Feature: Sign up
       And I fill in "Password confirmation" with "password"
       And I press "Sign up"
       Then I should see "Thanks for signing up. Welcome to VoteReports."
+      And I should be on the user page for "James"
+
+    Scenario: User signs up from another page and is sent to their user page
+      Given a published report named "Published Report"
+      When I go to the report page for "Published Report"
+      And I follow "Sign up"
+      And I fill in "Username" with "James"
+      And I fill in "Email" with "email@person.com"
+      And I fill in "Password" with "password"
+      And I fill in "Password confirmation" with "password"
+      And I press "Sign up"
+      Then I should see "Thanks for signing up. Welcome to VoteReports."
+      And I should be on the user page for "James"
