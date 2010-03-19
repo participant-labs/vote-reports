@@ -12,6 +12,7 @@
           <th>Bill</th>
           <th>Support/Oppose</th>
           <th><span class="info" title="This will be linked from the support/oppose declaration on the report page">Explanatory Link</span></th>
+          <td></td>
         </thead>
         <tbody>
           <%- @report.bill_criteria.each do |criterion| -%>
@@ -30,14 +31,23 @@
                 </td>
                 <td>
                   <%= bill_criteria_fields.label :explanatory_url, 'Explanatory Link', :class => 'hidden' %>
-                  <%= bill_criteria_fields.text_field :explanatory_url %>
+                  <%= bill_criteria_fields.text_field :explanatory_url, :size => '20' %>
+                </td>
+                <td>
+                  <%= raw button_to('Remove', user_report_bill_path(current_user, @report, criterion),
+                            :method => :delete,
+                            :title => "Delete criterion for '#{criterion.bill.titles.first}'",
+                            :confirm => "Are you sure you want to delete the criterion for '#{criterion.bill.titles.first}'?") -%>
                 </td>
               </tr>
             <%- end -%>
           <%- end -%>
         </tbody>
       </table>
-      <%= f.submit 'Save Bill Criteria' %> - <%= link_to 'cancel', :back %>
+      <ul class="actions_menu" style="padding-top: 20px;">
+        <li><%= f.submit 'Save Bill Criteria' %></li>
+        <li><%= link_to 'cancel', edit_user_report_path(current_user, @report) %></li>
+      </ul>
     <% end %>
   <%- end -%>
 </div>
