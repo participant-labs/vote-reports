@@ -17,7 +17,7 @@ module LocationsHelper
       Politician.from(session[:geo_location])
     else
       Politician
-    end.in_office(params[:in_office])
+    end.in_office(params.has_key?(:in_office) ? params[:in_office] : true)
   end
 
   def requested_location
