@@ -34,7 +34,7 @@ Feature: Deleting Criteria from Reports
     When I go to my report page for "Active Report"
     And I follow "Edit Report"
     And I follow "Edit Existing Criteria"
-    And I press "Remove"
+    And I follow "Remove"
     Then I should see "Successfully deleted report criterion"
     And I should be on the edit bills page for my report "Active Report"
 

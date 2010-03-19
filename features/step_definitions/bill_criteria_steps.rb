@@ -7,6 +7,6 @@ end
 
 When /I remove a bill criterion from (report ".+")/ do |report|
   visit edit_user_report_bills_path(current_user, report)
-  click_button "Remove"
+  click_link "Remove"
   Then %{I should see "Successfully deleted report criterion"}
 end
