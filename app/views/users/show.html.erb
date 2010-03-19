@@ -5,6 +5,7 @@
 
   <p><%= link_to 'Edit Profile', edit_user_path(current_user) %></p>
 
+  <h2>Your Reports</h2>
   <%- if @reports.empty? -%>
     <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
   <%- else -%>
@@ -12,7 +13,17 @@
     <%= render 'users/reports/list', :reports => @reports.unpublished, :title => 'Personal Reports' %>
   <%- end -%>
 
-  <%= render 'users/reports/list', :reports => @user.followed_reports, :title => 'Followed Reports' %>
+  <%- if @user.followed_reports.present? -%>
+    <h2><%= link_to "Your Personalized Report", '#' %></h2>
+    <p>Followed reports are collectively factored into a single personalized report, which is specific to you.</p>
+
+    <h3>Reports you Follow</h3>
+    <ul>
+    <% @user.followed_reports.each do |report| %>
+      <li><%= render 'reports/report', :report => report %></li>
+    <% end %>
+    </ul>
+  <%- end -%>
 
   <p><%= link_to "Create a report", new_user_report_path(@user) %></p>
 </div>
