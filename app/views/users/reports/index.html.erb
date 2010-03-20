@@ -5,9 +5,9 @@
 
   <%- if @reports.empty? -%>
     <%- if @user == current_user -%>
-      <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
+      <p>You haven't published a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
     <%- else -%>
-      <p><%= @user.username %> hasn't created any reports yet</p>
+      <p><%= @user.username %> hasn't published any reports yet</p>
     <%- end -%>
   <%- else -%>
     <ul>
