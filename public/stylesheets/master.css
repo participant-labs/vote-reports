@@ -73,6 +73,10 @@ input.tagged {
   text-align: center;
 }
 
+.report_score .report_score_evidence_link {
+  font-size: 0.5em;
+}
+
 .report_score.blank:after {
   content: '—';
 }
