@@ -68,11 +68,13 @@ input.tagged {
 }
 
 .report_score {
+  font-size: 2em;
   position: relative;
+  text-align: center;
 }
 
-.report_score > .score {
-  font-size: 2em;
+.report_score.blank:after {
+  content: '—';
 }
 
 table#reports td {

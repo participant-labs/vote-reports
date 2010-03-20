@@ -1,7 +1,5 @@
 <%- if score.nil? -%>
-  <div class="report_score">
-    <span class="score">—</span>
-  </div>
+  <div class="report_score blank" />
 <%- else -%>
   <%- score_id = "#{score.report.to_param}_evidence_for_#{score.politician.to_param}" -%>
   <div class="report_score hoverable">
