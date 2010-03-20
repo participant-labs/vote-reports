@@ -16,12 +16,11 @@ class Politician < ActiveRecord::Base
 
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
   def state
-    result = self[:state]
-    if result.nil?
+    self[:state] || begin
       result = latest_term.try(:state)
       update_attribute(:state, result) if result
+      result
     end
-    result
   end
 
   IDENTITY_STRING_FIELDS = [
@@ -137,6 +136,14 @@ class Politician < ActiveRecord::Base
 
   def full_name
     [first_name, last_name].join(" ")
+  end
+
+  def title
+    self[:title] || begin
+      result = latest_term.try(:title)
+      update_attribute(:title, result) if result
+      result
+    end
   end
 
   def short_title
