@@ -28,7 +28,7 @@
             <td>
               <div class="report_score">
                 <%- score = politician.report_scores.for_reports(@topical_reports).average(:score) -%>
-                <span class="score"><%= score ? score.round.to_i : '—' %>%</span>
+                <span class="score"><%= score ? "#{score.round.to_i}%" : '—' %></span>
               </div>
             </td>
           <%- end -%>
