@@ -38,6 +38,10 @@ class Report < ActiveRecord::Base
       transition :personal => :published
     end
 
+    event :personalize do
+      transition :personal => :personalized
+    end
+
     event :unpublish do
       transition :published => :personal
     end
@@ -59,6 +63,16 @@ class Report < ActiveRecord::Base
             :state_event => 'publish',
             :confirm => 'Publish this Report?  It will then show up in lists and searches on this site.'
           }
+        end
+      end
+    end
+
+    state :personalized do
+      validate :require_only_personalized_report
+
+      def require_only_personalized_report
+        if user.reports.personalized.exists?
+          errors.add(:user, "already has a personalized report")
         end
       end
     end
@@ -98,6 +112,9 @@ class Report < ActiveRecord::Base
   has_many :bill_criteria, :dependent => :destroy
   has_many :bills, :through => :bill_criteria
 
+  has_many :report_criteria, :dependent => :destroy
+  has_many :reports, :through => :report_criteria
+
   has_many :follows, :class_name => 'ReportFollow'
   has_many :followers, :through => :follows, :source => :user
 
@@ -124,6 +141,7 @@ class Report < ActiveRecord::Base
 
   named_scope :published, :conditions => {:state => 'published'}
   named_scope :unpublished, :conditions => "reports.state != 'published'"
+  named_scope :personalized, :conditions => {:state => 'personalized'}
   named_scope :with_criteria, :select => 'DISTINCT reports.*', :joins => :bill_criteria
   named_scope :scored, :select => 'DISTINCT reports.*', :joins => {:bill_criteria => {:bill => :passage_rolls}}
   named_scope :by_updated_at, :order => 'updated_at DESC'

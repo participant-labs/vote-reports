@@ -1,0 +1,79 @@
+<% title "Your Personalized Report" %>
+
+<div class="section report_show">
+  <%= render 'reports/header', :report => @report %>
+
+  <%- if @report.user == current_user -%>
+    <ul class="actions_menu">
+      <li><%= link_to 'Edit Report', edit_user_report_path(current_user, @report) %></li>
+      <li><%= raw button_to("Delete Report", [current_user, @report],
+                    :confirm => 'Are you sure you want to delete this report?', :method => :delete) %></li>
+    </ul>
+
+    <div class="report_status <%= @report.state %>">
+      <h3>Visibility: <%= @report.state.capitalize %></h3>
+      <%= content_tag :p, @report.status if @report.status.present? %>
+      <%= report_next_step(@report) %>
+    </div>
+  <%- end -%>
+</div>
+
+<div class="section report_scores">
+  <h2>Scores</h2>
+  <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#', :'data-dialog' => "#bill_criteria" %> lead to a high score, votes against, a low one.</p>
+  <%- if @report.scores.present? -%>
+    <%= render 'politicians/search', :url => user_report_path(@report.user, @report), :replace => 'report_scores' %>
+  <%- end -%>
+  <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
+</div>
+
+<div id="bill_criteria" data-dialog-title="<%= "Bill Criteria for #{@report.name}" %>">
+  <h2>Bill Criteria</h2>
+  <p>Learn more about the bills in this report:</p>
+  <blockquote>
+    <ul>
+      <%- if @report.bill_criteria.any? {|bc| bc.explanatory_url? }  -%>
+      <li>Follow the Support/Oppose links on the left to see the report creator's explanation</li>
+      <%- end -%>
+      <li>Click on the bill to see it's details</li>
+    </ul>
+  </blockquote>
+  <%- if @report.bill_criteria.present? -%>
+    <ul>
+      <%- @report.bill_criteria.each do |criterion| -%>
+        <li class="bill_criterion"><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %></li>
+      <%- end -%>
+    </ul>
+  <%- elsif @report.user == current_user -%>
+    <p>You need to add bills to this report in order to generate a score:</p>
+  <%- else -%>
+    <p>This report doesn't have any bills selected</p>
+  <%- end -%>
+</div>
+
+<div class="section last report_subjects">
+  <h2>Subjects</h2>
+  <p>Subjects for this report are drawn from the associated bills.  Follow the links below to find reports on related subjects.</p>
+  <%= render 'subjects/cloud', :subjects => @subjects %>
+</div>
+
+<div class="section last">
+  <%- if current_user.try(:follows?, @report) -%>
+    <h3>You're following this report</h3>
+    <p>You're following this report, so its scores are incorporated into your personal report.</p>
+    <%= follower_count(@report, :other) %>
+  <%- else -%>
+    <h3>Like this report?</h3>
+    <p>Following reports is anonymous and gives you access to special report features and updates.</p>
+    <%= follower_count(@report) %>
+    <%= raw button_to('Follow this Report', user_report_follows_path(@report.user, @report)) %>
+  <%- end -%>
+</div>
+
+<div class="footer">
+  <ul>
+    <li><%= link_to 'Learn about this Report', '#', :'data-dialog' => "#bill_criteria" %></li>
+    <li><%= link_to 'View another Report', reports_path %></li>
+    <li><%= link_to 'Create a new Report', new_report_path %></li>
+  </ul>
+</div>

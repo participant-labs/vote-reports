@@ -14,7 +14,7 @@
   <%- end -%>
 
   <%- if @user.followed_reports.present? -%>
-    <h2><%= link_to "Your Personalized Report", '#' %></h2>
+    <h2><%= link_to "Your Personalized Report", user_personalized_report_path(@user) %></h2>
     <p>Followed reports are collectively factored into a single personalized report, which is specific to you.</p>
 
     <h3>Reports you Follow</h3>

@@ -38,6 +38,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :user_sessions
   map.resources :users do |user|
+    user.resource :personalized_report, :controller => 'users/personalized_reports'
     user.resources :rpx_identities, :only => [:create, :destroy], :controller => 'users/rpx_identities'
   end
 

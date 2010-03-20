@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   acts_as_authentic
 
   has_many :reports
+  def personalized_report
+    reports.personalized.first
+  end
 
   has_many :report_follows
   has_many :followed_reports, :through => :report_follows, :source => :report

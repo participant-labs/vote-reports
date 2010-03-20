@@ -23,6 +23,9 @@ module NavigationHelpers
     when /the edit bills page for the report "(.+)"/
       edit_user_report_bills_path(Report.find_by_name($1).user, Report.find_by_name($1))
 
+    when /my personalized report page/i
+      user_personalized_report_path(current_userj)
+
     when /my reports page/i
       user_reports_path(current_user)
     when /my profile page/i

@@ -8,7 +8,9 @@ Feature: Personal Report
     And I am signed in
     And I am following report "A Certain Published Report"
     When I go to my profile page
-    Then I should see "Your Personalized Report"
+    And I follow "Your Personalized Report"
+    Then I should be on my personalized report page
+    And I should see "Your Personalized Report"
 
   Scenario: User follows multiple reports, whose scores are displayed on the personal report
     Given I am signed in
@@ -17,4 +19,6 @@ Feature: Personal Report
     And I am following report "A Certain Published Report"
     And I am following report "Another Published Report"
     When I go to my profile page
-    Then I should see "Your Personalized Report"
+    And I follow "Your Personalized Report"
+    Then I should be on my personalized report page
+    And I should see "Your Personalized Report"
