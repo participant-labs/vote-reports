@@ -26,6 +26,13 @@ Given /^the following published reports?:$/ do |table|
   end
 end
 
+Given /^(report "[^"]*") has the following scores:$/ do |report, table|
+  table.map_column!('politician') {|name| Politician.with_name(name).first }
+  table.hashes.each do |hash|
+    report.scores.create!(:politician => hash['politician'], :score => hash['score'])
+  end
+end
+
 Then /^I should see the following scores?:$/ do |table|
   table.map_column!('politician') {|name| Politician.with_name(name).first }
   table.hashes.each do |hash|
