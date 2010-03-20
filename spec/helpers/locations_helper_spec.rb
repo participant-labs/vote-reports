@@ -16,11 +16,8 @@ describe LocationsHelper do
       helper.zip_code?('  750281111 ').should == true
     end
 
-    it "should recognize zip_codes with incomplete + 4" do
-      helper.zip_code?('75025-111').should == true
-    end
-
     it "should not recognize non zips" do
+      helper.zip_code?('75025-111').should == false
       helper.zip_code?('TX').should == false
       helper.zip_code?('7502').should == false
       helper.zip_code?('7502').should == false
