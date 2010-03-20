@@ -70,11 +70,10 @@ input.tagged {
 .report_score {
   font-size: 2em;
   position: relative;
-  text-align: center;
 }
 
-.report_score .report_score_evidence_link {
-  font-size: 0.5em;
+#scores .report_score {
+  text-align: center;
 }
 
 .report_score.blank:after {
@@ -95,9 +94,10 @@ table#reports td {
   display: none;
   border: 1px solid #dda;
   position: absolute;
+  font-size: 0.5em;
   top: -30px;
   left: 75px;
-  padding: 1em;
+  padding: 0.5em;
   background: #ffc;
   color: #930;
   text-align: center;
@@ -108,9 +108,9 @@ table#reports td {
 }
 
 #scores .report_score > .report_score_evidence_link {
-  top: 3em;
+  top: 4em;
   left: 0;
-  width: 131%;
+  width: 105%;
 }
 
 .report_score.hovering > .report_score_evidence_link {
