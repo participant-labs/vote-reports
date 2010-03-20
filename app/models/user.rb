@@ -8,6 +8,12 @@ class User < ActiveRecord::Base
   def personalized_report
     reports.personalized.first
   end
+  def create_personalized_report
+    personalized_report || reports.create!(
+      :name => "#{username}'s Personalized Report",
+      :description => "This report is composed of the all the reports your following",
+      :state => 'personalized')
+  end
 
   has_many :report_follows
   has_many :followed_reports, :through => :report_follows, :source => :report

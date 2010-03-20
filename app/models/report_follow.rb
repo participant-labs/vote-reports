@@ -11,7 +11,7 @@ class ReportFollow < ActiveRecord::Base
 private
 
   def add_to_personalized_report
-    (user.personalized_report || user.reports.create(:state => 'personalized')).reports << report
+    user.create_personalized_report.reports << report
     user.personalized_report.rescore!
   end
 

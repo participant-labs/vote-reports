@@ -113,7 +113,7 @@ class Report < ActiveRecord::Base
   has_many :bills, :through => :bill_criteria
 
   has_many :report_criteria, :dependent => :destroy
-  has_many :reports, :through => :report_criteria
+  has_many :reports, :through => :report_criteria, :source => :criteria_report
 
   has_many :follows, :class_name => 'ReportFollow'
   has_many :followers, :through => :follows, :source => :user
