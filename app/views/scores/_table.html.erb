@@ -27,7 +27,8 @@
           <%- @politicians.each do |politician| -%>
             <td>
               <div class="report_score">
-                <span class="score"><%= politician.report_scores.for_reports(@topical_reports).average(:score).round.to_i %>%</span>
+                <%- score = politician.report_scores.for_reports(@topical_reports).average(:score) -%>
+                <span class="score"><%= score ? score.round.to_i : '—' %>%</span>
               </div>
             </td>
           <%- end -%>
