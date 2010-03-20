@@ -15,6 +15,14 @@ class Politician < ActiveRecord::Base
   end
 
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
+  def state
+    result = self[:state]
+    if result.nil?
+      result = latest_term.try(:state)
+      update_attribute(:state, result) if result
+    end
+    result
+  end
 
   IDENTITY_STRING_FIELDS = [
     :vote_smart_id, :bioguide_id, :eventful_id, :twitter_id, :email, :metavid_id,
