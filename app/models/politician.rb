@@ -7,6 +7,8 @@ class Politician < ActiveRecord::Base
   has_many :representative_terms
   has_many :senate_terms
   has_many :presidential_terms
+  has_many :interest_group_ratings
+  has_many :rating_interest_groups, :through => :interest_group_ratings, :source => :interest_group
 
   def latest_term
     [representative_terms.by_ended_on.first,
