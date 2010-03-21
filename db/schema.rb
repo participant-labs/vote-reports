@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100302051721) do
+ActiveRecord::Schema.define(:version => 20100321183134) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -348,9 +348,12 @@ ActiveRecord::Schema.define(:version => 20100302051721) do
   end
 
   create_table "subjects", :force => true do |t|
-    t.string "name",        :null => false
-    t.string "cached_slug"
+    t.string  "name",          :null => false
+    t.string  "cached_slug"
+    t.integer "vote_smart_id"
   end
+
+  add_index "subjects", ["vote_smart_id"], :name => "index_subjects_on_vote_smart_id", :unique => true
 
   create_table "us_states", :force => true do |t|
     t.string   "abbreviation", :limit => 2, :null => false
