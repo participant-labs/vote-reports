@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100321183134) do
+ActiveRecord::Schema.define(:version => 20100321230526) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -186,6 +186,43 @@ ActiveRecord::Schema.define(:version => 20100321183134) do
 
   add_index "districts", ["us_state_id", "district"], :name => "districts_us_state_id_district_unique", :unique => true
   add_index "districts", ["us_state_id"], :name => "index_districts_on_us_state_id"
+
+  create_table "interest_group_ratings", :force => true do |t|
+    t.integer  "interest_group_id", :null => false
+    t.integer  "politician_id",     :null => false
+    t.string   "vote_smart_id",     :null => false
+    t.string   "rating",            :null => false
+    t.string   "description",       :null => false
+    t.string   "time_span",         :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interest_group_ratings", ["interest_group_id", "politician_id"], :name => "index_interest_group_ratings_on_p_and_ig"
+  add_index "interest_group_ratings", ["interest_group_id"], :name => "index_interest_group_ratings_on_interest_group_id"
+  add_index "interest_group_ratings", ["politician_id"], :name => "index_interest_group_ratings_on_politician_id"
+
+  create_table "interest_groups", :force => true do |t|
+    t.integer  "vote_smart_id", :null => false
+    t.string   "ancestry"
+    t.string   "name",          :null => false
+    t.text     "description"
+    t.string   "email"
+    t.string   "url"
+    t.string   "contact_name"
+    t.string   "phone1"
+    t.string   "phone2"
+    t.string   "fax"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interest_groups", ["ancestry"], :name => "index_interest_groups_on_ancestry"
+  add_index "interest_groups", ["vote_smart_id"], :name => "index_interest_groups_on_vote_smart_id", :unique => true
 
   create_table "parties", :force => true do |t|
     t.string   "name",       :null => false
