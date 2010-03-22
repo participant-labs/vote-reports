@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100322004345) do
+ActiveRecord::Schema.define(:version => 20100322032226) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -201,6 +201,17 @@ ActiveRecord::Schema.define(:version => 20100322004345) do
   add_index "interest_group_ratings", ["interest_group_id", "politician_id"], :name => "index_interest_group_ratings_on_p_and_ig"
   add_index "interest_group_ratings", ["interest_group_id"], :name => "index_interest_group_ratings_on_interest_group_id"
   add_index "interest_group_ratings", ["politician_id"], :name => "index_interest_group_ratings_on_politician_id"
+
+  create_table "interest_group_reports", :force => true do |t|
+    t.integer  "interest_group_id"
+    t.string   "timespan"
+    t.integer  "vote_smart_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interest_group_reports", ["interest_group_id", "timespan"], :name => "index_interest_group_reports_on_interest_group_id_and_timespan", :unique => true
+  add_index "interest_group_reports", ["vote_smart_id"], :name => "index_interest_group_reports_on_vote_smart_id", :unique => true
 
   create_table "interest_groups", :force => true do |t|
     t.integer  "vote_smart_id", :null => false
