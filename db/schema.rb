@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100322032745) do
+ActiveRecord::Schema.define(:version => 20100323040755) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -210,6 +210,17 @@ ActiveRecord::Schema.define(:version => 20100322032745) do
 
   add_index "interest_group_reports", ["vote_smart_id"], :name => "index_interest_group_reports_on_vote_smart_id", :unique => true
 
+  create_table "interest_group_subjects", :force => true do |t|
+    t.integer  "interest_group_id", :null => false
+    t.integer  "subject_id",        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interest_group_subjects", ["interest_group_id", "subject_id"], :name => "index_interest_groups_subjects_on_group_and_subject", :unique => true
+  add_index "interest_group_subjects", ["interest_group_id"], :name => "index_interest_group_subjects_on_interest_group_id"
+  add_index "interest_group_subjects", ["subject_id"], :name => "index_interest_group_subjects_on_subject_id"
+
   create_table "interest_groups", :force => true do |t|
     t.integer  "vote_smart_id", :null => false
     t.string   "ancestry"
@@ -227,7 +238,6 @@ ActiveRecord::Schema.define(:version => 20100322032745) do
     t.string   "zip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "subject_id",    :null => false
   end
 
   add_index "interest_groups", ["ancestry"], :name => "index_interest_groups_on_ancestry"
