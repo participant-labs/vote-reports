@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100322032226) do
+ActiveRecord::Schema.define(:version => 20100322032745) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -188,18 +188,16 @@ ActiveRecord::Schema.define(:version => 20100322032226) do
   add_index "districts", ["us_state_id"], :name => "index_districts_on_us_state_id"
 
   create_table "interest_group_ratings", :force => true do |t|
-    t.integer  "interest_group_id", :null => false
-    t.integer  "politician_id",     :null => false
-    t.string   "vote_smart_id",     :null => false
-    t.string   "rating",            :null => false
-    t.string   "description",       :null => false
-    t.string   "time_span",         :null => false
+    t.integer  "interest_group_report_id", :null => false
+    t.integer  "politician_id",            :null => false
+    t.string   "rating",                   :null => false
+    t.text     "description",              :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "interest_group_ratings", ["interest_group_id", "politician_id"], :name => "index_interest_group_ratings_on_p_and_ig"
-  add_index "interest_group_ratings", ["interest_group_id"], :name => "index_interest_group_ratings_on_interest_group_id"
+  add_index "interest_group_ratings", ["interest_group_report_id", "politician_id"], :name => "index_interest_group_ratings_on_p_and_ig"
+  add_index "interest_group_ratings", ["interest_group_report_id"], :name => "index_interest_group_ratings_on_interest_group_id"
   add_index "interest_group_ratings", ["politician_id"], :name => "index_interest_group_ratings_on_politician_id"
 
   create_table "interest_group_reports", :force => true do |t|
@@ -210,7 +208,6 @@ ActiveRecord::Schema.define(:version => 20100322032226) do
     t.datetime "updated_at"
   end
 
-  add_index "interest_group_reports", ["interest_group_id", "timespan"], :name => "index_interest_group_reports_on_interest_group_id_and_timespan", :unique => true
   add_index "interest_group_reports", ["vote_smart_id"], :name => "index_interest_group_reports_on_vote_smart_id", :unique => true
 
   create_table "interest_groups", :force => true do |t|

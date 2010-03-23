@@ -2,8 +2,14 @@ class InterestGroup < ActiveRecord::Base
   has_ancestry
 
   belongs_to :subject
-  has_many :interest_group_ratings
-  has_many :rated_politicians, :through => :interest_group_ratings, :source => :politician
+  has_many :reports, :class_name => 'InterestGroupReport'
+  has_many :ratings, :through => :reports
+  def rated_politicians
+    Politician.scoped(
+      :select => 'DISTINCT politicians.*',
+      :joins => {:ratings => :reports},
+      :conditions => {:'reports.interest_group_id' => self})
+  end
 
   validates_presence_of :subject
   validate :ensure_subject_has_vote_smart_id
