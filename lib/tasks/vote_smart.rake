@@ -20,11 +20,10 @@ namespace :vote_smart do
 
         sigs = to_array(VoteSmart::Rating.get_sig_list(category['categoryId'])['sigs']['sig'])
         sigs.each do |sig|
-          InterestGroup.find_by_vote_smart_id(sig['sigId']) \
+          (InterestGroup.find_by_vote_smart_id(sig['sigId']) \
             || InterestGroup.create!(
-              :subject => subject,
               :name => sig['name'],
-              :vote_smart_id => sig['sigId'])
+              :vote_smart_id => sig['sigId'])).subjects << subject
         end
         sigs.each do |sig|
           puts "  * InterestGroup: #{sig['sigId']} #{sig['name']}"
@@ -62,10 +61,14 @@ namespace :vote_smart do
               report = group.reports.find_by_vote_smart_id(rating['ratingId']) || group.reports.create!(
                 :vote_smart_id => rating['ratingId'],
                 :timespan => rating['timespan'])
-              report.ratings.create!(
-                :politician => politician,
-                :rating => rating['rating'],
-                :description => rating['ratingText'])
+              new_rating = report.ratings.find_by_politician_id(politician) \
+                || report.ratings.create(
+                  :politician => politician,
+                  :rating => rating['rating'],
+                  :description => rating['ratingText'])
+              if new_rating.rating != rating['rating']
+                raise "Rating mismatch: #{new_rating.rating} vs. #{rating['rating']}, #{rating.inspect}"
+              end
             end
           end
           $stdout.print "\n"
