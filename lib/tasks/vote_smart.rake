@@ -9,22 +9,26 @@ namespace :vote_smart do
     $stdout.sync = true
 
     ActiveRecord::Base.transaction do
+      # begin
+      #   category = {'categoryId' => '4'}
+      #   subject = Subject.first(:conditions => 'vote_smart_id IS NOT NULL')
       to_array(VoteSmart::Rating.get_categories['categories']['category']).each do |category|
-        puts "Subject: #{category['name']}"
+        puts "Subject: #{category['categoryId']} #{category['name']}"
         subject = Subject.find_or_create_by_name(
           :name => category['name'])
         subject.update_attributes(:vote_smart_id => category['categoryId'])
 
         sigs = to_array(VoteSmart::Rating.get_sig_list(category['categoryId'])['sigs']['sig'])
         sigs.each do |sig|
-          InterestGroup.find_or_create_by_vote_smart_id(
-            :subject => subject,
-            :name => sig['name'],
-            :vote_smart_id => sig['sigId'])
+          InterestGroup.find_by_vote_smart_id(sig['sigId']) \
+            || InterestGroup.create!(
+              :subject => subject,
+              :name => sig['name'],
+              :vote_smart_id => sig['sigId'])
         end
         sigs.each do |sig|
-          puts "  * InterestGroup: #{sig['name']}"
-          group = InterestGroup.find_by_vote_smart_id(sig['sigId'])
+          puts "  * InterestGroup: #{sig['sigId']} #{sig['name']}"
+          group = InterestGroup.find_by_vote_smart_id(sig['sigId']) || raise("No sig for #{sig.inspect}")
           if sig['parentId'] != '-1'
             parent = InterestGroup.find_by_vote_smart_id(sig['parentId'])
             raise "Parent #{sig['parentId']} not found" unless parent
@@ -55,13 +59,13 @@ namespace :vote_smart do
             end
             to_array(ratings['candidateRating']['rating']).each do |rating|
               $stdout.print '.'
-              politician.interest_group_ratings.find_or_create_by_vote_smart_id(
-                :interest_group => group,
+              report = group.reports.find_by_vote_smart_id(rating['ratingId']) || group.reports.create!(
                 :vote_smart_id => rating['ratingId'],
+                :timespan => rating['timespan'])
+              report.ratings.create!(
+                :politician => politician,
                 :rating => rating['rating'],
-                :description => rating['ratingText'],
-                :time_span => rating['timespan']
-              )
+                :description => rating['ratingText'])
             end
           end
           $stdout.print "\n"
