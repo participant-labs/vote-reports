@@ -20,10 +20,11 @@ namespace :vote_smart do
 
         sigs = to_array(VoteSmart::Rating.get_sig_list(category['categoryId'])['sigs']['sig'])
         sigs.each do |sig|
-          (InterestGroup.find_by_vote_smart_id(sig['sigId']) \
+          group = InterestGroup.find_by_vote_smart_id(sig['sigId']) \
             || InterestGroup.create!(
               :name => sig['name'],
-              :vote_smart_id => sig['sigId'])).subjects << subject
+              :vote_smart_id => sig['sigId'])
+          group.subjects << subject unless group.subjects.include?(subject)
         end
         sigs.each do |sig|
           puts "  * InterestGroup: #{sig['sigId']} #{sig['name']}"
