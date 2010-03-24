@@ -1,0 +1,52 @@
+<% title "Interest Group - #{h @interest_group.name}" %>
+
+<div class="section">
+  <h2><%= @interest_group.name %></h2>
+  <blockquote><%= @interest_group.description %></blockquote>
+  <dl>
+    <dt>Email</dt>
+    <dd><%= mail_to @interest_group.email %></dd>
+    <dt>Website</dt>
+    <dd><%= link_to @interest_group.url, @interest_group.url %></dd>
+  <%- if @interest_group.contact_name.present? -%>
+    <dt>Contact</dt>
+    <dd><%= @interest_group.contact_name %></dd>
+  <%- end -%>
+    <dt>Phone Number</dt>
+    <dd><%= @interest_group.phone1 %></dd>
+    <dd><%= @interest_group.phone2 %></dd>
+    <dt>Fax</dt>
+    <dd><%= @interest_group.fax %></dd>
+    <dt>Address</dt>
+    <dd><%= render 'addresses/address', :address => @interest_group %></dd>
+  </dl>
+</div>
+
+<%- if parent = @interest_group.parent -%>
+<div class="section">
+  <h2>Parent Group</h2>
+  <%= render parent %>
+</div>
+<%- end -%>
+
+<%- if @interest_group.parent && (siblings = @interest_group.siblings).present? -%>
+<div class="section">
+  <h2><%= pluralize siblings.count, 'Sibling Group' %></h2>
+  <ul>
+    <%- siblings.each do |sibling| -%>
+    <li><%= render sibling %></li>
+    <%- end -%>
+  </ul>
+</div>
+<%- end -%>
+
+<%- if (children = @interest_group.children).present? -%>
+<div class="section">
+  <h2><%= pluralize children.count, 'Child Group' %></h2>
+  <ul>
+    <%- children.each do |child| -%>
+    <li><%= render child %></li>
+    <%- end -%>
+  </ul>
+</div>
+<%- end -%>
