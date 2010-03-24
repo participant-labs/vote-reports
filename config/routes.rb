@@ -4,6 +4,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :bills, :only => [:index, :show]
   map.resources :politicians, :only => [:index, :show]
   map.resources :subjects, :only => [:index, :show]
+  map.resources :interest_groups, :only => [:index, :show]
+
   map.resources :reports, :only => [:index, :new]
   map.resource :location
 
