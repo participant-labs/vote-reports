@@ -77,6 +77,13 @@ Fixjour :verify => false do
     klass.new(:name => Forgery(:basic).text, :user => create_user)
   end
 
+  define_builder(InterestGroup) do |klass, overrides|
+    klass.new(
+      :name => Forgery(:basic).text,
+      :vote_smart_id => rand(1000000).to_s
+    )
+  end
+
   define_builder(Amendment) do |klass, overrides|
     klass.new(
       :purpose => Forgery(:basic).text,
