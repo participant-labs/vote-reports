@@ -8,7 +8,13 @@ class Politician < ActiveRecord::Base
   has_many :senate_terms
   has_many :presidential_terms
   has_many :interest_group_ratings
-  has_many :rating_interest_groups, :through => :interest_group_ratings, :source => :interest_group
+  has_many :interest_group_reports, :through => :interest_group_ratings
+  def rating_interest_groups
+    InterestGroup.scoped(
+      :select => 'DISTINCT interest_groups.*',
+      :joins => {:reports => :ratings},
+      :conditions => {:'interest_group_ratings.politician_id' => self})
+  end
 
   def latest_term
     [representative_terms.by_ended_on.first,
