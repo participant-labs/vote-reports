@@ -2,6 +2,9 @@ class Subject < ActiveRecord::Base
   has_many :bill_subjects
   has_many :bills, :through => :bill_subjects
 
+  has_many :interest_group_subjects
+  has_many :interest_groups, :through => :interest_group_subjects
+
   has_friendly_id :name, :use_slug => true
 
   searchable do
