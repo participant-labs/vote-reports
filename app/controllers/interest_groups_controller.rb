@@ -14,5 +14,6 @@ class InterestGroupsController < ApplicationController
 
   def show
     @interest_group = InterestGroup.find(params[:id])
+    @subjects = @interest_group.subjects
   end
 end
