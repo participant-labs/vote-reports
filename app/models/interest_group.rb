@@ -1,6 +1,23 @@
 class InterestGroup < ActiveRecord::Base
   has_ancestry
 
+  searchable do
+    text :name, :description
+    text :subjects do
+      subjects.all(:select => 'name').map(&:name).join(' ')
+    end
+  end
+
+  class << self
+    def paginated_search(params)
+      search do
+        order_by :name
+        fulltext params[:q]
+        paginate :page => params[:page]
+      end
+    end
+  end
+
   has_many :interest_group_subjects
   has_many :subjects, :through => :interest_group_subjects
 
@@ -21,7 +38,8 @@ class InterestGroup < ActiveRecord::Base
         subjects = Subject.find(subjects)
       end
       {
-        :select => 'DISTINCT interest_groups.*', :joins => :interest_group_subjects,
+        :select => 'DISTINCT interest_groups.*',
+        :joins => :interest_group_subjects,
         :conditions => {:'interest_group_subjects.subject_id' => subjects}
       }
     end
