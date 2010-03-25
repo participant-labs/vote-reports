@@ -44,4 +44,8 @@ class InterestGroup < ActiveRecord::Base
       }
     end
   }
+
+  def phone_numbers
+    [phone1, phone2]
+  end
 end

@@ -16,10 +16,11 @@
     <dt>Contact</dt>
     <dd><%= @interest_group.contact_name %></dd>
   <%- end -%>
-  <%- if @interest_group.phone1.present? || @interest_group.phone2.present? -%>
-    <dt>Phone Number</dt>
-    <dd><%= @interest_group.phone1 %></dd>
-    <dd><%= @interest_group.phone2 %></dd>
+  <%- if @interest_group.phone_numbers.present? -%>
+    <dt>Phone Numbers</dt>
+    <%- @interest_group.phone_numbers.each do |number| -%>
+      <dd><%= number %></dd>
+    <%- end -%>
   <%- end -%>
   <%- if @interest_group.fax.present? -%>
     <dt>Fax</dt>
