@@ -2,7 +2,7 @@ class InterestGroupsController < ApplicationController
   def index
     params[:subjects] ||= []
     @interest_groups = InterestGroup.for_subjects(params[:subjects]).paginate(:page => params[:page])
-    @subjects = Subject.for_interest_groups_tag_cloud.scoped(:limit => 20)
+    @subjects = Subject.for_interest_groups_tag_cloud.all(:limit => 20)
 
     respond_to do |format|
       format.html
