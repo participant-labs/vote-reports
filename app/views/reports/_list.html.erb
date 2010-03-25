@@ -1,13 +1,14 @@
 <%- param_name ||= :page -%>
-
-<%- if reports.present? -%>
-  <ol class="reports">
-    <%- reports.each do |report| -%>
-      <li><%= render report %></li>
-    <%- end -%>
-  </ol>
-<%- else -%>
-  <p>No reports found...</p>
-<%- end -%>
-
-<%= will_paginate reports, :param_name => param_name %>
+<div id="reports">
+  <%- if reports.present? -%>
+    <% paginated_section :param_name => param_name do %>
+      <ol class="reports">
+        <%- reports.each do |report| -%>
+          <li><%= render report %></li>
+        <%- end -%>
+      </ol>
+    <% end %>
+  <%- else -%>
+    <p>No reports found...</p>
+  <%- end -%>
+</div>

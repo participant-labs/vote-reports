@@ -13,5 +13,12 @@ class ReportsController < ApplicationController
       @title = 'Recent Reports'
       @reports = Report.published.by_updated_at.paginate(:page => params[:page])
     end
+
+    respond_to do |format|
+      format.html
+      format.js {
+        render :partial => 'reports/list', :locals => {:reports => @reports}
+      }
+    end
   end
 end
