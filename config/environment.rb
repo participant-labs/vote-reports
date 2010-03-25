@@ -36,6 +36,7 @@ Rails::Initializer.run do |config|
   config.gem 'state_machine'
   config.gem 'sunspot', :lib => 'sunspot'
   config.gem 'sunspot_rails', :lib => 'sunspot/rails'
+  config.gem 'votesmart', :version => '>= 0.3.0'
   config.gem 'whenever', :lib => false
   config.gem 'will_paginate'
 
