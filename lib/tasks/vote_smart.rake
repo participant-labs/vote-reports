@@ -5,7 +5,8 @@ namespace :vote_smart do
     end
 
     gem 'votesmart', '>= 0.3.0'
-    VoteSmart.api_key = ENV['PVS_API_KEY']
+    PVS_API_KEY = ENV['PVS_API_KEY'] unless defined?(PVS_API_KEY)
+    VoteSmart.api_key = PVS_API_KEY
     $stdout.sync = true
 
     sigs = to_array(VoteSmart::Rating.get_categories['categories']['category']).map do |category|
