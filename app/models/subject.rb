@@ -49,4 +49,10 @@ class Subject < ActiveRecord::Base
     :select => "DISTINCT(subjects.*), COUNT(bill_subjects.bill_id) AS count",
     :group => qualified_column_names,
     :order => "count DESC"
+
+  named_scope :for_interest_groups_tag_cloud,
+    :joins => :interest_group_subjects,
+    :select => 'DISTINCT(subjects.*), COUNT(interest_group_subjects.interest_group_id) AS count',
+    :group => qualified_column_names,
+    :order => "count DESC"
 end

@@ -1,5 +1,9 @@
 <%- title "Interest Groups" -%>
 
-<div class="section">
-  <%= render 'interest_groups/list', :interest_groups => @interest_groups %>
+<div class="section" id="interest_groups_index">
+  <%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
+    [interest_groups_path(:subjects => subjects), {:'data-replace' => 'interest_groups_index'}]
+  } %>
+
+  <%= render 'interest_groups/list', :interest_groups => @interest_groups, :replace => 'interest_groups_index' %>
 </div>

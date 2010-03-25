@@ -1,13 +1,13 @@
 class InterestGroupsController < ApplicationController
   def index
-    @interest_groups = InterestGroup.paginate(:page => params[:page])
+    params[:subjects] ||= []
+    @interest_groups = InterestGroup.for_subjects(params[:subjects]).paginate(:page => params[:page])
+    @subjects = Subject.for_interest_groups_tag_cloud.scoped(:limit => 20)
 
     respond_to do |format|
       format.html
       format.js {
-        render :partial => 'interest_groups/list', :locals => {
-          :interest_groups => @interest_groups
-        }
+        render 'interest_groups/index', :layout => false
       }
     end
   end
