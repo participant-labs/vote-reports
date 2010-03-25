@@ -53,6 +53,7 @@ ul#menu li h2 {
 
 ul#menu li.hovering.dropdown > .dropdown_target {
   display: block;
+  z-index: 1000;
 }
 
 #menu h2 a {
