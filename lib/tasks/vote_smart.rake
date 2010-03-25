@@ -4,7 +4,7 @@ namespace :vote_smart do
       obj.is_a?(Array) ? obj : [obj]
     end
 
-    require 'vote_smart'
+    gem 'votesmart', '>= 0.3.0'
     VoteSmart.api_key = ENV['PVS_API_KEY']
     $stdout.sync = true
 
