@@ -3,7 +3,7 @@ class InterestGroupsController < ApplicationController
     params[:subjects] ||= []
     @interest_groups =
       if params[:subjects].present?
-        InterestGroup.for_subjects(params[:subjects]).paginate(:page => params[:page])
+        InterestGroup.for_subjects(params[:subjects]).paginate(:order => 'name', :page => params[:page])
       else
         @q = params[:q]
         InterestGroup.paginated_search(params).results
