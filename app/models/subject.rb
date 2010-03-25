@@ -50,7 +50,7 @@ class Subject < ActiveRecord::Base
     :group => qualified_column_names,
     :order => "count DESC"
 
-  named_scope :for_interest_groups_tag_cloud_matching, lambda {|query|
+  named_scope :tag_cloud_for_interest_groups_matching, lambda {|query|
     result = {
       :joins => :interest_group_subjects,
       :select => 'DISTINCT(subjects.*), COUNT(interest_group_subjects.interest_group_id) AS count',
