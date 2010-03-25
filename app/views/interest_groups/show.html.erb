@@ -4,19 +4,27 @@
   <h2><%= @interest_group.name %></h2>
   <blockquote><%= @interest_group.description %></blockquote>
   <dl>
+  <%- if @interest_group.email.present? -%>
     <dt>Email</dt>
     <dd><%= mail_to @interest_group.email %></dd>
+  <%- end -%>
+  <%- if @interest_group.url.present? -%>
     <dt>Website</dt>
     <dd><%= link_to @interest_group.url, @interest_group.url %></dd>
+    <%- end -%>
   <%- if @interest_group.contact_name.present? -%>
     <dt>Contact</dt>
     <dd><%= @interest_group.contact_name %></dd>
   <%- end -%>
+  <%- if @interest_group.phone1.present? || @interest_group.phone2.present? -%>
     <dt>Phone Number</dt>
     <dd><%= @interest_group.phone1 %></dd>
     <dd><%= @interest_group.phone2 %></dd>
+  <%- end -%>
+  <%- if @interest_group.fax.present? -%>
     <dt>Fax</dt>
     <dd><%= @interest_group.fax %></dd>
+  <%- end -%>
     <dt>Address</dt>
     <dd><%= render 'addresses/address', :address => @interest_group %></dd>
   </dl>
