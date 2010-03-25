@@ -23,7 +23,7 @@ namespace :vote_smart do
           group.subjects << subject unless group.subjects.include?(subject)
         end
         sigs
-      end.flatten.index_by {|sig| sig['sigId'] }.values.sort_by {|sig| sig['sigId'] }
+      end.flatten.index_by {|sig| sig['sigId'] }.values.sort_by {|sig| sig['sigId'].to_i }
 
       sigs.each do |sig|
         puts "InterestGroup: #{sig['sigId']} #{sig['name']}"
