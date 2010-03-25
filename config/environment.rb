@@ -39,6 +39,8 @@ Rails::Initializer.run do |config|
   config.gem 'votesmart', :version => '>= 0.3.0'
   config.gem 'whenever', :lib => false
   config.gem 'will_paginate'
+  config.gem 'ym4r'
+  config.gem 'httparty'
 
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
