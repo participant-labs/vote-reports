@@ -1,4 +1,5 @@
 <%- if @politicians || @topical_reports -%>
+<%- @politicians ||= [] -%>
 <table id="scores">
   <%- if @politicians -%>
     <thead>
@@ -14,7 +15,7 @@
   <%- end -%>
   <%- if @topical_reports -%>
     <tbody>
-      <%- unless @topical_reports.size == 1 -%>
+      <%- unless @topical_reports.size <= 1 || @politicians.size <= 1 -%>
         <tr>
           <th>
             <div class="report">
