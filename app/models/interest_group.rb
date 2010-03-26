@@ -3,8 +3,8 @@ class InterestGroup < ActiveRecord::Base
   has_friendly_id :name, :use_slug => true
 
   searchable do
-    text :name
-    text :description
+    text :name, :description
+    string :name
     text :subjects do
       subjects.all(:select => 'name').map(&:name).join(' ')
     end
