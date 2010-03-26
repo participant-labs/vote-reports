@@ -19,15 +19,18 @@ class Politician < ActiveRecord::Base
   def latest_term
     [representative_terms.by_ended_on.first,
       senate_terms.by_ended_on.first,
-      presidential_terms.by_ended_on.first].compact.sort_by(&:ended_on).reverse.first
+      presidential_terms.by_ended_on.first].compact.sort_by(&:ended_on).last
   end
 
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
   def state
     self[:state] || begin
-      result = latest_term.try(:state)
-      update_attribute(:state, result) if result
-      result
+      latest_term = self.latest_term
+      if latest_term.respond_to?(:state)
+        latest_term.state.tap do |state|
+          update_attribute(:state, state) if state
+        end
+      end
     end
   end
 
