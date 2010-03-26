@@ -8,6 +8,7 @@ module LocationsHelper
   end
 
   def sought_politicians
+    @in_office = !params.has_key?(:in_office) || params[:in_office] == '1'
     if params.has_key?(:representing)
       Politician.from(params[:representing])
     elsif session[:zip_code].present?
@@ -17,7 +18,7 @@ module LocationsHelper
       Politician.from(session[:geo_location])
     else
       Politician
-    end.in_office(params.has_key?(:in_office) ? params[:in_office] : true)
+    end.in_office(@in_office)
   end
 
   def requested_location
