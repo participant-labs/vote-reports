@@ -7,6 +7,8 @@ youreontheballot
 voteforwhatmatters
 areyouontheballot
 
+time rake vlad:invoke COMMAND="cd /var/www/votereports/production/current && RAILS_ENV=production /usr/bin/env nice -n 3 rake vote_smart:import"
+
 To inform. To promote truth. To combat political apathy.
 
 Extract State class for associating terms and such
