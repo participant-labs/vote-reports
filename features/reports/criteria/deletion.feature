@@ -13,6 +13,7 @@ Feature: Deleting Criteria from Reports
     When I go to the report page for "Active Report"
     Then I should not see "Delete 'Bovine Security Act of 2009' criterion"
 
+  @emulate_rails_javascript
   Scenario: Report owner deletes an existing bill criterion
     Given I am signed in
     And a bill named "Bovine Security Act of 2009"

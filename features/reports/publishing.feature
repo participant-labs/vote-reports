@@ -36,6 +36,7 @@ Feature: Browsing Reports
     Then I should see "Successfully updated report"
     And I should see "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
 
+  @emulate_rails_javascript
   Scenario: Published report is unpublishable after deleting all criteria
     Given I have a scored report named "My Report"
     When I go to my report page for "My Report"
@@ -45,6 +46,7 @@ Feature: Browsing Reports
     Then I should not see the button "Publish this Report"
     And I should see "You'll need to add bills to this report in order to publish this report."
 
+  @emulate_rails_javascript
   Scenario: Published report is unpublished on deleting all scores
     Given I have a scored report named "My Report"
     When I go to my report page for "My Report"
