@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100325132647) do
+ActiveRecord::Schema.define(:version => 20100326220254) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -342,7 +342,7 @@ ActiveRecord::Schema.define(:version => 20100325132647) do
   end
 
   create_table "reports", :force => true do |t|
-    t.integer  "user_id",                :null => false
+    t.integer  "user_id"
     t.string   "name",                   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -352,6 +352,7 @@ ActiveRecord::Schema.define(:version => 20100325132647) do
     t.string   "thumbnail_file_name"
     t.string   "thumbnail_content_type"
     t.string   "thumbnail_file_size"
+    t.integer  "interest_group_id"
   end
 
   create_table "representative_terms", :force => true do |t|

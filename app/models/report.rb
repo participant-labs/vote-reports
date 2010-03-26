@@ -2,6 +2,11 @@ class Report < ActiveRecord::Base
   DEFAULT_THUMBNAIL_PATH = "reports/default_thumbnail.jpg"
 
   belongs_to :user
+  belongs_to :interest_group
+  def owner
+    user || interest_group
+  end
+
   has_friendly_id :name, :use_slug => true, :scope => :user
 
   has_many :report_delayed_jobs
@@ -117,7 +122,7 @@ class Report < ActiveRecord::Base
 
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
 
-  validates_presence_of :user, :name
+  validates_presence_of :owner, :name
 
   named_scope :published, :conditions => {:state => 'published'}
   named_scope :unpublished, :conditions => "reports.state != 'published'"
