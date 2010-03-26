@@ -2,6 +2,8 @@ class InterestGroup < ActiveRecord::Base
   has_ancestry
   has_friendly_id :name, :use_slug => true
 
+  has_one :report
+
   searchable do
     text :name, :description
     string :name
