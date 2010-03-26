@@ -123,6 +123,7 @@ class Report < ActiveRecord::Base
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
 
   validates_presence_of :owner, :name
+  validate :ensure_only_one_owner
 
   named_scope :published, :conditions => {:state => 'published'}
   named_scope :unpublished, :conditions => "reports.state != 'published'"
@@ -196,6 +197,12 @@ class Report < ActiveRecord::Base
   end
 
 private
+
+  def ensure_only_one_owner
+    if user && interest_group
+      errors.add_to_base("Report can't be owned by both a user and an interest group")
+    end
+  end
 
   def reprocess_thumbnail
     thumbnail.reprocess!
