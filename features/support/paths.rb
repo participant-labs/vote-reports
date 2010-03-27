@@ -27,6 +27,7 @@ module NavigationHelpers
       user_reports_path(current_user)
     when /my profile page/i
       user_path(current_user)
+
     when /the user page for "(.+)"/i
       user_path(User.find_by_username($1))
     when /the politician page for "(.+)"/
@@ -40,6 +41,8 @@ module NavigationHelpers
       bill_path(BillTitle.find_by_title($1).bill)
     when /the subject page for "(.+)"/
       subject_path(Subject.find_by_name($1))
+    when /the interest group page for "(.+)"/
+      interest_group_path(InterestGroup.find_by_name($1))
 
     when /the (.+) page/i
       send("#{$1}_path")
