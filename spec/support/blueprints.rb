@@ -84,6 +84,21 @@ Fixjour :verify => false do
     )
   end
 
+  define_builder(InterestGroupReport) do |klass, overrides|
+    klass.new(
+      :interest_group => new_interest_group,
+      :timespan => "2007"
+    )
+  end
+
+  define_builder(InterestGroupRating) do |klass, overrides|
+    klass.new(
+      :interest_group_report => new_interest_group_report,
+      :politician => new_politician,
+      :description => Forgery(:basic).text
+    )
+  end
+
   define_builder(Amendment) do |klass, overrides|
     klass.new(
       :purpose => Forgery(:basic).text,
