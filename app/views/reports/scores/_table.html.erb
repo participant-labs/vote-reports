@@ -86,12 +86,18 @@
   </table>
 <%- elsif params[:representing].present? -%>
   <p>No scores found for: "<%= params[:representing] %>"</p>
-<%- elsif report.bill_criteria.blank? -%>
-  <p>No scores yet, as this report has no criteria to judge representatives by.</p>
-<%- elsif report.bills.scoped(:joins => :passage_rolls).empty? -%>
-  <p>No scores yet, as the associated bills have not been voted on.</p>
 <%- elsif report.delayed_jobs.present? -%>
   <p>Scores are being generated. Please try again in a moment.</p>
+<%- elsif report.owner.is_a?(User) -%>
+  <%- if report.bill_criteria.blank? -%>
+    <p>No scores yet, as this report has no criteria to judge representatives by.</p>
+  <%- elsif report.bills.scoped(:joins => :passage_rolls).empty? -%>
+    <p>No scores yet, as the associated bills have not been voted on.</p>
+  <%- end -%>
+<%- elsif report.owner.is_a?(InterestGroup) -%>
+  <%- if report.owner.ratings.blank? -%>
+    <p>No ratings on record for this group</p>
+  <%- end -%>
 <%- else -%>
   <p>No scores found</p>
 <%- end -%>

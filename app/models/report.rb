@@ -31,7 +31,7 @@ class Report < ActiveRecord::Base
   searchable do
     text :name, :description
     text :username do
-      user.username
+      user && user.username
     end
     boolean :published do
       published?

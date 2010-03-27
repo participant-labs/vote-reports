@@ -52,4 +52,10 @@ class InterestGroup < ActiveRecord::Base
   def phone_numbers
     [phone1, phone2]
   end
+
+  def rescore!
+    if ratings.present?
+      (report || build_report(:name => name)).rescore!
+    end
+  end
 end
