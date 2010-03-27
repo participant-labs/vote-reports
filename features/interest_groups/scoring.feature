@@ -34,7 +34,7 @@ Feature: Scoring Reports
       | 2008     | Connie Mack           | 80     |
       | 2008     | Neil Abercrombie      | 100    |
     And the scores for interest group "Sierra Club" are calculated
-    When I go to the interest group for "Sierra Club"
+    When I go to the interest group page for "Sierra Club"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 0     |
