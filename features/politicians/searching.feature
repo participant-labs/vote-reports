@@ -4,7 +4,7 @@ Feature: Browsing Politicians
   I want to search politicians
 
   Background:
-    Given the following politician records:
+    Given the following in-office politician records:
       | name                  |
       | Michael Burgess       |
       | J. Kerrey             |

@@ -210,14 +210,11 @@ Fixjour :verify => false do
   define_builder(PresidentialTerm) do |klass, overrides|
     politician_term_overrides(overrides, rand(2) * 4)
 
-    started_on = rand(50).years.ago
-    ended_on = started_on + 4.years
-
     klass.new(
       :politician => new_politician,
       :party => new_party,
-      :started_on => started_on,
-      :ended_on => ended_on
+      :started_on => 2.years.ago,
+      :ended_on => 2.years.from_now
     )
   end
 
@@ -263,31 +260,25 @@ Fixjour :verify => false do
       overrides[:district] = District.find_or_create_by_us_state_id_and_district(state.id, overrides[:district].present? ? overrides[:district].to_i : nil)
     end
 
-    started_on = rand(50).years.ago
-    ended_on = started_on + 2.years
-
     klass.new(
       :politician => new_politician,
       :party => new_party,
       :district => new_district,
-      :started_on => started_on,
-      :ended_on => ended_on
+      :started_on => 1.year.ago,
+      :ended_on => 1.year.from_now
     )
   end
 
   define_builder(SenateTerm) do |klass, overrides|
     politician_term_overrides(overrides, 6)
 
-    started_on = rand(50).years.ago
-    ended_on = started_on + 6.years
-
     klass.new(
       :politician => new_politician,
       :party => new_party,
       :senate_class => [1, 2, 3].rand,
       :state => new_us_state,
-      :started_on => started_on,
-      :ended_on => ended_on
+      :started_on => 3.years.ago,
+      :ended_on => 3.years.from_now
     )
   end
 
@@ -314,6 +305,12 @@ Fixjour :verify => false do
         overrides[:started_on] = 14.years.ago
         overrides[:ended_on] = 14.years.ago + years.years
       end
+    end
+  end
+
+  def create_in_office_politician(params)
+    create_politician(params).tap do |politician|
+      create_representative_term(:politician => politician)
     end
   end
 
