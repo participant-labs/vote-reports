@@ -52,22 +52,23 @@ Feature: Browsing Report Scores by State
     Then I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 100   |
-      | J. Kerrey            | 24    |
-      | John Cornyn          | 76    |
-      | Kay Hutchison        | 53    |
-      | Connie Mack          | 50    |
-      | Neil Abercrombie     | 0     |
-    When I check "In Office Only"
-    And I press "Go!"
-    Then I should see the following scores:
-      | politician           | score |
-      | Michael Burgess      | 100   |
       | John Cornyn          | 76    |
       | Connie Mack          | 50    |
       | Neil Abercrombie     | 0     |
     And I should not see "J. Kerrey"
     And I should not see "Kay Hutchison"
+    When I uncheck "In Office Only"
+    And I press "Go!"
+    Then I should see the following scores:
+      | politician           | score |
+      | Michael Burgess      | 100   |
+      | J. Kerrey            | 24    |
+      | John Cornyn          | 76    |
+      | Kay Hutchison        | 53    |
+      | Connie Mack          | 50    |
+      | Neil Abercrombie     | 0     |
     When I fill in "From" with "TX"
+    When I check "In Office Only"
     And I press "Go!"
     Then I should see the following scores:
       | politician           | score |

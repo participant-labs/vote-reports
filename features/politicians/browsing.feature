@@ -9,7 +9,7 @@ Feature: Browsing Politicians
     Then I should be on the politicians page
 
   Scenario: Browsing to a Politician from the Politicians Page
-    Given the following politician records:
+    Given the following in-office politician records:
       | name      | gov_track_id |
       | Ron Wyden | 300100       |
       | Bob Barr  |              |

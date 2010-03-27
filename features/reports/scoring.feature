@@ -8,7 +8,7 @@ Feature: Scoring Reports
     And an un-voted, current-congress bill named "Bovine Security Act of 2009"
     And an un-voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
     And an un-voted, current-congress bill named "Honoring Miss America Act of 2009"
-    And the following politician records:
+    And the following in-office politician records:
       | name                  |
       | Piyush Jindal         |
       | J. Kerrey             |
