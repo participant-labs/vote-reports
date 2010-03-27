@@ -22,7 +22,7 @@ Feature: Scoring Reports
 
   Scenario: Without Criteria, I should see message noting why no scores exist
     When I go to the interest group page for "Sierra Club"
-    Then I should see "We have no ratings on record for this "
+    Then I should see "No ratings on record for this group"
 
   Scenario: Scores from a single set of numeric ratings
     Given interest group "Sierra Club" has the following ratings:
