@@ -16,10 +16,6 @@ class BillCriterionScore
     end
   end
 
-  def votes
-    @vote_scores.keys
-  end
-
   def average_base
     @average_base ||= begin
       bases = @vote_scores.values.map {|score| score[:base] }
@@ -48,8 +44,8 @@ class BillCriterionScore
   end
 
   def build_evidence_on(report_score)
-    votes.each do |vote|
-      report_score.evidence.build(:vote => vote, :bill_criterion => bill_criterion)
+    @vote_scores.keys.each do |vote|
+      report_score.evidence.build(:evidence => vote, :criterion => bill_criterion)
     end
   end
 end

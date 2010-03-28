@@ -1,7 +1,7 @@
 class BillCriterion < ActiveRecord::Base
   belongs_to :bill
   belongs_to :report
-  has_many :evidence, :class_name => 'ReportScoreEvidence', :dependent => :destroy
+  has_many :evidence, :class_name => 'ReportScoreEvidence', :dependent => :destroy, :as => :criterion
 
   validates_presence_of :bill, :report
   validates_uniqueness_of :bill_id, :scope => "report_id"

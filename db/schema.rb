@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100326220254) do
+ActiveRecord::Schema.define(:version => 20100328053237) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -326,11 +326,13 @@ ActiveRecord::Schema.define(:version => 20100326220254) do
   add_index "report_follows", ["user_id"], :name => "index_report_follows_on_user_id"
 
   create_table "report_score_evidences", :force => true do |t|
-    t.integer  "report_score_id",   :null => false
-    t.integer  "vote_id",           :null => false
-    t.integer  "bill_criterion_id", :null => false
+    t.integer  "report_score_id", :null => false
+    t.integer  "evidence_id",     :null => false
+    t.integer  "criterion_id",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "evidence_type",   :null => false
+    t.string   "criterion_type",  :null => false
   end
 
   create_table "report_scores", :force => true do |t|

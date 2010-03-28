@@ -11,4 +11,8 @@ class InterestGroupRating < ActiveRecord::Base
   rescue ArgumentError
     puts "Bad value: #{rating}" unless Rails.env.production?
   end
+
+  def subject
+    interest_group_report
+  end
 end

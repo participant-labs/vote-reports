@@ -11,17 +11,5 @@
     </div>
   </div>
 
-  <dl id="<%= score_id %>" class="hidden"
-    data-dialog-title="<%= "Significant Votes for #{score.politician.full_name} on '#{score.report.name}'" %>">
-    <%- score.evidence.group_by(&:subject).each_pair do |bill, bill_scores| -%>
-    <dt><%= render 'bills/bill', :bill => bill %>:
-      <%= bill_scores.first.bill_criterion.position %></dt>
-    <dd><dl>
-      <%- bill_scores.each do |bill_score| -%>
-        <dt><%= render 'rolls/roll', :roll => bill_score.vote.roll %></dt>
-        <dd><%= bill_score.vote.position %></dd>
-      <%- end -%>
-    </dl></dd>
-    <%- end -%>
-  </dl>
+  <%= render 'reports/scores/evidence', :score => score, :id => score_id %>
 <%- end -%>
