@@ -22,10 +22,15 @@ module ApplicationHelper
     @page_title = page_title.to_s
   end
 
-  def to_html(text, html_attrs = {})
-    content_tag :div, text.to_s.split("\n").map {|paragraph|
+  def format_newlines(text)
+    text.to_s.gsub(/(?:\n\r?|\r\n?)/, '<br />')
+  end
+  safe_helper :format_newlines
+
+  def to_html(text)
+    text.to_s.split("\n").map {|paragraph|
       content_tag :p, paragraph
-    }.join, html_attrs
+    }.join
   end
 
   def flash_helper
