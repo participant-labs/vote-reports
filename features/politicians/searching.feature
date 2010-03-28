@@ -4,7 +4,7 @@ Feature: Browsing Politicians
   I want to search politicians
 
   Background:
-    Given the following in-office politician records:
+    Given the following politician records:
       | name                  |
       | Michael Burgess       |
       | J. Kerrey             |
@@ -31,6 +31,7 @@ Feature: Browsing Politicians
   Scenario: Browsing to a Politician from the Politicians Page
     When I go to the politicians page
     And I fill in "From" with "75028"
+    And I uncheck "In Office Only"
     And I press "Go!"
     Then I should see "Michael Burgess"
     And I should see "Kay Hutchison"
