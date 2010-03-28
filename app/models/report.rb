@@ -161,6 +161,14 @@ class Report < ActiveRecord::Base
     end
   }
 
+  def criteria_scores
+    if user
+      bill_criteria.active
+    else
+      [interest_group]
+    end.map(&:scores).flatten
+  end
+
   def description
     BlueCloth::new(self[:description].to_s).to_html
   end

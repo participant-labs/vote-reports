@@ -5,4 +5,10 @@ class InterestGroupRating < ActiveRecord::Base
   delegate :interest_group, :to => :interest_group_report
 
   validates_presence_of :interest_group_report, :politician
+
+  def numeric_rating
+    Float(rating)
+  rescue ArgumentError
+    puts "Bad value: #{rating}" unless Rails.env.production?
+  end
 end

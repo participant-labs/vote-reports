@@ -55,7 +55,15 @@ class InterestGroup < ActiveRecord::Base
 
   def rescore!
     if ratings.present?
-      (report || build_report(:name => name)).rescore!
+      (report || begin
+        build_report(:name => name).tap(&:save!)
+      end).rescore!
+    end
+  end
+
+  def scores
+    ratings.group_by(&:politician).map do |politician, ratings|
+      InterestGroup::Score.new(:interest_group => self, :ratings => ratings, :politician => politician)
     end
   end
 end

@@ -1,20 +1,16 @@
 class Report
   class Scorer < Struct.new(:report_id)
     def perform
-      report = Report.find_by_id(report_id) || begin
-        notify_exceptional("Tried to score missing report #{report_id}")
-        return nil
-      end
-      report.bill_criteria.active.map(&:scores).flatten.group_by(&:politician).each_pair do |politician, bill_scores|
-        bill_baseline = bill_scores.map(&:average_base)
-        bill_baseline = bill_baseline.sum / bill_baseline.size
+      report = Report.find_by_id(report_id) \
+        || raise("Tried to score missing report #{report_id}")
+      report.criteria_scores.group_by(&:politician).each_pair do |politician, criteria_scores|
+        baseline = criteria_scores.map(&:average_base)
+        baseline = baseline.sum / baseline.size
 
-        scores = bill_scores.map {|s| s.score * s.average_base / bill_baseline }
+        scores = criteria_scores.map {|s| s.score * s.average_base / baseline }
         score = report.scores.build(:politician => politician, :score => scores.sum / scores.size)
-        bill_scores.each do |bill_score|
-          bill_score.votes.each do |vote|
-            score.evidence.build(:vote => vote, :bill_criterion => bill_score.bill_criterion)
-          end
+        criteria_scores.each do |criterion_score|
+          criterion_score.build_evidence_on(score)
         end
       end
       ActiveRecord::Base.transaction do

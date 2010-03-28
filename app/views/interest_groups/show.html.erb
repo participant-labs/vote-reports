@@ -36,7 +36,7 @@
   <p>We score representatives based on the actual ratings this interest group has released over time.</p>
   <%- if @report -%>
     <%- if @report.scores.present? -%>
-      <%= render 'politicians/search', :url => user_report_path(@report.user, @report), :replace => 'report_scores' %>
+      <%= render 'politicians/search', :url => interest_group_path(@interest_group), :replace => 'report_scores' %>
     <%- end -%>
     <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
   <%- else -%>
