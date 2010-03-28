@@ -45,6 +45,7 @@ Feature: Scoring Reports
       | bill                                    | support |
       | Bovine Security Act of 2009             | true    |
       | USA PATRIOT Reauthorization Act of 2009 | false   |
+    And I wait for delayed job to finish
     When I go to my report page for "Active Report"
     Then I should see "No scores yet, as the associated bills have not been voted on."
 
@@ -63,6 +64,7 @@ Feature: Scoring Reports
     And report "Active Report" has the following bill criteria:
       | bill                                    | support |
       | Bovine Security Act of 2009             | true    |
+    And I wait for delayed job to finish
     When I go to my report page for "Active Report"
     Then I should see "No scores yet, as the associated bills have not been voted on."
 

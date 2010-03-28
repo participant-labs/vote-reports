@@ -36,6 +36,7 @@ Feature: Deleting Criteria from Reports
     And I follow "Edit Report"
     And I follow "Edit Existing Criteria"
     And I follow "Remove"
+    And I wait for delayed job to finish
     Then I should see "Successfully deleted report criterion"
     And I should be on the edit bills page for my report "Active Report"
 
