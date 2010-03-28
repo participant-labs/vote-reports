@@ -1,10 +1,10 @@
 class InterestGroup::Score
   DISCOUNTING_RATE = 0.07
 
-  attr_reader :politician, :criterion, :vote_scores
+  attr_reader :politician_id, :criterion, :vote_scores
 
   def initialize(args)
-    @politician = args.fetch(:politician)
+    @politician_id = args.fetch(:politician_id)
     @criterion = args.fetch(:interest_group)
     @rating_scores = args.fetch(:ratings).inject({}) do |scores, rating|
       if rating.numeric_rating
