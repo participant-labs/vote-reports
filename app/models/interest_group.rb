@@ -62,7 +62,7 @@ class InterestGroup < ActiveRecord::Base
   end
 
   def scores
-    ratings.group_by(&:politician_id).map do |politician_id, ratings|
+    ratings.scoped(:select => 'id, politician_id', :include => :interest_group_report).group_by(&:politician_id).map do |politician_id, ratings|
       InterestGroup::Score.new(:interest_group => self, :ratings => ratings, :politician_id => politician_id)
     end
   end
