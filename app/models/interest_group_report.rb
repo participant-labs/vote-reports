@@ -4,4 +4,32 @@ class InterestGroupReport < ActiveRecord::Base
 
   validates_presence_of :interest_group
   validates_uniqueness_of :vote_smart_id
+
+  def rated_on
+    year = timespan.split('-').last
+    season, year =
+      if year.include?(' ')
+        year.split(' ')
+      else
+        ['Spring', year]
+      end
+    Date.parse([season_midpoint(season), year].join('/'))
+  end
+
+  private
+
+  def season_midpoint(season)
+    case season
+    when 'Spring'
+      "3/20"
+    when 'Summer'
+      "6/21"
+    when 'Fall'
+      "9/23"
+    when 'Winter'
+      "12/21"
+    else
+      raise "Unknown season: #{season.inspect}"
+    end
+  end
 end

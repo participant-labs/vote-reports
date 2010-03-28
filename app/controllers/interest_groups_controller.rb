@@ -25,6 +25,7 @@ class InterestGroupsController < ApplicationController
       return
     end
     @report = @interest_group.report
+    @scores = @report.scores
     @subjects = @interest_group.subjects
   end
 end

@@ -46,4 +46,10 @@ class BillCriterionScore
   def base_for_vote(vote)
     (1 - DISCOUNTING_RATE) ** vote.roll.voted_at.to_date.years_until(Date.today)
   end
+
+  def build_evidence_on(report_score)
+    votes.each do |vote|
+      report_score.evidence.build(:vote => vote, :bill_criterion => bill_criterion)
+    end
+  end
 end
