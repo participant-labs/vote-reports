@@ -17,10 +17,6 @@ class InterestGroup::Score
     end
   end
 
-  def ratings
-    @rating_scores.keys
-  end
-
   def average_base
     @average_base ||= begin
       bases = @rating_scores.values.map {|score| score[:base] }
@@ -39,6 +35,8 @@ class InterestGroup::Score
   end
 
   def build_evidence_on(report_score)
-    # TODO
+    @rating_scores.keys.each do |rating|
+      report_score.evidence.build(:evidence => rating, :criterion => @criterion)
+    end
   end
 end

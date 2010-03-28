@@ -8,7 +8,7 @@ class ReportScore < ActiveRecord::Base
 
   named_scope :with_evidence, :include => {
     :politician => :state,
-    :evidence => [{:vote => {:roll => {:subject => {:titles => :as}}}}, :bill_criterion]
+    :evidence => [:evidence, :criterion]
   }
 
   named_scope :published, :joins => :report, :conditions => {:'reports.state' => 'published'}

@@ -14,6 +14,8 @@ class Vote < ActiveRecord::Base
   named_scope :present, :conditions => {:vote => 'P'}
   named_scope :not_voting, :conditions => {:vote => '0'}
 
+  delegate :subject, :to => :roll
+
   unless Rails.env.development?
     after_create :create_bill_support_or_opposition
   end
