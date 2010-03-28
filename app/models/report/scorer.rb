@@ -21,6 +21,12 @@ class Report
           report.save!
         end
       end
+    rescue => e
+      unless Rails.env.production?
+        p e
+        puts e.backtrace
+      end
+      raise
     end
   end
 end
