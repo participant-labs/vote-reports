@@ -80,13 +80,14 @@ Fixjour :verify => false do
   define_builder(InterestGroup) do |klass, overrides|
     klass.new(
       :name => Forgery(:basic).text,
-      :vote_smart_id => rand(1000000).to_s
+      :vote_smart_id => rand(100000000).to_s
     )
   end
 
   define_builder(InterestGroupReport) do |klass, overrides|
     klass.new(
       :interest_group => new_interest_group,
+      :vote_smart_id => rand(100000000).to_s,
       :timespan => "2007"
     )
   end
