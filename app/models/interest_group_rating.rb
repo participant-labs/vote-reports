@@ -6,12 +6,6 @@ class InterestGroupRating < ActiveRecord::Base
 
   validates_presence_of :interest_group_report, :politician
 
-  def numeric_rating
-    Float(rating)
-  rescue ArgumentError
-    puts "Bad value: #{rating}" unless Rails.env.production?
-  end
-
   def subject
     interest_group_report
   end
