@@ -32,6 +32,7 @@ module ApplicationHelper
       content_tag :p, paragraph
     }.join
   end
+  safe_helper :to_html
 
   def flash_helper
     flash.map do |(level, message)|
