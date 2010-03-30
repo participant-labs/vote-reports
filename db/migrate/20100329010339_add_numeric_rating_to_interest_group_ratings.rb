@@ -72,7 +72,7 @@ class AddNumericRatingToInterestGroupRatings < ActiveRecord::Migration
       ratings = report.ratings.map {|r| r.rating.to_f }
       if ratings.max >= 100.0
         # the negatives are just outliers, not a sign of a 0-centered range
-        if (report.ratings.map(&:rating) | PLUS_RATINGS).present?
+        if (report.ratings.map(&:rating) & PLUS_RATINGS).present?
           raise "Unexpected + rating in #{report.vote_smart_id} which we assumed was a normal range"
         end
         $stdout.print 'G'
