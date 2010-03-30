@@ -1,5 +1,5 @@
 class AddNumericRatingToInterestGroupRatings < ActiveRecord::Migration
-  NON_RATINGS = ['', 'N/A', 'n/a', 'S', 'Inc.']
+  NON_RATINGS = ['', 'N/A', 'n/a', 'S', 'Inc.', '24970']
   UNUSUAL_RATINGS_MAP = {
     '00' => 0.0,
     '000' => 0.0,
@@ -19,6 +19,9 @@ class AddNumericRatingToInterestGroupRatings < ActiveRecord::Migration
     '104' => 100.0,
     '105' => 100.0,
     '108' => 100.0,
+    '110' => 100.0,
+    '116' => 100.0,
+    '117' => 100.0,
 
     'Anti Hemp' => 0.0,
     'Fence Sitter' => 50.0,
