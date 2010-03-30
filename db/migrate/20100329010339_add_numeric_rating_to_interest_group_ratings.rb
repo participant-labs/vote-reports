@@ -82,11 +82,12 @@ class AddNumericRatingToInterestGroupRatings < ActiveRecord::Migration
         report.ratings.update_all({:numeric_rating => 0.0}, {:rating => ZERO_CENTERED_RATINGS})
       else
         # this is a range centered around 0
-        max = [r.max, -r.min].max
-        range = ((max * 2) + 1)
+        max = [ratings.max, -ratings.min].max
+        step = 100 / ((max * 2) + 1)
         $stdout.print 'R'
         report.ratings.each do |rating|
-          rating.update_attribute(:numeric_rating, (rating.rating.to_f + max) * 100.0 / range))
+          r = (rating.rating == "-2(House)/-1(Senator)" ? -1.5 : rating.rating.to_f)
+          rating.update_attribute(:numeric_rating, (r + max) * step)
         end
       end
     end
