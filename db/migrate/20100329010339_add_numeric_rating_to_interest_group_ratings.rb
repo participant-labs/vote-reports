@@ -59,6 +59,7 @@ class AddNumericRatingToInterestGroupRatings < ActiveRecord::Migration
   end
 
   def self.up
+    $stdout.sync = true
     add_column :interest_group_ratings, :numeric_rating, :float
     constrain :interest_group_ratings, :numeric_rating, :within => 0.0...100.0
 
@@ -74,11 +75,13 @@ class AddNumericRatingToInterestGroupRatings < ActiveRecord::Migration
         if (report.ratings.map(&:rating) | PLUS_RATINGS).present?
           raise "Unexpected + rating in #{report.vote_smart_id} which we assumed was a normal range"
         end
+        $stdout.print 'G'
         report.ratings.update_all({:numeric_rating => 0.0}, {:rating => ZERO_CENTERED_RATINGS})
       else
         # this is a range centered around 0
         max = [r.max, -r.min].max
         range = ((max * 2) + 1)
+        $stdout.print 'R'
         report.ratings.each do |rating|
           rating.update_attribute(:numeric_rating, (rating.rating.to_f + max) * 100.0 / range))
         end
@@ -87,6 +90,7 @@ class AddNumericRatingToInterestGroupRatings < ActiveRecord::Migration
 
     InterestGroupRating.paginated_each(:conditions => 'numeric_rating IS NULL') do |rating|
       next if NON_RATINGS.include?(rating.rating)
+      $stdout.print '.'
       rating.update_attribute(:numeric_rating, numeric_rating(rating.rating))
     end
   end
