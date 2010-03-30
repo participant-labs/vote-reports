@@ -61,7 +61,7 @@ class AddNumericRatingToInterestGroupRatings < ActiveRecord::Migration
   def self.up
     $stdout.sync = true
     add_column :interest_group_ratings, :numeric_rating, :float
-    constrain :interest_group_ratings, :numeric_rating, :within => 0.0...100.0
+    constrain :interest_group_ratings, :numeric_rating, :within => ((-0.00001)...100.00001)
 
     UNUSUAL_RATINGS_MAP.each_pair do |rating, numeric_rating|
       InterestGroupRating.update_all({:numeric_rating => numeric_rating}, {:rating => rating})
