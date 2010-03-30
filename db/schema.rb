@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100328184407) do
+ActiveRecord::Schema.define(:version => 20100329010339) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(:version => 20100328184407) do
     t.text     "description",              :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "numeric_rating"
   end
 
   add_index "interest_group_ratings", ["interest_group_report_id", "politician_id"], :name => "index_interest_group_ratings_on_p_and_ig"
