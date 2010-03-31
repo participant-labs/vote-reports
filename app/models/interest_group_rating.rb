@@ -6,6 +6,8 @@ class InterestGroupRating < ActiveRecord::Base
 
   validates_presence_of :interest_group_report, :politician
 
+  named_scope :numeric, :conditions => 'interest_group_ratings.numeric_rating IS NOT NULL'
+
   def subject
     interest_group_report
   end

@@ -7,12 +7,10 @@ class InterestGroup::Score
     @politician_id = args.fetch(:politician_id)
     @criterion = args.fetch(:interest_group)
     @rating_scores = args.fetch(:ratings).inject({}) do |scores, rating|
-      if rating.numeric_rating
-        scores[rating] = {
-          :score => rating.numeric_rating,
-          :base => base_for_rating(rating)
-        }
-      end
+      scores[rating] = {
+        :score => rating.numeric_rating,
+        :base => base_for_rating(rating)
+      }
       scores
     end
   end
