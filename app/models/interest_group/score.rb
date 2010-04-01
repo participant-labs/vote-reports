@@ -8,7 +8,7 @@ class InterestGroup::Score
     @criterion = args.fetch(:interest_group)
     @rating_scores = args.fetch(:ratings).inject({}) do |scores, rating|
       scores[rating] = {
-        :score => rating.numeric_rating,
+        :score => @criterion.event_score(rating),
         :base => base_for_rating(rating)
       }
       scores

@@ -61,6 +61,10 @@ class InterestGroup < ActiveRecord::Base
     end
   end
 
+  def event_score(rating)
+    rating.numeric_rating
+  end
+
   def scores
     ratings.numeric.scoped(:select => 'numeric_rating, id, politician_id',
       :include => :interest_group_report).group_by(&:politician_id).map do |politician_id, ratings|
