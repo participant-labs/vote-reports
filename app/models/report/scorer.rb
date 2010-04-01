@@ -1,16 +1,25 @@
 class Report
   class Scorer < Struct.new(:report_id)
     def perform
-      @average_bases, @bases, @scores = {}, {}, {}
+      @bases = {}
       report = Report.find(report_id)
-      report.criteria_scores.group_by(&:politician_id).each_pair do |politician_id, criteria_scores|
-        baseline = baseline_for(criteria_scores)
+      report.score_criteria.inject({}) do |criterion_events, criterion|
+        criterion.events.each do |event|
+          criterion_events[event.politician_id] ||= {}
+          criterion_events[event.politician_id][criterion] ||= []
+          criterion_events[event.politician_id][criterion] << event
+        end
+        criterion_events
+      end.each_pair do |politician_id, criteria_events|
+        baseline = average_base_for(criteria_events.values.flatten)
 
-        scores = criteria_scores.map {|s| score_for(s) * average_base_for(s) / baseline }
+        scores = criteria_events.map do |criterion, events|
+          score_for(criterion, events) * average_base_for(events) / baseline
+        end
         score = report.scores.build(:politician_id => politician_id, :score => scores.sum / scores.size)
-        criteria_scores.each do |criterion_score|
-          criterion_score.events.each do |event|
-            score.evidence.build(:evidence => event, :criterion => criterion_score.criterion)
+        criteria_events.each_pair do |criterion, events|
+          events.each do |event|
+            score.evidence.build(:evidence => event, :criterion => criterion)
           end
         end
       end
@@ -32,20 +41,13 @@ class Report
 
     private
 
-    def score_for(score)
-      @scores[score] ||= begin
-        scores = score.events.sum {|e| score.criterion.event_score(e) * base_for(e) }
-        bases = score.events.sum {|e| base_for(e) }
-        scores / bases
-      end
+    def score_for(criterion, events)
+      scores = events.sum {|e| criterion.event_score(e) * base_for(e) }
+      scores / events.sum {|e| base_for(e) }
     end
 
-    def baseline_for(scores)
-      scores.sum {|s| average_base_for(s) } / scores.size
-    end
-
-    def average_base_for(score)
-      @average_bases[score] ||= score.events.sum {|event| base_for(event) } / score.events.size
+    def average_base_for(events)
+      events.sum {|e| base_for(e) } / events.size
     end
 
     DISCOUNTING_RATE = 0.07

@@ -38,10 +38,8 @@ class BillCriterion < ActiveRecord::Base
     (support? && vote.nay?) || (oppose? && vote.aye?)
   end
 
-  def scores
-    bill.passage_rolls.all(:include => {:votes => [{:politician => :state}, :roll]}).map(&:votes).flatten.group_by(&:politician).map do |politician, votes|
-      BillCriterionScore.new(:bill_criterion => self, :votes => votes, :politician => politician)
-    end
+  def events
+    bill.passage_rolls.all(:include => {:votes => [{:politician => :state}, :roll]}).map(&:votes).flatten
   end
 
   def after_destroy
