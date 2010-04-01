@@ -26,9 +26,11 @@ class Report
             end
           end
         end
-        ReportScoreEvidence.import_without_validations_or_callbacks(
-          [:report_score_id, :criterion_type, :criterion_id, :evidence_type, :evidence_id],
-          evidences)
+        unless evidences.blank?
+          ReportScoreEvidence.import_without_validations_or_callbacks(
+            [:report_score_id, :criterion_type, :criterion_id, :evidence_type, :evidence_id],
+            evidences)
+        end
         if report.scores.empty? && report.can_unpublish?
           report.unpublish
         else
