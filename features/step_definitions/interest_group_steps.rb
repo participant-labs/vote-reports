@@ -15,7 +15,9 @@ Given /^(interest group "[^"]*") has the following ratings:$/ do |interest_group
   }
   table.hashes.each do |hash|
     create_interest_group_rating(
-      hash.merge(:interest_group_report => hash.delete('report')))
+      hash.merge(
+        :interest_group_report => hash.delete('report'),
+        :numeric_rating => hash['rating'].to_f))
   end
 end
 
