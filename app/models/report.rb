@@ -161,12 +161,12 @@ class Report < ActiveRecord::Base
     end
   }
 
-  def criteria_scores
+  def score_criteria
     if user
       bill_criteria.active
     else
       [interest_group]
-    end.map(&:scores).flatten
+    end
   end
 
   def description
