@@ -66,6 +66,7 @@ class InterestGroup < ActiveRecord::Base
   end
 
   def events
-    ratings.numeric.scoped(:select => 'numeric_rating, id, politician_id')
+    ratings.numeric.scoped(:select => 'numeric_rating, id, politician_id',
+      :include => :interest_group_report)
   end
 end
