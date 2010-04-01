@@ -24,8 +24,18 @@ class InterestGroupsController < ApplicationController
       redirect_to interest_group_path(@interest_group), :status => 301
       return
     end
+
     @report = @interest_group.report
-    @scores = @report.try(:scores)
+    @scores = @report.scores.for_politicians(sought_politicians) if @report
     @subjects = @interest_group.subjects
+
+    respond_to do |format|
+      format.html
+      format.js {
+        render :partial => 'reports/scores/table', :locals => {
+          :report => @report, :scores => @scores
+        }
+      }
+    end
   end
 end
