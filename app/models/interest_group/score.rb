@@ -29,7 +29,7 @@ class InterestGroup::Score
   end
 
   def base_for_rating(rating)
-    (1 - DISCOUNTING_RATE) ** rating.interest_group_report.rated_on.years_until(Date.today)
+    (1 - DISCOUNTING_RATE) ** rating.event_date.years_until(Date.today)
   end
 
   def build_evidence_on(report_score)

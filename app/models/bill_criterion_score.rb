@@ -30,7 +30,7 @@ class BillCriterionScore
   end
 
   def base_for_vote(vote)
-    (1 - DISCOUNTING_RATE) ** vote.roll.voted_at.to_date.years_until(Date.today)
+    (1 - DISCOUNTING_RATE) ** vote.event_date.years_until(Date.today)
   end
 
   def build_evidence_on(report_score)
