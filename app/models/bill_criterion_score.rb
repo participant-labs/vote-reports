@@ -1,41 +1,9 @@
 class BillCriterionScore
-  DISCOUNTING_RATE = 0.07
-
-  attr_reader :politician, :bill_criterion, :vote_scores
-  delegate :bill, :to => :bill_criterion
+  attr_reader :politician, :criterion, :events
 
   def initialize(args)
     @politician = args.fetch(:politician)
-    @bill_criterion = args.fetch(:bill_criterion)
-    @vote_scores = args.fetch(:votes).inject({}) do |scores, vote|
-      scores[vote] = {
-        :score => @bill_criterion.event_score(vote),
-        :base => base_for_vote(vote)
-      }
-      scores
-    end
-  end
-
-  def average_base
-    @average_base ||= begin
-      bases = @vote_scores.values.map {|score| score[:base] }
-      bases.sum / bases.size
-    end
-  end
-
-  def score
-    scores = @vote_scores.values.map {|s| s[:score] * s[:base] }.sum
-    bases = @vote_scores.values.map {|s| s[:base] }.sum
-    scores / bases
-  end
-
-  def base_for_vote(vote)
-    (1 - DISCOUNTING_RATE) ** vote.event_date.years_until(Date.today)
-  end
-
-  def build_evidence_on(report_score)
-    @vote_scores.keys.each do |vote|
-      report_score.evidence.build(:evidence => vote, :criterion => bill_criterion)
-    end
+    @criterion = args.fetch(:bill_criterion)
+    @events = args.fetch(:votes)
   end
 end
