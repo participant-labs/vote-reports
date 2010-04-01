@@ -48,6 +48,16 @@ class BillCriterion < ActiveRecord::Base
     report.rescore!
   end
 
+  def event_score(vote)
+    if aligns?(vote)
+      100.0
+    elsif contradicts?(vote)
+      0.0
+    else
+      50.0
+    end
+  end
+
   private
 
   def rescore_report

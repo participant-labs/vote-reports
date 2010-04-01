@@ -9,7 +9,7 @@ class BillCriterionScore
     @bill_criterion = args.fetch(:bill_criterion)
     @vote_scores = args.fetch(:votes).inject({}) do |scores, vote|
       scores[vote] = {
-        :score => score_vote(vote),
+        :score => @bill_criterion.event_score(vote),
         :base => base_for_vote(vote)
       }
       scores
@@ -27,16 +27,6 @@ class BillCriterionScore
     scores = @vote_scores.values.map {|s| s[:score] * s[:base] }.sum
     bases = @vote_scores.values.map {|s| s[:base] }.sum
     scores / bases
-  end
-
-  def score_vote(vote)
-    if @bill_criterion.aligns?(vote)
-      100.0
-    elsif @bill_criterion.contradicts?(vote)
-      0.0
-    else
-      50.0
-    end
   end
 
   def base_for_vote(vote)
