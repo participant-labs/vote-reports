@@ -2,29 +2,33 @@ class Report
   class Scorer < Struct.new(:report_id)
     def perform
       @bases = {}
-      report = Report.find(report_id)
-      report.score_criteria.inject({}) do |criterion_events, criterion|
-        criterion.events.each do |event|
-          criterion_events[event.politician_id] ||= {}
-          criterion_events[event.politician_id][criterion] ||= []
-          criterion_events[event.politician_id][criterion] << event
-        end
-        criterion_events
-      end.each_pair do |politician_id, criteria_events|
-        baseline = average_base_for(criteria_events.values.flatten)
+      ActiveRecord::Base.transaction do
+        report = Report.find(report_id)
+        evidences = []
+        ReportScore.delete_all(:report_id => report)
+        report.score_criteria.inject({}) do |criterion_events, criterion|
+          criterion.events.each do |event|
+            criterion_events[event.politician_id] ||= {}
+            criterion_events[event.politician_id][criterion] ||= []
+            criterion_events[event.politician_id][criterion] << event
+          end
+          criterion_events
+        end.each_pair do |politician_id, criteria_events|
+          baseline = average_base_for(criteria_events.values.flatten)
 
-        scores = criteria_events.map do |criterion, events|
-          score_for(criterion, events) * average_base_for(events) / baseline
-        end
-        score = report.scores.build(:politician_id => politician_id, :score => scores.sum / scores.size)
-        criteria_events.each_pair do |criterion, events|
-          events.each do |event|
-            score.evidence.build(:evidence => event, :criterion => criterion)
+          scores = criteria_events.map do |criterion, events|
+            score_for(criterion, events) * average_base_for(events) / baseline
+          end
+          score = report.scores.create!(:politician_id => politician_id, :score => scores.sum / scores.size)
+          criteria_events.each_pair do |criterion, events|
+            evidences += events.map do |event|
+              [score.id, criterion.class.name, criterion.id, event.class.name, event.id]
+            end
           end
         end
-      end
-      ActiveRecord::Base.transaction do
-        ReportScore.delete_all(:report_id => report)
+        ReportScoreEvidence.import_without_validations_or_callbacks(
+          [:report_score_id, :criterion_type, :criterion_id, :evidence_type, :evidence_id],
+          evidences)
         if report.scores.empty? && report.can_unpublish?
           report.unpublish
         else
