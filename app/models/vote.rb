@@ -35,6 +35,10 @@ class Vote < ActiveRecord::Base
     vote == '-'
   end
 
+  def event_date
+    roll.voted_at.to_date
+  end
+
   private
 
   unless Rails.env.development?

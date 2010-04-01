@@ -8,6 +8,10 @@ class InterestGroupRating < ActiveRecord::Base
 
   named_scope :numeric, :conditions => 'interest_group_ratings.numeric_rating IS NOT NULL'
 
+  def event_date
+    interest_group_report.rated_on
+  end
+
   def subject
     interest_group_report
   end
