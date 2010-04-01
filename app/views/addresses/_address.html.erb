@@ -1,4 +1,5 @@
 <div class="address">
-  <%= format_newlines(address.address) %><br />
-  <%= address.city %>, <%= address.state %> <%= address.zip %>
+  <%= format_newlines(address.address) %><%= raw '<br />' if address.address.present? %>
+  <%= address.city %><%= ',' if address.address.present? || address.city.present? %>
+  <%= address.state %> <%= address.zip %>
 </div>
