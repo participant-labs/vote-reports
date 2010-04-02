@@ -1,7 +1,13 @@
 <%- replace ||= 'reports' -%>
 
 <% form_tag reports_path, :method => :get, :'data-replace' => replace do %>
-  <%= label_tag :q, 'Search' %>
-  <%= text_field_tag :q, @q %>
-  <%= submit_tag 'Search' %>
+  <p>
+    <%= label_tag :q, 'Search', :style => 'font-weight: bold;' %>
+    <%= text_field_tag :q, @q %>
+  </p>
+  <p>
+    <%= check_box_tag :include_interest_group_reports, '1', params[:include_interest_group_reports] %>
+    <%= label_tag :include_interest_group_reports, 'Include Interest Group Reports' %>
+  </p>
+  <p><%= submit_tag 'Search' %></p>
 <% end %>
