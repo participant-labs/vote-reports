@@ -16,6 +16,10 @@ class InterestGroupReport < ActiveRecord::Base
     Date.parse([season_midpoint(season), year].join('/'))
   end
 
+  def vote_smart_url
+    "http://votesmart.org/issue_rating_detail.php?r_id=#{vote_smart_id}"
+  end
+
   private
 
   def season_midpoint(season)

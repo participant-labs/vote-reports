@@ -7,6 +7,8 @@ youreontheballot
 voteforwhatmatters
 areyouontheballot
 
+interest_groups/republican-liberty-caucus has several repeated reports on vote smart.  Time to clean up their data!
+
 time rake vlad:invoke COMMAND="cd /var/www/votereports/production/current && RAILS_ENV=production /usr/bin/env nice -n 3 rake vote_smart:import"
 
 To inform. To promote truth. To combat political apathy.
