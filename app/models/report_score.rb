@@ -6,10 +6,10 @@ class ReportScore < ActiveRecord::Base
   default_scope :order => 'score DESC'
   named_scope :bottom, :order => :score
 
-  named_scope :with_evidence, :include => {
-    :politician => :state,
-    :evidence => [:evidence, :criterion]
-  }
+  named_scope :with_evidence, :include => [
+    {:politician => :state},
+    :evidence
+  ]
 
   named_scope :published, :joins => :report, :conditions => {:'reports.state' => 'published'}
 
