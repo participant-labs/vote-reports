@@ -125,7 +125,8 @@ class Report < ActiveRecord::Base
   validates_presence_of :owner, :name
   validate :ensure_only_one_owner
 
-  named_scope :published, :conditions => {:state => 'published'}
+  named_scope :published, :conditions => [
+    "reports.state = ? OR reports.interest_group_id IS NOT NULL", 'published']
   named_scope :unpublished, :conditions => "reports.state != 'published'"
   named_scope :with_criteria, :select => 'DISTINCT reports.*', :joins => :bill_criteria
   named_scope :scored, :select => 'DISTINCT reports.*', :joins => {:bill_criteria => {:bill => :passage_rolls}}
