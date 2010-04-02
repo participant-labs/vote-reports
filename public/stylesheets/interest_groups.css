@@ -1,0 +1,62 @@
+ul#interest_group_details {
+  float: right;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+ul#interest_group_details > li {
+  margin: 0.1em 1em;
+  position: relative;
+}
+
+ul#interest_group_details li {
+  list-style-type: none;
+  font-size: 1.3em;
+}
+
+ul#interest_group_details li.dropdown h2:hover {
+  text-decoration: underline;
+}
+
+ul#interest_group_details li h2 {
+  font-size: 1em;
+}
+
+ul#interest_group_details li .dropdown_target {
+  font-size: 0.7em;
+}
+
+ul#interest_group_details li.dropdown h2 {
+  padding-right: 1em;
+  background: transparent url(../images/bullet_arrow_down.png) center right no-repeat;
+}
+
+ul#interest_group_details li.dropdown > .dropdown_target {
+  display: none;
+  border: 1px solid #dda;
+  min-width: 10em;
+  position: absolute;
+  top: 1.6em;
+  left: 0em;
+  padding: 1.3em;
+  background: #ffc;
+  text-align: left;
+}
+
+ul#interest_group_details li.dropdown > .dropdown_target a {
+padding: 0;
+background-image: none;
+}
+
+ul#interest_group_details li h2 {
+  display: inline;
+}
+
+ul#interest_group_details li.hovering.dropdown > .dropdown_target {
+  display: block;
+  z-index: 1000;
+}
+
+#interest_group_details h2 a {
+  border-bottom: 0;
+}

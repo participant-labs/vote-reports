@@ -19,5 +19,6 @@ stylesheets:
     - public/stylesheets/master.css
     - public/stylesheets/interaction.css
     - public/stylesheets/menu.css
+    - public/stylesheets/interest_groups.css
     - public/stylesheets/tag_cloud.css
     - public/stylesheets/jquery.Jcrop.css
