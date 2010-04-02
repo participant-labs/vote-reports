@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100402003151) do
+ActiveRecord::Schema.define(:version => 20100402182530) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -343,6 +343,16 @@ ActiveRecord::Schema.define(:version => 20100402003151) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "report_subjects", :force => true do |t|
+    t.integer  "report_id",  :null => false
+    t.integer  "subject_id", :null => false
+    t.integer  "count",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "report_subjects", ["report_id", "subject_id"], :name => "index_report_subjects_on_report_id_and_subject_id", :unique => true
 
   create_table "reports", :force => true do |t|
     t.integer  "user_id"
