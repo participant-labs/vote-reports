@@ -92,8 +92,7 @@ class AddNumericRatingToInterestGroupRatings < ActiveRecord::Migration
       end
     end
 
-    InterestGroupRating.paginated_each(:conditions => 'numeric_rating IS NULL') do |rating|
-      next if NON_RATINGS.include?(rating.rating)
+    InterestGroupRating.paginated_each(:conditions => ['numeric_rating IS NULL AND rating NOT IN(?)', NON_RATINGS]) do |rating|
       $stdout.print '.'
       rating.update_attribute(:numeric_rating, numeric_rating(rating.rating))
     end
