@@ -44,7 +44,7 @@ class InterestGroup < ActiveRecord::Base
       {
         :select => 'DISTINCT interest_groups.*',
         :joins => :interest_group_subjects,
-        :conditions => {:'interest_group_subjects.subject_id' => subjects}
+        :conditions => ['interest_group_subjects.subject_id IN(?)', subjects]
       }
     end
   }
