@@ -9,7 +9,7 @@
 </div>
 
 <div class="section">
-  <h2>Recent Reports</h2>
+  <h3>Recent Reports</h3>
   <%= render 'reports/list', :reports => @recent_reports %>
-  <%= will_paginate @recent_reports %>
+  <%= link_to "See More...", reports_path %>
 </div>
