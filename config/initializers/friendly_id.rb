@@ -1,5 +1,5 @@
 module FriendlyId
-  module ActiveRecord2
+  module ActiveRecordAdapter
     module SimpleModel
       def friendly_id
         self[friendly_id_config.column.to_sym]
