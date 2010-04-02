@@ -1,6 +1,8 @@
 class Report
   class Scorer < Struct.new(:report_id)
     def perform
+      require 'ar-extensions'
+      require 'ar-extensions/import/postgresql'
       @bases = {}
       ActiveRecord::Base.transaction do
         report = Report.find(report_id)
