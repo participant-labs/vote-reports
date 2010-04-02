@@ -8,12 +8,7 @@ class Users::ReportsController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
-    @report = @user.reports.find(params[:id], :scope => @user, :include => {
-      :user => nil,
-      :bill_criteria => {
-        :bill => [{:titles => :as}, :congress, :passage_rolls]
-      }
-    })
+    @report = @user.reports.preload_bill_criteria.find(params[:id], :scope => @user)
     if !@report.friendly_id_status.best?
       redirect_to user_report_path(@user, @report), :status => 301
       return
