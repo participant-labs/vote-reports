@@ -36,11 +36,12 @@
           <%- end -%>
         </tr>
       <%- end -%>
+      <%- scores = ReportScore.for_reports(@topical_reports).for_politicians(@politicians).with_evidence.scoped(:include => :report) -%>
       <%- @topical_reports.each do |report| -%>
         <tr>
           <th><%= render 'reports/report', :report => report, :no_description => true %></th>
           <%- @politicians.each do |politician| -%>
-            <td><%= render 'reports/scores/score', :score => report.scores.for_politicians(politician).first %></td>
+            <td><%= render 'reports/scores/score', :score => scores.detect {|s| s.politician_id == politician.id && s.report_id == report.id } %></td>
           <%- end -%>
         </tr>
       <%- end -%>
