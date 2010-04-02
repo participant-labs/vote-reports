@@ -153,9 +153,14 @@ dd {
   margin-left: 0;
 }
 
+.left {
+  float: left;
+  width: 50%;
+}
+
 #instant_gratification dt {
   padding: 10px;
-  font: normal normal normal 24px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+  font: normal normal normal 18px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
 }
 
 #instant_gratification dt:after {
@@ -175,8 +180,8 @@ dd {
   padding-right: .5em;
 }
 
-.report_attrs {
-  margin-left: 118px;
+.report {
+  padding: 10px;
 }
 
 .report_attrs blockquote, .report_creator {
