@@ -1,16 +1,16 @@
 <% form_tag root_url, :method => :get, :'data-replace' => 'instant_gratification', :id => 'instant_gratification' do %>
   <dl>
-    <dt>1) Tell us your zip code</dt>
+    <dt>1) Enter your zip code</dt>
     <dd>
       <%= label_tag :representing, 'Zip Code', :class => 'hidden' %>
       <%= text_field_tag :representing, requested_location, :tabindex => 1, :size => 10 %>
       <%= submit_tag requested_location.present? ? 'Update' : 'Go!' %>
     </dd>
-    <dt>2) Tell us what you care about</dt>
+    <dt>2) Pick Some Issues</dt>
     <dd><%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
       [root_path(:subjects => subjects, :representing => params[:representing]),
       {:'data-replace' => 'instant_gratification'}] } %></dd>
-    <dt>3) We'll tell you how they represent you</dt>
+    <dt>3) See your reps' report cards</dt>
     <dd><%= render 'scores/table' %></dd>
   </dl>
 <% end %>
