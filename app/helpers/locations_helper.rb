@@ -8,7 +8,7 @@ module LocationsHelper
   end
 
   def sought_politicians
-    @in_office = !params.has_key?(:in_office) || params[:in_office]
+    @in_office = !params.has_key?(:in_office) || ['1', true].include?(params[:in_office])
     if params.has_key?(:representing)
       Politician.from(params[:representing])
     elsif session[:zip_code].present?
