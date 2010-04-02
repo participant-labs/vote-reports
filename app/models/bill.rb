@@ -54,9 +54,9 @@ class Bill < ActiveRecord::Base
   has_many :reports, :through => :bill_criteria
   has_many :amendments, :dependent => :destroy
   has_many :rolls, :as => :subject, :dependent => :destroy
-  has_many :passage_rolls, :as => :subject, :class_name => 'Roll', :conditions => {
-    :'rolls.roll_type' => Roll::PASSAGE_TYPES,
-  }
+  has_many :passage_rolls, :as => :subject, :class_name => 'Roll', :conditions => [
+    "rolls.roll_type IN(?)", Roll::PASSAGE_TYPES
+  ]
   has_many :votes, :through => :rolls
   def politicians
     Politician.scoped(:select => 'DISTINCT politicians.*', :joins => {:votes => :roll}, :conditions => {

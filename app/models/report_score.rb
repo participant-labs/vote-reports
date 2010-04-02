@@ -24,7 +24,7 @@ class ReportScore < ActiveRecord::Base
       {
         :select => 'DISTINCT report_scores.*',
         :joins => {:report => {:bills => :bill_subjects}},
-        :conditions => {:'bill_subjects.subject_id' => subject}
+        :conditions => ['bill_subjects.subject_id IN(?)', subjects]
       }
     end
   }

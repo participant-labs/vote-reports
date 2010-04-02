@@ -10,8 +10,8 @@ class Roll < ActiveRecord::Base
   has_friendly_id :friendly_id
 
   named_scope :by_voted_at, :order => "voted_at DESC"
-  named_scope :on_bill_passage, :conditions => {
-    :'rolls.roll_type' => PASSAGE_TYPES, :'rolls.subject_type' => 'Bill'}
+  named_scope :on_bill_passage, :conditions => [
+    "rolls.roll_type IN(?) AND rolls.subject_type = ?", PASSAGE_TYPES, 'Bill']
 
   before_validation :set_friendly_id
 

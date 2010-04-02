@@ -31,7 +31,7 @@ class Subject < ActiveRecord::Base
   named_scope :for_report, lambda {|reports|
     {
       :joins => {:bills => :bill_criteria},
-      :conditions => {:'bill_criteria.report_id' => reports}
+      :conditions => ['bill_criteria.report_id IN(?)', reports]
     }
   }
 
