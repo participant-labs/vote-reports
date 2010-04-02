@@ -19,15 +19,18 @@ class InterestGroupsController < ApplicationController
   end
 
   def show
-    @interest_group = InterestGroup.find(params[:id], :include => {:report => :scores})
+    @interest_group = InterestGroup.find(params[:id], :include => :subjects)
     if !@interest_group.friendly_id_status.best?
       redirect_to interest_group_path(@interest_group), :status => 301
       return
     end
 
-    @report = @interest_group.report
-    @scores = @report.scores.for_politicians(sought_politicians) if @report
     @subjects = @interest_group.subjects
+    @report = @interest_group.report
+    if @interest_group.report
+      @report = @interest_group.report
+      @scores = @report.scores.for_politicians(sought_politicians)
+    end
 
     respond_to do |format|
       format.html
