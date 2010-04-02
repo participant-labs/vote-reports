@@ -239,6 +239,8 @@ table tbody {
 
 #data_sources {
   list-style-type: none;
+  margin-left: 0;
+  text-align: center;
 }
 
 #data_sources > li {
@@ -246,7 +248,7 @@ table tbody {
 }
 
 #data_sources > li + li {
-  padding-left: 3em;
+  padding-left: 2em;
 }
 
 #data_sources > li > a {
