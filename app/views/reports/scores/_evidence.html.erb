@@ -10,11 +10,13 @@
           <dd><%= bill_score.evidence.position %></dd>
         <%- end -%>
       </dl></dd>
+    <%- elsif subject.is_a?(InterestGroupReport) -%>
+      <%- notify_exceptional("Multiple interest group ratings #{subject_scores.inspect}") if subject_scores.size > 1 -%>
+      <%- rating = subject_scores.first.evidence -%>
+      <dt><%= link_to "In #{subject.timespan}: #{rating.numeric_rating.round}%", subject.vote_smart_url %></dt>
+      <dd><%= rating.description %></dd>
     <%- else -%>
-      <dt><%= render subject %></dt>
-      <%- subject_scores.each do |subject_score| -%>
-        <dd><%= render subject_score.evidence %></dd>
-      <%- end -%>
+      <% raise "Unknown subject! #{subject.inspect}" %>
     <%- end -%>
   <%- end -%>
 </dl>
