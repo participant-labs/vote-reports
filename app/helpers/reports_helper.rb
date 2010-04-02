@@ -6,6 +6,10 @@ module ReportsHelper
     end
   end
 
+  def report_path_components(report)
+    report.user ? [report.user, report] : report.interest_group
+  end
+
   def report_next_step(report)
     next_step = report.next_step
     if next_step.is_a?(String)
