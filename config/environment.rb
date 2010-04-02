@@ -34,8 +34,8 @@ Rails::Initializer.run do |config|
   config.gem 'rpx_now', :version => '>= 0.6.12'
   config.gem 'sexy_pg_constraints'
   config.gem 'state_machine'
-  config.gem 'sunspot', :lib => 'sunspot'
-  config.gem 'sunspot_rails', :lib => 'sunspot/rails'
+  config.gem 'sunspot', :lib => 'sunspot', :version => '= 0.10.8'
+  config.gem 'sunspot_rails', :lib => 'sunspot/rails', :version => '= 0.11.5'
   config.gem 'votesmart', :version => '>= 0.3.0'
   config.gem 'whenever', :lib => false
   config.gem 'will_paginate'
