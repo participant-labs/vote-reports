@@ -6,8 +6,12 @@
     <%= content_tag :span, "#{score.score.round}%", :class => 'score',
       :'data-dialog' => "##{score_id}" %>
     <div class="report_score_evidence_link">
-      based on <%= link_to pluralize(score.evidence.size, 'vote'), '#',
-      :'data-dialog' => "##{score_id}" %>
+      based on
+      <ul>
+        <%- score.evidence.group_by(&:evidence_type).each_pair do |type, evidence| -%>
+          <li><%= link_to pluralize(evidence.size, human_type_name(type)), '#', :'data-dialog' => "##{score_id}" %></li>
+        <%- end -%>
+      </ul>
     </div>
   </div>
 

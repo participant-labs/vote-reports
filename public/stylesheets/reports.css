@@ -1,0 +1,12 @@
+.report_score_evidence_link > ul {
+  display: inline;
+  margin-left: 0;
+}
+
+.report_score_evidence_link > ul > li {
+  display: inline;
+}
+
+.report_score_evidence_link > ul > li + li {
+  content: ', ';
+}
