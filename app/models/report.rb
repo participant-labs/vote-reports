@@ -177,7 +177,11 @@ class Report < ActiveRecord::Base
   end
 
   def description
-    BlueCloth::new(self[:description].to_s).to_html
+    if self[:description].blank? && interest_group.present?
+      interest_group.description
+    else
+      BlueCloth::new(self[:description].to_s).to_html
+    end
   end
 
   def publishable?
