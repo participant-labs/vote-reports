@@ -1,3 +1,13 @@
+#logo {
+  float: left;
+  padding-left: 15px;
+  padding-right: 10px;
+}
+
+#mc-embedded-subscribe-form {
+  padding-top: 60px;
+}
+
 ul#menu {
   border-top: solid 1px #D5D5D5;
   border-bottom: solid 1px #D5D5D5;
@@ -20,7 +30,7 @@ ul#menu li.dropdown h2:hover {
 }
 
 ul#menu li h2 {
-  font-size: 1.7em;
+  font-size: 1.4em;
 }
 
 ul#menu li.dropdown h2 {
