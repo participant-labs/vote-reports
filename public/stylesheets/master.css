@@ -25,7 +25,7 @@ input.tagged {
   border-top: 1px solid #D5D5D5;
 }
 
-.footer h3, .footer p, .footer ul, .footer li {
+.footer h3, .footer p, .footer ul, .footer li, .sidebar-links ul, .sidebar-links li {
   display:inline;
 }
 
@@ -38,8 +38,12 @@ input.tagged {
   font-size: 13px;
 }
 
-.footer li + li:before, #account li + li:before {
+.sidebar-links li + li:before, #account li + li:before {
   content: " / ";
+}
+
+#menu.sidebar-links li + li:before {
+  content: '';
 }
 
 #inner {
