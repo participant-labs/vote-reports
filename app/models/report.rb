@@ -125,6 +125,12 @@ class Report < ActiveRecord::Base
   validates_presence_of :owner, :name
   validate :ensure_only_one_owner
 
+  named_scope :random, :order => 'random()'
+
+  named_scope :user_published, :conditions => {:state => 'published'}, :include => :user
+  named_scope :interest_group_published,
+    :conditions => 'reports.interest_group_id IS NOT NULL',
+    :include => :interest_group
   named_scope :published, :conditions => [
     "reports.state = ? OR reports.interest_group_id IS NOT NULL", 'published']
   named_scope :unpublished, :conditions => "reports.state != 'published'"
