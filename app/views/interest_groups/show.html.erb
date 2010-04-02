@@ -35,7 +35,7 @@
 </div>
 
 <div class="section report_scores">
-  <h2>Scores</h2>
+  <h3>Scores</h3>
   <p>We score representatives based on the actual ratings this interest group has released over time.</p>
   <%- if @report -%>
     <%- if @report.scores.present? -%>
@@ -49,14 +49,14 @@
 
 <%- if parent = @interest_group.parent -%>
 <div class="section">
-  <h2>Parent Group</h2>
+  <h3>Parent Group</h3>
   <%= render parent %>
 </div>
 <%- end -%>
 
 <%- if @interest_group.parent && (siblings = @interest_group.siblings).present? -%>
 <div class="section">
-  <h2><%= pluralize siblings.count, 'Sibling Group' %></h2>
+  <h3><%= pluralize siblings.count, 'Sibling Group' %></h3>
   <ul>
     <%- siblings.each do |sibling| -%>
     <li><%= render sibling %></li>
@@ -67,7 +67,7 @@
 
 <%- if (children = @interest_group.children).present? -%>
 <div class="section">
-  <h2><%= pluralize children.count, 'Child Group' %></h2>
+  <h3><%= pluralize children.count, 'Child Group' %></h3>
   <ul>
     <%- children.each do |child| -%>
     <li><%= render child %></li>
@@ -77,6 +77,6 @@
 <%- end -%>
 
 <div class="section">
-  <h2>Subjects</h2>
+  <h3>Subjects</h3>
   <%= render 'subjects/cloud', :subjects => @subjects %>
 </div>

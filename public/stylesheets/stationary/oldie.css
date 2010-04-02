@@ -114,8 +114,25 @@ h2 a:hover {
 	color: #111;
 }
 
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 16px;
+}
+
+h6 {
+  font-size: 14px;
+}
+
 h3, h4, h5, h6 {
-	font: normal 18px/1.4em Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+  font-weight: normal;
+	font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
 }
 
 pre {
