@@ -25,6 +25,10 @@ input.tagged {
   display:inline;
 }
 
+.footer h3 {
+  font-size: 1.4em;
+}
+
 .footer ul {
   margin-right: 30px;
   font-size: 13px;
