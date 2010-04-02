@@ -24,7 +24,9 @@ class Report < ActiveRecord::Base
     end
   end
 
-  def subjects
+  has_many :report_subjects
+  has_many :subjects, :through => :report_subjects
+  def bill_criteria_subjects
     Subject.for_report(self)
   end
 
