@@ -8,14 +8,23 @@
   <p>Use VoteReports to see if your representatives truly represent you!</p>
 </div>
 
-<div class="section">
-  <h3>Recent Reports</h3>
-  <%= render 'reports/list', :reports => @recent_reports %>
-  <%= link_to "See More...", reports_path %>
-</div>
-
-<div class="section">
-  <h3>Featured Interest Group Reports</h3>
-  <%= render 'reports/list', :reports => @featured_interest_group_reports %>
-  <%= link_to "See More...", interest_groups_path %>
-</div>
+<table class="section">
+  <thead>
+    <tr>
+      <td><h3>Recent Reports</h3></td>
+      <td><h3>Featured Interest Group Reports</h3></td>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @recent_reports.zip(@featured_interest_group_reports) do |recent, featured_ig| -%>
+      <tr>
+        <td><%= render 'reports/report', :report => recent %></td>
+        <td><%= render 'reports/report', :report => featured_ig %></td>
+      </tr>
+    <%- end -%>
+    <tr>
+      <td><%= link_to "See More...", reports_path %></td>
+      <td><%= link_to "See More...", interest_groups_path %></td>
+    </tr>
+  </tbody>
+</table>
