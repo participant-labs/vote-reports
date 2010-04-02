@@ -6,12 +6,12 @@ class ReportsController < ApplicationController
   end
 
   def index
-    if @q = params[:q]
+    if (@q = params[:q]).present?
       @title = 'Matching Reports'
       @reports = Report.paginated_search(params).results
     else
       @title = 'Recent Reports'
-      @reports = Report.published.by_updated_at.paginate(:page => params[:page])
+      @reports = Report.published(params).by_updated_at.paginate(:page => params[:page])
     end
 
     respond_to do |format|

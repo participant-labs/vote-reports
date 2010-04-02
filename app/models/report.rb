@@ -28,16 +28,6 @@ class Report < ActiveRecord::Base
     Subject.for_report(self)
   end
 
-  searchable do
-    text :name, :description
-    text :username do
-      user && user.username
-    end
-    boolean :published do
-      published?
-    end
-  end
-
   state_machine :initial => :personal do
     event :publish do
       transition :personal => :published
@@ -86,6 +76,19 @@ class Report < ActiveRecord::Base
     end
   end
 
+  searchable do
+    text :name, :description
+    text :username do
+      user.try(:username)
+    end
+    boolean :published do
+      published? || interest_group_id.present?
+    end
+    boolean :user_published do
+      published?
+    end
+  end
+
   class << self
     def per_page
       10
@@ -94,7 +97,11 @@ class Report < ActiveRecord::Base
     def paginated_search(params)
       search do
         fulltext params[:q]
-        with(:published, true)
+        if params[:include_interest_group_reports]
+          with(:published, true)
+        else
+          with(:user_published, true)
+        end
         paginate :page => params[:page], :per_page => Report.per_page
       end
     end
@@ -131,8 +138,17 @@ class Report < ActiveRecord::Base
   named_scope :interest_group_published,
     :conditions => 'reports.interest_group_id IS NOT NULL',
     :include => :interest_group
-  named_scope :published, :conditions => [
-    "reports.state = ? OR reports.interest_group_id IS NOT NULL", 'published']
+  named_scope :published, lambda {|params|
+    if params.nil? || params[:include_interest_group_reports].present?
+      {
+        :conditions => [
+          "reports.state = ? OR reports.interest_group_id IS NOT NULL", 'published'],
+        :include => [:user, :interest_group]
+      }
+    else
+      user_published.proxy_options
+    end
+  }
   named_scope :unpublished, :conditions => "reports.state != 'published'"
   named_scope :with_criteria, :select => 'DISTINCT reports.*', :joins => :bill_criteria
   named_scope :scored, :select => 'DISTINCT reports.*', :joins => {:bill_criteria => {:bill => :passage_rolls}}
