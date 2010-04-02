@@ -8,11 +8,11 @@
       <%- if description.blank? || no_description -%>
         <br />
         <%- if report.user_id -%>
-          <span class="report_creator">By <%= render report.owner %></span>
+          <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
         <%- end -%>
       <%- else -%>
         <%- if report.user_id -%>
-          <span class="report_creator">By <%= render report.owner %></span>
+          <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
         <%- end -%>
         <blockquote><p><%= description %></p></blockquote>
       <%- end -%>
