@@ -13,3 +13,9 @@
   <%= render 'reports/list', :reports => @recent_reports %>
   <%= link_to "See More...", reports_path %>
 </div>
+
+<div class="section">
+  <h3>Featured Interest Group Reports</h3>
+  <%= render 'reports/list', :reports => @featured_interest_group_reports %>
+  <%= link_to "See More...", interest_groups_path %>
+</div>
