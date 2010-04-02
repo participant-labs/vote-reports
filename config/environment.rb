@@ -23,7 +23,7 @@ Rails::Initializer.run do |config|
   config.gem 'delayed_job'
   config.gem 'erubis'
   config.gem 'exceptional'
-  config.gem 'friendly_id'
+  config.gem 'friendly_id', :version => '= 2.3.2'
   config.gem 'geokit'
   config.gem 'gravtastic', :version => '>= 2.1.0'
   config.gem 'jammit'
