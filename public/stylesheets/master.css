@@ -76,7 +76,7 @@ input.tagged {
 }
 
 .report_score {
-  font-size: 2em;
+  font-size: 1.7em;
   position: relative;
 }
 
@@ -102,7 +102,7 @@ table#reports td {
   display: none;
   border: 1px solid #dda;
   position: absolute;
-  font-size: 0.5em;
+  font-size: 0.6em;
   top: -30px;
   left: 75px;
   padding: 0.5em;
@@ -111,18 +111,15 @@ table#reports td {
   text-align: center;
 }
 
-#scores .report_score {
-  padding: 1em;
-}
-
 #scores .report_score > .report_score_evidence_link {
-  top: 4em;
-  left: 0;
-  width: 105%;
+  top: 2em;
+  left: -4em;
+  width: 200%;
 }
 
 .report_score.hovering > .report_score_evidence_link {
   display: block;
+  z-index: 1000;
 }
 
 thead th {
@@ -153,14 +150,9 @@ dd {
   margin-left: 0;
 }
 
-.left {
-  float: left;
-  width: 50%;
-}
-
 #instant_gratification dt {
   padding: 10px;
-  font: normal normal normal 18px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+  font: normal normal normal 24px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
 }
 
 #instant_gratification dt:after {
@@ -180,12 +172,35 @@ dd {
   padding-right: .5em;
 }
 
-.report {
-  padding: 10px;
+.report_attrs {
+  margin-left: 100px;
 }
 
 .report_attrs blockquote, .report_creator {
   margin-top: 5px;
+}
+
+#scores .report_title, #featured_recent_reports .report_title {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+#featured_recent_reports td {
+  width: 50%;
+}
+
+#featured_recent_reports th {
+  font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+  background-color: inherit;
+  font-size: 1.5em;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table tbody {
+  border-top: 15px solid transparent;
 }
 
 .report_title {

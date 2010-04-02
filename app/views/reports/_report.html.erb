@@ -1,20 +1,21 @@
-<%- no_description ||= false -%>
+<%- float_description ||= false -%>
 
 <% div_for(report, :class => 'clearfix') do %>
   <%= link_to image_tag(report.thumbnail.url, :size => '90x68'), report_path_components(report), :class => 'report_image' %>
   <div class="report_attrs">
-    <%= link_to report.name, report_path_components(report), :class => 'report_title' %>
-      <%- description = truncate(strip_tags(report.description), :length => report.user_id ? 90 : 150) -%>
-      <%- if description.blank? || no_description -%>
-        <br />
-        <%- if report.user_id -%>
-          <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
-        <%- end -%>
-      <%- else -%>
-        <%- if report.user_id -%>
-          <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
-        <%- end -%>
-        <blockquote><p><%= description %></p></blockquote>
+    <%- description = truncate(strip_tags(report.description), :length => (report.user_id ? 110 : 140) - report.name.length) -%>
+    <%- attrs = float_description ? {:title => strip_tags(report.description)} : {} if  -%>
+    <%= link_to report.name, report_path_components(report), attrs.merge(:class => 'report_title') %>
+    <%- if description.blank? || float_description || report.name.size > 60 -%>
+      <br />
+      <%- if report.user_id -%>
+        <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
       <%- end -%>
+    <%- else -%>
+      <%- if report.user_id -%>
+        <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
+      <%- end -%>
+      <blockquote><p><%= description %></p></blockquote>
+    <%- end -%>
   </div>
 <% end %>
