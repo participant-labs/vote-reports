@@ -1,6 +1,6 @@
 <%- param_name ||= :page -%>
 <div id="reports">
-  <%- if reports.present? -%>
+  <%- if reports.respond_to?(:total_pages) -%>
     <% paginated_section reports, :param_name => param_name do %>
       <ol class="reports">
         <%- reports.each do |report| -%>
@@ -8,6 +8,12 @@
         <%- end -%>
       </ol>
     <% end %>
+  <%- elsif reports.present? -%>
+    <ol class="reports">
+      <%- reports.each do |report| -%>
+        <li><%= render report %></li>
+      <%- end -%>
+    </ol>
   <%- else -%>
     <p>No reports found...</p>
   <%- end -%>

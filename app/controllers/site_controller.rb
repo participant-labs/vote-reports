@@ -23,7 +23,7 @@ class SiteController < ApplicationController
 
     respond_to do |format|
       format.html {
-        @recent_reports = Report.published.by_updated_at.paginate(:page => params[:page], :include => :user)
+        @recent_reports = Report.published.by_updated_at.all(:limit => 5, :include => :user)
       }
       format.js {
         render :partial => 'site/instant_gratification'
