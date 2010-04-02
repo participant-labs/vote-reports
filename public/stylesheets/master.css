@@ -155,8 +155,8 @@ dd {
 }
 
 #instant_gratification dt {
-  padding: 10px;
-  font: normal normal normal 24px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+  padding: 5px;
+  font: normal normal normal 18px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
 }
 
 #instant_gratification dt:after {
