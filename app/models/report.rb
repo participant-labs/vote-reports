@@ -164,15 +164,15 @@ class Report < ActiveRecord::Base
     if subjects.first.is_a?(String)
       {
         :select => 'DISTINCT reports.*',
-        :joins => {:bills => :subjects},
+        :joins => :subjects,
         :conditions => ["subjects.name IN(:subjects) OR subjects.cached_slug IN(:subjects)",
           {:subjects => subjects}]
       }
     else
       {
         :select => 'DISTINCT reports.*',
-        :joins => {:bills => :bill_subjects},
-        :conditions => ['bill_subjects.subject_id IN(?)', subjects]
+        :joins => :report_subjects,
+        :conditions => ['report_subjects.subject_id IN(?)', subjects]
       }
     end
   }

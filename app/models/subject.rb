@@ -5,6 +5,9 @@ class Subject < ActiveRecord::Base
   has_many :interest_group_subjects
   has_many :interest_groups, :through => :interest_group_subjects
 
+  has_many :report_subjects
+  has_many :reports, :through => :report_subjects
+
   has_friendly_id :name, :use_slug => true
 
   searchable do
@@ -30,23 +33,23 @@ class Subject < ActiveRecord::Base
 
   named_scope :for_report, lambda {|reports|
     {
-      :joins => {:bills => :bill_criteria},
-      :conditions => ['bill_criteria.report_id IN(?)', reports]
+      :joins => :report_subjects,
+      :conditions => ['report_subjects.report_id IN(?)', reports]
     }
   }
 
   named_scope :on_published_reports,
-    :joins => {:bills => :reports},
+    :joins => :reports,
     :conditions => {:'reports.state' => 'published'}
 
   named_scope :for_tag_cloud,
-    :select => "DISTINCT(subjects.*), COUNT(bills.id) AS count",
+    :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
     :group => qualified_column_names,
     :order => 'count DESC'
 
   named_scope :by_popularity,
     :joins => :bill_subjects,
-    :select => "DISTINCT(subjects.*), COUNT(bill_subjects.bill_id) AS count",
+    :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
     :group => qualified_column_names,
     :order => "count DESC"
 

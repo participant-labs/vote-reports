@@ -15,7 +15,9 @@ class Users::ReportsController < ApplicationController
     end
 
     @scores = @report.scores.for_politicians(sought_politicians)
-    @subjects = @report.subjects.for_tag_cloud.all(:limit => 30)
+    @subjects = @report.subjects.for_tag_cloud.all(
+    :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
+    :limit => 30)
 
     respond_to do |format|
       format.html
