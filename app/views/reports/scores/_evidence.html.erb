@@ -1,5 +1,5 @@
 <dl id="<%= id %>" class="hidden"
-  data-dialog-title="<%= "Significant Votes for #{score.politician.full_name} on '#{score.report.name}'" %>">
+  data-dialog-title="<%= "Significant Events for #{score.politician.full_name} on '#{score.report.name}'" %>">
   <%- score.evidence.group_by(&:subject).each_pair do |subject, subject_scores| -%>
     <%- if subject.is_a?(Bill) -%>
       <dt><%= render 'bills/bill', :bill => subject %>:
@@ -12,12 +12,9 @@
       </dl></dd>
     <%- else -%>
       <dt><%= render subject %></dt>
-      <dd><dl>
-        <%- subject_scores.each do |subject_score| -%>
-          <dt><%= render subject_score.evidence.interest_group_report %></dt>
-          <dd><%= render subject_score.evidence %></dd>
-        <%- end -%>
-      </dl></dd>
+      <%- subject_scores.each do |subject_score| -%>
+        <dd><%= render subject_score.evidence %></dd>
+      <%- end -%>
     <%- end -%>
   <%- end -%>
 </dl>
