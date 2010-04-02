@@ -50,7 +50,7 @@ class InterestGroup < ActiveRecord::Base
   }
 
   def phone_numbers
-    [phone1, phone2]
+    [phone1, phone2].compact
   end
 
   def rescore!
