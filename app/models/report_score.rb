@@ -11,7 +11,8 @@ class ReportScore < ActiveRecord::Base
     :evidence
   ]
 
-  named_scope :published, :joins => :report, :conditions => {:'reports.state' => 'published'}
+  named_scope :published, :joins => :report, :conditions => [
+    "reports.state = ? OR reports.interest_group_id IS NOT NULL", 'published']
 
   named_scope :for_reports_with_subject, lambda {|subject|
     if subject.is_a?(String)
