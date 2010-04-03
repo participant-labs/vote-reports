@@ -53,24 +53,5 @@
 
 <div class="section">
   <h2>Reports</h2>
-  <%- if @politician.report_scores.published.blank? -%>
-    <p>No Reports for this politician yet.  Maybe you can <%= link_to 'make the first', new_report_path %>?</p>
-  <%- else -%>
-    <table id="reports">
-      <thead>
-        <tr>
-          <th>Report</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%- @politician.report_scores.published.each do |report_score| -%>
-        <tr>
-          <td><%= render 'reports/report', :report => report_score.report %></td>
-          <td><%= render 'reports/scores/score', :score => report_score %></td>
-        </tr>
-        <%- end -%>
-      </tbody>
-    </table>
-  <%- end -%>
+  <%= render 'politicians/scores/table', :scores => @scores %>
 </div>
