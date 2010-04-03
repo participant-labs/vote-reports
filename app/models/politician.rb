@@ -22,6 +22,14 @@ class Politician < ActiveRecord::Base
       presidential_terms.by_ended_on.first].compact.sort_by(&:ended_on).last
   end
 
+  def terms
+    (
+      representative_terms.all(:include => [:party, :district])  +
+      senate_terms.all(:include => [:party, :state]) +
+      presidential_terms.all(:include => :party)
+    ).sort_by(&:ended_on).reverse
+  end
+
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
   def state
     self[:state] || begin

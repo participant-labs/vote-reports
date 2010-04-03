@@ -24,11 +24,7 @@ class PoliticiansController < ApplicationController
 
     respond_to do |format|
       format.html {
-        @terms = (
-          @politician.representative_terms.all(:include => [:party, :district])  +
-          @politician.senate_terms.all(:include => [:party, :state]) +
-          @politician.presidential_terms.all(:include => :party)
-        ).sort_by(&:ended_on).reverse
+        @terms = @politician.terms
       }
       format.js {
         render :partial => 'politicians/scores/table', :locals => {
