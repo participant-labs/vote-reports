@@ -1,0 +1,24 @@
+<%- if scores.blank? -%>
+  <p>No Reports for this politician yet.  Maybe you can <%= link_to 'make the first', new_report_path %>?</p>
+<%- else -%>
+<div id="reports">
+  <%- paginated_section scores, :'data-replace' => 'reports' do -%>
+    <table>
+      <thead>
+        <tr>
+          <th>Report</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- scores.each do |report_score| -%>
+        <tr>
+          <td><%= render 'reports/report', :report => report_score.report %></td>
+          <td><%= render 'reports/scores/score', :score => report_score %></td>
+        </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  <%- end -%>
+</div>
+<%- end -%>
