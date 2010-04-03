@@ -31,6 +31,13 @@ class Subject < ActiveRecord::Base
     Report.with_subjects(self)
   end
 
+  named_scope :for_bill_criteria_on_report, lambda {|reports|
+    {
+      :joins => {:bills => :bill_criteria},
+      :conditions => ['bill_criteria.report_id IN(?)', reports]
+    }
+  }
+
   named_scope :for_report, lambda {|reports|
     {
       :joins => :report_subjects,
