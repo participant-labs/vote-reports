@@ -27,7 +27,7 @@ class Report < ActiveRecord::Base
   has_many :report_subjects
   has_many :subjects, :through => :report_subjects
   def bill_criteria_subjects
-    Subject.for_report(self)
+    Subject.for_bill_criteria_on_report(self)
   end
 
   state_machine :initial => :personal do
