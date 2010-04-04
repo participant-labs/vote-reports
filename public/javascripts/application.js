@@ -70,12 +70,9 @@
 
     $(':input[data-replace]').live('click', function(event) {
       var target = $(event.target);
-      var source = current_url();
-      if (target.is(':input')) {
-        source += (source.indexOf('?') == -1 ? '?' : '&') + target.serialize();
-      }
-      replaceWith(target.attr('data-replace'), source);
-      return true;
+      return replaceWith(
+        target.attr('data-replace'),
+        current_url() + '?' + target.serialize());
     });
 
     $('[data-replace] > a, a[data-replace]').live('click', function(event) {
