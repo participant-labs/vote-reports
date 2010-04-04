@@ -43,12 +43,7 @@
     $('.flash.error, .flash.warning').fadeOutSoon(5000, 5000);
 
     $('.selectable').live('update_selected', function(event) {
-      var target = $(event.target).closest('.selectable');
-      if (target.is('.selected')) {
-        target.removeClass('selected')
-      } else {
-        target.addClass('selected');
-      }
+      $(event.target).closest('.selectable').toggleClass('selected');
       return true;
     });
 
