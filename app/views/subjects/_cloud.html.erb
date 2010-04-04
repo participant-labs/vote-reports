@@ -5,7 +5,7 @@
 <% tag_cloud(subjects, classes) do |subject, css_class| %>
 <%-
   if params[:subjects]
-    classes = [css_class]
+    classes = ['selectable', css_class]
     slug = subject.to_param
     subjects =
       if params[:subjects].include?(slug)
