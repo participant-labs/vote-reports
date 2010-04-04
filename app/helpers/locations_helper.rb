@@ -4,15 +4,13 @@ module LocationsHelper
   end
 
   def politicians_sought?
-    params[:representing].present? || session[:zip_code].present?
+    requested_location.present?
   end
 
   def sought_politicians
     @in_office = !params.has_key?(:in_office) || ['1', true].include?(params[:in_office])
-    if params.has_key?(:representing)
-      Politician.from(params[:representing])
-    elsif session[:zip_code].present?
-      Politician.from(session[:zip_code])
+    if requested_location.present?
+      Politician.from(requested_location)
     elsif session[:geo_location]
       params[:representing] = session[:geo_location].full_address
       Politician.from(session[:geo_location])
@@ -24,7 +22,7 @@ module LocationsHelper
   def requested_location
     if params[:representing].present?
       params[:representing]
-    elsif session[:zip_code].present?
+    elsif !params.has_key?(:representing) && session[:zip_code].present?
       session[:zip_code]
     end
   end
