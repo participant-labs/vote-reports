@@ -20,7 +20,7 @@ class ReportsController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :partial => 'reports/list', :locals => {:reports => @reports}
+        render :layout => false
       }
     end
   end
