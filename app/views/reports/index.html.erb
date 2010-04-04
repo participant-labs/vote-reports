@@ -7,11 +7,10 @@
 
   <p>Search for reports on the issues important to you.  If you find none, you can always <%= link_to 'create your own', new_report_path %>.</p>
 
-  <%- replace ||= 'reports' -%>
-
+  <%- replace = 'content' -%>
   <% form_tag reports_path, :method => :get, :'data-replace' => replace do %>
     <p>
-      <%= check_box_tag :include_interest_group_reports, '1', params[:include_interest_group_reports] %>
+      <%= check_box_tag :include_interest_group_reports, '1', params[:include_interest_group_reports], :'data-replace' => replace %>
       <%= label_tag :include_interest_group_reports, 'Include Interest Group Reports' %>
     </p>
     <p>

@@ -16,10 +16,14 @@
     if (event.value.length > 1) {
       var values = event.value.substring(1).split('/');
       var target_id = values.shift();
-      var url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + values.shift();
+      var url = current_url() + '?' + values.shift();
       replaceWith(target_id, url);
     }
   });
+
+  function current_url() {
+    return window.location.protocol + '//' + window.location.host + window.location.pathname;
+  }
 
   function params_to_path(target_id, url) {
     return target_id + '/' + url.substring(url.indexOf('?') + 1);
@@ -63,6 +67,16 @@
       $('#' + $(event.target).attr('data-toggle')).toggle();
       return false;
     })
+
+    $(':input[data-replace]').live('click', function(event) {
+      var target = $(event.target);
+      var source = current_url();
+      if (target.is(':input')) {
+        source += (source.indexOf('?') == -1 ? '?' : '&') + target.serialize();
+      }
+      replaceWith(target.attr('data-replace'), source);
+      return true;
+    });
 
     $('[data-replace] > a, a[data-replace]').live('click', function(event) {
       var target = $(event.target);
