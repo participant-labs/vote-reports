@@ -8,10 +8,5 @@
 </div>
 
 <div class="section">
-  <h3>Interest Groups for "<%= @subject.name %>"</h3>
-  <%= render 'interest_groups/list', :interest_groups => @interest_groups, :param_name => :interest_group_page %>
-</div>
-
-<div class="section">
   <%= render 'bills/list', :bills => @bills, :title => %Q{Bills on "#{@subject.name}"}, :param_name => :bill_page %>
 </div>
