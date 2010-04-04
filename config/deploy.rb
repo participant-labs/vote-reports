@@ -17,7 +17,8 @@ namespace :vlad do
       "ln -s #{latest_release}/config/database.rimu.yml #{latest_release}/config/database.yml",
       "ln -s #{shared_path}/data #{latest_release}/data",
       "ln -s #{shared_path}/assets #{latest_release}/public/assets",
-      "ln -s #{shared_path}/config/secure_variables.rb #{latest_release}/config/secure_variables.rb"
+      "ln -s #{shared_path}/config/secure_variables.rb #{latest_release}/config/secure_variables.rb",
+      "chown -R www-data:www-data #{latest_release}/public/assets"
     ].join(' && ')
   end
 
