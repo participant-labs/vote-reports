@@ -34,7 +34,7 @@
         </ul>
 
         <div id="header" class="clearfix">
-          <%= link_to_unless_current image_tag('logo.png', :size => '521x150', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
+          <%= link_to image_tag('logo.png', :size => '521x150', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
 
           <form action="http://votereports.us1.list-manage.com/subscribe/post?u=7a5f531cddf4733361c3c56b4&amp;id=6ed81c914b" method="post" id="mc-embedded-subscribe-form" class="validate">
               <div id="mce-responses">
@@ -62,7 +62,7 @@
         </div>
 
         <div class="footer" id="footer">
-          <h3><%= link_to_unless_current 'VoteReports', root_path %></h3>
+          <h3><%= link_to 'VoteReports', root_path %></h3>
           <ul class="sidebar-links">
             <li><%= link_to_unless_current "About us", about_path %></li>
             <li><%= link_to 'Our Blog', blog_path %></li>
