@@ -2,6 +2,12 @@ ol.tag_cloud {
   list-style-type: none;
   text-align: center;
   margin-left: 0;
+  background: #EEE;
+  border: 1px solid #CCC;
+  padding: 0.5em;
+  -webkit-border-radius: 0.7em;
+  -moz-border-radius: 0.7em;
+  border-radius: 0.7em;
 }
 
 ol.tag_cloud li {
