@@ -9,7 +9,7 @@ class SiteController < ApplicationController
     params[:in_office] = true if params[:in_office].nil?
 
     if politicians_sought?
-      @politicians = sought_politicians
+      @politicians = sought_politicians.all(:limit => 5)
       @topical_reports = topical_reports.with_scores_for(@politicians)
     elsif params[:subjects].present?
       @topical_reports = topical_reports
