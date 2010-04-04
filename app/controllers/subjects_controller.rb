@@ -26,6 +26,5 @@ class SubjectsController < ApplicationController
     end
     @bills = @subject.bills.paginate :page => params[:bill_page]
     @reports = @subject.reports.published.paginate :page => params[:report_page]
-    @interest_groups = @subject.interest_groups.paginate :page => params[:interest_group_page]
   end
 end
