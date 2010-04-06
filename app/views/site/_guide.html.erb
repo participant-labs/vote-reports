@@ -1,4 +1,4 @@
-<% form_tag root_url, :method => :get, :'data-replace' => 'instant_gratification', :id => 'instant_gratification' do %>
+<% form_tag root_url, :method => :get, :'data-replace' => 'guide', :id => 'guide' do %>
   <dl>
     <dt>1) Enter your zip code</dt>
     <dd>
@@ -9,7 +9,7 @@
     <dt>2) Pick Some Issues</dt>
     <dd><%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
       [root_path(:subjects => subjects, :representing => params[:representing]),
-      {:'data-replace' => 'instant_gratification'}] } %></dd>
+      {:'data-replace' => 'guide'}] } %></dd>
     <dt>3) See your reps' report cards</dt>
     <dd><%= render 'scores/table' %></dd>
   </dl>
