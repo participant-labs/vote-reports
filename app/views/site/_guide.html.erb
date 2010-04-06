@@ -1,4 +1,5 @@
-<% form_tag root_url, :method => :get, :'data-replace' => 'guide', :id => 'guide' do %>
+<%- replace ||= 'guide' -%>
+<% form_tag root_url, :method => :get, :'data-replace' => replace do %>
   <dl>
     <dt>1) Enter your zip code</dt>
     <dd>
