@@ -13,6 +13,8 @@ ol.tag_cloud {
 ol.tag_cloud li {
   display: inline-block;
   padding: 0.2em;
+  padding-top: 0.4em;
+  margin: 1px;
   text-transform: uppercase;
 }
 
@@ -32,5 +34,5 @@ ol.tag_cloud li a:hover {
 .tag6 a {font-size: 2.5em; color: #666;}
 
 .subject.selected {
-  border: .5em solid black;
+  border: .2em solid #444;
 }
