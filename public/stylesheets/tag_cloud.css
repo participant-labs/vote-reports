@@ -36,3 +36,9 @@ ol.tag_cloud li a:hover {
 .subject.selected {
   border: .2em solid #444;
 }
+.subject.selected:hover {
+  background-image: url("../images/icons/cross.png");
+  background-position: right center;
+  background-repeat: no-repeat;
+  padding-right: 1.3em;
+}
