@@ -145,21 +145,21 @@ dl dt {
 dd {
   margin-left: 1.5em; }
 
-#instant_gratification > dl > dt:first-of-type {
+#guide > dl > dt:first-of-type {
   display: inline;
 }
 
-#instant_gratification > dl > dd:first-of-type {
+#guide > dl > dd:first-of-type {
   display: inline;
   margin-left: 0;
 }
 
-#instant_gratification dt {
+#guide dt {
   padding: 5px;
   font: normal normal normal 18px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
 }
 
-#instant_gratification dt:after {
+#guide dt:after {
   content: ':';
 }
 

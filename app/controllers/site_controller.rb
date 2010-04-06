@@ -29,7 +29,7 @@ class SiteController < ApplicationController
         @featured_interest_group_reports = Report.interest_group_published.random.all(:limit => 3)
       }
       format.js {
-        render :partial => 'site/instant_gratification'
+        render :partial => 'site/guide'
       }
     end
   end
