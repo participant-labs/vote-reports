@@ -47,7 +47,7 @@ class Subject < ActiveRecord::Base
 
   named_scope :on_published_reports,
     :joins => :reports,
-    :conditions => {:'reports.state' => 'published'}
+    :conditions => ["reports.state = ? OR reports.interest_group_id IS NOT NULL", 'published']
 
   named_scope :for_tag_cloud,
     :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
