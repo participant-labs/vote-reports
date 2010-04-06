@@ -13,12 +13,36 @@ ul#menu {
   border-bottom: solid 1px #D5D5D5;
   margin-left: 0;
   text-align: center;
+  padding: 0.2em 0.5em;
+}
+
+ul#menu:before {
+  content: '• ';
+}
+
+ul#menu:after {
+  content: ' •';
 }
 
 ul#menu > li {
-  display: inline;
-  margin: 0.1em 1em;
+  display: inline-block;
+  margin: 0 1em;
+  padding: 0.2em 0.5em;
   position: relative;
+  color: #333;
+}
+
+ul#menu > li > h2 > a {
+  border-bottom: 1px dotted #333;
+}
+
+ul#menu > li > h2 > a:hover {
+  border-bottom-style: solid;
+}
+
+ul#menu > li.selected > h2 > a {
+  font-weight: bold;
+  color: #555;
 }
 
 ul#menu li {
