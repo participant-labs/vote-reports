@@ -9,9 +9,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :reports, :only => [:index, :new]
   map.resource :location
 
-  map.resources :states, :as => 'us', :controller => 'us/states' do |state|
-    state.resources :districts, :controller => 'us/states/districts'
-  end
+  map.resources :states, :as => 'us', :controller => 'us/states', :only => 'show'
+  map.district '/us/:state_id/:id', :controller => 'us/states/districts', :action => 'show'
 
   map.user_reports "reports/:user_id",
     :controller => 'users/reports',:action => 'index', :conditions => { :method => :get }
