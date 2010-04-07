@@ -3,7 +3,11 @@
 <div class="section">
   <h2><%= @title %></h2>
 
-  <h3>Senators (<%= @senators.count %>)</h3>
+  <iframe width="425" height="300" frameborder="0"
+   scrolling="no" marginheight="0" marginwidth="0"
+   src="<%= gov_track_map_url(@district) %>" style="float:right;"></iframe>
+
+  <h3>Senators</h3>
   <ul>
     <%- @senators.each do |senator| -%>
       <li><%= render 'politicians/politician', :politician => senator %></li>
