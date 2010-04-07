@@ -5,8 +5,14 @@ class Politician < ActiveRecord::Base
   has_friendly_id :full_name, :use_slug => true, :approximate_ascii => true
 
   has_many :representative_terms
+  has_one :latest_representative_term, :class_name => 'RepresentativeTerm', :order => 'ended_on DESC'
+
   has_many :senate_terms
+  has_one :latest_senate_term, :class_name => 'SenateTerm', :order => 'ended_on DESC'
+
   has_many :presidential_terms
+  has_one :latest_presidential_term, :class_name => 'PresidentialTerm', :order => 'ended_on DESC'
+
   has_many :interest_group_ratings
   has_many :interest_group_reports, :through => :interest_group_ratings
   def rating_interest_groups
@@ -17,9 +23,9 @@ class Politician < ActiveRecord::Base
   end
 
   def latest_term
-    [representative_terms.by_ended_on.first,
-      senate_terms.by_ended_on.first,
-      presidential_terms.by_ended_on.first].compact.sort_by(&:ended_on).last
+    [latest_senate_term,
+      latest_presidential_term,
+      latest_senate_term].compact.sort_by(&:ended_on).last
   end
 
   def terms
@@ -30,6 +36,7 @@ class Politician < ActiveRecord::Base
     ).sort_by(&:ended_on).reverse
   end
 
+  belongs_to :district
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
   def state
     self[:state] || begin
