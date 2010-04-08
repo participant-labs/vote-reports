@@ -135,11 +135,11 @@ class Politician < ActiveRecord::Base
       from_district(District.with_zip(zip_code))
     end
 
-    def from_location(state = nil, zip_code = nil)
-      if zip_code.present?
-        from_zip_code(zip_code)
-      elsif state.present?
-        from_state(state)
+    def from_location(location)
+      if location.zip_code.present?
+        from_zip_code(location.zip_code)
+      elsif location.state.present?
+        from_state(location.state)
       else
         scoped(:conditions => '0 = 1')
       end
@@ -149,16 +149,11 @@ class Politician < ActiveRecord::Base
       if representing.blank?
         self
       elsif representing.is_a?(Geokit::GeoLoc)
-        from_location(representing.state, representing.zip)
+        from_location(representing)
       else
-        results = from_state(representing)
-        results = from_zip_code(representing) if results.blank?
-
-        if results.blank?
-          location = Geokit::Geocoders::MultiGeocoder.geocode(representing)
-          results = from_location(location.state, location.zip)
-        end
-
+        results = from_zip_code(representing)
+        results = from_state(representing) if results.blank?
+        results = from_location(Geokit::Geocoders::MultiGeocoder.geocode(representing)) if results.blank?
         results
       end
     end
