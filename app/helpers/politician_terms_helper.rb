@@ -3,18 +3,20 @@ module PoliticianTermsHelper
     party = "; #{term.party}" if term.party
     "#{term.title} #{term_place(term)}#{party}"
   end
+  safe_helper :term_description
 
   def term_place(term)
     case term
     when PresidentialTerm
       "of these United States"
     when RepresentativeTerm
-      "for #{term.district.full_name}"
+      "for #{district_full_name(term.district)}"
     when SenateTerm
-      "for #{term.state.full_name}"
+      "for #{state_full_name(term.state)}"
     else
       notify_exceptional("Unrecognized term #{term.inspect}")
       ''
     end
   end
+  safe_helper :term_place
 end
