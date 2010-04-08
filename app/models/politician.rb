@@ -127,6 +127,8 @@ class Politician < ActiveRecord::Base
         from_zip_code(zip_code)
       elsif state.present?
         from_state(state)
+      else
+        scoped(:conditions => '0 = 1')
       end
     end
 

@@ -5,6 +5,18 @@ describe Politician do
     @politician = create_politician
   end
 
+  describe ".from" do
+    context "with an unknown location" do
+      it "should not return nil" do
+        Politician.from('Tokyo, Japan').should_not be_nil
+      end
+
+      it "should return an empty set" do
+        Politician.from('Tokyo, Japan').should be_empty
+      end
+    end
+  end
+
   describe "#state" do
     it "should be sourced from the latest term" do
       state = create_us_state
