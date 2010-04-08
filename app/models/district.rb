@@ -32,13 +32,36 @@ class District < ActiveRecord::Base
     end
   }
 
+  class << self
+    def find_by_name(name)
+      state, district = name.split('-')
+      district = 0 if district == 'At_large'
+      first(:conditions => {'districts.district' => district, 'us_states.abbreviation' => state}, :joins => :state)
+    end
+  end
+
   def politicians
     Politician.from_district(self)
+  end
+
+  def abbreviation
+    district_abbrv = self.district == 0 ? 'At large' : self.district.to_s
+    "#{state.abbreviation}-#{district_abbrv}"
+  end
+
+  def to_param
+    abbreviation.gsub(' ', '_')
   end
 
   def full_name
     district = self.district == 0 ? 'at-large' : self.district.ordinalize if self.district
     district = "the #{district} district of " if district
+    "#{district}#{state.full_name}"
+  end
+
+  def full_title_name
+    district = self.district == 0 ? 'At-large' : self.district.ordinalize if self.district
+    district = "The #{district} District of " if district
     "#{district}#{state.full_name}"
   end
 end

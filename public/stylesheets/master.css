@@ -79,6 +79,14 @@ input.tagged {
   font-size: 1.3em;
 }
 
+.politician_location:before {
+  content: ' (';
+}
+
+.politician_location:after {
+  content: ')';
+}
+
 .report_score {
   font-size: 1.7em;
   position: relative;
