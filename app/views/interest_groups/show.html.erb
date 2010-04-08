@@ -2,7 +2,7 @@
 
 <div class="section">
   <h2><%= @interest_group.name %></h2>
-  <ul id="interest_group_details">
+  <ul class="details">
   <%- if @interest_group.url.present? -%>
     <li><%= link_to 'Website', @interest_group.url %></li>
   <%- end -%>
