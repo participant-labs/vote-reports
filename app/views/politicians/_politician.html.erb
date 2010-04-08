@@ -1,5 +1,10 @@
 <%- no_image ||= false -%>
 <% div_for politician do %>
-  <%= image_tag politician.headshot_url(:small), :size => '50x61', :alt => '' if !no_image && politician.headshot_url(:small) %><br />
-  <%= link_to_unless_current politician_title(politician), politician, :class => 'politician_name'  %>
+  <%- if !no_image && politician.headshot_url(:small) -%>
+    <%= image_tag politician.headshot_url(:small), :size => '50x61', :alt => '' %><br />
+  <%- end -%>
+  <span class="politician_name"><%= link_to_unless_current politician_name(politician), politician  %>
+    <%- if politician.location -%>
+    <span class="politician_location"><%= link_to_unless_current politician.location.abbreviation, polymorphic_path(politician.location) %></span></span>
+    <%- end -%>
 <% end %>

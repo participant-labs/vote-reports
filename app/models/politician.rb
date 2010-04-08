@@ -25,7 +25,7 @@ class Politician < ActiveRecord::Base
   def latest_term
     [latest_senate_term,
       latest_presidential_term,
-      latest_senate_term].compact.sort_by(&:ended_on).last
+      latest_representative_term].compact.sort_by(&:ended_on).last
   end
 
   def terms
@@ -38,15 +38,8 @@ class Politician < ActiveRecord::Base
 
   belongs_to :district
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
-  def state
-    self[:state] || begin
-      latest_term = self.latest_term
-      if latest_term.respond_to?(:state)
-        latest_term.state.tap do |state|
-          update_attribute(:state, state) if state
-        end
-      end
-    end
+  def location
+    district || state
   end
 
   IDENTITY_STRING_FIELDS = [
