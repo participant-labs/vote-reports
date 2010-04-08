@@ -189,6 +189,10 @@ class Politician < ActiveRecord::Base
     end
   end
 
+  def in_office?
+    !Politician.in_office(true).find_by_id(id).nil?
+  end
+
   private
 
   def name_shouldnt_contain_nickname
