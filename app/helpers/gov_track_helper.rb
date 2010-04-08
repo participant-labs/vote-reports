@@ -4,7 +4,11 @@ module GovTrackHelper
       if object.is_a?(UsState)
         {:state => object.abbreviation}
       elsif object.is_a?(District)
-        {:state => object.state.abbreviation, :district => object.district}
+        if object.district == 0
+          {:state => object.state.abbreviation}
+        else
+          {:state => object.state.abbreviation, :district => object.district}
+        end
       else
         raise "Not gov-trackable: #{object.inspect}"
       end.to_param
