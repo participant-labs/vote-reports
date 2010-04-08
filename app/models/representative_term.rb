@@ -9,8 +9,4 @@ class RepresentativeTerm < ActiveRecord::Base
   def title
     "#{'Delegate ' if state.unincorporated? }Representative"
   end
-
-  def place
-    "for #{district.full_name}"
-  end
 end

@@ -7,8 +7,4 @@ class SenateTerm < ActiveRecord::Base
   def title
     "Senator"
   end
-
-  def place
-    "for #{state.full_name}"
-  end
 end
