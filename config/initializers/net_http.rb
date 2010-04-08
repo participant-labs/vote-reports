@@ -1,4 +1,4 @@
-unless Rails.env.test?
+if Rails.env.development? || Rails.env.production?
   module Net
     class HTTP < Protocol
       def request(req, body = nil, &block)  # :yield: +response+
