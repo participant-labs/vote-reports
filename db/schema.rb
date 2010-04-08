@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100407055420) do
+ActiveRecord::Schema.define(:version => 20100408060456) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -255,7 +255,6 @@ ActiveRecord::Schema.define(:version => 20100407055420) do
     t.string   "country"
     t.string   "world_region"
     t.string   "zip_code_type"
-    t.string   "primary"
     t.string   "location_id"
     t.string   "location_name"
     t.string   "population"
@@ -263,10 +262,11 @@ ActiveRecord::Schema.define(:version => 20100407055420) do
     t.string   "income"
     t.string   "land_area"
     t.string   "water_area"
-    t.string   "decommissioned"
     t.string   "military_restriction_codes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "primary"
+    t.boolean  "decommissioned"
   end
 
   create_table "parties", :force => true do |t|
