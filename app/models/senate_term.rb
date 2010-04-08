@@ -7,4 +7,6 @@ class SenateTerm < ActiveRecord::Base
   def title
     "Senator"
   end
+
+  alias_attribute :location, :state
 end

@@ -1,6 +1,6 @@
 <% title "Politician - #{politician_title(@politician)}" %>
 
-<div class="section">
+<div class="section clearfix">
   <h2><%= render @politician, :no_image => true %></h2>
   <%= image_tag @politician.headshot_url(:large), :size => '200x245', :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' if @politician.headshot_url(:large) %>
 
@@ -38,6 +38,12 @@
       </dl>
     </li>
   </ul>
+
+  <%- if location = @politician.latest_term.try(:location) -%>
+    <iframe width="400" height="272" frameborder="0"
+     scrolling="no" marginheight="0" marginwidth="0"
+     src="<%= gov_track_map_url(location) %>" style="float:right;"></iframe>
+  <%- end -%>
 </div>
 
 <div class="section">
