@@ -4,4 +4,8 @@ class PresidentialTerm < ActiveRecord::Base
   def title
     "President"
   end
+
+  def location
+    nil
+  end
 end
