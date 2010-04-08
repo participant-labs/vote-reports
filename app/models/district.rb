@@ -53,15 +53,11 @@ class District < ActiveRecord::Base
     abbreviation.gsub(' ', '_')
   end
 
-  def full_name
-    district = self.district == 0 ? 'at-large' : self.district.ordinalize if self.district
-    district = "the #{district} congressional district of " if district
-    "#{district}#{state.full_name}"
+  def at_large?
+    district == 0
   end
 
-  def full_title_name
-    district = self.district == 0 ? 'At-large' : self.district.ordinalize if self.district
-    district = "The #{district} Congressional District of " if district
-    "#{district}#{state.full_name}"
+  def which
+    at_large? ? 'At-large' : district.ordinalize if district
   end
 end
