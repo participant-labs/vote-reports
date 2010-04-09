@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100408060456) do
+ActiveRecord::Schema.define(:version => 20100409215011) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(:version => 20100408060456) do
 
   create_table "districts", :force => true do |t|
     t.integer  "us_state_id", :null => false
-    t.integer  "district"
+    t.integer  "district",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

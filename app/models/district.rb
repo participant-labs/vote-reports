@@ -12,6 +12,7 @@ class District < ActiveRecord::Base
       ])
     end
   end
+  has_many :cached_politicians, :class_name => 'Politician'
 
   delegate :senators, :to => :state
 

@@ -20,6 +20,7 @@ namespace :watchdog do
         open(DATA_PATH.join('zipdict.txt')).each_line do |line|
           zip, districts = line.split(': ')
           districts.split(' ').each do |district|
+            district = 'NE-02' if district == 'NE-99'
             state, district = district.split('-')
             district = District.find_or_create_by_us_state_id_and_district(us_states.fetch(state).id, district || 0)
             zips << [district.id, zip.to_i]
