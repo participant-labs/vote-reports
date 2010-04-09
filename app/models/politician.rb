@@ -136,8 +136,8 @@ class Politician < ActiveRecord::Base
     end
 
     def from_location(location)
-      if location.zip_code.present?
-        from_zip_code(location.zip_code)
+      if location.zip.present?
+        from_zip_code(location.zip)
       elsif location.state.present?
         from_state(location.state)
       else
