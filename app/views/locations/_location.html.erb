@@ -1,4 +1,4 @@
-<%- if session[:zip_code].present? -%>
+<%- if session[:zip_code] -%>
   <li>Zip: <%= session[:zip_code] %>
     <%= link_to 'clear', location_path(:return_to => request.request_uri), :method => :delete %></li>
 <%- else -%>
