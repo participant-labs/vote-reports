@@ -245,28 +245,16 @@ ActiveRecord::Schema.define(:version => 20100409215011) do
   add_index "interest_groups", ["ancestry"], :name => "index_interest_groups_on_ancestry"
   add_index "interest_groups", ["vote_smart_id"], :name => "index_interest_groups_on_vote_smart_id", :unique => true
 
-  create_table "location_zip_codes", :force => true do |t|
-    t.integer  "zip_code"
-    t.float    "lat"
-    t.float    "lng"
+  create_table "locations", :force => true do |t|
     t.string   "city"
     t.string   "state"
     t.string   "county"
     t.string   "country"
-    t.string   "world_region"
-    t.string   "zip_code_type"
     t.string   "location_id"
     t.string   "location_name"
-    t.string   "population"
-    t.string   "housing_units"
-    t.string   "income"
-    t.string   "land_area"
-    t.string   "water_area"
-    t.string   "military_restriction_codes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "primary"
-    t.boolean  "decommissioned"
+    t.integer  "zip_code_id",   :null => false
   end
 
   create_table "parties", :force => true do |t|
