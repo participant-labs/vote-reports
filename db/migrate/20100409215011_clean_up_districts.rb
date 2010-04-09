@@ -2,17 +2,17 @@ class CleanUpDistricts < ActiveRecord::Migration
   def self.district_for_politician(politician)
     case politician.to_param
     when 'ed-case'
-      UsState.find_by_name('Hawaii').districts.find_by_district(2)
+      UsState.find_by_full_name('Hawaii').districts.find_by_district(2)
     when 'rahm-emanuel'
-      UsState.find_by_name('Illinois').districts.find_by_district(5)
+      UsState.find_by_full_name('Illinois').districts.find_by_district(5)
     when 'jo-ann-emerson'
-      UsState.find_by_name('Missouri').districts.find_by_district(8)
+      UsState.find_by_full_name('Missouri').districts.find_by_district(8)
     when 'robert-matsui'
-      UsState.find_by_name('California').districts.find_by_district(5)
+      UsState.find_by_full_name('California').districts.find_by_district(5)
     when 'julian-dixon'
-      UsState.find_by_name('California').districts.find_by_district(32)
+      UsState.find_by_full_name('California').districts.find_by_district(32)
     when 'newton-gingrich'
-      UsState.find_by_name('Georgia').districts.find_by_district(6)
+      UsState.find_by_full_name('Georgia').districts.find_by_district(6)
     end
   end
 
