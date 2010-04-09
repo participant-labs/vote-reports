@@ -512,4 +512,22 @@ ActiveRecord::Schema.define(:version => 20100409215011) do
     t.string   "vote"
   end
 
+  create_table "zip_codes", :force => true do |t|
+    t.integer "zip_code",                   :null => false
+    t.float   "lat"
+    t.float   "lng"
+    t.string  "population"
+    t.string  "housing_units"
+    t.string  "income"
+    t.string  "land_area"
+    t.string  "water_area"
+    t.string  "zip_code_type"
+    t.string  "military_restriction_codes"
+    t.boolean "primary"
+    t.boolean "decommissioned"
+    t.string  "world_region"
+  end
+
+  add_index "zip_codes", ["zip_code"], :name => "index_zip_codes_on_zip_code", :unique => true
+
 end
