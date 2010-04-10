@@ -42,6 +42,16 @@ Fixjour :verify => false do
     "#{bill_type}#{meeting}-#{bill_number}"
   end
 
+  define_builder(Location) do |klass, overrides|
+    overrides.process(:zip_code) do |zip_code|
+      overrides[:zip_code] = ZipCode.find_or_create_by_zip_code(zip_code)
+    end
+
+    klass.new(
+      :zip_code => new_zip_code
+    )
+  end
+
   define_builder(Party) do |klass, overrides|
     klass.new(
       :name => Forgery(:basic).text
