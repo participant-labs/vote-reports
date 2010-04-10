@@ -135,14 +135,16 @@ class Politician < ActiveRecord::Base
       from_district(District.with_zip(zip_code))
     end
 
+    def from_city(address)
+      from_district(District.for_city(address))
+    end
+
     def from_location(location)
-      if location.zip.present?
-        from_zip_code(location.zip)
-      elsif location.state.present?
-        from_state(location.state)
-      else
-        scoped(:conditions => '0 = 1')
-      end
+      results = scoped(:conditions => '0 = 1')
+      results = from_zip_code(location.zip) if location.zip.present?
+      results = from_city("#{location.city}, #{location.state}") if results.empty? && location.city.present?
+      results = from_state(location.state) if results.empty? && location.state.present?
+      results
     end
 
     def from(representing)
@@ -152,6 +154,7 @@ class Politician < ActiveRecord::Base
         from_location(representing)
       else
         results = from_zip_code(representing)
+        results = from_city(representing) if results.blank?
         results = from_state(representing) if results.blank?
         results = from_location(Geokit::Geocoders::MultiGeocoder.geocode(representing)) if results.blank?
         results

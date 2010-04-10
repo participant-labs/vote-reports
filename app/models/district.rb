@@ -36,6 +36,19 @@ class District < ActiveRecord::Base
     end
   }
 
+  named_scope :for_city, lambda {|address|
+    city, state = address.split(', ', 2)
+    if city.blank?
+      {:conditions => '0 = 1'}
+    elsif state.blank?
+      {:joins => {:zip_codes => :locations},
+      :conditions => {:'locations.city' => city}}
+    else
+      {:joins => {:zip_codes => :locations},
+      :conditions => {:'locations.city' => city, :'locations.state' => state}}
+    end
+  }
+
   class << self
     def find_by_name(name)
       state, district = name.split('-')
