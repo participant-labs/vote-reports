@@ -18,8 +18,8 @@
   <tbody>
     <%- @recent_reports.zip(@featured_interest_group_reports) do |recent, featured_ig| -%>
       <tr>
-        <td><%= render 'reports/report', :report => recent %></td>
-        <td><%= render 'reports/report', :report => featured_ig %></td>
+        <td><%= render 'reports/report', :report => recent if recent %></td>
+        <td><%= render 'reports/report', :report => featured_ig if featured_ig %></td>
       </tr>
     <%- end -%>
     <tr>
