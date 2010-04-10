@@ -258,14 +258,23 @@ Fixjour :verify => false do
     )
   end
 
+  define_builder(ZipCode) do |klass, overrides|
+    klass.new(
+      :zip_code => rand(99999)
+    )
+  end
+
   define_builder(DistrictZipCode) do |klass, overrides|
     overrides.process(:district) do |district|
       overrides[:district] = District.find_or_create_by_us_state_id_and_district(us_state(overrides.send(:delete, :state)).id, district)
     end
+    overrides.process(:zip_code) do |zip_code|
+      overrides[:zip_code] = ZipCode.find_or_create_by_zip_code(zip_code)
+    end
 
     klass.new(
       :district => new_district,
-      :zip_code => rand(99999)
+      :zip_code => new_zip_code
     )
   end
 
