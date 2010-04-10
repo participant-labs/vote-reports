@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100409215011) do
+ActiveRecord::Schema.define(:version => 20100410004537) do
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -166,16 +166,16 @@ ActiveRecord::Schema.define(:version => 20100409215011) do
 
   create_table "district_zip_codes", :force => true do |t|
     t.integer  "district_id", :null => false
-    t.integer  "zip_code",    :null => false
+    t.integer  "zip_code_id", :null => false
     t.integer  "plus_4"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "district_zip_codes", ["district_id", "zip_code", "plus_4"], :name => "district_zip_codes_district_id_zip_code_plus_4_unique", :unique => true
+  add_index "district_zip_codes", ["district_id", "zip_code_id", "plus_4"], :name => "district_zip_codes_district_id_zip_code_plus_4_unique", :unique => true
   add_index "district_zip_codes", ["district_id"], :name => "index_district_zip_codes_on_district_id"
-  add_index "district_zip_codes", ["zip_code", "plus_4"], :name => "index_district_zip_codes_on_zip_code_and_plus_4"
-  add_index "district_zip_codes", ["zip_code"], :name => "index_district_zip_codes_on_zip_code"
+  add_index "district_zip_codes", ["zip_code_id", "plus_4"], :name => "index_district_zip_codes_on_zip_code_and_plus_4"
+  add_index "district_zip_codes", ["zip_code_id"], :name => "index_district_zip_codes_on_zip_code"
 
   create_table "districts", :force => true do |t|
     t.integer  "us_state_id", :null => false
