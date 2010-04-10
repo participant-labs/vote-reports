@@ -257,7 +257,7 @@ Fixjour :verify => false do
   define_builder(District) do |klass, overrides|
     klass.new(
       :state => new_us_state,
-      :district => rand(40)
+      :district => rand(53)
     )
   end
 
@@ -292,7 +292,7 @@ Fixjour :verify => false do
     politician_term_overrides(overrides, 2)
 
     overrides.process(:state) do |state|
-      overrides[:district] = District.find_or_create_by_us_state_id_and_district(state.id, overrides[:district].present? ? overrides[:district].to_i : nil)
+      overrides[:district] = District.find_or_create_by_us_state_id_and_district(state.id, overrides[:district].present? ? overrides[:district].to_i : rand(53))
     end
 
     klass.new(

@@ -18,8 +18,7 @@ Feature: User create report
       Given I signed up as:
         | email            | password |
         | email@person.com | password |
-      When I go to the home page
-      And I follow "Create a Report"
+      When I go to the new report page
       And I log in as "email@person.com/password"
 
     Scenario: User tries to create a report without a name
