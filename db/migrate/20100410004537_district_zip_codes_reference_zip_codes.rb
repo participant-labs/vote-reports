@@ -2,7 +2,7 @@ class DistrictZipCodesReferenceZipCodes < ActiveRecord::Migration
   def self.up
     $stdout.sync = true
     DistrictZipCode.paginated_each do |district_zip_code|
-      zip_code = ZipCode.find_by_zip_code(district_zip_code[:zip_code])
+      zip_code = ZipCode.find_by_zip_code(district_zip_code[:zip_code]) || raise("Foo")
       district_zip_code.update_attribute(:zip_code, zip_code)
       $stdout.print '.'
     end
