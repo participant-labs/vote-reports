@@ -32,8 +32,8 @@ Feature: Browsing Report Scores by State
       | NY    | 7        | 11111    |
     And the following location records:
       | zip_code | city         | state |
-      | 75028    | Lewisville   | TX    |
-      | 11111    | Lewisville   | TX    |
+      | 75028    | LEWISVILLE   | TX    |
+      | 11111    | LEWISVILLE   | TX    |
     And bill "Bovine Security Act of 2009" has the following rolls:
       | roll_type                                            | voted_at     |
       | On Passage                                           | 2.years.ago  |
