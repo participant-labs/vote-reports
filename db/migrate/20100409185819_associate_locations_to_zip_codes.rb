@@ -6,6 +6,9 @@ class AssociateLocationsToZipCodes < ActiveRecord::Migration
   end
 
   def self.up
+    raise "Missing Locations" if LocationZipCode.count == 0
+    raise "Missing ZipCodes" if ZipCode.count == 0
+
     $stdout.sync = true
     add_column :location_zip_codes, :zip_code_id, :integer
     ZipCode.paginated_each(:select => 'id, zip_code') do |zip_code|
@@ -20,6 +23,6 @@ class AssociateLocationsToZipCodes < ActiveRecord::Migration
   end
 
   def self.down
-    raise "Nope"
+    rename_table :locations, :location_zip_codes
   end
 end
