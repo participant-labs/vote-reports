@@ -11,8 +11,8 @@ namespace :zip_codes do
   task :import => :environment do
     require 'ar-extensions'
     require 'ar-extensions/import/postgresql'
-    require 'faster_csv'
     require 'open-uri'
+    require 'excelsior'
 
     IN_COLS = [
       "Zipcode",
@@ -58,11 +58,31 @@ namespace :zip_codes do
       'military_restriction_codes'
     ].freeze
 
+    class LocationZipCode < ActiveRecord::Base
+    end
+
     ActiveRecord::Base.transaction do
-      rows = FasterCSV.read(DATA_PATH, :headers => true, :skip_blanks => true).to_a
-      headers = rows.shift
-      raise [IN_COLS, headers] if IN_COLS != headers
-      LocationZipCode.import_without_validations_or_callbacks(OUT_COLS, rows)
+      $stdout.sync = true
+      count = 0
+      rows = []
+      Excelsior::Reader.rows(File.open(DATA_PATH, 'rb')) do |row|
+       rows << row
+       if count == 0
+         headers = rows.shift
+         raise [IN_COLS, headers] if IN_COLS != headers
+       end
+       count += 1
+       if count % 300 == 0
+         puts "Importing"
+         LocationZipCode.import_without_validations_or_callbacks(OUT_COLS, rows)
+         rows = []
+       end
+       $stdout.print '.'
+      end
+      if rows.present?
+        puts "Importing"
+        LocationZipCode.import_without_validations_or_callbacks(OUT_COLS, rows)
+      end
     end
   end
 end
