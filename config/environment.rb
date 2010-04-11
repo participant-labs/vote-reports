@@ -24,6 +24,7 @@ Rails::Initializer.run do |config|
   config.gem 'erubis'
   config.gem 'exceptional'
   config.gem 'friendly_id', :version => '= 2.3.2'
+  config.gem 'gemcutter' # required by whenever
   config.gem 'geokit'
   config.gem 'gravtastic', :version => '>= 2.1.0'
   config.gem 'jammit'
