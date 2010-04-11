@@ -6,7 +6,6 @@ class ReportSubject < ActiveRecord::Base
   # report, subject presence
   # [report, subject] uniqueness
 
-
   class << self
     def generate!
       require 'ar-extensions'
@@ -35,10 +34,12 @@ class ReportSubject < ActiveRecord::Base
             [report.id, subject.id, count]
           end
         end
-        ReportSubject.import_without_validations_or_callbacks(
-          [:report_id, :subject_id, :count],
-          subjects
-        )
+        if subjects.present?
+          ReportSubject.import_without_validations_or_callbacks(
+            [:report_id, :subject_id, :count],
+            subjects
+          )
+        end
       end
     end
   end
