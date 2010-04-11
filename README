@@ -11,6 +11,42 @@ interest_groups/republican-liberty-caucus has several repeated reports on vote s
 
 time rake vlad:invoke COMMAND="cd /var/www/votereports/production/current && RAILS_ENV=production /usr/bin/env nice -n 3 rake vote_smart:import"
 
+# AssociateLocationsToZipCodes.migrate(:down)
+ENV['VERSION'] = '20100409185819'
+Rake::Task['db:migrate:down'].invoke
+
+# CreateLocationZipCodes.migrate(:down)
+ENV['VERSION'] = '20100406060108'
+Rake::Task['db:migrate:down'].invoke
+
+# CreateZipCodes.migrate(:down)
+ENV['VERSION'] = '20100408055427'
+Rake::Task['db:migrate:down'].invoke
+
+# PopulateZipCodes.migrate(:down)
+ENV['VERSION'] = '20100409174738'
+Rake::Task['db:migrate:down'].invoke
+
+# CreateLocationZipCodes.migrate(:up)
+ENV['VERSION'] = '20100406060108'
+Rake::Task['db:migrate:up'].invoke
+
+Rake::Task['zip_codes:download'].invoke
+Rake::Task['zip_codes:import'].invoke
+
+# CreateZipCodes.migrate(:up)
+ENV['VERSION'] = '20100408055427'
+Rake::Task['db:migrate:up'].invoke
+
+# PopulateZipCodes.migrate(:up)
+ENV['VERSION'] = '20100409174738'
+Rake::Task['db:migrate:up'].invoke
+
+# AssociateLocationsToZipCodes.migrate(:up)
+ENV['VERSION'] = '20100409185819'
+Rake::Task['db:migrate:up'].invoke
+
+
 To inform. To promote truth. To combat political apathy.
 
 Extract State class for associating terms and such
