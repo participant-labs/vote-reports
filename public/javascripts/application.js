@@ -96,12 +96,13 @@
         },
         position: {
           corner: {
-            target: 'bottomRight',
+            target: 'bottomMiddle',
             tooltip: 'topMiddle'
           }
         },
         style: {
-          tip: 'topMiddle'
+          tip: 'topMiddle',
+          width: 445
         },
         hide: { fixed: true }
       });
