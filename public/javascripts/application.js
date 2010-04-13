@@ -86,6 +86,27 @@
       return replaceWith(source.attr('data-replace'), source.attr('action') + '?' + source.serialize());
     });
 
+    $('[data-district]').each(function() {
+      var url = "http://www.govtrack.us/embed/mapframe.xpd?" + $(this).attr('data-district');
+      $(this).qtip({
+        content: {
+          text: '<iframe width="425" height="300" frameborder="0" \
+           scrolling="no" marginheight="0" marginwidth="0" \
+           src="' + url + '"></iframe>'
+        },
+        position: {
+          corner: {
+            target: 'bottomRight',
+            tooltip: 'topMiddle'
+          }
+        },
+        style: {
+          tip: 'topMiddle'
+        },
+        hide: { fixed: true }
+      });
+    });
+
     $('.hoverable, .dropdown').live('mouseover', function() {
       if (!$(this).data('init')) {
         $(this).data('init', true);
