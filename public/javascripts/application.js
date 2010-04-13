@@ -86,26 +86,30 @@
       return replaceWith(source.attr('data-replace'), source.attr('action') + '?' + source.serialize());
     });
 
-    $('[data-district]').each(function() {
-      var url = "http://www.govtrack.us/embed/mapframe.xpd?" + $(this).attr('data-district');
-      $(this).qtip({
-        content: {
-          text: '<iframe width="425" height="300" frameborder="0" \
-           scrolling="no" marginheight="0" marginwidth="0" \
-           src="' + url + '"></iframe>'
-        },
-        position: {
-          corner: {
-            target: 'bottomMiddle',
-            tooltip: 'topMiddle'
-          }
-        },
-        style: {
-          tip: 'topMiddle',
-          width: 445
-        },
-        hide: { fixed: true }
-      });
+    $('[data-district]').live('mouseover', function(event) {
+      var self = $(event.target).closest('[data-district]');
+      if (!self.data('init')) {
+        self.data('init', true);
+        var url = "http://www.govtrack.us/embed/mapframe.xpd?" + self.attr('data-district');
+        self.qtip({
+          content: {
+            text: '<iframe width="425" height="300" frameborder="0" \
+             scrolling="no" marginheight="0" marginwidth="0" \
+             src="' + url + '"></iframe>'
+          },
+          position: {
+            corner: {
+              target: 'bottomMiddle',
+              tooltip: 'topMiddle'
+            }
+          },
+          style: {
+            tip: 'topMiddle',
+            width: 445
+          },
+          hide: { fixed: true }
+        });
+      }
     });
 
     $('.hoverable, .dropdown').live('mouseover', function() {
