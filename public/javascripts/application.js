@@ -114,14 +114,15 @@
     });
 
     $('.hoverable, .dropdown').live('mouseover', function() {
-      if (!$(this).data('init')) {
-        $(this).data('init', true);
-        $(this).hoverIntent({
+      var self = $(this);
+      if (!self.data('init')) {
+        self.data('init', true);
+        self.hoverIntent({
           timeout: 500,
           over: function() { $(this).addClass("hovering"); },
           out: function() { $(this).removeClass("hovering"); }
         });
-        $(this).trigger('mouseover');
+        self.mouseover();
       }
     });
 
