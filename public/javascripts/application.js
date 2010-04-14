@@ -106,7 +106,15 @@
             }
           },
           style: {
-            tip: 'topMiddle',
+            border: {
+              width: 5,
+              radius: 5,
+              color: '#8f8f8f'
+            },
+            tip: {
+              corner: 'topMiddle',
+              size: { x: 18, y: 18 }
+            },
             width: 445
           },
           show: {
