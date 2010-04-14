@@ -26,4 +26,12 @@ module LocationsHelper
       session[:zip_code]
     end
   end
+
+  def location_title(location)
+    if location.is_a?(District)
+      district_title(location)
+    else
+      state_title(location)
+    end
+  end
 end
