@@ -1,5 +1,5 @@
 <%- replace ||= 'guide' -%>
-<% form_tag root_url, :method => :get, :'data-replace' => replace do %>
+<% form_tag send(target_path), :method => :get, :'data-replace' => replace do %>
   <dl>
     <dt>1) Enter your zip code</dt>
     <dd>
@@ -9,9 +9,12 @@
     </dd>
     <dt>2) Pick your issues</dt>
     <dd><%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
-      [root_path(:subjects => subjects, :representing => params[:representing]),
+      [send(target_path, :subjects => subjects, :representing => params[:representing]),
       {:'data-replace' => 'guide'}] } %></dd>
     <dt>3) See your reps' report cards</dt>
-    <dd><%= render 'scores/table' %></dd>
+    <dd><%= render 'scores/table', :averages => @topical_reports.count < 5 %></dd>
   </dl>
 <% end %>
+<%- unless current_page?(guide_path) -%>
+  <%= link_to "See More...", guide_path(:representing => requested_location, :subjects => @subjects) %>
+<%- end -%>

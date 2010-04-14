@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :reports, :only => [:index, :new]
   map.resource :location
+  map.resource :guide
 
   map.resources :us_states, :as => 'us/states', :controller => 'us/states', :only => 'show'
   map.district 'us/congressional_districts/:id', :controller => 'us/states/districts', :action => 'show'
