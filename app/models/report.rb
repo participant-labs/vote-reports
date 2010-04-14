@@ -152,6 +152,10 @@ class Report < ActiveRecord::Base
         user_published
       end
     end
+
+    def qualified_column_names
+      column_names.collect {|c| "reports.#{c}"}.join(",")
+    end
   end
 
   named_scope :unpublished, :conditions => "reports.state != 'published'"
@@ -182,9 +186,11 @@ class Report < ActiveRecord::Base
       {}
     else
       {
-        :select => 'DISTINCT reports.*',
+        :select => 'DISTINCT reports.*, COUNT(report_scores.id) AS score_count',
         :joins => :scores,
-        :conditions => {:'report_scores.politician_id' => politicians}
+        :conditions => {:'report_scores.politician_id' => politicians},
+        :group => qualified_column_names,
+        :order => 'score_count DESC'
       }
     end
   }
