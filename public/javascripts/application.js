@@ -91,11 +91,13 @@
       if (!self.data('init')) {
         self.data('init', true);
         var url = "http://www.govtrack.us/embed/mapframe.xpd?" + self.attr('data-district');
+        var title = self.attr('data-district-title');
         self.qtip({
           content: {
             text: '<iframe width="425" height="300" frameborder="0" \
              scrolling="no" marginheight="0" marginwidth="0" \
-             src="' + url + '"></iframe>'
+             src="' + url + '"></iframe>',
+            title: { text: title }
           },
           position: {
             corner: {
