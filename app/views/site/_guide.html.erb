@@ -16,5 +16,5 @@
   </dl>
 <% end %>
 <%- unless current_page?(guide_path) -%>
-  <%= link_to "See More...", guide_path(:representing => requested_location, :subjects => @subjects) %>
+  <%= link_to "See More...", guide_path(:representing => requested_location, :subjects => params[:subjects]) %>
 <%- end -%>
