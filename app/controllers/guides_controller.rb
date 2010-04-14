@@ -1,6 +1,5 @@
-class SiteController < ApplicationController
-
-  def index
+class GuidesController < ApplicationController
+  def show
     if params[:representing].present? && zip_code?(params[:representing])
       session[:zip_code] = params[:representing]
     end
@@ -21,24 +20,13 @@ class SiteController < ApplicationController
         Subject.on_published_reports
       end.for_tag_cloud.all(:limit => 20)
 
-    @topical_reports = @topical_reports.scoped(:limit => 3) if @topical_reports
+    @topical_reports = @topical_reports.scoped(:limit => 10) if @topical_reports
 
     respond_to do |format|
-      format.html {
-        @recent_reports = Report.user_published.by_updated_at.all(:limit => 3)
-        @featured_interest_group_reports = Report.interest_group_published.random.all(:limit => 3)
-      }
+      format.html
       format.js {
-        render :partial => 'site/guide', :locals => {:target_path => 'root_path'}
+        render :partial => 'site/guide', :locals => {:target_path => 'guide_path'}
       }
     end
-  end
-
-  def about
-  end
-
-private
-
-  def topical_reports
   end
 end
