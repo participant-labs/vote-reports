@@ -1,4 +1,3 @@
-<%- averages ||= false -%>
 <%- if @politicians || @topical_reports -%>
 <%- @politicians ||= [] -%>
 <table id="scores">
@@ -16,7 +15,8 @@
   <%- end -%>
   <%- if @topical_reports -%>
     <tbody>
-      <%- unless !averages || @topical_reports.size <= 1 || @politicians.size <= 1 -%>
+      <%- averages ||= @topical_reports.all.size <= 5 -%>
+      <%- if averages && @topical_reports.size > 1 -%>
         <tr>
           <th>
             <div class="report">
