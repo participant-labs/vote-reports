@@ -8,12 +8,8 @@ class SiteController < ApplicationController
     params[:subjects] ||= []
     params[:in_office] = true if params[:in_office].nil?
 
-    if specific_politicians_sought?
-      @politicians = sought_politicians.all(:limit => 5)
-      @topical_reports = topical_reports.with_scores_for(@politicians)
-    elsif params[:subjects].present?
-      @topical_reports = topical_reports
-    end
+    @politicians = sought_politicians.all(:limit => 5)
+    @topical_reports = topical_reports.with_scores_for(@politicians)
     @subjects =
       if @topical_reports
         Subject.for_report(@topical_reports)
@@ -42,7 +38,7 @@ private
   def topical_reports
     if params[:subjects].present?
       Report.published.with_subjects(params[:subjects])
-    elsif specific_politicians_sought?
+    else
       Report.published
     end
   end
