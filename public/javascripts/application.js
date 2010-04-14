@@ -115,7 +115,8 @@
               corner: 'topMiddle',
               size: { x: 18, y: 18 }
             },
-            width: 445
+            width: 450,
+            height: 285
           },
           show: {
             effect: { length: 200 }
