@@ -8,7 +8,9 @@ module LocationsHelper
     if !requested_location.nil?
       Politician.from(requested_location)
     elsif session[:geo_location]
-      params[:representing] = session[:geo_location].full_address
+      unless @dont_show_geo_address
+        params[:representing] = session[:geo_location].full_address
+      end
       Politician.from(session[:geo_location])
     else
       Politician
