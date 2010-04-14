@@ -3,10 +3,6 @@ module LocationsHelper
     (location =~ /^\s*\d{5}([-\s]*\d{4})?\s*$/).present?
   end
 
-  def specific_politicians_sought?
-    requested_location.present?
-  end
-
   def sought_politicians
     @in_office = !params.has_key?(:in_office) || ['1', true].include?(params[:in_office])
     if !requested_location.nil?
