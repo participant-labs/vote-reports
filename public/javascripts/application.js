@@ -107,7 +107,14 @@
             tip: 'topMiddle',
             width: 445
           },
-          hide: { fixed: true }
+          show: {
+            effect: { length: 200 }
+          },
+          hide: {
+            fixed: true,
+            delay: 500,
+            effect: { length: 500 }
+         }
         });
         self.mouseover();
       }
