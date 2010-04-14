@@ -5,7 +5,7 @@
     <dd>
       <%= label_tag :representing, 'Zip Code', :class => 'hidden' %>
       <%= text_field_tag :representing, requested_location, :tabindex => 1, :size => 10 %>
-      <%= submit_tag requested_location.present? ? 'Update' : 'Go!' %>
+      <%= submit_tag 'Go!' %>
     </dd>
     <dt>2) Pick your issues</dt>
     <dd><%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
