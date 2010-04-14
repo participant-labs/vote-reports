@@ -109,6 +109,7 @@
           },
           hide: { fixed: true }
         });
+        self.mouseover();
       }
     });
 
