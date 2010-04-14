@@ -1,6 +1,8 @@
 class SiteController < ApplicationController
 
   def index
+    @dont_show_geo_address = true
+
     if params[:representing].present? && zip_code?(params[:representing])
       session[:zip_code] = params[:representing]
     end
