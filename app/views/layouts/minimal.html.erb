@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title><%= page_title %></title>
+    <%= raw include_stylesheets(:common, :media => 'all') %>
+    <%= render 'layouts/google_analytics' %>
+
+    <!--[if IE]>
+    <style type="text/css">
+      .clearfix {
+        zoom: 1;     /* triggers hasLayout */
+        display: block;     /* resets display for IE/Win */
+        }  /* Only IE can see inside the conditional comment
+        and read this CSS rule. Don't ever use a normal HTML
+        comment inside the CC or it will close prematurely. */
+    </style>
+    <![endif]-->
+  </head>
+  <body>
+    <%= yield(:minimal_content) || yield %>
+
+    <%= raw include_javascripts(:common) %>
+    <%= yield :javascript_area %>
+  </body>
+</html>
