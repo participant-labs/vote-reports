@@ -5,6 +5,6 @@
   <%- end -%>
   <span class="politician_name"><%= link_to_unless_current politician_name(politician), politician  %>
     <%- if politician.location -%>
-    <span class="politician_location" data-district="<%= gov_track_map_params(politician.location) %>" data-district-title="<%= location_title(politician.location) %>"><%= link_to_unless_current politician.location.abbreviation, polymorphic_path(politician.location) %></span></span>
+    <span class="politician_location" data-district="<%= polymorphic_path([politician.location, :map]) %>" data-district-title="<%= location_title(politician.location) %>"><%= link_to_unless_current politician.location.abbreviation, polymorphic_path(politician.location) %></span></span>
     <%- end -%>
 <% end %>
