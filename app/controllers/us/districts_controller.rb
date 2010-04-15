@@ -1,4 +1,4 @@
-class Us::States::DistrictsController < ApplicationController
+class Us::DistrictsController < ApplicationController
   def show
     @district = District.find_by_name(params[:id])
     @representative = @district.representatives.in_office
