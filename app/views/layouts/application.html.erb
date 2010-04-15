@@ -1,81 +1,60 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title><%= page_title %></title>
-    <%= raw include_stylesheets(:common, :media => 'all') %>
-    <%= render 'layouts/google_analytics' %>
+<% content_for :minimal_content do %>
+  <%= flash_helper %>
 
-    <!--[if IE]>
-    <style type="text/css">
-      .clearfix {
-        zoom: 1;     /* triggers hasLayout */
-        display: block;     /* resets display for IE/Win */
-        }  /* Only IE can see inside the conditional comment
-        and read this CSS rule. Don't ever use a normal HTML
-        comment inside the CC or it will close prematurely. */
-    </style>
-    <![endif]-->
-  </head>
-  <body>
-    <%= flash_helper %>
+  <div id="main">
+    <div id="inner">
+      <ul id="account">
+        <%- if current_user -%>
+          <li><%= link_to_unless_current "Your reports", user_path(current_user) %></li>
+          <li><%= link_to_unless_current "Log out", logout_path %></li>
+        <%- else -%>
+          <li><%= link_to_unless_current "Log in", login_path(:return_to => request.path) %></li>
+          <li><%= link_to_unless_current "Sign up", signup_path %></li>
+        <%- end -%>
+        <%= render 'locations/location' %>
+      </ul>
 
-    <div id="main">
-      <div id="inner">
-        <ul id="account">
-          <%- if current_user -%>
-            <li><%= link_to_unless_current "Your reports", user_path(current_user) %></li>
-            <li><%= link_to_unless_current "Log out", logout_path %></li>
-          <%- else -%>
-            <li><%= link_to_unless_current "Log in", login_path(:return_to => request.path) %></li>
-            <li><%= link_to_unless_current "Sign up", signup_path %></li>
-          <%- end -%>
-          <%= render 'locations/location' %>
+      <div id="header" class="clearfix">
+        <%= link_to image_tag('logo.png', :size => '521x150', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
+
+        <form action="http://votereports.us1.list-manage.com/subscribe/post?u=7a5f531cddf4733361c3c56b4&amp;id=6ed81c914b" method="post" id="mc-embedded-subscribe-form" class="validate">
+            <div id="mce-responses">
+              <div class="response" id="mce-error-response" style="display:none"></div>
+              <div class="response" id="mce-success-response" style="display:none"></div>
+            </div>
+            <div class="mc-field-group">
+              <label for="mce-EMAIL" class="fieldtag">Our Newsletter</label>
+              <input type="text" value="" name="EMAIL" class="required email text fieldtag" id="mce-EMAIL" title="Our Newsletter" />
+            </div>
+            <div><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn submit" /></div>
+        </form>
+      </div>
+      <ul id="menu" class="sidebar-links">
+        <li <%= raw %{class="selected"} if [root_path, about_path].include?(request.path) %>><h2><%= link_to_unless_current "Home", root_path %></h2></li>
+        <li <%= raw %{class="selected"} if request.path.starts_with?('/reports') %>><h2><%= link_to_unless_current "Reports", reports_path %></h2></li>
+        <li <%= raw %{class="selected"} if request.path.starts_with?('/interest_groups') %>><h2><%= link_to_unless_current "Interest Groups", interest_groups_path %></h2></li>
+        <li <%= raw %{class="selected"} if request.path.starts_with?('/politicians') %>><h2><%= link_to_unless_current "Politicians", politicians_path %></h2></li>
+        <li <%= raw %{class="selected"} if request.path.starts_with?('/bills') %>><h2><%= link_to_unless_current "Bills", bills_path %></h2></li>
+      </ul>
+
+      <div id="content">
+        <%= yield(:content) || yield %>
+      </div>
+
+      <div class="footer" id="footer">
+        <h3><%= link_to 'VoteReports', root_path %></h3>
+        <ul class="sidebar-links">
+          <li><%= link_to_unless_current "About us", about_path %></li>
+          <li><%= link_to 'Our Blog', blog_path %></li>
+          <li><%= mail_to 'all_ears@votereports.org', "Contact us" %></li>
+          <li><%= link_to 'Feedback', get_satisfaction_path, :title => 'We welcome it' %></li>
         </ul>
-
-        <div id="header" class="clearfix">
-          <%= link_to image_tag('logo.png', :size => '521x150', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
-
-          <form action="http://votereports.us1.list-manage.com/subscribe/post?u=7a5f531cddf4733361c3c56b4&amp;id=6ed81c914b" method="post" id="mc-embedded-subscribe-form" class="validate">
-              <div id="mce-responses">
-                <div class="response" id="mce-error-response" style="display:none"></div>
-                <div class="response" id="mce-success-response" style="display:none"></div>
-              </div>
-              <div class="mc-field-group">
-                <label for="mce-EMAIL" class="fieldtag">Our Newsletter</label>
-                <input type="text" value="" name="EMAIL" class="required email text fieldtag" id="mce-EMAIL" title="Our Newsletter" />
-              </div>
-              <div><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn submit" /></div>
-          </form>
-        </div>
-        <ul id="menu" class="sidebar-links">
-          <li <%= raw %{class="selected"} if [root_path, about_path].include?(request.path) %>><h2><%= link_to_unless_current "Home", root_path %></h2></li>
-          <li <%= raw %{class="selected"} if request.path.starts_with?('/reports') %>><h2><%= link_to_unless_current "Reports", reports_path %></h2></li>
-          <li <%= raw %{class="selected"} if request.path.starts_with?('/interest_groups') %>><h2><%= link_to_unless_current "Interest Groups", interest_groups_path %></h2></li>
-          <li <%= raw %{class="selected"} if request.path.starts_with?('/politicians') %>><h2><%= link_to_unless_current "Politicians", politicians_path %></h2></li>
-          <li <%= raw %{class="selected"} if request.path.starts_with?('/bills') %>><h2><%= link_to_unless_current "Bills", bills_path %></h2></li>
-        </ul>
-
-        <div id="content">
-          <%= yield %>
-        </div>
-
-        <div class="footer" id="footer">
-          <h3><%= link_to 'VoteReports', root_path %></h3>
-          <ul class="sidebar-links">
-            <li><%= link_to_unless_current "About us", about_path %></li>
-            <li><%= link_to 'Our Blog', blog_path %></li>
-            <li><%= mail_to 'all_ears@votereports.org', "Contact us" %></li>
-            <li><%= link_to 'Feedback', get_satisfaction_path, :title => 'We welcome it' %></li>
-          </ul>
-          <p id="copy"><%= link_to "&copy; #{Date.today.year}", participant_labs_path %></p>
-        </div>
+        <p id="copy"><%= link_to "&copy; #{Date.today.year}", participant_labs_path %></p>
       </div>
     </div>
+  </div>
 
-    <%= raw include_javascripts(:common) %>
-    <%= render 'layouts/mail_chimp' %>
-    <%= render 'layouts/get_satisfaction' %>
-    <%= yield :javascript_area %>
-  </body>
-</html>
+  <%= render 'layouts/mail_chimp' %>
+  <%= render 'layouts/get_satisfaction' %>
+<% end %>
+<%= render :file => 'layouts/minimal' %> 
