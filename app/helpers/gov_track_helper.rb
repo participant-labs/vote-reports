@@ -3,7 +3,7 @@ module GovTrackHelper
     if object.is_a?(UsState)
       {:state => object.abbreviation}
     elsif object.is_a?(District)
-      if object.district == 0
+      if object.at_large?
         {:state => object.state.abbreviation}
       else
         {:state => object.state.abbreviation, :district => object.district}
