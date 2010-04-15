@@ -21,5 +21,5 @@ Feature: Browsing the Home Page
     Then I should see "Zip: 75028"
 
     When I fill in "Zip Code" with "90210"
-    And I press "Update"
+    And I press "Go!"
     Then I should see "Zip: 90210"
