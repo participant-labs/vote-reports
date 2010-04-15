@@ -1,4 +1,4 @@
-module Us::States::DistrictsHelper
+module Us::DistrictsHelper
   def district_full_name(district)
     [link_to_unless_current("the #{district.which.downcase} congressional district", district_path(district)),
       state_full_name(district.state)

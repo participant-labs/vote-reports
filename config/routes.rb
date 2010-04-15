@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :guide
 
   map.resources :us_states, :as => 'us/states', :controller => 'us/states', :only => 'show'
-  map.district 'us/congressional_districts/:id', :controller => 'us/states/districts', :action => 'show'
+  map.resources :districts, :as => 'us/congressional_districts', :controller => 'us/districts', :only => 'show'
 
   map.user_reports "reports/:user_id",
     :controller => 'users/reports',:action => 'index', :conditions => { :method => :get }
