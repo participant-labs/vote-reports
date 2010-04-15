@@ -10,8 +10,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :location
   map.resource :guide
 
-  map.resources :us_states, :as => 'us/states', :controller => 'us/states', :only => 'show'
-  map.resources :districts, :as => 'us/congressional_districts', :controller => 'us/districts', :only => 'show'
+  map.resources :us_states, :as => 'us/states', :controller => 'us/states', :only => 'show' do |state|
+    state.resource :map, :controller => 'us/states/maps', :only => 'show'
+  end
+  map.resources :districts, :as => 'us/congressional_districts', :controller => 'us/districts', :only => 'show' do |district|
+    district.resource :map, :controller => 'us/districts/maps', :only => 'show'
+  end
 
   map.user_reports "reports/:user_id",
     :controller => 'users/reports',:action => 'index', :conditions => { :method => :get }
