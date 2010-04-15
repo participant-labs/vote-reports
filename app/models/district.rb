@@ -64,7 +64,7 @@ class District < ActiveRecord::Base
   end
 
   def abbreviation
-    district_abbrv = self.district == 0 ? 'At large' : self.district.to_s
+    district_abbrv = at_large? ? 'At large' : self.district.to_s
     "#{state.abbreviation}-#{district_abbrv}"
   end
 
