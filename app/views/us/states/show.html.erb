@@ -1,11 +1,9 @@
 <%- title state_title(@state) -%>
 
-<div class="section clearfix">
+<% div_for @state, :class => "section clearfix" do %>
   <h2><%= state_title(@state) %></h2>
 
-  <iframe width="425" height="300" frameborder="0"
-   scrolling="no" marginheight="0" marginwidth="0"
-   src="<%= gov_track_map_url(@state) %>" style="float:right;"></iframe>
+  <%= render 'us/states/maps/map', :state => @state %>
 
   <h3>Senators</h3>
   <ul>
@@ -20,4 +18,4 @@
       <li><%= render 'politicians/politician', :politician => representative %></li>
     <%- end -%>
   </ul>
-</div>
+<% end %>

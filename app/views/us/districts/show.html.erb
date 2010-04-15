@@ -1,11 +1,9 @@
 <%- title district_title(@district) -%>
 
-<div class="section clearfix">
+<% div_for @district, :class => "section clearfix" do %>
   <h2><%= district_full_title_name(@district) %></h2>
 
-  <iframe width="425" height="300" frameborder="0"
-   scrolling="no" marginheight="0" marginwidth="0"
-   src="<%= gov_track_map_url(@district) %>" style="float:right;"></iframe>
+  <%= render 'us/districts/maps/map', :district => @district %>
 
   <h3>Senators</h3>
   <ul>
@@ -20,4 +18,4 @@
       <li><%= render 'politicians/politician', :politician => representative %></li>
     <%- end -%>
   </ul>
-</div>
+<% end %>
