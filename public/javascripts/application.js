@@ -130,6 +130,7 @@
               if (self.data('needs_show')) {
                 self.data('needs_show', false);
                 self.data('needs_refresh', true);
+                return false;
               } else {
                 self.data('needs_show', true);
               }
