@@ -178,24 +178,6 @@
           show: {
             effect: { length: 200 }
           },
-          api: {
-            onShow: function () {
-              self.data('needs_show', false);
-              if (self.data('needs_refresh')) {
-                self.qtip("api").loadContent(self.attr('data-district'));
-                self.data('needs_refresh', false);
-              }
-            },
-            beforeContentUpdate: function() {
-              if (self.data('needs_show')) {
-                self.data('needs_show', false);
-                self.data('needs_refresh', true);
-                return false;
-              } else {
-                self.data('needs_show', true);
-              }
-            }
-          },
           hide: {
             fixed: true,
             delay: 500,
