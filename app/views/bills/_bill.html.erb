@@ -7,7 +7,7 @@
 <span class="bill">
   <%= link_to_unless_current "#{bill.bill_type.to_s} #{bill.bill_number}#{" (#{bill.introduced_on.year})" unless hide_year }: #{bill.titles.first}", bill, :class => 'title' %>
   <%- if bill.titles.size > 1 -%>
-    (<%= link_to 'all titles', '#', :'data-dialog' => "##{bill_titles_id}", :class => 'bill_titles' %>)
+    (<%= link_to 'all titles', '#', :'data-dialog' => bill_titles_id, :class => 'bill_titles' %>)
   <%- end -%>
 </span>
 

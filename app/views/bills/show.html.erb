@@ -12,7 +12,7 @@
     <%- if @bill.opencongress_url -%>
     <li><%= link_to 'View on OpenCongress', @bill.opencongress_url %></li>
     <%- end -%>
-    <li><%= link_to 'View Summary', '#', :'data-dialog' => '#bill_summary' %></li>
+    <li><%= link_to 'View Summary', '#', :'data-dialog' => 'bill_summary' %></li>
   </ul>
 
   <div id="bill_summary" class="hidden" data-dialog-title="Bill Summary">
