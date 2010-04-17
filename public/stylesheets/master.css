@@ -16,6 +16,21 @@
   display: inline;
 }
 
+.score_examples li {
+  width: 100%;
+}
+
+.score_examples .report {
+  width: 60%;
+  float: left;
+  padding-right: 5%;
+}
+
+.score_examples .politicians_score {
+  width: 40%;
+  float: right;
+}
+
 .hidden {
   display: none;
 }
