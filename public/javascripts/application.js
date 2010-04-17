@@ -122,12 +122,19 @@
           api: {
             onShow: function () {
               self.data('needs_show', false);
+              self.data('needs_load', true);
               if (self.data('needs_refresh')) {
                 self.qtip("api").loadContent(self.attr('data-district'));
                 self.data('needs_refresh', false);
               }
             },
+            beforeHide: function () {
+              if (self.data('needs_load')) {
+                return false;
+              }
+            },
             beforeContentUpdate: function() {
+              self.data('needs_load', false);
               if (self.data('needs_show')) {
                 self.data('needs_show', false);
                 self.data('needs_refresh', true);
