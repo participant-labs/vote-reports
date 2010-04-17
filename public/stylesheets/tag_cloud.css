@@ -1,4 +1,4 @@
-ol.tag_cloud {
+.tag_cloud {
   list-style-type: none;
   text-align: center;
   margin-left: 0;
@@ -10,7 +10,7 @@ ol.tag_cloud {
   border-radius: 0.7em;
 }
 
-ol.tag_cloud li {
+.tag_cloud li {
   display: inline-block;
   padding: 0.2em;
   padding-top: 0.4em;
@@ -18,11 +18,11 @@ ol.tag_cloud li {
   text-transform: uppercase;
 }
 
-ol.tag_cloud li a {
+.tag_cloud li a {
   border-bottom-width: 0;
 }
 
-ol.tag_cloud li a:hover {
+.tag_cloud li a:hover {
   border-bottom-width: 1px;
 }
 

@@ -1,3 +1,21 @@
+.left {
+  float: left;
+  width: 48%;
+}
+
+.right {
+  float: right;
+  width: 48%;
+}
+
+.guide_entry h4 {
+  font-size: 18px;
+}
+
+.guide_entry dl, .guide_entry dt, .guide_entry dd {
+  display: inline;
+}
+
 .hidden {
   display: none;
 }
