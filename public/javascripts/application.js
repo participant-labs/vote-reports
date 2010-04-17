@@ -121,27 +121,28 @@
           },
           api: {
             onShow: function () {
-              self.data('needs_show', false);
-              self.data('needs_load', true);
               if (self.data('needs_refresh')) {
                 self.qtip("api").loadContent(self.attr('data-district'));
                 self.data('needs_refresh', false);
               }
+              self.data('last', 'show');
             },
             beforeHide: function () {
               if (self.data('needs_load')) {
                 return false;
               }
+              self.data('last', 'hide');
             },
             beforeContentUpdate: function() {
-              self.data('needs_load', false);
-              if (self.data('needs_show')) {
-                self.data('needs_show', false);
+              if (self.data('last') == 'update') {
                 self.data('needs_refresh', true);
                 return false;
+              } else if (self.data('last') == undefined) {
+                self.data('needs_load', true);
               } else {
-                self.data('needs_show', true);
+                self.data('needs_load', false);
               }
+              self.data('last', 'update');
             }
           },
           hide: {
