@@ -123,7 +123,7 @@
             onShow: function () {
               if (self.data('needs_refresh')) {
                 self.qtip("api").loadContent(self.attr('data-district'));
-                self.data('needs_refresh', false);
+                self.removeData('needs_refresh');
               }
               self.data('last', 'show');
             },
@@ -140,7 +140,7 @@
               } else if (self.data('last') == undefined) {
                 self.data('needs_load', true);
               } else {
-                self.data('needs_load', false);
+                self.removeData('needs_load');
               }
               self.data('last', 'update');
             }
