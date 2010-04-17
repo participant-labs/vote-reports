@@ -154,8 +154,10 @@ class Politician < ActiveRecord::Base
         from_location(representing)
       else
         results = from_zip_code(representing)
-        results = from_city(representing) if results.blank?
+        # try state first as it's much more restrictive search than city
+        # and there are some misleading 2-character cities
         results = from_state(representing) if results.blank?
+        results = from_city(representing) if results.blank?
         results = from_location(Geokit::Geocoders::MultiGeocoder.geocode(representing)) if results.blank?
         results
       end
