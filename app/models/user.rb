@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   is_gravtastic!
   has_friendly_id :username, :use_slug => true
+  alias_attribute :to_s, :username
 
   acts_as_authentic
 

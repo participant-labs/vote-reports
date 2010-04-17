@@ -6,7 +6,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :subjects, :only => [:index, :show]
   map.resources :interest_groups, :only => [:index, :show]
 
-  map.resources :reports, :only => [:index, :new]
+  map.resources :reports, :only => [:index, :new] do |report|
+    report.resources :scores, :controller => 'reports/scores', :only => :show
+  end
   map.resource :location
   map.resource :guide
 

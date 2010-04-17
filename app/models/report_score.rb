@@ -51,4 +51,8 @@ class ReportScore < ActiveRecord::Base
       10
     end
   end
+
+  def to_s
+    "#{score.round}%"
+  end
 end
