@@ -1,13 +1,25 @@
 <%- title 'Knowing is Half the Ballot' -%>
-<div class="section">
+<div class="section clearfix">
   <h3>Helping you Cast your Best Votes</h3>
-  <p>We all want to vote for the best candidates, but we know it's hard work to find out what the candidates <em>really</em> stand for.</p>
+  <div class="left">
+    <p>We all want to vote for the best candidates, but how do we know what the candidates <em>really</em> stand for?</p>
 
-  <p>At VoteReports, we tell you the real deal about your representatives, by condensing all their votes into simple letter grades on the issues important to you.</p>
+    <p>At VoteReports, we tell you the real deal about your representatives, by condensing all their votes into simple letter grades on the issues important to you.</p>
+  </div>
 
-  <p>Best of all, it's easy.  Just tell us what you care about, and we'll tell you how your representatives are doing.<br /> We make it easy to see if your representatives truly represent you.</p>
-
-  <div id="guide"><%= render 'site/guide', :target_path => 'root_path' %></div>
+  <div class="right">
+    <p>Best of all, it's easy.  Just tell us where you are &amp; what you care about, and we'll tell you how your representatives are doing.</p>
+    <div class="guide_entry">
+      <h4>Find out how your Reps are doing in 2 steps:</h4>
+      <% form_tag guide_path, :method => :get, :class => 'tag_cloud' do %>
+        <dl>
+          <dt><%= label_tag :representing, '1) Enter your zip code' %></dt>
+          <dd><%= text_field_tag :representing, requested_location, :tabindex => 1, :size => 10 %></dd>
+        </p>
+        <%= submit_tag 'Go!' %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <table class="section" id="featured_recent_reports">
