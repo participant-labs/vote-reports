@@ -24,7 +24,7 @@
 
 <div class="section report_scores">
   <h2>Scores</h2>
-  <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#', :'data-dialog' => "#bill_criteria" %> lead to a high score, votes against, a low one.</p>
+  <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#', :'data-dialog' => "bill_criteria" %> lead to a high score, votes against, a low one.</p>
   <%- if @report.scores.present? -%>
     <%= render 'politicians/search', :url => user_report_path(@report.user, @report), :replace => 'report_scores' %>
   <%- end -%>
@@ -63,7 +63,7 @@
 
 <div class="footer">
   <ul class="sidebar-links">
-    <li><%= link_to 'Learn about this Report', '#', :'data-dialog' => "#bill_criteria" %></li>
+    <li><%= link_to 'Learn about this Report', '#', :'data-dialog' => "bill_criteria" %></li>
     <li><%= link_to 'View another Report', reports_path %></li>
     <li><%= link_to 'Create a new Report', new_report_path %></li>
   </ul>

@@ -52,14 +52,15 @@
     });
 
     $('[data-dialog]').live('focusin', function() {
-      var target = $($(this).attr('data-dialog'));
+      var target = $('#' + $(this).attr('data-dialog'));
       target.dialog({
         autoOpen: false,
         title: target.attr('data-dialog-title'),
         width: target.attr('data-dialog-width') || 740});
     });
     $('[data-dialog]').live('click', function(event) {
-      $($(event.target).attr('data-dialog')).dialog('open');
+      console.info($(event.target).attr('data-dialog'));
+      $('#' + $(event.target).attr('data-dialog')).dialog('open');
       return false;
     });
 
