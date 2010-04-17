@@ -1,19 +1,5 @@
 <%- if score.nil? -%>
   <div class="report_score blank" />
 <%- else -%>
-  <%- score_id = "#{score.report.to_param}_evidence_for_#{score.politician.to_param}" -%>
-  <div class="report_score hoverable">
-    <%= content_tag :span, "#{score.score.round}%", :class => 'score',
-      :'data-dialog' => score_id %>
-    <div class="report_score_evidence_link">
-      based on
-      <ul>
-        <%- score.evidence.group_by(&:evidence_type).each_pair do |type, evidence| -%>
-          <li><%= link_to pluralize(evidence.size, human_type_name(type)), '#', :'data-dialog' => score_id %></li>
-        <%- end -%>
-      </ul>
-    </div>
-  </div>
-
-  <%= render 'reports/scores/evidence', :score => score, :id => score_id %>
+  <div class="report_score"><span class="score" data-qtip="<%= report_score_path(score.report, score) %>"  data-qtip-title="<%= score_title(score) %>"><%= score %></span></div>
 <%- end -%>

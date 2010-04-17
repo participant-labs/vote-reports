@@ -147,6 +147,65 @@
       }
     });
 
+    $('[data-qtip]').live('mouseover', function(event) {
+      var self = $(event.target).closest('[data-qtip]');
+      if (!self.data('init')) {
+        self.data('init', true);
+        var title = self.attr('data-qtip-title');
+        self.qtip({
+          content: {
+            url: self.attr('data-qtip'),
+            title: { text: title }
+          },
+          position: {
+            corner: {
+              target: 'bottomMiddle',
+              tooltip: 'topMiddle'
+            }
+          },
+          style: {
+            border: {
+              width: 5,
+              radius: 5,
+              color: '#8f8f8f'
+            },
+            tip: {
+              corner: 'topMiddle',
+              size: { x: 18, y: 18 }
+            },
+            width: 450
+          },
+          show: {
+            effect: { length: 200 }
+          },
+          api: {
+            onShow: function () {
+              self.data('needs_show', false);
+              if (self.data('needs_refresh')) {
+                self.qtip("api").loadContent(self.attr('data-district'));
+                self.data('needs_refresh', false);
+              }
+            },
+            beforeContentUpdate: function() {
+              if (self.data('needs_show')) {
+                self.data('needs_show', false);
+                self.data('needs_refresh', true);
+                return false;
+              } else {
+                self.data('needs_show', true);
+              }
+            }
+          },
+          hide: {
+            fixed: true,
+            delay: 500,
+            effect: { length: 500 }
+         }
+        });
+        self.mouseover();
+      }
+    });
+
     $('.hoverable, .dropdown').live('mouseover', function() {
       var self = $(this);
       if (!self.data('init')) {
