@@ -59,7 +59,6 @@
         width: target.attr('data-dialog-width') || 740});
     });
     $('[data-dialog]').live('click', function(event) {
-      console.info($(event.target).attr('data-dialog'));
       $('#' + $(event.target).attr('data-dialog')).dialog('open');
       return false;
     });
