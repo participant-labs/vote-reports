@@ -5,7 +5,7 @@
   <div class="report_attrs">
     <%- description = truncate(strip_tags(report.description), :length => (report.user_id ? 110 : 140) - report.name.length) -%>
     <%- attrs = float_description ? {:title => strip_tags(report.description)} : {} if  -%>
-    <%= link_to report.name, report_path_components(report), attrs.merge(:class => 'report_title') %>
+    <%= link_to h(report.name), report_path_components(report), attrs.merge(:class => 'report_title') %>
     <%- if description.blank? || float_description || report.name.size > 60 -%>
       <br />
       <%- if report.user_id -%>
@@ -15,7 +15,7 @@
       <%- if report.user_id -%>
         <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
       <%- end -%>
-      <blockquote><p><%= description %></p></blockquote>
+      <blockquote><p><%= h(description) %></p></blockquote>
     <%- end -%>
   </div>
 <% end %>
