@@ -225,7 +225,7 @@ dd {
   margin-top: 5px;
 }
 
-#scores .report_title, #featured_recent_reports .report_title {
+#scores .report_title, #featured_recent_reports .report_title, .score_examples .report_title {
   font-size: 1.1em;
   font-weight: bold;
 }
