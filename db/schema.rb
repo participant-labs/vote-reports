@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100410004537) do
+ActiveRecord::Schema.define(:version => 20100418204020) do
+
+  create_table "adminships", :force => true do |t|
+    t.integer  "user_id",       :null => false
+    t.integer  "created_by_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -142,6 +149,20 @@ ActiveRecord::Schema.define(:version => 20100410004537) do
   create_table "congresses", :force => true do |t|
     t.integer "meeting"
   end
+
+  create_table "congressional_districts", :force => true do |t|
+    t.integer  "district_id",  :null => false
+    t.integer  "congress_id",  :null => false
+    t.float    "lat",          :null => false
+    t.float    "lng",          :null => false
+    t.float    "square_miles", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "congressional_districts", ["congress_id", "district_id"], :name => "index_congressional_districts_on_congress_id_and_district_id", :unique => true
+  add_index "congressional_districts", ["congress_id"], :name => "index_congressional_districts_on_congress_id"
+  add_index "congressional_districts", ["district_id"], :name => "index_congressional_districts_on_district_id"
 
   create_table "cosponsorships", :force => true do |t|
     t.integer  "bill_id",       :null => false
