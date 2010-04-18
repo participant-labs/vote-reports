@@ -26,10 +26,8 @@
   <h3>See what we mean</h3>
   <p>On the left, you see reports.  On the right is a single score from each report, and the representative who recived it.  Hover over the score to see the votes or interest group ratings which back it up.</p>
   <ul class="score_examples">
-    <%- @politicians.each do |politician| -%>
-      <%- if score = politician.report_scores.published.rand -%>
-        <li class="clearfix"><%= render score.report %><%= render 'politicians/score', :score => score %></li>
-      <%- end -%>
+    <%- @scores.each do |score| -%>
+      <li class="clearfix"><%= render score.report %><%= render 'politicians/score', :score => score %></li>
     <%- end -%>
   </ul>
 </div>
