@@ -28,26 +28,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def login_required
-    unless current_user
-      #store_location #TODO: implement store location
-      flash[:notice] = "You must be logged in to access this page"
-      redirect_to login_path(:return_to => request.path)
-      return false
-    end
-  end
-
-  def is_report_owner
-    return if login_required == false
-    report_owner = User.find(params[:user_id])
-    unless current_user.admin? || (current_user == report_owner)
-      notify_exceptional("User #{current_user.inspect} attempted to access protected page #{request.path}")
-      flash[:notice] = "You may not access this page"
-      redirect_to user_report_path(report_owner, report_owner.reports.find(params[:report_id] || params[:id], :scope => report_owner))
-      return false
-    end
-  end
-
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find

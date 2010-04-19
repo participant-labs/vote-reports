@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  filter_resource_access
+  filter_access_to :all
 
   def new
     redirect_to new_user_report_path(current_user)

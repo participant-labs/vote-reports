@@ -1,6 +1,5 @@
 class Users::Reports::BillCriteriaController < ApplicationController
-  before_filter :is_report_owner
-  filter_access_to :all
+  filter_resource_access :nested_in => :reports
 
   def new
     @new_report = true if params[:new_report]
