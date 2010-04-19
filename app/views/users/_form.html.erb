@@ -1,5 +1,5 @@
 <%-
-  pass_through ||= false
+  pass_through ||= {}
   url ||= polymorphic_path(user)
 -%>
 
@@ -22,10 +22,8 @@
       <%= f.password_field :password_confirmation %><br />
     <%- end -%>
 
-    <%- if pass_through -%>
-      <%- params.each_pair do |key, value| -%>
-        <%= hidden_field_tag key, value %>
-      <%- end -%>
+    <%- pass_through.each_pair do |key, value| -%>
+      <%= hidden_field_tag key, value %>
     <%- end -%>
 
     <%= f.submit user.new_record? ? "Sign up" : "Save Changes" %>
