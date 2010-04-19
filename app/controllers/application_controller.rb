@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
       flash[:error] = 'Sorry, you are not allowed to the requested page.'
       notify_exceptional("User #{current_user.inspect} attempted to access protected page #{request.path}")
       respond_to do |format|
-        format.html { redirect_to(:back) rescue redirect_to('/') }
+        format.html { redirect_to('/') }
         format.xml  { head :unauthorized }
         format.js   { head :unauthorized }
       end
