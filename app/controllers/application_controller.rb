@@ -37,16 +37,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def is_current_user?
-    return if login_required == false
-    unless current_user.admin? || (current_user == User.find(params[:user_id] || params[:id]))
-      notify_exceptional("User #{current_user.inspect} attempted to access protected page #{request.path}")
-      flash[:notice] = "You may not access this page"
-      redirect_to user_path(current_user)
-      return false
-    end
-  end
-
   def is_report_owner
     return if login_required == false
     report_owner = User.find(params[:user_id])
