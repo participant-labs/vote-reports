@@ -1,5 +1,5 @@
 class UserSessionsController < ApplicationController
-  before_filter :require_no_user, :only => [:new, :create]
+  filter_resource_access
 
   def new
     @return_to = params[:return_to]

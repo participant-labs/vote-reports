@@ -32,14 +32,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def require_no_user
-    if current_user
-      flash[:notice] = "You're already logged in"
-      redirect_to root_path
-      return false
-    end
-  end
-
   def is_admin?
     return if login_required == false
     if !current_user.admin?
