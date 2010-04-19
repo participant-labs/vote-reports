@@ -12,11 +12,7 @@ authorization do
     has_permission_on :users_rpx_identities, :to => [:create, :destroy] do
       if_attribute :user_id => is {user.id}
     end
-    has_permission_on [:reports, :users_reports], :to => [:new]
-    has_permission_on [:reports, :users_reports], :to => [:show, :index, :create, :edit, :update, :destroy] do
-      if_attribute :user_id => is {user.id}
-    end
-    has_permission_on :users_reports_bill_criteria, :to => [:index, :new, :destroy] do
+    has_permission_on [:reports, :users_reports, :users_reports_bill_criteria, :users_reports_thumbnails], :to => [:show, :index, :new, :create, :edit, :update, :destroy] do
       if_attribute :user_id => is {user.id}
     end
   end

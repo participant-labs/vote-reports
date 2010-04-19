@@ -1,6 +1,5 @@
 class Users::Reports::ThumbnailsController < ApplicationController
-  before_filter :is_report_owner
-  filter_resource_access
+  filter_access_to :all
 
   def edit
     @report = current_user.reports.find(params[:report_id], :scope => current_user)

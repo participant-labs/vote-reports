@@ -1,6 +1,5 @@
 class Users::ReportsController < ApplicationController
-  before_filter :is_report_owner, :except => [:index, :show]
-  filter_access_to :all
+  filter_resource_access :nested_in => :users
 
   def index
     @user = User.find(params[:user_id])
