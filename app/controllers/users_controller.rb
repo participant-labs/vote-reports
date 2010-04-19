@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_filter :is_current_user?, :only => [:edit, :update]
   filter_resource_access
 
   def index
