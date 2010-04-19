@@ -11,6 +11,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   filter_parameter_logging :password, :password_confirmation
 
+  def permission_denied
+    flash[:error] = 'Sorry, you are not allowed to the requested page.'
+    notify_exception("User #{current_user.inspect} attempted to access protected page #{request.path}")
+    respond_to do |format|
+      format.html { redirect_to(:back) rescue redirect_to('/') }
+      format.xml  { head :unauthorized }
+      format.js   { head :unauthorized }
+    end
+  end
+
   private
 
   def login_required
