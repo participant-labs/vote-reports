@@ -16,28 +16,12 @@ ul#menu {
   padding: 0.2em 0.5em;
 }
 
-ul#menu:before {
-  content: '• ';
-}
-
-ul#menu:after {
-  content: ' •';
-}
-
 ul#menu > li {
   display: inline-block;
   margin: 0 1em;
   padding: 0.2em 0.5em;
   position: relative;
   color: #333;
-}
-
-ul#menu > li:first-of-type {
-  padding-left: 7em;
-}
-
-ul#menu > li:last-of-type {
-  padding-right: 7em;
 }
 
 ul#menu > li > h2 > a {
