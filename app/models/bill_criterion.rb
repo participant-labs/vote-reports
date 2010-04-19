@@ -13,6 +13,7 @@ class BillCriterion < ActiveRecord::Base
     :conditions => Roll.on_bill_passage.proxy_options[:conditions]
 
   after_save :rescore_report
+  delegate :user_id, :to => :report
 
   def unvoted?
     bill.passage_rolls.empty?

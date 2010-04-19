@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   acts_as_authentic
 
+  has_one :adminship
   has_many :reports
 
   validates_uniqueness_of :username, :email, :case_sensitive => false
@@ -22,8 +23,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def role_symbols
+    syms = [:user]
+    syms << :admin if adminship
+    syms
+  end
+
   def admin?
-    false
+    role_symbols.include?(:admin)
   end
 
 private

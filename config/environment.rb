@@ -20,6 +20,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic", :version => '>=2.1.3'
   config.gem 'Empact-authlogic_rpx', :lib => 'authlogic_rpx', :version => '>= 1.1.3'
   config.gem 'bluecloth', :version => '>=2.0.5'
+  config.gem "declarative_authorization"
   config.gem 'delayed_job'
   config.gem 'erubis'
   config.gem 'exceptional'
