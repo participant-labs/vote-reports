@@ -34,4 +34,10 @@ class Users::Reports::BillCriteriaController < ApplicationController
     flash[:notice] = "Successfully deleted report criterion"
     redirect_to :back
   end
+
+  private
+
+  def permission_denied_path
+    user_report_path(params[:user_id], params[:report_id])
+  end
 end

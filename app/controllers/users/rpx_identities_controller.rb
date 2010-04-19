@@ -1,5 +1,5 @@
 class Users::RpxIdentitiesController < ApplicationController
-  filter_resource_access
+  filter_access_to :all
 
   def create
     @user = current_user
