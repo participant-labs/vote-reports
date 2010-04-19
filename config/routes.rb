@@ -36,12 +36,12 @@ ActionController::Routing::Routes.draw do |map|
   map.edit_user_report_thumbnail  "reports/:user_id/:report_id/thumbnail/edit",
     :controller => 'users/reports/thumbnails', :action => 'edit', :conditions => { :method => :get }
 
-  map.new_user_report_bills "reports/:user_id/:report_id/bills/new",
-    :controller => 'users/reports/bills', :action => 'new', :conditions => { :method => :get }
-  map.edit_user_report_bills "reports/:user_id/:report_id/bills/edit",
-    :controller => 'users/reports/bills', :action => 'edit', :conditions => { :method => :get }
-  map.user_report_bill "reports/:user_id/:report_id/bills/:id",
-    :controller => 'users/reports/bills', :action => 'destroy', :conditions => { :method => :delete }
+  map.user_report_bill_criteria "reports/:user_id/:report_id/bill_criteria",
+    :controller => 'users/reports/bill_criteria', :action => 'index', :conditions => { :method => :get }
+  map.new_user_report_bill_criteria "reports/:user_id/:report_id/bill_criteria/new",
+    :controller => 'users/reports/bill_criteria', :action => 'new', :conditions => { :method => :get }
+  map.user_report_bill_criterion "reports/:user_id/:report_id/bill_criteria/:id",
+    :controller => 'users/reports/bill_criteria', :action => 'destroy', :conditions => { :method => :delete }
 
   map.about "about", :controller => "site", :action => "show"  
 

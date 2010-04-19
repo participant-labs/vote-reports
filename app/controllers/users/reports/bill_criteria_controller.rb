@@ -1,11 +1,12 @@
-class Users::Reports::BillsController < ApplicationController
+class Users::Reports::BillCriteriaController < ApplicationController
   before_filter :is_report_owner
+  filter_access_to :all
 
   def new
     @new_report = true if params[:new_report]
     @report = current_user.reports.find(params[:report_id], :scope => current_user)
     if !@report.friendly_id_status.best?
-      redirect_to new_user_report_bills_path(current_user, @report), :status => 301
+      redirect_to new_user_report_bill_criteria_path(current_user, @report), :status => 301
       return
     end
     @q = params[:q]
@@ -17,14 +18,14 @@ class Users::Reports::BillsController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :partial => 'users/reports/bills/table', :locals => {
+        render :partial => 'users/reports/bill_criteria/table', :locals => {
           :report => @report, :bills => @bills
         }
       }
     end
   end
 
-  def edit
+  def index
     @report = current_user.reports.find(params[:report_id], :scope => current_user)
   end
 
