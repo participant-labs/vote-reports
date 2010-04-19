@@ -24,8 +24,8 @@ describe UsersController do
     it "should reject me if I'm not an admin" do
       login
       get :index
-      flash[:notice].should == "You may not access this page"
-      response.should redirect_to(user_path(current_user))
+      flash[:error].should == "You may not access this page"
+      response.should redirect_to(root_path)
     end
   end
 
@@ -45,8 +45,8 @@ describe UsersController do
       current = create_user
       login(current)
       get :edit, :id => @user
-      response.should redirect_to(user_path(current))
-      flash[:notice].should == "You may not access this page"
+      response.should redirect_to(user_path(@user))
+      flash[:error].should == "You may not access this page"
     end
   end
 end

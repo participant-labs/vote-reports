@@ -45,6 +45,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     flash[:notice] = "Successfully destroyed user."
-    redirect_to users_url
+    redirect_to users_path
+  end
+
+  private
+
+  def permission_denied_path
+    if params[:id]
+      user_path(params[:id])
+    else
+      root_path
+    end
   end
 end

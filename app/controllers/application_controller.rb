@@ -11,12 +11,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   filter_parameter_logging :password, :password_confirmation
 
+  def permission_denied_path
+    root_path
+  end
+
   def permission_denied
     if current_user
       flash[:error] = 'You may not access this page'
       notify_exceptional("User #{current_user.inspect} attempted to access protected page #{request.path}")
       respond_to do |format|
-        format.html { redirect_to('/') }
+        format.html { redirect_to permission_denied_path }
         format.xml  { head :unauthorized }
         format.js   { head :unauthorized }
       end

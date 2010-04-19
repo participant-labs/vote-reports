@@ -68,6 +68,16 @@ class Users::ReportsController < ApplicationController
     @user = User.find(params[:user_id])
     @user.reports.find(params[:id], :scope => @user).destroy
     flash[:notice] = "Successfully destroyed report."
-    redirect_to user_reports_url(@user)
+    redirect_to user_reports_path(@user)
+  end
+
+  private
+
+  def permission_denied_path
+    if params[:id]
+      user_report_path(params[:user_id], params[:id])
+    else
+      user_reports_path(params[:user_id])
+    end
   end
 end
