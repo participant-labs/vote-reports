@@ -9,7 +9,7 @@
     <%= raw link_to('Looks Good, take me to my Profile', user_path(@user)) %>
   <%- end -%>
 
-  <%- if @user.valid? -%>
+  <%- if @user.valid? && permitted_to?(:create, :users_rpx_identities) -%>
     <h2>Associated Logins</h2>
     <%- if @user.rpx_identifiers.present? -%>
       <ul>
@@ -24,5 +24,15 @@
     <p>
       <%= raw rpx_popup(:link_text => "Add a login to this account", :app_name => RPX_APP_NAME, :return_url => user_rpx_identities_url(current_user), :add_rpx => true, :unobtrusive => false) %>
     </p>
+  <%- end -%>
+
+  <%- permitted_to? :create, :users_adminships do -%>
+    <h2>Permissions</h2>
+    <%- if @user.adminship -%>
+      <p>Promoted to Admin by <%= render 'users/user', :user => @user.adminship.created_by %> on <%= @user.adminship.created_at.to_s(:long_ordinal) %></p>
+      <%= raw button_to('Revoke Admin Status', user_adminship_path(@user), :method => :delete) %>
+    <%- else -%>
+      <%= raw button_to('Promote to Admin', user_adminship_path(@user)) %>
+    <%- end -%>
   <%- end -%>
 </div>
