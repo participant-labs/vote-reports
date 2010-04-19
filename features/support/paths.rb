@@ -15,13 +15,13 @@ module NavigationHelpers
     when /my edit report page for "(.+)"/i
       edit_user_report_path(current_user, Report.find_by_name($1))
     when /the new bills page for my report "(.+)"/
-      new_user_report_bills_path(current_user, Report.find_by_name($1))
+      new_user_report_bill_criteria_path(current_user, Report.find_by_name($1))
     when /the edit bills page for my report "(.+)"/
-      edit_user_report_bills_path(current_user, Report.find_by_name($1))
+      user_report_bill_criteria_path(current_user, Report.find_by_name($1))
     when /the new bills page for the report "(.+)"/
-      new_user_report_bills_path(Report.find_by_name($1).user, Report.find_by_name($1))
+      new_user_report_bill_criteria_path(Report.find_by_name($1).user, Report.find_by_name($1))
     when /the edit bills page for the report "(.+)"/
-      edit_user_report_bills_path(Report.find_by_name($1).user, Report.find_by_name($1))
+      user_report_bill_criteria_path(Report.find_by_name($1).user, Report.find_by_name($1))
 
     when /my reports page/i
       user_reports_path(current_user)

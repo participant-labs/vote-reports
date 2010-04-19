@@ -3,8 +3,8 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
 describe Users::Reports::BillsController do
 
   describe "routes" do
-    route_matches("/reports/empact/my-report/bills/new",   :get,   :controller => 'users/reports/bills', :action => 'new', :user_id=>"empact", :report_id=>"my-report")
-    route_matches("/reports/empact/my-report/bills/1",   :delete,   :controller => 'users/reports/bills', :action => 'destroy', :user_id=>"empact", :report_id=>"my-report", :id => '1')
+    route_matches("/reports/empact/my-report/bills/new",   :get,   :controller => 'users/reports/bill_criteria', :action => 'new', :user_id=>"empact", :report_id=>"my-report")
+    route_matches("/reports/empact/my-report/bills/1",   :delete,   :controller => 'users/reports/bill_criteria', :action => 'destroy', :user_id=>"empact", :report_id=>"my-report", :id => '1')
     it "should not support nested crud" do
       {:get => "/reports/empact/my-report/bills/1"}.should_not be_routable
       {:post=>"/reports/empact/my-report/bills"}.should_not be_routable
@@ -26,7 +26,7 @@ describe Users::Reports::BillsController do
 
       it "should redirect" do
         get :new, :user_id => current_user, :report_id => @report, :q => 'Smelly Roses'
-        response.should redirect_to(new_user_report_bills_path(current_user, @report))
+        response.should redirect_to(new_user_report_bill_criteria_path(current_user, @report))
       end
     end
 
@@ -34,7 +34,7 @@ describe Users::Reports::BillsController do
       it "should deny access" do
         logout
         get :new, :user_id => @report.user, :report_id => @report, :q => 'searchy!'
-        response.should redirect_to(login_path(:return_to => new_user_report_bills_path(@report.user, @report)))
+        response.should redirect_to(login_path(:return_to => new_user_report_bill_criteria_path(@report.user, @report)))
       end
     end
 
