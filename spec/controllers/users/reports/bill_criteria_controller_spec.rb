@@ -1,15 +1,15 @@
 require File.dirname(__FILE__) + '/../../../spec_helper'
 
-describe Users::Reports::BillsController do
+describe Users::Reports::BillCriteriaController do
 
   describe "routes" do
     route_matches("/reports/empact/my-report/bills/new",   :get,   :controller => 'users/reports/bill_criteria', :action => 'new', :user_id=>"empact", :report_id=>"my-report")
-    route_matches("/reports/empact/my-report/bills/1",   :delete,   :controller => 'users/reports/bill_criteria', :action => 'destroy', :user_id=>"empact", :report_id=>"my-report", :id => '1')
+    route_matches("/reports/empact/my-report/bill_criteria/1",   :delete,   :controller => 'users/reports/bill_criteria', :action => 'destroy', :user_id=>"empact", :report_id=>"my-report", :id => '1')
     it "should not support nested crud" do
-      {:get => "/reports/empact/my-report/bills/1"}.should_not be_routable
+      {:get => "/reports/empact/my-report/bill_criteria/1"}.should_not be_routable
       {:post=>"/reports/empact/my-report/bills"}.should_not be_routable
-      {:put => "/reports/empact/my-report/bills/1"     }.should_not be_routable
-      {:get => "/reports/empact/my-report/bills/1/edit"}.should_not be_routable
+      {:put => "/reports/empact/my-report/bill_criteria/1"     }.should_not be_routable
+      {:get => "/reports/empact/my-report/bill_criteria/1/edit"}.should_not be_routable
     end
   end
 
