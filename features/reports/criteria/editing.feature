@@ -17,7 +17,7 @@ Feature: Editing Criteria from Reports
     Then I should not see "Edit Report"
     When I go to the edit bills page for the report "Active Report"
     Then I should see "You may not access this page"
-    And I should be on the report page for "Active Report"
+    And I should be on the home page
 
   Scenario: Report owner adds an explanatory url to an existing bill criterion
     Given I have a report named "Target Report"
