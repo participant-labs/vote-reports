@@ -12,7 +12,7 @@
   font-size: 18px;
 }
 
-.guide_entry dl, .guide_entry dt, .guide_entry dd, .guide_entry p {
+.guide_entry form dl, .guide_entry form dt, .guide_entry form dd, .guide_entry form p {
   display: inline;
 }
 
