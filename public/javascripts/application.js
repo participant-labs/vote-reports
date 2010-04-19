@@ -51,7 +51,7 @@
       return true;
     });
 
-    $('[data-dialog]').live('focusin', function() {
+    $('[data-dialog]').live('mouseover', function() {
       var target = $('#' + $(this).attr('data-dialog'));
       target.dialog({
         autoOpen: false,
