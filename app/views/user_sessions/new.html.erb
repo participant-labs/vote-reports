@@ -3,7 +3,7 @@
 <div class="section">
   <%= error_messages_for(:user_session) %>
 
-  <%= raw rpx_embed(:app_name => RPX_APP_NAME, :return_url => user_sessions_url) %><br />
+  <%= raw rpx_embed(:app_name => RPX_APP_NAME, :return_url => user_sessions_url(params.slice(:return_to).merge(:authenticity_token => form_authenticity_token))) %><br />
 
   <h3><%= link_to 'Or, Sign in using your email address', '#', :'data-dialog' => 'email_signin' %></h3>
   <div id="email_signin" class="hidden"

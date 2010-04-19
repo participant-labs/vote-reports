@@ -5,14 +5,15 @@ authorization do
   end
 
   role :user do
-    has_permission_on :user_sessions, :to => :destroy
+    has_permission_on :user_sessions, :to => [:new, :create, :destroy]
     has_permission_on :users, :to => [:show, :edit, :update] do
       if_attribute :id => is {user.id}
     end
     has_permission_on :users_rpx_identities, :to => [:create, :destroy] do
       if_attribute :user_id => is {user.id}
     end
-    has_permission_on :users_reports, :to => [:show, :index, :new, :create, :edit, :update, :destroy] do
+    has_permission_on [:reports, :users_reports], :to => [:new]
+    has_permission_on [:reports, :users_reports], :to => [:show, :index, :create, :edit, :update, :destroy] do
       if_attribute :user_id => is {user.id}
     end
     has_permission_on :users_reports_bill_criteria, :to => [:index, :new, :destroy] do
@@ -22,6 +23,6 @@ authorization do
 
   role :guest do
     has_permission_on [:users, :user_sessions], :to => [:new, :create]
-    has_permission_on :users_reports, :to => [:show, :index]
+    has_permission_on [:reports, :users_reports], :to => [:show, :index]
   end
 end
