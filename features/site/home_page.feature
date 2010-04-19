@@ -16,10 +16,10 @@ Feature: Browsing the Home Page
 
   Scenario: User sets their zip code from the instant grat section
     When I go to the home page
-    And I fill in "Zip Code" with "75028"
+    And I fill in "1) Enter your zip code" with "75028"
     And I press "Go!"
     Then I should see "Zip: 75028"
 
-    When I fill in "Zip Code" with "90210"
+    When I fill in "1) Enter your zip code" with "90210"
     And I press "Go!"
     Then I should see "Zip: 90210"
