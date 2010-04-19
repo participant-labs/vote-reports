@@ -1,5 +1,6 @@
 class Users::ReportsController < ApplicationController
   before_filter :is_report_owner, :except => [:index, :show]
+  filter_access_to :all
 
   def index
     @user = User.find(params[:user_id])
@@ -58,7 +59,7 @@ class Users::ReportsController < ApplicationController
     @report = @user.reports.build(params[:report])
     if @report.save
       flash[:notice] = "Successfully created report."
-      redirect_to new_user_report_bills_path(@user, @report, :new_report => true)
+      redirect_to new_user_report_bill_criteria_path(@user, @report, :new_report => true)
     else
       render :action => 'new'
     end
