@@ -1,4 +1,14 @@
 namespace :laws_i_like do
+  task :count_users do
+    require 'excelsior'
+    users = {}
+    Excelsior::Reader.rows(File.open(
+      Rails.root.join('data/laws_i_like/lawslike_18042010.csv'), 'rb')) do |row|
+      users[row.first] = true
+    end
+    puts "#{users.keys.size} users"
+  end
+
   task :import => :environment do
     def facebook_user(fb_id)
       @facebook_users ||= begin
