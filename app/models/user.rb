@@ -3,7 +3,9 @@ class User < ActiveRecord::Base
   has_friendly_id :username, :use_slug => true
   alias_attribute :to_s, :username
 
-  acts_as_authentic
+  acts_as_authentic do |c|
+    c.merge_validates_format_of_login_field_options :with => /\A\w[\w\.+\-_@ ']+$/
+  end
 
   has_one :adminship
   has_one :moderatorship
