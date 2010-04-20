@@ -39,6 +39,8 @@ youreontheballot
 voteforwhatmatters
 areyouontheballot
 
+http://www.govtrack.us/congress/bill.xpd?bill=hj111-5
+
 interest_groups/republican-liberty-caucus has several repeated reports on vote smart.  Time to clean up their data!
 
 time cap invoke COMMAND="cd /var/www/votereports/production/current && RAILS_ENV=production /usr/bin/env nice -n 3 rake vote_smart:import"
