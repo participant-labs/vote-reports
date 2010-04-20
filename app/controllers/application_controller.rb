@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   geocode_ip_address
 
   helper_method :current_user_session, :current_user, :report_path_components, :report_path, :report_follows_path, :report_score_path
-  filter_parameter_logging :password, :password_confirmation
+  filter_parameter_logging :password, :password_confirmation, :fb_sig_friends
 
   before_filter :basic_authenticate if Rails.env.staging?
 
