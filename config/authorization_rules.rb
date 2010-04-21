@@ -1,6 +1,6 @@
 authorization do
   role :admin do
-    has_permission_on [:users, :users_reports], :to => [:index, :show, :edit, :update, :destroy]
+    has_permission_on [:users, :users_reports, :reports], :to => [:index, :show, :edit, :update, :destroy]
     has_permission_on :users_adminships, :to => [:create, :destroy]
   end
 
