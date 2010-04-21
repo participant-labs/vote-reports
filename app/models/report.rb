@@ -1,6 +1,4 @@
 class Report < ActiveRecord::Base
-  DEFAULT_THUMBNAIL_PATH = "reports/default_thumbnail.jpg"
-
   belongs_to :user
   belongs_to :interest_group
   def owner
@@ -114,20 +112,7 @@ class Report < ActiveRecord::Base
 
   has_many :scores, :class_name => 'ReportScore', :dependent => :destroy
 
-  has_attached_file :thumbnail,
-        :styles => { :normal => "330x248>",
-                     :thumbnail => '110x83#',
-                     :small => "55x41#" },
-        :processors => [:jcropper],
-        :default_url => ('/images/' + DEFAULT_THUMBNAIL_PATH),
-        :default_style => :thumbnail
-
   validate :name_not_reserved
-  validates_attachment_content_type :thumbnail, :content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-png']
-
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-
-  after_update :reprocess_thumbnail, :if => :cropping?
 
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
 
@@ -234,31 +219,12 @@ class Report < ActiveRecord::Base
     end
   end
 
-  def cropping?
-    [crop_x, crop_y, crop_w, crop_h].all?(&:present?)
-  end
-
-  # helper method used by the cropper view to get the real image geometry
-  def thumbnail_geometry(style = :original)
-    @geometry ||= {}
-    path = thumbnail.path(style)
-    if path.present?
-      @geometry[style] ||= Paperclip::Geometry.from_file path
-    else
-      @default_geometry ||= Paperclip::Geometry.from_file Rails.root.join('public/images', DEFAULT_THUMBNAIL_PATH)
-    end
-  end
-
 private
 
   def ensure_only_one_owner
     if user && interest_group
       errors.add_to_base("Report can't be owned by both a user and an interest group")
     end
-  end
-
-  def reprocess_thumbnail
-    thumbnail.reprocess!
   end
 
   def name_not_reserved
