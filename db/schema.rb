@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100421025605) do
+ActiveRecord::Schema.define(:version => 20100421033149) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -207,6 +207,15 @@ ActiveRecord::Schema.define(:version => 20100421025605) do
 
   add_index "districts", ["us_state_id", "district"], :name => "districts_us_state_id_district_unique", :unique => true
   add_index "districts", ["us_state_id"], :name => "index_districts_on_us_state_id"
+
+  create_table "images", :force => true do |t|
+    t.string   "thumbnail_file_name",    :null => false
+    t.string   "thumbnail_content_type", :null => false
+    t.integer  "thumbnail_file_size",    :null => false
+    t.datetime "thumbnail_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "interest_group_ratings", :force => true do |t|
     t.integer  "interest_group_report_id", :null => false
@@ -478,15 +487,6 @@ ActiveRecord::Schema.define(:version => 20100421025605) do
   end
 
   add_index "subjects", ["vote_smart_id"], :name => "index_subjects_on_vote_smart_id", :unique => true
-
-  create_table "thumbnails", :force => true do |t|
-    t.string   "thumbnail_file_name",    :null => false
-    t.string   "thumbnail_content_type", :null => false
-    t.integer  "thumbnail_file_size",    :null => false
-    t.datetime "thumbnail_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "us_states", :force => true do |t|
     t.string   "abbreviation", :limit => 2, :null => false
