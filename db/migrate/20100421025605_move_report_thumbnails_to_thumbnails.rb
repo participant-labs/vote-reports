@@ -1,6 +1,16 @@
 class MoveReportThumbnailsToThumbnails < ActiveRecord::Migration
   class Report < ActiveRecord::Base
-    has_attached_file :thumbnail
+    has_attached_file :thumbnail,
+      :styles => { :normal => "330x248>",
+                   :thumbnail => '110x83#',
+                   :small => "55x41#" }
+  end
+
+  class Thumbnail < ActiveRecord::Base
+    has_attached_file :thumbnail,
+      :styles => { :normal => "330x248>",
+                   :thumbnail => '110x83#',
+                   :small => "55x41#" }
   end
 
   def self.up
