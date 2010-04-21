@@ -4,7 +4,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :bills, :only => [:index, :show]
   map.resources :politicians, :only => [:index, :show]
   map.resources :subjects, :only => [:index, :show]
-  map.resources :interest_groups, :only => [:index, :show]
+  map.resources :interest_groups, :only => [:index, :show] do |interest_group|
+    interest_group.resource :image, :controller => 'interest_groups/images', :only => [:edit, :create, :update]
+  end
 
   map.resources :reports, :only => [:index, :new] do |report|
     report.resources :scores, :controller => 'reports/scores', :only => :show

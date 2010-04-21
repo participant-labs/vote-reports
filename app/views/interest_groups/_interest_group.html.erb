@@ -1,1 +1,12 @@
-<%= link_to_unless_current interest_group.name, interest_group %>
+<% div_for(interest_group, :class => 'clearfix') do %>
+  <%= link_to image_tag(interest_group.thumbnail.url, :size => '90x68'), interest_group_path(interest_group), :class => 'report_image' %>
+  <div class="report_attrs">
+    <%- description = truncate(strip_tags(interest_group.description), :length => 140 - interest_group.name.length) -%>
+    <%= link_to h(interest_group.name), interest_group_path(interest_group), :class => 'report_title' %>
+    <%- if description.blank? || interest_group.name.size > 60 -%>
+      <br />
+    <%- else -%>
+      <blockquote><p><%= h(description) %></p></blockquote>
+    <%- end -%>
+  </div>
+<% end %>
