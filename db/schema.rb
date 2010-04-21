@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100421024927) do
+ActiveRecord::Schema.define(:version => 20100421025605) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -389,16 +389,14 @@ ActiveRecord::Schema.define(:version => 20100421024927) do
 
   create_table "reports", :force => true do |t|
     t.integer  "user_id"
-    t.string   "name",                   :null => false
+    t.string   "name",              :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
     t.string   "cached_slug"
     t.string   "state"
-    t.string   "thumbnail_file_name"
-    t.string   "thumbnail_content_type"
-    t.string   "thumbnail_file_size"
     t.integer  "interest_group_id"
+    t.integer  "thumbnail_id"
   end
 
   create_table "representative_terms", :force => true do |t|

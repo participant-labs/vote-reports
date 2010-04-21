@@ -1,4 +1,6 @@
 class Thumbnail < ActiveRecord::Base
+  DEFAULT_THUMBNAIL_PATH = "reports/default_thumbnail.jpg"
+
   has_attached_file :thumbnail,
         :styles => { :normal => "330x248>",
                      :thumbnail => '110x83#',
