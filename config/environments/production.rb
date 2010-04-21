@@ -28,4 +28,4 @@ config.action_view.cache_template_loading            = true
 # config.threadsafe!
 
 config.gem 'scout'
-config.gem 'request-log-analyzer'
+config.gem 'request-log-analyzer', :lib => 'request_log_analyzer'
