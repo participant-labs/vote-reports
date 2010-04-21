@@ -40,7 +40,7 @@
   <%= render 'reports/header', :report => @report %>
 
   <h2>Replace Thumbnail</h2>
-  <% form_for [@report.user, @report], :html => { :multipart => true } do |f| %>
+  <% form_for [@report.user, @report, @image], :html => { :multipart => true } do |f| %>
     <p>
       <%= f.label :thumbnail_file_name, 'Thumbnail' %><br />
       <%= f.file_field :thumbnail %><br />
