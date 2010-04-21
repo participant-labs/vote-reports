@@ -12,6 +12,13 @@ class Thumbnail < ActiveRecord::Base
   validates_attachment_presence :thumbnail
   validates_attachment_content_type :thumbnail, :content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-png']
 
+  class << self
+    def default
+      new
+    end
+  end
+  delegate :url, :to => :thumbnail
+
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
   after_update :reprocess_thumbnail, :if => :cropping?
