@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100421033149) do
+ActiveRecord::Schema.define(:version => 20100421035022) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -405,7 +405,7 @@ ActiveRecord::Schema.define(:version => 20100421033149) do
     t.string   "cached_slug"
     t.string   "state"
     t.integer  "interest_group_id"
-    t.integer  "thumbnail_id"
+    t.integer  "image_id"
   end
 
   create_table "representative_terms", :force => true do |t|

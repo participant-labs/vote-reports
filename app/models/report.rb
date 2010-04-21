@@ -5,6 +5,11 @@ class Report < ActiveRecord::Base
     user || interest_group
   end
 
+  belongs_to :image
+  def thumbnail
+    image || Image.default
+  end
+
   has_friendly_id :name, :use_slug => true, :scope => :user
 
   has_many :report_delayed_jobs
