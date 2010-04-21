@@ -35,6 +35,8 @@ ActionController::Routing::Routes.draw do |map|
     :controller => 'users/reports', :action => 'edit', :conditions =>  { :method => :get }
   map.edit_user_report_thumbnail  "reports/:user_id/:report_id/thumbnail/edit",
     :controller => 'users/reports/thumbnails', :action => 'edit', :conditions => { :method => :get }
+  map.user_report_image  "reports/:user_id/:report_id/thumbnail",
+    :controller => 'users/reports/thumbnails', :action => 'update', :conditions => { :method => :put }
 
   map.user_report_bill_criteria "reports/:user_id/:report_id/bill_criteria",
     :controller => 'users/reports/bill_criteria', :action => 'index', :conditions => { :method => :get }

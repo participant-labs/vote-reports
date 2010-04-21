@@ -7,7 +7,7 @@ class Report < ActiveRecord::Base
 
   belongs_to :image
   def thumbnail
-    image || Image.default
+    image || build_image
   end
 
   has_friendly_id :name, :use_slug => true, :scope => :user
