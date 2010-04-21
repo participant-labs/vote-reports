@@ -1,5 +1,5 @@
 <% title %Q{Crop Thumbnail for "#{@report.name}"} %>
-<%- thumb_width, thumb_height = @report.thumbnail.styles[:thumbnail][:geometry].split('x').map(&:to_i) -%>
+<%- thumb_width, thumb_height = @image.thumbnail.styles[:thumbnail][:geometry].split('x').map(&:to_i) -%>
 
 <% content_for :javascript_area do %>
 <% javascript_tag do %>
@@ -11,8 +11,8 @@
     var ry = <%= thumb_height %> / coords.h;
 
     $('#preview').css({
-      width: Math.round(rx * <%= @report.thumbnail_geometry.width.to_i %>) + 'px',
-      height: Math.round(ry * <%= @report.thumbnail_geometry.height.to_i %>) + 'px',
+      width: Math.round(rx * <%= @image.thumbnail_geometry.width.to_i %>) + 'px',
+      height: Math.round(ry * <%= @image.thumbnail_geometry.height.to_i %>) + 'px',
       marginLeft: '-' + Math.round(rx * coords.x) + 'px',
       marginTop: '-' + Math.round(ry * coords.y) + 'px'
     });
@@ -58,14 +58,14 @@
   <p>Use your mouse to select the thumbnail from the original image below</p>
   <dl>
     <dt>Original Image</dt>
-    <dd><%= image_tag @report.thumbnail.url(:original), :id => 'cropbox' %></dd>
+    <dd><%= image_tag @image.thumbnail.url(:original), :id => 'cropbox' %></dd>
 
     <dt>Cropped Result</dt>
-    <dd style="width:<%= thumb_width %>px;height:<%= thumb_height %>px;overflow:hidden"><%= image_tag @report.thumbnail.url(:original), :id => 'preview' %></dd>
+    <dd style="width:<%= thumb_width %>px;height:<%= thumb_height %>px;overflow:hidden"><%= image_tag @image.thumbnail.url(:original), :id => 'preview' %></dd>
   </dl>
 
   <ul class="actions_menu">
-    <li><% form_for [@report.user, @report] do |f| %>
+    <li><% form_for @image, :url => user_report_image_path(@report.user, @report) do |f| %>
       <%= f.hidden_field :crop_x, :id => 'crop_x' %>
       <%= f.hidden_field :crop_y, :id => 'crop_y' %>
       <%= f.hidden_field :crop_w, :id => 'crop_w' %>
