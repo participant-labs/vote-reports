@@ -1,0 +1,79 @@
+<% title %Q{Crop Thumbnail for "#{@interest_group.name}"} %>
+
+<%- thumb_width, thumb_height = @image.thumbnail.styles[:thumbnail][:geometry].split('x').map(&:to_i) -%>
+
+<% content_for :javascript_area do %>
+<% javascript_tag do %>
+
+(function($) {
+  function showPreview(coords)
+  {
+    var rx = <%= thumb_width %> / coords.w;
+    var ry = <%= thumb_height %> / coords.h;
+
+    $('#preview').css({
+      width: Math.round(rx * <%= @image.thumbnail_geometry.width.to_i %>) + 'px',
+      height: Math.round(ry * <%= @image.thumbnail_geometry.height.to_i %>) + 'px',
+      marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+      marginTop: '-' + Math.round(ry * coords.y) + 'px'
+    });
+
+    $('#crop_x').val(Math.round(coords.x));
+    $('#crop_y').val(Math.round(coords.y));
+    $('#crop_w').val(Math.round(coords.w));
+    $('#crop_h').val(Math.round(coords.h));
+  }
+
+  $(function() {
+    $('#cropbox').Jcrop({
+        onSelect: showPreview,
+        onChange: showPreview,
+        aspectRatio: <%= thumb_width %>/<%= thumb_height %>,
+        bgColor: '#F9F9F9'
+      });
+  });
+})(jQuery);
+
+<% end %>
+<% end %>
+
+<div class="section">
+  <%= render 'interest_groups/header', :interest_group => @interest_group %>
+
+  <h2>Replace Thumbnail</h2>
+  <% form_for @image, :url => interest_group_image_path(@interest_group), :html => { :multipart => true } do |f| %>
+    <p>
+      <%= f.label :thumbnail_file_name, 'Thumbnail' %><br />
+      <%= f.file_field :thumbnail %><br />
+    </p>
+    <ul class="actions_menu">
+      <li><%= f.submit "Replace!" %></li>
+      <li><%= link_to 'Back to Interest Group', interest_group_path(@interest_group) %></li>
+    </ul>
+  <% end %>
+</div>
+
+<%- unless @image.new_record? -%>
+<div class="section">
+  <h2>Crop Thumbnail</h2>
+  <p>Use your mouse to select the thumbnail from the original image below</p>
+  <dl>
+    <dt>Original Image</dt>
+    <dd><%= image_tag @image.thumbnail.url(:original), :id => 'cropbox' %></dd>
+
+    <dt>Cropped Result</dt>
+    <dd style="width:<%= thumb_width %>px;height:<%= thumb_height %>px;overflow:hidden"><%= image_tag @image.thumbnail.url(:original), :id => 'preview' %></dd>
+  </dl>
+
+  <ul class="actions_menu">
+    <li><% form_for @image, :url => interest_group_image_path(@interest_group) do |f| %>
+      <%= f.hidden_field :crop_x, :id => 'crop_x' %>
+      <%= f.hidden_field :crop_y, :id => 'crop_y' %>
+      <%= f.hidden_field :crop_w, :id => 'crop_w' %>
+      <%= f.hidden_field :crop_h, :id => 'crop_h' %>
+      <%= f.submit "Crop!" %>
+    <% end %></li>
+    <li><%= link_to 'Back to Interest Group', interest_group_path(@interest_group) %></li>
+  </ul>
+</div>
+<%- end -%>

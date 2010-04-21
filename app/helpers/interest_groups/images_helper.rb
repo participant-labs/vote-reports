@@ -1,0 +1,2 @@
+module InterestGroups::ImagesHelper
+end

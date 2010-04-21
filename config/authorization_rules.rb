@@ -2,6 +2,7 @@ authorization do
   role :admin do
     has_permission_on [:users, :users_reports, :reports], :to => [:index, :show, :edit, :update, :destroy]
     has_permission_on :users_adminships, :to => [:create, :destroy]
+    has_permission_on :interest_groups_images, :to => [:edit, :create, :update]
   end
 
   role :user do

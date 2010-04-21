@@ -1,7 +1,7 @@
 <% title "Interest Group - #{h @interest_group.name}" %>
 
 <div class="section">
-  <h2><%= @interest_group.name %></h2>
+  <%= render 'interest_groups/header', :interest_group => @interest_group %>
   <ul class="details">
   <%- if @interest_group.url.present? -%>
     <li><%= link_to 'Website', @interest_group.url %></li>
@@ -32,6 +32,11 @@
   </li>
   </ul>
   <blockquote><%= to_html(@interest_group.description) %></blockquote>
+  <%- permitted_to? :edit, :interest_groups_images do -%>
+    <ul class="actions_menu">
+      <li><%= link_to 'Edit Interest Group Thumbnail', edit_interest_group_image_path(@interest_group) %></li>
+    </ul>
+  <%- end -%>
 </div>
 
 <div class="section report_scores">
