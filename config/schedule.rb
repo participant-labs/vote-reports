@@ -18,7 +18,7 @@ every 7.days do
 end
 
 every 1.minute do
-  command "/opt/local/bin/scout 53a8a406-6297-4ab9-8763-21f8266b9968"
+  command "/usr/local/bin/scout 53a8a406-6297-4ab9-8763-21f8266b9968"
 end
 
 # Learn more: http://github.com/javan/whenever
