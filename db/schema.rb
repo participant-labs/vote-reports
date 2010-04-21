@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100421035022) do
+ActiveRecord::Schema.define(:version => 20100421053602) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -270,6 +270,7 @@ ActiveRecord::Schema.define(:version => 20100421035022) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cached_slug"
+    t.integer  "image_id"
   end
 
   add_index "interest_groups", ["ancestry"], :name => "index_interest_groups_on_ancestry"
