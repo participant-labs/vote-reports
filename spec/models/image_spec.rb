@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe Thumbnail do
+describe Image do
 end

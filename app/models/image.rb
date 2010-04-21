@@ -1,4 +1,4 @@
-class Thumbnail < ActiveRecord::Base
+class Image < ActiveRecord::Base
   DEFAULT_THUMBNAIL_PATH = "reports/default_thumbnail.jpg"
 
   has_attached_file :thumbnail,
