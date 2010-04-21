@@ -7,7 +7,7 @@ class Report < ActiveRecord::Base
 
   belongs_to :image
   def thumbnail
-    image || build_image
+    image || interest_group.try(:image) || build_image
   end
 
   has_friendly_id :name, :use_slug => true, :scope => :user
