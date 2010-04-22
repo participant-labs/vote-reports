@@ -204,17 +204,25 @@ dd {
   content: ':';
 }
 
-.report_image, .ui-dialog-titlebar-close {
+.image, .ui-dialog-titlebar-close {
   border-bottom: 0;
 }
 
-.report_image:hover {
+.image:hover {
   border-bottom: 0;
 }
 
-.report_image {
+.image {
   float: left;
   padding-right: .5em;
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+}
+
+.image.normal {
+  width: 110px;
+  height: 110px;
 }
 
 .report_attrs {

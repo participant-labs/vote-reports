@@ -5,7 +5,6 @@ class Image < ActiveRecord::Base
         :styles => { :normal => ["110x110", :png],
                      :thumbnail => ['90x90', :png] },
         :processors => [:jcropper],
-        :default_url => ('/images/' + DEFAULT_THUMBNAIL_PATH),
         :default_style => :thumbnail
 
   validates_attachment_presence :thumbnail
