@@ -65,7 +65,7 @@
         <th>All Scores
           <%- if params[:representing].present? -%>
           for Representatives from "<%= params[:representing] %>"
-          <%= link_to 'show all', user_report_path(@report.user, @report, :representing => ''), :'data-replace' => 'report_scores' %>
+          <%= link_to 'show all', path_for_report(@report, :representing => ''), :'data-replace' => 'report_scores' %>
           <%- end -%>
         </th>
       </tr>
