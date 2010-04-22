@@ -215,19 +215,18 @@ dd {
 .image {
   float: left;
   padding-right: .5em;
-  max-width: 90px;
-  max-height: 90px;
+  max-width: 100px;
+  max-height: 100px;
   overflow: hidden;
   width: 1000%;
 }
-
-.image.normal {
-  max-width: 110px;
-  max-height: 110px;
+.image.large {
+  max-width: 120px;
+  max-height: 120px;
 }
 
 .report_attrs {
-  margin-left: 100px;
+  margin-left: 110px;
 }
 
 .report_attrs blockquote, .report_creator {
