@@ -5,7 +5,7 @@ class Users::Reports::BillCriteriaController < ApplicationController
     @new_report = true if params[:new_report]
     @report = current_user.reports.find(params[:report_id], :scope => current_user)
     if !@report.friendly_id_status.best?
-      redirect_to new_user_report_bill_criteria_path(current_user, @report), :status => 301
+      redirect_to new_user_report_bill_criterion_path(current_user, @report), :status => 301
       return
     end
     @q = params[:q]

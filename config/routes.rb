@@ -21,33 +21,10 @@ ActionController::Routing::Routes.draw do |map|
     district.resource :map, :controller => 'us/districts/maps', :only => 'show'
   end
 
-  map.user_reports "reports/:user_id",
-    :controller => 'users/reports',:action => 'index', :conditions => { :method => :get }
-  map.user_reports "reports/:user_id",
-    :controller => 'users/reports',:action => 'create', :conditions => { :method => :post }
-  map.new_user_report  "reports/:user_id/new",
-    :controller => 'users/reports', :action => 'new', :conditions => { :method => :get }
-  map.user_report  "reports/:user_id/:id",
-    :controller => 'users/reports', :action => 'show', :conditions => { :method => :get }
-  map.user_report  "reports/:user_id/:id",
-    :controller => 'users/reports', :action => 'update', :conditions => { :method => :put }
-  map.user_report  "reports/:user_id/:id",
-    :controller => 'users/reports', :action => 'destroy', :conditions => { :method => :delete }
-  map.edit_user_report  "reports/:user_id/:id/edit",
-    :controller => 'users/reports', :action => 'edit', :conditions =>  { :method => :get }
-  map.edit_user_report_thumbnail  "reports/:user_id/:report_id/thumbnail/edit",
-    :controller => 'users/reports/thumbnails', :action => 'edit', :conditions => { :method => :get }
-  map.user_report_image  "reports/:user_id/:report_id/thumbnail",
-    :controller => 'users/reports/thumbnails', :action => 'update', :conditions => { :method => :put }
-  map.user_report_images  "reports/:user_id/:report_id/thumbnail",
-    :controller => 'users/reports/thumbnails', :action => 'create', :conditions => { :method => :post }
-
-  map.user_report_bill_criteria "reports/:user_id/:report_id/bill_criteria",
-    :controller => 'users/reports/bill_criteria', :action => 'index', :conditions => { :method => :get }
-  map.new_user_report_bill_criteria "reports/:user_id/:report_id/bill_criteria/new",
-    :controller => 'users/reports/bill_criteria', :action => 'new', :conditions => { :method => :get }
-  map.user_report_bill_criterion "reports/:user_id/:report_id/bill_criteria/:id",
-    :controller => 'users/reports/bill_criteria', :action => 'destroy', :conditions => { :method => :delete }
+  map.resources :reports, :as => '', :name_prefix => 'user_', :path_prefix => "reports/:user_id", :controller => 'users/reports' do |report|
+    report.resource :image, :as => 'thumbnail', :only => [:edit, :update, :create], :controller => 'users/reports/images'
+    report.resources :bill_criteria, :only => [:index, :new, :destroy], :controller => 'users/reports/bill_criteria'
+  end
 
   map.about "about", :controller => "site", :action => "show"  
 
