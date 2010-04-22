@@ -2,40 +2,7 @@
 
 <%- thumb_width, thumb_height = @image.thumbnail.styles[:thumbnail][:geometry].split('x').map(&:to_i) -%>
 
-<% content_for :javascript_area do %>
-<% javascript_tag do %>
-
-(function($) {
-  function showPreview(coords)
-  {
-    var rx = <%= thumb_width %> / coords.w;
-    var ry = <%= thumb_height %> / coords.h;
-
-    $('#preview').css({
-      width: Math.round(rx * <%= @image.thumbnail_geometry.width.to_i %>) + 'px',
-      height: Math.round(ry * <%= @image.thumbnail_geometry.height.to_i %>) + 'px',
-      marginLeft: '-' + Math.round(rx * coords.x) + 'px',
-      marginTop: '-' + Math.round(ry * coords.y) + 'px'
-    });
-
-    $('#crop_x').val(Math.round(coords.x));
-    $('#crop_y').val(Math.round(coords.y));
-    $('#crop_w').val(Math.round(coords.w));
-    $('#crop_h').val(Math.round(coords.h));
-  }
-
-  $(function() {
-    $('#cropbox').Jcrop({
-        onSelect: showPreview,
-        onChange: showPreview,
-        aspectRatio: <%= thumb_width %>/<%= thumb_height %>,
-        bgColor: '#F9F9F9'
-      });
-  });
-})(jQuery);
-
-<% end %>
-<% end %>
+<%= render 'images/crop_js', :image => @image, :width => thumb_width, :height => thumb_height %>
 
 <div class="section">
   <%= render 'interest_groups/header', :interest_group => @interest_group %>
