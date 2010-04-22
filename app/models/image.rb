@@ -29,7 +29,7 @@ class Image < ActiveRecord::Base
     if path.present?
       @geometry[style] ||= Paperclip::Geometry.from_file path
     else
-      @default_geometry ||= Paperclip::Geometry.from_file Rails.root.join('public/images', DEFAULT_THUMBNAIL_PATH)
+      @default_geometry ||= Paperclip::Geometry.from_file Rails.root.join("public/thumbnails/#{style}/missing.png")
     end
   end
 
