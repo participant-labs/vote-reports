@@ -2,7 +2,8 @@ class Image < ActiveRecord::Base
   DEFAULT_THUMBNAIL_PATH = "reports/default_thumbnail.jpg"
 
   has_attached_file :thumbnail,
-        :styles => { :thumbnail => '90x68' },
+        :styles => { :normal => ["110x110", :png],
+                     :thumbnail => ['90x90', :png] },
         :processors => [:jcropper],
         :default_url => ('/images/' + DEFAULT_THUMBNAIL_PATH),
         :default_style => :thumbnail
