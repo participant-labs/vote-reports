@@ -10,6 +10,10 @@ module ReportsHelper
     report.user ? [report.user, report] : report.interest_group
   end
 
+  def path_for_report(report, options = {})
+    polymorphic_path(report_path_components(report), options)
+  end
+
   def report_next_step(report)
     next_step = report.next_step
     if next_step.is_a?(String)
