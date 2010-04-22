@@ -1,0 +1,34 @@
+<% content_for :javascript_area do %>
+<% javascript_tag do %>
+
+(function($) {
+  function showPreview(coords)
+  {
+    var rx = <%= width %> / coords.w;
+    var ry = <%= height %> / coords.h;
+
+    $('#preview').css({
+      width: Math.round(rx * <%= image.thumbnail_geometry.width.to_i %>) + 'px',
+      height: Math.round(ry * <%= image.thumbnail_geometry.height.to_i %>) + 'px',
+      marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+      marginTop: '-' + Math.round(ry * coords.y) + 'px'
+    });
+
+    $('#crop_x').val(Math.round(coords.x));
+    $('#crop_y').val(Math.round(coords.y));
+    $('#crop_w').val(Math.round(coords.w));
+    $('#crop_h').val(Math.round(coords.h));
+  }
+
+  $(function() {
+    $('#cropbox').Jcrop({
+        onSelect: showPreview,
+        onChange: showPreview,
+        aspectRatio: <%= width %>/<%= height %>,
+        bgColor: '#F9F9F9'
+      });
+  });
+})(jQuery);
+
+<% end %>
+<% end %>
