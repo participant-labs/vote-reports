@@ -3,8 +3,8 @@
 <div class="section">
   <ul class="actions_menu">
     <li><h2>Edit Report</h2></li>
-    <li><%= link_to 'Edit Thumbnail', edit_user_report_thumbnail_path(current_user, @report) %></li>
-    <li><%= link_to 'Add New Criteria', new_user_report_bill_criteria_path(current_user, @report) %></li>
+    <li><%= link_to 'Edit Thumbnail', edit_user_report_image_path(current_user, @report) %></li>
+    <li><%= link_to 'Add New Criteria', new_user_report_bill_criterion_path(current_user, @report) %></li>
     <li><%= link_to 'Edit Existing Criteria', user_report_bill_criteria_path(current_user, @report) %></li>
   </ul>
 
