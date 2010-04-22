@@ -1,6 +1,6 @@
 <% title %Q{Crop Thumbnail for "#{@interest_group.name}"} %>
 
-<%- thumb_width, thumb_height = @image.thumbnail.styles[:thumbnail][:geometry].split('x').map(&:to_i) -%>
+<%- thumb_width, thumb_height = @image.thumbnail.styles[:normal][:geometry].split('x').map(&:to_i) -%>
 
 <%= render 'images/crop_js', :image => @image, :width => thumb_width, :height => thumb_height %>
 
