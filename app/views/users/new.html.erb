@@ -1,12 +1,15 @@
 <% title "Sign up" %>
 
-<div class="section">
+<div class="section clearfix">
   <%- unless @user.errors.present? -%>
-    <h2>Sign up using an Existing Account</h2>
+  <div class="left">
+    <h2>Sign up via...</h2>
     <%= raw rpx_embed(:app_name => RPX_APP_NAME, :return_url => user_sessions_url) %><br />
-
-    <h2>Or, Sign up using your email address</h2>
+  </div>
   <%- end -%>
 
-  <%= render 'users/form', :user => @user %>
+  <div class="right">
+    <h2>Sign up via Email</h2>
+    <%= render 'users/form', :user => @user %>
+  </div>
 </div>
