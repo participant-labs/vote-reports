@@ -84,7 +84,6 @@ namespace :gov_track do
       FileUtils.mkdir_p(dest)
       Dir.chdir(dest) do
         `wget -N http://www.govtrack.us/data/us/#{meeting}/committees.xml`
-        `wget -N http://www.govtrack.us/data/us/#{meeting}/votes.all.index.xml`
         `wget -N http://www.govtrack.us/data/us/#{meeting}/people.xml`
         `rsync -az govtrack.us::govtrackdata/us/#{meeting}/bills .`
         `rsync -az govtrack.us::govtrackdata/us/#{meeting}/bills.amdt .`
