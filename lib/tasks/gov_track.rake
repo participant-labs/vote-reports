@@ -75,20 +75,17 @@ namespace :gov_track do
     @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
   end
 
-  task :download_all do
+  task :download_all => :support do
     Dir.chdir(Rails.root.join("data/gov_track/us/")) do
       `wget -N http://www.govtrack.us/data/us/people.xml`
     end
-    MEETINGS.each do |meeting|
-      dest = Rails.root.join("data/gov_track/us/#{meeting}/")
-      FileUtils.mkdir_p(dest)
-      Dir.chdir(dest) do
-        `wget -N http://www.govtrack.us/data/us/#{meeting}/committees.xml`
-        `wget -N http://www.govtrack.us/data/us/#{meeting}/people.xml`
-        `rsync -az govtrack.us::govtrackdata/us/#{meeting}/bills .`
-        `rsync -az govtrack.us::govtrackdata/us/#{meeting}/bills.amdt .`
-        `rsync -az govtrack.us::govtrackdata/us/#{meeting}/rolls .`
-      end
+    log = Rails.root.join('log/govtrack-rsync.log')
+    meetings do |meeting|
+      `wget -N http://www.govtrack.us/data/us/#{meeting}/committees.xml >> #{log}`
+      `wget -N http://www.govtrack.us/data/us/#{meeting}/people.xml  >> #{log}`
+      `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/bills . >> #{log}`
+      `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/bills.amdt . >> #{log}`
+      `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/rolls . >> #{log}`
     end
   end
 
