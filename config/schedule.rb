@@ -17,6 +17,10 @@ every 7.days do
   rake "db:backup:full"
 end
 
+every 1.day do
+  rake "gov_track:download_all"
+end
+
 every 1.minute do
   command "/usr/local/bin/scout 53a8a406-6297-4ab9-8763-21f8266b9968"
 end
