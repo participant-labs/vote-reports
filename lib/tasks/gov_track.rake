@@ -3,7 +3,7 @@ namespace :gov_track do
     require 'open-uri'
     require 'nokogiri'
 
-    MEETINGS = 103..111
+    MEETINGS = 101..111
 
     def gov_track_path(path)
       local_path = Rails.root.join('data/gov_track', path)
@@ -63,7 +63,6 @@ namespace :gov_track do
         end
       end
     end
-
   end
 
   task :politicians => :environment do
