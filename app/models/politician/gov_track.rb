@@ -10,6 +10,7 @@ class Politician < ActiveRecord::Base
       end
     end
 
+    # this implements much of the Paperclip::Attachment api for the sake of our reuse
     class Headshot
       ROOT_PATH = "http://www.govtrack.us/data/"
       HEADSHOT_TYPE_TO_SIZE = {nil => nil, :small => '50px', :medium => '100px', :large => '200px'}.freeze
@@ -17,6 +18,22 @@ class Politician < ActiveRecord::Base
       def initialize(id)
         raise ArgumentError unless id.present?
         @id = id
+      end
+
+      def thumbnail
+        self
+      end
+
+      def file?
+        true
+      end
+
+      def styles
+        HEADSHOT_TYPE_TO_SIZE.inject({}) do |all, (size, dimensions)|
+          dimensions ||= HEADSHOT_TYPE_TO_SIZE[:large]
+          all[size] = {:geometry => dimensions}
+          all
+        end
       end
 
       def url(size = nil)
