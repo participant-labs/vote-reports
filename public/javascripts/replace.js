@@ -1,0 +1,51 @@
+;(function($) {
+  $.address.init(function(event) {
+    if (event.value.length > 1) {
+      var values = event.value.substring(1).split('/');
+      var target_id = values.shift();
+      var url = current_url() + '?' + values.shift();
+      replaceWith(target_id, url);
+    }
+  });
+
+  function current_url() {
+    return window.location.protocol + '//' + window.location.host + window.location.pathname;
+  }
+
+  function params_to_path(target_id, url) {
+    return target_id + '/' + url.substring(url.indexOf('?') + 1);
+  }
+
+  function replaceWith(target_id, url) {
+    target = $('#' + target_id);
+    if (target.length == 0) {
+      return true;
+    }
+    target.block({message: '<p class="loading">Loading...</p>'});
+    target.load(url, function() {
+      target.unblock();
+    });
+    $.address.value(params_to_path(target_id, url));
+    return false;
+  }
+
+  $(document).ready(function(){
+    $(':input[data-replace]').live('click', function(event) {
+      var target = $(event.target);
+      return replaceWith(
+        target.attr('data-replace'),
+        current_url() + '?' + target.serialize());
+    });
+
+    $('[data-replace] > a, a[data-replace]').live('click', function(event) {
+      var target = $(event.target);
+      target.trigger('update_selected');
+      return replaceWith(target.closest('[data-replace]').attr('data-replace'), target.attr('href'));
+    })
+
+    $('form[data-replace]').live('submit', function(event){
+      var source = $(event.target);
+      return replaceWith(source.attr('data-replace'), source.attr('action') + '?' + source.serialize());
+    });
+  });
+})(jQuery);
