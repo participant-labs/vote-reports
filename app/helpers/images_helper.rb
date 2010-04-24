@@ -3,7 +3,10 @@ module ImagesHelper
     attachment = image.thumbnail
     attrs =
       if attachment.file? && style != :large
-        {:'data-qtip-image' => attachment.url(:large)}
+        {
+          :'data-qtip-image' => attachment.url(:large),
+          :'data-qtip-width' => attachment.styles[:large][:geometry].split('x').first.to_i
+        }
       end
     image_tag(attachment.url(style), (attrs || {}).merge(
       :alt => title, :title => title
