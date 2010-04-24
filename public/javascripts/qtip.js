@@ -127,7 +127,7 @@
           },
           style: {
             'text-align': 'center',
-            width: 230,
+            width: parseInt(self.attr('data-qtip-width'), 10) + 30,
             border: {
               width: 5,
               radius: 5,
