@@ -213,9 +213,7 @@
           },
           style: {
             'text-align': 'center',
-            width: {
-              min: 210
-            },
+            width: 220,
             border: {
               width: 5,
               radius: 5,
