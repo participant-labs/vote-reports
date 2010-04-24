@@ -1,4 +1,5 @@
 <%-
+  hide_titles ||= false
   hide_year ||= false
   @bill_titles_rendered ||= []
   bill_titles_id = dom_id(bill, :titles)
@@ -6,12 +7,12 @@
 
 <span class="bill">
   <%= link_to_unless_current "#{bill.bill_type.to_s} #{bill.bill_number}#{" (#{bill.introduced_on.year})" unless hide_year }: #{bill.titles.first}", bill, :class => 'title' %>
-  <%- if bill.titles.size > 1 -%>
+  <%- if !hide_titles && bill.titles.size > 1 -%>
     (<%= link_to 'all titles', '#', :'data-dialog' => bill_titles_id, :class => 'bill_titles' %>)
   <%- end -%>
 </span>
 
-<%- if bill.titles.size > 1 && !@bill_titles_rendered.include?(bill) -%>
+<%- if !hide_titles && bill.titles.size > 1 && !@bill_titles_rendered.include?(bill) -%>
   <%- @bill_titles_rendered << bill -%>
   <% content_tag :dl, :id => bill_titles_id, :class => 'hidden', :'data-dialog-title' => %{Bill Titles for "#{bill.titles.first}"} do %>
     <%- bill.titles.group_by {|t| t.as }.each_pair do |as, as_titles| -%>
