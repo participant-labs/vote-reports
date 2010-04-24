@@ -154,14 +154,14 @@
       }
     });
 
-    $('[data-qtip]').live('mouseover', function(event) {
-      var self = $(event.target).closest('[data-qtip]');
+    $('[data-qtip-path]').live('mouseover', function(event) {
+      var self = $(event.target).closest('[data-qtip-path]');
       if (!self.data('init')) {
         self.data('init', true);
         var title = self.attr('data-qtip-title');
         self.qtip({
           content: {
-            url: self.attr('data-qtip'),
+            url: self.attr('data-qtip-path'),
             title: { text: title }
           },
           position: {
