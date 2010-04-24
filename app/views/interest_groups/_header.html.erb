@@ -1,4 +1,4 @@
 <div class="clearfix report_description">
-  <div class="image large"><%= image_tag interest_group.thumbnail.url(:header) %></div>
+  <div class="image large"><%= hover_image_tag interest_group.thumbnail, interest_group.name, :header %></div>
   <h2><%= interest_group.name %></h2>
 </div>
