@@ -1,7 +1,8 @@
 class Image < ActiveRecord::Base
   has_attached_file :thumbnail,
         :styles => {
-          :large =>  ["120x120", :png],
+          :large => ["200x200", :png],
+          :header =>  ["120x120", :png],
           :normal => ["100x100", :png]
         },
         :processors => [:jcropper],
