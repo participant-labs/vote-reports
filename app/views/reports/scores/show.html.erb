@@ -11,14 +11,11 @@
   <dl>
     <%- @score.evidence.group_by(&:subject).each_pair do |subject, subject_scores| -%>
       <%- if subject.is_a?(Bill) -%>
-        <dt><%= render 'bills/bill', :bill => subject %>:
-          <%= subject_scores.first.criterion.position %></dt>
-        <dd><dl>
-          <%- subject_scores.each do |bill_score| -%>
-            <dt><%= render 'rolls/roll', :roll => bill_score.evidence.roll %></dt>
-            <dd><%= bill_score.evidence.position %></dd>
-          <%- end -%>
-        </dl></dd>
+        <%- subject_scores.each do |bill_score| -%>
+          <%- roll = bill_score.evidence.roll -%>
+          <dt><%= link_to "On #{roll.voted_at.to_date.to_s(:long)} voted #{bill_score.evidence.position}", roll %></dt>
+        <%- end -%>
+        <dd>On <%= render 'bills/bill', :bill => subject, :hide_titles => true, :hide_year => true %> which this report <%= subject_scores.first.criterion.position %>s</dd>
       <%- elsif subject.is_a?(InterestGroupReport) -%>
         <%- notify_exceptional("Multiple interest group ratings #{subject_scores.inspect}") if subject_scores.size > 1 -%>
         <%- rating = subject_scores.first.evidence -%>
