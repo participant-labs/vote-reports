@@ -1,5 +1,5 @@
 <% div_for(interest_group, :class => 'clearfix') do %>
-  <%= link_to image_tag(interest_group.thumbnail.url), interest_group_path(interest_group), :class => 'image' %>
+  <%= link_to hover_image_tag(interest_group.thumbnail, interest_group.name), interest_group_path(interest_group), :class => 'image' %>
   <div class="report_attrs">
     <%- description = truncate(strip_tags(interest_group.description), :length => 140 - interest_group.name.length) -%>
     <%= link_to h(interest_group.name), interest_group_path(interest_group), :class => 'report_title' %>
