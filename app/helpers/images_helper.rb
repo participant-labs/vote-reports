@@ -1,5 +1,5 @@
 module ImagesHelper
-  def hover_image_tag(image, title, style = image.thumbnail.default_style)
+  def hover_image_tag(image, title, style = image.thumbnail.default_style, options = {})
     attachment = image.thumbnail
     attrs =
       if attachment.file? && style != :large
@@ -10,6 +10,6 @@ module ImagesHelper
       end
     image_tag(attachment.url(style), (attrs || {}).merge(
       :alt => title, :title => title
-    ))
+    ).merge(options))
   end
 end

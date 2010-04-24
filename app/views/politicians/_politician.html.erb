@@ -1,7 +1,7 @@
 <%- no_image ||= false -%>
 <% div_for politician do %>
   <%- if !no_image && politician.headshot.url(:small) -%>
-    <%= link_to_unless_current image_tag(politician.headshot.url(:small), :size => '50x61', :alt => politician.full_name), politician_path(politician), :class => 'undecorated' %><br />
+    <%= link_to_unless_current hover_image_tag(politician.headshot, politician_title(politician), :small, :size => '50x61'), politician_path(politician), :class => 'undecorated' %><br />
   <%- end -%>
   <span class="politician_name"><%= link_to_unless_current politician_name(politician), politician  %>
     <%- if politician.location -%>
