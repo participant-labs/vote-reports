@@ -2,7 +2,7 @@
 
 <div class="section clearfix">
   <h2><%= render @politician, :no_image => true %></h2>
-  <%= image_tag @politician.headshot_url(:large), :size => '200x245', :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' if @politician.headshot_url(:large) %>
+  <%= image_tag @politician.headshot.url(:large), :size => '200x245', :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' if @politician.headshot.url(:large) %>
 
   <%- if @politician.in_office? || @politician.congresspedia_url -%>
   <ul class="details">
