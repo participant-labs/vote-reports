@@ -8,6 +8,10 @@
   width: 48%;
 }
 
+a.undecorated, a.undecorated:hover {
+  border-bottom: 0;
+}
+
 .guide_entry h4 {
   font-size: 18px;
 }
