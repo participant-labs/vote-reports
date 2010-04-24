@@ -86,14 +86,14 @@ describe Politician do
 
     context "with no argument" do
       it "should return the url of the largest available headshot" do
-        @politician.headshot_url.to_s.should =~ gov_track_url("photos/#{@politician.gov_track_id}.jpeg")
+        @politician.headshot.url.to_s.should =~ gov_track_url("photos/#{@politician.gov_track_id}.jpeg")
       end
     end
 
     context "with size argument" do
       it "should return an equivalent url" do
         {:large => 200, :medium => 100, :small => 50}.each_pair do |arg, width|
-          @politician.headshot_url(arg).should =~ gov_track_url("photos/#{@politician.gov_track_id}-#{width}px.jpeg")
+          @politician.headshot.url(arg).should =~ gov_track_url("photos/#{@politician.gov_track_id}-#{width}px.jpeg")
         end
       end
     end
