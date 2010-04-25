@@ -32,6 +32,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users do |user|
     user.resources :rpx_identities, :only => [:create, :destroy], :controller => 'users/rpx_identities'
     user.resource :adminship, :only => [:create, :destroy], :controller => 'users/adminships'
+    user.resource :moderatorship, :only => [:create, :destroy], :controller => 'users/moderatorships'
   end
 
   map.signup "/signup", :controller => "users", :action => "new"  
