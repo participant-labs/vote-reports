@@ -9,6 +9,7 @@ Feature: Editing Interest Group Images
     When I go to the interest group page for "AARP"
     And I follow "Edit Interest Group Thumbnail"
     Then I should see "Replace Thumbnail"
+    And I should be on the edit interest group image page for "AARP"
 
   Scenario: Updating the image on an interest group
     Given an interest group named "AARP"
