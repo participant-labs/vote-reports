@@ -22,6 +22,8 @@ module NavigationHelpers
       new_user_report_bill_criterion_path(Report.find_by_name($1).user, Report.find_by_name($1))
     when /the edit bills page for the report "(.+)"/
       user_report_bill_criteria_path(Report.find_by_name($1).user, Report.find_by_name($1))
+    when /the edit image page for the report "(.+)"/
+      edit_user_report_image_path(Report.find_by_name($1).user, Report.find_by_name($1))
 
     when /my reports page/i
       user_reports_path(current_user)
@@ -36,13 +38,16 @@ module NavigationHelpers
       politician_path(Politician.with_name($1).first)
     when /the roll page for "(.+)"/
       roll_path(Roll.find_by_question($1))
+
     when /the report page for "(.+)"/
       report = Report.find_by_name($1)
       user_report_path(report.user, report)
+
     when /the bill page for "(.+)"/
       bill_path(BillTitle.find_by_title($1).bill)
     when /the subject page for "(.+)"/
       subject_path(Subject.find_by_name($1))
+
     when /the interest group page for "(.+)"/
       interest_group_path(InterestGroup.find_by_name($1))
     when /the edit interest group image page for "(.+)"/
