@@ -182,7 +182,8 @@ Fixjour :verify => false do
       first_name, last_name = name.split(' ', 2)
       overrides.merge!(
         :first_name => first_name,
-        :last_name => last_name)
+        :last_name => last_name,
+        :gov_track_id => rand(1000000))
     end
 
     klass.new(
