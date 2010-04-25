@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   acts_as_authentic
 
   has_one :adminship
+  has_one :moderatorship
   has_many :reports
 
   validates_uniqueness_of :username, :email, :case_sensitive => false
@@ -26,6 +27,7 @@ class User < ActiveRecord::Base
   def role_symbols
     syms = [:user]
     syms << :admin if adminship
+    syms << :moderator if moderatorship
     syms
   end
 

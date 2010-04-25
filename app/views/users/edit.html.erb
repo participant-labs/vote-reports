@@ -26,13 +26,15 @@
     </p>
   <%- end -%>
 
-  <%- permitted_to? :create, :users_adminships do -%>
-    <h2>Permissions</h2>
-    <%- if @user.adminship -%>
-      <p>Promoted to Admin by <%= render 'users/user', :user => @user.adminship.created_by %> on <%= @user.adminship.created_at.to_s(:long_ordinal) %></p>
-      <%= raw button_to('Revoke Admin Status', user_adminship_path(@user), :method => :delete) %>
-    <%- else -%>
-      <%= raw button_to('Promote to Admin', user_adminship_path(@user)) %>
-    <%- end -%>
+  <%- if @user.adminship -%>
+    <p>Promoted to Admin by <%= render 'users/user', :user => @user.adminship.created_by %> on <%= @user.adminship.created_at.to_s(:long_ordinal) %></p>
+    <%= raw button_to('Revoke Admin Status', user_adminship_path(@user), :method => :delete)  if permitted_to?(:destroy, :users_adminships) %>
+  <%- elsif @user.moderatorship -%>
+    <p>Promoted to Moderator by <%= render 'users/user', :user => @user.moderatorship.created_by %> on <%= @user.moderatorship.created_at.to_s(:long_ordinal) %></p>
+    <%= raw button_to('Promote to Admin', user_adminship_path(@user)) if permitted_to?(:create, :users_adminships) %>
+    <%= raw button_to('Revoke Moderator Status', user_moderatorship_path(@user), :method => :delete) if permitted_to?(:destroy, :users_moderatorships) %>
+  <%- else -%>
+    <%= raw button_to('Promote to Admin', user_adminship_path(@user)) if permitted_to?(:create, :users_adminships) %>
+    <%= raw button_to('Promote to Moderator', user_moderatorship_path(@user)) if permitted_to?(:create, :users_moderatorships) %>
   <%- end -%>
 </div>
