@@ -56,7 +56,7 @@ Feature: Browsing Report Scores by State
       | Michael Burgess      | 42    |
       | J. Kerrey            | 30    |
       | John Cornyn          | 12    |
-      | Kay Hutchison       | 44    |
+      | Kay Hutchison        | 44    |
       | Connie Mack          | 51    |
       | Neil Abercrombie     | 100   |
 
@@ -66,10 +66,10 @@ Feature: Browsing Report Scores by State
     And I press "Go!"
     Then I should see the following scores:
       | politician           | score |
-      | Michael Burgess      | 100   |
-      | J. Kerrey            | 24    |
-      | John Cornyn          | 76    |
-      | Neil Abercrombie     | 0     |
+      | Michael Burgess      | 42   |
+      | J. Kerrey            | 30    |
+      | John Cornyn          | 12    |
+      | Neil Abercrombie     | 100     |
     But I should not see "Connie Mack"
     And I should not see "Kay Hutchison"
 
