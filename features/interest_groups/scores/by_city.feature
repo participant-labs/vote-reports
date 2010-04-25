@@ -34,19 +34,19 @@ Feature: Browsing Report Scores by State
       | 75028    | LEWISVILLE   | TX    |
       | 11111    | LEWISVILLE   | TX    |
     And interest group "Sierra Club" has the following ratings:
-      | report    | politician            | rating |
-      | 2008      | Michael Burgess         | 0      |
-      | 2008      | J. Kerrey             | 30     |
-      | 2008      | John Cornyn           | 20     |
-      | 2008      | Kay Hutchison        | 25     |
-      | 2008      | Connie Mack           | 80     |
-      | 2008      | Neil Abercrombie      | 100    |
-      | Fall 2003 | Michael Burgess         | 100    |
-      | Fall 2003 | J. Kerrey             | 30     |
-      | Fall 2003 | John Cornyn           | 0      |
-      | Fall 2003 | Kay Hutchison        | 70     |
-      | Fall 2003 | Connie Mack           | 12     |
-      | Fall 2003 | Neil Abercrombie      | 100    |
+      | report    | politician          | rating |
+      | 2008      | Michael Burgess     | 0      |
+      | 2008      | J. Kerrey           | 30     |
+      | 2008      | John Cornyn         | 20     |
+      | 2008      | Kay Hutchison       | 25     |
+      | 2008      | Connie Mack         | 80     |
+      | 2008      | Neil Abercrombie    | 100    |
+      | Fall 2003 | Michael Burgess     | 100    |
+      | Fall 2003 | J. Kerrey           | 30     |
+      | Fall 2003 | John Cornyn         | 0      |
+      | Fall 2003 | Kay Hutchison       | 70     |
+      | Fall 2003 | Connie Mack         | 12     |
+      | Fall 2003 | Neil Abercrombie    | 100    |
     And the scores for interest group "Sierra Club" are calculated
 
   Scenario: When unscoped, report scores should be proper and complete
@@ -66,10 +66,10 @@ Feature: Browsing Report Scores by State
     And I press "Go!"
     Then I should see the following scores:
       | politician           | score |
-      | Michael Burgess      | 42   |
+      | Michael Burgess      | 42    |
       | J. Kerrey            | 30    |
       | John Cornyn          | 12    |
-      | Neil Abercrombie     | 100     |
+      | Neil Abercrombie     | 100   |
     But I should not see "Connie Mack"
     And I should not see "Kay Hutchison"
 
