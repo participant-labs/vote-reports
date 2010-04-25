@@ -14,4 +14,7 @@ Feature: Editing Interest Groups
     Given an interest group named "AARP"
     And I am signed in as an Admin
     When I go to the edit interest group image page for "AARP"
-    Then I should see "Replace Thumbnail"
+    And I attach the file "public/images/gov_track_logo.png" to "image_thumbnail"
+    And I press "Replace!"
+    Then I should be on the interest group page for "AARP"
+    And I should see the image "gov_track_logo.png"
