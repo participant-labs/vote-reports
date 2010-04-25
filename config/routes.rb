@@ -22,7 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :reports, :as => '', :name_prefix => 'user_', :path_prefix => "reports/:user_id", :controller => 'users/reports' do |report|
-    report.resource :image, :as => 'thumbnail', :only => [:edit, :update, :create], :controller => 'users/reports/images'
+    report.resource :image, :as => 'thumbnail', :only => [:edit, :update, :create], :controller => 'users/reports/thumbnails'
     report.resources :bill_criteria, :only => [:index, :new, :destroy], :controller => 'users/reports/bill_criteria'
   end
 
