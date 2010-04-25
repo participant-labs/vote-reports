@@ -1,4 +1,4 @@
-Feature: Editing Interest Groups
+Feature: Editing Interest Group Images
   In order to add images to interest groups
   As an admin
   I want to edit the interest group image
