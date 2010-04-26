@@ -56,7 +56,9 @@ namespace :gov_track do
         (ENV['MEETING'].present? ? [ENV['MEETING'].to_i] : MEETINGS).each do |meeting|
           @congress = Congress.find_or_create_by_meeting(meeting)
           Sunspot.batch do
-            Dir.chdir(Rails.root.join("data/gov_track/us/#{meeting}")) do
+            path = Rails.root.join("data/gov_track/us", meeting)
+            FileUtils.mkdir_p(path)
+            Dir.chdir(path) do
               yield meeting
             end
           end
