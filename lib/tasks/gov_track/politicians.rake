@@ -8,74 +8,96 @@ namespace :gov_track do
       end
     end
 
+    def district(state, district)
+      @districts ||= District.all(:select => 'id,us_state_id,district').index_by {|d| [d.us_state_id, d.district] }
+      state = us_state(state)
+      district = district.to_i
+      district = nil if district == -1
+      @districts.fetch([state.id, district]) do
+        @districts[[state.id, district]] = District.create!(:state => state, :district => district)
+      end
+    end
+
+    def us_state(abbr)
+      @states ||= UsState.all(:select => 'id, abbreviation').index_by(&:abbreviation)
+      @states.fetch(abbr)
+    end
+
+    def politician(gov_track_id)
+      @politicians ||= Politician.all(:select => 'id, gov_track_id,us_state_id,cached_slug', :include => [:representative_terms, :senate_terms, :presidential_terms]).index_by(&:gov_track_id)
+      @politicians.fetch(gov_track_id.to_i) do
+        @politicians[gov_track_id.to_i] = Politician.create!(:gov_track_id => gov_track_id)
+      end
+    end
+
     desc "Process Politicians"
     task :unpack => :'gov_track:support' do
       data_path = ENV['MEETING'] ? "us/#{ENV['MEETING']}/people.xml" : "us/people.xml"
       doc = Nokogiri::XML(open(gov_track_path(data_path)))
+      include SuppressValidations
 
       ActiveRecord::Base.transaction do
-        doc.xpath('people/person').each do |person|
-          politician = Politician.find_or_create_by_gov_track_id(person['id'])
-          politician.update_attributes({
-              'lastname' => 'last_name',
-              'middlename' => 'middle_name',
-              'firstname' => 'first_name',
-              'bioguideid' => 'bioguide_id',
-              'metavidid' => 'metavid_id',
-              'osid' => 'open_secrets_id',
-              'birthday' => 'birthday',
-              'gender' => 'gender',
-              'religion' => 'religion'
-            }.inject({}) do |attrs, (attr, method)|
-              attrs[method] = person[attr] if person[attr].present?
-              attrs
-          end)
+        suppress_validations do
+          doc.xpath('people/person').each do |person|
+            politician = politician(person['id'])
+            politician.update_attributes({
+                'lastname' => 'last_name',
+                'middlename' => 'middle_name',
+                'firstname' => 'first_name',
+                'bioguideid' => 'bioguide_id',
+                'metavidid' => 'metavid_id',
+                'osid' => 'open_secrets_id',
+                'birthday' => 'birthday',
+                'gender' => 'gender',
+                'religion' => 'religion'
+              }.inject({}) do |attrs, (attr, method)|
+                attrs[method] = person[attr] if person[attr].present?
+                attrs
+            end)
+            representative_terms = politician.representative_terms.index_by(&:started_on)
+            senate_terms = politician.senate_terms.index_by(&:started_on)
+            presidential_terms = politician.presidential_terms.index_by(&:started_on)
 
-          person.xpath('role').each do |role|
-            attrs = {
-              'startdate' => 'started_on',
-              'enddate' => 'ended_on',
-              'url' => 'url',
-              'party' => 'party'
-            }.inject({}) do |attrs, (attr, method)|
-              attrs[method] = role[attr].to_s if role[attr].present?
-              attrs
-            end
-            attrs['party'] = party(attrs.delete('party'))
-            attrs.symbolize_keys!
+            person.xpath('role').each do |role|
+              attrs = {
+                'startdate' => 'started_on',
+                'enddate' => 'ended_on',
+                'url' => 'url',
+                'party' => 'party'
+              }.inject({}) do |attrs, (attr, method)|
+                attrs[method] = role[attr].to_s if role[attr].present?
+                attrs
+              end
+              attrs['party'] = party(attrs.delete('party'))
+              attrs.symbolize_keys!
 
-            case role['type']
-            when 'rep'
-              state = UsState.find_by_abbreviation(role['state']) || raise("Unknown state #{role['state']}")
-              district = role['district'].to_i
-              district = nil if district == -1
-              district = District.first(:conditions => {:us_state_id => state, :district => district}) \
-                || District.create(:state => state, :district => district)
-              attrs.merge!(:district => district)
-              politician.representative_terms.find_by_started_on(role['startdate'].to_date).tap do |term|
-                term && term.update_attributes(attrs)
-              end || politician.representative_terms.create(attrs)
-            when 'sen'
-              state = UsState.find_by_abbreviation(role['state']) || raise("Unknown state #{role['state']}")
-              attrs.merge!(:senate_class => role['class'], :state => state)
-              politician.senate_terms.find_by_started_on(role['startdate'].to_date).tap do |term|
-                term && term.update_attributes(attrs)
-              end || politician.senate_terms.create(attrs)
-            when 'prez'
-              politician.presidential_terms.find_by_started_on(role['startdate'].to_date).tap do |term|
-                term && term.update_attributes(attrs)
-              end || politician.presidential_terms.create(attrs)
-            else
-              raise role.inspect
-            end.tap do |term|
-              $stdout.print "P" if term.party.nil?
+              case role['type']
+              when 'rep'
+                attrs.merge!(:district => district(role['state'], role['district']))
+                representative_terms[role['startdate'].to_date].tap do |term|
+                  term && term.update_attributes(attrs)
+                end || politician.representative_terms.create(attrs)
+              when 'sen'
+                attrs.merge!(:senate_class => role['class'], :state => us_state(role['state']))
+                senate_terms[role['startdate'].to_date].tap do |term|
+                  term && term.update_attributes(attrs)
+                end || politician.senate_terms.create(attrs)
+              when 'prez'
+                presidential_terms[role['startdate'].to_date].tap do |term|
+                  term && term.update_attributes(attrs)
+                end || politician.presidential_terms.create(attrs)
+              else
+                raise role.inspect
+              end.tap do |term|
+                $stdout.print "P" if term.party.nil?
+              end
             end
+
+            $stdout.print "."
+            $stdout.flush
           end
-
-          $stdout.print "."
-          $stdout.flush
+          puts
         end
-        puts
       end
     end
   end
