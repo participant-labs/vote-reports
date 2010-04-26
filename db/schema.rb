@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100426043007) do
+ActiveRecord::Schema.define(:version => 20100426050719) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -335,6 +335,21 @@ ActiveRecord::Schema.define(:version => 20100426043007) do
     t.integer  "us_state_id"
     t.integer  "district_id"
   end
+
+  add_index "politicians", ["bioguide_id"], :name => "index_politicians_on_bioguide_id", :unique => true
+  add_index "politicians", ["congresspedia_url"], :name => "index_politicians_on_congresspedia_url", :unique => true
+  add_index "politicians", ["crp_id"], :name => "index_politicians_on_crp_id", :unique => true
+  add_index "politicians", ["email"], :name => "index_politicians_on_email", :unique => true
+  add_index "politicians", ["eventful_id"], :name => "index_politicians_on_eventful_id", :unique => true
+  add_index "politicians", ["fec_id"], :name => "index_politicians_on_fec_id", :unique => true
+  add_index "politicians", ["gov_track_id"], :name => "index_politicians_on_gov_track_id", :unique => true
+  add_index "politicians", ["metavid_id"], :name => "index_politicians_on_metavid_id", :unique => true
+  add_index "politicians", ["open_secrets_id"], :name => "index_politicians_on_open_secrets_id", :unique => true
+  add_index "politicians", ["phone"], :name => "index_politicians_on_phone", :unique => true
+  add_index "politicians", ["twitter_id"], :name => "index_politicians_on_twitter_id", :unique => true
+  add_index "politicians", ["vote_smart_id"], :name => "index_politicians_on_vote_smart_id", :unique => true
+  add_index "politicians", ["website"], :name => "index_politicians_on_website", :unique => true
+  add_index "politicians", ["youtube_url"], :name => "index_politicians_on_youtube_url", :unique => true
 
   create_table "presidential_terms", :force => true do |t|
     t.integer  "politician_id", :null => false
