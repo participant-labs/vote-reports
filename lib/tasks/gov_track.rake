@@ -77,7 +77,7 @@ namespace :gov_track do
   end
 
   task :download_all => :support do
-    begin
+    Exceptional.rescue_and_reraise do
       Dir.chdir(Rails.root.join("data/gov_track/us/")) do
         `wget -N http://www.govtrack.us/data/us/people.xml`
       end
@@ -89,9 +89,6 @@ namespace :gov_track do
         `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/bills.amdt . >> #{log}`
         `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/rolls . >> #{log}`
       end
-    rescue Exception => e
-      notify_exceptional(e)
-      raise
     end
   end
 
