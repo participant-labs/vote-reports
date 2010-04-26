@@ -5,5 +5,6 @@ def notify_exceptional(exception)
   nil
 rescue => e
   Rails.logger.error("Trouble (#{e.inspect}) Notifying Exceptional of #{exception.inspect}")
+  raise unless Rails.env.production?
   nil
 end
