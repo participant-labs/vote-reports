@@ -89,7 +89,7 @@ namespace :gov_track do
         `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/bills.amdt . >> #{log}`
         `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/rolls . >> #{log}`
       end
-    rescue => e
+    rescue Exception => e
       notify_exceptional(e)
       raise
     end
