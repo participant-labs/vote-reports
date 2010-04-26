@@ -51,14 +51,20 @@ namespace :gov_track do
       subcommittee_meeting
     end
 
+    def chdir(path)
+      FileUtils.mkdir_p(path)
+      Dir.chdir(path) do
+        yield
+      end
+    end
+
     def meetings(&block)
       ActiveRecord::Base.transaction do
         (ENV['MEETING'].present? ? [ENV['MEETING'].to_i] : MEETINGS).each do |meeting|
           @congress = Congress.find_or_create_by_meeting(meeting)
           Sunspot.batch do
             path = Rails.root.join("data/gov_track/us", meeting)
-            FileUtils.mkdir_p(path)
-            Dir.chdir(path) do
+            chdir(path) do
               yield meeting
             end
           end
@@ -78,7 +84,7 @@ namespace :gov_track do
 
   task :download_all => :support do
     Exceptional.rescue_and_reraise do
-      Dir.chdir(Rails.root.join("data/gov_track/us/")) do
+      chdir(Rails.root.join("data/gov_track/us/")) do
         `wget -N http://www.govtrack.us/data/us/people.xml`
       end
       log = Rails.root.join('log/govtrack-rsync.log')
