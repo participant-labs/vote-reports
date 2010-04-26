@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100425182049) do
+ActiveRecord::Schema.define(:version => 20100426043007) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -200,7 +200,7 @@ ActiveRecord::Schema.define(:version => 20100425182049) do
 
   create_table "districts", :force => true do |t|
     t.integer  "us_state_id", :null => false
-    t.integer  "district",    :null => false
+    t.integer  "district"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -48,7 +48,7 @@ namespace :gov_track do
             when 'rep'
               state = UsState.find_by_abbreviation(role['state']) || raise("Unknown state #{role['state']}")
               district = role['district'].to_i
-              district = 0 if district == -1
+              district = nil if district == -1
               district = District.first(:conditions => {:us_state_id => state, :district => district}) \
                 || District.create(:state => state, :district => district)
               attrs.merge!(:district => district)
