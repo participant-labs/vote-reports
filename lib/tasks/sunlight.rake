@@ -11,19 +11,15 @@ namespace :sunlight do
 
     desc "Process Politicians"
     task :unpack => :environment do
-      require 'fastercsv'
-      require 'open-uri'
+      Exceptional.rescue_and_reraise do
+        require 'fastercsv'
+        require 'open-uri'
 
-      ActiveRecord::Base.transaction do
-        FasterCSV.new(open(DATA_PATH), :headers => true, :skip_blanks => true).each do |row|
-          row = row.to_hash.except('senate_class', 'state')
-          begin
+        ActiveRecord::Base.transaction do
+          FasterCSV.new(open(DATA_PATH), :headers => true, :skip_blanks => true).each do |row|
+            row = row.to_hash.except('senate_class', 'state')
             politician = Politician.first(:conditions => {:bioguide_id => row['bioguide_id']})
             politician ? politician.update_attributes!(row) : Politician.create!(row)
-          rescue => e
-            notify_exceptional(e)
-            p row
-            raise
           end
         end
       end
