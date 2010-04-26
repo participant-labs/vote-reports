@@ -77,16 +77,21 @@ namespace :gov_track do
   end
 
   task :download_all => :support do
-    Dir.chdir(Rails.root.join("data/gov_track/us/")) do
-      `wget -N http://www.govtrack.us/data/us/people.xml`
-    end
-    log = Rails.root.join('log/govtrack-rsync.log')
-    meetings do |meeting|
-      `wget -N http://www.govtrack.us/data/us/#{meeting}/committees.xml >> #{log}`
-      `wget -N http://www.govtrack.us/data/us/#{meeting}/people.xml  >> #{log}`
-      `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/bills . >> #{log}`
-      `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/bills.amdt . >> #{log}`
-      `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/rolls . >> #{log}`
+    begin
+      Dir.chdir(Rails.root.join("data/gov_track/us/")) do
+        `wget -N http://www.govtrack.us/data/us/people.xml`
+      end
+      log = Rails.root.join('log/govtrack-rsync.log')
+      meetings do |meeting|
+        `wget -N http://www.govtrack.us/data/us/#{meeting}/committees.xml >> #{log}`
+        `wget -N http://www.govtrack.us/data/us/#{meeting}/people.xml  >> #{log}`
+        `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/bills . >> #{log}`
+        `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/bills.amdt . >> #{log}`
+        `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/rolls . >> #{log}`
+      end
+    rescue => e
+      notify_exceptional(e)
+      raise
     end
   end
 
