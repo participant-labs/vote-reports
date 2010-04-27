@@ -74,8 +74,10 @@ namespace :gov_track do
               puts "#{e.inspect} #{bill_path}"
               return nil
             end
-          raise "Something is weird #{@congress.meeting} != #{data['session']}" if @congress.meeting != data['session'].to_i
-          sponsor = data.at('sponsor')['none'].present? ? nil : @politicians.fetch(data.at('sponsor')['id'].to_i)
+          if @congress.meeting != data['session'].to_i
+            raise "Something is weird #{@congress.meeting} != #{data['session']}" 
+          end
+          sponsor = @politicians.fetch(data.at('sponsor')['id'].to_i) unless data.at('sponsor')['none'].present?
           attrs = {
             :opencongress_id => opencongress_bill_id,
             :gov_track_id => gov_track_bill_id,
