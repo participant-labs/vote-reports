@@ -26,7 +26,7 @@ namespace :gov_track do
     def politician(gov_track_id)
       @politicians ||= Politician.all(:select => 'id, gov_track_id,us_state_id,cached_slug', :include => [:representative_terms, :senate_terms, :presidential_terms]).index_by(&:gov_track_id)
       @politicians.fetch(gov_track_id.to_i) do
-        @politicians[gov_track_id.to_i] = Politician.create!(:gov_track_id => gov_track_id)
+        @politicians[gov_track_id.to_i] = Politician.new(:gov_track_id => gov_track_id)
       end
     end
 
