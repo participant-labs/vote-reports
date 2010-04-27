@@ -35,15 +35,26 @@ namespace :gov_track do
     end
 
     def find_subcommittee(committee_name, subcommittee_name, source, node)
-      subcommittee_meeting = find_committee(subcommittee_name, source, node)
-      if subcommittee_meeting
-        parent = subcommittee_meeting.committee.parent
-        unless [parent.display_name, *parent.meetings.map(&:name)].compact.include?(committee_name)
-          raise "Skipping subcommittee '#{subcommittee_meeting.name}' which wasn't found under '#{committee_name}', but under '#{parent.display_name}' / '#{parent.meetings.find_by_congress_id(@congress.id).try(:name) }'"
-          return nil
-        end
+      if committee_meeting = CommitteeMeeting.first(:conditions => {:name => committee_name, :congress_id => @congress.id})
+        sub = committee_meeting.subcommittees.find_by_name(subcommittee_name) || begin
+            parent_subcommittee_meetings = committee_meeting.committee.subcommittee_meetings
+            corresponding_subcommittee_meetings = parent_subcommittee_meetings.select {|m| (m.name || m.committee.display_name).include?(subcommittee_name) }
+
+            if corresponding_subcommittee_meetings.blank?
+              raise("No subcommittee found for #{node}")
+            elsif corresponding_subcommittee_meetings.size > 1 && corresponding_subcommittee_meetings.map(&:committee).uniq.size > 1
+              raise "Multiple subcommittee_meetings for #{node.inspect}: #{corresponding_subcommittee_meetings}"
+            else
+              corresponding_subcommittee_meeting = corresponding_subcommittee_meetings.first
+              puts("Selected #{corresponding_subcommittee_meeting.name} for #{subcommittee_name}")
+              corresponding_subcommittee_meeting.committee.meetings.create!(:congress => @congress, :name => subcommittee_name)
+            end
+          end
+        raise(sub.errors.full_messages.inspect) unless sub.valid?
+        sub
+      else
+        raise "No committee found for #{node}"
       end
-      subcommittee_meeting
     end
 
     def chdir(path)
