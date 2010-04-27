@@ -38,7 +38,7 @@ Rails::Initializer.run do |config|
   config.gem 'state_machine'
   config.gem 'sunspot', :lib => 'sunspot', :version => '= 0.10.8'
   config.gem 'sunspot_rails', :lib => 'sunspot/rails', :version => '= 0.11.5'
-  config.gem 'polly-suppress_validations', :lib => 'suppress_validations'
+  config.gem 'polly-suppress_validations', :source => "http://gems.github.com", :lib => 'suppress_validations'
   config.gem 'votesmart', :version => '>= 0.3.0'
   config.gem 'whenever', :lib => false
   config.gem 'will_paginate'
