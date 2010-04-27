@@ -29,7 +29,8 @@ namespace :vlad do
   end
 
   remote_task :start_dj, :roles => :app do
-    run "cd #{latest_release} && RAILS_ENV=production script/delayed_job restart"
+    run "cd #{latest_release} && RAILS_ENV=production script/delayed_job stop"
+    run "cd #{latest_release} && RAILS_ENV=production script/delayed_job start"
   end
 
   remote_task :setup_scheduling, :roles => :app do
