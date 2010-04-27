@@ -19,8 +19,8 @@ end
 
 every 7.day do
   rake "gov_track:download_all"
-  rake "gov_track:politicians:unpack"
-  rake "gov_track:committees:unpack"
+  rake "gov_track:politicians:unpack"  # 18.0m
+  rake "gov_track:committees:unpack"   #  2.5m
 end
 
 every 1.minute do
