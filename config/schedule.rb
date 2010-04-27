@@ -17,9 +17,10 @@ every 7.days do
   rake "db:backup:full"
 end
 
-every 1.day do
+every 7.day do
   rake "gov_track:download_all"
   rake "gov_track:politicians:unpack"
+  rake "gov_track:committees:unpack"
 end
 
 every 1.minute do
