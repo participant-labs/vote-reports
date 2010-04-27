@@ -60,10 +60,9 @@ namespace :gov_track do
       meetings do |meeting|
         puts "Fetching Bills for Meeting #{meeting}"
 
+        @committees = CommitteeMeeting.all(:conditions => {:congress_id => @congress.id}).index_by(&:name)
         new_bills = []
         Dir['bills/*'].each do |bill_path|
-          @committees = CommitteeMeeting.all(:conditions => {:congress_id => @congress.id}).index_by(&:name)
-
           type, number = bill_path.match(%r{bills/([a-z]+)(\d+)\.xml}).captures
           opencongress_bill_id = "#{meeting}-#{type}#{number}"
           gov_track_bill_id = "#{type}#{meeting}-#{number}"
