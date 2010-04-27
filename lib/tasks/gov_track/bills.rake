@@ -1,17 +1,19 @@
 namespace :gov_track do
   namespace :bills do
     def title_columns
-      [:title, :title_type, :as, :bill_id]
+      [:title, :title_type, :bill_title_as_id, :bill_id]
     end
 
     def title_attrs(bill, title_node)
+      @bill_title_as ||= BillTitleAs.all(:select => 'bill_title_as.as, id').index_by(&:as)
       as = title_node['as'].to_s
       type = title_node['type'].to_s
       if type == 'popular'
         as = 'popular'
         type = 'short'
       end
-      [title_node.inner_text, type, as, bill.id]
+      as = @bill_title_as.fetch(as)
+      [title_node.inner_text, type, as.id, bill.id]
     end
 
     namespace :titles do
