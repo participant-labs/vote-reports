@@ -64,7 +64,7 @@ class District < ActiveRecord::Base
   end
 
   def abbreviation
-    district_abbrv = at_large? ? 'At large' : self.district.to_s
+    district_abbrv = at_large? || district.nil? ? 'At large' : self.district.to_s
     "#{state.abbreviation}-#{district_abbrv}"
   end
 
@@ -77,6 +77,12 @@ class District < ActiveRecord::Base
   end
 
   def which
-    at_large? ? 'At-large' : district.ordinalize if district
+    if district.nil?
+      'Unidentified'
+    elsif at_large?
+      'At-large'
+    else
+      district.ordinalize
+    end
   end
 end
