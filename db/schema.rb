@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100426050719) do
+ActiveRecord::Schema.define(:version => 20100427021927) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -121,6 +121,10 @@ ActiveRecord::Schema.define(:version => 20100426050719) do
     t.datetime "gov_track_updated_at"
   end
 
+  add_index "bills", ["congress_id", "bill_type", "bill_number"], :name => "index_bills_on_congress_id_and_bill_type_and_bill_number", :unique => true
+  add_index "bills", ["gov_track_id"], :name => "index_bills_on_gov_track_id", :unique => true
+  add_index "bills", ["opencongress_id"], :name => "index_bills_on_opencongress_id", :unique => true
+
   create_table "committee_meetings", :force => true do |t|
     t.string   "name",         :null => false
     t.integer  "congress_id",  :null => false
@@ -129,6 +133,8 @@ ActiveRecord::Schema.define(:version => 20100426050719) do
     t.datetime "updated_at"
   end
 
+  add_index "committee_meetings", ["congress_id", "committee_id"], :name => "index_committee_meetings_on_congress_id_and_committee_id", :unique => true
+
   create_table "committee_memberships", :force => true do |t|
     t.integer  "politician_id",        :null => false
     t.integer  "committee_meeting_id", :null => false
@@ -136,6 +142,8 @@ ActiveRecord::Schema.define(:version => 20100426050719) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "committee_memberships", ["politician_id", "committee_meeting_id"], :name => "index_committee_memberships_on_pol_id_and_com_meeting_id", :unique => true
 
   create_table "committees", :force => true do |t|
     t.string   "chamber"
@@ -146,9 +154,13 @@ ActiveRecord::Schema.define(:version => 20100426050719) do
     t.datetime "updated_at"
   end
 
+  add_index "committees", ["code", "ancestry"], :name => "index_committees_on_code_and_ancestry", :unique => true
+
   create_table "congresses", :force => true do |t|
     t.integer "meeting"
   end
+
+  add_index "congresses", ["meeting"], :name => "index_congresses_on_meeting", :unique => true
 
   create_table "congressional_districts", :force => true do |t|
     t.integer  "district_id",  :null => false
