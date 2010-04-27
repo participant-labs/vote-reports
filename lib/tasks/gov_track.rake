@@ -22,7 +22,7 @@ namespace :gov_track do
         name = 'House House Administration'
       end
 
-      @committees[name] || begin
+      @committee_meetings[name] || begin
         congress_meeting = CommitteeMeeting.first(:conditions => {:name => name}) \
           || find_committee_meeting_by_committee(Committee.find_by_display_name(name))
         if congress_meeting.nil?
