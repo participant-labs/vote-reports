@@ -79,7 +79,7 @@ namespace :gov_track do
         raise "Couldn't find politician: #{gov_track_id}"
       end
     end
-    @politicians = Politician.all(:select => "id, gov_track_id").index_by {|p| p.gov_track_id }
+    @politicians = Politician.all(:select => "id, gov_track_id, us_state_id").index_by {|p| p.gov_track_id }
   end
 
   task :download_all => :support do
