@@ -26,7 +26,35 @@ namespace :gov_track do
         end
       end
 
+      def import_committee_node(committee_node)
+        committee = Committee.find_by_code(committee_node['code'].to_s) || Committee.new(:code => committee_node['code'].to_s)
+        import_committee(committee, committee_node)
+        $stdout.print "C"
+        $stdout.flush
+        committee_node.xpath('subcommittee').each do |subcommittee_node|
+          subcommittee = committee.children.find_by_code(subcommittee_node['code'].to_s) || Committee.new(:parent => committee, :code => subcommittee_node['code'].to_s)
+          import_committee(subcommittee, subcommittee_node)
+          subcommittee_node.xpath('subcommittee').each do |subsubcommittee_node|
+            raise "Subsub #{subsubcommittee_node}"
+          end
+          $stdout.print "."
+          $stdout.flush
+        end
+      end
+
       Exceptional.rescue_and_reraise do
+        puts "All"
+        doc =
+          begin
+            Nokogiri::XML(open(Rails.root.join('data/gov_track/us/committees.xml')))
+          rescue => e
+            puts e.inspect
+            next
+          end
+        doc.xpath('committees/committee').each do |committee_node|
+          import_committee_node(committee_node)
+        end
+
         meetings do |meeting|
           puts "Meeting #{meeting}"
           doc =
@@ -37,19 +65,7 @@ namespace :gov_track do
               next
             end
           doc.xpath('committees/committee').each do |committee_node|
-            committee = Committee.find_by_code(committee_node['code'].to_s) || Committee.new(:code => committee_node['code'].to_s)
-            import_committee(committee, committee_node)
-            $stdout.print "C"
-            $stdout.flush
-            committee_node.xpath('subcommittee').each do |subcommittee_node|
-              subcommittee = committee.children.find_by_code(subcommittee_node['code'].to_s) || Committee.new(:parent => committee, :code => subcommittee_node['code'].to_s)
-              import_committee(subcommittee, subcommittee_node)
-              subcommittee_node.xpath('subcommittee').each do |subsubcommittee_node|
-                raise "Subsub #{subsubcommittee_node}"
-              end
-              $stdout.print "."
-              $stdout.flush
-            end
+            import_committee_node(committee_node)
           end
           puts "\n\n"
         end
