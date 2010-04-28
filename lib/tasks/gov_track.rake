@@ -25,7 +25,7 @@ namespace :gov_track do
         congress_meeting = CommitteeMeeting.first(:conditions => {:name => name}) \
           || find_committee_meeting_by_committee(Committee.find_by_display_name(name))
         if congress_meeting.nil?
-          puts "#{source} committee '#{name}' not found for #{node}"
+          raise "#{source} committee '#{name}' not found for #{node}"
           nil
         elsif congress_meeting.congress != @congress
           congress_meeting = find_committee_meeting_by_committee(congress_meeting.committee).tap do |right_congress_meeting|
@@ -43,7 +43,7 @@ namespace :gov_track do
       if subcommittee_meeting
         parent = subcommittee_meeting.committee.parent
         unless [parent.display_name, *parent.meetings.map(&:name)].compact.include?(committee_name)
-          puts "Skipping subcommittee '#{subcommittee_meeting.name}' which wasn't found under '#{committee_name}', but under '#{parent.display_name}' / '#{parent.meetings.find_by_congress_id(@congress.id).try(:name) }'"
+          raise "Skipping subcommittee '#{subcommittee_meeting.name}' which wasn't found under '#{committee_name}', but under '#{parent.display_name}' / '#{parent.meetings.find_by_congress_id(@congress.id).try(:name) }'"
           return nil
         end
       end
