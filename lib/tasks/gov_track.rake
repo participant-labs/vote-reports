@@ -21,8 +21,8 @@ namespace :gov_track do
             committee && committee.meetings.for_congress(@congress)
           end
         if congress_meeting.nil?
-          raise "#{source} committee '#{name}' not found for #{node}"
-          nil
+          puts "#{source} committee '#{name}' not found for #{node}"
+          Committee.create!.meetings.for_congress(@congress, name)
         elsif congress_meeting.congress != @congress
           congress_meeting = congress_meeting.committee.meetings.for_congress(@congress).tap do |right_congress_meeting|
             if congress_meeting.name != right_congress_meeting.name
@@ -35,21 +35,41 @@ namespace :gov_track do
     end
 
     def find_subcommittee(committee_name, subcommittee_name, source, node)
+      if committee_name == 'House Administration'
+        committee_name = 'House House Administration'
+      end
+      if subcommittee_name == 'House Administration'
+        subcommittee_name = 'House House Administration'
+      end
+
       committee_meeting = @congress.committee_meetings.find_by_name(committee_name)
       raise "No committee found for #{node}" unless committee_meeting
 
-      sub = committee_meeting.subcommittees.find_by_name(subcommittee_name) || begin
+      sub = committee_meeting.subcommittees.find_by_name(subcommittee_name) \
+        || begin
+          comm = committee_meeting.committee.subcommittees.find_by_display_name(subcommittee_name)
+          comm && comm.meetings.for_congress(@congress)
+        end || begin
           parent_subcommittee_meetings = committee_meeting.committee.subcommittee_meetings
           corresponding_subcommittee_meetings = parent_subcommittee_meetings.select {|m| (m.name || m.committee.display_name).include?(subcommittee_name) }
 
           if corresponding_subcommittee_meetings.blank?
-            raise("No subcommittee found for #{node}")
+            committee_meeting.committee.subcommittees.create!.meetings.create!(:name => subcommittee_name, :congress => @congress)
           elsif corresponding_subcommittee_meetings.size > 1 && corresponding_subcommittee_meetings.map(&:committee).uniq.size > 1
-            raise "Multiple subcommittee_meetings for #{node.inspect}: #{corresponding_subcommittee_meetings}"
+            puts "Multiple subcommittee_meetings for #{node}: #{corresponding_subcommittee_meetings.map(&:name).inspect}"
+            p corresponding_subcommittee_meetings.map(&:committee).uniq.map(&:display_name)
+            committee_meeting.committee.subcommittees.create!.meetings.create!(:name => subcommittee_name, :congress => @congress)
           else
             corresponding_subcommittee_meeting = corresponding_subcommittee_meetings.first
+            puts node
             puts("Selected #{corresponding_subcommittee_meeting.name} for #{subcommittee_name}")
-            corresponding_subcommittee_meeting.committee.meetings.create!(:congress => @congress, :name => subcommittee_name)
+            existing_meeting = corresponding_subcommittee_meeting.committee.meetings.first(:conditions => {:congress_id => @congress})
+            if existing_meeting
+              puts "but it already had #{existing_meeting.name}"
+              committee_meeting.committee.subcommittees.create!.meetings.create!(:name => subcommittee_name, :congress => @congress)
+            else
+              corresponding_subcommittee_meeting.committee.meetings.create!(:congress => @congress, :name => subcommittee_name)
+            end
           end
         end
       raise(sub.errors.full_messages.inspect) unless sub.valid?
