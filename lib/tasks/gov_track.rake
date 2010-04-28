@@ -54,21 +54,21 @@ namespace :gov_track do
           corresponding_subcommittee_meetings = parent_subcommittee_meetings.select {|m| (m.name || m.committee.display_name).include?(subcommittee_name) }
 
           if corresponding_subcommittee_meetings.blank?
-            committee_meeting.committee.subcommittees.create!.meetings.create!(:name => subcommittee_name, :congress => @congress)
+            committee_meeting.committee.subcommittees.create!.meetings.for_congress(@congress, subcommittee_name)
           elsif corresponding_subcommittee_meetings.size > 1 && corresponding_subcommittee_meetings.map(&:committee).uniq.size > 1
             puts "Multiple subcommittee_meetings for #{node}: #{corresponding_subcommittee_meetings.map(&:name).inspect}"
             p corresponding_subcommittee_meetings.map(&:committee).uniq.map(&:display_name)
-            committee_meeting.committee.subcommittees.create!.meetings.create!(:name => subcommittee_name, :congress => @congress)
+            committee_meeting.committee.subcommittees.create!.meetings.for_congress(@congress, subcommittee_name)
           else
             corresponding_subcommittee_meeting = corresponding_subcommittee_meetings.first
             puts node
             puts("Selected #{corresponding_subcommittee_meeting.name} for #{subcommittee_name}")
-            existing_meeting = corresponding_subcommittee_meeting.committee.meetings.first(:conditions => {:congress_id => @congress})
+            existing_meeting = corresponding_subcommittee_meeting.committee.meetings.first(:conditions => {:congress_id => @congress.id})
             if existing_meeting
               puts "but it already had #{existing_meeting.name}"
-              committee_meeting.committee.subcommittees.create!.meetings.create!(:name => subcommittee_name, :congress => @congress)
+              committee_meeting.committee.subcommittees.create!.meetings.for_congress(@congress, subcommittee_name)
             else
-              corresponding_subcommittee_meeting.committee.meetings.create!(:congress => @congress, :name => subcommittee_name)
+              corresponding_subcommittee_meeting.committee.meetings.for_congress(@congress, subcommittee_name)
             end
           end
         end
