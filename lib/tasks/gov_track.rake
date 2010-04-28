@@ -11,9 +11,8 @@ namespace :gov_track do
     end
 
     def find_committee_meeting_by_committee(committee)
-      if committee
-        committee.meetings.find_by_congress_id(@congress.id) \
-          || committee.meetings.create!(:congress_id => @congress.id, :name => committee.display_name, :committee_id => committee.id)
+      committee && committee.meetings.find_or_create_by_congress_id(@congress.id).tap do |meeting|
+        raise meeting.errors.full_messages.inspect
       end
     end
 
