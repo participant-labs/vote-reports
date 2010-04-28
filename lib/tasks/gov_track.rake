@@ -11,9 +11,7 @@ namespace :gov_track do
     end
 
     def find_committee_meeting_by_committee(committee)
-      committee && committee.meetings.find_or_create_by_congress_id(@congress.id).tap do |meeting|
-        raise meeting.errors.full_messages.inspect
-      end
+      committee && committee.meetings.for_congress(@congress)
     end
 
     def find_committee(name, source, node)
@@ -28,7 +26,7 @@ namespace :gov_track do
           raise "#{source} committee '#{name}' not found for #{node}"
           nil
         elsif congress_meeting.congress != @congress
-          congress_meeting = find_committee_meeting_by_committee(congress_meeting.committee).tap do |right_congress_meeting|
+          congress_meeting = congress_meeting.committee.meetings.for_congress(@congress).tap do |right_congress_meeting|
             if congress_meeting.name != right_congress_meeting.name
               puts "#{source} listed committee #{congress_meeting.inspect} via #{node}, when it should have listed #{right_congress_meeting.inspect}"
             end
