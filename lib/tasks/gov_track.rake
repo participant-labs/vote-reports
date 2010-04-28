@@ -35,7 +35,7 @@ namespace :gov_track do
     end
 
     def find_subcommittee(committee_name, subcommittee_name, source, node)
-      if committee_meeting = CommitteeMeeting.first(:conditions => {:name => committee_name, :congress_id => @congress.id})
+      if committee_meeting = @congress.committee_meetings.find_by_name(committee_name)
         sub = committee_meeting.subcommittees.find_by_name(subcommittee_name) || begin
             parent_subcommittee_meetings = committee_meeting.committee.subcommittee_meetings
             corresponding_subcommittee_meetings = parent_subcommittee_meetings.select {|m| (m.name || m.committee.display_name).include?(subcommittee_name) }
