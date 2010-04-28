@@ -10,18 +10,16 @@ namespace :gov_track do
       File.exist?(local_path) ? local_path : "http://www.govtrack.us/data/#{path}"
     end
 
-    def find_committee_meeting_by_committee(committee)
-      committee && committee.meetings.for_congress(@congress)
-    end
-
     def find_committee(name, source, node)
       if name == 'House Administration'
         name = 'House House Administration'
       end
 
       @committee_meetings[name] || begin
-        congress_meeting = CommitteeMeeting.first(:conditions => {:name => name}) \
-          || find_committee_meeting_by_committee(Committee.find_by_display_name(name))
+        congress_meeting = CommitteeMeeting.first(:conditions => {:name => name}) || begin
+            committee = Committee.find_by_display_name(name)
+            committee && committee.meetings.for_congress(@congress)
+          end
         if congress_meeting.nil?
           raise "#{source} committee '#{name}' not found for #{node}"
           nil
