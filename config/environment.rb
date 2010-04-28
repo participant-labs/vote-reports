@@ -31,6 +31,7 @@ Rails::Initializer.run do |config|
   config.gem 'jammit'
   config.gem 'json'
   config.gem 'newrelic_rpm'
+  config.gem 'nokogiri'
   config.gem 'paperclip'
   config.gem 'pg'
   config.gem 'rpx_now', :version => '>= 0.6.12'
