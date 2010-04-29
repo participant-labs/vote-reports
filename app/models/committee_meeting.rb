@@ -2,6 +2,10 @@ class CommitteeMeeting < ActiveRecord::Base
   belongs_to :committee
   belongs_to :congress
 
+  def name
+    self[:name] || committee.display_name
+  end
+
   def subcommittees
     CommitteeMeeting.scoped(
       :conditions => {
