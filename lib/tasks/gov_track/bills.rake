@@ -62,7 +62,7 @@ namespace :gov_track do
 
         @committee_meetings = CommitteeMeeting.all(:conditions => {:congress_id => @congress.id}).index_by(&:name)
         new_bills = []
-        Dir['bills/*'].each do |bill_path|
+        bills = Dir['bills/*'].map do |bill_path|
           type, number = bill_path.match(%r{bills/([a-z]+)(\d+)\.xml}).captures
           opencongress_bill_id = "#{meeting}-#{type}#{number}"
           gov_track_bill_id = "#{type}#{meeting}-#{number}"
@@ -146,10 +146,12 @@ namespace :gov_track do
 
           $stdout.print "."
           $stdout.flush
+          bill
         end
+        puts "Reindexing"
+        Sunspot.index!(bills)
         puts
       end
-      Bill.reindex
     end
   end
 end
