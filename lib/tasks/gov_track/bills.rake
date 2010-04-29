@@ -1,5 +1,11 @@
 namespace :gov_track do
   namespace :bills do
+    def import(model, columns, new_instances)
+      if new_instances.present?
+        model.import_without_validations_or_callbacks columns, new_instances
+      end
+    end
+
     def title_columns
       [:title, :title_type, :bill_title_as_id, :bill_id]
     end
@@ -95,25 +101,21 @@ namespace :gov_track do
             bill = Bill.create!(attrs)
           end
 
-          new_titles = data.xpath('titles/title').map do |title_node|
+          import(BillTitle, title_columns, data.xpath('titles/title').map do |title_node|
             title_attrs(bill, title_node)
-          end
-          if new_titles.present?
-            BillTitle.import_without_validations_or_callbacks title_columns, new_titles
-          end
+          end)
 
-          new_subjects = data.xpath('subjects/term').map do |term_node|
+          import(BillSubject, [:subject_id, :bill_id],
+          data.xpath('subjects/term').map do |term_node|
             name = term_node['name'].to_s
             subject = @subjects.fetch(name) do
               @subjects[name] = Subject.create(:name => name)
             end
             [subject.id, bill.id]
-          end
-          if new_subjects.present?
-            BillSubject.import_without_validations_or_callbacks [:subject_id, :bill_id], new_subjects
-          end
+          end)
 
-          new_committee_actions = data.xpath('committees/committee').map do |committee_node|
+          import(BillCommitteeAction, [:action, :bill_id, :committee_meeting_id],
+          data.xpath('committees/committee').map do |committee_node|
             committee_name = committee_node['name'].to_s
             committee_meeting_id = find_committee(committee_name, "Bill #{opencongress_bill_id}", committee_node)
             if (subcommittee_name = committee_node['subcommittee']).present?
@@ -130,19 +132,14 @@ namespace :gov_track do
               next
             end
             [committee_node['activity'].to_s, bill.id, committee_meeting_id]
-          end.compact
-          if new_committee_actions.present?
-            BillCommitteeAction.import_without_validations_or_callbacks [:action, :bill_id, :committee_meeting_id], new_committee_actions
-          end
+          end.compact)
 
-          new_cosponsors = data.xpath('cosponsors/cosponsor').map do |cosponsor_node|
+          import(Cosponsorship, [:politician_id, :joined_on, :bill_id],
+          data.xpath('cosponsors/cosponsor').map do |cosponsor_node|
             joined = cosponsor_node['joined'].to_s
             joined = nil if joined.blank?
             [@politicians.fetch(cosponsor_node['id'].to_s.to_i), joined, bill.id]
-          end
-          if new_cosponsors.present?
-            Cosponsorship.import_without_validations_or_callbacks [:politician_id, :joined_on, :bill_id], new_cosponsors
-          end
+          end)
 
           $stdout.print "."
           $stdout.flush
