@@ -5,7 +5,7 @@ namespace :gov_track do
         new_instances.map {|i| Hash[columns.zip(i)] }.each do |new_instance|
           model.exists?(new_instance) || model.create!(new_instance)
         end
-      else
+      elsif new_instances.present?
         model.import_without_validations_or_callbacks columns, new_instances
       end
     end
