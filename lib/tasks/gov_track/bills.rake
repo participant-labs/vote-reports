@@ -62,97 +62,99 @@ namespace :gov_track do
     end
     
     task :unpack => [:'gov_track:support', :'gov_track:politicians'] do
-      require 'ar-extensions'
-      require 'ar-extensions/import/postgresql'
+      Exceptional.rescue_and_reraise do
+        require 'ar-extensions'
+        require 'ar-extensions/import/postgresql'
 
-      @subjects = Subject.all.index_by(&:name)
-      @update = ENV['UPDATE'].present?
+        @subjects = Subject.all.index_by(&:name)
+        @update = ENV['UPDATE'].present?
 
-      meetings do |meeting|
-        puts "Fetching Bills for Meeting #{meeting}"
+        meetings do |meeting|
+          puts "Fetching Bills for Meeting #{meeting}"
 
-        @committee_meetings = CommitteeMeeting.all(:conditions => {:congress_id => @congress.id}).index_by(&:name)
-        new_bills = []
-        bills = Dir['bills/*'].map do |bill_path|
-          type, number = bill_path.match(%r{bills/([a-z]+)(\d+)\.xml}).captures
-          opencongress_bill_id = "#{meeting}-#{type}#{number}"
-          gov_track_bill_id = "#{type}#{meeting}-#{number}"
+          @committee_meetings = CommitteeMeeting.all(:conditions => {:congress_id => @congress.id}).index_by(&:name)
+          new_bills = []
+          bills = Dir['bills/*'].map do |bill_path|
+            type, number = bill_path.match(%r{bills/([a-z]+)(\d+)\.xml}).captures
+            opencongress_bill_id = "#{meeting}-#{type}#{number}"
+            gov_track_bill_id = "#{type}#{meeting}-#{number}"
 
-          data =
-            begin
-              Nokogiri::XML(open(bill_path)).at('bill')
-            rescue => e
-              puts "#{e.inspect} #{bill_path}"
-              return nil
-            end
-          if @congress.meeting != data['session'].to_i
-            raise "Something is weird #{@congress.meeting} != #{data['session']}" 
-          end
-          sponsor = @politicians.fetch(data.at('sponsor')['id'].to_i) unless data.at('sponsor')['none'].present?
-          attrs = {
-            :opencongress_id => opencongress_bill_id,
-            :gov_track_id => gov_track_bill_id,
-            :congress_id => @congress.id,
-            :bill_type => data['type'].to_s,
-            :bill_number => data['number'].to_s,
-            :gov_track_updated_at => data['updated'].to_s,
-            :introduced_on => data.at('introduced')['datetime'].to_s,
-            :sponsor_id => sponsor && sponsor.id,
-            :summary => data.at('summary').inner_text.strip
-          }
-          if @update && bill = Bill.find_by_opencongress_id(opencongress_bill_id)
-            bill.update_attributes!(attrs)
-          else
-            bill = Bill.create!(attrs)
-          end
-
-          import(BillTitle, title_columns, data.xpath('titles/title').map do |title_node|
-            title_attrs(bill, title_node)
-          end)
-
-          import(BillSubject, [:subject_id, :bill_id],
-          data.xpath('subjects/term').map do |term_node|
-            name = term_node['name'].to_s
-            subject = @subjects.fetch(name) do
-              @subjects[name] = Subject.create(:name => name)
-            end
-            [subject.id, bill.id]
-          end)
-
-          import(BillCommitteeAction, [:action, :bill_id, :committee_meeting_id],
-          data.xpath('committees/committee').map do |committee_node|
-            committee_name = committee_node['name'].to_s
-            committee_meeting_id = find_committee(committee_name, "Bill #{opencongress_bill_id}", committee_node)
-            if (subcommittee_name = committee_node['subcommittee']).present?
-              subcommittee_id = (committee_meeting_id && CommitteeMeeting.first(
-                :joins => :committee, :conditions => {:'committee_meetings.name' => subcommittee_name, :'committees.ancestry' => CommitteeMeeting.find(committee_meeting_id).committee_id.to_s}
-              ).try(:id)) || find_subcommittee(committee_name, subcommittee_name, "Bill #{opencongress_bill_id}", committee_node)
-              committee_meeting_id = subcommittee_id if subcommittee_id
-            end
-            if committee_meeting_id.nil?
-              if committee_node['name'].to_s != "House Administration"
-                puts
-                p committee_node
+            data =
+              begin
+                Nokogiri::XML(open(bill_path)).at('bill')
+              rescue => e
+                puts "#{e.inspect} #{bill_path}"
+                return nil
               end
-              next
+            if @congress.meeting != data['session'].to_i
+              raise "Something is weird #{@congress.meeting} != #{data['session']}" 
             end
-            [committee_node['activity'].to_s, bill.id, committee_meeting_id]
-          end.compact)
+            sponsor = @politicians.fetch(data.at('sponsor')['id'].to_i) unless data.at('sponsor')['none'].present?
+            attrs = {
+              :opencongress_id => opencongress_bill_id,
+              :gov_track_id => gov_track_bill_id,
+              :congress_id => @congress.id,
+              :bill_type => data['type'].to_s,
+              :bill_number => data['number'].to_s,
+              :gov_track_updated_at => data['updated'].to_s,
+              :introduced_on => data.at('introduced')['datetime'].to_s,
+              :sponsor_id => sponsor && sponsor.id,
+              :summary => data.at('summary').inner_text.strip
+            }
+            if @update && bill = Bill.find_by_opencongress_id(opencongress_bill_id)
+              bill.update_attributes!(attrs)
+            else
+              bill = Bill.create!(attrs)
+            end
 
-          import(Cosponsorship, [:politician_id, :joined_on, :bill_id],
-          data.xpath('cosponsors/cosponsor').map do |cosponsor_node|
-            joined = cosponsor_node['joined'].to_s
-            joined = nil if joined.blank?
-            [@politicians.fetch(cosponsor_node['id'].to_s.to_i).id, joined, bill.id]
-          end)
+            import(BillTitle, title_columns, data.xpath('titles/title').map do |title_node|
+              title_attrs(bill, title_node)
+            end)
 
-          $stdout.print "."
-          $stdout.flush
-          bill
+            import(BillSubject, [:subject_id, :bill_id],
+            data.xpath('subjects/term').map do |term_node|
+              name = term_node['name'].to_s
+              subject = @subjects.fetch(name) do
+                @subjects[name] = Subject.create(:name => name)
+              end
+              [subject.id, bill.id]
+            end)
+
+            import(BillCommitteeAction, [:action, :bill_id, :committee_meeting_id],
+            data.xpath('committees/committee').map do |committee_node|
+              committee_name = committee_node['name'].to_s
+              committee_meeting_id = find_committee(committee_name, "Bill #{opencongress_bill_id}", committee_node)
+              if (subcommittee_name = committee_node['subcommittee']).present?
+                subcommittee_id = (committee_meeting_id && CommitteeMeeting.first(
+                  :joins => :committee, :conditions => {:'committee_meetings.name' => subcommittee_name, :'committees.ancestry' => CommitteeMeeting.find(committee_meeting_id).committee_id.to_s}
+                ).try(:id)) || find_subcommittee(committee_name, subcommittee_name, "Bill #{opencongress_bill_id}", committee_node)
+                committee_meeting_id = subcommittee_id if subcommittee_id
+              end
+              if committee_meeting_id.nil?
+                if committee_node['name'].to_s != "House Administration"
+                  puts
+                  p committee_node
+                end
+                next
+              end
+              [committee_node['activity'].to_s, bill.id, committee_meeting_id]
+            end.compact)
+
+            import(Cosponsorship, [:politician_id, :joined_on, :bill_id],
+            data.xpath('cosponsors/cosponsor').map do |cosponsor_node|
+              joined = cosponsor_node['joined'].to_s
+              joined = nil if joined.blank?
+              [@politicians.fetch(cosponsor_node['id'].to_s.to_i).id, joined, bill.id]
+            end)
+
+            $stdout.print "."
+            $stdout.flush
+            bill
+          end
+          puts "Reindexing"
+          Sunspot.index!(bills)
+          puts
         end
-        puts "Reindexing"
-        Sunspot.index!(bills)
-        puts
       end
     end
   end
