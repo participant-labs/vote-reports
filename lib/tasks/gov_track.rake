@@ -85,12 +85,14 @@ namespace :gov_track do
 
     def meetings(&block)
       ActiveRecord::Base.transaction do
-        (ENV['MEETING'].present? ? [ENV['MEETING'].to_i] : MEETINGS).each do |meeting|
+        (ENV['MEETING'].present? ? ENV['MEETING'].split(',').map(&:to_i) : MEETINGS).each do |meeting|
           @congress = Congress.find_or_create_by_meeting(meeting)
           Sunspot.batch do
             path = Rails.root.join("data/gov_track/us", meeting.to_s)
             chdir(path) do
+              puts "Starting Meeting: #{meeting}"
               yield meeting
+              puts "Finished Meeting: #{meeting}"
             end
           end
         end
