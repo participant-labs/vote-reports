@@ -1,7 +1,11 @@
 namespace :gov_track do
   namespace :bills do
     def import(model, columns, new_instances)
-      if new_instances.present?
+      if @update
+        new_instances.map {|i| Hash[columns.zip(i)] }.each do |new_instance|
+          model.exists?(new_instance) || model.create!(new_instance)
+        end
+      else
         model.import_without_validations_or_callbacks columns, new_instances
       end
     end
@@ -62,6 +66,7 @@ namespace :gov_track do
       require 'ar-extensions/import/postgresql'
 
       @subjects = Subject.all.index_by(&:name)
+      @update = ENV['UPDATE'].present?
 
       meetings do |meeting|
         puts "Fetching Bills for Meeting #{meeting}"
@@ -95,7 +100,7 @@ namespace :gov_track do
             :sponsor_id => sponsor && sponsor.id,
             :summary => data.at('summary').inner_text.strip
           }
-          if bill = Bill.find_by_opencongress_id(opencongress_bill_id)
+          if @update && bill = Bill.find_by_opencongress_id(opencongress_bill_id)
             bill.update_attributes!(attrs)
           else
             bill = Bill.create!(attrs)
@@ -138,7 +143,7 @@ namespace :gov_track do
           data.xpath('cosponsors/cosponsor').map do |cosponsor_node|
             joined = cosponsor_node['joined'].to_s
             joined = nil if joined.blank?
-            [@politicians.fetch(cosponsor_node['id'].to_s.to_i), joined, bill.id]
+            [@politicians.fetch(cosponsor_node['id'].to_s.to_i).id, joined, bill.id]
           end)
 
           $stdout.print "."
