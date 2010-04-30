@@ -5,10 +5,9 @@ namespace :gov_track do
       require 'ar-extensions/import/postgresql'
 
       meetings do |meeting|
-        existing_amendments = @congress.amendments.index_by {|a| "#{meeting}-#{a.chamber}#{a.number}" }
-
         puts "Fetching Amendments for Meeting #{meeting}"
-        bills = Bill.all(:conditions => {:congress_id => @congress}).index_by {|b| b.gov_track_id }
+        existing_amendments = @congress.amendments.index_by {|a| "#{meeting}-#{a.chamber}#{a.number}" }
+        bills = @congress.bills.index_by {|b| b.gov_track_id }
 
         new_amendments = []
         Dir['bills.amdt/*.xml'].each do |amendment_path|
