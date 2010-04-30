@@ -16,8 +16,7 @@ namespace :gov_track do
           data = Nokogiri::XML(open(gov_track_path("us/#{@congress.meeting}/rolls/#{where}#{year}-#{number}.xml"))).at('roll')
           subject =
             if bill = data.at('bill')
-              bill = Bill.find_by_gov_track_id("#{bill['type']}#{bill['session']}-#{bill['number']}")
-              if bill.nil?
+              bill = Bill.find_by_gov_track_id("#{bill['type']}#{bill['session']}-#{bill['number']}") || begin
                 puts "#{data.at('bill')} not found"
                 next
               end
