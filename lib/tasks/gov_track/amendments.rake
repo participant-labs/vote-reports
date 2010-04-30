@@ -56,10 +56,15 @@ namespace :gov_track do
                nil
              end
 
+          bill = bills.fetch("#{amends['type']}#{@congress.meeting}-#{amends['number']}") do
+            notify_exceptional("#{amends['type']}#{@congress.meeting}-#{amends['number']} not found (#{amends.to_s})")
+          end || begin
+            $stdout.print('-')
+            next
+          end
+
           values = [
-            bills.fetch("#{amends['type']}#{@congress.meeting}-#{amends['number']}") do
-              raise "#{amends['type']}#{@congress.meeting}-#{amends['number']} not found (#{amends.to_s})"
-            end.id,
+            bill.id,
             @congress.id,
             chamber,
             number,
