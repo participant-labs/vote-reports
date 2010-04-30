@@ -71,7 +71,7 @@ namespace :gov_track do
         end
         puts "\n"
       end
-      `rake db:migrate:redo VERSION=20100116015937`
+      Roll.update_roll_types_for_consistency!
     end
 
   end
