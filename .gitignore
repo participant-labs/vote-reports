@@ -9,7 +9,7 @@ log/*.lck
 tmp/
 public/system
 public/assets
-data/backups
+data/backup
 data/federalgovernmentzipcodes.us
 data/gov_track
 data/sunlight_labs
