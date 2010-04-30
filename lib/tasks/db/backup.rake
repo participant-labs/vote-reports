@@ -8,5 +8,12 @@ namespace :db do
         `sudo -u postgres PGPASSWORD=monkey7paris pg_dump -Fc vote_reports_#{Rails.env} > #{dest.join("#{Date.today.to_s}.gz")}`
       end
     end
+
+    task :restore do
+      Exceptional.rescue_and_reraise do
+        raise "You must specify a file to restore from" unless ENV['PATH'].present?
+        `pg_restore -h localhost -p 5432 -U postgres -d vote_reports_#{Rails.env} #{ENV['PATH']}`
+      end
+    end
   end
 end
