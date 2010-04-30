@@ -11,6 +11,8 @@ namespace :gov_track do
     end
 
     def find_committee(name, source, node)
+      @committee_meetings ||= @congress.committee_meetings.index_by(&:name)
+
       if name == 'House Administration'
         name = 'House House Administration'
       end

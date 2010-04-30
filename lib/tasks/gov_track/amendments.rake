@@ -9,7 +9,6 @@ namespace :gov_track do
 
         puts "Fetching Amendments for Meeting #{meeting}"
         bills = Bill.all(:conditions => {:congress_id => @congress}).index_by {|b| b.gov_track_id }
-        @committee_meetings = CommitteeMeeting.all(:conditions => {:congress_id => @congress.id}).index_by(&:name)
 
         new_amendments = []
         Dir['bills.amdt/*.xml'].each do |amendment_path|
