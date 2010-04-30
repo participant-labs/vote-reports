@@ -16,10 +16,6 @@ class Vote < ActiveRecord::Base
 
   delegate :subject, :to => :roll
 
-  unless Rails.env.development?
-    after_create :create_bill_support_or_opposition
-  end
-
   def position
     {'+' => 'Aye',
      '-' => 'Nay',
@@ -37,16 +33,5 @@ class Vote < ActiveRecord::Base
 
   def event_date
     roll.voted_at.to_date
-  end
-
-  private
-
-  unless Rails.env.development?
-    def create_bill_support_or_opposition
-      if roll.passage?
-        BillOpposition.find_or_create_by_bill_id_and_politician_id(roll.subject.id, politician.id) if nay?
-        BillSupport.find_or_create_by_bill_id_and_politician_id(roll.subject.id, politician.id) if aye?
-      end
-    end
   end
 end
