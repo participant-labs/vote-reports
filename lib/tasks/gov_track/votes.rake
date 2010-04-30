@@ -10,7 +10,9 @@ namespace :gov_track do
         existing_rolls = @congress.rolls.index_by {|r| "#{r.where.first}#{r.year}-#{r.number}"}
         puts "Meeting #{meeting}"
         Dir['rolls/*'].each do |roll_path|
-          where, year, number = roll_path.match(%r{rolls/(.)(\d+)-(\d+)\.xml}).captures
+          match = roll_path.match(%r{rolls/(.)(\d+)-(\d+)\.xml})
+          next if !match
+          where, year, number = match.captures
           next if existing_rolls["#{where}#{year}-#{number}"]
 
           data = Nokogiri::XML(open(gov_track_path("us/#{@congress.meeting}/rolls/#{where}#{year}-#{number}.xml"))).at('roll')
