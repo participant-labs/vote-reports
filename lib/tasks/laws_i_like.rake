@@ -58,7 +58,6 @@ namespace :laws_i_like do
         Excelsior::Reader.rows(File.open(
           Rails.root.join('data/laws_i_like/lawslike_18042010.csv'), 'rb')) do |row|
           # 618219,0,S. 431,s,431,Economic Recovery Adjustment Act of 2009,111,http://www.govtrack.us/congress/bill.xpd?bill=s111-431,06/12/2009
-          p row
           fb_id, support, bill_ref, bill_house, bill_number, bill_title, bill_meeting, bill_gov_track_url, liked_on = row
 
           next if fb_id == "NO_USER"
@@ -112,7 +111,6 @@ namespace :laws_i_like do
             :created_at => liked_on.to_date
           )
           count += 1
-          $stdout.print "#{count} "
           $stdout.print '.'
         end
       end
