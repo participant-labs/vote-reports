@@ -20,6 +20,7 @@ every 7.days do
   rake "gov_track:committees:unpack"   #  2.5m
   env 'MEETING', 111
   rake "gov_track:bills:unpack"
+  rake "gov_track:amendments:unpack"
 end
 
 every 1.minute do
