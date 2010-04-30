@@ -1,6 +1,19 @@
 namespace :gov_track do
   namespace :amendments do
     task :unpack => [:'gov_track:support', :'gov_track:politicians'] do
+      amendment_columns = [
+        :bill_id,
+        :congress_id,
+        :chamber,
+        :number,
+        :offered_on,
+        :sponsor_id,
+        :sponsor_type,
+        :sequence,
+        :description,
+        :purpose
+      ]
+
       require 'ar-extensions'
       require 'ar-extensions/import/postgresql'
 
@@ -59,7 +72,7 @@ namespace :gov_track do
           ]
 
           if amendment = existing_amendments["#{meeting}-#{chamber}#{number}"]
-            amendment.update_attributes!(Hash[columns.zip(values)])
+            amendment.update_attributes!(Hash[amendment_columns.zip(values)])
           else
             new_amendments << values
           end
@@ -67,19 +80,7 @@ namespace :gov_track do
           $stdout.print(sequence.nil? ? 'N' : ".")
           $stdout.flush
         end
-        columns = [
-          :bill_id,
-          :congress_id,
-          :chamber,
-          :number,
-          :offered_on,
-          :sponsor_id,
-          :sponsor_type,
-          :sequence,
-          :description,
-          :purpose
-        ]
-        Amendment.import_without_validations_or_callbacks columns, new_amendments
+        Amendment.import_without_validations_or_callbacks amendment_columns, new_amendments
         puts
         raise "Import failed (#{Amendment.count} not at least #{new_amendments.size})" if Amendment.count < new_amendments.size
       end
