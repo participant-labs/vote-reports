@@ -65,7 +65,11 @@ namespace :gov_track do
             [vote['vote'], voter.id, roll.id]
           }.compact
 
-          Vote.import_without_validations_or_callbacks [:vote, :politician_id, :roll_id], inserts
+          if inserts.blank?
+            raise "No votes for #{roll.inspect}"
+          else
+            Vote.import_without_validations_or_callbacks [:vote, :politician_id, :roll_id], inserts
+          end
 
           $stdout.print "."
           $stdout.flush
