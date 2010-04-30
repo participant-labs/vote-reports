@@ -58,11 +58,6 @@ class Politician < ActiveRecord::Base
   has_many :votes
   has_many :rolls, :through => :votes, :extend => Vote::Support
 
-  has_many :bill_supports
-  has_many :supported_bills, :through => :bill_supports, :source => :bill
-  has_many :bill_oppositions
-  has_many :opposed_bills, :through => :bill_oppositions, :source => :bill
-
   has_many :report_scores
   has_many :reports, :through => :report_scores
 
