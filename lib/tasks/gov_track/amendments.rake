@@ -85,7 +85,9 @@ namespace :gov_track do
           $stdout.print(amendment.nil? ? '.' : "*")
           $stdout.flush
         end
-        Amendment.import_without_validations_or_callbacks amendment_columns, new_amendments
+        if new_amendments.present?
+          Amendment.import_without_validations_or_callbacks amendment_columns, new_amendments
+        end
         puts
         raise "Import failed (#{Amendment.count} not at least #{new_amendments.size})" if Amendment.count < new_amendments.size
       end
