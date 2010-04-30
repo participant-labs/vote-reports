@@ -1,5 +1,6 @@
 class Congress < ActiveRecord::Base
   has_many :bills, :dependent => :destroy
+  has_many :amendments, :through => :bills
   has_many :committee_meetings
 
   validates_uniqueness_of :meeting
