@@ -77,7 +77,7 @@ namespace :gov_track do
             new_amendments << values
           end
 
-          $stdout.print(sequence.nil? ? 'N' : ".")
+          $stdout.print(amendment.nil? ? '.' : "*")
           $stdout.flush
         end
         Amendment.import_without_validations_or_callbacks amendment_columns, new_amendments
