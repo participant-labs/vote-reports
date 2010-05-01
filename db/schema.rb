@@ -152,20 +152,6 @@ ActiveRecord::Schema.define(:version => 20100430212957) do
 
   add_index "congresses", ["meeting"], :name => "index_congresses_on_meeting", :unique => true
 
-  create_table "congressional_districts", :force => true do |t|
-    t.integer  "district_id",  :null => false
-    t.integer  "congress_id",  :null => false
-    t.float    "lat",          :null => false
-    t.float    "lng",          :null => false
-    t.float    "square_miles", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "congressional_districts", ["congress_id", "district_id"], :name => "index_congressional_districts_on_congress_id_and_district_id", :unique => true
-  add_index "congressional_districts", ["congress_id"], :name => "index_congressional_districts_on_congress_id"
-  add_index "congressional_districts", ["district_id"], :name => "index_congressional_districts_on_district_id"
-
   create_table "cosponsorships", :force => true do |t|
     t.integer  "bill_id",       :null => false
     t.integer  "politician_id", :null => false
@@ -368,32 +354,10 @@ ActiveRecord::Schema.define(:version => 20100430212957) do
   add_index "presidential_terms", ["party_id"], :name => "index_presidential_terms_on_party_id"
   add_index "presidential_terms", ["politician_id"], :name => "index_presidential_terms_on_politician_id"
 
-  create_table "report_criteria", :force => true do |t|
-    t.integer  "report_id",          :null => false
-    t.integer  "criteria_report_id", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "report_criteria", ["criteria_report_id"], :name => "index_report_criteria_on_criteria_report_id"
-  add_index "report_criteria", ["report_id", "criteria_report_id"], :name => "index_report_criteria_on_report_id_and_criteria_report_id", :unique => true
-  add_index "report_criteria", ["report_id"], :name => "index_report_criteria_on_report_id"
-
   create_table "report_delayed_jobs", :force => true do |t|
     t.integer "report_id",      :null => false
     t.integer "delayed_job_id", :null => false
   end
-
-  create_table "report_follows", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.integer  "report_id",  :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "report_follows", ["report_id", "user_id"], :name => "index_report_follows_on_report_id_and_user_id", :unique => true
-  add_index "report_follows", ["report_id"], :name => "index_report_follows_on_report_id"
-  add_index "report_follows", ["user_id"], :name => "index_report_follows_on_user_id"
 
   create_table "report_score_evidences", :force => true do |t|
     t.integer  "report_score_id", :null => false
@@ -532,7 +496,6 @@ ActiveRecord::Schema.define(:version => 20100430212957) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cached_slug"
-    t.string   "state",                             :null => false
     t.integer  "login_count",        :default => 0, :null => false
     t.integer  "failed_login_count", :default => 0, :null => false
     t.datetime "last_request_at"
@@ -540,6 +503,7 @@ ActiveRecord::Schema.define(:version => 20100430212957) do
     t.datetime "current_login_at"
     t.string   "last_login_ip"
     t.string   "current_login_ip"
+    t.string   "state",                             :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
