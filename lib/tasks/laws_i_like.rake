@@ -15,8 +15,8 @@ namespace :laws_i_like do
         Facebooker::Session.current = Facebooker::Session.create
         {}
       end
-      @facebook_users[fb_id] ||= begin
-        Facebooker::User.new(fb_id).tap do |user|
+      @facebook_users.fetch(fb_id) do
+        @facebook_users[fb_id] = Facebooker::User.new(fb_id).tap do |user|
           retries = 0
           begin
             user.populate()
