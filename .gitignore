@@ -1,4 +1,5 @@
 config/database.yml
+config/facebooker.yml
 db/*.sqlite3
 log/*.log
 log/*.lck
