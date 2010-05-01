@@ -23,13 +23,14 @@ Rails::Initializer.run do |config|
   config.gem "declarative_authorization"
   config.gem 'delayed_job', :version => '>= 2.0.3'
   config.gem 'erubis'
-  config.gem 'hoptoad_notifier'
+  config.gem 'excelsior'
   config.gem 'fastercsv'
   config.gem 'facebooker'
   config.gem 'friendly_id', :version => '= 2.3.2'
   config.gem 'gemcutter' # required by whenever
   config.gem 'geokit'
   config.gem 'gravtastic', :version => '>= 2.1.0'
+  config.gem 'hoptoad_notifier'
   config.gem 'jammit'
   config.gem 'json', :version => '>= 1.4.3'
   config.gem 'shadow_puppet'
