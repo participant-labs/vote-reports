@@ -13,6 +13,10 @@ class Congress < ActiveRecord::Base
       meeting -= 1 if today.month == 1 && today.day < 3
       meeting
     end
+
+    def current
+      first(:conditions => {:meeting => current_meeting})
+    end
   end
 
   def current?
