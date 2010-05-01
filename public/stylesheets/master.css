@@ -51,10 +51,6 @@ input.tagged {
   color: gray;
 }
 
-#bill_criteria {
-  display: none;
-}
-
 .footer {
   text-align: center;
   padding-bottom: 1em;
@@ -322,4 +318,8 @@ table tbody {
 
 .actions_menu li + li:before {
   content: ' | ';
+}
+/* removed bottom border on tabbed links*/
+.tabbed-nav a{
+  border-bottom: none !important;
 }

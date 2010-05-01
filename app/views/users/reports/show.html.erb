@@ -23,50 +23,52 @@
     </div>
   <%- end -%>
 </div>
-
-<div class="section report_scores">
-  <h2>Scores</h2>
-  <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#', :'data-dialog' => "bill_criteria" %> lead to a high score, votes against, a low one.</p>
-  <%- if @report.scores.present? -%>
-    <%= render 'politicians/search', :url => user_report_path(@report.user, @report), :replace => 'report_scores' %>
-  <%- end -%>
-  <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
-</div>
-
-<div id="bill_criteria" data-dialog-title="<%= "Bill Criteria for #{@report.name}" %>">
-  <h2>Bill Criteria</h2>
-  <p>Learn more about the bills in this report:</p>
-  <blockquote>
-    <ul>
-      <%- if @report.bill_criteria.any? {|bc| bc.explanatory_url? }  -%>
-      <li>Follow the Support/Oppose links on the left to see the report creator's explanation</li>
-      <%- end -%>
-      <li>Click on the bill to see it's details</li>
-    </ul>
-  </blockquote>
-  <%- if @report.bill_criteria.present? -%>
-    <ul>
-      <%- @report.bill_criteria.each do |criterion| -%>
-        <li class="bill_criterion"><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %></li>
-      <%- end -%>
-    </ul>
-  <%- elsif @report.user == current_user -%>
-    <p>You need to add bills to this report in order to generate a score:</p>
-  <%- else -%>
-    <p>This report doesn't have any bills selected</p>
-  <%- end -%>
-</div>
-
-<div class="section last report_subjects">
-  <h2>Subjects</h2>
-  <p>Subjects for this report are drawn from the associated bills.  Follow the links below to find reports on related subjects.</p>
-  <%= render 'subjects/cloud', :subjects => @subjects %>
-</div>
-
-<div class="footer">
-  <ul class="sidebar-links">
-    <li><%= link_to 'Learn about this Report', '#', :'data-dialog' => "bill_criteria" %></li>
-    <li><%= link_to 'View another Report', reports_path %></li>
-    <li><%= link_to 'Create a new Report', new_report_path %></li>
+<div class="tabbed-nav">
+  <ul>
+    <li><a href="#report_scores">Scores</a></li>
+    <li><a href="#report_subjects">Subjects</a></li>
+    <li><a href="#bill_criteria">Bill Criteria</a></li>
   </ul>
+  
+  <div id="report_scores" class="section report_scores">
+    <h2>Scores</h2>
+    <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#', :'data-dialog' => "bill_criteria" %> lead to a high score, votes against, a low one.</p>
+    <%- if @report.scores.present? -%>
+      <%= render 'politicians/search', :url => user_report_path(@report.user, @report), :replace => 'report_scores' %>
+    <%- end -%>
+    <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
+  </div>
+
+  <div id="bill_criteria">
+    <h2>Bill Criteria</h2>
+    <p>Learn more about the bills in this report:</p>
+    <blockquote>
+      <ul>
+        <%- if @report.bill_criteria.any? {|bc| bc.explanatory_url? }  -%>
+        <li>Follow the Support/Oppose links on the left to see the report creator's explanation</li>
+        <%- end -%>
+        <li>Click on the bill to see it's details</li>
+      </ul>
+    </blockquote>
+    <%- if @report.bill_criteria.present? -%>
+      <ul>
+        <%- @report.bill_criteria.each do |criterion| -%>
+          <li class="bill_criterion"><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %></li>
+        <%- end -%>
+      </ul>
+    <%- elsif @report.user == current_user -%>
+      <p>You need to add bills to this report in order to generate a score:</p>
+    <%- else -%>
+      <p>This report doesn't have any bills selected</p>
+    <%- end -%>
+  </div>
+
+  <div id="report_subjects" class="section last report_subjects">
+    <h2>Subjects</h2>
+    <p>Subjects for this report are drawn from the associated bills.  Follow the links below to find reports on related subjects.</p>
+    <%= render 'subjects/cloud', :subjects => @subjects %>
+  </div>
+
 </div>
+
+
