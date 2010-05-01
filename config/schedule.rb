@@ -23,6 +23,7 @@ every 7.days do
   rake "gov_track:download_all"
   rake "gov_track:politicians:unpack"  # 18.0m
   rake "gov_track:committees:unpack"   #  2.5m
+  env 'UPDATE', true
   env 'MEETING', 111
   rake "gov_track:bills:unpack"
   rake "gov_track:amendments:unpack"
