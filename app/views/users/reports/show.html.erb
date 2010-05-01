@@ -25,12 +25,12 @@
 </div>
 <div class="tabbed-nav">
   <ul>
-    <li><a href="#report_scores">Scores</a></li>
+    <li><a href="#report_scores_section">Scores</a></li>
     <li><a href="#report_subjects">Subjects</a></li>
     <li><a href="#bill_criteria">Bill Criteria</a></li>
   </ul>
   
-  <div id="report_scores" class="section report_scores">
+  <div id="report_scores_section" class="section report_scores">
     <h2>Scores</h2>
     <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#', :'data-dialog' => "bill_criteria" %> lead to a high score, votes against, a low one.</p>
     <%- if @report.scores.present? -%>
@@ -39,7 +39,7 @@
     <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
   </div>
 
-  <div id="bill_criteria">
+  <div id="bill_criteria" class="section">
     <h2>Bill Criteria</h2>
     <p>Learn more about the bills in this report:</p>
     <blockquote>
