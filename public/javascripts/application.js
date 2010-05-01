@@ -56,4 +56,7 @@
 
   });
   $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script;
+  
+  $(".tabbed-nav").tabs();
+  
 })(jQuery);
