@@ -2,7 +2,7 @@ embed_assets: on
 
 javascripts:
   common:
-    - public/javascripts/vendor/jquery-ui-1.7.2.custom.min.js
+    - public/javascripts/vendor/jquery-ui-1.8.1.custom.min.js
     - public/javascripts/vendor/jquery.address-1.1.min.js
     - public/javascripts/vendor/jquery.blockUI.js
     - public/javascripts/vendor/jquery.hoverIntent.js
@@ -18,7 +18,7 @@ stylesheets:
   common:
     - public/stylesheets/stationary/reset.css
     - public/stylesheets/stationary/oldie.css
-    - public/stylesheets/smoothness/jquery-ui-1.7.2.custom.css
+    - public/stylesheets/smoothness/jquery-ui-1.8.1.custom.css
     - public/stylesheets/master.css
     - public/stylesheets/interaction.css
     - public/stylesheets/menu.css
