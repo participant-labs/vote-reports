@@ -10,6 +10,8 @@ namespace :db do
     end
 
     task :restore do
+      require 'exceptional'
+      require 'rubygems'
       Exceptional.rescue_and_reraise do
         raise "You must specify a file to restore from" unless ENV['PATH'].present?
         `pg_restore -h localhost -p 5432 -U postgres -d vote_reports_#{Rails.env} #{ENV['PATH']}`
