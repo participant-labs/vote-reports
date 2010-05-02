@@ -1,6 +1,7 @@
 class RescoreLawsILike < ActiveRecord::Migration
   def self.up
-    Report.all(:conditions => {:name => 'Laws I Like'}).map(&:rescore!)
+    # rescore all as ReportSubjects at least are out of sync
+    Report.all.map(&:rescore!)
   end
 
   def self.down
