@@ -41,45 +41,12 @@ ul#menu li {
   list-style-type: none;
 }
 
-ul#menu li.dropdown h2:hover {
-  text-decoration: underline;
-}
-
 ul#menu li h2 {
   font-size: 1.4em;
 }
 
-ul#menu li.dropdown h2 {
-  padding: 0 1.2em;
-  background: transparent url(../images/bullet_arrow_down.png) center right no-repeat;
-}
-
-ul#menu li.dropdown > .dropdown_target {
-  display: none;
-  border: 1px solid #dda;
-  min-width: 10em;
-  position: absolute;
-  top: 1.6em;
-  left: 0em;
-  padding: 1.3em;
-  background: #ffc;
-  color: #930;
-  text-align: left;
-}
-
-ul#menu li.dropdown > .dropdown_target a {
-color: #300;
-padding: 0;
-background-image: none;
-}
-
 ul#menu li h2 {
   display: inline;
-}
-
-ul#menu li.hovering.dropdown > .dropdown_target {
-  display: block;
-  z-index: 1000;
 }
 
 #menu h2 a {
