@@ -38,6 +38,7 @@ class Report
         else
           report.save!
         end
+        ReportSubject.regenerate_for(report)
       end
     rescue => e
       unless Rails.env.production?
