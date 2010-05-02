@@ -9,7 +9,7 @@ module ImagesHelper
         }
       end
     image_tag(attachment.url(style), (attrs || {}).merge(
-      :alt => title, :title => title
+      :alt => title, :title => title, :width => attachment.styles[style][:geometry].split('x').first.to_i
     ).merge(options))
   end
 end

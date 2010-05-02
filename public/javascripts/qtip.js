@@ -114,9 +114,10 @@
       if (!self.data('init')) {
         self.data('init', true);
         var title = self.attr('alt');
+        var width = self.attr('data-qtip-width');
         self.qtip({
           content: {
-            text: '<img src="' + self.attr('data-qtip-image') + '" alt="' + title + '" />',
+            text: '<img src="' + self.attr('data-qtip-image') + '" alt="' + title + '" width="' + width + '" />',
             title: { text: title }
           },
           position: {
@@ -127,7 +128,7 @@
           },
           style: {
             'text-align': 'center',
-            width: parseInt(self.attr('data-qtip-width'), 10) + 30,
+            width: parseInt(width, 10) + 30,
             border: {
               width: 5,
               radius: 5,
