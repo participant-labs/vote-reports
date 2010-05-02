@@ -209,6 +209,8 @@ class Report < ActiveRecord::Base
   validate :ensure_only_one_owner
   before_validation_on_create :add_creator_to_followers
 
+  before_create :ensure_state_is_set
+
   named_scope :random, :order => 'random()'
 
   named_scope :user_published, :conditions => {:state => 'published'}, :include => :user
@@ -311,6 +313,10 @@ private
     if user && state != 'personal'
       self.followers << user
     end
+  end
+
+  def ensure_state_is_set
+    self.state ||= 'Personal'
   end
 
   def ensure_only_one_owner

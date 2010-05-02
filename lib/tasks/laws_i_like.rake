@@ -53,7 +53,7 @@ namespace :laws_i_like do
       end
     end
 
-    Exceptional.rescue_and_reraise do
+    rescue_and_reraise do
       ActiveRecord::Base.transaction do
         Excelsior::Reader.rows(File.open(
           Rails.root.join('data/laws_i_like/lawslike_18042010.csv'), 'rb')) do |row|
