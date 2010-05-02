@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100430212957) do
+ActiveRecord::Schema.define(:version => 20100501194223) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -297,7 +297,7 @@ ActiveRecord::Schema.define(:version => 20100430212957) do
     t.string   "vote_smart_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "gov_track_id"
+    t.integer  "gov_track_id",      :null => false
     t.string   "bioguide_id"
     t.string   "congress_office"
     t.string   "congresspedia_url"
