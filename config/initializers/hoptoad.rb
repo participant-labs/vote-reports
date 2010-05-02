@@ -9,6 +9,13 @@ rescue => e
   nil
 end
 
+def rescue_and_reraise
+  yield
+rescue => e
+  notify_hoptoad(e)
+  raise
+end
+
 HoptoadNotifier.configure do |config|
   config.api_key = '5615579fbd5772fbf96c0fa21adce582'
 end
