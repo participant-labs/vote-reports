@@ -47,6 +47,12 @@ class User < ActiveRecord::Base
 
 private
 
+  def map_rpx_data_each_login
+    if email.blank? || email.ends_with?('+facebook@votereports.org')
+      update_attribute(:email, @rpx_data['profile']['email'])
+    end
+  end
+
   def username_not_reserved
     if %w[new edit].include?(username.to_s.downcase)
       errors.add(:username, "is reserved")
