@@ -78,6 +78,7 @@ namespace :laws_i_like do
           identifier.update_attribute(:user_id, user.id)
           report = user.reports.find_or_create_by_name(
             :name => 'Laws I Like',
+            :source => 'laws_i_like',
             :description => 'These scores are based on the bills I voted on with the [Laws I Like](http://apps.facebook.com/lawsilike/) Facebook App'
           )
 
