@@ -8,6 +8,7 @@ class ReportSubject < ActiveRecord::Base
 
   class << self
     def generate_for(report)
+      report.report_subjects.delete_all
       bill_criteria_subjects = report.bill_criteria_subjects.scoped(
         :select => "DISTINCT(subjects.id), COUNT(subjects.id) AS count",
         :group => 'subjects.id').inject({}) do |hash, subject|
@@ -38,7 +39,6 @@ class ReportSubject < ActiveRecord::Base
       require 'ar-extensions/import/postgresql'
 
       transaction do
-        delete_all
         paginated_each do |report|
           generate_for(report)
         end
