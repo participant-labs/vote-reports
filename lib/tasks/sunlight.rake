@@ -18,8 +18,7 @@ namespace :sunlight do
         ActiveRecord::Base.transaction do
           FasterCSV.new(open(DATA_PATH), :headers => true, :skip_blanks => true).each do |row|
             row = row.to_hash.except('senate_class', 'state')
-            politician = Politician.first(:conditions => {:bioguide_id => row['bioguide_id']})
-            politician ? politician.update_attributes!(row) : Politician.create!(row)
+            Politician.first(:conditions => {:gov_track_id => row['govtrack_id']}).update_attributes!(row)
           end
         end
       end
