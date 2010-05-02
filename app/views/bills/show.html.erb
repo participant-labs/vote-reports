@@ -7,54 +7,72 @@
     by <%= render @bill.sponsor %>
   <%- end -%>
   </p>
+</div>
 
+<%- if @bill.opencongress_url -%>
+<div class="buttons open-congress">
+<%= link_to 'View on OpenCongress', @bill.opencongress_url %>
+</div>
+<%- end -%>
+
+<div class="clear"></div>
+
+<div class="tabbed-nav">
   <ul>
-    <%- if @bill.opencongress_url -%>
-    <li><%= link_to 'View on OpenCongress', @bill.opencongress_url %></li>
+    <li><a href="#bill_summary">Summary</a></li>
+     <%- if (amendments = @bill.amendments.with_votes).present? -%>
+     <li><a href="#amendments">Amendments</a></li>
+     <% end %>
+    <%- if @rolls.present? -%>
+    <li><a href="#votes">Votes</a></li>
     <%- end -%>
-    <li><%= link_to 'View Summary', '#', :'data-dialog' => 'bill_summary' %></li>
+    <%- if @bill.reports.published.present? -%>
+    <li><a href="#reports">Reports</a></li>
+    <%- end -%>
+    <li><a href="#bill_subjects">Subjects</a></li>
   </ul>
+  
 
-  <div id="bill_summary" class="hidden" data-dialog-title="Bill Summary">
+  <div id="bill_summary">
     <%= to_html(@bill.summary) %>
   </div>
-</div>
+  
+  <%- if (amendments = @bill.amendments.with_votes).present? -%>
+  <div id="amendments" class="section">
+    <h2>Amendments</h2>
+    <ul>
+      <% amendments.each do |amendment|  %>
+        <li><%= render amendment %></li>
+      <% end %>
+    </ul>
+  </div>
+  <%- end -%>
 
-<%- if (amendments = @bill.amendments.with_votes).present? -%>
-<div class="section" id="amendments">
-  <h2>Amendments</h2>
-  <ul>
-    <% amendments.each do |amendment|  %>
-      <li><%= render amendment %></li>
-    <% end %>
-  </ul>
-</div>
-<%- end -%>
+  <%- if @rolls.present? -%>
+  <div id="votes" class="section">
+    <h2>Votes</h2>
+    <ul>
+      <% @rolls.each do |roll|  %>
+        <li><%= render roll %></li>
+      <% end %>
+    </ul>
+  </div>
+  <%- end -%>
 
-<%- if @rolls.present? -%>
-<div class="section" id="votes">
-  <h2>Votes</h2>
-  <ul>
-    <% @rolls.each do |roll|  %>
-      <li><%= render roll %></li>
-    <% end %>
-  </ul>
-</div>
-<%- end -%>
+  <%- if @bill.reports.published.present? -%>
+  <div id="reports" class="section">
+    <h2>Reports</h2>
+    <ul>
+      <%- @bill.reports.published.each do |report| -%>
+        <li><%= render 'reports/report', :report => report %></li>
+      <%- end -%>
+    </ul>
+  </div>
+  <%- end -%>
 
-<%- if @bill.reports.published.present? -%>
-<div class="section" id="reports">
-  <h2>Reports</h2>
-  <ul>
-    <%- @bill.reports.published.each do |report| -%>
-      <li><%= render 'reports/report', :report => report %></li>
-    <%- end -%>
-  </ul>
-</div>
-<%- end -%>
-
-<div class="section bill_subjects">
-  <h2>Subjects</h2>
-  <p>Follow the links below to find bills &amp; reports on related subjects.</p>
-  <%= render 'subjects/cloud', :subjects => @subjects %>
+  <div id="bill_subjects" class="section bill_subjects">
+    <h2>Subjects</h2>
+    <p>Follow the links below to find bills &amp; reports on related subjects.</p>
+    <%= render 'subjects/cloud', :subjects => @subjects %>
+  </div>
 </div>
