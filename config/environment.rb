@@ -24,6 +24,7 @@ Rails::Initializer.run do |config|
   config.gem 'delayed_job'
   config.gem 'erubis'
   config.gem 'exceptional'
+  config.gem 'fastercsv'
   config.gem 'friendly_id', :version => '= 2.3.2'
   config.gem 'gemcutter' # required by whenever
   config.gem 'geokit'

@@ -22,6 +22,9 @@ every 7.days do
   rake "gov_track:bills:unpack"
   rake "gov_track:amendments:unpack"
   rake "gov_track:votes:unpack"
+
+  rake "sunlight:politicians:download"
+  rake "sunlight:politicians:unpack"
 end
 
 every 1.minute do
