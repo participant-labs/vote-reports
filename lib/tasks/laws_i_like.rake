@@ -9,7 +9,7 @@ namespace :laws_i_like do
     puts "#{users.keys.size} users"
   end
 
-  task :import => :environment do
+  task :unpack => :environment do
     def facebook_user(fb_id)
       @facebook_users ||= begin
         Facebooker::Session.current = Facebooker::Session.create
