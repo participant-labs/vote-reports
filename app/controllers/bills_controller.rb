@@ -16,5 +16,6 @@ class BillsController < ApplicationController
     @subjects = @bill.subjects
     @amendments = @bill.amendments.with_votes
     @reports = @bill.reports.published
+    @empty = [@bill.summary, @amendments, @rolls, @subjects, @reports].all?(&:blank?)
   end
 end
