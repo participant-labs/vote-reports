@@ -1,0 +1,14 @@
+<%- attrs ||= {} -%>
+<% content_tag :dl, attrs do %>
+  <%- bill.titles.group_by {|t| t.as }.each_pair do |as, as_titles| -%>
+  <dt><%= as %></dt>
+  <dd><dl>
+    <%- as_titles.group_by {|t| t.title_type }.each do |title_type, type_titles| -%>
+      <dt><%= title_type %></dt>
+      <%- type_titles.each do |title| -%>
+        <dd><q><%= title.title %></q></dd>
+      <%- end -%>
+    <%- end -%>
+  </dl></dd>
+  <%- end -%>
+<%- end -%>

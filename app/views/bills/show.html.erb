@@ -1,7 +1,7 @@
 <% title %Q{Bill - "#{h @bill.titles.first}"} %>
 
 <div class="section">
-  <h2><%= render @bill, :hide_year => true %></h2>
+  <h2><%= render @bill, :hide_year => true, :hide_titles => true %></h2>
   <p>Introduced on <%= @bill.introduced_on.to_s(:long_ordinal) %>
   <%- if @bill.sponsor -%>
     by <%= render @bill.sponsor %>
@@ -15,9 +15,12 @@
 </div>
 <%- end -%>
 
-<%- unless @empty -%>
+<%- unless [@bill.titles, @bill.summary, @amendments, @rolls, @subjects, @reports].all?(&:blank?) -%>
 <div class="tabbed-nav">
   <ul>
+    <%- if @bill.titles.present? -%>
+      <li><a href="#bill_titles">All Titles</a></li>
+    <%- end -%>
     <%- if @bill.summary.present? -%>
       <li><a href="#bill_summary">Summary</a></li>
     <%- end -%>
@@ -34,6 +37,12 @@
       <li><a href="#bill_subjects">Subjects</a></li>
     <%- end -%>
   </ul>
+
+  <%- if @bill.titles.present? -%>
+  <div id="bill_titles">
+    <%= render 'bills/titles', :bill => @bill %>
+  </div>
+  <%- end -%>
 
   <%- if @bill.summary.present? -%>
   <div id="bill_summary">
