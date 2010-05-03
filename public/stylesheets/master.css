@@ -320,7 +320,7 @@ table tbody {
   content: ' | ';
 }
 /* removed bottom border on tabbed links*/
-.tabbed-nav a{
+.ui-tabs-nav a{
   border-bottom: none !important;
 }
 
