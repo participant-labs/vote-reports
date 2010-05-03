@@ -10,12 +10,10 @@
 </div>
 
 <%- if @bill.opencongress_url -%>
-<div class="buttons open-congress">
+<div class="buttons open-congress clearfix">
 <%= link_to 'View on OpenCongress', @bill.opencongress_url %>
 </div>
 <%- end -%>
-
-<div class="clear"></div>
 
 <div class="tabbed-nav">
   <ul>
