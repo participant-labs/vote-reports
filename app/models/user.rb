@@ -30,6 +30,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def avatar_url(size)
+    if fake_email? && identifier = rpx_identifiers.find_by_provider_name('Facebook')
+      type = size.to_i > 100 ? 'large' : 'square'
+      prefix = 'http://www.facebook.com/profile.php?id='
+      raise "Bad facebook id: #{identifier.identifier}" unless identifier.identifier.starts_with?(prefix)
+      "http://graph.facebook.com/#{identifier.identifier.sub(prefix, '')}/picture?type=#{type}"
+    else
+      gravatar_url(:size => size, :default => "identicon")
+    end
+  end
+
   def role_symbols
     syms = [:user]
     syms << :admin if adminship
@@ -42,6 +53,10 @@ class User < ActiveRecord::Base
   end
 
 private
+
+  def fake_email?
+    email.ends_with?('+facebook@votereports.org')
+  end
 
   def username_not_reserved
     if %w[new edit].include?(username.to_s.downcase)
