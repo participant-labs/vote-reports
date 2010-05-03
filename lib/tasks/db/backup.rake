@@ -13,8 +13,28 @@ namespace :db do
       require 'exceptional'
       require 'rubygems'
       Exceptional.rescue_and_reraise do
-        raise "You must specify a file to restore from" unless ENV['PATH'].present?
-        `pg_restore -h localhost -p 5432 -U postgres -d vote_reports_#{Rails.env} #{ENV['PATH']}`
+        raise "db:backup:restore is only for development" unless Rails.env.development?
+
+        path = 'data/backup/db/full/production'
+        remote_path = "/srv/vote-reports/current/#{path}"
+        local_path = Rails.root.join(path, ENV['FROM'])
+        unless ENV['FROM'].present?
+          ENV['COMMAND'] = "ls #{remote_path}"
+          Rake::Task['vlad:invoke'].invoke
+
+          raise "You must specify a file to restore FROM"
+        end
+        chdir(local_path.dirname) do
+          unless File.exist?(local_path)
+            puts "Copying db file from server..."
+            `scp vote-reports:#{remote_path}/#{local_path.basename} .`
+          end
+        end
+        puts "Restoring db backup..."
+        Rake::Task['db:drop:all'].invoke
+        Rake::Task['db:create:all'].invoke
+        `pg_restore -h localhost -p 5432 -U postgres -d vote_reports_development #{local_path}`
+        puts "Done."
       end
     end
   end
