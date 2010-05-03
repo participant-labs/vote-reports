@@ -14,5 +14,7 @@ class BillsController < ApplicationController
     @titles =  @bill.titles
     @rolls = @bill.rolls.by_voted_at
     @subjects = @bill.subjects
+    @amendments = @bill.amendments.with_votes
+    @reports = @bill.reports.published
   end
 end

@@ -17,25 +17,30 @@
 
 <div class="tabbed-nav">
   <ul>
-    <li><a href="#bill_summary">Summary</a></li>
-     <%- if (amendments = @bill.amendments.with_votes).present? -%>
-     <li><a href="#amendments">Amendments</a></li>
-     <% end %>
+    <%- if @bill.summary.present? -%>
+      <li><a href="#bill_summary">Summary</a></li>
+    <%- end -%>
+    <%- if @amendments.present? -%>
+      <li><a href="#amendments">Amendments</a></li>
+    <% end %>
     <%- if @rolls.present? -%>
-    <li><a href="#votes">Votes</a></li>
+      <li><a href="#votes">Votes</a></li>
     <%- end -%>
-    <%- if @bill.reports.published.present? -%>
-    <li><a href="#reports">Reports</a></li>
+    <%- if @reports.present? -%>
+      <li><a href="#reports">Reports</a></li>
     <%- end -%>
-    <li><a href="#bill_subjects">Subjects</a></li>
+    <%- if @subjects.present? -%>
+      <li><a href="#bill_subjects">Subjects</a></li>
+    <%- end -%>
   </ul>
-  
 
+  <%- if @bill.summary.present? -%>
   <div id="bill_summary">
     <%= to_html(@bill.summary) %>
   </div>
-  
-  <%- if (amendments = @bill.amendments.with_votes).present? -%>
+  <%- end -%>
+
+  <%- if @amendments.present? -%>
   <div id="amendments" class="section">
     <h2>Amendments</h2>
     <ul>
@@ -57,7 +62,7 @@
   </div>
   <%- end -%>
 
-  <%- if @bill.reports.published.present? -%>
+  <%- if @reports.present? -%>
   <div id="reports" class="section">
     <h2>Reports</h2>
     <ul>
@@ -68,9 +73,11 @@
   </div>
   <%- end -%>
 
+  <%- if @subjects.present? -%>
   <div id="bill_subjects" class="section bill_subjects">
     <h2>Subjects</h2>
     <p>Follow the links below to find bills &amp; reports on related subjects.</p>
     <%= render 'subjects/cloud', :subjects => @subjects %>
   </div>
+  <%- end -%>
 </div>
