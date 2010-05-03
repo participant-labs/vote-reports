@@ -36,7 +36,12 @@
     $('[data-toggle]').live('click', function(event) {
       $('#' + $(event.target).attr('data-toggle')).toggle();
       return false;
-    })
+    });
+
+    $('[data-tab-select]').live('click', function(event) {
+      $current_tabs.tabs('select', $(event.target).attr('data-tab-select'));
+      return false;
+    });
 
     $('.hoverable, .dropdown').live('mouseover', function() {
       var self = $(this);
@@ -56,7 +61,6 @@
 
   });
   $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script;
-  
-  $(".tabbed-nav").tabs();
-  
+
+  $current_tabs = $(".tabbed-nav").tabs();
 })(jQuery);
