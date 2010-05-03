@@ -28,11 +28,12 @@ describe Users::RpxIdentitiesController do
         before do
           @current = create_user
           login(@current)
-          create_post(create_user)
+          @modified = create_user
+          create_post(@modified)
         end
 
         it "should redirect" do
-          response.should redirect_to(user_path(@current))
+          response.should redirect_to(user_path(@modified))
         end
 
         it "should not create an rpx identity" do
