@@ -8,7 +8,7 @@ class Report
         ActiveRecord::Base.transaction do
           report = Report.find(report_id)
           evidences = []
-          ReportScore.delete_all(:report_id => report)
+          ReportScore.delete_all(:report_id => report.id)
           report.score_criteria.inject({}) do |criterion_events, criterion|
             criterion.events.each do |event|
               criterion_events[event.politician_id] ||= {}
