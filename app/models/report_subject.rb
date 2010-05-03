@@ -8,7 +8,7 @@ class ReportSubject < ActiveRecord::Base
 
   class << self
     def generate_for(report)
-      report.report_subjects.delete_all
+      ReportSubject.delete_all(:report_id => report.id)
       bill_criteria_subjects = report.bill_criteria_subjects.scoped(
         :select => "DISTINCT(subjects.id), COUNT(subjects.id) AS count",
         :group => 'subjects.id').inject({}) do |hash, subject|
