@@ -14,17 +14,7 @@
 
 <%- if !hide_titles && bill.titles.size > 1 && !@bill_titles_rendered.include?(bill) -%>
   <%- @bill_titles_rendered << bill -%>
-  <% content_tag :dl, :id => bill_titles_id, :class => 'hidden', :'data-dialog-title' => %{Bill Titles for "#{bill.titles.first}"} do %>
-    <%- bill.titles.group_by {|t| t.as }.each_pair do |as, as_titles| -%>
-    <dt><%= as %></dt>
-    <dd><dl>
-      <%- as_titles.group_by {|t| t.title_type }.each do |title_type, type_titles| -%>
-        <dt><%= title_type %></dt>
-        <%- type_titles.each do |title| -%>
-          <dd><q><%= title.title %></q></dd>
-        <%- end -%>
-      <%- end -%>
-    </dl></dd>
-    <%- end -%>
-  <% end %>
+  <%= render 'bills/titles', :bill => bill, :attrs => {
+    :id => bill_titles_id, :class => 'hidden',
+    :'data-dialog-title' => %{Bill Titles for "#{bill.titles.first}"}} %>
 <%- end -%>
