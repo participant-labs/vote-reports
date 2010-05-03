@@ -3,10 +3,19 @@
 <div class="section">
   <h2><%= @subject.name %></h2>
 
-  <h3>Reports on "<%= @subject.name %>"</h3>
-  <%= render 'reports/list', :reports => @reports, :param_name => :report_page %>
-</div>
+<div class="tabbed-nav">
+  <ul>
+    <li><a href="#subject_reports">Reports</a></li>
+    <li><a href="#subject_bills">Bills</a></li>
+  </ul>
 
-<div class="section">
-  <%= render 'bills/list', :bills => @bills, :title => %Q{Bills on "#{@subject.name}"}, :param_name => :bill_page %>
+  <div id="subject_reports">
+    <h2>Reports on "<%= @subject.name %>"</h2>
+    <%= render 'reports/list', :reports => @reports, :param_name => :report_page %>
+  </div>
+
+  <div id="subject_bills">
+    <%= render 'bills/list', :bills => @bills, :title => %Q{Bills on "#{@subject.name}"}, :param_name => :bill_page %>
+  </div>
+</div>
 </div>
