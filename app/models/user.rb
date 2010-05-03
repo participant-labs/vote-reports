@@ -37,10 +37,6 @@ class User < ActiveRecord::Base
     syms
   end
 
-  def admin?
-    role_symbols.include?(:admin)
-  end
-
   def follows?(report)
     followed_reports.include?(report)
   end
