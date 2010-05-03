@@ -32,17 +32,15 @@
   </li>
   </ul>
   <blockquote><%= to_html(@interest_group.description) %></blockquote>
-  <%- permitted_to? :edit, :interest_groups_images do -%>
-    <ul class="actions_menu">
-      <li><%= link_to 'Edit Interest Group Thumbnail', edit_interest_group_image_path(@interest_group) %></li>
-    </ul>
-  <%- end -%>
 </div>
 <div class="tabbed-nav">
   
   <ul>
     <li><a href="#report_scores_section">Scores</a></li>
     <li><a href="#report_subjects">Subjects</a></li>
+    <%- permitted_to? :edit, :interest_groups_images do -%>
+    <li><a href="#admin">Admin</a></li>
+    <%- end -%>
   </ul>
   
   <div id="report_scores_section" class="section report_scores">
@@ -92,4 +90,12 @@
     <p>Subjects for this report are selected by <a href="http://votesmart.org/">Project Vote Smart</a>.  Follow the links below to find reports on related subjects.</p>
     <%= render 'subjects/cloud', :subjects => @subjects %>
   </div>
+
+  <%- permitted_to? :edit, :interest_groups_images do -%>
+  <div id="admin">
+    <ul class="actions_menu">
+      <li><%= link_to 'Edit Interest Group Thumbnail', edit_interest_group_image_path(@interest_group) %></li>
+    </ul>
+  </div>
+  <%- end -%>
 </div>
