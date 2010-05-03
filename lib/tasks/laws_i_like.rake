@@ -68,12 +68,10 @@ namespace :laws_i_like do
           name = fb_user.name if name.blank?
           name = fb_user.id.to_s if name.blank?
 
-          password = SecureRandom.hex(13)
           user = identifier.user_id ? User.find(identifier.user_id) : User.create!(
             :username => name,
             :email => "#{name.gsub(' ', '_')}+facebook@votereports.org",
-            :password => password,
-            :password_confirmation => password
+            :rpx_identifiers => [identifier]
           )
           identifier.update_attribute(:user_id, user.id)
           report = user.reports.find_or_create_by_name(
