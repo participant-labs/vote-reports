@@ -1,6 +1,6 @@
 class ImportLawsILike < ActiveRecord::Migration
   def self.up
-    Rake::Task['laws_i_like:import'].invoke
+    Rake::Task['laws_i_like:unpack'].invoke
   end
 
   def self.down
