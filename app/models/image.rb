@@ -18,6 +18,12 @@ class Image < ActiveRecord::Base
 
   after_update :reprocess_thumbnail, :if => :cropping?
 
+  class << self
+    def laws_i_like
+      first(:conditions => {:thumbnail_file_name => 'lawsilike.png'})
+    end
+  end
+
   def cropping?
     [crop_x, crop_y, crop_w, crop_h].all?(&:present?)
   end

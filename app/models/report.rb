@@ -12,7 +12,7 @@ class Report < ActiveRecord::Base
   def current_image
     image || begin
         owner.present? && owner.respond_to?(:image) && owner.image
-      end
+      end || (laws_i_like? && Image.laws_i_like)
   end
   def thumbnail
     current_image || build_image
@@ -266,6 +266,10 @@ class Report < ActiveRecord::Base
       }
     end
   }
+
+  def laws_i_like?
+    source == 'laws_i_like'
+  end
 
   def score_criteria
     if user
