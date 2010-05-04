@@ -8,9 +8,16 @@ class BillCriterion < ActiveRecord::Base
 
   accepts_nested_attributes_for :bill
 
+  named_scope :supported, :conditions => {:support => true}
+  named_scope :opposed, :conditions => {:support => false}
+
   named_scope :active, :select => 'DISTINCT bill_criteria.*',
     :joins => {:bill => :rolls},
     :conditions => Roll.on_bill_passage.proxy_options[:conditions]
+
+  named_scope :inactive, :select => 'DISTINCT bill_criteria.*',
+    :joins => {:bill => :rolls},
+    :conditions => Roll.not_on_bill_passage.proxy_options[:conditions]
 
   after_save :rescore_report
   delegate :user_id, :to => :report

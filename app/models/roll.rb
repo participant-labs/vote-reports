@@ -23,6 +23,8 @@ class Roll < ActiveRecord::Base
   has_friendly_id :friendly_id
 
   named_scope :by_voted_at, :order => "voted_at DESC"
+  named_scope :not_on_bill_passage, :conditions => [
+    "rolls.roll_type NOT IN(?) AND rolls.subject_type = ?", PASSAGE_TYPES, 'Bill']
   named_scope :on_bill_passage, :conditions => [
     "rolls.roll_type IN(?) AND rolls.subject_type = ?", PASSAGE_TYPES, 'Bill']
 
