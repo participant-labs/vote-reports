@@ -16,10 +16,14 @@
   padding-left: 0;
 }
 
-a.report_title, .report_creator a {
+.politician_name {
+  font-size: 1.1em;
+}
+
+a.report_title, .report_creator a, .politician_name a {
   border-bottom: 0;
 }
 
-a.report_title:hover, .report_creator a:hover {
+a.report_title:hover, .report_creator a:hover, .politician_name a:hover {
   border-bottom: 1px solid;
 }
