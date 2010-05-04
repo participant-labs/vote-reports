@@ -11,7 +11,7 @@
   content: ', ';
 }
 
-.report_attrs blockquote {
+.report_attrs blockquote, .report_description blockquote {
   border-left: 0;
   padding-left: 0;
 }
@@ -31,4 +31,12 @@ a.report_title:hover, .report_creator a:hover, .politician_name a:hover {
 #featured_recent_reports .report {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+}
+
+.report_description h1 {
+  font-size: 1.5em;
+}
+
+.report_description h1, .report_description p {
+  margin-bottom: .5em;
 }

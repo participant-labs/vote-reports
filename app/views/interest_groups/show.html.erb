@@ -1,38 +1,6 @@
 <% title "Interest Group - #{h @interest_group.name}" %>
 
-<div class="section">
-  <%= render 'interest_groups/header', :interest_group => @interest_group %>
-  <ul class="details">
-  <%- if @interest_group.url.present? -%>
-    <li><%= link_to 'Website', @interest_group.url %></li>
-  <%- end -%>
-  <%- if @interest_group.email.present? -%>
-    <li><%= mail_to @interest_group.email, 'Email' %></li>
-  <%- end -%>
-  <li class="dropdown">
-    <h2>Contact</h2>
-    <dl class="dropdown_target">
-      <%- if @interest_group.contact_name.present? -%>
-        <dt>Contact</dt>
-        <dd><%= @interest_group.contact_name %></dd>
-      <%- end -%>
-      <%- if @interest_group.phone_numbers.present? -%>
-        <dt>Phone Numbers</dt>
-        <%- @interest_group.phone_numbers.each do |number| -%>
-          <dd><%= number %></dd>
-        <%- end -%>
-      <%- end -%>
-      <%- if @interest_group.fax.present? -%>
-        <dt>Fax</dt>
-        <dd><%= @interest_group.fax %></dd>
-      <%- end -%>
-        <dt>Address</dt>
-        <dd><%= render 'addresses/address', :address => @interest_group %></dd>
-    </dl>
-  </li>
-  </ul>
-  <blockquote><%= to_html(@interest_group.description) %></blockquote>
-</div>
+ <%= render 'interest_groups/header', :interest_group => @interest_group %>
 <div class="tabbed-nav">
   
   <ul>
