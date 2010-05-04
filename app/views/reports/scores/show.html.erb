@@ -15,7 +15,7 @@
           <%- roll = bill_score.evidence.roll -%>
           <dt><%= link_to "On #{roll.voted_at.to_date.to_s(:long)} voted #{bill_score.evidence.position}", roll %></dt>
         <%- end -%>
-        <dd>On <%= render 'bills/bill', :bill => subject, :hide_titles => true, :hide_year => true %> which this report <%= subject_scores.first.criterion.position %>s</dd>
+        <dd>On <%= render 'bills/bill', :bill => subject, :hide_year => true %> which this report <%= subject_scores.first.criterion.position %>s</dd>
       <%- elsif subject.is_a?(InterestGroupReport) -%>
         <%- notify_exceptional("Multiple interest group ratings #{subject_scores.inspect}") if subject_scores.size > 1 -%>
         <%- rating = subject_scores.first.evidence -%>

@@ -1,20 +1,11 @@
 <%-
-  hide_titles ||= false
   hide_year ||= false
-  @bill_titles_rendered ||= []
-  bill_titles_id = dom_id(bill, :titles)
+  attrs = bill.titles.present? ? {
+    :'data-qtip-path' => bill_titles_path(bill),
+    :'data-qtip-title' => %{Bill Titles for "#{bill.titles.first}"}
+  } : {}
 -%>
 
 <span class="bill">
-  <%= link_to_unless_current "#{bill.bill_type.to_s} #{bill.bill_number}#{" (#{bill.introduced_on.year})" unless hide_year }: #{bill.titles.first}", bill, :class => 'title' %>
-  <%- if !hide_titles && bill.titles.size > 1 -%>
-    (<%= link_to 'all titles', '#', :'data-dialog' => bill_titles_id, :class => 'bill_titles' %>)
-  <%- end -%>
+  <%= link_to_unless_current "#{bill.bill_type.to_s} #{bill.bill_number}#{" (#{bill.introduced_on.year})" unless hide_year }: #{bill.titles.first}", bill, attrs.merge(:class => 'title') %>
 </span>
-
-<%- if !hide_titles && bill.titles.size > 1 && !@bill_titles_rendered.include?(bill) -%>
-  <%- @bill_titles_rendered << bill -%>
-  <%= render 'bills/titles', :bill => bill, :attrs => {
-    :id => bill_titles_id, :class => 'hidden',
-    :'data-dialog-title' => %{Bill Titles for "#{bill.titles.first}"}} %>
-<%- end -%>

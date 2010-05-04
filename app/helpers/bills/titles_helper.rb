@@ -1,0 +1,2 @@
+module Bills::TitlesHelper
+end
