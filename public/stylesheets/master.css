@@ -71,12 +71,8 @@ input.tagged {
   font-size: 13px;
 }
 
-.sidebar-links li + li:before, #account li + li:before {
+#footer .sidebar-links li + li:before, #account li + li:before {
   content: " / ";
-}
-
-#menu.sidebar-links li + li:before {
-  content: '';
 }
 
 #inner {
