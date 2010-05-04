@@ -16,10 +16,10 @@
   padding-left: 0;
 }
 
-a.report_title {
+a.report_title, .report_creator a {
   border-bottom: 0;
 }
 
-a.report_title:hover {
+a.report_title:hover, .report_creator a:hover {
   border-bottom: 1px solid;
 }
