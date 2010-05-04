@@ -1,12 +1,6 @@
 <% title "Report - #{h @report.name}" %>
 
-<div class="section report_show">
-  <%= render 'reports/header', :report => @report %>
-
-  <%- unless @report.description.blank? -%>
-  <blockquote><%= raw @report.description %></blockquote>
-  <%- end -%>
-</div>
+<%= render 'reports/header', :report => @report %>
 
 <div class="tabbed-nav">
   <ul>
