@@ -1,7 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
 
   map.resources :rolls, :only => [:show]
-  map.resources :bills, :only => [:index, :show]
+  map.resources :bills, :only => [:index, :show] do |bill|
+    bill.resource :titles, :controller => 'bills/titles', :only => :show
+  end
   map.resources :politicians, :only => [:index, :show]
   map.resources :subjects, :only => [:index, :show]
   map.resources :interest_groups, :only => [:index, :show] do |interest_group|
