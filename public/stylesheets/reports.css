@@ -10,3 +10,16 @@
 .report_score_evidence_link > ul > li + li {
   content: ', ';
 }
+
+.report_attrs blockquote {
+  border-left: 0;
+  padding-left: 0;
+}
+
+a.report_title {
+  border-bottom: 0;
+}
+
+a.report_title:hover {
+  border-bottom: 1px solid;
+}
