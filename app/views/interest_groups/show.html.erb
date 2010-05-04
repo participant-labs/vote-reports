@@ -6,6 +6,7 @@
   <ul>
     <li><a href="#report_scores_section">Scores</a></li>
     <li><a href="#report_subjects">Subjects</a></li>
+    <li><a href="#interest_group_ratings">Agenda</a></li>
     <%- permitted_to? :edit, :interest_groups_images do -%>
     <li><a href="#admin">Admin</a></li>
     <%- end -%>
@@ -57,6 +58,16 @@
     <h3>Subjects</h3>
     <p>Subjects for this report are selected by <a href="http://votesmart.org/">Project Vote Smart</a>.  Follow the links below to find reports on related subjects.</p>
     <%= render 'subjects/cloud', :subjects => @subjects %>
+  </div>
+
+  <div id="interest_group_ratings" class="section">
+    <h3>Agenda</h3>
+    <p>This report's scores are based on ratings periodically issued by the <%= @interest_group.name %>.  All included ratings are shown below.</p>
+    <ul>
+    <%- @interest_group.reports.each do |report| -%>
+      <li><%= render 'interest_group_reports/interest_group_report', :report => report %></li>
+    <%- end -%>
+    </ul>
   </div>
 
   <%- permitted_to? :edit, :interest_groups_images do -%>
