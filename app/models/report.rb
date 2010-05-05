@@ -49,9 +49,9 @@ class Report < ActiveRecord::Base
 
       def next_step
         if bill_criteria.blank?
-          "You'll need to add bills to this report in order to publish this report."
+          "You'll need to add bills to this report in order to publish it."
         elsif scores.blank?
-          "None of the added bills have passage roll call votes associated. You'll need to add a voted bill to publish this report."
+          "None of this report's bills have roll call votes associated. You'll need to add a voted bill to publish this report."
         else
           {
             :text => 'Publish this Report',
