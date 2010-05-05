@@ -20,8 +20,10 @@ module ReportsHelper
       content_tag :p, report.next_step
     else
       next_step.assert_valid_keys(:text, :why, :state_event, :confirm)
-      raw(content_tag(:p, next_step.fetch(:why)) \
-       + button_to(next_step.fetch(:text), user_report_path(current_user, report, :report => {:state_event => next_step.fetch(:state_event)}), :confirm => next_step.fetch(:confirm), :method => :put))
+      content_tag :div, :class => 'buttons clearfix' do
+        content_tag(:p, next_step.fetch(:why)) \
+          + link_to(next_step.fetch(:text), user_report_path(current_user, report, :report => {:state_event => next_step.fetch(:state_event)}), :confirm => next_step.fetch(:confirm), :method => :put)
+      end
     end
   end
 end
