@@ -21,7 +21,7 @@ Rails::Initializer.run do |config|
   config.gem 'Empact-authlogic_rpx', :lib => 'authlogic_rpx', :version => '>= 1.1.3'
   config.gem 'bluecloth', :version => '>=2.0.5'
   config.gem "declarative_authorization"
-  config.gem 'delayed_job'
+  config.gem 'delayed_job', :version => '>= 2.0.3'
   config.gem 'erubis'
   config.gem 'exceptional'
   config.gem 'fastercsv'

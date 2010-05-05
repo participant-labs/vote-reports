@@ -23,5 +23,5 @@ end
 
 Given /^the scores for (interest group "[^"]*") are calculated$/ do |interest_group|
   interest_group.rescore!
-  Delayed::Job.reserve_and_run_one_job.should == true
+  Delayed::Worker.new(:quiet => true).work_off(1).should == [1, 0]
 end
