@@ -30,3 +30,4 @@ config.gem 'rspec-rails',      :lib => false, :version => '>=1.3.2' unless File.
 config.gem 'fixjour'
 config.gem 'forgery', :source => 'http://gemcutter.org'
 config.gem 'fakeweb'
+config.gem 'rr'
