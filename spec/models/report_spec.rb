@@ -94,7 +94,7 @@ describe Report do
 
       it "completeing the rescore should remove it from the active jobs" do
         lambda {
-          Delayed::Job.reserve_and_run_one_job
+          Delayed::Worker.new(:quiet => true).work_off(1)
         }.should change(@report.delayed_jobs, :count).by(-1)
       end
 

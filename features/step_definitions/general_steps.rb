@@ -14,7 +14,7 @@ When /^I wait (\d+) seconds$/ do |seconds|
 end
 
 When /^I wait for delayed job to finish$/ do
-  Delayed::Job.reserve_and_run_one_job
+  Delayed::Worker.new(:quiet => true).work_off(1)
 end
 
 When /^I console$/ do
