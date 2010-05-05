@@ -33,8 +33,8 @@ class Report
             [:report_score_id, :criterion_type, :criterion_id, :evidence_type, :evidence_id],
             evidences)
         end
-        if report.scores.empty? && report.can_unpublish?
-          report.unpublish
+        if report.scores.empty? && report.can_unshare?
+          report.unshare
         else
           report.save!
         end
