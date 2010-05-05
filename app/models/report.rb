@@ -53,7 +53,6 @@ class Report < ActiveRecord::Base
         elsif scores.blank?
           "None of the added bills have passage roll call votes associated. You'll need to add a voted bill to publish this report."
         else
-          notify_exceptional("Invalid publishable state for report #{inspect}") unless publishable?
           {
             :text => 'Publish this Report',
             :state_event => 'publish',
@@ -206,16 +205,6 @@ class Report < ActiveRecord::Base
     else
       BlueCloth::new(self[:description].to_s).to_html
     end
-  end
-
-  def publishable?
-    return false unless can_publish?
-    current_state_event = self.state_event
-    self.state_event = "publish"
-    result = self.valid?
-    self.errors.clear
-    self.state_event = current_state_event
-    result
   end
 
   def rescore!
