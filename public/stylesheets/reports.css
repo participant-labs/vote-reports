@@ -54,3 +54,8 @@ a.report_title:hover, .report_creator a:hover, .politician_name a:hover {
 .publicize h2, .publicize p {
   margin-bottom: 5px;
 }
+
+.publicize .buttons a, #visibility .buttons a {
+  background-color: #E2E1DE;
+  border-color: #C4C4C4;
+}
