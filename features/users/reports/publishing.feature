@@ -32,7 +32,7 @@ Feature: Browsing Reports
     When I go to my report page for "My Report"
     When I follow "Unshare this Report"
     Then I should see "Successfully updated report"
-    And I should see "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
+    And I should see "This report is private, so only you can access it."
 
   @emulate_rails_javascript
   Scenario: Published report is unpublishable after deleting all criteria
