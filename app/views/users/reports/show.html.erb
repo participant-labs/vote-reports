@@ -75,7 +75,7 @@
     <div id="visibility" class="section report_status <%= @report.state %>">
       <h2>Visibility: <%= @report.state.capitalize %></h2>
       <%= content_tag :p, @report.status if @report.status.present? %>
-      <%= report_next_step(@report) %>
+      <%= report_next_steps(@report) %>
     </div>
 
     <div id="admin" class="section">

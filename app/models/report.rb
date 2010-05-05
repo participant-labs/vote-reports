@@ -33,13 +33,70 @@ class Report < ActiveRecord::Base
     Subject.for_bill_criteria_on_report(self)
   end
 
-  state_machine :initial => :personal do
+  def publish_step
+    if bill_criteria.blank?
+      "You'll need to add bills to this report in order to publish it."
+    elsif scores.blank?
+      "None of this report's bills have roll call votes associated. You'll need to add a voted bill to publish this report."
+    else
+      {
+        :text => 'Publish this Report',
+        :why => "Publishing this report will include it in lists and searches on the site",
+        :state_event => 'publish',
+        :confirm => 'Publish this Report?  It will then show up in lists and searches on this site.'
+      }
+    end
+  end
+
+  def share_step
+    {
+      :text => 'Share this Report',
+      :why => "Sharing this report will allow others to access it from this url.",
+      :state_event => 'share',
+      :confirm => 'Share this Report?  It will accessible to others via this url.'
+    }
+  end
+
+  def unshare_step
+    {
+      :text => 'Unshare this Report',
+      :why => "Unsharing this report will make it accessible only to you.",
+      :state_event => 'unshare',
+      :confirm => 'Unshare this Report? It will only be accesible to you.'
+    }
+  end
+
+  state_machine :initial => :private do
     event :publish do
-      transition :personal => :published
+      transition [:private, :personal] => :published
     end
 
-    event :unpublish do
-      transition :published => :personal
+    event :share do
+      transition [:private, :published] => :personal
+    end
+
+    event :unshare do
+      transition [:published, :personal] => :private
+    end
+
+    state :private do
+      def status
+        "This report is private, so only you can access it."
+      end
+
+      def next_steps
+        if publish_step.is_a?(String)
+          [
+            share_step,
+            publish_step
+          ]
+        else
+          [
+            publish_step,
+            share_step
+          ]
+        end
+      end
     end
 
     state :personal do
@@ -47,19 +104,11 @@ class Report < ActiveRecord::Base
         "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
       end
 
-      def next_step
-        if bill_criteria.blank?
-          "You'll need to add bills to this report in order to publish it."
-        elsif scores.blank?
-          "None of this report's bills have roll call votes associated. You'll need to add a voted bill to publish this report."
-        else
-          {
-            :text => 'Publish this Report',
-            :why => "Publishing this report will include it in lists and searches on the site",
-            :state_event => 'publish',
-            :confirm => 'Publish this Report?  It will then show up in lists and searches on this site.'
-          }
-        end
+      def next_steps
+        [
+          publish_step,
+          unshare_step
+        ]
       end
     end
 
@@ -71,15 +120,16 @@ class Report < ActiveRecord::Base
         "This report is published, so it will show up in lists and searches on this site."
       end
 
-      def next_step
-        {
-          :text => 'Unpublish this Report',
-          :why => "Unpublishing this report will remove it from lists and searches on the site, but it will still be accessible by its current url",
-          :state_event => 'unpublish',
-          :confirm => 'Unpublish this Report? It will no longer show up in lists or searches on this site.'
-        }
+      def next_steps
+        [
+          unshare_step
+        ]
       end
     end
+  end
+
+  def next_step
+    next_steps.first
   end
 
   searchable do
