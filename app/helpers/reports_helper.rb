@@ -14,16 +14,27 @@ module ReportsHelper
     polymorphic_path(report_path_components(report), options)
   end
 
-  def report_next_step(report)
-    next_step = report.next_step
-    if next_step.is_a?(String)
-      content_tag :p, report.next_step
+  def report_step(report, step)
+    if step.is_a?(String)
+      content_tag :p, step
     else
-      next_step.assert_valid_keys(:text, :why, :state_event, :confirm)
+      step.assert_valid_keys(:text, :why, :state_event, :confirm)
       content_tag :div, :class => 'buttons clearfix' do
-        content_tag(:p, next_step.fetch(:why)) \
-          + link_to(next_step.fetch(:text), user_report_path(current_user, report, :report => {:state_event => next_step.fetch(:state_event)}), :confirm => next_step.fetch(:confirm), :method => :put)
+        content_tag(:p, step.fetch(:why)) \
+          + link_to(step.fetch(:text), user_report_path(current_user, report, :report => {:state_event => step.fetch(:state_event)}), :confirm => step.fetch(:confirm), :method => :put)
       end
+    end
+  end
+
+  def report_next_step(report)
+    report_step(report, report.next_step)
+  end
+
+  def report_next_steps(report)
+    content_tag :ul do
+      report.next_steps.map do |step|
+        content_tag :li, report_step(report, step)
+      end.join
     end
   end
 end
