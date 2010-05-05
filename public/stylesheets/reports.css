@@ -40,3 +40,17 @@ a.report_title:hover, .report_creator a:hover, .politician_name a:hover {
 .report_description h1, .report_description p {
   margin-bottom: .5em;
 }
+
+.publicize {
+  float: right;
+  margin-left: 15px;
+  width: 20em;
+}
+
+.publicize h2 {
+  font-size: 1.3em;
+}
+
+.publicize h2, .publicize p {
+  margin-bottom: 5px;
+}

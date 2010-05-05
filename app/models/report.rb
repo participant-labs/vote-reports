@@ -55,6 +55,7 @@ class Report < ActiveRecord::Base
         else
           {
             :text => 'Publish this Report',
+            :why => "Publishing this report will include it in lists and searches on the site",
             :state_event => 'publish',
             :confirm => 'Publish this Report?  It will then show up in lists and searches on this site.'
           }
@@ -73,6 +74,7 @@ class Report < ActiveRecord::Base
       def next_step
         {
           :text => 'Unpublish this Report',
+          :why => "Unpublishing this report will remove it from lists and searches on the site, but it will still be accessible by its current url",
           :state_event => 'unpublish',
           :confirm => 'Unpublish this Report? It will no longer show up in lists or searches on this site.'
         }

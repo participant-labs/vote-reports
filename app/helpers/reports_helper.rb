@@ -19,8 +19,9 @@ module ReportsHelper
     if next_step.is_a?(String)
       content_tag :p, report.next_step
     else
-      next_step.assert_valid_keys(:text, :state_event, :confirm)
-      raw button_to(next_step.fetch(:text), user_report_path(current_user, report, :report => {:state_event => next_step.fetch(:state_event)}), :confirm => next_step.fetch(:confirm), :method => :put)
+      next_step.assert_valid_keys(:text, :why, :state_event, :confirm)
+      raw(content_tag(:p, next_step.fetch(:why)) \
+       + button_to(next_step.fetch(:text), user_report_path(current_user, report, :report => {:state_event => next_step.fetch(:state_event)}), :confirm => next_step.fetch(:confirm), :method => :put))
     end
   end
 end
