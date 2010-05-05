@@ -11,11 +11,11 @@ Feature: Bill viewing
   Scenario: User views all bill titles
     Given a bill named "USA PATRIOT Reauthorization Act of 2009"
     When I go to the bill page for "USA PATRIOT Reauthorization Act of 2009"
-    Then I should not see "all titles"
+    Then I should see "All Titles"
 
     Given bill "USA PATRIOT Reauthorization Act of 2009" has a title "Cheney Fuck Yeah"
     When I go to the bill page for "USA PATRIOT Reauthorization Act of 2009"
-    Then I should see "all titles"
+    Then I should see "All Titles"
     And I should see "Cheney Fuck Yeah"
 
   Scenario: Follow an existing roll to its page
