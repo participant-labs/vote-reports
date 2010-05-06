@@ -14,15 +14,15 @@ Given /^(\d+) published reports$/ do |count|
   end
 end
 
-Given /^I have the following published reports?:$/ do |table|
+Given /^I have the following (.*) reports?:$/ do |type, table|
   table.hashes.each do |row|
-    create_published_report(row.symbolize_keys.merge(:user => current_user))
+    send(:"create_#{type}_report", row.symbolize_keys.merge(:user => current_user))
   end
 end
 
-Given /^the following published reports?:$/ do |table|
+Given /^the following (.*) reports?:$/ do |type, table|
   table.hashes.each do |row|
-    create_published_report(row.symbolize_keys)
+    send(:"create_#{type}_report", row.symbolize_keys)
   end
 end
 

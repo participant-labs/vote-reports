@@ -337,6 +337,7 @@ Fixjour :verify => false do
   end
 
   alias create_empty_report create_report
+  alias create_private_report create_report
 
   def create_unscored_report(attrs = {})
     create_report(attrs).tap do |report|
