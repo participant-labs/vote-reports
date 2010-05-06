@@ -48,7 +48,16 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     # on_stage 'testing' do
     #   file '/etc/motd', :ensure => :file, :content => "Welcome to the TEST server!"
     # end
+
+    exec :jammit, :command => 'jammit',
+      :cwd => "#{configuration[:deploy_to]}/current/",
+      :creates => [
+        'public/assets/common-datauri.css',
+        'public/assets/common-mhtml.css',
+        'public/assets/common.js'
+      ]
   end
+
   # The following line includes the 'application_packages' recipe defined above
   recipe :application_packages
 

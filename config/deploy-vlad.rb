@@ -22,8 +22,4 @@ namespace :vlad do
   remote_task :setup_scheduling, :roles => :app do
     run "cd #{latest_release} && whenever --update-crontab #{application}"
   end
-
-  remote_task :setup_assets, :roles => :app do
-    run "cd #{latest_release} && jammit"
-  end
 end
