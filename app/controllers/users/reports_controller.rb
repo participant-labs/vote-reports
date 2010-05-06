@@ -74,7 +74,7 @@ class Users::ReportsController < ApplicationController
   private
 
   def permission_denied_path
-    if params[:id]
+    if permitted_to?(:show, @report, :context => :users_reports)
       user_report_path(params[:user_id], params[:id])
     else
       user_reports_path(params[:user_id])

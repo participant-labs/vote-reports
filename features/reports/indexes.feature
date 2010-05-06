@@ -42,12 +42,3 @@ Feature: Browsing Reports
     Given I am signed in as "NotEmpact"
     When I go to the user page for "Empact"
     Then I should be on the home page
-
-  Scenario: View Report name and Description on the report page
-    Given I am signed in
-    And I have the following published report:
-      | name      | description                |
-      | My Report | I made this because I care |
-    When I go to my reports page
-    And I follow "My Report"
-    Then I should see "I made this because I care"
