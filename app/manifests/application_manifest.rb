@@ -56,6 +56,9 @@ class ApplicationManifest < Moonshine::Manifest::Rails
         'public/assets/common-mhtml.css',
         'public/assets/common.js'
       ]
+
+    exec :whenever, :command => 'whenever --update-crontab',
+      :cwd => "#{configuration[:deploy_to]}/current/"
   end
 
   # The following line includes the 'application_packages' recipe defined above

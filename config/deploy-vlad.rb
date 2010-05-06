@@ -18,8 +18,4 @@ namespace :vlad do
     run "cd #{latest_release} && RAILS_ENV=production script/delayed_job stop"
     run "cd #{latest_release} && RAILS_ENV=production script/delayed_job start"
   end
-
-  remote_task :setup_scheduling, :roles => :app do
-    run "cd #{latest_release} && whenever --update-crontab #{application}"
-  end
 end
