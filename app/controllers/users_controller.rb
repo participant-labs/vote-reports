@@ -51,7 +51,7 @@ class UsersController < ApplicationController
 
   def permission_denied_path
     if params[:id]
-      user_path(params[:id])
+      user_reports_path(params[:id])
     else
       root_path
     end
