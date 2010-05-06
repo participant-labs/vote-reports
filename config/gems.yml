@@ -1,3 +1,45 @@
 --- 
+- :version: ">= 1.2.0"
+  :name: ancestry
+- :version: ">= 2.1.3"
+  :name: authlogic
+- :version: ">= 1.1.3"
+  :name: Empact-authlogic_rpx
+- :version: ">= 2.0.5"
+  :name: bluecloth
+- :name: declarative_authorization
+- :version: ">= 2.0.3"
+  :name: delayed_job
+- :name: erubis
+- :name: exceptional
+- :name: fastercsv
+- :version: = 2.3.2
+  :name: friendly_id
+- :name: gemcutter
+- :name: geokit
+- :version: ">= 2.1.0"
+  :name: gravtastic
+- :name: jammit
+- :name: json
+- :version: ">= 2.11.2"
+  :name: newrelic_rpm
+- :name: nokogiri
+- :name: paperclip
+- :name: pg
+- :version: ">= 0.6.12"
+  :name: rpx_now
+- :name: state_machine
+- :version: = 0.10.8
+  :name: sunspot
+- :version: = 0.11.5
+  :name: sunspot_rails
+- :source: http://gems.github.com
+  :name: polly-suppress_validations
+- :version: ">= 0.3.0"
+  :name: votesmart
+- :name: whenever
+- :name: will_paginate
+- :name: ym4r
+- :name: httparty
 - :version: 2.3.5
   :name: rails
