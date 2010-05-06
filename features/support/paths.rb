@@ -10,6 +10,9 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+    when /user "(.*)"'s page for report "(.*)"/
+      user = User.find_by_username($1)
+      user_report_path(user, user.reports.find_by_name($2))
     when /my report page for "(.+)"/i
       user_report_path(current_user, Report.find_by_name($1))
     when /my edit report page for "(.+)"/i
@@ -27,6 +30,8 @@ module NavigationHelpers
 
     when /my reports page/i
       user_reports_path(current_user)
+    when /the reports page for "(.*)"/i
+      user_reports_path(User.find_by_username($1))
     when /my profile page/i
       user_path(current_user)
 
