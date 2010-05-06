@@ -3,48 +3,39 @@ Feature: Browsing Reports
   As a user
   I want to browse reports
 
+  Background:
+    Given I am signed in as "Empact"
+    And I have a report named "Empty Report"
+    And I have an unscored report named "Unscored Report"
+    And I have a scored report named "Scored Report"
+    And I have a personal report named "Personal Report"
+    And I have a published report named "Active Report"
+
   Scenario: Browse excludes unpublished reports
-    Given a report named "Empty Report"
-    And an unscored report named "Unscored Report"
-    And a scored report named "Scored Report"
-    And a published report named "Active Report"
     When I go to the reports page
     Then I should see "Active Report"
     But I should not see "Empty Report"
     And I should not see "Unscored Report"
     And I should not see "Scored Report"
+    And I should not see "Personal Report"
 
   Scenario: User reports view excludes unpublished reports
-    Given I am signed in as "Empact"
-    And I have a report named "Empty Report"
-    And I have an unscored report named "Unscored Report"
-    And I have a scored report named "Scored Report"
-    And I have a published report named "Active Report"
     When I go to my reports page
     Then I should see "Published Reports"
     And I should see "Active Report"
     But I should not see "Empty Report"
     And I should not see "Unscored Report"
     And I should not see "Scored Report"
+    And I should not see "Personal Report"
     When I follow "View All Reports"
     Then I should be on my profile page
 
   Scenario: My Reports doesn't exclude empty reports
-    Given I am signed in
-    And I have a report named "Empty Report"
-    And I have an unscored report named "Unscored Report"
-    And I have a scored report named "Scored Report"
-    And I have a published report named "Active Report"
-    When I go to the reports page
-    Then I should not see "Empty Report"
-    And I should see "Active Report"
-    When I go to my reports page
-    Then I should not see "Empty Report"
-    And I should see "Active Report"
     When I go to my profile page
     Then I should see "Empty Report"
     And I should see "Unscored Report"
     And I should see "Scored Report"
+    And I should see "Personal Report"
     And I should see "Active Report"
 
   Scenario: View Report name and Description on the report page

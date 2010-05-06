@@ -356,6 +356,12 @@ Fixjour :verify => false do
     end
   end
 
+  def create_personal_report(attrs = {})
+    create_report(attrs).tap do |report|
+      report.share
+    end
+  end
+
   def create_published_report(attrs = {})
     create_scored_report(attrs).tap do |report|
       report.publish
