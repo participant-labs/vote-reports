@@ -7,8 +7,8 @@
     <li><a href="#report_scores_section">Scores</a></li>
     <li><a href="#report_subjects">Subjects</a></li>
     <li><a href="#bill_criteria">Agenda</a></li>
+    <li><a href="#visibility">Visibility</a></li>
     <%- permitted_to? :edit, @report do -%>
-      <li><a href="#visibility">Visibility</a></li>
       <li><a href="#admin">Admin</a></li>
     <%- end -%>
   </ul>
@@ -71,13 +71,15 @@
     <%- end -%>
   </div>
 
-  <%- permitted_to? :edit, @report do -%>
-    <div id="visibility" class="section report_status <%= @report.state %>">
-      <h2>Visibility: <%= @report.state.capitalize %></h2>
-      <%= content_tag :p, @report.status if @report.status.present? %>
+  <div id="visibility" class="section report_status <%= @report.state %>">
+    <h2>Visibility: <%= @report.state.capitalize %></h2>
+    <%= content_tag :p, @report.status if @report.status.present? %>
+    <%- permitted_to? :edit, @report do -%>
       <%= report_next_steps(@report) %>
-    </div>
+    <%- end -%>
+  </div>
 
+  <%- permitted_to? :edit, @report do -%>
     <div id="admin" class="section">
       <h2>Admin</h2>
       <ul class="actions_menu">
