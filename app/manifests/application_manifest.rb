@@ -49,6 +49,8 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     #   file '/etc/motd', :ensure => :file, :content => "Welcome to the TEST server!"
     # end
 
+    package 'curl', :ensure => :installed
+
     exec :jammit, :command => 'jammit',
       :cwd => "#{configuration[:deploy_to]}/current/"
     exec :whenever, :command => 'whenever --update-crontab',
