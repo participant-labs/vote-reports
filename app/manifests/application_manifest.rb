@@ -50,13 +50,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     # end
 
     exec :jammit, :command => 'jammit',
-      :cwd => "#{configuration[:deploy_to]}/current/",
-      :creates => [
-        'public/assets/common-datauri.css',
-        'public/assets/common-mhtml.css',
-        'public/assets/common.js'
-      ]
-
+      :cwd => "#{configuration[:deploy_to]}/current/"
     exec :whenever, :command => 'whenever --update-crontab',
       :cwd => "#{configuration[:deploy_to]}/current/"
   end
