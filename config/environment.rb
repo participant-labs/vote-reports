@@ -32,7 +32,7 @@ Rails::Initializer.run do |config|
   config.gem 'jammit'
   config.gem 'json'
   config.gem 'moonshine'
-  config.gem 'capistrano-ext'
+  config.gem 'shadow_puppet'
   config.gem 'newrelic_rpm', :version => '>= 2.11.2'
   config.gem 'nokogiri'
   config.gem 'paperclip'
