@@ -53,6 +53,8 @@
 # http://github.com/railsmachine/moonshine/issues if there are additional gem
 # dependencies moonshine should know about.
 :apt_gems:
+ :pg:
+   - postgresql
  :patron:
    - libcurl3
    - libcurl3-dev
