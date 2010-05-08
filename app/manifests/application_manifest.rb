@@ -49,7 +49,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     #   file '/etc/motd', :ensure => :file, :content => "Welcome to the TEST server!"
     # end
 
-    package 'libcurl', :ensure => :installed
+    package 'libcurl3', :ensure => :installed
 
     exec :jammit, :command => 'jammit',
       :cwd => "#{configuration[:deploy_to]}/current/"
