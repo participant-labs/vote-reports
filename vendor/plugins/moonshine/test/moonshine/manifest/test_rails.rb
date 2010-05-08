@@ -335,11 +335,11 @@ class Moonshine::Manifest::RailsTest < Test::Unit::TestCase
   def test_postgresql_server
     @manifest.postgresql_server
 
-    assert_not_nil @manifest.services["postgresql-8.3"]
+    assert_not_nil @manifest.services["postgresql-8.4"]
     assert_not_nil @manifest.packages["postgresql-client"]
     assert_not_nil @manifest.packages["postgresql-contrib"]
-    assert_not_nil @manifest.files["/etc/postgresql/8.3/main/pg_hba.conf"]
-    assert_not_nil @manifest.files["/etc/postgresql/8.3/main/postgresql.conf"]
+    assert_not_nil @manifest.files["/etc/postgresql/8.4/main/pg_hba.conf"]
+    assert_not_nil @manifest.files["/etc/postgresql/8.4/main/postgresql.conf"]
   end
 
   def test_postgresql_gem
