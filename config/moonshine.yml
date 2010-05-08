@@ -54,7 +54,7 @@
 # dependencies moonshine should know about.
 :apt_gems:
  :pg:
-   - postgresql
+   - postgresql-8.3
  :patron:
    - libcurl3
    - libcurl3-dev
