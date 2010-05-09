@@ -11,7 +11,7 @@ module Moonshine::Manifest::Rails::Postgresql
     package 'postgresql-client', :ensure => :installed
     package 'postgresql-contrib', :ensure => :installed
     package 'libpq-dev', :ensure => :installed
-    service 'postgresql-8.3',
+    service 'postgresql-8.4',
       :ensure     => :running,
       :hasstatus  => true,
       :require    => [
@@ -21,22 +21,22 @@ module Moonshine::Manifest::Rails::Postgresql
       ]
     #ensure the postgresql key is present on the configuration hash
     configure(:postgresql => {})
-    file '/etc/postgresql/8.3/main/pg_hba.conf',
+    file '/etc/postgresql/8.4/main/pg_hba.conf',
       :ensure  => :present,
       :content => template(File.join(File.dirname(__FILE__), 'templates', 'pg_hba.conf.erb')),
       :require => package('postgresql'),
       :mode    => '600',
       :owner   => 'postgres',
       :group   => 'postgres',
-      :notify  => service('postgresql-8.3')
-    file '/etc/postgresql/8.3/main/postgresql.conf',
+      :notify  => service('postgresql-8.4')
+    file '/etc/postgresql/8.4/main/postgresql.conf',
       :ensure  => :present,
       :content => template(File.join(File.dirname(__FILE__), 'templates', 'postgresql.conf.erb')),
       :require => package('postgresql'),
       :mode    => '600',
       :owner   => 'postgres',
       :group   => 'postgres',
-      :notify  => service('postgresql-8.3')
+      :notify  => service('postgresql-8.4')
   end
 
   # Install the <tt>pg</tt> rubygem and dependencies
@@ -51,7 +51,7 @@ module Moonshine::Manifest::Rails::Postgresql
     psql "CREATE USER #{database_environment[:username]} WITH PASSWORD '#{database_environment[:password]}'",
       :alias    => "postgresql_user",
       :unless   => psql_query('\\\\du') + "| grep #{database_environment[:username]}",
-      :require  => service('postgresql-8.3')
+      :require  => service('postgresql-8.4')
   end
 
   # Create the database from the current <tt>database_environment</tt>
