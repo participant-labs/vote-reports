@@ -343,7 +343,7 @@ namespace :ruby do
 
   task :install_deps do
     sudo 'apt-get update'
-    sudo 'apt-get install -q -y build-essential zlib1g-dev libssl-dev libreadline5-dev libncurses5-dev apt-show-versions libapt-pkg-perl wget'
+    sudo 'apt-get install -q -y build-essential zlib1g-dev libssl-dev libreadline5-dev wget'
   end
 
   task :install_moonshine_deps do
