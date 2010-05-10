@@ -20,7 +20,8 @@
 - :version: ">= 2.1.0"
   :name: gravtastic
 - :name: jammit
-- :name: json
+- :version: ">= 1.4.3"
+  :name: json
 - :name: shadow_puppet
 - :version: ">= 2.11.2"
   :name: newrelic_rpm

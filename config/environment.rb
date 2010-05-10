@@ -30,7 +30,7 @@ Rails::Initializer.run do |config|
   config.gem 'geokit'
   config.gem 'gravtastic', :version => '>= 2.1.0'
   config.gem 'jammit'
-  config.gem 'json'
+  config.gem 'json', :version => '>= 1.4.3'
   config.gem 'shadow_puppet'
   config.gem 'newrelic_rpm', :version => '>= 2.11.2'
   config.gem 'nokogiri'
