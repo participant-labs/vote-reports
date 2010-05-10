@@ -13,7 +13,10 @@ namespace :db do
       require 'exceptional'
       require 'rubygems'
       Exceptional.rescue_and_reraise do
-        raise "db:backup:restore is only for development" unless Rails.env.development?
+        unless Rails.env.development? || ENV['IM_DEFINITELY_POPULATING_AN_EMPTY_DATABASE'] == 'true'
+          raise "db:backup:restore is only for development unless you're populating a db you know is empty." +
+            "Run it with IM_DEFINITELY_POPULATING_AN_EMPTY_DATABASE=true to go ahead with this"
+        end
 
         path = 'data/backup/db/full/production'
         remote_path = "/srv/vote-reports/current/#{path}"
