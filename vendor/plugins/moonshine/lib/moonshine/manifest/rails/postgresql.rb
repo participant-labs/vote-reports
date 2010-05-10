@@ -56,8 +56,9 @@ module Moonshine::Manifest::Rails::Postgresql
 
   # Create the database from the current <tt>database_environment</tt>
   def postgresql_database
+    encoding = "--encoding=#{database_environment[:encoding]}" if database_environment[:encoding]
     exec "postgresql_database",
-      :command  => "/usr/bin/createdb -O #{database_environment[:username]} #{database_environment[:database]}",
+      :command  => "/usr/bin/createdb --template=template0 #{encoding} -O #{database_environment[:username]} #{database_environment[:database]}",
       :unless   => "/usr/bin/psql -l | grep #{database_environment[:database]}",
       :user     => 'postgres',
       :require  => exec('postgresql_user'),
