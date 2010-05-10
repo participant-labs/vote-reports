@@ -21,6 +21,7 @@
   :name: gravtastic
 - :name: jammit
 - :name: json
+- :name: shadow_puppet
 - :version: ">= 2.11.2"
   :name: newrelic_rpm
 - :name: nokogiri
@@ -41,5 +42,7 @@
 - :name: will_paginate
 - :name: ym4r
 - :name: httparty
+- :name: scout
+- :name: request-log-analyzer
 - :version: 2.3.5
   :name: rails
