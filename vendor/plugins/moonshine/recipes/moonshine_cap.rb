@@ -119,8 +119,11 @@ namespace :app do
     Link public directories to shared location.
     DESC
     task :update, :roles => [:app, :web] do
-      fetch(:app_symlinks).each do |link|
+      fetch(:public_symlinks).each do |link|
         run "ln -nfs #{shared_path}/public/#{link} #{latest_release}/public/#{link}"
+      end
+      fetch(:app_symlinks).each do |link|
+        run "ln -nfs #{shared_path}/#{link} #{latest_release}/#{link}"
       end
     end
   end

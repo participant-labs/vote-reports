@@ -169,9 +169,13 @@ module Moonshine::Manifest::Rails::Rails
       shared_dirs = configuration[:shared_children].map { |d| "#{configuration[:deploy_to]}/shared/#{d}" }
       dirs += shared_dirs
     end
-    if configuration[:app_symlinks].is_a?(Array)
+    if configuration[:public_symlinks].is_a?(Array)
       dirs += ["#{configuration[:deploy_to]}/shared/public"]
-      symlink_dirs = configuration[:app_symlinks].map { |d| "#{configuration[:deploy_to]}/shared/public/#{d}" }
+      symlink_dirs = configuration[:public_symlinks].map { |d| "#{configuration[:deploy_to]}/shared/public/#{d}" }
+      dirs += symlink_dirs
+    end
+    if configuration[:app_symlinks].is_a?(Array)
+      symlink_dirs = configuration[:app_symlinks].map { |d| "#{configuration[:deploy_to]}/shared/#{d}" }
       dirs += symlink_dirs
     end
     dirs.each do |dir|
