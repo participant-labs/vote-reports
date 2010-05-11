@@ -203,6 +203,7 @@ class Report < ActiveRecord::Base
   named_scope :with_criteria, :select => 'DISTINCT reports.*', :joins => :bill_criteria
   named_scope :scored, :select => 'DISTINCT reports.*', :joins => {:bill_criteria => {:bill => :passage_rolls}}
   named_scope :by_updated_at, :order => 'updated_at DESC'
+  named_scope :by_created_at, :order => 'created_at DESC'
 
   named_scope :with_subjects, lambda {|subjects|
     subjects = Array(subjects)
