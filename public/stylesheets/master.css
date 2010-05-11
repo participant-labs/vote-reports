@@ -20,11 +20,6 @@ a.undecorated, a.undecorated:hover {
   display: inline;
 }
 
-#score_examples ul {
-  margin-left: 0;
-  margin-bottom: 0;
-}
-
 #score_examples li {
   width: 100%;
 }
