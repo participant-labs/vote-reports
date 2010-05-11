@@ -75,9 +75,12 @@ input.tagged {
   content: " / ";
 }
 
-#advocates #reports {
-  padding-left: 10%;
-  padding-right: 10%;
+#advocates #reports ol {
+  list-style-type: none;
+}
+
+#advocates #reports li {
+  margin-bottom: 20px;
 }
 
 #inner {
