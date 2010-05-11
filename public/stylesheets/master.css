@@ -80,6 +80,11 @@ input.tagged {
   content: " / ";
 }
 
+#advocates #reports {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
 #inner {
   position: relative;
 }
@@ -234,19 +239,9 @@ dd {
   margin-top: 5px;
 }
 
-#scores .report_title, #featured_recent_reports .report_title, #score_examples .report_title {
+#scores .report_title, #score_examples .report_title {
   font-size: 1.1em;
   font-weight: bold;
-}
-
-#featured_recent_reports td {
-  width: 50%;
-}
-
-#featured_recent_reports th {
-  font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
-  background-color: inherit;
-  font-size: 1.5em;
 }
 
 table {

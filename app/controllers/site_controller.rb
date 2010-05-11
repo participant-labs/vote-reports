@@ -9,17 +9,14 @@ class SiteController < ApplicationController
     end
 
     @recent_reports = Report.user_published.by_updated_at.all(:limit => 3)
-    @featured_interest_group_reports = Report.interest_group_published.random.all(:limit => 3)
-    reports = @recent_reports + @featured_interest_group_reports
 
     @reps = ['Your Local', 'local']
     @politicians = sought_politicians.scoped(:limit => 5)
-    @scores =  @politicians.map {|politician| politician.report_scores.published.first(:order => 'random()', :conditions => ['reports.id NOT IN(?)', reports]) }.compact
-    if @scores.empty?
+    if @politicians.blank?
       @reps = ['These Example', 'example']
       @politicians = Politician.in_office(true).scoped(:limit => 5)
-      @scores =  @politicians.map {|politician| politician.report_scores.published.first(:order => 'random()', :conditions => ['reports.id NOT IN(?)', reports]) }.compact
     end
+    @scores =  @politicians.map {|politician| politician.report_scores.published.first(:order => 'random()') }.compact
 
     respond_to do |format|
       format.html
