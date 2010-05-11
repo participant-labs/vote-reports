@@ -8,7 +8,7 @@ class SiteController < ApplicationController
       session[:zip_code] = params[:representing]
     end
 
-    @recent_reports = Report.user_published.by_updated_at.all(:limit => 3)
+    @recent_reports = Report.user_published.by_created_at.all(:limit => 3)
 
     @reps = ['Your Local', 'local']
     @politicians = sought_politicians.scoped(:limit => 5)
