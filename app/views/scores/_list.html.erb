@@ -1,0 +1,5 @@
+<ul>
+  <%- scores.each do |score| -%>
+    <li class="clearfix"><%= render score.report %><%= render 'politicians/score', :score => score %></li>
+  <%- end -%>
+</ul>
