@@ -21,7 +21,7 @@ test: &TEST
     database: vote_reports_test
     encoding: utf8
       
-production:
+production: &PRODUCTION
     adapter: postgresql
     host: localhost
     port: 5432
@@ -32,3 +32,6 @@ production:
 
 cucumber:
   <<: *TEST
+
+staging:
+  <<: *PRODUCTION
