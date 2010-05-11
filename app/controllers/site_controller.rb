@@ -12,9 +12,11 @@ class SiteController < ApplicationController
     @featured_interest_group_reports = Report.interest_group_published.random.all(:limit => 3)
     reports = @recent_reports + @featured_interest_group_reports
 
+    @reps = ['Your Local', 'local']
     @politicians = sought_politicians.scoped(:limit => 5)
     @scores =  @politicians.map {|politician| politician.report_scores.published.first(:order => 'random()', :conditions => ['reports.id NOT IN(?)', reports]) }.compact
     if @scores.empty?
+      @reps = ['These Example', 'example']
       @politicians = Politician.in_office(true).scoped(:limit => 5)
       @scores =  @politicians.map {|politician| politician.report_scores.published.first(:order => 'random()', :conditions => ['reports.id NOT IN(?)', reports]) }.compact
     end
