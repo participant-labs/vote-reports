@@ -1,6 +1,6 @@
 <%- title 'Knowing is Half the Ballot' -%>
-<div class="section clearfix">
-  <h3>Know what your representatives <em>really</em> stand for</h3>
+<div class="section clearfix" id="voters">
+  <h3>Voters: Know what your representatives <em>really</em> stand for</h3>
   <p>We want you to be empowered to make good choices when you vote, so we make it easy to know how your representatives vote on the issues important to you.  Just tell us your zip code, tell us what you care about, and we'll tell you how they're doing.</p>
 
   <h4>Check Out <%= @reps.first %> Reps</h4>
@@ -24,23 +24,13 @@
   </div>
 </div>
 
-<table class="section" id="featured_recent_reports">
-  <thead>
-    <tr>
-      <th scope="col">Recent User Reports</th>
-      <th scope="col">Featured Interest Group Reports</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%- @recent_reports.zip(@featured_interest_group_reports) do |recent, featured_ig| -%>
-      <tr>
-        <td><%= render 'reports/report', :report => recent if recent %></td>
-        <td><%= render 'reports/report', :report => featured_ig if featured_ig %></td>
-      </tr>
-    <%- end -%>
-    <tr>
-      <td><%= link_to "See More...", reports_path %></td>
-      <td><%= link_to "See More...", interest_groups_path %></td>
-    </tr>
-  </tbody>
-</table>
+<div class="section clearfix" id="advocates">
+  <h3>Advocates: Bring Your Cause to the Voters</h3>
+  <p>You want to set the world of politics right, to bring on better policies for your communities, but are you connecting with your constituency?  VoteReports helps you keep them in the loop, so your cause in mind when they go to the ballot box.</p>
+
+  <p>To publish your own report, all you need is to simply flag the legislation you support or opposed.  We'll do the hard work of tracking and scoring the politicians' votes.  Check out a few of our recent user-created reports:</p>
+
+  <%= render 'reports/list', :reports => @recent_reports %>
+  Next <%= link_to 'see more Reports', reports_path %> or
+  <%= link_to 'create your own...', new_report_path %>
+</div>

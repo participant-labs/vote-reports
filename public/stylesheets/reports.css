@@ -28,11 +28,6 @@ a.report_title:hover, .report_creator a:hover, .politician_name a:hover {
   border-bottom: 1px solid;
 }
 
-#featured_recent_reports .report {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-}
-
 .report_description h1 {
   font-size: 1.5em;
 }
