@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   filter_parameter_logging :password, :password_confirmation
 
+  before_filter :basic_authenticate if Rails.env.staging?
+
   def permission_denied_path
     root_path
   end
@@ -49,5 +51,11 @@ class ApplicationController < ActionController::Base
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
+  end
+
+  def basic_authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      UserSession.create!(:username => username, :password => password).user.adminship.present?
+    end
   end
 end
