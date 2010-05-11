@@ -20,17 +20,17 @@ a.undecorated, a.undecorated:hover {
   display: inline;
 }
 
-.score_examples li {
+#score_examples li {
   width: 100%;
 }
 
-.score_examples .report {
+#score_examples .report {
   width: 60%;
   float: left;
   padding-right: 5%;
 }
 
-.score_examples .politician_score {
+#score_examples .politician_score {
   width: 35%;
   float: right;
 }
@@ -229,7 +229,7 @@ dd {
   margin-top: 5px;
 }
 
-#scores .report_title, #featured_recent_reports .report_title, .score_examples .report_title {
+#scores .report_title, #featured_recent_reports .report_title, #score_examples .report_title {
   font-size: 1.1em;
   font-weight: bold;
 }
