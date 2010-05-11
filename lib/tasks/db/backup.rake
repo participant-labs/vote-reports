@@ -34,8 +34,6 @@ namespace :db do
           end
         end
         puts "Restoring db backup..."
-        Rake::Task['db:drop:all'].invoke
-        Rake::Task['db:create:all'].invoke
         `pg_restore -h localhost -p 5432 -U postgres -d vote_reports_development #{local_path}`
         puts "Done."
       end
