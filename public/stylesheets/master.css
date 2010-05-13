@@ -218,6 +218,7 @@ dd {
 
 .image {
   float: left;
+  text-align: center;
   padding-right: .5em;
   max-width: 100px;
   max-height: 100px;
