@@ -15,13 +15,13 @@
 </div>
 <%- end -%>
 
-<%- unless [@bill.titles, @bill.summary, @amendments, @rolls, @subjects, @reports].all?(&:blank?) -%>
+<%- unless [@bill.titles, @bill.summary, @amendments, @rolls, @bill.subjects, @reports].all?(&:blank?) -%>
 <div class="tabbed-nav">
   <ul>
     <%- if @reports.present? -%>
       <li><a href="#reports">Reports</a></li>
     <%- end -%>
-    <%- if @subjects.present? -%>
+    <%- if @bill.subjects.present? -%>
       <li><a href="#bill_subjects">Subjects</a></li>
     <%- end -%>
     <%- if @bill.titles.present? -%>
@@ -50,11 +50,11 @@
   </div>
   <%- end -%>
 
-  <%- if @subjects.present? -%>
+  <%- if @bill.subjects.present? -%>
   <div id="bill_subjects" class="section bill_subjects">
     <h2>Subjects</h2>
     <p>Follow the links below to find bills &amp; reports on related subjects.</p>
-    <%= render 'subjects/cloud', :subjects => @subjects %>
+    <%= render 'subjects/cloud', :subjects => @bill.subjects %>
   </div>
   <%- end -%>
 
