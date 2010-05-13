@@ -1,4 +1,4 @@
-<% form_for [@user, @report] do |f| %>
+<% form_for [report.user, report] do |f| %>
   <%= f.error_messages %>
   <p>
     <%= f.label :name %>
@@ -6,7 +6,7 @@
     <%= f.label :description %> <span class="small">(you can use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>)</span><br />
     <%= f.text_area :description, :tabindex => 2 %><br />
 
-    <%= f.submit @report.new_record? ? "Create Report" : "Update Report" %> |
+    <%= f.submit report.new_record? ? "Create Report" : "Update Report" %> |
     <%= link_to 'cancel', back_to %>
   </p>
 <% end %>
