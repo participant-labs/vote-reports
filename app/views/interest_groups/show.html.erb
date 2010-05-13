@@ -5,7 +5,9 @@
   
   <ul>
     <li><a href="#report_scores_section">Scores</a></li>
+    <%- if @subjects.present? -%>
     <li><a href="#report_subjects">Subjects</a></li>
+    <%- end -%>
     <li><a href="#interest_group_ratings">Agenda</a></li>
     <%- permitted_to? :edit, :interest_groups_images do -%>
     <li><a href="#admin">Admin</a></li>
@@ -16,7 +18,7 @@
     <h3>Scores</h3>
     <p>We score representatives based on the actual ratings this interest group has released over time.</p>
     <%- if @report -%>
-      <%- if @report.scores.present? -%>
+      <%- if @scores.present? -%>
         <%= render 'politicians/search', :in_office => @in_office, :url => interest_group_path(@interest_group), :replace => 'report_scores' %>
       <%- end -%>
       <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
@@ -54,11 +56,13 @@
   </div>
   <%- end -%>
 
+  <%- if @subjects.present? -%>
   <div id="report_subjects" class="section report_subjects">
     <h3>Subjects</h3>
     <p>Subjects for this report are selected by <a href="http://votesmart.org/">Project Vote Smart</a>.  Follow the links below to find reports on related subjects.</p>
-    <%= render 'subjects/cloud', :subjects => @report.subjects %>
+    <%= render 'subjects/cloud', :subjects => @subjects %>
   </div>
+  <%- end -%>
 
   <div id="interest_group_ratings" class="section">
     <h3>Agenda</h3>
