@@ -25,10 +25,8 @@ class InterestGroupsController < ApplicationController
       return
     end
 
-    @subjects = @interest_group.subjects
     @report = @interest_group.report
-    if @interest_group.report
-      @report = @interest_group.report
+    if @report
       @scores = @report.scores.for_politicians(sought_politicians)
     end
 
