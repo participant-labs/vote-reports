@@ -1,14 +1,13 @@
 class Users::ReportsController < ApplicationController
   filter_resource_access :nested_in => :users
+  before_filter :find_user
+  before_filter :find_report, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @user = User.find(params[:user_id])
     @reports = @user.reports.published
   end
 
   def show
-    @user = User.find(params[:user_id])
-    @report = @user.reports.preload_bill_criteria.find(params[:id], :scope => @user)
     if !@report.friendly_id_status.best?
       redirect_to user_report_path(@user, @report), :status => 301
       return
@@ -30,16 +29,12 @@ class Users::ReportsController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:user_id])
-    @report = @user.reports.find(params[:id], :scope => @user)
     if !@report.friendly_id_status.best?
       redirect_to edit_user_report_path(@user, @report), :status => 301
     end
   end
 
   def update
-    @user = User.find(params[:user_id])
-    @report = @user.reports.find(params[:id], :scope => @user)
     if @report.update_attributes(params[:report])
       flash[:notice] = "Successfully updated report."
       redirect_to [@user, @report]
@@ -49,12 +44,10 @@ class Users::ReportsController < ApplicationController
   end
 
   def new
-    @user = User.find(params[:user_id])
     @report = @user.reports.build
   end
 
   def create
-    @user = User.find(params[:user_id])
     @report = @user.reports.build(params[:report])
     if @report.save
       flash[:notice] = "Successfully created report."
@@ -65,8 +58,7 @@ class Users::ReportsController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:user_id])
-    @user.reports.find(params[:id], :scope => @user).destroy
+    @report.destroy
     flash[:notice] = "Successfully destroyed report."
     redirect_to user_reports_path(@user)
   end
@@ -79,5 +71,13 @@ class Users::ReportsController < ApplicationController
     else
       user_reports_path(params[:user_id])
     end
+  end
+
+  def find_user
+    @user = User.find(params[:user_id])
+  end
+
+  def find_report
+    @report = @user.reports.find(params[:id], :scope => @user)
   end
 end

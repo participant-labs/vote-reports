@@ -237,13 +237,6 @@ class Report < ActiveRecord::Base
     end
   }
 
-  named_scope :preload_bill_criteria, :include => {
-    :user => nil,
-    :bill_criteria => {
-      :bill => [{:titles => :as}, :congress, :passage_rolls]
-    }
-  }
-
   def score_criteria
     if user
       bill_criteria.active
