@@ -1,8 +1,8 @@
 class Users::AdminshipsController < ApplicationController
   filter_access_to :all
+  before_filter :find_user
 
   def create
-    @user = User.find(params[:user_id])
     if @user.adminship
       flash[:error] = "User is already an Admin"
     elsif @user.create_adminship(:created_by => current_user)
@@ -14,7 +14,6 @@ class Users::AdminshipsController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:user_id])
     if !@user.adminship
       flash[:error] = "User is not an Admin"
     else
@@ -23,5 +22,10 @@ class Users::AdminshipsController < ApplicationController
     end
     redirect_to edit_user_path(@user)
   end
-end
 
+  private
+
+  def find_user
+    @user = User.find(params[:user_id])
+  end
+end

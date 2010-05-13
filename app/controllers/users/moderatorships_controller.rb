@@ -1,8 +1,8 @@
 class Users::ModeratorshipsController < ApplicationController
   filter_access_to :all
+  before_filter :find_user
 
   def create
-    @user = User.find(params[:user_id])
     if @user.moderatorship
       flash[:error] = "User is already an Moderator"
     elsif @user.create_moderatorship(:created_by => current_user)
@@ -14,7 +14,6 @@ class Users::ModeratorshipsController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:user_id])
     if !@user.moderatorship
       flash[:error] = "User is not a Moderator"
     else
@@ -22,5 +21,11 @@ class Users::ModeratorshipsController < ApplicationController
       flash[:notice] = "Successfully revoked Moderator status"
     end
     redirect_to edit_user_path(@user)
+  end
+
+  private
+
+  def find_user
+    @user = User.find(params[:user_id])
   end
 end

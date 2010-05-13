@@ -1,5 +1,6 @@
 class Users::Reports::BillCriteriaController < ApplicationController
   filter_resource_access :nested_in => :reports
+  before_filter :find_report, :only => [:index, :destroy]
 
   def new
     @new_report = true if params[:new_report]
@@ -25,17 +26,19 @@ class Users::Reports::BillCriteriaController < ApplicationController
   end
 
   def index
-    @report = current_user.reports.find(params[:report_id], :scope => current_user)
   end
 
   def destroy
-    @report = current_user.reports.find(params[:report_id], :scope => current_user)
     @report.bill_criteria.find(params[:id]).destroy
     flash[:notice] = "Successfully deleted report criterion"
     redirect_to :back
   end
 
   private
+
+  def find_report
+    @report = current_user.reports.find(params[:report_id], :scope => current_user)
+  end
 
   def permission_denied_path
     user_report_path(params[:user_id], params[:report_id])

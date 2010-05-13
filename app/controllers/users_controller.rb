@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   filter_resource_access
+  before_filter :find_user, :only => [:show, :edit, :update, :destroy]
 
   def index
     @users = User.all
   end
 
   def show
-    @user = User.find(params[:id])
     @reports = @user.reports
   end
 
@@ -25,13 +25,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
     @user.valid?
     @new_user = true if params[:new_user]
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       flash[:notice] = "Successfully updated user."
       redirect_to @user
@@ -41,7 +39,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     flash[:notice] = "Successfully destroyed user."
     redirect_to users_path
@@ -55,5 +52,9 @@ class UsersController < ApplicationController
     else
       root_path
     end
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end

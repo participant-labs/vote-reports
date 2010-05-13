@@ -1,8 +1,8 @@
 class Users::RpxIdentitiesController < ApplicationController
   filter_access_to :all
+  before_filter :find_user
 
   def create
-    @user = User.find(params[:user_id])
     if @user.save
       flash[:notice] = "Successfully added login to this account."
     else
@@ -12,10 +12,15 @@ class Users::RpxIdentitiesController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:user_id])
     @identifier = @user.rpx_identifiers.find(params[:id])
     @identifier.destroy
     flash[:notice] = "Successfully removed login."
     redirect_to edit_user_path(@user)
+  end
+
+  private
+
+  def find_user
+    @user = User.find(params[:user_id])
   end
 end
