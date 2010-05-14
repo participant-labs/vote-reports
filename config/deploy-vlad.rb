@@ -13,9 +13,4 @@ namespace :vlad do
       "chown -R www-data:www-data #{latest_release}/public/assets"
     ].join(' && ')
   end
-
-  remote_task :start_dj, :roles => :app do
-    run "cd #{latest_release} && RAILS_ENV=production script/delayed_job stop"
-    run "cd #{latest_release} && RAILS_ENV=production script/delayed_job start"
-  end
 end
