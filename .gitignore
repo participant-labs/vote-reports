@@ -6,6 +6,7 @@ log/*.log
 log/*.lck
 tmp/
 public/system
+public/assets
 data
 spec/support/web_requests.marshal
 solr
