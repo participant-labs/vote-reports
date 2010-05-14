@@ -48,9 +48,6 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     # on_stage 'testing' do
     #   file '/etc/motd', :ensure => :file, :content => "Welcome to the TEST server!"
     # end
-
-    exec :whenever, :command => 'whenever --update-crontab',
-      :cwd => "#{configuration[:deploy_to]}/current/"
   end
 
   # The following line includes the 'application_packages' recipe defined above
