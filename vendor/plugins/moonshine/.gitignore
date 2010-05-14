@@ -1,8 +1,0 @@
-pkg
-*.gem
-rdoc
-doc
-coverage
-.autotest
-test/test.log
-test/generator.log
