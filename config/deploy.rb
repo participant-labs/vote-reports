@@ -21,5 +21,11 @@ namespace :deploy do
     run_locally "jammit"
     top.upload "#{root_path}/public/assets", "#{current_release}/public", :via => :scp, :recursive => true
   end
+  after 'deploy:symlink', 'deploy:precache_assets'
+
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :db do
+    run "cd #{release_path} && whenever --update-crontab #{application}"
+  end
+  after "deploy:symlink", "deploy:update_crontab"
 end
-after 'deploy:symlink', 'deploy:precache_assets'
