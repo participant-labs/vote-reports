@@ -13,3 +13,13 @@ require 'delayed/recipes'
 after "deploy:start", "delayed_job:start"
 after "deploy:stop", "delayed_job:stop"
 after "deploy:restart", "delayed_job:restart"
+
+namespace :deploy do
+  desc 'Bundle and minify the JS and CSS files'
+  task :precache_assets, :roles => :app do
+    root_path = File.expand_path(File.dirname(__FILE__) + '/..')
+    run_locally "jammit"
+    top.upload "#{root_path}/public/assets", "#{current_release}/public", :via => :scp, :recursive => true
+  end
+end
+after 'deploy:symlink', 'deploy:precache_assets'
