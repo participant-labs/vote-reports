@@ -23,7 +23,7 @@ namespace :db do
         local_path = Rails.root.join(path, ENV['FROM'])
         unless ENV['FROM'].present?
           ENV['COMMAND'] = "ls #{remote_path}"
-          Rake::Task['vlad:invoke'].invoke
+          `cap invoke`
 
           raise "You must specify a file to restore FROM"
         end

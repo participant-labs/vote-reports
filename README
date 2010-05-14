@@ -9,7 +9,7 @@ areyouontheballot
 
 interest_groups/republican-liberty-caucus has several repeated reports on vote smart.  Time to clean up their data!
 
-time rake vlad:invoke COMMAND="cd /var/www/votereports/production/current && RAILS_ENV=production /usr/bin/env nice -n 3 rake vote_smart:import"
+time cap invoke COMMAND="cd /var/www/votereports/production/current && RAILS_ENV=production /usr/bin/env nice -n 3 rake vote_smart:import"
 
 # AssociateLocationsToZipCodes.migrate(:down)
 ENV['VERSION'] = '20100409185819'
