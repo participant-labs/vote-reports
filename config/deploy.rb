@@ -2,6 +2,7 @@ set :stages, %w(staging production)
 set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 
+set :user, 'deploy'
 set :branch, "moonshine"
 
 set :deploy_via, :remote_cache
