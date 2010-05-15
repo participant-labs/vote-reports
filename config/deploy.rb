@@ -3,7 +3,6 @@ set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 
 set :user, 'deploy'
-set :port, 7111
 
 set :deploy_via, :remote_cache
 set :copy_cache, true
