@@ -4,7 +4,7 @@ Feature: Scoring Reports
   I want to generate scores for each politician associated with this report's criteria
 
   Background:
-    Given I have a report named "Active Report"
+    Given I have a personal report named "Active Report"
     And an un-voted, current-congress bill named "Bovine Security Act of 2009"
     And an un-voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
     And an un-voted, current-congress bill named "Honoring Miss America Act of 2009"
