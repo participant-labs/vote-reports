@@ -9,7 +9,7 @@ Feature: Adding Bill Criteria to Reports
     When I go to the new bills page for my report "My report"
 
   Scenario Outline: User adds a bill to a report
-    Given I have a report named "Target Report"
+    Given I have a personal report named "Target Report"
     And <bill type> named "USA PATRIOT Reauthorization Act of 2009"
     When I fill in "Search" with "patriot"
     And I press "Search"
@@ -38,7 +38,7 @@ Feature: Adding Bill Criteria to Reports
     And I press "Save Bills"
     Then I should see "Successfully updated report."
     And I should be on my report page for "My report"
-    And I should see "Support -"
+    And I should see "Support"
     And I should see "USA PATRIOT Reauthorization Act of 2009"
     And I should see "no votes yet"
 
@@ -154,5 +154,5 @@ Feature: Adding Bill Criteria to Reports
     And I press "Save Bills"
     Then I should see "Successfully updated report."
     And I should be on my report page for "My report"
-    And I should see "Support -"
+    And I should see "Support"
     And I should see "Bovine Security Act of 2009"
