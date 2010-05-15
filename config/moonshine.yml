@@ -17,7 +17,7 @@
 :deploy_to: /srv/vote-reports
 
 # Primary domain application will be accessed as 
-:domain: votereports.org
+# :domain: votereports.org
 
 # Domain aliases for applaction. One common use of this is for asset hosts.
 #:domain_aliases:
