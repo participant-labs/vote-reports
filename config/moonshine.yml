@@ -42,7 +42,7 @@
 # directory to the server: these are files that you don't have/want in scm.
 :local_config:
  - config/database.yml
- - config/secure_variables.yml
+ - config/secure_variables.rb
 
 # The entries in shared_children are created in #{application}/shared
 :shared_children:
