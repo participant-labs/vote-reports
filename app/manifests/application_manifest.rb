@@ -52,4 +52,33 @@ class ApplicationManifest < Moonshine::Manifest::Rails
 
   # The following line includes the 'application_packages' recipe defined above
   recipe :application_packages
+
+  def integrity_vhost
+    file '/srv/integrity',
+      :ensure => :directory,
+      :owner => configuration[:user]
+
+    static_vhost = <<-VHOST
+    <VirtualHost *:80>
+        ServerName ci.votereports.org
+        DocumentRoot /srv/integrity/public
+        <Directory /srv/integrity/public>
+            Allow from all
+            Options -MultiViews
+        </Directory>
+    </VirtualHost>
+    VHOST
+
+    file "/etc/apache2/sites-available/integrity",
+      :alias => 'integrity',
+      :ensure => :present,
+      :content => static_vhost,
+      :notify => service("apache2"),
+      :require => file('/srv/integrity')
+
+    a2ensite "integrity"
+  end
+  if deploy_stage == 'staging'
+    recipe :integrity_vhost
+  end
 end
