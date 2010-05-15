@@ -21,7 +21,7 @@ Feature: Adding Bill Criteria to Reports
     And I should be on my report page for "My report"
     And I should see "USA PATRIOT Reauthorization Act of 2009"
     And I should not see "no votes yet"
-    When I follow "Support"
+    When I follow "Evidence"
     Then I should be on my report page for "Target Report"
 
   Examples:
