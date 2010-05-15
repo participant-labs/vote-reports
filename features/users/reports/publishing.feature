@@ -10,14 +10,14 @@ Feature: Browsing Reports
     Given I have an empty report named "My Report"
     When I go to my report page for "My Report"
     Then I should not see "Publish this Report"
-    And I should see "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
+    And I should see "This report is private, so only you can access it."
     And I should see "You'll need to add bills to this report in order to publish it."
 
   Scenario: User can't publish an unscored report
     Given I have an unscored report named "My Report"
     When I go to my report page for "My Report"
     Then I should not see "Publish this Report"
-    And I should see "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
+    And I should see "This report is private, so only you can access it."
     And I should see "None of this report's bills have roll call votes associated. You'll need to add a voted bill to publish this report."
 
   Scenario: User publishes a scored report
