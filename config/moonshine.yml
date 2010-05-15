@@ -20,9 +20,11 @@
 # :domain: votereports.org
 
 # Domain aliases for applaction. One common use of this is for asset hosts.
-#:domain_aliases:
-#  - assets1.yourapp.com
-#  - assets2.yourapp.com
+:domain_aliases:
+  - assets0.votereports.org
+  - assets1.votereports.org
+  - assets2.votereports.org
+  - assets3.votereports.org
 
 # Source control management to use. Defaults to git.
 # If you change this value, you will need to run: cap vcs:install
