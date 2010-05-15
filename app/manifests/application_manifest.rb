@@ -60,6 +60,9 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   if deploy_stage == 'production'
     plugin :denyhosts
     recipe :denyhosts
+
+    plugin :iptables
+    recipe :iptables
   end
 
   def integrity_vhost
