@@ -58,14 +58,10 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   recipe :application_packages
 
   if deploy_stage == 'production'
-    plugin :denyhosts
     recipe :denyhosts
-
-    plugin :iptables
     recipe :iptables
-
-    plugin :scout
     recipe :scout
+    recipe :ssh
   end
 
   def integrity_vhost
