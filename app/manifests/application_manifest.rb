@@ -63,6 +63,9 @@ class ApplicationManifest < Moonshine::Manifest::Rails
 
     plugin :iptables
     recipe :iptables
+
+    plugin :scout
+    recipe :scout
   end
 
   def integrity_vhost
