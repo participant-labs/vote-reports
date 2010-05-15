@@ -1,3 +1,4 @@
+set :domain, 'staging.votereports.org'
 set :rails_env, "staging"
 
-server 'staging.votereports.org', :app, :web, :db, :primary => true
+server domain, :app, :web, :db, :primary => true
