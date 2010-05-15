@@ -19,7 +19,7 @@ class BillCriterion < ActiveRecord::Base
     :joins => [
       'INNER JOIN bills ON bills.id = bill_criteria.bill_id',
       'LEFT OUTER JOIN rolls ON bills.id = rolls.subject_id'],
-    :conditions => ["rolls.id IS NULL OR (rolls.roll_type IN(?) AND rolls.subject_type = ?)",
+    :conditions => ["rolls.id IS NULL OR (rolls.roll_type NOT IN(?) AND rolls.subject_type = ?)",
       Roll::PASSAGE_TYPES, 'Bill']
 
   after_save :rescore_report
