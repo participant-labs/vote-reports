@@ -16,8 +16,11 @@ class BillCriterion < ActiveRecord::Base
     :conditions => Roll.on_bill_passage.proxy_options[:conditions]
 
   named_scope :inactive, :select => 'DISTINCT bill_criteria.*',
-    :joins => {:bill => :rolls},
-    :conditions => Roll.not_on_bill_passage.proxy_options[:conditions]
+    :joins => [
+      'INNER JOIN bills ON bills.id = bill_criteria.bill_id',
+      'LEFT OUTER JOIN rolls ON bills.id = rolls.subject_id'],
+    :conditions => ["rolls.id IS NULL OR (rolls.roll_type IN(?) AND rolls.subject_type = ?)",
+      Roll::PASSAGE_TYPES, 'Bill']
 
   after_save :rescore_report
   delegate :user_id, :to => :report
