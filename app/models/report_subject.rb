@@ -22,7 +22,7 @@ class ReportSubject < ActiveRecord::Base
             hash
           end
 
-          if report.interest_group?
+          if report.interest_group
             count = report.interest_group.reports.count
             report.interest_group.subjects.each do |subject|
               bill_criteria_subjects[subject] ||= 0
