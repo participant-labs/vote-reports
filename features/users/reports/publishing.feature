@@ -30,9 +30,9 @@ Feature: Browsing Reports
   Scenario: User unpublishes a published report
     Given I have a published report named "My Report"
     When I go to my report page for "My Report"
-    When I follow "Unshare this Report"
+    When I follow "Unlist this Report"
     Then I should see "Successfully updated report"
-    And I should see "This report is private, so only you can access it."
+    And I should see "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
 
   @emulate_rails_javascript
   Scenario: Published report is unpublishable after deleting all criteria
