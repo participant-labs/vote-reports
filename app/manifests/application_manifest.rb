@@ -48,10 +48,19 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     # on_stage 'testing' do
     #   file '/etc/motd', :ensure => :file, :content => "Welcome to the TEST server!"
     # end
+
+    configure(:denyhosts => {
+      :admin_email => 'ben@votereports.org, root@localhost'
+    })
   end
 
   # The following line includes the 'application_packages' recipe defined above
   recipe :application_packages
+
+  if deploy_stage == 'production'
+    plugin :denyhosts
+    recipe :denyhosts
+  end
 
   def integrity_vhost
     file '/srv/integrity',
