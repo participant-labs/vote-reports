@@ -20,7 +20,9 @@ Feature: Editing Criteria from Reports
     And I should be on the reports page for "Empact"
 
   Scenario: Report owner adds an explanatory url to an existing bill criterion
-    Given I have a report named "Target Report"
+    Given I have a personal report named "Target Report"
+    When I go to my report page for "Active Report"
+    Then I should see "Bovine Security Act of 2009"
     When I go to my edit report page for "Active Report"
     And I follow "Edit Existing Criteria"
     And I fill in "Explanatory Link" with "http://example.com/reports/empact/target-report"
