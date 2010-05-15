@@ -1,0 +1,18 @@
+= Moonshine_Denyhosts
+
+=== A plugin for Moonshine[http://github.com/railsmachine/moonshine]
+
+A plugin for installing and managing denyhosts.
+
+Look through the denyhosts.conf template to see available options.
+
+=== Instructions
+
+* <tt>script/plugin install git://github.com/sborsje/moonshine_denyhosts.git</tt>
+* Configure settings if needed
+    configure(:denyhosts => {
+      :admin_email => 'admin@domain.com'
+    })
+* Include the plugin and recipe(s) in your Moonshine manifest
+    plugin :denyhosts
+    recipe :denyhosts
