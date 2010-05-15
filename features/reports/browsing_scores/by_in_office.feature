@@ -58,7 +58,7 @@ Feature: Browsing Report Scores by State
     And I should not see "J. Kerrey"
     And I should not see "Kay Hutchison"
     When I uncheck "In Office Only"
-    And I press "Go!"
+    And I press "Show Reps"
     Then I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 100   |
@@ -69,7 +69,7 @@ Feature: Browsing Report Scores by State
       | Neil Abercrombie     | 0     |
     When I fill in "From" with "TX"
     When I check "In Office Only"
-    And I press "Go!"
+    And I press "Show Reps"
     Then I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 100   |

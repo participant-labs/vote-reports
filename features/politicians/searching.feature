@@ -32,7 +32,7 @@ Feature: Browsing Politicians
     When I go to the politicians page
     And I fill in "From" with "75028"
     And I uncheck "In Office Only"
-    And I press "Go!"
+    And I press "Show Reps"
     Then I should see "Michael Burgess"
     And I should see "Kay Hutchison"
     And I should see "John Cornyn"
@@ -43,7 +43,7 @@ Feature: Browsing Politicians
   Scenario: User views only in-office reps
     When I go to the politicians page
     When I check "In Office Only"
-    And I press "Go!"
+    And I press "Show Reps"
     Then I should see "Michael Burgess"
     And I should see "Neil Abercrombie"
     And I should see "John Cornyn"
@@ -51,7 +51,7 @@ Feature: Browsing Politicians
     And I should not see "Kay Hutchison"
     And I should not see "Connie Mack"
     When I fill in "From" with "TX"
-    And I press "Go!"
+    And I press "Show Reps"
     Then I should see "Michael Burgess"
     And I should see "John Cornyn"
     And I should not see "Neil Abercrombie"

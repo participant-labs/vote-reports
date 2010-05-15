@@ -62,7 +62,7 @@ Feature: Browsing Report Scores by State
   Scenario Outline: Narrow report results to those within a certain zip code
     When I go to my report page for "Active Report"
     And I fill in "From" with "<zip code input>"
-    And I press "Go!"
+    And I press "Show Reps"
     Then I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 100   |
@@ -86,7 +86,7 @@ Feature: Browsing Report Scores by State
       | NY    | 7        | 11111    | 111    |
     When I go to my report page for "Active Report"
     And I fill in "From" with "<zip code input>"
-    And I press "Go!"
+    And I press "Show Reps"
     Then I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 100   |
