@@ -4,7 +4,7 @@ Feature: Browsing Report Scores by State
   I want to view a report's scores for reps of a given state
 
   Background:
-    Given I have a report named "Active Report"
+    Given I have a personal report named "Active Report"
     And an un-voted, current-congress bill named "Bovine Security Act of 2009"
     And the following politician records:
       | name                  |
