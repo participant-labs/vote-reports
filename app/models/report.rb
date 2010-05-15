@@ -66,6 +66,15 @@ class Report < ActiveRecord::Base
     }
   end
 
+  def unlist_step
+    {
+      :text => 'Unlist this Report',
+      :why => "Unlisting this report will remove it from lists & searches on the site.",
+      :state_event => 'unlist',
+      :confirm => 'Unlist this Report? It will no longer show up in lists and searches on this site.'
+    }
+  end
+
   state_machine :initial => :private do
     event :publish do
       transition [:private, :personal] => :published
@@ -77,6 +86,10 @@ class Report < ActiveRecord::Base
 
     event :unshare do
       transition [:published, :personal] => :private
+    end
+
+    event :unlist do
+      transition :published => :personal
     end
 
     state :private do
@@ -122,7 +135,7 @@ class Report < ActiveRecord::Base
 
       def next_steps
         [
-          unshare_step
+          unlist_step
         ]
       end
     end
