@@ -1,7 +1,9 @@
-task :integrity  => [:'integrity:setup_db', :'db:test:prepare', :spec, :cucumber]
+task :integrity  => [:'integrity:setup', :'db:test:prepare', :spec, :cucumber]
 
 namespace :integrity do
-  task :setup_db do
-    FileUtils.cp("/srv/vote-reports/current/config/database.yml", RAILS_ROOT+"/config/database.yml")
+  task :setup do
+    %w[database.yml secure_variables.rb].each do |path|
+      FileUtils.cp("/srv/vote-reports/current/config/#{path}", RAILS_ROOT+"/config/#{path}")
+    end
   end
 end
