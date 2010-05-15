@@ -45,7 +45,7 @@ describe UsersController do
       current = create_user
       login(current)
       get :edit, :id => @user
-      response.should redirect_to(user_path(@user))
+      response.should redirect_to(user_reports_url(@user))
       flash[:error].should == "You may not access this page"
     end
   end
