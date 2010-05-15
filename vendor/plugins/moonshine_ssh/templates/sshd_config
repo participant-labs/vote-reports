@@ -1,0 +1,110 @@
+# Moonshine_SSH generated configuration file
+# See the sshd(8) manpage for details
+#
+# The default configuration is based on the Ubuntu
+# defaults with a few tweaks, mostly for security.
+
+# What ports, IPs and protocols we listen for
+Port <%= options[:port] || 22 %>
+# Use these options to restrict which interfaces/protocols sshd will bind to
+#ListenAddress ::
+#ListenAddress 0.0.0.0
+<% if options[:listen_address] %>
+ListenAddress <%= options[:listen_address] %>
+<% end %>
+Protocol <%= options[:protocol] || 2 %>
+# HostKeys for protocol version 2
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_dsa_key
+#Privilege Separation is turned on for security
+UsePrivilegeSeparation <%= options[:use_privilege_separation] || 'yes' %>
+
+# Lifetime and size of ephemeral version 1 server key
+KeyRegenerationInterval <%= options[:key_regeneration_interval] || 3600 %>
+ServerKeyBits <%= options[:server_key_bits] || 768 %>
+
+# Logging
+SyslogFacility <%= options[:syslog_facility] || 'AUTH' %>
+LogLevel <%= options[:log_level] || 'INFO' %>
+
+# Authentication:
+LoginGraceTime <%= options[:login_grace_time] || 30 %>
+PermitRootLogin <%= options[:permit_root_login] || 'no' %>
+StrictModes <%= options[:strict_modes] || 'yes' %>
+
+RSAAuthentication yes
+PubkeyAuthentication yes
+#AuthorizedKeysFile        %h/.ssh/authorized_keys
+
+# Don't read the user's ~/.rhosts and ~/.shosts files
+IgnoreRhosts yes
+# For this to work you will also need host keys in /etc/ssh_known_hosts
+RhostsRSAAuthentication no
+# similar for protocol version 2
+HostbasedAuthentication no
+# Uncomment if you don't trust ~/.ssh/known_hosts for RhostsRSAAuthentication
+#IgnoreUserKnownHosts yes
+
+# To enable empty passwords, change to yes (NOT RECOMMENDED)
+PermitEmptyPasswords no
+
+# Change to yes to enable challenge-response passwords (beware issues with
+# some PAM modules and threads)
+ChallengeResponseAuthentication no
+
+# Change to no to disable tunnelled clear text passwords
+PasswordAuthentication <%= options[:password_authentication] || 'yes' %>
+
+# Kerberos options
+#KerberosAuthentication no
+#KerberosGetAFSToken no
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+
+# GSSAPI options
+#GSSAPIAuthentication no
+#GSSAPICleanupCredentials yes
+
+X11Forwarding <%= options[:x11_forwarding] || 'yes' %>
+X11DisplayOffset <%= options[:x11_display_offsets] || 10 %>
+PrintMotd <%= options[:print_motd] || 'no' %>
+PrintLastLog <%= options[:print_last_log] || 'yes' %>
+TCPKeepAlive <%= options[:tcp_keep_alive] || 'yes' %>
+#UseLogin no
+
+# http://techgurulive.com/2008/09/15/how-to-protect-ssh-from-multiple-and-parallel-coordinated-attacks/
+MaxStartups <%= options[:max_startups] || '2:50:5' %>
+
+<% if options[:use_banner] %>
+Banner /etc/issue.net
+<% end %>
+
+# Allow client to pass locale environment variables
+AcceptEnv LANG LC_*
+
+<% if options[:subsystem] %>
+  <% options[:subsystem].each do |subsystem,command| %>
+Subsystem <%= subsystem %> <%= command %>
+  <% end %>
+<% else %>
+Subsystem sftp /usr/lib/openssh/sftp-server
+<% end %>
+
+UsePAM <%= options[:use_pam] || 'yes' %>
+
+<% if options[:allow_users] %>
+AllowUsers <%= options[:allow_users].to_a.join(' ') %>
+<% end %>
+<% if options[:allow_groups] %>
+AllowGroups <%= options[:allow_groups].to_a.join(' ') %>
+<% end %>
+
+<%= options[:extra] %>
+
+<% if options[:sftponly] %>
+Match Group sftponly
+  ChrootDirectory <%= options[:sftponly][:chroot_directory] || '/home/%u' %>
+  ForceCommand internal-sftp
+  X11Forwarding no
+  AllowTcpForwarding no
+<% end %>
