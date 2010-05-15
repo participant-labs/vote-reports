@@ -59,9 +59,19 @@ describe Users::ReportsController do
         current_user.should_not == @report.user
       end
 
-      it "should deny access" do
-        get :edit, :user_id => @report.user, :id => @report
-        response.should redirect_to(user_report_path(@report.user, @report))
+      context "and you have permission to see the report" do
+        it "should deny access" do
+          @report.share!
+          get :edit, :user_id => @report.user, :id => @report
+          response.should redirect_to(user_report_url(@report.user, @report))
+        end
+      end
+
+      context "and the report is private" do
+        it "should deny access and send me to the user report page" do
+          get :edit, :user_id => @report.user, :id => @report
+          response.should redirect_to(user_reports_url(@report.user))
+        end
       end
     end
   end
