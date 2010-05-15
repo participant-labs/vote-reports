@@ -1,5 +1,5 @@
-task :integrity_spec  => [:'integrity:setup', :'db:test:prepare', :spec]
-task :integrity_cucumber => [:'integrity:setup', :'db:test:prepare', :cucumber]
+task :integrity_spec  => [:'integrity:setup', :'db:test:load', :spec]
+task :integrity_cucumber => [:'integrity:setup', :'db:test:load', :cucumber]
 
 namespace :integrity do
   task :setup do
