@@ -34,7 +34,9 @@
     });
 
     $('[data-toggle]').live('click', function(event) {
-      $('#' + $(event.target).attr('data-toggle')).toggle();
+      $.each($(event.target).attr('data-toggle').split(', '), function() {
+        $('#' + this).toggle();
+      })
       return false;
     });
 
