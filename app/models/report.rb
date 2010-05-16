@@ -188,6 +188,8 @@ class Report < ActiveRecord::Base
   validates_presence_of :owner, :name
   validate :ensure_only_one_owner
 
+  before_validation :populate_name_from_interest_group
+
   named_scope :random, :order => 'random()'
 
   named_scope :user_published, :conditions => {:state => 'published'}, :include => :user
@@ -282,6 +284,10 @@ class Report < ActiveRecord::Base
   end
 
 private
+
+  def populate_name_from_interest_group
+    self[:name] ||= interest_group.name if interest_group.present?
+  end
 
   def ensure_only_one_owner
     if user && interest_group
