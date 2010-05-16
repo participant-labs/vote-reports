@@ -1,6 +1,7 @@
 config/database.yml
 config/facebooker.yml
 config/secure_variables.rb
+config/mongo.yml
 db/*.sqlite3
 log/*.log
 log/*.lck

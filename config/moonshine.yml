@@ -45,6 +45,7 @@
 :local_config:
  - config/database.yml
  - config/secure_variables.rb
+ - config/mongo.yml
 
 # The entries in shared_children are created in #{application}/shared
 :shared_children:
