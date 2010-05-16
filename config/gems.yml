@@ -23,8 +23,12 @@
 - :version: ">= 1.4.3"
   :name: json
 - :name: shadow_puppet
-- :version: ">= 1.0.1"
+- :version: = 1.0.0
   :name: bson_ext
+- :version: = 1.0.0
+  :name: bson
+- :version: = 1.0.0
+  :name: mongo
 - :version: ">= 0.7.5"
   :name: mongo_mapper
 - :version: ">= 2.11.2"
