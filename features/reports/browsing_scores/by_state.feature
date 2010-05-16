@@ -55,7 +55,7 @@ Feature: Browsing Report Scores by State
 
   Scenario Outline: Narrow report results to those within a certain zip code
     When I go to my report page for "Active Report"
-    And I fill in "From" with "<location>"
+    And I fill in "Reps From" with "<location>"
     And I press "Show Reps"
     Then I should see the following scores:
       | politician           | score |

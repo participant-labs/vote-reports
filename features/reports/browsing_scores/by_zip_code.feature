@@ -61,7 +61,7 @@ Feature: Browsing Report Scores by State
 
   Scenario Outline: Narrow report results to those within a certain zip code
     When I go to my report page for "Active Report"
-    And I fill in "From" with "<zip code input>"
+    And I fill in "Reps From" with "<zip code input>"
     And I press "Show Reps"
     Then I should see the following scores:
       | politician           | score |
@@ -85,7 +85,7 @@ Feature: Browsing Report Scores by State
       | TX    | 11       | 75028    | 7      |
       | NY    | 7        | 11111    | 111    |
     When I go to my report page for "Active Report"
-    And I fill in "From" with "<zip code input>"
+    And I fill in "Reps From" with "<zip code input>"
     And I press "Show Reps"
     Then I should see the following scores:
       | politician           | score |
