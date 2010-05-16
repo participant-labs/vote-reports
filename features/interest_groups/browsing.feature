@@ -7,7 +7,6 @@ Feature: Browsing Interest Groups
     Given an interest group named "Sierra Club"
 
   Scenario: Navigating to the interest group list
-    Given I am on the home page
-    When I follow "Interest Groups"
+    Given I go to the interest groups page
     Then I should see "Interest Groups"
     And I should see "Sierra Club"
