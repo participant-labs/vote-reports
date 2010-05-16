@@ -16,7 +16,7 @@ Feature: Report Searching
   Scenario: User searches for and doesn't find a reports
     Given 30 published reports
     When I go to the reports page
-    Then I should see "Recent Reports"
+    Then I should see "Reports"
     And I fill in "Search" with "smelly roses"
     And I press "Search"
     Then I should see "Matching Reports"
