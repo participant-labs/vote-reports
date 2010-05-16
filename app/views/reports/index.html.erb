@@ -13,10 +13,6 @@
     </p>
     <p><%= submit_tag 'Search' %></p>
 
-    <p>
-      <%= check_box_tag :user_reports_only, '1', params[:user_reports_only], :'data-replace' => replace %>
-      <%= label_tag :user_reports_only, 'User Reports Only' %>
-    </p>
     <p>or browse by subject:</p>
     <div id="report_subjects_cloud">
       <%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
