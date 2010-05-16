@@ -32,6 +32,7 @@ Rails::Initializer.run do |config|
   config.gem 'jammit'
   config.gem 'json', :version => '>= 1.4.3'
   config.gem 'shadow_puppet'
+  config.gem 'mongo_mapper'
   config.gem 'newrelic_rpm', :version => '>= 2.11.2'
   config.gem 'nokogiri'
   config.gem 'paperclip'
