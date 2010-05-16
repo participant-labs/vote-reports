@@ -32,7 +32,7 @@ Rails::Initializer.run do |config|
   config.gem 'jammit'
   config.gem 'json', :version => '>= 1.4.3'
   config.gem 'shadow_puppet'
-  config.gem 'bson_ext'
+  config.gem 'bson_ext', :version => '>= 1.0.1'
   config.gem 'mongo_mapper', :version => '>= 0.7.5'
   config.gem 'newrelic_rpm', :version => '>= 2.11.2'
   config.gem 'nokogiri'
