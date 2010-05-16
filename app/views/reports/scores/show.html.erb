@@ -17,7 +17,7 @@
         <%- end -%>
         <dd>On <%= render 'bills/bill', :bill => subject, :hide_year => true, :no_titles => true %> which this report <%= subject_scores.first.criterion.position %>s</dd>
       <%- elsif subject.is_a?(InterestGroupReport) -%>
-        <%- notify_exceptional("Multiple interest group ratings #{subject_scores.inspect}") if subject_scores.size > 1 -%>
+        <%- notify_hoptoad("Multiple interest group ratings #{subject_scores.inspect}") if subject_scores.size > 1 -%>
         <%- rating = subject_scores.first.evidence -%>
         <dt><%= link_to "In #{subject.timespan}: #{rating.numeric_rating.round}%", subject.vote_smart_url %></dt>
         <dd><%= rating.description %></dd>

@@ -32,7 +32,7 @@ namespace :gov_track do
 
     desc "Process Politicians"
     task :unpack => :'gov_track:support' do
-      Exceptional.rescue_and_reraise do
+      rescue_and_reraise do
         data_path = ENV['MEETING'] ? "us/#{ENV['MEETING']}/people.xml" : "us/people.xml"
         doc = Nokogiri::XML(open(gov_track_path(data_path)))
         include SuppressValidations

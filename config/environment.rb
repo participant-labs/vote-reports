@@ -23,7 +23,7 @@ Rails::Initializer.run do |config|
   config.gem "declarative_authorization"
   config.gem 'delayed_job', :version => '>= 2.0.3'
   config.gem 'erubis'
-  config.gem 'exceptional'
+  config.gem 'hoptoad_notifier'
   config.gem 'fastercsv'
   config.gem 'friendly_id', :version => '= 2.3.2'
   config.gem 'gemcutter' # required by whenever

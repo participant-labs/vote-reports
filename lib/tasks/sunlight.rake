@@ -12,7 +12,7 @@ namespace :sunlight do
 
     desc "Process Politicians"
     task :unpack => :environment do
-      Exceptional.rescue_and_reraise do
+      rescue_and_reraise do
         require 'fastercsv'
         require 'open-uri'
 

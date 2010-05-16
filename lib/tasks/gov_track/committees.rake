@@ -42,7 +42,7 @@ namespace :gov_track do
         end
       end
 
-      Exceptional.rescue_and_reraise do
+      rescue_and_reraise do
         puts "All"
         doc =
           begin

@@ -57,7 +57,7 @@ namespace :gov_track do
              end
 
           bill = bills.fetch("#{amends['type']}#{@congress.meeting}-#{amends['number']}") do
-            notify_exceptional("#{amends['type']}#{@congress.meeting}-#{amends['number']} not found (#{amends.to_s})")
+            notify_hoptoad("#{amends['type']}#{@congress.meeting}-#{amends['number']} not found (#{amends.to_s})")
           end || begin
             $stdout.print('-')
             next
