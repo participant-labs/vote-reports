@@ -238,7 +238,7 @@ dd {
   margin-top: 5px;
 }
 
-#scores .report_title, #score_examples .report_title {
+.report_title {
   font-size: 1.1em;
   font-weight: bold;
 }
@@ -249,14 +249,6 @@ table {
 
 table tbody {
   border-top: 15px solid transparent;
-}
-
-.report_title {
-  font-size: 1.6em;
-}
-
-.report_title.big {
-  font-size: 4em;
 }
 
 .report_description {
