@@ -11,8 +11,8 @@ class ReportsController < ApplicationController
       @title = 'Matching Reports'
       @reports = Report.paginated_search(params).results
     else
-      @title = 'Recent Reports'
-      @reports = topical_reports.by_updated_at.paginate(:page => params[:page])
+      @title = 'Reports'
+      @reports = topical_reports.by_name.paginate(:page => params[:page])
     end
 
     @subjects = Subject.for_report(topical_reports).for_tag_cloud.all(:limit => 20)
