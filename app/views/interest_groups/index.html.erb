@@ -2,12 +2,24 @@
 
 <div class="section" id="interest_groups_index">
   <h2>Interest Groups</h2>
-  <%= render 'interest_groups/search',:replace => 'interest_groups_index' %>
+  <div id="search" class="<%= 'hidden' if params[:subjects].present? %>">
+    <% form_tag interest_groups_path, :method => :get, :'data-replace' => 'interest_groups_index' do %>
+      <h3><%= label_tag :q, 'Search' %></h3>
+      <%= text_field_tag :q, @q %>
+      <%= submit_tag 'Search' %>
+      <p>or <a href="#" data-toggle="search, browse_by_subject">browse by subject</a></p>
+    <% end %>
+  </div>
 
-  <p>or browse by subject:</p>
-  <%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
-    [interest_groups_path(:subjects => subjects), {:'data-replace' => 'interest_groups_index'}]
-  } %>
+  <div id="browse_by_subject" class="<%= 'hidden' unless params[:subjects].present? %>">
+    <% form_tag interest_groups_path, :method => :get, :'data-replace' => 'interest_groups_index' do %>
+      <h3>Browse by Subject</h3>
+      <%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
+        [interest_groups_path(:subjects => subjects), {:'data-replace' => 'interest_groups_index'}]
+      } %>
+      <p>or <a href="#" data-toggle="search, browse_by_subject">search</a></p>
+    <% end %>
+  </div>
 
   <%= render 'interest_groups/list', :interest_groups => @interest_groups, :replace => 'interest_groups_index' %>
 </div>
