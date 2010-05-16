@@ -8,19 +8,19 @@
   <%- replace = 'content' -%>
   <% form_tag reports_path, :method => :get, :'data-replace' => replace do %>
     <p>
-      <%= check_box_tag :include_interest_group_reports, '1', params[:include_interest_group_reports], :'data-replace' => replace %>
-      <%= label_tag :include_interest_group_reports, 'Include Interest Group Reports' %>
-    </p>
-    <p>
       <%= label_tag :q, 'Search', :style => 'font-weight: bold;' %>
       <%= text_field_tag :q, @q %>
     </p>
     <p><%= submit_tag 'Search' %></p>
 
+    <p>
+      <%= check_box_tag :user_reports_only, '1', params[:user_reports_only], :'data-replace' => replace %>
+      <%= label_tag :user_reports_only, 'User Reports Only' %>
+    </p>
     <p>or browse by subject:</p>
     <div id="report_subjects_cloud">
       <%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
-        [reports_path(params.slice(:include_interest_group_reports).merge(:subjects => subjects)), {:'data-replace' => replace}]
+        [reports_path(params.slice(:user_reports_only).merge(:subjects => subjects)), {:'data-replace' => replace}]
       } %>
     </div>
   <% end %>
