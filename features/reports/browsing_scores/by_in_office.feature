@@ -57,7 +57,7 @@ Feature: Browsing Report Scores by State
       | Neil Abercrombie     | 0     |
     And I should not see "J. Kerrey"
     And I should not see "Kay Hutchison"
-    When I uncheck "In Office Only"
+    When I uncheck "In Office"
     And I press "Show Reps"
     Then I should see the following scores:
       | politician           | score |
@@ -67,8 +67,8 @@ Feature: Browsing Report Scores by State
       | Kay Hutchison        | 53    |
       | Connie Mack          | 50    |
       | Neil Abercrombie     | 0     |
-    When I check "In Office Only"
     When I fill in "Reps From" with "TX"
+    When I check "In Office"
     And I press "Show Reps"
     Then I should see the following scores:
       | politician           | score |

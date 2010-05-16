@@ -30,8 +30,8 @@ Feature: Browsing Politicians
 
   Scenario: Browsing to a Politician from the Politicians Page
     When I go to the politicians page
-    And I uncheck "In Office Only"
     And I fill in "Reps From" with "75028"
+    And I uncheck "In Office"
     And I press "Show Reps"
     Then I should see "Michael Burgess"
     And I should see "Kay Hutchison"
@@ -42,7 +42,7 @@ Feature: Browsing Politicians
 
   Scenario: User views only in-office reps
     When I go to the politicians page
-    When I check "In Office Only"
+    When I check "In Office"
     And I press "Show Reps"
     Then I should see "Michael Burgess"
     And I should see "Neil Abercrombie"

@@ -3,6 +3,6 @@
   <%= text_field_tag :representing, requested_location, :title => %{e.g. "TX", "98101", "San Francisco, CA"}, :size => 33, :class => 'fieldtag' %>
   <%= hidden_field_tag :in_office, '0', :id => 'in_office_false' %>
   <%= check_box_tag :in_office, '1', in_office, :id => 'in_office_true' %>
-  <%= label_tag :in_office_true, 'In Office Only' %>
+  <%= label_tag :in_office_true, 'In Office' %>
   <%= submit_tag 'Show Reps' %>
 <% end %>
