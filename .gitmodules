@@ -3,4 +3,4 @@
 	url = git@github.com:Empact/moonshine.git
 [submodule "vendor/plugins/moonshine_mongodb"]
 	path = vendor/plugins/moonshine_mongodb
-	url = http://github.com/wfarr/moonshine_mongodb.git
+	url = git@github.com:Empact/moonshine_mongodb.git
