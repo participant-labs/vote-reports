@@ -259,6 +259,14 @@ class Report < ActiveRecord::Base
     end
   end
 
+  def name
+    if self[:name].blank? && interest_group.present?
+      interest_group.name
+    else
+      self[:name]
+    end
+  end
+
   def description
     if self[:description].blank? && interest_group.present?
       interest_group.description
