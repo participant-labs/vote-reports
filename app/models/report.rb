@@ -166,10 +166,10 @@ class Report < ActiveRecord::Base
     def paginated_search(params)
       search do
         fulltext params[:q]
-        if params[:include_interest_group_reports]
-          with(:published, true)
-        else
+        if params[:user_reports_only]
           with(:user_published, true)
+        else
+          with(:published, true)
         end
         paginate :page => params[:page], :per_page => Report.per_page
       end
@@ -200,10 +200,10 @@ class Report < ActiveRecord::Base
     :include => [:user, :interest_group]
   class << self
     def published_by(params)
-      if params.nil? || params[:include_interest_group_reports].present?
-        published
-      else
+      if params[:user_reports_only]
         user_published
+      else
+        published
       end
     end
 
