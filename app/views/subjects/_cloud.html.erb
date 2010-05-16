@@ -1,23 +1,24 @@
 <%- target ||= lambda {|subject| subject } -%>
+<%- attrs ||= {} -%>
 <%- classes = subjects.size > 40 ? %w(tag1 tag2 tag3 tag4 tag5 tag6) : %w(tag1 tag2 tag3 tag4) -%>
 
-<ol class="tag_cloud">
-<% tag_cloud(subjects, classes) do |subject, css_class| %>
-<%-
-  if params[:subjects]
-    classes = ['selectable', css_class]
-    slug = subject.to_param
-    subjects =
-      if params[:subjects].include?(slug)
-        classes << 'selected'
-        params[:subjects] - [slug]
-      else
-        params[:subjects] + [slug]
-      end
--%>
-    <li class="subject <%= classes.join(' ') %>"><%= link_to subject.name, *target.call(subjects)  %></li>
-  <%- else -%>
-    <li class="subject <%= css_class %>"><%= link_to subject.name, *target.call(subject)  %></li>
-  <%- end -%>
+<% content_tag :ol, attrs.reverse_merge(:class => 'tag_cloud') do %>
+  <% tag_cloud(subjects, classes) do |subject, css_class| %>
+  <%-
+    if params[:subjects]
+      classes = ['selectable', css_class]
+      slug = subject.to_param
+      subjects =
+        if params[:subjects].include?(slug)
+          classes << 'selected'
+          params[:subjects] - [slug]
+        else
+          params[:subjects] + [slug]
+        end
+  -%>
+      <li class="subject <%= classes.join(' ') %>"><%= link_to subject.name, *target.call(subjects)  %></li>
+    <%- else -%>
+      <li class="subject <%= css_class %>"><%= link_to subject.name, *target.call(subject)  %></li>
+    <%- end -%>
+  <% end %>
 <% end %>
-</ol>
