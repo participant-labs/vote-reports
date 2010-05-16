@@ -5,6 +5,7 @@ class InterestGroupRating < ActiveRecord::Base
   delegate :interest_group, :to => :interest_group_report
 
   validates_presence_of :interest_group_report, :politician
+  validates_uniqueness_of :interest_group_report_id, :scope => :politician_id
 
   named_scope :numeric, :conditions => 'interest_group_ratings.numeric_rating IS NOT NULL'
 
