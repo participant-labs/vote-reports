@@ -112,7 +112,7 @@ namespace :gov_track do
   end
 
   task :download_all => :support do
-    Exceptional.rescue_and_reraise do
+    rescue_and_reraise do
       log = Rails.root.join('log/govtrack-rsync.log')
       chdir(Rails.root.join("data/gov_track/us/")) do
         `wget -N http://www.govtrack.us/data/us/people.xml >> #{log}`

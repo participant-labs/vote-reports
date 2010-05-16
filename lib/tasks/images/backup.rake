@@ -1,6 +1,6 @@
 namespace :images do
   task :backup => :environment do
-    Exceptional.rescue_and_reraise do
+    rescue_and_reraise do
       require 'date'
       dest = Rails.root.join('data/backup/system', Rails.env)
       FileUtils.mkdir_p dest

@@ -1,7 +1,7 @@
 namespace :db do
   namespace :backup do
     task :full => :environment do
-      Exceptional.rescue_and_reraise do
+      rescue_and_reraise do
         require 'date'
         dest = Rails.root.join('data/backup/db/full', Rails.env)
         FileUtils.mkdir_p dest
@@ -10,9 +10,8 @@ namespace :db do
     end
 
     task :restore do
-      require 'exceptional'
       require 'rubygems'
-      Exceptional.rescue_and_reraise do
+      rescue_and_reraise do
         unless Rails.env.development? || ENV['IM_DEFINITELY_POPULATING_AN_EMPTY_DATABASE'] == 'true'
           raise "db:backup:restore is only for development unless you're populating a db you know is empty." +
             "Run it with IM_DEFINITELY_POPULATING_AN_EMPTY_DATABASE=true to go ahead with this"

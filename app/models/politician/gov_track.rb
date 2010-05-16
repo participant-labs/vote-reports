@@ -3,7 +3,7 @@ class Politician < ActiveRecord::Base
     def headshot
       @headshot ||= begin
         if gov_track_id.blank?
-          notify_exceptional("Unable to fetch headshot, no gov_track_id for: #{inspect}")
+          notify_hoptoad("Unable to fetch headshot, no gov_track_id for: #{inspect}")
           return nil
         end
         GovTrack::Headshot.new(gov_track_id)

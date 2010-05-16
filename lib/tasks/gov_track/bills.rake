@@ -62,7 +62,7 @@ namespace :gov_track do
     end
     
     task :unpack => [:'gov_track:support', :'gov_track:politicians'] do
-      Exceptional.rescue_and_reraise do
+      rescue_and_reraise do
         require 'ar-extensions'
         require 'ar-extensions/import/postgresql'
 
