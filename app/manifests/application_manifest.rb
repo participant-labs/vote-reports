@@ -64,6 +64,8 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     configure(:denyhosts => {
       :admin_email => 'ben@votereports.org, root@localhost'
     })
+
+    configure(:mongodb => {:version => '1.4.2'})
   end
 
   # The following line includes the 'application_packages' recipe defined above
@@ -75,6 +77,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     recipe :scout
     recipe :ssh
   end
+  recipe :mongodb
 
   def integrity_vhost
     file '/srv/integrity',
