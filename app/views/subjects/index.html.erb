@@ -10,7 +10,9 @@
   <%- if @q -%>
     <%= render 'subjects/list', :subjects => @subjects, :title => @title %>
   <%- else -%>
-    <h3><%= @title %></h3>
-    <%= render 'subjects/cloud', :subjects => @subjects %>
+    <div id="subjects">
+      <h3><%= @title %></h3>
+      <%= render 'subjects/cloud', :subjects => @subjects %>
+    </div>
   <%- end -%>
 </div>
