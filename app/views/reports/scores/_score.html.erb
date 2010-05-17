@@ -1,5 +1,5 @@
 <%- if score.nil? -%>
   <div class="report_score blank" />
 <%- else -%>
-  <div class="report_score"><span class="score" data-qtip-path="<%= report_score_path(score.report, score) %>"  data-qtip-title="<%= score_title(score) %>"><%= score %></span></div>
+  <div class="report_score"><span class="score" data-qtip-path="<%= report_score_path(score.report, score) %>"><%= score %></span></div>
 <%- end -%>
