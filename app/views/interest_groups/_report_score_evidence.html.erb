@@ -1,11 +1,13 @@
-<!-- <dl>
-  <%- score.evidence.group_by(&:subject).each_pair do |subject, subject_scores| -%>
-    <%- notify_hoptoad("Multiple interest group ratings #{subject_scores.inspect}") if subject_scores.size > 1 -%>
-    <%- rating = subject_scores.first.evidence -%>
-    <dt><%= link_to "In #{subject.timespan}: #{rating.numeric_rating.round}%", subject.vote_smart_url %></dt>
-    <dd><%= rating.description %></dd>
-  <%- end -%>
-</dl> -->
+<%- categories, data = [], [] -%>
+<%- score.evidence.group_by(&:subject).each_pair do |subject, subject_scores| -%>
+  <%- notify_hoptoad("Multiple interest group ratings #{subject_scores.inspect}") if subject_scores.size > 1 -%>
+  <%- rating = subject_scores.first.evidence -%>
+  <%- categories << subject.timespan.to_s -%>
+  <%- data << rating.numeric_rating -%>
+  <!-- [subject.timespan, rating.numeric_rating.round] -->
+  <%# link_to "In #{subject.timespan}: #{rating.numeric_rating.round}%", subject.vote_smart_url %>
+  <%# rating.description %>
+<%- end -%>
 
 <% javascript_tag do %>
   new Highcharts.Chart({
@@ -20,7 +22,7 @@
       text: 'Source: WorldClimate.com',
     },
     xAxis: {
-      type: 'datetime',
+      categories: <%= categories.inspect.gsub('"', "'") %>,
       title: {
          text: 'Month'
       }
@@ -44,9 +46,8 @@
       enabled: false
     },
     series: [{
-      pointInterval: 24 * 3600 * 1000 * 365,
-      pointStart: Date.UTC(2006, 0, 01),
-      data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+      type: 'line',
+      data: <%= data.inspect %>
     }]
   });
 <% end %>
