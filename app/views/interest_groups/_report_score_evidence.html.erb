@@ -26,13 +26,21 @@
          color: '#808080'
       }]
     },
+    tooltip: {
+      formatter: function() {
+        return this.point.name;
+      },
+      style: {
+        whiteSpace: 'normal'
+      }
+    },
     legend: {
       enabled: false
     },
     series: [{
       name: '<%= escape_javascript(score.report.name) %>',
       type: 'line',
-      data: <%= raw data.map {|p| p[:y] }.to_json %>
+      data: <%= raw data.map {|p| p.slice(:y, :name) }.to_json %>
     }]
   });
 <% end %>
