@@ -9,4 +9,14 @@ module Reports::ScoresHelper
       pluralize(evidence.size, human_type_name(type))
     end
   end
+
+  def score_evidence_points(score)
+    score.evidence.group_by(&:subject).map do |(subject, subject_scores)|
+      notify_hoptoad("Multiple interest group ratings #{subject_scores.inspect}") if subject_scores.size > 1
+      rating = subject_scores.first.evidence
+      {:x => subject.timespan.to_s, :y => rating.numeric_rating, :name => rating.description}
+      # link_to "In #{subject.timespan}: #{rating.numeric_rating.round}%", subject.vote_smart_url
+      # rating.description
+    end.sort_by {|p| p[:x] }
+  end
 end
