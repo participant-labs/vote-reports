@@ -19,7 +19,7 @@
       text: '<%= escape_javascript(score_title(score)) %>',
     },
     subtitle: {
-      text: 'Source: WorldClimate.com',
+      text: 'based on <%= escape_javascript(score_evidence_components(score).join(', ')) %>',
     },
     xAxis: {
       categories: <%= categories.inspect.gsub('"', "'") %>,
