@@ -1,16 +1,16 @@
 <%- title score_title(@score) -%>
 <div>
-  <div class="report_score_evidence_link">
-    based on
-    <ul>
-      <%- @score.evidence.group_by(&:evidence_type).each_pair do |type, evidence| -%>
-        <li><%= pluralize(evidence.size, human_type_name(type)) %></li>
-      <%- end -%>
-    </ul>
-  </div>
   <%- if @score.report.owner.is_a?(InterestGroup) -%>
     <%= render 'interest_groups/report_score_evidence', :score => @score %>
   <%- else -%>
+    <div class="report_score_evidence_link">
+      based on
+      <ul>
+        <%- score_evidence_components(@score).each do |component| -%>
+          <li><%= component %></li>
+        <%- end -%>
+      </ul>
+    </div>
     <dl>
       <%- @score.evidence.group_by(&:subject).each_pair do |subject, subject_scores| -%>
         <%- subject_scores.each do |bill_score| -%>
