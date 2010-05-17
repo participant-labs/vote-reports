@@ -33,6 +33,7 @@
       enabled: false
     },
     series: [{
+      name: '<%= escape_javascript(score.report.name) %>',
       type: 'line',
       data: <%= raw data.map {|p| p[:y] }.to_json %>
     }]
