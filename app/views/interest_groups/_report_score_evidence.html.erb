@@ -26,7 +26,7 @@
     },
     tooltip: {
       formatter: function() {
-        return this.point.name;
+        return this.point.tooltip;
       },
       style: {
         whiteSpace: 'normal'
@@ -38,7 +38,7 @@
     series: [{
       name: '<%= escape_javascript(score.report.name) %>',
       type: 'line',
-      data: <%= raw data.map {|p| p.slice(:y, :name) }.to_json %>
+      data: <%= raw data.map {|p| p.slice(:y, :tooltip) }.to_json %>
     }]
   });
 <% end %>
