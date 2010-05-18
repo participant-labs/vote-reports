@@ -17,17 +17,10 @@
       <div id="header" class="clearfix">
         <%= link_to image_tag('logo.png', :size => '521x150', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
 
-        <form action="http://votereports.us1.list-manage.com/subscribe/post?u=7a5f531cddf4733361c3c56b4&amp;id=6ed81c914b" method="post" id="mc-embedded-subscribe-form" class="validate">
-            <div id="mce-responses">
-              <div class="response" id="mce-error-response" style="display:none"></div>
-              <div class="response" id="mce-success-response" style="display:none"></div>
-            </div>
-            <div class="mc-field-group">
-              <label for="mce-EMAIL" class="fieldtag">Our Newsletter</label>
-              <input type="text" value="" name="EMAIL" class="required email text fieldtag" id="mce-EMAIL" title="Our Newsletter" />
-            </div>
-            <div><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn submit" /></div>
-        </form>
+        <% form_tag reports_path, :method => :get, :id => 'header_search' do %>
+          <%= text_field_tag :q, '', :class => 'fieldtag', :title => 'Search Our Reports' %>
+          <%= submit_tag 'Search' %>
+        <% end %>
       </div>
       <ul id="menu" class="sidebar-links">
         <li <%= raw %{class="selected"} if [root_path, about_path].include?(request.path) %>><h2><%= link_to_unless_current "Home", root_path %></h2></li>
