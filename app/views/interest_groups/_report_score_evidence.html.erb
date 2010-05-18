@@ -35,10 +35,21 @@
     legend: {
       enabled: false
     },
+    plotOptions: {
+       line: {
+          point: {
+             events: {
+                click: function() {
+                  window.location = this.vote_smart_url;
+                }
+             }
+          }
+       }
+    },
     series: [{
       name: '<%= escape_javascript(score.report.name) %>',
       type: 'line',
-      data: <%= raw data.map {|p| p.slice(:y, :tooltip) }.to_json %>
+      data: <%= raw data.map {|p| p.slice(:y, :tooltip, :vote_smart_url) }.to_json %>
     }]
   });
 <% end %>
