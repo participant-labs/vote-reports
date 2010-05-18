@@ -18,7 +18,7 @@ module Reports::ScoresHelper
         content_tag(:dt, "In #{subject.timespan}: #{rating.numeric_rating.round}%") \
          + content_tag(:dd, rating.description)
       end
-      {:x => subject.timespan.to_s, :y => rating.numeric_rating, :name => tooltip}
+      {:x => subject.timespan.to_s, :y => rating.numeric_rating, :tooltip => tooltip}
     end.sort_by {|p| p[:x] }
   end
 end
