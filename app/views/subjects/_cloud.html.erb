@@ -1,4 +1,4 @@
-<%- target ||= lambda {|subject| subject } -%>
+<%- target ||= lambda {|subject| subject_path(subject) } -%>
 <%- attrs ||= {} -%>
 <%- classes = subjects.size > 40 ? %w(tag1 tag2 tag3 tag4 tag5 tag6) : %w(tag1 tag2 tag3 tag4) -%>
 

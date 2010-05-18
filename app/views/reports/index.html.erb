@@ -29,6 +29,12 @@
 </div>
 
 <div class="section">
-  <h3><%= @title %></h3>
-  <%= render 'reports/list', :reports => @reports %>
+  <%- if @reports.present? -%>
+    <h3><%= @title %></h3>
+    <%= render 'reports/list', :reports => @reports %>
+  <%- else -%>
+    <h3>No Reports Found - Try again?</h3>
+    <p>Unfortunately, we couldn't find any reports for "<%= @q %>," but that doesn't mean we don't have what you're looking for.  Try another search, or select a subject from the list below:</p>
+    <%= render 'subjects/cloud', :subjects => @subjects %>
+  <%- end -%>
 </div>
