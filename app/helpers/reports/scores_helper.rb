@@ -14,7 +14,7 @@ module Reports::ScoresHelper
     score.evidence.group_by(&:subject).map do |(subject, subject_scores)|
       notify_hoptoad("Multiple interest group ratings #{subject_scores.inspect}") if subject_scores.size > 1
       rating = subject_scores.first.evidence
-      tooltip = content_tag :dl do
+      tooltip = content_tag :dl, :class => 'chart_tooltip' do
         content_tag(:dt, "In #{subject.timespan}: #{rating.numeric_rating.round}%") \
          + content_tag(:dd, rating.description)
       end

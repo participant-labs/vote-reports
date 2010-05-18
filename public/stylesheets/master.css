@@ -190,6 +190,10 @@ dl dt {
 dd {
   margin-left: 1.5em; }
 
+dl.chart_tooltip {
+  margin: 0.5em;
+}
+
 #guide > dl > dt:first-of-type {
   display: inline;
 }
