@@ -10,7 +10,6 @@ javascripts:
     - public/javascripts/vendor/jquery.Jcrop.js
     - public/javascripts/vendor/jquery.qtip-1.0.0-rc3-dm.js
     - public/javascripts/vendor/jquery.qtip.preload.js
-    - public/javascripts/vendor/excanvas.compiled.js
     - public/javascripts/vendor/highcharts.js
     - public/javascripts/replace.js
     - public/javascripts/qtip.js
