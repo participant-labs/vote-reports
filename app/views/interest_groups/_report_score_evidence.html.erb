@@ -13,7 +13,7 @@
       text: 'based on <%= escape_javascript(score_evidence_components(score).join(', ')) %>',
     },
     xAxis: {
-      categories: <%= raw data.map {|p| p[:x] }.to_json %>
+      categories: <%= raw pare_down_score_dates(data.map {|p| p[:x] }).to_json %>
     },
     yAxis: {
       min: -2,

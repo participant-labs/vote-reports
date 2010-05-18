@@ -21,4 +21,17 @@ module Reports::ScoresHelper
       {:x => subject.timespan.to_s, :y => rating.numeric_rating, :tooltip => tooltip}
     end.sort_by {|p| p[:x] }
   end
+
+  def pare_down_score_dates(dates)
+    goal_size = 35
+    return dates if dates.join.size <= goal_size
+
+    long_dates = dates.select {|d| d.include?('-') }
+    while dates.join.size > goal_size && long_dates.present?
+      long_date = long_dates.delete(long_dates.rand)
+      long_date_index = dates.index(long_date)
+      dates[long_date_index] = long_date.split('-').last
+    end
+    dates
+  end
 end
