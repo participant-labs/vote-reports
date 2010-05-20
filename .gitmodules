@@ -4,3 +4,6 @@
 [submodule "vendor/plugins/moonshine_mongodb"]
 	path = vendor/plugins/moonshine_mongodb
 	url = git@github.com:Empact/moonshine_mongodb.git
+[submodule "vendor/plugins/moonshine_god"]
+	path = vendor/plugins/moonshine_god
+	url = git://github.com/railsmachine/moonshine_god.git
