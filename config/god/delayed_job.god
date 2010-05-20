@@ -1,11 +1,11 @@
-rails_root = "/srv/vote-reports/current"
+RAILS_ROOT = File.join(File.dirname(__FILE__), "../..")
 
 2.times do |num|
   God.watch do |w|
     w.name = "dj-#{num}"
     w.group = 'dj'
     w.interval = 30.seconds
-    w.start = "rake -f #{rails_root}/Rakefile production jobs:work"
+    w.start = "rake -f #{RAILS_ROOT}/Rakefile production jobs:work"
 
     w.uid = 'git'
     w.gid = 'git'
