@@ -77,6 +77,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     recipe :scout
     recipe :ssh
   end
+  recipe :god
   recipe :mongodb
 
   def integrity_vhost
