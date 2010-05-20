@@ -7,3 +7,6 @@
 [submodule "vendor/plugins/moonshine_god"]
 	path = vendor/plugins/moonshine_god
 	url = http://github.com/varyform/moonshine_god.git
+[submodule "vendor/plugins/moonshine_monit"]
+	path = vendor/plugins/moonshine_monit
+	url = http://github.com/pjkelly/moonshine_monit.git
