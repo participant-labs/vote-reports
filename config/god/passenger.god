@@ -26,7 +26,7 @@ God.watch do |w|
   w.transition(:up, :restart) do |on|
     on.condition(:memory_usage) do |c|
       c.above = 500.megabytes
-      c.times = 2
+      c.times = [3, 5]
     end
   end
 

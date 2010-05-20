@@ -14,7 +14,7 @@ RAILS_ROOT = File.join(File.dirname(__FILE__), "../..")
     w.transition(:up, :restart) do |on|
       on.condition(:memory_usage) do |c|
         c.above = 300.megabytes
-        c.times = 2
+        c.times = [3, 5]
       end
     end
 
