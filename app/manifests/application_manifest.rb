@@ -66,6 +66,8 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     })
 
     configure(:mongodb => {:version => '1.4.2'})
+
+    configure(:monit => {:gui => true})
   end
 
   # The following line includes the 'application_packages' recipe defined above
