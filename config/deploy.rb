@@ -1,6 +1,12 @@
-set :stages, %w(staging production)
-set :default_stage, "staging"
+require 'auto_tagger/recipes'
+set :stages, [:staging, :production]
+set :autotagger_stages, stages
 require 'capistrano/ext/multistage'
+
+before "deploy:update_code", "release_tagger:set_branch"
+after  "deploy", "release_tagger:create_tag"
+after  "deploy", "release_tagger:write_tag_to_shared"
+after  "deploy", "release_tagger:print_latest_tags"
 
 set :user, 'deploy'
 
