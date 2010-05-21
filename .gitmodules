@@ -9,4 +9,4 @@
 	url = http://github.com/varyform/moonshine_god.git
 [submodule "vendor/plugins/moonshine_monit"]
 	path = vendor/plugins/moonshine_monit
-	url = http://github.com/pjkelly/moonshine_monit.git
+	url = git@github.com:Empact/moonshine_monit.git
