@@ -1,6 +1,8 @@
 require 'mongo_mapper'
 
-MongoMapper.setup(YAML.load_file(Rails.root.join('config', 'mongo.yml')), Rails.env, {
+config = YAML.load_file(Rails.root.join('config', 'mongo.yml'))
+MongoMapper.setup(config, Rails.env, {
   :logger    => Rails.logger,
   :passenger => true,
 })
+MongoMapper.database = config[Rails.env]['database']
