@@ -8,7 +8,7 @@
           <li><%= link_to_unless_current "Your reports", user_path(current_user) %></li>
           <li><%= link_to_unless_current "Log out", logout_path %></li>
         <%- else -%>
-          <li><%= link_to_unless_current "Log in", login_path(:return_to => request.path) %></li>
+          <li><%= link_to_unless_current "Log in", request.path == root_path ? login_path : login_path(:return_to => request.path) %></li>
           <li><%= link_to_unless_current "Sign up", signup_path %></li>
         <%- end -%>
         <%= render 'locations/location' %>
