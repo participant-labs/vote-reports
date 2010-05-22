@@ -80,14 +80,14 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     staging:
       host: staging.votereports.org
       database: vote-reports-staging
-      username: deploy
-      password: monkey7paris
+      username: mongo
+      password: eea2009a5937db97e8105e7e4db
       <<: *global_settings
 
     production:
       database: vote-reports
-      username: deploy
-      password: monkey7paris
+      username: mongo
+      password: eea2009a5937db97e8105e7e4db
       <<: *global_settings
     MONGO
 
