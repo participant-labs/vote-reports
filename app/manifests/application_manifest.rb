@@ -61,36 +61,6 @@ class ApplicationManifest < Moonshine::Manifest::Rails
       '-A INPUT -p udp -m udp --dport 8000:10000 -j ACCEPT'
     ]})
 
-    file "/srv/vote-reports/shared/config/mongo.yml",
-      :ensure => :present,
-      :content => <<-MONGO
-    development: &global_settings
-      database: vote-reports-development
-      host: 127.0.0.1
-      port: 27017
-
-    test:
-      database: vote-reports-test
-      <<: *global_settings
-
-    cucumber:
-      database: vote-reports-cucumber
-      <<: *global_settings
-
-    staging:
-      host: staging.votereports.org
-      database: vote-reports-staging
-      username: mongo
-      password: eea2009a5937db97e8105e7e4db
-      <<: *global_settings
-
-    production:
-      database: vote-reports
-      username: mongo
-      password: eea2009a5937db97e8105e7e4db
-      <<: *global_settings
-    MONGO
-
     configure(:denyhosts => {
       :admin_email => 'ben@votereports.org, root@localhost'
     })
