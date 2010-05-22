@@ -4,7 +4,7 @@
   <%- unless @user_session.errors.present? -%>
   <div class="left">
     <h2>Log in via...</h2>
-    <%= raw rpx_embed(:app_name => RPX_APP_NAME, :return_url => user_sessions_url(params.slice(:return_to).merge(:authenticity_token => form_authenticity_token))) %><br />
+    <%= raw rpx_embed(:app_name => RPX_APP_NAME, :return_url => user_sessions_url(params.slice(:return_to))) %><br />
   </div>
   <%- end -%>
 
