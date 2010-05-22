@@ -42,9 +42,6 @@
 
 # Use :shared_config to copy directories straight from your local project
 # directory to the server: these are files that you don't have/want in scm.
-:shared_config:
- - config/mongo.yml
-
 :local_config:
  - config/database.yml
  - config/secure_variables.rb

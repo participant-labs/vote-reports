@@ -26,6 +26,11 @@ namespace :deploy do
   end
   before "moonshine:apply", "deploy:gem_install"
 
+  task :link_mongo_config, :roles => :app do
+    run "cd #{current_path} && ln -s #{shared_path}/config/mongo.yml #{current_path}/config/mongo.yml"
+  end
+  after "deploy:symlink", "deploy:link_mongo_config"
+
   desc 'Bundle and minify the JS and CSS files'
   task :precache_assets, :roles => :app do
     root_path = File.expand_path(File.dirname(__FILE__) + '/..')
