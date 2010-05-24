@@ -1,5 +1,5 @@
 <div class="clearfix report_description section">
-  <div class="image large"><%= hover_image_tag interest_group.thumbnail, interest_group.name, :header %></div>
+  <div class="image large"><%= image_with_hover_tag interest_group.thumbnail, interest_group.name, :style => :header %></div>
   <h1><%= interest_group.name %></h1>
   <ul class="details">
   <%- if @interest_group.url.present? -%>

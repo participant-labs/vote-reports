@@ -241,11 +241,7 @@ dl.chart_tooltip {
   margin-bottom: 1em;
 }
 
-.report_attrs {
-  margin-left: 110px;
-}
-
-.report_attrs blockquote, .report_creator {
+.report blockquote, .report_creator {
   margin-top: 5px;
 }
 

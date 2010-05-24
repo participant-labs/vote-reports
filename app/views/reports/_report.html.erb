@@ -1,17 +1,14 @@
 <%- float_description ||= false -%>
 
 <% div_for(report, :class => 'clearfix') do %>
-  <%= link_to content_tag(:div, hover_image_tag(report.thumbnail, report.name), :class => 'image'), report_path_components(report) %>
-  <div class="report_attrs">
-    <%- description = truncate(strip_tags(report.description), :length => (report.user_id ? 110 : 140) - report.name.length) -%>
-    <%- attrs = float_description ? {:title => strip_tags(report.description)} : {} if  -%>
-    <%= link_to h(report.name), report_path_components(report), attrs.merge(:class => 'report_title') %>
-    <br />
-      <%- if report.user_id -%>
-        <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
-      <%- end -%>
-    <%- unless description.blank? || float_description || report.name.size > 60 -%>
-      <blockquote><p><%= h(description) %></p></blockquote>
+  <%- description = truncate(strip_tags(report.description), :length => (report.user_id ? 110 : 140) - report.name.length) -%>
+  <%- attrs = float_description ? {:title => strip_tags(report.description)} : {} if  -%>
+  <%= link_to h(report.name), report_path_components(report), attrs.merge(:class => 'report_title').merge(hover_image_attrs(report.thumbnail)) %>
+  <br />
+    <%- if report.user_id -%>
+      <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
     <%- end -%>
-  </div>
+  <%- unless description.blank? || float_description || report.name.size > 60 -%>
+    <blockquote><p><%= h(description) %></p></blockquote>
+  <%- end -%>
 <% end %>
