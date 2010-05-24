@@ -18,7 +18,7 @@
         <%= link_to image_tag('logo.png', :size => '521x150', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
 
         <% form_tag reports_path, :method => :get, :id => 'header_search' do %>
-          <%= text_field_tag :q, '', :class => 'fieldtag', :title => 'Search Our Reports' %>
+          <%= text_field_tag :q, '', :class => 'fieldtag', :title => 'Search Our Reports', :id => 'header_search_reports' %>
           <%= submit_tag 'Search' %>
         <% end %>
       </div>
