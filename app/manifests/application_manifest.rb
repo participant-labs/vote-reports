@@ -50,9 +50,10 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     # end
 
     delayed_job_monit = <<-DJ
-      check process delayed_job with pidfile /srv/vote-reports/shared/pids/delayed_job.pid
-      start program = "/srv/vote-reports/current/script/delayed_job start RAILS_ENV=production"
-      stop program = "/srv/vote-reports/current/script/delayed_job stop RAILS_ENV=production"
+      check process delayed_job
+        with pidfile /srv/vote-reports/shared/pids/delayed_job.pid
+        start program = "/usr/bin/env RAILS_ENV=production /srv/vote-reports/current/script/delayed_job start"
+        stop program = "/usr/bin/env RAILS_ENV=production /srv/vote-reports/current/script/delayed_job stop"
     DJ
 
     file '/etc/monit.d/delayed_job',
