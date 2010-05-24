@@ -1,7 +1,7 @@
 <%- float_description ||= false -%>
 
 <% div_for(report, :class => 'clearfix') do %>
-  <%- description = truncate(strip_tags(report.description), :length => (report.user_id ? 110 : 140) - report.name.length) -%>
+  <%- description = truncate(strip_tags(report.description), :length => 180 - report.name.length) -%>
   <%- attrs = float_description ? {:title => strip_tags(report.description)} : {} if  -%>
   <%= link_to h(report.name), report_path_components(report), attrs.merge(:class => 'report_title').merge(hover_image_attrs(report.thumbnail)) %>
   <br />
