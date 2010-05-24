@@ -11,7 +11,7 @@
   content: ', ';
 }
 
-.report_attrs blockquote, .report_description blockquote {
+.report blockquote, .report_description blockquote {
   border-left: 0;
   padding-left: 0;
 }

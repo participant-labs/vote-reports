@@ -1,15 +1,20 @@
 module ImagesHelper
-  def hover_image_tag(image, title, style = image.thumbnail.default_style, options = {})
+  def hover_image_attrs(image)
     attachment = image.thumbnail
-    attrs =
-      if attachment.file? && style != :large
-        {
-          :'data-qtip-image' => attachment.url(:large),
-          :'data-qtip-width' => attachment.styles[:large][:geometry].split('x').first.to_i
-        }
-      end
-    image_tag(attachment.url(style), (attrs || {}).merge(
-      :alt => title, :title => title
-    ).merge(options))
+    if attachment.file?
+      {
+        :'data-qtip-image' => attachment.url(:large),
+        :'data-qtip-width' => attachment.styles[:large][:geometry].split('x').first.to_i
+      }
+    else
+      {}
+    end
+  end
+
+  def image_with_hover_tag(image, title, attrs = {})
+    style = attrs.delete(:style) || image.thumbnail.default_style
+    attrs.reverse_merge(:alt => title, :title => title)
+    attrs.merge(hover_image_attrs(image)) if style != :large
+    image_tag(image.thumbnail.url(style), attrs)
   end
 end

@@ -1,12 +1,9 @@
 <% div_for(interest_group, :class => 'clearfix') do %>
-  <%= link_to hover_image_tag(interest_group.thumbnail, interest_group.name), interest_group_path(interest_group), :class => 'image' %>
-  <div class="report_attrs">
-    <%- description = truncate(strip_tags(interest_group.description), :length => 140 - interest_group.name.length) -%>
-    <%= link_to h(interest_group.name), interest_group_path(interest_group), :class => 'report_title' %>
-    <%- if description.blank? || interest_group.name.size > 60 -%>
-      <br />
-    <%- else -%>
-      <blockquote><p><%= h(description) %></p></blockquote>
-    <%- end -%>
-  </div>
+  <%- description = truncate(strip_tags(interest_group.description), :length => 140 - interest_group.name.length) -%>
+  <%= link_to h(interest_group.name), interest_group_path(interest_group), hover_image_attrs(interest_group.thumbnail).merge(:class => 'report_title') %>
+  <%- if description.blank? || interest_group.name.size > 60 -%>
+    <br />
+  <%- else -%>
+    <blockquote><p><%= h(description) %></p></blockquote>
+  <%- end -%>
 <% end %>
