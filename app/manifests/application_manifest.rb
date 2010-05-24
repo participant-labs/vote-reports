@@ -49,6 +49,17 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     #   file '/etc/motd', :ensure => :file, :content => "Welcome to the TEST server!"
     # end
 
+    file '/etc/monit.d/delayed_job',
+      :mode => '600',
+      :owner => configuration[:user],
+      :group => configuration[:group] || configuration[:user],
+      :require => file('/etc/monit.d')
+      :content => <<-VHOST
+        check process delayed_job with pidfile /var/www/app/shared/pids/delayed_job.pid
+        start program = "/var/www/app/current/script/delayed_job -e production start"
+        stop program = "/var/www/app/current/script/delayed_job -e production stop"
+      VHOST
+
     configure(:iptables => { :rules => [
       '-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT',
       '-A INPUT -p icmp -j ACCEPT',
