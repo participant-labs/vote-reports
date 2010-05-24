@@ -22,6 +22,12 @@ a.undecorated, a.undecorated:hover {
 
 #score_examples li {
   width: 100%;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+#score_examples li + li {
+  border-top: 1px dotted gray;
 }
 
 #score_examples .report {
@@ -129,6 +135,7 @@ input.tagged {
 .report_score {
   font-size: 2.3em;
   position: relative;
+  height: 0;
 }
 
 #scores .report_score {
