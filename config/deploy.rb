@@ -15,11 +15,6 @@ set :copy_cache, true
 set :copy_exclude, [".git"]
 set :use_sudo, false
 
-require 'delayed/recipes'
-after "deploy:start", "delayed_job:start"
-after "deploy:stop", "delayed_job:stop"
-after "deploy:restart", "delayed_job:restart"
-
 namespace :deploy do
   task :gem_install, :roles => :app do
     run "cd #{current_path} && #{sudo} rake RAILS_ENV=production gems:install"
@@ -46,6 +41,31 @@ namespace :deploy do
   after "deploy:symlink", "deploy:update_crontab"
 end
 
+namespace :monit do
+  task :reload do
+    run "monit reload"
+  end
+end
+
+namespace :delayed_job do
+  task :start, :roles => :app do
+    run "monit start delayed_job"
+  end
+  before "delayed_job:start", 'monit:reload'
+  after "deploy:start", "delayed_job:start"
+
+  task :stop, :roles => :app do
+    run "monit stop delayed_job"
+  end
+  before "delayed_job:stop", 'monit:reload'
+  after "deploy:stop", "delayed_job:stop"
+
+  task :restart, :roles => :app do
+    run "monit restart delayed_job"
+  end
+  before "delayed_job:restart", 'monit:reload'
+  after "deploy:restart", "delayed_job:restart"
+end
 
 Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
   $: << File.join(vendored_notifier, 'lib')
