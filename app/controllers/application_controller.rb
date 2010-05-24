@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
 
   def basic_authenticate
     authenticate_or_request_with_http_basic do |username, password|
-      UserSession.create!(:username => username, :password => password).user.adminship.present?
+      User.find_by_username(username).try(:valid_password?, password)
     end
   end
 end
