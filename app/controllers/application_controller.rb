@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
 
   def basic_authenticate
     authenticate_or_request_with_http_basic do |username, password|
-      User.find_by_username(username).try(:valid_password?, password)
+      User.find_by_username(username).try(:valid_password?, password) || false
     end
   end
 end
