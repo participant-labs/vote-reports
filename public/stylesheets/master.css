@@ -28,6 +28,8 @@ a.undecorated, a.undecorated:hover {
   width: 60%;
   float: left;
   padding-right: 5%;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 #score_examples .politician_score {
@@ -232,6 +234,11 @@ dl.chart_tooltip {
 .image.large {
   max-width: 120px;
   max-height: 120px;
+}
+
+.report {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .report_attrs {
