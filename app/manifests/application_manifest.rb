@@ -59,8 +59,8 @@ class ApplicationManifest < Moonshine::Manifest::Rails
       :mode => '600',
       :owner => configuration[:user],
       :group => configuration[:group] || configuration[:user],
-      :require => file('/etc/monit.d')
-      :content => 
+      :require => file('/etc/monit.d'),
+      :content => delayed_job_monit
 
     configure(:iptables => { :rules => [
       '-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT',
