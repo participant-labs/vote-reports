@@ -117,6 +117,13 @@ class ApplicationManifest < Moonshine::Manifest::Rails
       :notify => service("apache2"),
       :require => file('/srv/integrity')
 
+    cron 'cleanup integrity builds nightly',
+      :command => "cd /srv/integrity && /usr/bin/rake cleanup",
+      :user => configuration[:user],
+      :minute => 0,
+      :hour => 0,
+      :require => file('/srv/integrity')
+
     a2ensite "integrity"
   end
   if deploy_stage == 'staging'
