@@ -64,36 +64,35 @@ class ApplicationManifest < Moonshine::Manifest::Rails
       :content => delayed_job_monit
   end
 
-  configure(:iptables => { :rules => [
-    '-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT',
-    '-A INPUT -p icmp -j ACCEPT',
-    '-A INPUT -p tcp -m tcp --dport 25 -j ACCEPT',
-    '-A INPUT -p tcp -m tcp --dport 7111 -j ACCEPT',
-    '-A INPUT -p tcp -m tcp --dport 80 -j ACCEPT',
-    '-A INPUT -p tcp -m tcp --dport 443 -j ACCEPT',
-    '-A INPUT -s 127.0.0.1 -j ACCEPT',
-    '-A INPUT -p tcp -m tcp --dport 8000:10000 -j ACCEPT',
-    '-A INPUT -p udp -m udp --dport 8000:10000 -j ACCEPT'
-  ]})
-
-  configure(:denyhosts => {
-    :admin_email => 'ben@votereports.org, root@localhost'
-  })
-
-  configure(:mongodb => {:version => '1.4.2'})
-
-  configure(:monit => {:gui => true})
-
   # The following line includes the 'application_packages' recipe defined above
   recipe :application_packages
 
   if deploy_stage == 'production'
-    recipe :denyhosts
+    configure(:iptables => { :rules => [
+      '-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT',
+      '-A INPUT -p icmp -j ACCEPT',
+      '-A INPUT -p tcp -m tcp --dport 25 -j ACCEPT',
+      '-A INPUT -p tcp -m tcp --dport 7111 -j ACCEPT',
+      '-A INPUT -p tcp -m tcp --dport 80 -j ACCEPT',
+      '-A INPUT -p tcp -m tcp --dport 443 -j ACCEPT',
+      '-A INPUT -s 127.0.0.1 -j ACCEPT',
+      '-A INPUT -p tcp -m tcp --dport 8000:10000 -j ACCEPT',
+      '-A INPUT -p udp -m udp --dport 8000:10000 -j ACCEPT'
+    ]})
     recipe :iptables
+
+    configure(:denyhosts => {
+      :admin_email => 'ben@votereports.org, root@localhost'
+    })
+    recipe :denyhosts
+
     recipe :scout
     recipe :ssh
   end
+  configure(:monit => {:gui => true})
   recipe :monit
+
+  configure(:mongodb => {:version => '1.4.2'})
   recipe :mongodb
 
   def integrity_vhost
