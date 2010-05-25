@@ -44,7 +44,7 @@ a.undecorated, a.undecorated:hover {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 form {
