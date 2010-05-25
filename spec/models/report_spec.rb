@@ -70,7 +70,7 @@ describe Report do
     end
 
     it "should return reports with voted bill_criteria" do
-      create_roll(:subject => @bill, :roll_type => Roll::PASSAGE_TYPES.rand)
+      create_roll(:subject => @bill, :roll_type => Roll::PASSAGE_TYPES.random_element)
 
       Report.scored.should == [@report]
     end
