@@ -3,7 +3,7 @@
   :name: ancestry
 - :version: ">= 2.1.3"
   :name: authlogic
-- :version: ">= 1.1.3"
+- :version: ">= 1.1.7"
   :name: Empact-authlogic_rpx
 - :version: ">= 2.0.5"
   :name: bluecloth
@@ -29,7 +29,7 @@
   :name: bson
 - :version: = 1.0.0
   :name: mongo
-- :version: ">= 0.7.5"
+- :version: ">= 0.7.6"
   :name: mongo_mapper
 - :version: ">= 2.11.2"
   :name: newrelic_rpm
@@ -51,5 +51,6 @@
 - :name: will_paginate
 - :name: ym4r
 - :name: httparty
+- :name: auto_tagger
 - :version: 2.3.5
   :name: rails
