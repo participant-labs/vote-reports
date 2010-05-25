@@ -21,6 +21,10 @@ class Image < ActiveRecord::Base
     [crop_x, crop_y, crop_w, crop_h].all?(&:present?)
   end
 
+  def exists?
+    thumbnail.file?
+  end
+
   # helper method used by the cropper view to get the real image geometry
   def thumbnail_geometry(style = :original)
     @geometry ||= {}
