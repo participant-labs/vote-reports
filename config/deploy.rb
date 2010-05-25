@@ -16,11 +16,6 @@ set :copy_exclude, [".git"]
 set :use_sudo, false
 
 namespace :deploy do
-  task :gem_install, :roles => :app do
-    run "cd #{release_path} && #{sudo} rake RAILS_ENV=production gems:install"
-  end
-  before "moonshine:apply", "deploy:gem_install"
-
   desc 'Bundle and minify the JS and CSS files'
   task :precache_assets, :roles => :app do
     root_path = File.expand_path(File.dirname(__FILE__) + '/..')
