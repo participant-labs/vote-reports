@@ -17,7 +17,7 @@ set :use_sudo, false
 
 namespace :deploy do
   task :gem_install, :roles => :app do
-    run "cd #{current_path} && #{sudo} rake RAILS_ENV=production gems:install"
+    run "cd #{release_path} && #{sudo} rake RAILS_ENV=production gems:install"
   end
   before "moonshine:apply", "deploy:gem_install"
 
