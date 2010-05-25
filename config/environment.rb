@@ -17,7 +17,7 @@ Rails::Initializer.run do |config|
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
   config.gem 'ancestry', :version => '>=1.2.0'
-  config.gem "authlogic", :version => '>=2.1.3'
+  config.gem "Empact-authlogic", :lib => 'authlogic', :version => '>=2.1.4'
   config.gem 'Empact-authlogic_rpx', :lib => 'authlogic_rpx', :version => '>= 1.1.7'
   config.gem 'bluecloth', :version => '>=2.0.5'
   config.gem "declarative_authorization"
