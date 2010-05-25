@@ -89,7 +89,6 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     recipe :scout
     recipe :ssh
   end
-  configure(:monit => {:gui => true})
   recipe :monit
 
   configure(:mongodb => {:version => '1.4.2'})
