@@ -26,7 +26,7 @@ a.undecorated, a.undecorated:hover {
   padding-bottom: 0.5em;
 }
 
-#score_examples li + li {
+.report_scores > li + li, .reports > li + li {
   border-top: 1px dotted gray;
 }
 
