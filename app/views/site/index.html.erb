@@ -3,17 +3,16 @@
   <h3>Voters: Know what your representatives <em>really</em> stand for</h3>
   <p>We want you to be empowered to make good choices when you vote, so we make it easy to know how your representatives vote on the issues important to you.  Just tell us your zip code, tell us what you care about, and we'll tell you how they're doing.</p>
 
-  <h4>Check Out <%= @reps.first %> Reps</h4>
   <div class="clearfix">
-    <p class="left">On the left are various interest groups.  On the right is a score from each group, and the <%= @reps.last %> representative who received it.</p>
+    <h4 class="left">Check Out <%= @reps.first %> Reps</h4>
     <div class="right">
       <div class="guide_entry">
         <% form_tag root_path, :method => :get, :class => 'tag_cloud', :'data-replace' => 'score_examples' do %>
           <dl>
-            <dt><%= label_tag :representing, 'Next, Enter your zip code to see just your Reps' %></dt>
+            <dt><%= label_tag :representing, 'Show Reps for Your Location' %>:</dt>
             <dd><%= text_field_tag :representing, requested_location, :size => 10 %></dd>
           </dl>
-          <p><%= submit_tag 'Show Reps' %></p>
+          <p class="hidden"><%= submit_tag 'Show Reps for Your Location' %></p>
         <% end %>
       </div>
     </div>

@@ -16,10 +16,10 @@ Feature: Browsing the Home Page
 
   Scenario: User sets their zip code from the instant grat section
     When I go to the home page
-    And I fill in "Next, Enter your zip code to see just your Reps" with "75028"
-    And I press "Show Reps"
+    And I fill in "Show Reps for Your Location" with "75028"
+    And I press "Show Reps for Your Location"
     Then I should see "Zip: 75028"
 
-    When I fill in "Next, Enter your zip code to see just your Reps" with "90210"
-    And I press "Show Reps"
+    When I fill in "Show Reps for Your Location" with "90210"
+    And I press "Show Reps for Your Location"
     Then I should see "Zip: 90210"

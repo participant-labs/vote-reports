@@ -31,16 +31,16 @@ a.undecorated, a.undecorated:hover {
 }
 
 #score_examples .report {
-  width: 60%;
-  float: left;
-  padding-right: 5%;
+  width: 73%;
+  float: right;
+  padding-left: 2%;
   margin-top: 0;
   margin-bottom: 0;
 }
 
 #score_examples .politician_score {
-  width: 35%;
-  float: right;
+  width: 25%;
+  float: left;
 }
 
 .hidden {
