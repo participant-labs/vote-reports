@@ -1,4 +1,16 @@
 module Reports::ScoresHelper
+  def report_score_path(score)
+    report = score.report
+    if user = report.user
+      user_report_score_path(user, report, score)
+    elsif ig = report.interest_group
+      interest_group_score_path(ig, score)
+    else
+      notify_hoptoad("Unknown score controller for #{score.inspect}")
+      ''
+    end
+  end
+
   def score_title(score)
     by = " by #{score.report.owner}" unless score.report.interest_group_id
     "#{score} for #{score.politician.full_name} on '#{score.report.name}' #{by}"

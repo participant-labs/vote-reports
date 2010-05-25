@@ -7,12 +7,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :politicians, :only => [:index, :show]
   map.resources :subjects, :only => [:index, :show]
   map.resources :interest_groups, :only => [:index, :show] do |interest_group|
+    interest_group.resources :scores, :controller => 'interest_groups/scores', :only => :show
     interest_group.resource :image, :controller => 'interest_groups/images', :only => [:edit, :create, :update]
   end
 
-  map.resources :reports, :only => [:index, :new] do |report|
-    report.resources :scores, :controller => 'reports/scores', :only => :show
-  end
+  map.resources :reports, :only => [:index, :new]
   map.resource :location
   map.resource :guide
 
@@ -24,6 +23,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :reports, :as => '', :name_prefix => 'user_', :path_prefix => "reports/:user_id", :controller => 'users/reports' do |report|
+    report.resources :scores, :controller => 'users/reports/scores', :only => :show
     report.resource :image, :as => 'thumbnail', :only => [:edit, :update, :create], :controller => 'users/reports/thumbnails'
     report.resources :bill_criteria, :only => [:index, :new, :destroy], :controller => 'users/reports/bill_criteria'
   end
