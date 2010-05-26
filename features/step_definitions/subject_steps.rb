@@ -17,7 +17,6 @@ Given /^(\d+) bills? with (subject "[^\"]*")$/ do |bill_count, subject|
   bill_count.to_i.times do
     create_bill(:subjects => [subject])
   end
-  ReportSubject.generate!
 end
 
 Given /^(\d+) report bills? with (subject "[^\"]*")$/ do |report_bill_count, subject|
@@ -26,7 +25,6 @@ Given /^(\d+) report bills? with (subject "[^\"]*")$/ do |report_bill_count, sub
     bill = create_bill(:subjects => [subject])
     create_bill_criterion(:bill => bill, :report => report)
   end
-  ReportSubject.generate!
 end
 
 Given /^(\d+) subjects? with (\d+) report bills? each$/ do |subject_count, report_bill_count|
@@ -38,5 +36,4 @@ Given /^(\d+) subjects? with (\d+) report bills? each$/ do |subject_count, repor
       create_bill_criterion(:bill => bill, :report => report)
     end
   end
-  ReportSubject.generate!
 end
