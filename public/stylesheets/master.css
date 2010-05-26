@@ -136,8 +136,11 @@ input.tagged {
   position: relative;
 }
 
-.politician_score > .report_score {
+.report_score {
   font-size: 2.3em;
+}
+
+.politician_score > .report_score {
   height: 0;
 }
 
