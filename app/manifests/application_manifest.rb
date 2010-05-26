@@ -68,7 +68,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   recipe :application_packages
 
   if deploy_stage == 'production'
-    configure(:astrails => {
+    configure(:astrails_safe => {
       :keep => {
         :s3 => 100
       },
@@ -94,7 +94,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
         }
       ]
     })
-    recipe :astrails
+    recipe :astrails_safe
 
     configure(:iptables => { :rules => [
       '-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT',
