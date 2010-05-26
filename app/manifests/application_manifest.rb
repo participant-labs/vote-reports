@@ -68,6 +68,34 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   recipe :application_packages
 
   if deploy_stage == 'production'
+    configure(:astrails => {
+      :keep => {
+        :s3 => 100
+      }
+      :gpg => {
+        :key => 'ben@votereports.org'
+      },
+      :s3 => {
+        :key => '0YN0K8DPG0D52XG7WW82',
+        :secret => 'azbToHx43247//SuoK//XMX7cMf1HGzYkgWphSPO',
+        :bucket => 'vote-reports-production-backups',
+      },
+      :archives => [{
+          :name => 'vote-reports',
+          :files =>  '/srv/vote-reports',
+          :exclude => [
+            '/srv/vote-reports/shared/log',
+            '/srv/vote-reports/shared/public/system',
+            '/srv/vote-reports/shared/solr',
+            '/srv/vote-reports/shared/cached-copy',
+            '/srv/vote-reports/shared/data',
+            '/srv/vote-reports/shared/pids'
+          ]
+        }
+      ]
+    })
+    recipe :astrails
+
     configure(:iptables => { :rules => [
       '-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT',
       '-A INPUT -p icmp -j ACCEPT',
