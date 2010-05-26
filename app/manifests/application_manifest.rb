@@ -71,7 +71,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     configure(:astrails => {
       :keep => {
         :s3 => 100
-      }
+      },
       :gpg => {
         :key => 'ben@votereports.org'
       },
