@@ -5,27 +5,7 @@
 
   <p>Our politician report cards are created by people like you to condense all the complexity of politics to simple letter grades.  And if you can't find your cause represented below, you can always <%= link_to 'create your own', new_report_path %>.</p>
 
-  <%- replace = 'content' -%>
-  <div id="search" class="<%= 'hidden' if params[:subjects].present? %>">
-    <% form_tag reports_path, :method => :get, :'data-replace' => replace do %>
-      <h3><%= label_tag :q, 'Search' %></h3>
-      <%= text_field_tag :q, @q %>
-      <%= submit_tag 'Search' %>
-      <p>or <a href="#" data-toggle="search, browse_by_subject">browse by subject</a></p>
-    <% end %>
-  </div>
-
-  <div id="browse_by_subject" class="<%= 'hidden' unless params[:subjects].present? %>">
-    <% form_tag interest_groups_path, :method => :get, :'data-replace' => replace do %>
-      <h3>Browse by Subject</h3>
-      <div id="report_subjects_cloud">
-        <%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
-          [reports_path(params.slice(:user_reports_only).merge(:subjects => subjects)), {:'data-replace' => replace}]
-        } %>
-      </div>
-      <p>or <a href="#" data-toggle="search, browse_by_subject">search</a></p>
-    <% end %>
-  </div>
+  <%= render 'reports/navigate', :replace => 'content', :path => reports_path %>
 </div>
 
 <div class="section">
