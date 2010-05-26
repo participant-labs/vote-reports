@@ -3,7 +3,6 @@ Given /^(report "[^\"]*") has the following bill criteri(?:a|on):$/ do |report, 
   table.hashes.each do |attrs|
     create_bill_criterion(attrs.symbolize_keys.merge(:report => report))
   end
-  ReportSubject.generate!
 end
 
 When /I remove a bill criterion from (report ".+")/ do |report|
