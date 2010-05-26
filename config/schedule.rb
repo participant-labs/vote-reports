@@ -16,7 +16,6 @@ set :output, "/srv/vote-reports/shared/log/cron_log.log"
 every 7.days do
   rake "images:backup"
 
-  rake "db:backup:full"
   rake "gov_track:download_all"
   rake "gov_track:politicians:unpack"  # 18.0m
   rake "gov_track:committees:unpack"   #  2.5m
