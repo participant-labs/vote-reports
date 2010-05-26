@@ -25,6 +25,16 @@ class Users::Reports::BillCriteriaController < ApplicationController
     end
   end
 
+  def create
+    @report = current_user.reports.find(params[:report_id], :scope => current_user)
+    if @report.update_attributes(params[:report].slice(:bill_criteria_attributes))
+      flash[:notice] = "Successfully updated report bills."
+      redirect_to :action => 'new'
+    else
+      render :action => 'new'
+    end
+  end
+
   def index
   end
 
