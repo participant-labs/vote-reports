@@ -58,6 +58,13 @@ Fixjour :verify => false do
     )
   end
 
+  define_builder(Cause) do |klass, overrides|
+    klass.new(
+      :name => Forgery(:basic).text,
+      :description => Forgery(:basic).text
+    )
+  end
+
   define_builder(Committee) do |klass, overrides|
     klass.new(
       :display_name => Forgery(:basic).text,

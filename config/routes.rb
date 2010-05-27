@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
+  map.resources :causes
   map.resources :reports, :only => [:index, :new]
   map.resources :reports, :as => '', :name_prefix => 'user_', :path_prefix => "reports/:user_id", :controller => 'users/reports' do |report|
     report.resources :scores, :controller => 'users/reports/scores', :only => :show
