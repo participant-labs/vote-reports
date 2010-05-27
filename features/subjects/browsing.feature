@@ -12,7 +12,8 @@ Feature: Subject viewing
     And report "Active Report" has the following bill criteria:
       | bill                                    | support |
       | Bovine Security Act of 2009             | true    |
-    When I go to the subject page for "Cows"
+    When I wait for delayed job to finish
+    And I go to the subject page for "Cows"
     And I follow "Active Report"
     Then I should be on the report page for "Active Report"
 
