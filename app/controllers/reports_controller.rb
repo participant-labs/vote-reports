@@ -28,6 +28,6 @@ class ReportsController < ApplicationController
   private
 
   def topical_reports
-    Report.with_subjects(params[:subjects])
+    Report.published.with_subjects(params[:subjects])
   end
 end
