@@ -28,10 +28,6 @@ class ReportsController < ApplicationController
   private
 
   def topical_reports
-    if params[:subjects].present?
-      Report.with_subjects(params[:subjects])
-    else
-      Report
-    end
+    Report.with_subjects(params[:subjects])
   end
 end

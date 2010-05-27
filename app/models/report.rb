@@ -211,7 +211,9 @@ class Report < ActiveRecord::Base
 
   named_scope :with_subjects, lambda {|subjects|
     subjects = Array(subjects)
-    if subjects.first.is_a?(String)
+    if subjects.empty?
+      {}
+    elsif subjects.first.is_a?(String)
       {
         :select => 'DISTINCT reports.*',
         :joins => :subjects,
