@@ -3,11 +3,11 @@
 <div class="section">
   <h2>Find subjects you care about</h2>
 
-  <%= render 'subjects/search', :replace => 'subjects', :q => @q %>
+  <%= render 'subjects/search', :replace => 'subjects', :q => params[:q] %>
 </div>
 
 <div class="section">
-  <%- if @q -%>
+  <%- if params[:q] -%>
     <%= render 'subjects/list', :subjects => @subjects, :title => @title %>
   <%- else -%>
     <div id="subjects">

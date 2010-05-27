@@ -1,11 +1,11 @@
-<% title @q.present? ? %Q{Bill Search Results for "#{h @q}"} : 'Bills' %>
+<% title params[:q].present? ? %Q{Bill Search Results for "#{h params[:q]}"} : 'Bills' %>
 
 <div class="section">
   <h2>Bill Search</h2>
 
   <% form_tag bills_path, :method => :get do %>
     <%= label_tag :q, 'Search' %>
-    <%= text_field_tag :q, @q %>
+    <%= text_field_tag :q, params[:q] %>
     <%= submit_tag 'Search' %>
   <% end %>
 
