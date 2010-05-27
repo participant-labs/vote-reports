@@ -1,0 +1,7 @@
+<%- title "Cause - #{h(@cause.name)} - Edit" -%>
+<h1>Edit Cause: <%= @cause.name %></h1>
+
+<% form_for @cause do |f| %>
+  <%= render 'causes/fields', :f => f %>
+  <p><%= f.submit 'Update Cause' %></p>
+<% end %>
