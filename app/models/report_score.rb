@@ -14,24 +14,28 @@ class ReportScore < ActiveRecord::Base
   named_scope :published, :joins => :report, :conditions => [
     "reports.state = ? OR reports.interest_group_id IS NOT NULL", 'published']
 
-  named_scope :for_reports_with_subject, lambda {|subject|
-    if subject.is_a?(String)
+  named_scope :for_reports_with_subjects, lambda {|subjects|
+    subjects = Array(subjects)
+    if subjects.empty?
+      {}
+    elsif subjects.first.is_a?(String)
       {
         :select => 'DISTINCT report_scores.*',
-        :joins => {:report => {:bills => :subjects}},
-        :conditions => ["subjects.name = ? OR subjects.cached_slug = ?", subject, subject]
+        :joins => {:report => :subjects},
+        :conditions => ["subjects.name IN(?) OR subjects.cached_slug IN(?)", subjects, subjects]
       }
     else
       {
         :select => 'DISTINCT report_scores.*',
-        :joins => {:report => {:bills => :bill_subjects}},
-        :conditions => ['bill_subjects.subject_id IN(?)', subjects]
+        :joins => {:report => :subjects},
+        :conditions => ['subjects.id IN(?)', subjects]
       }
     end
   }
 
   named_scope :for_politicians, lambda {|politicians|
-    if politicians == Politician
+    politicians = Array(politicians)
+    if politicians.empty?
       {}
     else
       {:conditions => {:politician_id => politicians}}
@@ -39,7 +43,8 @@ class ReportScore < ActiveRecord::Base
   }
 
   named_scope :for_reports, lambda {|reports|
-    if reports == Report
+    reports = Array(reports)
+    if reports.empty?
       {}
     else
       {:conditions => {:report_id => reports}}
