@@ -32,5 +32,13 @@ class CausesController < ApplicationController
   end
 
   def update
+    @cause = Cause.find(params[:id])
+    if @cause.update_attributes(params[:cause])
+      flash[:notice] = "Successfully updated Cause"
+      redirect_to @cause
+    else
+      flash[:error] = "Unable to update Cause"
+      render :action => :edit
+    end
   end
 end
