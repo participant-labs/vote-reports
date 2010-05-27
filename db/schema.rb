@@ -122,6 +122,22 @@ ActiveRecord::Schema.define(:version => 20100529203818) do
   add_index "bills", ["opencongress_id"], :name => "index_bills_on_opencongress_id", :unique => true
   add_index "bills", ["sponsor_id"], :name => "index_bills_on_sponsor_id"
 
+  create_table "cause_reports", :force => true do |t|
+    t.integer  "report_id",  :null => false
+    t.integer  "cause_id",   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "causes", :force => true do |t|
+    t.string   "name",        :null => false
+    t.text     "description", :null => false
+    t.string   "ancestry"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "cached_slug"
+  end
+
   create_table "committee_meetings", :force => true do |t|
     t.string   "name"
     t.integer  "congress_id",  :null => false
@@ -444,6 +460,7 @@ ActiveRecord::Schema.define(:version => 20100529203818) do
     t.integer  "interest_group_id"
     t.integer  "image_id"
     t.string   "source"
+    t.integer  "cause_id"
   end
 
   add_index "reports", ["cached_slug"], :name => "index_reports_on_cached_slug"
