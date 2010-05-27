@@ -166,11 +166,7 @@ class Report < ActiveRecord::Base
     def paginated_search(params)
       search do
         fulltext params[:q]
-        if params[:user_reports_only]
-          with(:user_published, true)
-        else
-          with(:published, true)
-        end
+        with(:published, true)
         paginate :page => params[:page], :per_page => Report.per_page
       end
     end
@@ -201,14 +197,6 @@ class Report < ActiveRecord::Base
       "reports.state = ? OR reports.interest_group_id IS NOT NULL", 'published'],
     :include => [:user, :interest_group]
   class << self
-    def published_by(params)
-      if params[:user_reports_only]
-        user_published
-      else
-        published
-      end
-    end
-
     def qualified_column_names
       column_names.collect {|c| "reports.#{c}"}.join(",")
     end

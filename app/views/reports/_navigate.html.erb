@@ -12,7 +12,7 @@
     <h3>Browse by Subject</h3>
     <div id="report_subjects_cloud">
       <%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
-        [reports_path(params.slice(:user_reports_only).merge(:subjects => subjects)), {:'data-replace' => replace}]
+        [reports_path(params.merge(:subjects => subjects)), {:'data-replace' => replace}]
       } %>
     </div>
     <p>or <a href="#" data-toggle="search, browse_by_subject">search</a></p>

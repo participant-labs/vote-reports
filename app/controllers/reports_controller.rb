@@ -29,9 +29,9 @@ class ReportsController < ApplicationController
 
   def topical_reports
     if params[:subjects].present?
-      Report.published_by(params).with_subjects(params[:subjects])
+      Report.with_subjects(params[:subjects])
     else
-      Report.published_by(params)
+      Report
     end
   end
 end
