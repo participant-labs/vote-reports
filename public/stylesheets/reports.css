@@ -28,6 +28,10 @@ a.report_title:hover, .report_creator a:hover, .politician_name a:hover {
   border-bottom: 1px solid;
 }
 
+h1 {
+  font: 35px/1.8em Georgia,Palatino,'Palatino Linotype',Times,'Times New Roman',serif;
+}
+
 .report_description h1 {
   font-size: 1.5em;
 }
