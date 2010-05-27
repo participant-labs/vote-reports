@@ -6,7 +6,7 @@
       chart: {
         renderTo: '<%= dom_id(@score, :evidence) %>',
         defaultSeriesType: 'line',
-        margin: [80, 10, 40, 60],
+        margin: [90, 10, 40, 60],
         width: 420
       },
       credits: {
@@ -14,10 +14,10 @@
         href: 'http://votesmart.org/issue_rating_category_about.php'
       },
       title: {
-        text: '<%= escape_javascript(score_title(@score)) %>',
+        text: '<%= escape_javascript(score_title(@score)) %> based on <%= pluralize @score.evidence.count, 'rating' %>',
       },
       subtitle: {
-        text: 'based on <%= escape_javascript(score_evidence_components(@score).join(', ')) %>',
+        text: 'Click a point on the chart to view the data source for that point',
       },
       xAxis: {
         categories: <%= raw pare_down_score_dates(data.map {|p| p[:x] }).to_json %>
