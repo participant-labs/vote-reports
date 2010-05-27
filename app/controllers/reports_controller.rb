@@ -7,7 +7,7 @@ class ReportsController < ApplicationController
 
   def index
     params[:subjects] ||= []
-    if (@q = params[:q]).present?
+    if params[:q].present?
       @title = 'Matching Reports'
       @reports = Report.paginated_search(params).results
     else

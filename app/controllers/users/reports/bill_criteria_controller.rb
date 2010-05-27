@@ -9,7 +9,6 @@ class Users::Reports::BillCriteriaController < ApplicationController
       redirect_to new_user_report_bill_criterion_path(current_user, @report), :status => 301
       return
     end
-    @q = params[:q]
     @bills = Bill.paginated_search(params).results
 
     @current = params[:current]

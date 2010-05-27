@@ -2,7 +2,7 @@
 
 <% form_tag new_user_report_bill_criterion_path(report.user, report), :method => :get, :'data-replace' => 'report_bills_results_table' do %>
   <%= label_tag :q, label %>
-  <%= text_field_tag :q, @q %>
+  <%= text_field_tag :q, params[:q] %>
   <%= check_box_tag :voted, @voted %>
   <%= label_tag :voted, 'Voted Bills Only' %>
   <%= check_box_tag :current, @current %>

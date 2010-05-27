@@ -2,12 +2,12 @@ class InterestGroupsController < ApplicationController
   def index
     params[:subjects] ||= []
     @interest_groups =
-      if (@q = params[:q]).present?
+      if params[:q].present?
         InterestGroup.paginated_search(params).results
       else
         InterestGroup.for_subjects(params[:subjects]).paginate(:order => 'name', :page => params[:page])
       end
-    @subjects = Subject.tag_cloud_for_interest_groups_matching(@q).all(:limit => 25)
+    @subjects = Subject.tag_cloud_for_interest_groups_matching(params[:q]).all(:limit => 25)
 
     respond_to do |format|
       format.html
