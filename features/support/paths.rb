@@ -10,6 +10,10 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+
+    when /the cause page for "(.*)"/
+      cause_path(Cause.find_by_name($1))
+
     when /user "(.*)"'s page for report "(.*)"/
       user = User.find_by_username($1)
       user_report_path(user, user.reports.find_by_name($2))

@@ -1,0 +1,6 @@
+<% div_for cause do %>
+  <%= link_to cause.name, cause %>
+  <div class="description">
+    <%= truncate(strip_tags(cause.description)) %>
+  </div>
+<% end %>
