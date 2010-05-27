@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100516060834) do
+ActiveRecord::Schema.define(:version => 20100527025656) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -121,6 +121,21 @@ ActiveRecord::Schema.define(:version => 20100516060834) do
   add_index "bills", ["gov_track_id"], :name => "index_bills_on_gov_track_id", :unique => true
   add_index "bills", ["opencongress_id"], :name => "index_bills_on_opencongress_id", :unique => true
   add_index "bills", ["sponsor_id"], :name => "index_bills_on_sponsor_id"
+
+  create_table "cause_reports", :force => true do |t|
+    t.integer  "report_id",  :null => false
+    t.integer  "cause_id",   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "causes", :force => true do |t|
+    t.string   "name",        :null => false
+    t.text     "description", :null => false
+    t.string   "ancestry"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "committee_meetings", :force => true do |t|
     t.string   "name"
