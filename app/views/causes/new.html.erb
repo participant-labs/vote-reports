@@ -1,0 +1,13 @@
+<%- title 'New Cause' -%>
+<h1>New Cause</h1>
+
+<% form_for @cause do |f| %>
+  <dl>
+    <dt><%= f.label :name %></dt>
+    <dd><%= f.text_field :name %></dd>
+
+    <dt><%= f.label :description %></dt>
+    <dd><%= f.text_area :description %></dd>
+  </dl>
+  <p><%= f.submit 'Create Cause' %></p>
+<% end %>

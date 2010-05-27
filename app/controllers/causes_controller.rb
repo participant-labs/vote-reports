@@ -16,6 +16,13 @@ class CausesController < ApplicationController
   end
 
   def create
+    if @cause.save
+      flash[:notice] = "Successfully created Cause"
+      redirect_to @cause
+    else
+      flash[:error] = "Unable to create Cause"
+      render :action => :new
+    end
   end
 
   def show
