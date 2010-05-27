@@ -1,6 +1,7 @@
 authorization do
   role :admin do
     includes :moderator
+    has_permission_on :causes, :to => [:new, :create, :edit, :update, :destroy]
     has_permission_on [:users, :users_reports, :reports], :to => [:index, :show, :edit, :update, :destroy]
     has_permission_on [:users_adminships, :users_moderatorships], :to => [:create, :destroy]
   end

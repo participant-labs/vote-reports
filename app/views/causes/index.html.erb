@@ -2,3 +2,7 @@
 <h1>Browse Causes</h1>
 
 <%= render 'causes/list', :causes => @causes %>
+
+<%- permitted_to? :create, :causes do -%>
+  <%= link_to "Create a new Cause", new_cause_path %>
+<%- end -%>
