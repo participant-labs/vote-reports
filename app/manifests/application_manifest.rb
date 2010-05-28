@@ -69,6 +69,9 @@ class ApplicationManifest < Moonshine::Manifest::Rails
 
   if deploy_stage == 'production'
     configure(:astrails_safe => {
+      :local => {
+        :path => '/srv/vote-reports/shared/data/backup/safe'
+      },
       :keep => {
         :s3 => 100
       },
