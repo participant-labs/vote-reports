@@ -40,6 +40,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.new_donation '/donate', :controller => :donations, :action => :new
   map.donation_thanks '/thanks', :controller => :donations, :action => :show
+  map.resource :donations
 
   map.about "about", :controller => "site", :action => "show"
   map.root :controller => "site", :action => 'index'
