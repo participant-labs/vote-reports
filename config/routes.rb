@@ -27,7 +27,6 @@ ActionController::Routing::Routes.draw do |map|
     district.resource :map, :controller => 'us/districts/maps', :only => 'show'
   end
 
-  map.resource :donate, :controller => :donations, :only => :show
   map.resources :users do |user|
     user.resources :rpx_identities, :only => [:create, :destroy], :controller => 'users/rpx_identities'
     user.resource :adminship, :only => [:create, :destroy], :controller => 'users/adminships'
@@ -38,6 +37,9 @@ ActionController::Routing::Routes.draw do |map|
   map.signup "/signup", :controller => "users", :action => "new"
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"
+
+  map.new_donation '/donate', :controller => :donations, :action => :new
+  map.donation_thanks '/thanks', :controller => :donations, :action => :show
 
   map.about "about", :controller => "site", :action => "show"
   map.root :controller => "site", :action => 'index'

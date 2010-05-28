@@ -1,5 +1,7 @@
 class DonationsController < ApplicationController
+  def new
+  end
+
   def show
-    render :action => :new
   end
 end
