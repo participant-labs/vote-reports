@@ -4,4 +4,9 @@ class DonationsController < ApplicationController
 
   def show
   end
+
+  def create
+    Amazon::InstantPaymentNotification.create(params)
+    head :ok
+  end
 end
