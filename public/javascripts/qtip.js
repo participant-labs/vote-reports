@@ -97,7 +97,8 @@
             width: 450
           },
           show: {
-            effect: { length: 200 }
+            effect: { length: 200 },
+            delay: self.attr('data-qtip-delay') || 140
           },
           hide: {
             fixed: true,

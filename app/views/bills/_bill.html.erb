@@ -3,7 +3,8 @@
   hide_year ||= false
   attrs = (!no_titles && bill.titles.present?) ? {
     :'data-qtip-path' => bill_titles_path(bill),
-    :'data-qtip-title' => %{Bill Titles for "#{bill.titles.first}"}
+    :'data-qtip-title' => %{Bill Titles for "#{bill.titles.first}"},
+    :'data-qtip-delay' => 2000
   } : {}
 -%>
 
