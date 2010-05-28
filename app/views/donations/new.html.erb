@@ -5,5 +5,33 @@
   <p>We're passionate about empowering you with the information you need to help your community.  We want you to be a proud participant in your community.</p>
 
   <p>But we need help too. While we're hard at work helping you, we're not taking cushy corporate jobs or the like.  Your donation helps us pay the bills, and better yet, recruit more people to build great tools for you to use.</p>
+
+<div class="notice clearfix">
+  <div style="float:left;width:20em;">
+    <form action="https://authorize.payments.amazon.com/pba/paypipeline" method="post">
+      <input type="hidden" name="immediateReturn" value="1" >
+      <input type="hidden" name="collectShippingAddress" value="0" >
+      <input type="hidden" name="signatureVersion" value="2" >
+      <input type="hidden" name="signatureMethod" value="HmacSHA256" >
+      <input type="hidden" name="accessKey" value="11SEM03K88SD016FS1G2" >
+      <input type="hidden" name="signature" value="CUSeeG1zfINtI5bGSSbyUv/kfRbZfY9QWaHQRtq2Gdw=" >
+      <input type="hidden" name="isDonationWidget" value="1" >
+      <input type="hidden" name="description" value="Support VoteReports" >
+      <input type="hidden" name="amazonPaymentsAccountId" value="YDGNBZMKXHSI3RINHEABU8UUMNXZ993KBTN85U" >
+      <input type="hidden" name="ipnUrl" value="http://votereports.org/donations" >
+      <input type="hidden" name="returnUrl" value="http://votereports.org/thanks" >
+      <input type="hidden" name="processImmediate" value="1" >
+      <input type="hidden" name="cobrandingStyle" value="logo" >
+      <input type="hidden" name="abandonUrl" value="http://votereports.org/" >
+      <table class="table" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td style="vertical-align:top;">$&nbsp;<input type="text" name="amount" size="8" value=""></td>
+          <td><input type="image" src="http://g-ecx.images-amazon.com/images/G/01/asp/beige_medium_donate_withlogo_lightbg.gif" border="0"></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <p>Donations to VoteReports are not currently tax-deductible.<br />  Please <%= mail_to 'donations@votereports.org', "let us know" %> if this is discouraging you from contributing, or if you have any questions about supporting our project.</p>
+</div>
 </div>
  
