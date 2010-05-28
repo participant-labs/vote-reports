@@ -27,6 +27,7 @@ ActionController::Routing::Routes.draw do |map|
     district.resource :map, :controller => 'us/districts/maps', :only => 'show'
   end
 
+  map.resource :donate, :controller => :donations, :only => :show
   map.resources :users do |user|
     user.resources :rpx_identities, :only => [:create, :destroy], :controller => 'users/rpx_identities'
     user.resource :adminship, :only => [:create, :destroy], :controller => 'users/adminships'

@@ -39,6 +39,8 @@
           <li><%= link_to 'Our Blog', blog_path %></li>
           <li><%= mail_to 'all_ears@votereports.org', "Contact us" %></li>
           <li><%= link_to 'Feedback', get_satisfaction_path, :title => 'We welcome it' %></li>
+          <li><%= link_to 'Support Our Efforts', donate_path,
+            :title => "We've got plenty more to do, and we need your help to do it" %></li>
         </ul>
         <p id="copy"><%= link_to "&copy; #{Date.today.year}", participant_labs_path %></p>
       </div>
