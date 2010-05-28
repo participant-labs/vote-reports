@@ -1,0 +1,20 @@
+development: &global_settings
+  database: vote-reports-development
+  host: 127.0.0.1
+  port: 27017
+
+test:
+  database: vote-reports-test
+  <<: *global_settings
+
+cucumber:
+  database: vote-reports-cucumber
+  <<: *global_settings
+
+staging:
+  database: vote-reports-staging
+  <<: *global_settings
+
+production:
+  database: vote-reports
+  <<: *global_settings
