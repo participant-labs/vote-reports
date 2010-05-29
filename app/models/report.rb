@@ -1,8 +1,9 @@
 class Report < ActiveRecord::Base
   belongs_to :user
   belongs_to :interest_group
+  belongs_to :cause
   def owner
-    user || interest_group
+    user || interest_group || cause
   end
 
   belongs_to :image
@@ -151,7 +152,7 @@ class Report < ActiveRecord::Base
       user.try(:username)
     end
     boolean :published do
-      published? || interest_group_id.present?
+      user.nil? || published?
     end
     boolean :user_published do
       published?
@@ -184,17 +185,11 @@ class Report < ActiveRecord::Base
   validates_presence_of :owner, :name
   validate :ensure_only_one_owner
 
-  before_validation :populate_name_from_interest_group
-
   named_scope :random, :order => 'random()'
 
   named_scope :user_published, :conditions => {:state => 'published'}, :include => :user
-  named_scope :interest_group_published,
-    :conditions => 'reports.interest_group_id IS NOT NULL',
-    :include => :interest_group
   named_scope :published,
-    :conditions => [
-      "reports.state = ? OR reports.interest_group_id IS NOT NULL", 'published'],
+    :conditions => ["reports.state = ? OR reports.user_id IS NULL", 'published'],
     :include => [:user, :interest_group]
   class << self
     def qualified_column_names
@@ -252,16 +247,16 @@ class Report < ActiveRecord::Base
   end
 
   def name
-    if self[:name].blank? && interest_group.present?
-      interest_group.name
+    if self[:name].blank? && owner.respond_to?(:name)
+      owner.name
     else
       self[:name]
     end
   end
 
   def description
-    if self[:description].blank? && interest_group.present?
-      interest_group.description
+    if self[:description].blank? && owner.respond_to?(:description)
+      owner.description
     else
       BlueCloth::new(self[:description].to_s).to_html
     end
@@ -275,13 +270,9 @@ class Report < ActiveRecord::Base
 
 private
 
-  def populate_name_from_interest_group
-    self[:name] ||= interest_group.name if interest_group.present?
-  end
-
   def ensure_only_one_owner
-    if user && interest_group
-      errors.add_to_base("Report can't be owned by both a user and an interest group")
+    if [user, interest_group, cause].compact.size > 1
+      errors.add_to_base("Report can't have multiple owners")
     end
   end
 
