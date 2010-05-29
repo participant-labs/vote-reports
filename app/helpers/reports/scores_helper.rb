@@ -5,6 +5,8 @@ module Reports::ScoresHelper
       user_report_score_path(user, report, score)
     elsif ig = report.interest_group
       interest_group_score_path(ig, score)
+    elsif cause = report.cause
+      cause_score_path(cause, score)
     else
       notify_hoptoad("Unknown score controller for #{score.inspect}")
       ''

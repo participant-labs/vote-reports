@@ -12,6 +12,16 @@ class Causes::ScoresController < ApplicationController
     end
   end
 
+  def show
+    @report = @cause.report
+    @score = @report.scores.find(params[:id])
+    respond_to do |format|
+      format.js {
+        render :layout => false
+      }
+    end
+  end
+
   private
 
   def load_cause

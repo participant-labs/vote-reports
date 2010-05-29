@@ -6,6 +6,8 @@ class ReportScore < ActiveRecord::Base
   default_scope :order => 'score DESC'
   named_scope :bottom, :order => :score
 
+  alias_method :subject, :report # for the score evidence pop-up
+
   named_scope :with_evidence, :include => [
     {:politician => :state},
     :evidence
