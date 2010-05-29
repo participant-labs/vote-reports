@@ -92,6 +92,29 @@ Feature: Scoring Reports
     When I follow "Piyush Jindal"
     Then I should be on the politician page for "Piyush Jindal"
 
+  Scenario: Bill Criteria report doesn't generates scores over 100
+    Given bill "Bovine Security Act of 2009" has the following passage votes on "12/24/2009":
+      | politician     | vote |
+      | Piyush Jindal  | +    |
+    And bill "Bovine Security Act of 2009" has the following passage votes on "12/23/2009":
+      | politician     | vote |
+      | Piyush Jindal  | +    |
+    And bill "Bovine Security Act of 2009" has the following passage votes on "11/23/2009":
+      | politician     | vote |
+      | Piyush Jindal  | +    |
+    And bill "USA PATRIOT Reauthorization Act of 2009" has the following passage votes on "3/25/2010":
+      | politician     | vote |
+      | Piyush Jindal  | +    |
+    And report "Active Report" has the following bill criterion:
+      | bill                        | support |
+      | Bovine Security Act of 2009 | true    |
+      | USA PATRIOT Reauthorization Act of 2009 | true    |
+    When I wait for delayed job to finish
+    And I go to my report page for "Active Report"
+    Then I should see the following scores:
+      | politician           | score |
+      | Piyush Jindal        | 100   |
+
   Scenario: Bill Criteria report scores combine
     Given the following bill passage votes:
       | politician     | Bovine Security Act of 2009  | USA PATRIOT Reauthorization Act of 2009 |

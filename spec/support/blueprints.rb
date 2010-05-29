@@ -202,6 +202,12 @@ Fixjour :verify => false do
   end
 
   define_builder(Roll) do |klass, overrides|
+    overrides.process(:voted_at) do |voted_at|
+      if voted_at.present?
+        overrides[:voted_at] = voted_at
+      end
+    end
+
     klass.new(
       :congress => Congress.find_or_create_by_meeting(rand(200)),
       :subject => new_bill,

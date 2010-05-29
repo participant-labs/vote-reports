@@ -1,5 +1,5 @@
-Given /^(bill "[^\"]*") has the following passage votes:$/ do |bill, table|
-  roll = create_roll(:subject => bill, :roll_type => "On Passage")
+Given /^(bill "[^\"]*") has the following passage votes(?: on "(.*)"|):$/ do |bill, voted_at, table|
+  roll = create_roll(:subject => bill, :roll_type => "On Passage", :voted_at => voted_at)
   table.map_column!('politician') {|name| Politician.with_name(name).first }
   table.hashes.each do |attrs|
     next if attrs['vote'].blank?
