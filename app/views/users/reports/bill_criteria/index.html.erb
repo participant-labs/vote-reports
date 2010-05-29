@@ -6,7 +6,10 @@
   <h2>Edit Bill Criteria</h2>
   <%- if @report.bill_criteria.empty? -%>
     <p>This report doesn't have any bills selected</p>
-    <%= link_to 'Back', :back %>
+    <ul class="actions_menu">
+      <li><%= link_to 'Back to Edit', edit_user_report_path(@report.user, @report) %></li>
+      <li><%= link_to 'Back to Report', user_report_path(@report.user, @report) %></li>
+    </ul>
   <%- else -%>
     <% form_for [@report.user, @report] do |f| %>
       <table>
