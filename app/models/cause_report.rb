@@ -3,4 +3,6 @@ class CauseReport < ActiveRecord::Base
   belongs_to :report
 
   validates_presence_of :cause, :report
+
+  attr_accessor :support
 end

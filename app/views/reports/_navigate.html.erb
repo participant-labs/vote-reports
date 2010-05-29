@@ -1,3 +1,5 @@
+<%- subjects ||= Subject.on_published_reports.for_tag_cloud.all(:limit => 20) -%>
+
 <div id="search" style="<%= 'display: none' if params[:subjects].present? %>">
   <% form_tag path, :method => :get, :'data-replace' => replace do %>
     <h3><%= label_tag :q, 'Search Reports' %></h3>
