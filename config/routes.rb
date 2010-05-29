@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
 
   map.resources :causes do |cause|
-    cause.resources :reports, :controller => 'causes/reports', :only => [:new, :create, :destroy]
+    cause.resources :reports, :controller => 'causes/reports', :only => [:new, :create, :index, :destroy]
   end
   map.resources :reports, :only => [:index, :new]
   map.resources :reports, :as => '', :name_prefix => 'user_', :path_prefix => "reports/:user_id", :controller => 'users/reports' do |report|

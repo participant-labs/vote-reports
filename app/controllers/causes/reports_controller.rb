@@ -30,6 +30,15 @@ class Causes::ReportsController < ApplicationController
     end
   end
 
+  def index
+    @cause_reports = @cause.cause_reports
+    respond_to do |format|
+      format.js {
+        render :layout => false
+      }
+    end
+  end
+
   def destroy
     cause_report = @cause.cause_reports.find(params[:id])
     cause_report.destroy
