@@ -20,6 +20,16 @@ class InterestGroupReport < ActiveRecord::Base
     "http://votesmart.org/issue_rating_detail.php?r_id=#{vote_smart_id}"
   end
 
+  def events
+    ratings.numeric.scoped(
+      :select => 'numeric_rating, id, politician_id, interest_group_report_id',
+      :include => :interest_group_report)
+  end
+
+  def event_score(rating)
+    rating.numeric_rating
+  end
+
   private
 
   def season_midpoint(season)

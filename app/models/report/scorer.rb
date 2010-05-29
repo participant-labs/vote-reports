@@ -10,6 +10,12 @@ class Report
           evidences = []
           ReportScore.delete_all(:report_id => report.id)
           report.score_criteria.inject({}) do |criterion_events, criterion|
+            # Collect up all important events by politician and criteria
+            # e.g.
+            #  criterion_events =
+            #    politician -> bill criteria -> votes
+            #    politician -> interest group reports -> ratings
+            #
             criterion.events.each do |event|
               criterion_events[event.politician_id] ||= {}
               criterion_events[event.politician_id][criterion] ||= []
@@ -17,12 +23,8 @@ class Report
             end
             criterion_events
           end.each_pair do |politician_id, criteria_events|
-            baseline = average_base_for(criteria_events.values.flatten)
+            score = report.scores.create!(:politician_id => politician_id, :score => report_score(criteria_events))
 
-            scores = criteria_events.map do |criterion, events|
-              score_for(criterion, events) * average_base_for(events) / baseline
-            end
-            score = report.scores.create!(:politician_id => politician_id, :score => scores.sum / scores.size)
             criteria_events.each_pair do |criterion, events|
               evidences += events.map do |event|
                 [score.id, criterion.class.name, criterion.id, event.class.name, event.id]
@@ -46,9 +48,21 @@ class Report
 
     private
 
-    def score_for(criterion, events)
-      scores = events.sum {|e| criterion.event_score(e) * base_for(e) }
-      scores / events.sum {|e| base_for(e) }
+    def report_score(criteria_events)
+      # Calculate scores for each criteria event (e.g. bill, ig report)
+      criteria_scores = criteria_events.map do |(criterion, events)|
+        {:score => criterion_score(criterion, events), :base => average_base_for(events)}
+      end
+      consolidate_score(criteria_scores)
+    end
+
+    def criterion_score(criterion, events)
+      consolidate_score(events.map {|e| {:score => criterion.event_score(e), :base => base_for(e) } })
+    end
+
+    def consolidate_score(scores_and_bases)
+      scores = scores_and_bases.sum {|score_and_base| score_and_base[:score] * score_and_base[:base]}
+      scores / scores_and_bases.sum {|score_and_base| score_and_base[:base]}
     end
 
     def average_base_for(events)

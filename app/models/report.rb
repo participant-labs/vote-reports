@@ -247,7 +247,7 @@ class Report < ActiveRecord::Base
     if user
       bill_criteria.active
     else
-      [interest_group]
+      interest_group.reports
     end
   end
 
