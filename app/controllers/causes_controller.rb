@@ -26,7 +26,7 @@ class CausesController < ApplicationController
   end
 
   def show
-    @reports = @cause.reports
+    @cause_reports = @cause.cause_reports
   end
 
   def edit

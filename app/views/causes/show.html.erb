@@ -7,17 +7,22 @@
     <%= link_to 'Edit Cause', edit_cause_path(@cause) %>
   <%- end -%>
   <%- permitted_to? :create, @cause, :context => :causes_reports do -%>
-    <%= link_to 'Add Reports', new_cause_reports_path(@cause) %>
+    <%= link_to 'Add Reports', new_cause_report_path(@cause) %>
   <%- end -%>
   </ul>
 </div>
 
 <div class="section">
   <h2>Reports</h2>
-  <%- if @reports.present? -%>
+  <%- if @cause_reports.present? -%>
     <ul>
-      <%- @reports.each do |report| -%>
-        <li><%= render 'reports/report', :report => report %></li>
+      <%- @cause_reports.each do |cause_report| -%>
+        <li>
+          <%= render 'reports/report', :report => cause_report.report %>
+          <%- permitted_to? :destroy, @cause, :context => :causes_reports do -%>
+            <%= link_to 'Remove', cause_report_path(@cause, cause_report), :confirm => "Remove '#{cause_report.report.name}' from '#{@cause.name}'?", :method => :delete %>
+          <%- end -%>
+        </li>
       <%- end -%>
     </ul>
   <%- else -%>

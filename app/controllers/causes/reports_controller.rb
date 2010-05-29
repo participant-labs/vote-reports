@@ -30,6 +30,13 @@ class Causes::ReportsController < ApplicationController
     end
   end
 
+  def destroy
+    cause_report = @cause.cause_reports.find(params[:id])
+    cause_report.destroy
+    flash[:success] = 'Successfully removed report'
+    redirect_to @cause
+  end
+
   private
 
   def topical_reports
