@@ -22,7 +22,10 @@ Feature: Cause Scores
       | Piyush Jindal | 11.3  |
       | Ron Wyden     | 28.6  |
     And cause "Lollipops!" includes report "Brady Campaign to Prevent Gun Violence"
-    When I go to the cause page for "Lollipops!"
+    And cause "Lollipops!" includes report "Aren't Circuses Great!?"
+    When I wait for delayed job to finish
+    And I go to the cause page for "Lollipops!"
+    And I follow "Scores"
     Then I should see the following scores:
       | politician    | score |
       | Piyush Jindal | 54    |
