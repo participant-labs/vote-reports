@@ -65,4 +65,6 @@ class InterestGroup < ActiveRecord::Base
       end).rescore!
     end
   end
+
+  alias_method :score_criteria, :reports
 end

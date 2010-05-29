@@ -60,4 +60,8 @@ class ReportScore < ActiveRecord::Base
   def to_s
     "#{score.round}%"
   end
+
+  def event_date
+    Date.today
+  end
 end

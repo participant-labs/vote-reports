@@ -3,7 +3,8 @@ class Causes::ScoresController < ApplicationController
   before_filter :load_cause
 
   def index
-    @scores = @cause.scores.for_politicians(sought_politicians)
+    @report = @cause.report
+    @scores = @report.scores.for_politicians(sought_politicians)
     respond_to do |format|
       format.js {
         render :layout => false

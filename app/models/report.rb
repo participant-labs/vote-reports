@@ -177,6 +177,10 @@ class Report < ActiveRecord::Base
   has_many :bills, :through => :bill_criteria
 
   has_many :scores, :class_name => 'ReportScore', :dependent => :destroy
+  alias_method :events, :scores
+  def event_score(event)
+    event.score
+  end
 
   validate :name_not_reserved
 
@@ -242,7 +246,7 @@ class Report < ActiveRecord::Base
     if user
       bill_criteria.active
     else
-      interest_group.reports
+      owner.score_criteria
     end
   end
 
