@@ -1,0 +1,2 @@
+module Causes::ReportsHelper
+end

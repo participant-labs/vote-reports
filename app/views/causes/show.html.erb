@@ -1,10 +1,26 @@
 <%- title "Cause - #{h(@cause.name)}" -%>
-<h1><%= @cause.name %></h1>
+<div class="section">
+  <%= render 'causes/header', :cause => @cause %>
 
-<blockquote>
-  <%= @cause.description %>
-</blockquote>
+  <ul class="actions_menu">
+  <%- permitted_to? :edit, @cause do -%>
+    <%= link_to 'Edit Cause', edit_cause_path(@cause) %>
+  <%- end -%>
+  <%- permitted_to? :create, @cause, :context => :causes_reports do -%>
+    <%= link_to 'Add Reports', new_cause_reports_path(@cause) %>
+  <%- end -%>
+  </ul>
+</div>
 
-<%- permitted_to? :edit, @cause do -%>
-  <%= link_to 'Edit Cause', edit_cause_path(@cause) %>
-<%- end -%>
+<div class="section">
+  <h2>Reports</h2>
+  <%- if @reports.present? -%>
+    <ul>
+      <%- @reports.each do |report| -%>
+        <li><%= render 'reports/report', :report => report %></li>
+      <%- end -%>
+    </ul>
+  <%- else -%>
+    <p>No reports have been added to this cause</p>
+  <%- end -%>
+</div>
