@@ -1,0 +1,17 @@
+<div class="section">
+  <h2>Reports</h2>
+  <%- if @cause_reports.present? -%>
+    <ul>
+      <%- @cause_reports.each do |cause_report| -%>
+        <li>
+          <%= render 'reports/report', :report => cause_report.report %>
+          <%- permitted_to? :destroy, @cause, :context => :causes_reports do -%>
+            <%= link_to 'Remove', cause_report_path(@cause, cause_report), :confirm => "Remove '#{cause_report.report.name}' from '#{@cause.name}'?", :method => :delete %>
+          <%- end -%>
+        </li>
+      <%- end -%>
+    </ul>
+  <%- else -%>
+    <p>No reports have been added to this cause</p>
+  <%- end -%>
+</div>
