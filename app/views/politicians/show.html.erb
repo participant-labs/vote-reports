@@ -63,6 +63,6 @@
 
 <div class="section">
   <h2>Reports</h2>
-  <%= render 'reports/navigate', :replace => 'reports', :path_components => @politician, :subjects => @subjects %>
+  <%= render 'reports/navigate', :replace => 'reports', :path => politician_path(@politician), :subjects => @subjects %>
   <%= render 'politicians/scores/table', :scores => @scores %>
 </div>

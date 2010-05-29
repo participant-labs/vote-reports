@@ -1,5 +1,5 @@
 <div id="search" style="<%= 'display: none' if params[:subjects].present? %>">
-  <% form_tag polymorphic_path(path_components), :method => :get, :'data-replace' => replace do %>
+  <% form_tag path, :method => :get, :'data-replace' => replace do %>
     <h3><%= label_tag :q, 'Search Reports' %></h3>
     <%= text_field_tag :q, params[:q] %>
     <%= submit_tag 'Search' %>
@@ -8,11 +8,11 @@
 </div>
 
 <div id="browse_by_subject" style="<%= 'display: none' unless params[:subjects].present? %>">
-  <% form_tag polymorphic_path(path_components), :method => :get, :'data-replace' => replace do %>
+  <% form_tag path, :method => :get, :'data-replace' => replace do %>
     <h3>Browse by Subject</h3>
     <div id="report_subjects_cloud">
       <%= render 'subjects/cloud', :subjects => subjects, :target => lambda {|subjects|
-        [polymorphic_path(path_components, params.slice(:page).merge(:subjects => subjects)), {:'data-replace' => replace}]
+        [path + "?" + params.slice(:page).merge(:subjects => subjects).to_param, {:'data-replace' => replace}]
       } %>
     </div>
     <p>or <a href="#" data-toggle="search, browse_by_subject">search</a></p>
