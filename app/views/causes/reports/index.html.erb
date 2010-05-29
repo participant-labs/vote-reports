@@ -14,4 +14,8 @@
   <%- else -%>
     <p>No reports have been added to this cause</p>
   <%- end -%>
+
+  <%- permitted_to? :create, @cause, :context => :causes_reports do -%>
+    <%= link_to 'Add Reports', new_cause_report_path(@cause) %>
+  <%- end -%>
 </div>

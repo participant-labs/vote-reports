@@ -2,14 +2,9 @@
 <div class="section">
   <%= render 'causes/header', :cause => @cause %>
 
-  <ul class="actions_menu">
   <%- permitted_to? :edit, @cause do -%>
     <%= link_to 'Edit Cause', edit_cause_path(@cause) %>
   <%- end -%>
-  <%- permitted_to? :create, @cause, :context => :causes_reports do -%>
-    <%= link_to 'Add Reports', new_cause_report_path(@cause) %>
-  <%- end -%>
-  </ul>
 </div>
 
 <div class="tabbed-nav">
