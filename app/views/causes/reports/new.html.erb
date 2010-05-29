@@ -4,6 +4,6 @@
   <%= render 'causes/header', :cause => @cause %>
 
   <h2>Add Reports to '<%= @cause.name %>'</h2>
-  <%= render 'reports/navigate', :path => new_cause_reports_path(@cause), :replace => 'cause_reports' %>
+  <%= render 'reports/navigate', :path => new_cause_report_path(@cause), :replace => 'cause_reports' %>
   <%= render 'causes/reports/selection_table', :cause => @cause, :reports => @reports, :id => 'cause_reports' %>
 </div>
