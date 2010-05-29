@@ -1,5 +1,9 @@
 def notify_hoptoad(exception)
   exception = RuntimeError.new(exception) unless exception.is_a?(Exception)
+  unless Rails.env.production?
+    p exception
+    puts exception.backtrace
+  end
   Rails.logger.error(exception.inspect)
   HoptoadNotifier.notify_or_ignore(exception) if defined?(HoptoadNotifier)
   nil
