@@ -7,6 +7,7 @@ class CauseReport < ActiveRecord::Base
   attr_accessor :support
 
   delegate :scores, :to => :report
+
   alias_method :events, :scores
   def event_score(event)
     event.score

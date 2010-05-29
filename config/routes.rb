@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
 
   map.resources :causes do |cause|
-    cause.resources :scores, :controller => 'causes/scores', :only => :index
+    cause.resources :scores, :controller => 'causes/scores', :only => [:index, :show]
     cause.resources :reports, :controller => 'causes/reports', :only => [:new, :create, :index, :destroy]
   end
   map.resources :reports, :only => [:index, :new]
