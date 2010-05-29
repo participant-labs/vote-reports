@@ -1,0 +1,2 @@
+module Causes::ScoresHelper
+end
