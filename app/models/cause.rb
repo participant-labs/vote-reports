@@ -14,6 +14,5 @@ class Cause < ActiveRecord::Base
     (report || build_report(:name => name).tap(&:save!)).rescore!
   end
 
-  delegate :scores, :to => :report
-  alias_method :score_criteria, :reports
+  alias_method :score_criteria, :cause_reports
 end
