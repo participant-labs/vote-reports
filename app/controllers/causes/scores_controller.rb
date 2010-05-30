@@ -11,6 +11,7 @@ class Causes::ScoresController < ApplicationController
     @report = @cause.report
     @scores = @report.scores.for_politicians(sought_politicians)
     respond_to do |format|
+      format.html
       format.js {
         render :layout => false
       }
@@ -21,6 +22,7 @@ class Causes::ScoresController < ApplicationController
     @report = @cause.report
     @score = @report.scores.find(params[:id])
     respond_to do |format|
+      format.html
       format.js {
         render :layout => false
       }
