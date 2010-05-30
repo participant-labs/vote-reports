@@ -11,6 +11,7 @@ Feature: Managing Cause Reports
 
   Scenario: Add report to cause
     When I go to the cause page for "Gun Control"
+    And I follow "Reports" within "#content"
     And I follow "Add Reports"
     And I fill in "Search Reports" with "Brady"
     And I press "Search" within "#content"
@@ -19,11 +20,13 @@ Feature: Managing Cause Reports
     And I press "Save"
     Then I should see "Successfully added reports to cause"
     And I should be on the cause page for "Gun Control"
-    And I should see "Brady Campaign to Prevent Gun Violence"
+    When I follow "Reports" within "#content"
+    Then I should see "Brady Campaign to Prevent Gun Violence"
 
   Scenario: Remove report from cause
     Given cause "Gun Control" includes report "Brady Campaign to Prevent Gun Violence"
     When I go to the cause page for "Gun Control"
+    And I follow "Reports" within "#content"
     Then I should see "Brady Campaign to Prevent Gun Violence"
     And I follow "Remove"
     Then I should see "Successfully removed report"
