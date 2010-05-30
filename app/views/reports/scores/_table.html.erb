@@ -101,6 +101,10 @@
   <%- if report.owner.ratings.blank? -%>
     <p>No ratings on record for this group</p>
   <%- end -%>
+<%- elsif report.owner.is_a?(Cause) -%>
+  <%- if report.owner.reports.blank? -%>
+    <p>No reports on record for this cause</p>
+  <%- end -%>
 <%- else -%>
   <p>No scores found</p>
 <%- end -%>
