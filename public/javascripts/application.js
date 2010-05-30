@@ -66,3 +66,15 @@
 
   $current_tabs = $(".ui-tabs").tabs();
 })(jQuery);
+
+$(function(){
+  
+  // Bind an event to window.onhashchange that, when the hash changes, gets the hash
+  $(window).bind( 'hashchange', function(){
+    var hash = location.hash;
+    
+  // Since the event is only triggered when the hash changes, we need to trigger
+  // the event now, to handle the hash the page may have loaded with.
+  $(window).trigger( 'hashchange' );
+  
+});
