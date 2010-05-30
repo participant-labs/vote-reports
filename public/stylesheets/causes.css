@@ -5,6 +5,11 @@
   color: #282625;
 }
 
+#cause_scores {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
 .cause_score_evidence dt {
   float: left;
   margin-top: 8px;

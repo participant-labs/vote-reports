@@ -6,11 +6,6 @@ img {
   width: 100%;
 }
 
-.tabbed-nav .section {
-  margin: 0;
-  padding: 0;
-}
-
 .left {
   float: left;
   width: 48%;
@@ -119,12 +114,7 @@ input.tagged {
   display: inline;
 }
 
-.report_scores {
-  padding-bottom: 20px;
-}
-
 .report_scores table {
-  margin: .5em;
   width: 100%;
 }
 
