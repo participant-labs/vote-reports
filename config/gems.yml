@@ -1,7 +1,7 @@
 --- 
 - :version: ">= 1.2.0"
   :name: ancestry
-- :version: ">= 2.1.4"
+- :version: ">= 2.1.5"
   :name: Empact-authlogic
 - :version: ">= 1.1.7"
   :name: Empact-authlogic_rpx
