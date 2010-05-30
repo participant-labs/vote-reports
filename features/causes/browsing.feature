@@ -8,7 +8,7 @@ Feature: Browsing Causes
 
   Scenario: Visiting the Cause Index from the home page
     When I go to the causes page
-    Then I should see "Browse Causes"
+    Then I should see "Find the Causes you believe in"
     When I follow "Lollipops!"
     Then I should be on the cause page for "Lollipops!"
 
