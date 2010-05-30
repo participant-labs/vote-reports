@@ -1,6 +1,6 @@
 <div class="section" id="cause_scores">
   <h2>Scores</h2>
-  <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#bill_criteria', :'data-tab-select' => 'bill_criteria' %> lead to a high score, votes against, a low one.</p>
+  <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this causes's reports", '#Reports', :'data-tab-select' => 'Reports' %> lead to a high score, votes against, a low one.</p>
   <%- if @scores.present? -%>
     <%= render 'politicians/search', :in_office => @in_office, :url => cause_scores_path(@cause), :replace => 'cause_scores' %>
   <%- end -%>
