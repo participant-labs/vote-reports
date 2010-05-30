@@ -4,7 +4,10 @@ class CauseReport < ActiveRecord::Base
 
   validates_presence_of :cause, :report
 
-  attr_accessor :support
+  attr_writer :support
+  def support
+    !new_record? # if this is saved, then support is declared
+  end
 
   delegate :scores, :to => :report
 
