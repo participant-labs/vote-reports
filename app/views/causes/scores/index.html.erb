@@ -4,5 +4,5 @@
   <%- if @scores.present? -%>
     <%= render 'politicians/search', :in_office => @in_office, :url => cause_scores_path(@cause), :replace => 'cause_scores' %>
   <%- end -%>
-  <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
+  <%= render 'reports/scores/table', :report => @report, :scores => @scores, :replace => 'cause_scores' %>
 </div>
