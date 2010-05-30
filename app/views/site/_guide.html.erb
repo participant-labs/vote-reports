@@ -11,7 +11,7 @@
       [send(target_path, :subjects => subjects, :representing => params[:representing]),
       {:'data-replace' => 'guide'}] } %></dd>
     <dt>3) See your reps' report cards</dt>
-    <dd><%= render 'scores/table' %></dd>
+    <dd><%= render 'scores/table', :politicians => @politicians, :reports => @topical_reports %></dd>
   </dl>
 <% end %>
 <%- unless current_page?(guide_path) -%>

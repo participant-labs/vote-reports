@@ -1,31 +1,31 @@
-<%- if @politicians || @topical_reports -%>
-<%- @politicians ||= [] -%>
+<%- if politicians || reports -%>
+<%- politicians ||= [] -%>
 <table id="scores">
-  <%- if @politicians -%>
+  <%- if politicians -%>
     <thead>
       <tr>
-        <%- if @topical_reports -%>
+        <%- if reports -%>
           <td></td>
         <%- end -%>
-        <%- @politicians.each do |politician| -%>
+        <%- politicians.each do |politician| -%>
           <th><%= render politician %></th>
         <%- end -%>
       </tr>
     </thead>
   <%- end -%>
-  <%- if @topical_reports -%>
+  <%- if reports -%>
     <tbody>
-      <%- averages ||= @topical_reports.all.size <= 5 -%>
-      <%- if averages && @topical_reports.size > 1 -%>
+      <%- averages ||= reports.all.size <= 5 -%>
+      <%- if averages && reports.size > 1 -%>
         <tr>
           <th>
             <div class="report">
               <span class="report_title">Average of these Reports</span>
             </div>
           </th>
-          <%- @politicians.each do |politician| -%>
+          <%- politicians.each do |politician| -%>
             <td>
-              <%- if score = politician.report_scores.for_reports(@topical_reports).average(:score) -%>
+              <%- if score = politician.report_scores.for_reports(reports).average(:score) -%>
                 <div class="report_score"><%= score.round.to_i %>%</div>
               <%- else -%>
                 <div class="report_score blank" />
@@ -34,11 +34,11 @@
           <%- end -%>
         </tr>
       <%- end -%>
-      <%- scores = ReportScore.for_reports(@topical_reports).for_politicians(@politicians).with_evidence.scoped(:include => :report) -%>
-      <%- @topical_reports.each do |report| -%>
+      <%- scores = ReportScore.for_reports(reports).for_politicians(politicians).with_evidence.scoped(:include => :report) -%>
+      <%- reports.each do |report| -%>
         <tr>
           <th><%= render 'reports/report', :report => report, :float_description => true %></th>
-          <%- @politicians.each do |politician| -%>
+          <%- politicians.each do |politician| -%>
             <td><%= render 'reports/scores/score', :score => scores.detect {|s| s.politician_id == politician.id && s.report_id == report.id } %></td>
           <%- end -%>
         </tr>
