@@ -21,6 +21,6 @@ class CauseReport < ActiveRecord::Base
   private
 
   def rescore_report
-    cause.rescore! if new_record?
+    cause.rescore!
   end
 end
