@@ -1,0 +1,21 @@
+/* see also: .report_title */
+.cause_title {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #282625;
+}
+
+.cause_score_evidence dt {
+  float: left;
+  margin-top: 8px;
+  width: 8em;
+}
+
+.cause_score_evidence dd {
+  margin-left: 8em;
+}
+
+.cause_score_evidence .report_score {
+  float: right;
+  padding-right: 0.5em;
+}

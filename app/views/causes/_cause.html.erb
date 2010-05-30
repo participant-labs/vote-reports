@@ -1,6 +1,6 @@
 <% div_for cause do %>
-  <%= link_to cause.name, cause %>
-  <div class="description">
-    <%= truncate(strip_tags(cause.description)) %>
-  </div>
+  <%= link_to cause.name, cause, :class => 'cause_title' %>
+  <blockquote class="description">
+    <p><%= truncate(strip_tags(cause.description)) %></p>
+  </blockquote>
 <% end %>
