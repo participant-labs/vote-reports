@@ -13,7 +13,7 @@
     <%- end -%>
   </ul>
 
-  <div id="report_scores_section" class="section report_scores">
+  <div id="report_scores_section" class="report_scores">
     <h2>Scores</h2>
     <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#bill_criteria', :'data-tab-select' => 'bill_criteria' %> lead to a high score, votes against, a low one.</p>
     <%- if @report.scores.present? -%>
