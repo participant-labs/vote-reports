@@ -26,9 +26,17 @@ class CausesController < ApplicationController
   end
 
   def show
+    if !@cause.friendly_id_status.best?
+      redirect_to cause_path(@cause), :status => 301
+      return
+    end
   end
 
   def edit
+    if !@cause.friendly_id_status.best?
+      redirect_to edit_cause_path(@cause), :status => 301
+      return
+    end
   end
 
   def update
