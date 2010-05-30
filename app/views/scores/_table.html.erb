@@ -15,7 +15,7 @@
   <%- end -%>
   <%- if reports -%>
     <tbody>
-      <%- averages ||= reports.all.size <= 5 -%>
+      <%- averages ||= reports.size <= 5 -%>
       <%- if averages && reports.size > 1 -%>
         <tr>
           <th>

@@ -22,7 +22,7 @@ class GuidesController < ApplicationController
         Subject.on_published_reports
       end.for_tag_cloud.all(:limit => 20)
 
-    @topical_reports = @topical_reports.scoped(:limit => 10) if @topical_reports
+    @topical_reports = @topical_reports.all(:limit => 10) if @topical_reports
 
     respond_to do |format|
       format.html
