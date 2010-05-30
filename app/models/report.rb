@@ -268,6 +268,12 @@ class Report < ActiveRecord::Base
     end
   end
 
+  def interest_group=(ig)
+    self.name ||= ig.name
+    self.description ||= ig.description
+    self[:interest_group_id] = ig.id
+  end
+
 private
 
   def ensure_only_one_owner
