@@ -5,10 +5,21 @@ img {
 .cause_score_evidence dt {
   float: left;
   margin-top: 8px;
+  width: 8em;
+  vertical-align: right;
 }
 
 .cause_score_evidence dd {
-  margin-left: 5em;
+  margin-left: 8em;
+}
+
+.cause_score_evidence .report_score {
+  float: right;
+  padding-right: 0.5em;
+}
+
+#report_scores > table {
+  width: 100%;
 }
 
 .tabbed-nav .section {
