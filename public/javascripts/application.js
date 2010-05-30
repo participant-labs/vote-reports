@@ -1,7 +1,19 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 //
+
 ;(function($) {
+  
+  // $(function(){
+  // 
+  //   // Bind the event.
+  //   $(window).bind( 'hashchange', function(){
+  //     // Alerts every time the hash changes!
+  //     alert( location.hash );
+  //   })
+  // 
+  // });
+  
   $.fn.fadeOutSoon = function(when, length) {
     if (typeof when == "undefined") when = 5000;
     if (typeof length == "undefined") length = 1000;
@@ -65,16 +77,41 @@
   $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script;
 
   $current_tabs = $(".ui-tabs").tabs();
-})(jQuery);
+  
+  var tabs = $('.ui-tabs'),
 
-$(function(){
-  
-  // Bind an event to window.onhashchange that, when the hash changes, gets the hash
-  $(window).bind( 'hashchange', function(){
-    var hash = location.hash;
-    
-  // Since the event is only triggered when the hash changes, we need to trigger
-  // the event now, to handle the hash the page may have loaded with.
+  tab_a_selector = 'ul.ui-tabs-nav a';
+  tabs.tabs({ event: 'change' });
+
+  // Define our own click handler for the tabs, overriding the default.
+  tabs.find( tab_a_selector ).click(function(){
+    var state = {},
+
+    // Get the id of this tab widget.
+    id = $(this).closest( '.ui-tabs' ).attr( 'id' ),
+
+    // Get the index of this tab.
+    idx = $(this).parent().prevAll().length;
+
+    // Set the state!
+    state[ id ] = idx;
+    $.bbq.pushState( state );
+  });
+
+  // Bind an event to window.onhashchange that, when the history state changes,
+  // iterates over all tab widgets, changing the current tab as necessary.
+  $(window).bind( 'hashchange', function(e) {
+
+    // Iterate over all tab widgets.
+    tabs.each(function(){
+      var idx = $.bbq.getState( this.id, true ) || 0;
+      $(this).find( tab_a_selector ).eq( idx ).triggerHandler( 'change' );
+    });
+  })
+
   $(window).trigger( 'hashchange' );
+
+ 
   
-});
+  
+})(jQuery);
