@@ -3,6 +3,8 @@ class CauseReport < ActiveRecord::Base
   belongs_to :report
 
   validates_presence_of :cause, :report
+  after_save :rescore_report
+  after_destroy :rescore_report
 
   attr_writer :support
   def support
@@ -14,5 +16,11 @@ class CauseReport < ActiveRecord::Base
   alias_method :events, :scores
   def event_score(event)
     event.score
+  end
+
+  private
+
+  def rescore_report
+    cause.rescore! if new_record?
   end
 end
