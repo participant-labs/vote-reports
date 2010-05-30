@@ -21,6 +21,7 @@
     <![endif]-->
   </head>
   <body>
+    <%= render 'layouts/ienomore' %>
     <%= yield(:minimal_content) || yield %>
 
     <%= raw include_javascripts(:common) %>
