@@ -7,6 +7,12 @@ class BillsController < ApplicationController
       @title = 'Recent Bills'
       @bills = Bill.by_introduced_on.paginate :page => (params[:bills_page] || params[:page]), :include => :titles
     end
+    respond_to do |format|
+      format.html
+      format.js {
+        render :partial => 'bills/list', :locals => {:bills => @bills}
+      }
+    end
   end
 
   def show
