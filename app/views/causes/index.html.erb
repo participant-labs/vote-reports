@@ -1,8 +1,12 @@
 <%- title 'Causes' -%>
-<h1>Browse Causes</h1>
+<div class="section">
+  <h1>Find the Causes you believe in</h1>
 
-<%= render 'causes/list', :causes => @causes %>
+  <p>Causes are specially curated by VoteReports to give you a high-level perspective on an issue. We pick a few highly reputable reports to combine to represent a given cause.</p>
 
-<%- permitted_to? :create, :causes do -%>
-  <%= link_to "Create a new Cause", new_cause_path %>
-<%- end -%>
+  <%= render 'causes/list', :causes => @causes %>
+
+  <%- permitted_to? :create, :causes do -%>
+    <%= link_to "Create a new Cause", new_cause_path %>
+  <%- end -%>
+</div>

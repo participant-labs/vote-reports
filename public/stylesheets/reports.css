@@ -20,6 +20,12 @@
   font-size: 1.1em;
 }
 
+.report_title {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #282625;
+}
+
 a.report_title, .report_creator a, .politician_name a {
   border-bottom: 0;
 }

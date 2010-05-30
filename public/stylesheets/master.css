@@ -2,22 +2,6 @@ img {
   display: inline-block;
 }
 
-.cause_score_evidence dt {
-  float: left;
-  margin-top: 8px;
-  width: 8em;
-  vertical-align: right;
-}
-
-.cause_score_evidence dd {
-  margin-left: 8em;
-}
-
-.cause_score_evidence .report_score {
-  float: right;
-  padding-right: 0.5em;
-}
-
 #report_scores > table {
   width: 100%;
 }
@@ -285,12 +269,6 @@ dl.chart_tooltip {
 
 .report blockquote, .report_creator {
   margin-top: 5px;
-}
-
-.report_title {
-  font-size: 1.1em;
-  font-weight: bold;
-  color: #282625;
 }
 
 table {
