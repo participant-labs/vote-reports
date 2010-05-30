@@ -1,7 +1,7 @@
 <% paginated_section causes, :'data-replace' => 'causes' do %>
-  <ol id="causes">
+  <ul id="causes">
     <%- causes.each do |cause| -%>
       <li><%= render cause %></li>
     <%- end -%>
-  </ol>
+  </ul>
 <% end %>
