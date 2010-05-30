@@ -13,3 +13,6 @@
 [submodule "vendor/plugins/moonshine_astrails_safe"]
 	path = vendor/plugins/moonshine_astrails_safe
 	url = git@github.com:Empact/moonshine_astrails_safe.git
+[submodule "vendor/plugins/moonshine_sphinx"]
+	path = vendor/plugins/moonshine_sphinx
+	url = git@github.com:Empact/moonshine_sphinx.git
