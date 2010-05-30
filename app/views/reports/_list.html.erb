@@ -3,18 +3,18 @@
   <%- if reports.present? -%>
     <%- if reports.respond_to?(:total_pages) -%>
       <% paginated_section reports, :param_name => param_name do %>
-        <ol class="reports">
+        <ul class="reports">
           <%- reports.each do |report| -%>
             <li><%= render report %></li>
           <%- end -%>
-        </ol>
+        </ul>
       <% end %>
-    <%- elsif  -%>
-      <ol class="reports">
+    <%- else -%>
+      <ul class="reports">
         <%- reports.each do |report| -%>
           <li><%= render report %></li>
         <%- end -%>
-      </ol>
+      </ul>
     <%- end -%>
   <%- else -%>
     <p>No reports found...</p>
