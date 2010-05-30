@@ -1,4 +1,7 @@
-<%- score_count = (scores.count + 1) -%>
+<%-
+  score_count = (scores.count + 1)
+  replace ||= 'report_scores'
+-%>
 
 <div id="report_scores">
   <%- if report.delayed_jobs.passing.present? -%>
@@ -33,11 +36,11 @@
         <td><%= will_paginate top_scores,
                 :param_name => :top_page,
                 :params => {:bottom_page => bottom_scores.current_page},
-                :'data-replace' => 'report_scores' %></td>
+                :'data-replace' => replace %></td>
         <td><%= will_paginate bottom_scores,
                 :param_name => :bottom_page,
                 :params => {:top_page => top_scores.current_page},
-                :'data-replace' => 'report_scores' %></td>
+                :'data-replace' => replace %></td>
       </tr>
       <%- top_scores.zip(bottom_scores).each do |(top_score, bottom_score)| -%>
         <tr>
@@ -49,11 +52,11 @@
         <td><%= will_paginate top_scores,
                 :param_name => :top_page,
                 :params => {:bottom_page => bottom_scores.current_page},
-                :'data-replace' => 'report_scores' %></td>
+                :'data-replace' => replace %></td>
         <td><%= will_paginate bottom_scores,
                 :param_name => :bottom_page,
                 :params => {:top_page => top_scores.current_page},
-                :'data-replace' => 'report_scores' %></td>
+                :'data-replace' => replace %></td>
       </tr>
     </tbody>
   </table>
@@ -65,14 +68,14 @@
         <th>All Scores
           <%- if params[:representing].present? -%>
           for Representatives from "<%= params[:representing] %>"
-          <%= link_to 'show all', path_for_report(@report, :representing => ''), :'data-replace' => 'report_scores' %>
+          <%= link_to 'show all', path_for_report(@report, :representing => ''), :'data-replace' => replace %>
           <%- end -%>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><%= will_paginate scores, :'data-replace' => 'report_scores' %></td>
+        <td><%= will_paginate scores, :'data-replace' => replace %></td>
       </tr>
       <%- scores.each do |score| -%>
         <tr>
@@ -80,7 +83,7 @@
         </tr>
       <%- end -%>
       <tr>
-        <td><%= will_paginate scores, :'data-replace' => 'report_scores' %></td>
+        <td><%= will_paginate scores, :'data-replace' => replace %></td>
       </tr>
     </tbody>
   </table>
