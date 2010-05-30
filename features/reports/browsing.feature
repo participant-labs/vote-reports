@@ -19,6 +19,13 @@ Feature: Browsing Reports
     And I should not see "Scored Report"
     And I should not see "Personal Report"
 
+  Scenario: Reports Index Pagination
+    Given 30 published reports
+    When I go to the reports page
+    Then I should see "Active Report"
+    When I follow "2"
+    Then I should not see "Active Report"
+
   Scenario: User reports view excludes unpublished reports
     When I go to my reports page
     Then I should see "Published Reports"
