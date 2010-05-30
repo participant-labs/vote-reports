@@ -48,7 +48,7 @@ Rails::Initializer.run do |config|
   config.gem 'polly-suppress_validations', :source => "http://gems.github.com", :lib => 'suppress_validations'
   config.gem 'votesmart', :version => '>= 0.3.0'
   config.gem 'whenever', :lib => false
-  config.gem 'will_paginate'
+  config.gem 'will_paginate', :version => '>=2.3.14'
   config.gem 'ym4r'
   config.gem 'httparty'
 
