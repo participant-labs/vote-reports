@@ -12,10 +12,6 @@ class Users::ReportsController < ApplicationController
       redirect_to user_report_path(@user, @report), :status => 301
       return
     end
-
-    @subjects = @report.subjects.for_tag_cloud.all(
-    :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
-    :limit => 30)
   end
 
   def edit
