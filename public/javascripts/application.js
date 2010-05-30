@@ -64,5 +64,5 @@
   });
   $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script;
 
-  $current_tabs = $(".tabbed-nav").tabs();
+  $current_tabs = $(".ui-tabs").tabs();
 })(jQuery);

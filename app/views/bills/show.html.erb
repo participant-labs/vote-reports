@@ -16,7 +16,7 @@
 <%- end -%>
 
 <%- unless [@bill.titles, @bill.summary, @amendments, @rolls, @bill.subjects, @reports].all?(&:blank?) -%>
-<div class="tabbed-nav">
+<div class="ui-tabs">
   <ul>
     <%- if @reports.present? -%>
       <li><a href="#reports">Reports</a></li>
