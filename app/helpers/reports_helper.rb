@@ -7,7 +7,11 @@ module ReportsHelper
   end
 
   def report_path_components(report)
-    report.user ? [report.user, report] : report.interest_group
+    if report.user
+      [report.user, report]
+    else
+      report.owner
+    end
   end
 
   def path_for_report(report, options = {})
