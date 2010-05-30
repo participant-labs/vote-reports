@@ -2,6 +2,15 @@ img {
   display: inline-block;
 }
 
+.cause_score_evidence dt {
+  float: left;
+  margin-top: 8px;
+}
+
+.cause_score_evidence dd {
+  margin-left: 5em;
+}
+
 .tabbed-nav .section {
   margin: 0;
   padding: 0;
