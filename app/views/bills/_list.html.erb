@@ -1,13 +1,17 @@
-<%- param_name ||= :page -%>
-<h3><%= title %></h3>
-<%- if bills.present? -%>
-  <ul>
-    <%- bills.each do |bill| -%>
-      <li><%= render 'bills/bill', :bill => bill %></li>
-    <%- end -%>
-  </ul>
-<%- else -%>
-  <p>No <%= title.downcase %> found...</p>
-<%- end -%>
-
-<%= will_paginate bills, :param_name => param_name %>
+<%-
+  param_name ||= :page
+  replace ||= 'bills'
+-%>
+<div id="bills">
+  <%- if bills.present? -%>
+    <% paginated_section bills, :param_name => param_name, :'data-replace' => replace do %>
+      <ul>
+        <%- bills.each do |bill| -%>
+          <li><%= render 'bills/bill', :bill => bill %></li>
+        <%- end -%>
+      </ul>
+    <% end %>
+  <%- else -%>
+    <p>No bills found...</p>
+  <%- end -%>
+</div>

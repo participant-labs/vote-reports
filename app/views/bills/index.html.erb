@@ -9,5 +9,6 @@
     <%= submit_tag 'Search' %>
   <% end %>
 
-  <%= render 'bills/list', :bills => @bills, :title => @title  %>
+  <h3><%= @title %></h3>
+  <%= render 'bills/list', :bills => @bills %>
 </div>
