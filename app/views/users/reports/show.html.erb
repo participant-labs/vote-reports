@@ -5,19 +5,13 @@
 <div class="ui-tabs">
   <ul>
     <li><%= link_to content_tag(:span, 'Scores'), user_report_scores_path(@report.user, @report), :title => 'Scores' %></li>
-    <li><a href="#report_subjects">Subjects</a></li>
+    <li><%= link_to content_tag(:span, 'Subjects'), user_report_subjects_path(@report.user, @report), :title => 'Subjects' %></li>
     <li><a href="#bill_criteria">Agenda</a></li>
     <li><a href="#visibility">Visibility</a></li>
     <%- permitted_to? :edit, @report do -%>
       <li><a href="#admin">Admin</a></li>
     <%- end -%>
   </ul>
-
-  <div id="report_subjects" class="section last report_subjects">
-    <h2>Subjects</h2>
-    <p>Subjects for this report are drawn from <%= link_to "the associated bills", '#bill_criteria', :'data-tab-select' => 'bill_criteria' %>.  Follow the links below to find reports on related subjects.</p>
-    <%= render 'subjects/cloud', :subjects => @subjects %>
-  </div>
 
   <div id="bill_criteria" class="section">
     <h2>Agenda</h2>
