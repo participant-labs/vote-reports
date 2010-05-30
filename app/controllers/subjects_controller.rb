@@ -24,7 +24,5 @@ class SubjectsController < ApplicationController
       redirect_to subject_path(@subject), :status => 301
       return
     end
-    @bills = @subject.bills.paginate :page => params[:bill_page]
-    @reports = @subject.reports.published.paginate :page => params[:report_page]
   end
 end

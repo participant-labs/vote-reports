@@ -15,7 +15,10 @@ ActionController::Routing::Routes.draw do |map|
     interest_group.resource :image, :controller => 'interest_groups/images', :only => [:edit, :create, :update]
   end
   map.resources :politicians, :only => [:index, :show]
-  map.resources :subjects, :only => [:index, :show]
+  map.resources :subjects, :only => [:index, :show] do |subject|
+    subject.resources :reports, :controller => 'subjects/reports', :only => :index
+    subject.resources :bills, :controller => 'subjects/bills', :only => :index
+  end
   map.resources :bills, :only => [:index, :show] do |bill|
     bill.resource :titles, :controller => 'bills/titles', :only => :show
   end
