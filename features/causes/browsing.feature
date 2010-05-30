@@ -7,8 +7,7 @@ Feature: Browsing Causes
     Given a cause named "Lollipops!"
 
   Scenario: Visiting the Cause Index from the home page
-    When I go to the home page
-    And I follow "Causes"
+    When I go to the causes page
     Then I should see "Browse Causes"
     When I follow "Lollipops!"
     Then I should be on the cause page for "Lollipops!"
