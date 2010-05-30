@@ -13,19 +13,9 @@ class Users::ReportsController < ApplicationController
       return
     end
 
-    @scores = @report.scores.for_politicians(sought_politicians)
     @subjects = @report.subjects.for_tag_cloud.all(
     :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
     :limit => 30)
-
-    respond_to do |format|
-      format.html
-      format.js {
-        render :partial => 'reports/scores/table', :locals => {
-          :report => @report, :scores => @scores
-        }
-      }
-    end
   end
 
   def edit

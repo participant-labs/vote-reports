@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :reports, :only => [:index, :new]
   map.resources :reports, :as => '', :name_prefix => 'user_', :path_prefix => "reports/:user_id", :controller => 'users/reports' do |report|
-    report.resources :scores, :controller => 'users/reports/scores', :only => :show
+    report.resources :scores, :controller => 'users/reports/scores', :only => [:index, :show]
     report.resource :image, :as => 'thumbnail', :only => [:edit, :update, :create], :controller => 'users/reports/thumbnails'
     report.resources :bill_criteria, :only => [:index, :new, :create, :destroy], :controller => 'users/reports/bill_criteria'
   end
