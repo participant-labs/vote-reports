@@ -1,7 +1,8 @@
 class AddCachedSlugToCauses < ActiveRecord::Migration
   def self.up
     add_column :causes, :cached_slug, :string
-    `rake friendly_id:redo_slugs MODEL=Cause`
+    ENV['MODEL'] = 'Cause'
+    Rake::Task['friendly_id:redo_slugs'].invoke
   end
 
   def self.down
