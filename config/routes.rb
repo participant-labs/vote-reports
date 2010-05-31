@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
     report.resources :scores, :controller => 'users/reports/scores', :only => [:index, :show]
     report.resources :subjects, :controller => 'users/reports/subjects', :only => :index
     report.resource :agenda, :controller => 'users/reports/agendas', :only => :show
+    report.resource :visibility, :controller => 'users/reports/visibilities', :only => :show
     report.resource :image, :as => 'thumbnail', :only => [:edit, :update, :create], :controller => 'users/reports/thumbnails'
     report.resources :bill_criteria, :only => [:index, :new, :create, :destroy], :controller => 'users/reports/bill_criteria'
   end

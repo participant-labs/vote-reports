@@ -7,19 +7,11 @@
     <li><%= link_to content_tag(:span, 'Scores'), user_report_scores_path(@report.user, @report), :title => 'Scores' %></li>
     <li><%= link_to content_tag(:span, 'Subjects'), user_report_subjects_path(@report.user, @report), :title => 'Subjects' %></li>
     <li><%= link_to content_tag(:span, 'Agenda'), user_report_agenda_path(@report.user, @report), :title => 'Agenda' %></li>
-    <li><a href="#visibility">Visibility</a></li>
+    <li><%= link_to content_tag(:span, 'Visibility'), user_report_visibility_path(@report.user, @report), :title => 'Visibility' %></li>
     <%- permitted_to? :edit, @report do -%>
       <li><a href="#admin">Admin</a></li>
     <%- end -%>
   </ul>
-
-  <div id="visibility" class="section report_status <%= @report.state %>">
-    <h2>Visibility: <%= @report.state.capitalize %></h2>
-    <%= content_tag :p, @report.status if @report.status.present? %>
-    <%- permitted_to? :edit, @report do -%>
-      <%= report_next_steps(@report) %>
-    <%- end -%>
-  </div>
 
   <%- permitted_to? :edit, @report do -%>
     <div id="admin" class="section">
