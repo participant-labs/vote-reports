@@ -8,7 +8,10 @@ class Users::Reports::ScoresController < ApplicationController
         render :layout => false
       }
       format.js {
-        render :partial => 'reports/scores/table', :locals => {:report => @report, :scores => @scores}
+        render :partial => 'reports/scores/table', :locals => {
+          :report => @report, :scores => @scores,
+          :reset_path => user_report_scores_path(@user, @report, :representing => '')
+        }
       }
     end
   end

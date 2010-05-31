@@ -11,7 +11,8 @@ class InterestGroups::ScoresController < ApplicationController
       }
       format.js {
         render :partial => 'reports/scores/table', :locals => {
-          :report => @report, :scores => @scores
+          :report => @report, :scores => @scores,
+          :reset_path => interest_group_scores_path(@interest_group, :representing => '')
         }
       }
     end

@@ -14,10 +14,6 @@ module ReportsHelper
     end
   end
 
-  def path_for_report(report, options = {})
-    polymorphic_path(report_path_components(report), options)
-  end
-
   def report_step(report, step)
     if step.is_a?(String)
       content_tag :p, step

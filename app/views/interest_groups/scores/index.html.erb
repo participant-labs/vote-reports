@@ -5,7 +5,8 @@
     <%- if @scores.present? -%>
       <%= render 'politicians/search', :in_office => @in_office, :url => interest_group_scores_path(@interest_group), :replace => 'report_scores' %>
     <%- end -%>
-    <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
+    <%= render 'reports/scores/table', :report => @report, :scores => @scores,
+    :reset_path => interest_group_scores_path(@interest_group, :representing => '') %>
   <%- else -%>
     <p>No ratings on record for this group</p>
   <%- end -%>
