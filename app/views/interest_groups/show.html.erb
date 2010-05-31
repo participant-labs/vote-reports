@@ -37,15 +37,7 @@
     <li><%= link_to content_tag(:span, 'Subjects'), interest_group_subjects_path(@interest_group), :title => 'Subjects' %></li>
     <li><%= link_to content_tag(:span, 'Agenda'), interest_group_agenda_path(@interest_group), :title => 'Agenda' %></li>
     <%- permitted_to? :edit, :interest_groups_images do -%>
-    <li><a href="#admin">Admin</a></li>
+    <li><%= link_to content_tag(:span, 'Admin'), edit_interest_group_image_path(@interest_group), :title => 'Admin' %></li>
     <%- end -%>
   </ul>
-
-  <%- permitted_to? :edit, :interest_groups_images do -%>
-  <div id="admin">
-    <ul class="actions_menu">
-      <li><%= link_to 'Edit Interest Group Thumbnail', edit_interest_group_image_path(@interest_group) %></li>
-    </ul>
-  </div>
-  <%- end -%>
 </div>
