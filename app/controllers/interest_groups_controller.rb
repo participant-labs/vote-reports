@@ -27,16 +27,6 @@ class InterestGroupsController < ApplicationController
     @report = @interest_group.report
     if @report
       @subjects = @report.subjects
-      @scores = @report.scores.for_politicians(sought_politicians)
-    end
-
-    respond_to do |format|
-      format.html
-      format.js {
-        render :partial => 'reports/scores/table', :locals => {
-          :report => @report, :scores => @scores
-        }
-      }
     end
   end
 end

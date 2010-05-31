@@ -4,7 +4,7 @@
 <div class="ui-tabs">
   
   <ul>
-    <li><a href="#report_scores_section">Scores</a></li>
+    <li><%= link_to content_tag(:span, 'Scores'), interest_group_scores_path(@interest_group), :title => 'Scores' %></li>
     <%- if @subjects.present? -%>
     <li><a href="#report_subjects">Subjects</a></li>
     <%- end -%>
@@ -13,19 +13,6 @@
     <li><a href="#admin">Admin</a></li>
     <%- end -%>
   </ul>
-  
-  <div id="report_scores_section" class="section report_scores">
-    <h3>Scores</h3>
-    <p>We score representatives based on the actual ratings this interest group has released over time.</p>
-    <%- if @report -%>
-      <%- if @scores.present? -%>
-        <%= render 'politicians/search', :in_office => @in_office, :url => interest_group_path(@interest_group), :replace => 'report_scores' %>
-      <%- end -%>
-      <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
-    <%- else -%>
-      <p>No ratings on record for this group</p>
-    <%- end -%>
-  </div>
 
   <%- if parent = @interest_group.parent -%>
   <div class="section">
