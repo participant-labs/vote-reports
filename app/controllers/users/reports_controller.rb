@@ -18,6 +18,7 @@ class Users::ReportsController < ApplicationController
     if !@report.friendly_id_status.best?
       redirect_to edit_user_report_path(@user, @report), :status => 301
     end
+    render :layout => false
   end
 
   def update

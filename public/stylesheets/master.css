@@ -6,6 +6,10 @@ img {
   width: 100%;
 }
 
+#cropbox {
+  max-width: 100%;
+}
+
 .left {
   float: left;
   width: 48%;
