@@ -1,8 +1,37 @@
 <% title "Interest Group - #{h @interest_group.name}" %>
 
- <%= render 'interest_groups/header', :interest_group => @interest_group %>
+<%= render 'interest_groups/header', :interest_group => @interest_group %>
+
+<%- if parent = @interest_group.parent -%>
+<div class="section">
+  <h3>Parent Group</h3>
+  <%= render parent %>
+</div>
+<%- end -%>
+
+<%- if @interest_group.parent && (siblings = @interest_group.siblings).present? -%>
+<div class="section">
+  <h3><%= pluralize siblings.count, 'Sibling Group' %></h3>
+  <ul>
+    <%- siblings.each do |sibling| -%>
+    <li><%= render sibling %></li>
+    <%- end -%>
+  </ul>
+</div>
+<%- end -%>
+
+<%- if (children = @interest_group.children).present? -%>
+<div class="section">
+  <h3><%= pluralize children.count, 'Child Group' %></h3>
+  <ul>
+    <%- children.each do |child| -%>
+    <li><%= render child %></li>
+    <%- end -%>
+  </ul>
+</div>
+<%- end -%>
+
 <div class="ui-tabs">
-  
   <ul>
     <li><%= link_to content_tag(:span, 'Scores'), interest_group_scores_path(@interest_group), :title => 'Scores' %></li>
     <%- if @subjects.present? -%>
@@ -13,35 +42,6 @@
     <li><a href="#admin">Admin</a></li>
     <%- end -%>
   </ul>
-
-  <%- if parent = @interest_group.parent -%>
-  <div class="section">
-    <h3>Parent Group</h3>
-    <%= render parent %>
-  </div>
-  <%- end -%>
-
-  <%- if @interest_group.parent && (siblings = @interest_group.siblings).present? -%>
-  <div class="section">
-    <h3><%= pluralize siblings.count, 'Sibling Group' %></h3>
-    <ul>
-      <%- siblings.each do |sibling| -%>
-      <li><%= render sibling %></li>
-      <%- end -%>
-    </ul>
-  </div>
-  <%- end -%>
-
-  <%- if (children = @interest_group.children).present? -%>
-  <div class="section">
-    <h3><%= pluralize children.count, 'Child Group' %></h3>
-    <ul>
-      <%- children.each do |child| -%>
-      <li><%= render child %></li>
-      <%- end -%>
-    </ul>
-  </div>
-  <%- end -%>
 
   <%- if @subjects.present? -%>
   <div id="report_subjects" class="section report_subjects">
