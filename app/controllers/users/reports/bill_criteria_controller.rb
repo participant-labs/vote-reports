@@ -1,12 +1,13 @@
 class Users::Reports::BillCriteriaController < ApplicationController
   filter_resource_access :nested_in => :reports
+  before_filter :load_user
   before_filter :find_report, :only => [:index, :destroy]
 
   def new
     @new_report = true if params[:new_report]
-    @report = current_user.reports.find(params[:report_id], :scope => current_user)
+    @report = @user.reports.find(params[:report_id], :scope => @user)
     if !@report.friendly_id_status.best?
-      redirect_to new_user_report_bill_criterion_path(current_user, @report), :status => 301
+      redirect_to new_user_report_bill_criterion_path(@user, @report), :status => 301
       return
     end
     @bills = Bill.paginated_search(params).results
@@ -27,7 +28,7 @@ class Users::Reports::BillCriteriaController < ApplicationController
   end
 
   def create
-    @report = current_user.reports.find(params[:report_id], :scope => current_user)
+    @report = @user.reports.find(params[:report_id], :scope => @user)
     if @report.update_attributes(params[:report].slice(:bill_criteria_attributes))
       flash[:notice] = "Successfully updated report bills."
       redirect_to :action => 'new'
@@ -48,8 +49,12 @@ class Users::Reports::BillCriteriaController < ApplicationController
 
   private
 
+  def load_user
+    @user = User.find(params[:user_id])
+  end
+
   def find_report
-    @report = current_user.reports.find(params[:report_id], :scope => current_user)
+    @report = @user.reports.find(params[:report_id], :scope => @user)
   end
 
   def permission_denied_path
