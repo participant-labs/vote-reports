@@ -49,6 +49,7 @@ Feature: Browsing Report Scores by State
 
   Scenario: User views scores for only in-office reps
     When I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 100   |

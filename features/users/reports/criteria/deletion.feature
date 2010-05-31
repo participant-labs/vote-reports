@@ -34,13 +34,17 @@ Feature: Deleting Criteria from Reports
       | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
     And I follow "Edit Report"
-    And I follow "Edit Existing Criteria"
+    And I follow "Edit Agenda"
     And I follow "Remove"
-    And I wait for delayed job to finish
     Then I should see "Successfully deleted report criterion"
-    And I should be on the edit bills page for my report "Active Report"
+    And I should be on the edit page for my report "Active Report"
 
+    When I wait for delayed job to finish
+    And I go to my report page for "Active Report"
+    And I follow "Agenda"
+    Then I should not see "Bovine Security Act of 2009"
     When I go to my report page for "Active Report"
-    And I should not see "Bovine Security Act of 2009"
-    And I should not see "Piyush Jindal"
+    And I follow "Scores"
+    Then I should not see "Piyush Jindal"
+    And show me the page
     And I should see "No scores yet, as this report has no criteria to judge representatives by."

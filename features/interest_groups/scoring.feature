@@ -22,6 +22,7 @@ Feature: Scoring Reports
 
   Scenario: Without Criteria, I should see message noting why no scores exist
     When I go to the interest group page for "Sierra Club"
+    And I follow "Scores"
     Then I should see "No ratings on record for this group"
 
   Scenario: Scores from a single set of numeric ratings
@@ -35,6 +36,7 @@ Feature: Scoring Reports
       | 2008     | Neil Abercrombie      | 100    |
     And the scores for interest group "Sierra Club" are calculated
     When I go to the interest group page for "Sierra Club"
+    And I follow "Scores"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 0     |
@@ -61,6 +63,7 @@ Feature: Scoring Reports
       | Fall 2003 | Neil Abercrombie      | 100    |
     And the scores for interest group "Sierra Club" are calculated
     When I go to the interest group page for "Sierra Club"
+    And I follow "Scores"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 42    |

@@ -41,7 +41,7 @@
     <% end %>
   <%- elsif @new_report -%>
     <p>No bills found for "<%= params[:q] %>". Try another search!</p>
-    <%= link_to 'Done', user_report_path(current_user, report) %>
+    <%= link_to 'Done', user_report_path(report.user, report) %>
   <%- else -%>
     <p>No bills found</p>
     <%= link_to 'Back', :back %>

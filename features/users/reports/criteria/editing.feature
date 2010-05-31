@@ -22,20 +22,22 @@ Feature: Editing Criteria from Reports
   Scenario: Report owner adds an explanatory url to an existing bill criterion
     Given I have a personal report named "Target Report"
     When I go to my report page for "Active Report"
+    And I follow "Agenda"
     Then I should see "Bovine Security Act of 2009"
-    When I go to my edit report page for "Active Report"
-    And I follow "Edit Existing Criteria"
+    When I go to the edit page for my report "Active Report"
+    And I follow "Edit Agenda"
     And I fill in "Explanatory Link" with "http://example.com/reports/empact/target-report"
     And I press "Save Bill Criteria"
     Then I should see "Successfully updated report"
     And I should be on my report page for "Active Report"
+    And I follow "Agenda"
     When I follow "Support"
     Then I should be on my report page for "Target Report"
 
   @wip
   Scenario: Report owner adds a bad explanatory url to an existing bill criterion
     When I go to my report page for "Active Report"
-    And I follow "Edit Existing Criteria"
+    And I follow "Edit Agenda"
     And I fill in "Explanatory Link" with "http://foo/bar/baz"
     And I press "Save Bill Criteria"
     Then I should not see "Successfully updated report"

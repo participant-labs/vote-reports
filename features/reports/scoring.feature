@@ -38,6 +38,7 @@ Feature: Scoring Reports
 
   Scenario: Without Criteria, I should see message noting why no scores exist
     When I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see "No scores yet, as this report has no criteria to judge representatives by."
 
   Scenario: With Criteria on unvoted bills, I should see message noting that as the bills are unvoted, no scores exist
@@ -47,6 +48,7 @@ Feature: Scoring Reports
       | USA PATRIOT Reauthorization Act of 2009 | false   |
     And I wait for delayed job to finish
     When I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see "No scores yet, as the associated bills have not been voted on."
 
   Scenario: With Criteria on bills without passage rolls, I should see message noting that as the bills are unvoted, no scores exist
@@ -66,6 +68,7 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009             | true    |
     And I wait for delayed job to finish
     When I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see "No scores yet, as the associated bills have not been voted on."
 
   Scenario: Bill Criteria report generates scores
@@ -81,6 +84,7 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009 | true    |
     When I wait for delayed job to finish
     And I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -111,6 +115,7 @@ Feature: Scoring Reports
       | USA PATRIOT Reauthorization Act of 2009 | true    |
     When I wait for delayed job to finish
     And I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -149,9 +154,11 @@ Feature: Scoring Reports
       | USA PATRIOT Reauthorization Act of 2009 | false   |
       | Honoring Miss America Act of 2009       | true   |
     When I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
     And I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see the following scores:
       | politician           | score |
       | Connie Mack          | 100   |
@@ -188,9 +195,11 @@ Feature: Scoring Reports
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
     And I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -218,9 +227,11 @@ Feature: Scoring Reports
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
     And I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -248,9 +259,11 @@ Feature: Scoring Reports
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
     When I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
     And I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -295,9 +308,11 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009     | true    |
       | Honoring Bo Jackson Act of 2005 | false   |
     When I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
     And I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |

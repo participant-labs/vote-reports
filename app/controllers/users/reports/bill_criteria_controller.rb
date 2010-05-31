@@ -31,7 +31,7 @@ class Users::Reports::BillCriteriaController < ApplicationController
     @report = @user.reports.find(params[:report_id], :scope => @user)
     if @report.update_attributes(params[:report].slice(:bill_criteria_attributes))
       flash[:notice] = "Successfully updated report bills."
-      redirect_to :action => 'new'
+      redirect_to edit_user_report_path(@user, @report, :anchor => 'Add_Bills')
     else
       render :action => 'new', :layout => false
     end
@@ -44,7 +44,7 @@ class Users::Reports::BillCriteriaController < ApplicationController
   def destroy
     @report.bill_criteria.find(params[:id]).destroy
     flash[:notice] = "Successfully deleted report criterion"
-    redirect_to :back
+    redirect_to edit_user_report_path(@user, @report, :anchor => 'Edit_Agenda')
   end
 
   private

@@ -8,7 +8,7 @@ class Users::ReportsController < ApplicationController
   end
 
   def show
-    if !@report.friendly_id_status.best?
+    if params[:id] != @report.to_param
       redirect_to user_report_path(@user, @report), :status => 301
       return
     end
@@ -19,7 +19,6 @@ class Users::ReportsController < ApplicationController
       redirect_to edit_user_report_path(@user, @report), :status => 301
       return
     end
-    render :layout => false
   end
 
   def update
@@ -39,7 +38,7 @@ class Users::ReportsController < ApplicationController
     @report = @user.reports.build(params[:report])
     if @report.save
       flash[:notice] = "Successfully created report."
-      redirect_to new_user_report_bill_criterion_path(@user, @report, :new_report => true)
+      redirect_to edit_user_report_path(@user, @report, :new_report => true, :anchor => 'Add_Bills')
     else
       render :action => 'new'
     end

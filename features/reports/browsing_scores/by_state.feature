@@ -44,6 +44,7 @@ Feature: Browsing Report Scores by State
 
   Scenario: When unscoped, report scores should be proper and complete
     When I go to my report page for "Active Report"
+    And I follow "Scores"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -55,6 +56,7 @@ Feature: Browsing Report Scores by State
 
   Scenario Outline: Narrow report results to those within a certain zip code
     When I go to my report page for "Active Report"
+    And I follow "Scores"
     And I fill in "Reps From" with "<location>"
     And I press "Show Reps"
     Then I should see the following scores:

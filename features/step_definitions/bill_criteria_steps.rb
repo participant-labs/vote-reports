@@ -6,7 +6,7 @@ Given /^(report "[^\"]*") has the following bill criteri(?:a|on):$/ do |report, 
 end
 
 When /I remove a bill criterion from (report ".+")/ do |report|
-  visit user_report_bill_criteria_path(current_user, report)
+  visit user_report_bill_criteria_path(report.user, report)
   click_link "Remove"
   Then %{I should see "Successfully deleted report criterion"}
 end
