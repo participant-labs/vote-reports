@@ -18,15 +18,10 @@ class InterestGroupsController < ApplicationController
   end
 
   def show
-    @interest_group = InterestGroup.find(params[:id], :include => :subjects)
+    @interest_group = InterestGroup.find(params[:id])
     if !@interest_group.friendly_id_status.best?
       redirect_to interest_group_path(@interest_group), :status => 301
       return
-    end
-
-    @report = @interest_group.report
-    if @report
-      @subjects = @report.subjects
     end
   end
 end

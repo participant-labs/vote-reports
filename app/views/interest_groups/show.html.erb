@@ -34,22 +34,12 @@
 <div class="ui-tabs">
   <ul>
     <li><%= link_to content_tag(:span, 'Scores'), interest_group_scores_path(@interest_group), :title => 'Scores' %></li>
-    <%- if @subjects.present? -%>
-    <li><a href="#report_subjects">Subjects</a></li>
-    <%- end -%>
+    <li><%= link_to content_tag(:span, 'Subjects'), interest_group_subjects_path(@interest_group), :title => 'Subjects' %></li>
     <li><a href="#interest_group_ratings">Agenda</a></li>
     <%- permitted_to? :edit, :interest_groups_images do -%>
     <li><a href="#admin">Admin</a></li>
     <%- end -%>
   </ul>
-
-  <%- if @subjects.present? -%>
-  <div id="report_subjects" class="section report_subjects">
-    <h3>Subjects</h3>
-    <p>Subjects for this report are selected by <a href="http://votesmart.org/">Project Vote Smart</a>.  Follow the links below to find reports on related subjects.</p>
-    <%= render 'subjects/cloud', :subjects => @subjects %>
-  </div>
-  <%- end -%>
 
   <div id="interest_group_ratings" class="section">
     <h3>Agenda</h3>

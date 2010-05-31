@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :interest_groups, :only => [:index, :show] do |interest_group|
     interest_group.resources :scores, :controller => 'interest_groups/scores', :only => [:index, :show]
+    interest_group.resources :subjects, :controller => 'interest_groups/subjects', :only => :index
     interest_group.resource :image, :controller => 'interest_groups/images', :only => [:edit, :create, :update]
   end
   map.resources :politicians, :only => [:index, :show]
