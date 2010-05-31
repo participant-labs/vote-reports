@@ -1,0 +1,9 @@
+<div id="interest_group_ratings" class="section">
+  <h3>Agenda</h3>
+  <p>This report's scores are based on ratings periodically issued by the <%= @interest_group.name %>.  All included ratings are shown below.</p>
+  <ul>
+  <%- @interest_group.reports.each do |report| -%>
+    <li><%= render 'interest_group_reports/interest_group_report', :report => report %></li>
+  <%- end -%>
+  </ul>
+</div>
