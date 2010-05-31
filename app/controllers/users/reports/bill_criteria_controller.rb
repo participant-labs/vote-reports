@@ -15,7 +15,9 @@ class Users::Reports::BillCriteriaController < ApplicationController
     @voted = params[:voted]
 
     respond_to do |format|
-      format.html
+      format.html {
+        render :layout => false
+      }
       format.js {
         render :partial => 'users/reports/bill_criteria/table', :locals => {
           :report => @report, :bills => @bills
@@ -30,11 +32,12 @@ class Users::Reports::BillCriteriaController < ApplicationController
       flash[:notice] = "Successfully updated report bills."
       redirect_to :action => 'new'
     else
-      render :action => 'new'
+      render :action => 'new', :layout => false
     end
   end
 
   def index
+    render :layout => false
   end
 
   def destroy
