@@ -39,6 +39,9 @@ class InterestGroup < ActiveRecord::Base
       :conditions => {:'reports.interest_group_id' => self})
   end
 
+  before_validation_on_create :initialize_report
+  validates_presence_of :report, :name
+
   named_scope :for_subjects, lambda {|subjects|
     if subjects.blank?
       {}
@@ -60,11 +63,15 @@ class InterestGroup < ActiveRecord::Base
 
   def rescore!
     if ratings.present?
-      (report || begin
-        build_report(:name => name).tap(&:save!)
-      end).rescore!
+      report.rescore!
     end
   end
 
   alias_method :score_criteria, :reports
+
+  private
+
+  def initialize_report
+    build_report(:name => name)
+  end
 end

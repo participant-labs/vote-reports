@@ -11,7 +11,7 @@ Feature: User create report
     And I fill in "Description" with "I made this because I care"
     And I press "Create Report"
     Then I should see "Successfully created report."
-    When I follow "Done"
+    When I follow "View this Report"
     Then I should be on the report page for "My report"
 
   Scenario: User signs in to create a report

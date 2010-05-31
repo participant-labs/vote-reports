@@ -7,7 +7,7 @@ Feature: Editing Interest Group Images
     Given an interest group named "AARP"
     And I am signed in as an Admin
     When I go to the interest group page for "AARP"
-    And I follow "Edit Interest Group Thumbnail"
+    And I follow "Admin"
     Then I should see "Replace Thumbnail"
     And I should be on the edit interest group image page for "AARP"
 

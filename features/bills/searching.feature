@@ -20,4 +20,4 @@ Feature: Bill Searching
     And I fill in "Search" with "smelly roses"
     And I press "Search" within "#content"
     Then I should see "Matching Bills"
-    Then I should see "No matching bills found..."
+    And I should see "No bills found..."
