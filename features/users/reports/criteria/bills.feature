@@ -17,12 +17,16 @@ Feature: Adding Bill Criteria to Reports
     When I choose "Support"
     And I fill in "Explanatory Link" with "http://example.com/reports/empact/target-report"
     And I press "Save Bills"
-    Then I should be on the new bills page for my report "My report"
+    Then I should be on the edit page for my report "My report"
     And I should see "Successfully updated report bills."
-    When I follow "Back to Report"
-    And I should be on my report page for "My report"
-    And I should see "USA PATRIOT Reauthorization Act of 2009"
-    And I should not see "no votes yet"
+    When I follow "View this Report"
+    Then I should be on my report page for "My report"
+    When I go to my report page for "My report"
+    And I follow "Scores"
+    Then I should not see "no votes yet"
+    When I go to my report page for "My report"
+    And I follow "Agenda"
+    Then I should see "USA PATRIOT Reauthorization Act of 2009"
     When I follow "Evidence"
     Then I should be on my report page for "Target Report"
 
@@ -61,13 +65,14 @@ Feature: Adding Bill Criteria to Reports
     Then the "Search" field should contain "patriot"
     When I choose "Support"
     And I press "Save Bills"
-    Then I should be on the new bills page for my report "My report"
+    Then I should be on the edit page for my report "My report"
     And I should see "Successfully updated report bills."
-    When I follow "Back to Report"
-    And I should be on my report page for "My report"
+    When I follow "View this Report"
+    Then I should be on my report page for "My report"
+    When I follow "Agenda"
+    Then I should see "no votes yet"
     And I should see "Support"
     And I should see "USA PATRIOT Reauthorization Act of 2009"
-    And I should see "no votes yet"
 
   Examples:
     | bill type                            |
@@ -82,8 +87,6 @@ Feature: Adding Bill Criteria to Reports
     And I should see "USA PATRIOT Reauthorization Act of 2009"
     And I should see "unvoted"
     And I should not see "No bills found"
-    When I follow "Back to Report"
-    Then I should be on my report page for "My report"
 
   Examples:
     | bill type                   |
@@ -154,21 +157,14 @@ Feature: Adding Bill Criteria to Reports
     And I press "Search"
     Then I should see "(1997)"
 
-  Scenario: User cancels a bill search
-    Given a voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
-    When I fill in "Search" with "patriot"
-    And I press "Search"
-    And I follow "Back to Report"
-    Then I should be on my report page for "My report"
-
   Scenario: User saves an empty bill search
     Given a voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
     When I fill in "Search" with "patriot"
     And I press "Search"
     And I press "Save"
-    Then I should be on the new bills page for my report "My report"
+    Then I should be on the edit page for my report "My report"
     And I should see "Successfully updated report bills."
-    When I follow "Back to Report"
+    When I follow "View this Report"
     Then I should be on my report page for "My report"
 
   Scenario: User tries a new bill search from the results page
@@ -182,9 +178,10 @@ Feature: Adding Bill Criteria to Reports
     Then I should see "Bovine Security Act of 2009"
     When I choose "Support"
     And I press "Save Bills"
-    Then I should be on the new bills page for my report "My report"
+    Then I should be on the edit page for my report "My report"
     And I should see "Successfully updated report bills."
-    When I follow "Back to Report"
-    And I should be on my report page for "My report"
-    And I should see "Support"
+    When I follow "View this Report"
+    Then I should be on my report page for "My report"
+    When I follow "Agenda"
+    Then I should see "Support"
     And I should see "Bovine Security Act of 2009"

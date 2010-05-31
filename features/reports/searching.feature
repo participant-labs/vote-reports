@@ -4,14 +4,14 @@ Feature: Report Searching
   I want to search reports
 
   Scenario: User searches for and views a specific report
-    Given a published report named "My Views"
+    Given a published report named "Zach's Views"
     And 30 published reports
     When I go to the reports page
-    Then I should not see "My Views"
+    Then I should not see "Zach's Views"
 
     When I fill in "Search" with "Views"
     And I press "Search" within "#content"
-    And I should see "My Views"
+    And I should see "Zach's Views"
 
   Scenario: User searches for and doesn't find a reports
     Given 30 published reports

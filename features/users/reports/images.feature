@@ -17,7 +17,9 @@ Feature: Editing Interest Group Images
     And I should be on the edit image page for the report "My Report"
 
   Scenario: Updating the image on an interest group
-    When I go to the edit image page for the report "My Report"
+    When I go to my report page for "My Report"
+    And I follow "Edit Report"
+    And I follow "Edit Thumbnail"
     And I attach the file "public/images/gov_track_logo.png" to "image_thumbnail"
     And I press "Replace!"
     Then I should be on my report page for "My Report"

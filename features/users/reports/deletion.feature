@@ -10,6 +10,8 @@ Feature: Deleting Reports
       | My Report | I made this because I care |
     When I go to my reports page
     And I follow "My Report"
+    And I follow "Edit Report"
+    And I follow "Delete Report"
     And I press "Delete Report"
     Then I should see "Successfully destroyed report."
     And I should not see "My Report"
@@ -19,7 +21,8 @@ Feature: Deleting Reports
     And I am signed in
     When I go to the reports page
     And I follow "My Report"
-    Then I should not see the button "Delete Report"
+    Then I should not see "Admin"
+    And I should not see the button "Delete Report"
 
   Scenario: Attempting to deleting a report while logged out
     Given a published report named "My Report"

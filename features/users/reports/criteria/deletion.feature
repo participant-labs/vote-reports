@@ -46,5 +46,4 @@ Feature: Deleting Criteria from Reports
     When I go to my report page for "Active Report"
     And I follow "Scores"
     Then I should not see "Piyush Jindal"
-    And show me the page
     And I should see "No scores yet, as this report has no criteria to judge representatives by."
