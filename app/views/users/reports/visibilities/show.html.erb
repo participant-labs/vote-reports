@@ -2,6 +2,10 @@
   <h2>Visibility: <%= @report.state.capitalize %></h2>
   <%= content_tag :p, @report.status if @report.status.present? %>
   <%- permitted_to? :edit, @report do -%>
-    <%= report_next_steps(@report) %>
+    <ul>
+      <%- @report.next_steps.each do |step| -%>
+        <li><%= report_step(@report, step) %></li>
+      <%- end -%>
+    </ul>
   <%- end -%>
 </div>

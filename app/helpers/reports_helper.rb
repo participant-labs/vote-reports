@@ -24,21 +24,13 @@ module ReportsHelper
     else
       step.assert_valid_keys(:text, :why, :state_event, :confirm)
       content_tag :div, :class => 'buttons clearfix' do
-        content_tag(:p, step.fetch(:why)) \
-          + link_to(step.fetch(:text), user_report_path(current_user, report, :report => {:state_event => step.fetch(:state_event)}), :confirm => step.fetch(:confirm), :method => :put)
+        content_tag(:p, step.fetch(:why))
+        link_to(step.fetch(:text), user_report_path(current_user, report, :report => {:state_event => step.fetch(:state_event)}), :confirm => step.fetch(:confirm), :method => :put)
       end
     end
   end
 
   def report_next_step(report)
     report_step(report, report.next_step)
-  end
-
-  def report_next_steps(report)
-    content_tag :ul do
-      report.next_steps.map do |step|
-        content_tag :li, report_step(report, step)
-      end.join
-    end
   end
 end
