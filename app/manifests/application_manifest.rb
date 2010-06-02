@@ -117,6 +117,15 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     })
     recipe :denyhosts
 
+    configure(:sphinx => {
+      :monit => true,
+      :version => '0.9.9'
+      :index_cron => {
+        :minute => 9
+      }
+    })
+    recipe :sphinx
+
     recipe :scout
     recipe :ssh
   end
