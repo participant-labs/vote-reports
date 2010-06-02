@@ -46,6 +46,7 @@
  - config/database.yml
  - config/secure_variables.rb
  - config/mongo.yml
+ - config/sphinx.conf
 
 # The entries in shared_children are created in #{application}/shared
 :shared_children:
