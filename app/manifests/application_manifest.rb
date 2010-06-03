@@ -62,6 +62,20 @@ class ApplicationManifest < Moonshine::Manifest::Rails
       :group => configuration[:group] || configuration[:user],
       :require => file('/etc/monit.d'),
       :content => delayed_job_monit
+
+    mongo_monit = <<-MONIT
+      check process mongodb
+        with pidfile /srv/vote-reports/shared/pids/mongodb.pid
+        start program = "/etc/init.d/mongodb start"
+        stop program = "/etc/init.d/mongodb stop"
+    MONIT
+
+    file '/etc/monit.d/mongodb',
+      :mode => '600',
+      :owner => configuration[:user],
+      :group => configuration[:group] || configuration[:user],
+      :require => file('/etc/monit.d'),
+      :content => mongo_monit
   end
 
   # The following line includes the 'application_packages' recipe defined above
