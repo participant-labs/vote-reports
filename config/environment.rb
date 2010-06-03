@@ -46,6 +46,7 @@ Rails::Initializer.run do |config|
   config.gem 'sunspot', :lib => 'sunspot', :version => '= 0.10.8'
   config.gem 'sunspot_rails', :lib => 'sunspot/rails', :version => '= 0.11.5'
   config.gem 'polly-suppress_validations', :source => "http://gems.github.com", :lib => 'suppress_validations'
+  config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version  => '>= 1.3.16'
   config.gem 'votesmart', :version => '>= 0.3.0'
   config.gem 'whenever', :lib => false
   config.gem 'will_paginate', :version => '>=2.3.14'

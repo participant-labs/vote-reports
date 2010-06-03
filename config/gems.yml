@@ -45,6 +45,8 @@
   :name: sunspot_rails
 - :source: http://gems.github.com
   :name: polly-suppress_validations
+- :version: ">= 1.3.16"
+  :name: thinking-sphinx
 - :version: ">= 0.3.0"
   :name: votesmart
 - :name: whenever
