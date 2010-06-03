@@ -76,6 +76,8 @@ class ApplicationManifest < Moonshine::Manifest::Rails
       :group => configuration[:group] || configuration[:user],
       :require => file('/etc/monit.d'),
       :content => mongo_monit
+
+    exec 'update-rc.d monit defaults'
   end
 
   # The following line includes the 'application_packages' recipe defined above
