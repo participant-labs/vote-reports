@@ -146,6 +146,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     }
   })
   recipe :sphinx
+  recipe :sphinx_monit
 
   configure(:mongodb => {:version => '1.4.2'})
   recipe :mongodb
