@@ -135,7 +135,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
 
     configure(:sphinx => {
       :monit => true,
-      :version => '0.9.9'
+      :version => '0.9.9',
       :index_cron => {
         :minute => 9
       }
