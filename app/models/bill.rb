@@ -7,36 +7,6 @@ class Bill < ActiveRecord::Base
 
   has_friendly_id :opencongress_id
 
-  searchable do
-    text :summary, :gov_track_id, :opencongress_id, :bill_number
-    text :subjects do
-      subjects.map(&:name) * ' '
-    end
-    text :bill_type do
-      [bill_type.short_name, bill_type.long_name].join(' ')
-    end
-    text :titles do
-      titles.map(&:title) * ' '
-    end
-    text :introduced_on do
-      introduced_on.to_s(:long)
-    end
-    boolean :current do
-      congress.current?
-    end
-    boolean :voted do
-      voted?
-    end
-    integer :bill_number
-    time :introduced_on
-  end
-
-  class << self
-    def reindex(opts = {})
-      super(opts.reverse_merge(:include => [:titles, :rolls, :congress, :subjects]))
-    end
-  end
-
   belongs_to :congress
 
   belongs_to :sponsor, :class_name => 'Politician'
@@ -65,6 +35,24 @@ class Bill < ActiveRecord::Base
   end
 
   composed_of :bill_type
+
+  define_index do
+    indexes summary
+    indexes gov_track_id
+    indexes opencongress_id
+    indexes bill_number
+    intexes subjects(:name), :as => :subjects
+    indexes titles(:title), :as => :title
+    indexes introduced_on
+    indexes bill_number
+
+    # boolean :current do
+    #   congress.current?
+    # end
+    # boolean :voted do
+    #   voted?
+    # end
+  end
 
   validates_format_of :gov_track_id, :with => /[a-z]+\d\d\d-\d+/
   validates_format_of :opencongress_id, :with => /\d\d\d-[a-z]+\d+/

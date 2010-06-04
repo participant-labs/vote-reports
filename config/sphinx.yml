@@ -10,4 +10,8 @@ staging:
   <<: *global_settings
 
 production:
+  config_file: "RAILS_ROOT/config/ENVIRONMENT.sphinx.conf"
+  searchd_log_file: "RAILS_ROOT/log/searchd.log"
+  query_log_file: "RAILS_ROOT/log/searchd.query.log"
+  pid_file: "/srv/vote-reports/shared/pids/searchd.pid"
   <<: *global_settings
