@@ -14,9 +14,11 @@ class SearchesController < ApplicationController
             :value => politician_title(r),
             :path => politician_path(r)}
           elsif r.owner.is_a?(User)
-            {:label => r.name, :path => user_report_path(r.user, r)}
+            {:label => render_to_string(:partial => 'reports/search_result', :locals => {:report => r}),
+              :value => r.name, :path => user_report_path(r.user, r)}
           else
-            { :label => r.name,
+            { :label => render_to_string(:partial => 'reports/search_result', :locals => {:report => r}),
+              :value => r.name,
               :path => polymorphic_path(r.owner)}
           end
         end

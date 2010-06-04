@@ -10,6 +10,11 @@ img {
   margin-left: 60px;
 }
 
+.ui-menu-item .report {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 #report_scores > table {
   width: 100%;
 }
