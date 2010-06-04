@@ -1,0 +1,10 @@
+<div class="clearfix">
+  <%- if politician.headshot.url(:small) -%>
+    <%= image_with_hover_tag politician.headshot, politician_title(politician), :style => :small, :size => '50x61', :alt => politician.full_name, :class => 'politician_headshot' %>
+  <%- end -%>
+  <div class="politician_name"><%= politician_name(politician) %>
+    <%- if politician.location -%>
+      <span class="politician_location" data-district="<%= polymorphic_path([politician.location, :map]) %>" data-district-title="<%= location_title(politician.location) %>"><%= politician.location.abbreviation %></span>
+    <%- end -%>
+  </div>
+</div>
