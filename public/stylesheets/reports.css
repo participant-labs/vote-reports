@@ -26,11 +26,11 @@
   color: #282625;
 }
 
-a.report_title, .report_creator a, .politician_name a {
+#content a.report_title, #content .report_creator a, #content .politician_name a {
   border-bottom: 0;
 }
 
-a.report_title:hover, .report_creator a:hover, .politician_name a:hover {
+#content a.report_title:hover, #content .report_creator a:hover, #content .politician_name a:hover {
   border-bottom: 1px solid;
 }
 
