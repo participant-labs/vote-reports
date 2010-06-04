@@ -33,7 +33,7 @@ img {
   width: 48%;
 }
 
-a.undecorated, a.undecorated:hover {
+#content a.politician_headshot, #content a.politician_headshot:hover {
   border-bottom: 0;
 }
 

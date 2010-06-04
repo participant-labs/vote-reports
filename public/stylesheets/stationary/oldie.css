@@ -188,11 +188,11 @@ ol, ul, dt {
 	margin: 0 8px 8px 0;
 }
 
-#content a {
+#content a, #footer a {
 	border-bottom: 1px dotted #524F4B;
 }
 
-#content a:hover {
+#content a:hover, #footer a:hover {
 	border-bottom: 1px solid #6C6A67;
 }
 
