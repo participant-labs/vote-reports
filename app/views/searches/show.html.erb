@@ -1,0 +1,10 @@
+<%- title 'Search Results' -%>
+
+<div class="section">
+  <h1>Search Results</h1>
+  <ul>
+    <%- @results.each do |result| -%>
+      <li><%= render result %></li>
+    <%- end -%>
+  </ul>
+</div>
