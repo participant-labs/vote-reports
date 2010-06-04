@@ -14,7 +14,7 @@
     <%= render 'reports/list', :reports => @reports, :replace => 'content' %>
   <%- else -%>
     <h3>No Reports Found - Try again?</h3>
-    <p>Unfortunately, we couldn't find any reports for "<%= params[:q] %>," but that doesn't mean we don't have what you're looking for.  Try another search, or select a subject from the list below:</p>
+    <p>Unfortunately, we couldn't find any reports for "<%= params[:term] %>," but that doesn't mean we don't have what you're looking for.  Try another search, or select a subject from the list below:</p>
     <%= render 'subjects/cloud', :subjects => @subjects %>
   <%- end -%>
 </div>

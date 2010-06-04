@@ -1,6 +1,6 @@
 class SubjectsController < ApplicationController
   def index
-    if params[:q].present?
+    if params[:term].present?
       @title = 'Matching Subjects'
       @subjects = Subject.paginated_search(params).results
     else

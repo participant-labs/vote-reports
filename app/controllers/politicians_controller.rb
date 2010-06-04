@@ -23,7 +23,7 @@ class PoliticiansController < ApplicationController
       return
     end
 
-    if params[:q].present?
+    if params[:term].present?
       @reports = Report.paginated_search(params).results
       @scores = @reports.replace(topical_scores.for_reports(@reports).all(:include => :report))
     else

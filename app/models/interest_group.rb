@@ -21,7 +21,7 @@ class InterestGroup < ActiveRecord::Base
     def paginated_search(params)
       search do
         order_by :name
-        fulltext params[:q]
+        fulltext params[:term]
         paginate :page => params[:page]
       end
     end

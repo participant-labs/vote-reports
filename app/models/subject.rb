@@ -17,7 +17,7 @@ class Subject < ActiveRecord::Base
   class << self
     def paginated_search(params)
       search do
-        fulltext params[:q]
+        fulltext params[:term]
         paginate :page => params[:subject_page]
       end
     end
