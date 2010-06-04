@@ -166,7 +166,7 @@ class Report < ActiveRecord::Base
 
     def paginated_search(params)
       search do
-        fulltext params[:q]
+        fulltext params[:term]
         with(:published, true)
         if params[:except].present?
           without(params[:except])

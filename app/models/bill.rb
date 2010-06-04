@@ -72,7 +72,7 @@ class Bill < ActiveRecord::Base
   class << self
     def paginated_search(params)
       search do
-        fulltext params[:q]
+        fulltext params[:term]
         paginate :page => params[:page], :per_page => Bill.per_page
         if params[:voted]
           without :voted, false

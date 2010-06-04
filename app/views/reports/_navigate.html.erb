@@ -2,8 +2,8 @@
 
 <div id="search" style="<%= 'display: none' if params[:subjects].present? %>">
   <% form_tag path, :method => :get, :'data-replace' => replace do %>
-    <h3><%= label_tag :q, 'Search Reports' %></h3>
-    <%= text_field_tag :q, params[:q] %>
+    <h3><%= label_tag :term, 'Search Reports' %></h3>
+    <%= text_field_tag :term, params[:term] %>
     <%= submit_tag 'Search' %>
     <p>or <a href="#" data-toggle="search, browse_by_subject">browse by subject</a></p>
   <% end %>

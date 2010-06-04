@@ -1,6 +1,6 @@
 class BillsController < ApplicationController
   def index
-    if params[:q].present?
+    if params[:term].present?
       @title = 'Matching Bills'
       @bills = Bill.paginated_search(params).results
     else

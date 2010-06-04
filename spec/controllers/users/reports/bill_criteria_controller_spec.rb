@@ -25,7 +25,7 @@ describe Users::Reports::BillCriteriaController do
       end
 
       it "should redirect" do
-        get :new, :user_id => current_user, :report_id => @report, :q => 'Smelly Roses'
+        get :new, :user_id => current_user, :report_id => @report, :term => 'Smelly Roses'
         response.should redirect_to(new_user_report_bill_criterion_path(current_user, @report))
       end
     end
@@ -33,7 +33,7 @@ describe Users::Reports::BillCriteriaController do
     context "when I am not logged in" do
       it "should deny access" do
         logout
-        get :new, :user_id => @report.user, :report_id => @report, :q => 'searchy!'
+        get :new, :user_id => @report.user, :report_id => @report, :term => 'searchy!'
         response.should redirect_to(login_path(:return_to => new_user_report_bill_criterion_path(@report.user, @report)))
       end
     end
@@ -45,7 +45,7 @@ describe Users::Reports::BillCriteriaController do
       end
 
       it "should deny access" do
-        get :new, :user_id => @report.user, :report_id => @report, :q => 'searchy!'
+        get :new, :user_id => @report.user, :report_id => @report, :term => 'searchy!'
         response.should redirect_to(user_report_path(@report.user, @report))
       end
     end
