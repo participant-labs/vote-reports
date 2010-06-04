@@ -188,14 +188,17 @@ ol, ul, dt {
 	margin: 0 8px 8px 0;
 }
 
-a {
-	color: #42403D;
+#content a {
 	border-bottom: 1px dotted #524F4B;
-	text-decoration: none;
 }
 
-a:hover {
+#content a:hover {
 	border-bottom: 1px solid #6C6A67;
+}
+
+a {
+  color: #42403D;
+	text-decoration: none;
 }
 
 #header a, #header a:hover {
