@@ -168,6 +168,9 @@ class Report < ActiveRecord::Base
       search do
         fulltext params[:q]
         with(:published, true)
+        if params[:except].present?
+          without(params[:except])
+        end
         paginate :page => params[:page], :per_page => Report.per_page
       end
     end

@@ -23,6 +23,15 @@ Feature: Managing Cause Reports
     When I follow "Reports" within "#content"
     Then I should see "Brady Campaign to Prevent Gun Violence"
 
+  Scenario: Add report to cause shouldn't reveal the Cause's report
+    When I go to the cause page for "Gun Control"
+    And I follow "Reports" within "#content"
+    And I follow "Add Reports"
+    And I fill in "Search Reports" with "Control"
+    And I press "Search" within "#content"
+    Then I should not see "Gun Control" within "#cause_reports"
+    But I should see "No reports found for 'Control'"
+
   Scenario: Remove report from cause
     Given cause "Gun Control" includes report "Brady Campaign to Prevent Gun Violence"
     When I go to the cause page for "Gun Control"
