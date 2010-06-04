@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resource :search, :only => :show
 
   map.resources :causes do |cause|
     cause.resources :scores, :controller => 'causes/scores', :only => [:index, :show]

@@ -61,6 +61,15 @@
     $('.fieldtag').fieldtag();
     $('label.fieldtag').hide();
 
+    $("#nav_search").autocomplete({
+      source: "/search",
+      minLength: 2,
+      select: function(event, ui) {
+        window.location = ui.item.path;
+      }
+
+    });
+
   });
   $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script;
 

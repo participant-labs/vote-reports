@@ -2,6 +2,18 @@ img {
   display: inline-block;
 }
 
+.ui-menu-item .ui-corner-all {
+  border-bottom: none;
+}
+
+.ui-menu-item .politician_headshot {
+  float:left;
+}
+
+.ui-menu-item .politician_name {
+  margin-left: 60px;
+}
+
 #report_scores > table {
   width: 100%;
 }
