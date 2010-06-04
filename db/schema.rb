@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100529203818) do
+ActiveRecord::Schema.define(:version => 20100604191817) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -464,6 +464,7 @@ ActiveRecord::Schema.define(:version => 20100529203818) do
   end
 
   add_index "reports", ["cached_slug"], :name => "index_reports_on_cached_slug"
+  add_index "reports", ["cause_id"], :name => "index_reports_on_cause_id", :unique => true
   add_index "reports", ["image_id"], :name => "index_reports_on_image_id"
   add_index "reports", ["interest_group_id"], :name => "index_reports_on_interest_group_id"
   add_index "reports", ["user_id"], :name => "index_reports_on_user_id"
