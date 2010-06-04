@@ -4,11 +4,12 @@ class SearchesController < ApplicationController
   def show
     params[:in_office] = true
     params[:representing] = params[:term]
-    results = Report.paginated_search(params).results
-    results += sought_politicians
+    @results = Report.paginated_search(params).results
+    @results += sought_politicians
     respond_to do |format|
+      format.html
       format.js {
-        results = results.map do |r|
+        @results = @results.map do |r|
           if r.is_a?(Politician)
             {:label => render_to_string(:partial => 'politicians/search_result', :locals => {:politician => r}),
             :value => politician_title(r),
@@ -23,7 +24,7 @@ class SearchesController < ApplicationController
           end
         end
 
-        render :json => results.to_json
+        render :json => @results.to_json
       }
     end
   end
