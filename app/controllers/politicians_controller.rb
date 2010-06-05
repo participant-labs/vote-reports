@@ -14,34 +14,12 @@ class PoliticiansController < ApplicationController
   end
 
   def show
-    params[:subjects] ||= []
-
-    @politician = Politician.find(params[:id],
-      :include => [:state, {:report_scores => [:report, :evidence]}])
+    @politician = Politician.find(params[:id], :include => :state)
     if !@politician.friendly_id_status.best?
       redirect_to politician_path(@politician), :status => 301
       return
     end
-
-    if params[:term].present?
-      @reports = Report.paginated_search(params).results
-      @scores = @reports.replace(topical_scores.for_reports(@reports).all(:include => :report))
-    else
-      @scores = topical_scores.paginate(:page => params[:page], :include => :report)
-    end
-
-    @subjects =  Subject.on_published_reports.for_tag_cloud.all(:limit => 20)
-
-    respond_to do |format|
-      format.html {
-        @terms = @politician.terms
-      }
-      format.js {
-        render :partial => 'politicians/scores/table', :locals => {
-          :scores => @scores
-        }
-      }
-    end
+    @terms = @politician.terms
   end
 
   private
