@@ -11,7 +11,7 @@
   content: ', ';
 }
 
-.report blockquote, .report_description blockquote {
+.cause blockquote, .report blockquote, .report_description blockquote {
   border-left: 0;
   padding-left: 0;
 }
@@ -26,11 +26,11 @@
   color: #282625;
 }
 
-#content .subject > a, #content a.report_title, #content .report_creator a, #content .politician_name a {
+#content .cause > a, #content .subject > a, #content a.report_title, #content .report_creator a, #content .politician_name a {
   border-bottom: 0;
 }
 
-#content .subject > a:hover, #content a.report_title:hover, #content .report_creator a:hover, #content .politician_name a:hover {
+#content .cause > a:hover, #content .subject > a:hover, #content a.report_title:hover, #content .report_creator a:hover, #content .politician_name a:hover {
   border-bottom: 1px solid;
 }
 

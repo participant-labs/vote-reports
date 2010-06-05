@@ -51,7 +51,7 @@ img {
   padding-bottom: 0.5em;
 }
 
-.report_scores > li + li, .reports > li + li {
+#causes li + li, .report_scores > li + li, .reports > li + li {
   border-top: 1px dotted gray;
 }
 
@@ -269,12 +269,12 @@ dl.chart_tooltip {
   max-height: 120px;
 }
 
-.report {
+.cause, .report {
   margin-top: 1em;
   margin-bottom: 1em;
 }
 
-.report blockquote, .report_creator {
+.cause blockquote, .report blockquote, .report_creator {
   margin-top: 5px;
 }
 
