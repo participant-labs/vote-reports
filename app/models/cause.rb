@@ -15,6 +15,12 @@ class Cause < ActiveRecord::Base
 
   alias_method :score_criteria, :cause_reports
 
+  class << self
+    def per_page
+      20
+    end
+  end
+
   private
 
   def initialize_report
