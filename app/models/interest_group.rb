@@ -8,6 +8,7 @@ class InterestGroup < ActiveRecord::Base
   end
 
   has_one :report
+  delegate :causes, :to => :report
 
   searchable do
     text :name, :description
