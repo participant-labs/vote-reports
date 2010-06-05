@@ -5,16 +5,19 @@ module LocationsHelper
 
   def sought_politicians
     @in_office = !params.has_key?(:in_office) || ['1', true].include?(params[:in_office])
-    if !requested_location.nil?
-      Politician.from(requested_location)
-    elsif session[:geo_location]
-      unless @dont_show_geo_address
-        params[:representing] = session[:geo_location].full_address
+    result =
+      if !requested_location.nil?
+        Politician.from(requested_location)
+      elsif session[:geo_location]
+        unless @dont_show_geo_address
+          params[:representing] = session[:geo_location].full_address
+        end
+        Politician.from(session[:geo_location])
+      else
+        Politician
       end
-      Politician.from(session[:geo_location])
-    else
-      Politician
-    end.in_office(@in_office)
+    result = result.in_office if @in_office
+    result
   end
 
   def requested_location

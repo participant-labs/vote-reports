@@ -63,25 +63,37 @@ class Politician < ActiveRecord::Base
 
   default_scope :include => :state
 
-  named_scope :in_office, lambda { |in_office_only|
-    if in_office_only.present?
-      {
-        :select => 'DISTINCT politicians.*',
-        :joins => [
-          %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
-          %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
-          %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id}],
-        :conditions => [
-          '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
-          '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
-          '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
-          {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
-        ]
-      }
-    else
-      {}
-    end
+  belongs_to :current_office, :polymorphic => true
+  named_scope :in_office, :conditions => 'politicians.current_office_id IS NOT NULL'
+  named_scope :in_office_normal_form, lambda {
+    {
+      :select => 'DISTINCT politicians.*',
+      :joins => [
+        %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
+        %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
+        %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id}],
+      :conditions => [
+        '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
+        '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
+        '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
+        {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
+      ]
+    }
   }
+  class << self
+    def update_current_office_status!
+      Politician.transaction do
+        Politician.update_all(:current_office_id => nil, :current_office_type => nil)
+        Politician.in_office_normal_form.paginated_each do |politician|
+          politician.update_attribute(:current_office, politician.latest_term)
+        end
+      end
+    end
+  end
+  def in_office?
+    current_office_id.nil?
+  end
+
   named_scope :with_name, lambda {|name|
     first, last = name.split(' ', 2)
     {:conditions => {:first_name => first, :last_name => last}}
@@ -183,10 +195,6 @@ class Politician < ActiveRecord::Base
     else
       "#{title.to(2)}."
     end
-  end
-
-  def in_office?
-    !Politician.in_office(true).find_by_id(id).nil?
   end
 
   private

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100604191817) do
+ActiveRecord::Schema.define(:version => 20100605005605) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -341,7 +341,7 @@ ActiveRecord::Schema.define(:version => 20100604191817) do
     t.string   "vote_smart_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "gov_track_id",      :null => false
+    t.integer  "gov_track_id",        :null => false
     t.string   "bioguide_id"
     t.string   "congress_office"
     t.string   "congresspedia_url"
@@ -368,6 +368,8 @@ ActiveRecord::Schema.define(:version => 20100604191817) do
     t.string   "title"
     t.integer  "us_state_id"
     t.integer  "district_id"
+    t.integer  "current_office_id"
+    t.string   "current_office_type"
   end
 
   add_index "politicians", ["bioguide_id"], :name => "index_politicians_on_bioguide_id", :unique => true

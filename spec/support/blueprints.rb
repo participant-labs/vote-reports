@@ -345,7 +345,8 @@ Fixjour :verify => false do
 
   def create_in_office_politician(params)
     create_politician(params).tap do |politician|
-      create_representative_term(:politician => politician)
+      term = create_representative_term(:politician => politician)
+      politician.update_attributes(:current_office => term)
     end
   end
 

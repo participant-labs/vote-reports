@@ -6,11 +6,7 @@ class District < ActiveRecord::Base
   has_many :representative_terms
   has_many :representatives, :through => :representative_terms, :source => :politician, :uniq => true do
     def in_office
-      scoped(
-      :conditions => [
-        '((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow)))',
-        {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
-      ])
+      scoped(:conditions => ['politicians.current_office_type = ?', 'RepresentativeTerm'])
     end
   end
   has_many :cached_politicians, :class_name => 'Politician'
