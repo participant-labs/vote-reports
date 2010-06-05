@@ -22,7 +22,9 @@ ActionController::Routing::Routes.draw do |map|
     interest_group.resource :agenda, :controller => 'interest_groups/agendas', :only => :show
     interest_group.resource :image, :controller => 'interest_groups/images', :only => [:edit, :create, :update]
   end
-  map.resources :politicians, :only => [:index, :show]
+  map.resources :politicians, :only => [:index, :show] do |politician|
+    politician.resources :reports, :controller => 'politicians/reports', :only => :index
+  end
   map.resources :subjects, :only => [:index, :show] do |subject|
     subject.resources :reports, :controller => 'subjects/reports', :only => :index
     subject.resources :bills, :controller => 'subjects/bills', :only => :index

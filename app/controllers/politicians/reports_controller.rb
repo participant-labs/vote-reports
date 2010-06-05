@@ -1,6 +1,6 @@
 class Politicians::ReportsController < ApplicationController
   def index
-    @politician = Politician.find(params[:politician_id])
+    @politician = Politician.find(params[:politician_id], :include => {:report_scores => [:report, :evidence]})
 
     params[:subjects] ||= []
     if params[:term].present?
@@ -12,7 +12,7 @@ class Politicians::ReportsController < ApplicationController
 
     @subjects = Subject.for_report(@scores.map(&:report)).for_tag_cloud.all(:limit => 20)
 
-    render :partial => 'politicians/scores/table', :locals => {:scores => @scores}
+    render :layout => false
   end
 
   private
