@@ -4,12 +4,6 @@ production:
     port: 8080
     log_level: WARNING
 
-staging:
-  solr:
-    hostname: localhost
-    port: 8080
-    log_level: WARNING
-
 development:
   solr:
     hostname: localhost
@@ -21,4 +15,3 @@ test:
     hostname: localhost
     port: 8981
     log_level: WARNING
-    
