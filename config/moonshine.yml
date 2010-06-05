@@ -39,6 +39,7 @@
 
 :root_symlinks:
  - data
+ - solr
 
 # Use :shared_config to copy directories straight from your local project
 # directory to the server: these are files that you don't have/want in scm.
