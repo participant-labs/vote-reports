@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :reports, :only => [:index, :new]
   map.resources :reports, :as => '', :name_prefix => 'user_', :path_prefix => "reports/:user_id", :controller => 'users/reports' do |report|
     report.resources :scores, :controller => 'users/reports/scores', :only => [:index, :show]
+    report.resources :causes, :controller => 'users/reports/causes', :only => :index
     report.resources :subjects, :controller => 'users/reports/subjects', :only => :index
     report.resource :agenda, :controller => 'users/reports/agendas', :only => :show
     report.resource :visibility, :controller => 'users/reports/visibilities', :only => :show

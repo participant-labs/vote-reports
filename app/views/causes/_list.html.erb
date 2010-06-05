@@ -2,7 +2,7 @@
   <% paginated_section causes, :'data-replace' => 'causes' do %>
     <ul>
       <%- causes.each do |cause| -%>
-        <li><%= render cause %></li>
+        <li><%= render 'causes/cause', :cause => cause %></li>
       <%- end -%>
     </ul>
   <% end %>

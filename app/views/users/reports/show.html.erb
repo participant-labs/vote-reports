@@ -9,8 +9,9 @@
 <div class="ui-tabs">
   <ul>
     <li><%= link_to content_tag(:span, 'Scores'), user_report_scores_path(@report.user, @report), :title => 'Scores' %></li>
-    <li><%= link_to content_tag(:span, 'Subjects'), user_report_subjects_path(@report.user, @report), :title => 'Subjects' %></li>
     <li><%= link_to content_tag(:span, 'Agenda'), user_report_agenda_path(@report.user, @report), :title => 'Agenda' %></li>
+    <li><%= link_to content_tag(:span, 'Subjects'), user_report_subjects_path(@report.user, @report), :title => 'Subjects' %></li>
     <li><%= link_to content_tag(:span, 'Visibility'), user_report_visibility_path(@report.user, @report), :title => 'Visibility' %></li>
+    <li><%= link_to content_tag(:span, 'Causes'), user_report_causes_path(@report.user, @report), :title => 'Causes' %></li>
   </ul>
 </div>
