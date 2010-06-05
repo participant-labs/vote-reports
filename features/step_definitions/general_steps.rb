@@ -6,6 +6,7 @@ Given /^the following (.+) records?:$/ do |type, table|
   table.hashes.each do |row|
     send "create_#{type.to_s.gsub(' ', '_').underscore}", row.symbolize_keys
   end
+  Politician.update_current_office_status! if type.include?(' term')
 end
 
 When /^I wait (\d+) seconds$/ do |seconds|

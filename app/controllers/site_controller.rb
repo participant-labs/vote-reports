@@ -14,7 +14,7 @@ class SiteController < ApplicationController
     @politicians = sought_politicians.scoped(:limit => 5)
     if @politicians.blank?
       @reps = ['These Example', 'example']
-      @politicians = Politician.in_office(true).scoped(:limit => 5)
+      @politicians = Politician.in_office.scoped(:limit => 5)
     end
     @scores =  @politicians.map {|politician| politician.report_scores.published.first(:order => 'random()') }.compact
 

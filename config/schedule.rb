@@ -13,6 +13,10 @@
 
 set :output, "/srv/vote-reports/shared/log/cron_log.log"
 
+every 1.day do
+  runner "Politician.update_current_office_status!"
+end
+
 every 7.days do
   rake "images:backup"
 
