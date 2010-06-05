@@ -202,14 +202,16 @@ class Politician < ActiveRecord::Base
   end
   alias_method :name, :full_name
 
-  def title
-    self[:title] || begin
-      result = latest_term.try(:title)
-      update_attribute(:title, result) if result
-      result
+  class << self
+    def update_titles!
+      paginated_each do |politician|
+        title = politician.latest_term.try(:title)
+        if politician.title != title
+          politician.update_attribute(:title, title)
+        end
+      end
     end
   end
-
   def short_title
     return '' if title.blank?
     if title == 'President'

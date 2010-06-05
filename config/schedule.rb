@@ -30,6 +30,8 @@ every 7.days do
 
   rake "sunlight:politicians:download"
   rake "sunlight:politicians:unpack"
+
+  runner "Politician.update_titles!"
 end
 
 # Learn more: http://github.com/javan/whenever
