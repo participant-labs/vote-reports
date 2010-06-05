@@ -192,7 +192,7 @@ ol, ul, dt {
 	border-bottom: 1px dotted #524F4B;
 }
 
-#account a, #content a:hover, #footer a:hover {
+#account a:hover, #content a:hover, #footer a:hover {
 	border-bottom: 1px solid #6C6A67;
 }
 
