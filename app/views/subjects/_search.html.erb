@@ -1,5 +1,5 @@
 <% form_tag subjects_path, :method => :get, :'data-replace' => replace do %>
   <%= label_tag :term, 'Search' %>
-  <%= text_field_tag :term, q %>
+  <%= text_field_tag :term, term %>
   <%= submit_tag 'Search' %>
 <% end %>
