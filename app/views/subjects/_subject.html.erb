@@ -1,0 +1,3 @@
+<% div_for subject do %>
+  <%= link_to_unless_current %{Subject: #{subject.name}}, subject_path(subject) %>
+<% end %>
