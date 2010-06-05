@@ -1,0 +1,2 @@
+module InterestGroups::CausesHelper
+end
