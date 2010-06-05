@@ -7,7 +7,7 @@ class CausesController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render 'causes/list', :causes => @causes
+        render :partial => 'causes/list', :locals => {:causes => @causes}
       }
     end
   end
