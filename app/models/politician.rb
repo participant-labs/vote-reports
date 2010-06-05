@@ -42,6 +42,28 @@ class Politician < ActiveRecord::Base
     district || state
   end
 
+  searchable do
+    text :name
+    boolean :visible do
+      true
+    end
+    boolean :in_office do
+      in_office?
+    end
+  end
+
+  class << self
+    def paginated_search(params)
+      search do
+        fulltext params[:term]
+        if params[:except].present?
+          without(params[:except])
+        end
+        paginate :page => params[:page]
+      end
+    end
+  end
+
   IDENTITY_STRING_FIELDS = [
     :vote_smart_id, :bioguide_id, :eventful_id, :twitter_id, :email, :metavid_id,
     :congresspedia_url, :open_secrets_id, :crp_id, :fec_id, :phone, :website, :youtube_url

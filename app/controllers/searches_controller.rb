@@ -3,9 +3,13 @@ class SearchesController < ApplicationController
 
   def show
     params[:in_office] = true
-    params[:representing] = params[:term]
-    @results = Report.paginated_search(params).results
-    @results += sought_politicians
+    term = params[:representing] = params[:term]
+    @results = (Sunspot.search(Subject, Report, Politician) do
+      fulltext term
+      with(:visible, true)
+      paginate :per_page => 20
+    end.results + sought_politicians).uniq
+
     respond_to do |format|
       format.html
       format.js {
@@ -14,6 +18,10 @@ class SearchesController < ApplicationController
             {:label => render_to_string(:partial => 'politicians/search_result', :locals => {:politician => r}),
             :value => politician_title(r),
             :path => politician_path(r)}
+          elsif r.is_a?(Subject)
+            {:label => "Subject: #{r.name}",
+            :value => r.name,
+            :path => subject_path(r)}
           elsif r.owner.is_a?(User)
             {:label => render_to_string(:partial => 'reports/search_result', :locals => {:report => r}),
               :value => r.name, :path => user_report_path(r.user, r)}

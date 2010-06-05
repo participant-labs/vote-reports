@@ -12,6 +12,9 @@ class Subject < ActiveRecord::Base
 
   searchable do
     text :name
+    boolean :visible do
+      true
+    end
   end
 
   class << self
