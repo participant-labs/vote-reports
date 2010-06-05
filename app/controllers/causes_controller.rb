@@ -7,7 +7,7 @@ class CausesController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render 'cases/list', :causes => @causes
+        render 'causes/list', :causes => @causes
       }
     end
   end
