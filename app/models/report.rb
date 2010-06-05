@@ -151,11 +151,8 @@ class Report < ActiveRecord::Base
     text :username do
       user.try(:username)
     end
-    boolean :published do
+    boolean :visible do
       user.nil? || published?
-    end
-    boolean :user_published do
-      published?
     end
   end
 
@@ -167,7 +164,7 @@ class Report < ActiveRecord::Base
     def paginated_search(params)
       search do
         fulltext params[:term]
-        with(:published, true)
+        with(:visible, true)
         if params[:except].present?
           without(params[:except])
         end
