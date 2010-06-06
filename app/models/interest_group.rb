@@ -1,4 +1,6 @@
 class InterestGroup < ActiveRecord::Base
+  include HasReport
+
   has_ancestry
   has_friendly_id :name, :use_slug => true
 
@@ -6,9 +8,6 @@ class InterestGroup < ActiveRecord::Base
   def thumbnail
     image || build_image
   end
-
-  has_one :report
-  delegate :causes, :to => :report
 
   searchable do
     text :name, :description
@@ -40,11 +39,6 @@ class InterestGroup < ActiveRecord::Base
       :conditions => {:'reports.interest_group_id' => self})
   end
 
-  before_validation_on_create :initialize_report
-  after_update :update_report
-
-  validates_presence_of :report, :name
-
   named_scope :for_subjects, lambda {|subjects|
     if subjects.blank?
       {}
@@ -71,16 +65,4 @@ class InterestGroup < ActiveRecord::Base
   end
 
   alias_method :score_criteria, :reports
-
-  private
-
-  def update_report
-    if name_changed? || description_changed?
-      report.update_attributes(:name => name, :description => description)
-    end
-  end
-
-  def initialize_report
-    build_report(:name => name)
-  end
 end
