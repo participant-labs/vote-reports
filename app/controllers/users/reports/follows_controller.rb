@@ -8,7 +8,7 @@ class Users::Reports::FollowsController < ApplicationController
     else
       flash[:notice] = "You are already following this report"
     end
-    redirect_to :back
+    redirect_to user_report_path(@follow.report.user, @follow.report)
   end
   alias_method :show, :create
 end

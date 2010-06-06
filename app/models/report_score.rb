@@ -39,7 +39,7 @@ class ReportScore < ActiveRecord::Base
 
   named_scope :for_politicians, lambda {|politicians|
     politicians = Array(politicians)
-    if politicians.empty?
+    if politicians.empty? || politicians.first == Politician
       {}
     else
       {:conditions => {:politician_id => politicians}}
