@@ -458,10 +458,9 @@ ActiveRecord::Schema.define(:version => 20100606023154) do
     t.datetime "updated_at"
     t.text     "description"
     t.string   "cached_slug"
-    t.string   "state",             :null => false
+    t.string   "state"
     t.integer  "interest_group_id"
     t.integer  "image_id"
-    t.string   "source"
     t.integer  "cause_id"
   end
 
