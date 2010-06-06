@@ -3,7 +3,6 @@ embed_assets: on
 javascripts:
   common:
     - public/javascripts/vendor/jquery-ui-1.8.2.custom.min.js
-    - public/javascripts/vendor/jquery.address-1.1.min.js
     - public/javascripts/vendor/jquery.blockUI.js
     - public/javascripts/vendor/jquery.hoverIntent.js
     - public/javascripts/vendor/jquery.fieldtag.js
