@@ -15,7 +15,7 @@ module HasReport
 
   def update_report
     if name_changed? || description_changed?
-      report.update_attributes(:name => name, :description => description)
+      (report || build_report).update_attributes!(:name => name, :description => description)
     end
   end
 
