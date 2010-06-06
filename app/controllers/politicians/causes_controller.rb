@@ -10,5 +10,6 @@ class Politicians::CausesController < ApplicationController
         render :partial => 'politicians/scores/table',
           :locals => {:scores => @scores, :replace => 'report_scores', :source => 'Cause'}
       }
+    end
   end
 end
