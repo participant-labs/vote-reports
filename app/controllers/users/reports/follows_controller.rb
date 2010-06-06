@@ -1,5 +1,5 @@
 class Users::Reports::FollowsController < ApplicationController
-  before_filter :login_required
+  filter_access_to :all
 
   def create
     @follow = User.find(params[:user_id]).reports.find(params[:report_id]).follows.new(:user => current_user)
@@ -8,6 +8,7 @@ class Users::Reports::FollowsController < ApplicationController
     else
       flash[:notice] = "You are already following this report"
     end
-    redirect_to user_report_path(@follow.report.user, @follow.report)
+    redirect_to :back
   end
+  alias_method :show, :create
 end
