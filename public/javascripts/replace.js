@@ -1,13 +1,4 @@
 ;(function($) {
-  $.address.init(function(event) {
-    if (event.value.length > 1) {
-      var values = event.value.substring(1).split('/');
-      var target_id = values.shift();
-      var url = current_url() + '?' + values.shift();
-      replaceWith(target_id, url);
-    }
-  });
-
   function current_url() {
     return window.location.protocol + '//' + window.location.host + window.location.pathname;
   }
@@ -25,7 +16,6 @@
     target.load(url, function() {
       target.unblock();
     });
-    $.address.value(params_to_path(target_id, url));
     return false;
   }
 
