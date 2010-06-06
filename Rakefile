@@ -17,4 +17,4 @@ rescue => e
   raise
 end
 
-task :default => [:spec, :cucumber]
+task :default => [:spec, :'cucumber:rerun']
