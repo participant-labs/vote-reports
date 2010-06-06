@@ -261,7 +261,7 @@ class Report < ActiveRecord::Base
     if self[:description].blank? && owner.respond_to?(:description)
       owner.description
     else
-      BlueCloth::new(self[:description].to_s).to_html
+      self[:description]
     end
   end
 

@@ -1,6 +1,6 @@
 <% div_for cause do %>
   <%= link_to cause.name, cause, :class => 'cause_title' %>
   <blockquote class="description">
-    <p><%= truncate(strip_tags(cause.description), :length => 180) %></p>
+    <p><%= truncate(strip_tags(md_to_html(cause.description)), :length => 180) %></p>
   </blockquote>
 <% end %>
