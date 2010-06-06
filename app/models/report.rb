@@ -191,7 +191,7 @@ class Report < ActiveRecord::Base
 
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
 
-  validates_presence_of :owner, :name, :followers
+  validates_presence_of :owner, :name
   validate :ensure_only_one_owner
   before_validation_on_create :add_creator_to_followers
 
