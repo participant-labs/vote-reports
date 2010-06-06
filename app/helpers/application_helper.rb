@@ -26,6 +26,11 @@ module ApplicationHelper
     @page_title = page_title.to_s
   end
 
+  def md_to_html(md)
+    BlueCloth::new(md).to_html
+  end
+  safe_helper :md_to_html
+
   def format_newlines(text)
     text.to_s.gsub(/(?:\n\r?|\r\n?)/, '<br />')
   end
