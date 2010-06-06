@@ -18,6 +18,7 @@ authorization do
     has_permission_on :users, :to => [:show, :edit, :update] do
       if_attribute :id => is {user.id}
     end
+    has_permission_on :users_reports_follows, :to => [:show, :create]
     has_permission_on :users_rpx_identities, :to => [:create, :destroy] do
       if_attribute :user_id => is {user.id}
     end

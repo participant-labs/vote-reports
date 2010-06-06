@@ -4,17 +4,15 @@
     <%= report_next_step(report) %>
   <%- end -%>
 
-  <h4>Followers</h4>
-  <%= follower_count(@report) || content_tag(:p, "No followers yet for this report") %>
+  <h4><%= follower_count(@report) || content_tag(:p, "Like this Report?") %></h4>
   <%- if current_user.try(:follows?, @report) -%>
-    <h3>You're following this report</h3>
-    <p>You're following this report, so its scores are incorporated into your personal report.</p>
+    <p>You're following this report</p>
     <%= follower_count(@report, :other) %>
   <%- else -%>
-    <h3>Like this report?</h3>
-    <p>Following reports is anonymous and gives you access to special report features and updates.</p>
-    <%= follower_count(@report) %>
-    <%= raw button_to('Follow this Report', user_report_follows_path(@report.user, @report)) %>
+    <p>Following is private by default and gives you access to special features and updates.</p>
+    <div class="buttons clearfix">
+      <%= link_to('Follow this Report', user_report_follows_path(@report.user, @report), :method => :post) %>
+    </div>
   <%- end -%>
 </div>
 
