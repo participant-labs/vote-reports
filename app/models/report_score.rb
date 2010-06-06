@@ -14,7 +14,7 @@ class ReportScore < ActiveRecord::Base
   ]
 
   named_scope :published, :joins => :report, :conditions => [
-    "reports.state = ? OR reports.interest_group_id IS NOT NULL", 'published']
+    "reports.state = ? OR reports.user_id IS NULL", 'published']
 
   named_scope :for_causes, :joins => :report, :conditions => ['reports.cause_id IS NOT NULL']
 
