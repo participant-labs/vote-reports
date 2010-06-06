@@ -11,6 +11,7 @@ Feature: Browsing Politician Reports
       | Piyush Jindal         |
       | Ron Wyden             |
 
+  @javascript
   Scenario: Searching related reports for specific topics
     Given report "Active Report" has the following scores:
       | politician    | score |
@@ -21,6 +22,7 @@ Feature: Browsing Politician Reports
       | Piyush Jindal | 97    |
       | Ron Wyden     | 33    |
     When I go to the politician page for "Piyush Jindal"
+    And I follow "Reports" within "#content"
     Then I should see "Active Report"
     And I should see "Other Report"
     And I should see "11%"
@@ -67,6 +69,7 @@ Feature: Browsing Politician Reports
       | Bovine Security Act of 2009 | true    |
     When I wait for delayed job to finish
     When I go to the politician page for "Piyush Jindal"
+    And I follow "Reports" within "#content"
     Then I should see "Active Report"
     And I should see "100%"
 
@@ -79,6 +82,7 @@ Feature: Browsing Politician Reports
       | politician | vote |
       | Ron Wyden  | -    |
     When I go to the politician page for "Ron Wyden"
+    And I follow "Reports" within "#content"
     Then I should see "Active Report"
     And I should see "50%"
     And I should not see "Piyush Jindal"
