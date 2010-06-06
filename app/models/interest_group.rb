@@ -41,6 +41,8 @@ class InterestGroup < ActiveRecord::Base
   end
 
   before_validation_on_create :initialize_report
+  after_update :update_report
+
   validates_presence_of :report, :name
 
   named_scope :for_subjects, lambda {|subjects|
@@ -71,6 +73,12 @@ class InterestGroup < ActiveRecord::Base
   alias_method :score_criteria, :reports
 
   private
+
+  def update_report
+    if name_changed? || description_changed?
+      report.update_attributes(:name => name, :description => description)
+    end
+  end
 
   def initialize_report
     build_report(:name => name)

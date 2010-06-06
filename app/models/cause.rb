@@ -4,6 +4,7 @@ class Cause < ActiveRecord::Base
 
   has_one :report
   before_validation_on_create :initialize_report
+  after_update :update_report
 
   accepts_nested_attributes_for :cause_reports, :reject_if => proc {|attributes| attributes['support'] == '0' }
 
@@ -22,6 +23,12 @@ class Cause < ActiveRecord::Base
   end
 
   private
+
+  def update_report
+    if name_changed? || description_changed?
+      report.update_attributes(:name => name, :description => description)
+    end
+  end
 
   def initialize_report
     build_report(:name => name)
