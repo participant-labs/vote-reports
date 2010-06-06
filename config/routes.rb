@@ -23,6 +23,7 @@ ActionController::Routing::Routes.draw do |map|
     interest_group.resource :image, :controller => 'interest_groups/images', :only => [:edit, :create, :update]
   end
   map.resources :politicians, :only => [:index, :show] do |politician|
+    politician.resources :causes, :controller => 'politicians/causes', :only => :index
     politician.resources :reports, :controller => 'politicians/reports', :only => :index
   end
   map.resources :subjects, :only => [:index, :show] do |subject|

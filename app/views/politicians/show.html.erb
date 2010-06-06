@@ -64,6 +64,7 @@
 
 <div class="ui-tabs">
   <ul>
+    <li><%= link_to content_tag(:span, 'Causes'), politician_causes_path(@politician), :title => 'Causes' %></li>
     <li><%= link_to content_tag(:span, 'Reports'), politician_reports_path(@politician), :title => 'Reports' %></li>
   </ul>
 </div>
