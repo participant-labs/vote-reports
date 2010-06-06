@@ -1,12 +1,20 @@
+<%- source ||= 'Report' -%>
+
 <%- if scores.blank? -%>
-  <p>No Reports for this politician yet.  Maybe you can <%= link_to 'make the first', new_report_path %>?</p>
+  <p>No <%= source.pluralize %> for this politician yet.
+  <%- if source == 'Report' -%>  
+    Maybe you can <%= link_to 'make the first', new_report_path %>?
+  <%- elsif source == 'Cause' -%>
+    <%= mail_to 'causes@votereports.org', 'Let us know' %> if one of <%= link_to 'their report scores', '#Reports' %> should be included in a cause.
+  <%- end -%>
+  </p>
 <%- else -%>
-<div id="reports">
+<div id="report_scores">
   <%- paginated_section scores, :'data-replace' => 'reports' do -%>
     <table>
       <thead>
         <tr>
-          <th>Report</th>
+          <th><%= source %></th>
           <th>Score</th>
         </tr>
       </thead>
