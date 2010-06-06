@@ -9,7 +9,7 @@
     <p>You're following this report</p>
     <%= follower_count(@report, :other) %>
   <%- else -%>
-    <p>Following is private by default and gives you access to special features and updates.</p>
+    <p>Following gives you access to special features and updates.</p>
     <div class="buttons clearfix">
       <%= link_to('Follow this Report', user_report_follows_path(@report.user, @report), :method => :post) %>
     </div>
