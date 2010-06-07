@@ -6,6 +6,7 @@ module PoliticianTermsHelper
   safe_helper :term_description
 
   def term_place(term)
+    term = term.representative_term if term.is_a?(ContinuousTerm)
     case term
     when PresidentialTerm
       "of these United States"

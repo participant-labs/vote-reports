@@ -19,7 +19,7 @@ class PoliticiansController < ApplicationController
       redirect_to politician_path(@politician), :status => 301
       return
     end
-    @terms = @politician.terms
+    @terms = @politician.continuous_terms
   end
 
   private
