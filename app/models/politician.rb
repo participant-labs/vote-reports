@@ -36,6 +36,10 @@ class Politician < ActiveRecord::Base
     ).sort_by(&:ended_on).reverse
   end
 
+  def continuous_terms
+    ContinuousTerm.find_all_by_politician_id(id, :order => [['ended_on', 'desc']])
+  end
+
   belongs_to :district
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
   def location

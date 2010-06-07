@@ -32,6 +32,7 @@ every 7.days do
   rake "sunlight:politicians:unpack"
 
   runner "Politician.update_titles!"
+  runner "ContinuousTerm.regenerate!"
 end
 
 # Learn more: http://github.com/javan/whenever

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100606023154) do
+ActiveRecord::Schema.define(:version => 20100607051540) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -411,6 +411,17 @@ ActiveRecord::Schema.define(:version => 20100606023154) do
   add_index "report_delayed_jobs", ["delayed_job_id"], :name => "index_report_delayed_jobs_on_delayed_job_id"
   add_index "report_delayed_jobs", ["report_id", "delayed_job_id"], :name => "index_report_delayed_jobs_on_report_id_and_delayed_job_id"
   add_index "report_delayed_jobs", ["report_id"], :name => "index_report_delayed_jobs_on_report_id"
+
+  create_table "report_follows", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "report_id",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "report_follows", ["report_id", "user_id"], :name => "index_report_follows_on_report_id_and_user_id", :unique => true
+  add_index "report_follows", ["report_id"], :name => "index_report_follows_on_report_id"
+  add_index "report_follows", ["user_id"], :name => "index_report_follows_on_user_id"
 
   create_table "report_score_evidences", :force => true do |t|
     t.integer  "report_score_id", :null => false
