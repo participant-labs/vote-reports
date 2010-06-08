@@ -3,6 +3,13 @@ module LocationsHelper
     (location =~ /^\s*\d{5}([-\s]*\d{4})?\s*$/).present?
   end
 
+  def geo_description(geoloc)
+    # unlike #full_address, doesn't include the country
+    zip = " #{geoloc.zip}" if geoloc.zip
+    city = "#{geoloc.city}, " if geoloc.city
+    "#{city}#{geoloc.state}#{zip}"
+  end
+
   def sought_politicians
     @in_office = !params.has_key?(:in_office) || ['1', true].include?(params[:in_office])
     result =
@@ -10,7 +17,7 @@ module LocationsHelper
         Politician.from(requested_location)
       elsif session[:geo_location].try(:is_us?)
         unless @dont_show_geo_address
-          params[:representing] = session[:geo_location].full_address
+          params[:representing] = geo_description(session[:geo_location])
         end
         Politician.from(session[:geo_location])
       else
