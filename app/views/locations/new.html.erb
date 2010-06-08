@@ -1,18 +1,16 @@
 <%- title "Set your location" -%>
 
 <div class="section">
-  <h2>Set your location</h2>
+  <h4>Help us show just the scores relevant to you</h4>
 
-  <p>Setting your location on VoteReports helps us to show you just the scores relevant to you.</p>
-
-  <p>Just tell us the zip code (+ 4 is best) for where you vote and we'll focus on your representatives throughout the site.</p>
+  <p>Just tell us where you vote (zip code is best, + 4 is even better) and we'll focus on your representatives throughout the site.</p>
 
   <% form_tag location_path do %>
-    <%= label_tag :zip_code, "Zip Code" %>
+    <%= label_tag :zip_code, "Location" %>
     <%= text_field_tag :zip_code %>
     <%- if params[:return_to].present? -%>
       <%= hidden_field_tag :return_to, params[:return_to] %>
     <%- end -%>
-    <%= submit_tag 'Save' %>
+    <%= submit_tag 'Set' %>
   <% end %>
 </div>
