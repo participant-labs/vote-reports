@@ -67,9 +67,11 @@
       select: function(event, ui) {
         window.location = ui.item.path;
       }
-
     });
 
+    $('.fancyboxy').fancybox({
+      hideOnContentClick: false
+    });
   });
 
   $current_tabs = $(".ui-tabs").tabs();
