@@ -1,7 +1,6 @@
 class SiteController < ApplicationController
 
   def index
-    @dont_show_geo_address = true
     params[:in_office] = true
 
     if params[:representing].present? && zip_code?(params[:representing])
