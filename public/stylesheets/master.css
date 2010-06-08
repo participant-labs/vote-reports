@@ -37,11 +37,11 @@ img {
   border-bottom: 0;
 }
 
-.guide_entry h4 {
+#guide_entry h4 {
   font-size: 18px;
 }
 
-.guide_entry form dl, .guide_entry form dt, .guide_entry form dd, .guide_entry form p {
+#guide_entry form dl, #guide_entry form dt, #guide_entry form dd, #guide_entry form p {
   display: inline;
 }
 
@@ -69,7 +69,7 @@ img {
 }
 
 .hidden {
-  display: none !important;
+  display: none;
 }
 
 form {
