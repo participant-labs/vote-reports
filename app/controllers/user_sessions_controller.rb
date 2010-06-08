@@ -4,6 +4,13 @@ class UserSessionsController < ApplicationController
   def new
     @return_to = params[:return_to]
     @user_session = UserSession.new
+
+    respond_to do |format|
+      format.html
+      format.js {
+        render :layout => false
+      }
+    end
   end
 
   def create
