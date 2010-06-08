@@ -71,7 +71,13 @@
     });
 
   });
-  $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script;
 
   $current_tabs = $(".ui-tabs").tabs();
 })(jQuery);
+
+jQuery.ajaxSettings.accepts.html = jQuery.ajaxSettings.accepts.script;
+jQuery.ajaxSetup({
+  beforeSend: function(xhr) {
+    xhr.setRequestHeader("Accept", "text/javascript");
+  }
+});
