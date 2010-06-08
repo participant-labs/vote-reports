@@ -1,4 +1,12 @@
 module ReportsHelper
+  def report_name(report)
+    if report.cause
+      "#{report.name} (Cause)"
+    else
+      report.name
+    end
+  end
+
   def build_criteria_for(report, bills)
     bills.map do |bill|
       report.bill_criteria.find_by_bill_id(bill.id) ||
