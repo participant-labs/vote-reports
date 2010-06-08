@@ -19,7 +19,7 @@ class SearchesController < ApplicationController
             :value => politician_title(r),
             :path => politician_path(r)}
           elsif r.is_a?(Subject)
-            {:label => "Subject: #{r.name}",
+            {:label => "#{r.name} (Subject)",
             :value => r.name,
             :path => subject_path(r)}
           elsif r.owner.is_a?(User)
