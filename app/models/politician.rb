@@ -48,6 +48,9 @@ class Politician < ActiveRecord::Base
 
   searchable do
     text :name
+    boolean :autocompletable do
+      in_office?
+    end
     boolean :visible do
       true
     end
