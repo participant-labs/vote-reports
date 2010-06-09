@@ -154,6 +154,9 @@ class Report < ActiveRecord::Base
     boolean :visible do
       user.nil? || published?
     end
+    boolean :autocompletable do
+      user.nil? || published?
+    end
   end
 
   class << self

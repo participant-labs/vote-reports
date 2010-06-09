@@ -15,6 +15,9 @@ class Subject < ActiveRecord::Base
     boolean :visible do
       true
     end
+    boolean :autocompletable do
+      true
+    end
   end
 
   class << self
