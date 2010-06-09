@@ -117,7 +117,7 @@ class Politician < ActiveRecord::Base
     end
   end
   def in_office?
-    current_office_id.nil?
+    !current_office_id.nil?
   end
 
   named_scope :with_name, lambda {|name|
