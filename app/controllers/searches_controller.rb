@@ -4,11 +4,11 @@ class SearchesController < ApplicationController
   def show
     params[:in_office] = true
     term = params[:representing] = params[:term]
-    @results = (Sunspot.search(Subject, Report, Politician) do
+    @results = Sunspot.search(Subject, Report, Politician) do
       fulltext term
       with(:visible, true)
       paginate :per_page => 20
-    end.results + sought_politicians).uniq
+    end.results
 
     respond_to do |format|
       format.html
