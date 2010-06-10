@@ -1,3 +1,17 @@
+.login_section,
+.signup_section {
+  width: 660px;
+}
+
+.login_section .right, .signup_section .right {
+  width: 40%;
+}
+
+.report_header .report_title {
+  float: left;
+  padding: .45em .7em .7em 0;
+}
+
 .report_score_evidence_link > ul {
   display: inline;
   margin-left: 0;

@@ -1,14 +1,14 @@
 <% title "Sign up" %>
 
-<div class="section clearfix">
+<div class="section clearfix signup_section">
   <%- unless @user.errors.present? -%>
-  <div class="left" style="min-width: 400px">
+  <div class="left">
     <h2>Sign up via...</h2>
     <%= raw rpx_embed(:app_name => RPX_APP_NAME, :return_url => user_sessions_url) %><br />
   </div>
   <%- end -%>
 
-  <div class="right" style="min-width: 380px">
+  <div class="right">
     <h2>Sign up via Email</h2>
     <%= render 'users/form', :user => @user %>
   </div>
