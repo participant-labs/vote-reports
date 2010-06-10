@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   geocode_ip_address
 
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :report_path_components
   filter_parameter_logging :password, :password_confirmation
 
   before_filter :basic_authenticate if Rails.env.staging?
@@ -29,6 +29,14 @@ class ApplicationController < ActionController::Base
     else
       flash[:notice] = "You must be logged in to access this page"
       redirect_to login_path(:return_to => request.path)
+    end
+  end
+
+  def report_path_components(report)
+    if report.user
+      [report.user, report]
+    else
+      report.owner
     end
   end
 

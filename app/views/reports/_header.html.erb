@@ -4,16 +4,7 @@
     <%= report_next_step(report) %>
   <%- end -%>
 
-  <%- if current_user.try(:follows?, @report) -%>
-    <h4>You're following this report</h4>
-    <%= follower_count(@report, :other) %>
-  <%- else -%>
-    <h4><%= follower_count(@report) || content_tag(:p, "Like this Report?") %></h4>
-    <p>Following gives you access to special features and updates.</p>
-    <div class="buttons clearfix">
-      <%= link_to('Follow this Report', user_report_follows_path(@report.user, @report), :method => :post) %>
-    </div>
-  <%- end -%>
+  <%= render 'reports/follows/section', :report => @report %>
 </div>
 
 <div class="clearfix section report_description">

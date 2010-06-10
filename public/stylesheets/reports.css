@@ -7,9 +7,17 @@
   width: 40%;
 }
 
+.cause_header h1, .report_header h1 {
+  float: left;
+}
+
+.cause_header .buttons {
+  margin: .45em .7em .7em 0;
+}
+
 .report_header .report_title {
   float: left;
-  padding: .45em .7em .7em 0;
+  margin: .45em .7em .7em 0;
 }
 
 .report_score_evidence_link > ul {
