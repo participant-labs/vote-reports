@@ -23,14 +23,6 @@ module ReportsHelper
     end
   end
 
-  def report_path_components(report)
-    if report.user
-      [report.user, report]
-    else
-      report.owner
-    end
-  end
-
   def report_step(report, step)
     if step.is_a?(String)
       content_tag :p, step

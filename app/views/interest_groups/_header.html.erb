@@ -1,8 +1,11 @@
 <div class="clearfix report_description section">
-  <%- if interest_group.thumbnail.exists? -%>
-  <div class="image large"><%= image_with_hover_tag interest_group.thumbnail, interest_group.name, :style => :header %></div>
-  <%- end -%>
-  <h1><%= interest_group.name %></h1>
+  <div class="report_header">
+    <%- if interest_group.thumbnail.exists? -%>
+    <div class="image large"><%= image_with_hover_tag interest_group.thumbnail, interest_group.name, :style => :header %></div>
+    <%- end -%>
+    <h1><%= interest_group.name %></h1>
+    <%= render 'reports/follows/button', :report => @interest_group.report %>
+  </div>
   <ul class="details">
   <%- if @interest_group.url.present? -%>
     <li><%= link_to 'Website', @interest_group.url %></li>

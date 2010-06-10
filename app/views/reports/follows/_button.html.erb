@@ -1,0 +1,7 @@
+<%- if current_user.try(:follows?, report) -%>
+  <h4>You're following this report</h4>
+<%- else -%>
+  <div class="buttons clearfix">
+    <%= link_to('Follow', report_follows_path(report.id), :method => :post) %>
+  </div>
+<%- end -%>
