@@ -9,9 +9,10 @@ class SiteController < ApplicationController
 
     @recent_reports = Report.user_published.by_created_at.all(:limit => 3)
 
-    @reps = ['Your Local', 'local']
-    @politicians = sought_politicians.scoped(:limit => 5)
-    if @politicians.blank?
+    if shown_location
+      @reps = ['Your Local', 'local']
+      @politicians = sought_politicians.scoped(:limit => 5)
+    else
       @reps = ['These Example', 'example']
       @politicians = Politician.in_office.scoped(:limit => 5)
     end
