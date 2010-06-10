@@ -27,6 +27,10 @@ module LocationsHelper
     result
   end
 
+  def shown_location
+    requested_location || (geo_description(session[:geo_location]) if session[:geo_location].try(:is_us?))
+  end
+
   def requested_location
     if params.has_key?(:representing)
       params[:representing]
