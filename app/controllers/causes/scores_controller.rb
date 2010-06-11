@@ -21,6 +21,7 @@ class Causes::ScoresController < ApplicationController
     @report = @cause.report
     @score = @report.scores.find(params[:id])
     respond_to do |format|
+      format.html
       format.js {
         render :layout => false
       }

@@ -18,7 +18,12 @@ class Users::Reports::ScoresController < ApplicationController
 
   def show
     @score = @report.scores.find(params[:id])
-    render :layout => false
+    respond_to do |format|
+      format.html
+      format.js {
+        render :layout => false
+      }
+    end
   end
 
   private

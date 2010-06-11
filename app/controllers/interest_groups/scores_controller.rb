@@ -20,7 +20,13 @@ class InterestGroups::ScoresController < ApplicationController
 
   def show
     @score = @interest_group.report.scores.find(params[:id])
-    render :layout => false
+    respond_to do |format|
+      format.html
+      format.js {
+        @js = true
+        render :layout => false
+      }
+    end
   end
 
   private

@@ -1,64 +1,70 @@
 <%- title score_title(@score) -%>
-<div>
+<div style="width: 450px">
   <%- data = score_evidence_points(@score) -%>
   <% javascript_tag do %>
-    new Highcharts.Chart({
-      chart: {
-        renderTo: '<%= dom_id(@score, :evidence) %>',
-        defaultSeriesType: 'line',
-        margin: [90, 10, 40, 60],
-        width: 420
-      },
-      credits: {
-        text: 'Ratings thanks to Project Vote Smart',
-        href: 'http://votesmart.org/issue_rating_category_about.php'
-      },
-      title: {
-        text: '<%= escape_javascript(score_title(@score)) %> based on <%= pluralize @score.evidence.count, 'rating' %>',
-      },
-      subtitle: {
-        text: 'Click a point on the chart to view the data source for that point',
-      },
-      xAxis: {
-        categories: <%= raw pare_down_score_dates(data.map {|p| p[:x] }).to_json %>
-      },
-      yAxis: {
-        min: -2,
-        max: 102,
-        endOnTick: false,
-        startOnTick: false,
-        title: {
-           text: 'Rating'
-        }
-      },
-      tooltip: {
-        formatter: function() {
-          return this.point.tooltip;
+  <%- unless @js -%>
+    $(function () {
+  <%- end -%>
+      new Highcharts.Chart({
+        chart: {
+          renderTo: '<%= dom_id(@score, :evidence) %>',
+          defaultSeriesType: 'line',
+          margin: [90, 10, 40, 60],
+          width: 420
         },
-        style: {
-          whiteSpace: 'normal'
-        }
-      },
-      legend: {
-        enabled: false
-      },
-      plotOptions: {
-         line: {
-            point: {
-               events: {
-                  click: function() {
-                    window.location = this.vote_smart_url;
-                  }
-               }
-            }
-         }
-      },
-      series: [{
-        name: '<%= escape_javascript(@score.report.name) %>',
-        type: 'line',
-        data: <%= raw data.map {|p| p.slice(:y, :tooltip, :vote_smart_url) }.to_json %>
-      }]
+        credits: {
+          text: 'Ratings thanks to Project Vote Smart',
+          href: 'http://votesmart.org/issue_rating_category_about.php'
+        },
+        title: {
+          text: '<%= escape_javascript(score_title(@score)) %> based on <%= pluralize @score.evidence.count, 'rating' %>',
+        },
+        subtitle: {
+          text: 'Click a point on the chart to view the data source for that point',
+        },
+        xAxis: {
+          categories: <%= raw pare_down_score_dates(data.map {|p| p[:x] }).to_json %>
+        },
+        yAxis: {
+          min: -2,
+          max: 102,
+          endOnTick: false,
+          startOnTick: false,
+          title: {
+             text: 'Rating'
+          }
+        },
+        tooltip: {
+          formatter: function() {
+            return this.point.tooltip;
+          },
+          style: {
+            whiteSpace: 'normal'
+          }
+        },
+        legend: {
+          enabled: false
+        },
+        plotOptions: {
+           line: {
+              point: {
+                 events: {
+                    click: function() {
+                      window.location = this.vote_smart_url;
+                    }
+                 }
+              }
+           }
+        },
+        series: [{
+          name: '<%= escape_javascript(@score.report.name) %>',
+          type: 'line',
+          data: <%= raw data.map {|p| p.slice(:y, :tooltip, :vote_smart_url) }.to_json %>
+        }]
+      });
+  <%- unless @js -%>
     });
+  <%- end -%>
   <% end %>
 
   <% div_for(@score, :evidence, :style => "width: 100%; height: 400px") do %>
