@@ -42,9 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def report_follows_path(report)
-    comps = report_path_components(report)
-    comps << :follows
-    polymorphic_path(comps)
+    polymorphic_path([report_path_components(report), :follows].flatten)
   end
 
   def report_path_components(report)
