@@ -37,7 +37,12 @@ class Politician < ActiveRecord::Base
   end
 
   def continuous_terms
-    ContinuousTerm.find_all_by_politician_id(id, :order => [['ended_on', 'desc']])
+    cterms = ContinuousTerm.find_all_by_politician_id(id, :order => [['ended_on', 'desc']])
+    if terms.present? && cterms.empty?
+      ContinuousTerm.regenerate_for(self)
+      cterms = ContinuousTerm.find_all_by_politician_id(id, :order => [['ended_on', 'desc']])
+    end
+    cterms
   end
 
   belongs_to :district
