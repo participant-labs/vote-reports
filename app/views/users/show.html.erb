@@ -4,22 +4,33 @@
   <h2><%= render 'users/user', :user => @user, :thumbnail_size => 50 %></h2>
 
   <p><%= link_to 'Edit Profile', edit_user_path(@user) %></p>
+</div>
 
-  <h2>Your Reports</h2>
-  <%- if @reports.empty? -%>
-    <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
-  <%- else -%>
-    <%= render 'users/reports/list', :reports => @reports.published, :title => 'Published Reports' %>
-    <%= render 'users/reports/list', :reports => @reports.unpublished, :title => 'Personal Reports' %>
-  <%- end -%>
-  <p><%= link_to "Create a Report", new_user_report_path(@user) %></p>
-
-  <%- if @user.followed_reports.present? -%>
-    <h3>Reports you Follow</h3>
+<div class="section">
+  <div class="ui-tabs">
     <ul>
-    <% @user.followed_reports.each do |report| %>
-      <li><%= render 'reports/report', :report => report %></li>
-    <% end %>
+      <li><%= link_to 'Your Reports', '#Your_Reports' %></li>
+      <li><%= link_to 'Reports you Follow', '#Followed_Reports' %></li>
     </ul>
-  <%- end -%>
+
+    <div id="Your_Reports">
+      <h2>Your Reports</h2>
+      <%- if @reports.empty? -%>
+        <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
+      <%- else -%>
+        <%= render 'users/reports/list', :reports => @reports.published, :title => 'Published Reports' %>
+        <%= render 'users/reports/list', :reports => @reports.unpublished, :title => 'Personal Reports' %>
+      <%- end -%>
+      <p><%= link_to "Create a Report", new_user_report_path(@user) %></p>
+    </div>
+
+    <div id="Followed_Reports">
+      <h3>Reports you Follow</h3>
+      <ul>
+      <% @user.followed_reports.each do |report| %>
+        <li><%= render 'reports/report', :report => report %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
