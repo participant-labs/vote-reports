@@ -25,11 +25,6 @@ class ReportsController < ApplicationController
     end
   end
 
-  def show
-    @report = Report.find(params[:id])
-    redirect_to report_path_components(@report)
-  end
-
   private
 
   def topical_reports

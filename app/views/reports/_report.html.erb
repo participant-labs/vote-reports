@@ -4,7 +4,7 @@
   <%- description = truncate(strip_tags(md_to_html(report.description)), :length => 180 - report.name.length) -%>
   <%- attrs = float_description ? {:title => strip_tags(md_to_html(report.description))} : {} if  -%>
   <div class="report_header">
-    <%= link_to report_name(report), report_path_components(report), attrs.merge(:class => 'report_title').merge(hover_image_attrs(report.thumbnail)) %>
+    <%= link_to report_name(report), report_path(report), attrs.merge(:class => 'report_title').merge(hover_image_attrs(report.thumbnail)) %>
     <%= render 'reports/follows/button', :report => report %>
   </div>
   <%- if report.user_id -%>
