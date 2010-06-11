@@ -6,8 +6,10 @@ img {
   display: inline-block;
 }
 
+.politician_score .politician_headshot,
 .ui-menu-item .politician_headshot {
   float:left;
+  padding-right: 1em;
 }
 
 .ui-menu-item .politician_name {
@@ -184,19 +186,6 @@ table#reports td {
   position: relative;
   top: 20px;
   left: 75px;
-}
-
-.report_score > .report_score_evidence_link {
-  display: none;
-  border: 1px solid #dda;
-  position: absolute;
-  font-size: 0.6em;
-  top: -30px;
-  left: 75px;
-  padding: 0.5em;
-  background: #ffc;
-  color: #930;
-  text-align: center;
 }
 
 #scores .report_score > .report_score_evidence_link {
