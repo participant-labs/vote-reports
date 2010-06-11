@@ -29,6 +29,10 @@ describe LocationsHelper do
     before do
       @geo = Object.new
       stub(@geo).full_address { 'geo' }
+      stub(@geo).is_us? { true }
+      stub(@geo).city { 'Seattle' }
+      stub(@geo).state { 'WA' }
+      stub(@geo).zip { '98101' }
     end
 
     context "when representing param is set" do
