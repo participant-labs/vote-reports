@@ -363,7 +363,7 @@ div.buttons.open-congress a{
    Some form of CSS for these guys are good to have and easy to re-style 
 */
 
-#content .buttons a, .buttons a, .buttons button{
+.buttons a, .buttons button{
    display:block;
    float:left;
    margin:0 7px 0 0;

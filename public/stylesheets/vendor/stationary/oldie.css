@@ -187,11 +187,11 @@ ol, ul, dt {
 	margin: 0 8px 8px 0;
 }
 
-#account a, #content a, #footer a {
+a {
 	border-bottom: 1px dotted #524F4B;
 }
 
-#account a:hover, #content a:hover, #footer a:hover {
+a:hover {
 	border-bottom: 1px solid #6C6A67;
 }
 
