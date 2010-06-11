@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
     cause.resource :follows, :controller => 'causes/follows', :only => [:show, :create, :destroy]
     cause.resources :reports, :controller => 'causes/reports', :only => [:new, :create, :index, :destroy]
   end
+  map.resources :reports, :only => [:index, :new]
   map.resources :reports, :as => '', :name_prefix => 'user_', :path_prefix => "reports/:user_id", :controller => 'users/reports' do |report|
     report.resources :scores, :controller => 'users/reports/scores', :only => [:index, :show]
     report.resource :follows, :controller => 'users/reports/follows', :only => [:show, :create, :destroy]
@@ -16,7 +17,6 @@ ActionController::Routing::Routes.draw do |map|
     report.resource :image, :as => 'thumbnail', :only => [:edit, :update, :create], :controller => 'users/reports/thumbnails'
     report.resources :bill_criteria, :only => [:index, :new, :create, :destroy], :controller => 'users/reports/bill_criteria'
   end
-  map.resources :reports, :only => [:index, :new]
   map.resources :interest_groups, :only => [:index, :show] do |interest_group|
     interest_group.resources :scores, :controller => 'interest_groups/scores', :only => [:index, :show]
     interest_group.resource :follows, :controller => 'interest_groups/follows', :only => [:show, :create, :destroy]
