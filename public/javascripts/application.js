@@ -69,8 +69,15 @@
       }
     });
 
-    $('.fancyboxy').fancybox({
-      hideOnContentClick: false
+    $('.fancyboxy').live('mouseover', function() {
+      var self = $(this);
+      if (!self.data('init')) {
+        self.data('init', true);
+        self.fancybox({
+          hideOnContentClick: false
+        });
+        self.mouseover();
+      }
     });
   });
 
