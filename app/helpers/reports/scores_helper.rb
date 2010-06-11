@@ -18,9 +18,16 @@ module Reports::ScoresHelper
     "#{score} for #{score.politician.full_name} on '#{score.report.name}' #{by}"
   end
 
-  def score_evidence_components(score)
+  SCORE_TYPE_SHORT_FORM = {
+    'interest group rating' => 'rating',
+    'report score'  => 'score'
+  }
+
+  def score_evidence_components(score, opts = {})
     score.evidence.group_by(&:evidence_type).map do |(type, evidence)|
-      pluralize(evidence.size, human_type_name(type))
+      name = human_type_name(type)
+      name = SCORE_TYPE_SHORT_FORM.fetch(name, name) if opts[:short_form]
+      pluralize(evidence.size, name)
     end
   end
 
