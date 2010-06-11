@@ -7,9 +7,8 @@
   width: 40%;
 }
 
-.report_header .report_title, .report_header h1, .cause_header h1 {
+.report_header .report_title, .report_header h1, .cause_header h1, .cause_header .cause_title {
   float: left;
-  margin-left: .7em;
   margin-right: .7em;
 }
 
@@ -41,11 +40,11 @@ h4, .report_title {
   color: #282625;
 }
 
-#content .cause > a, #content .subject > a, #content a.report_title, #content .report_creator a, #content .politician_name a {
+.cause a, .subject > a, a.report_title, .report_creator a, .politician_name a {
   border-bottom: 0;
 }
 
-#content .cause > a:hover, #content .subject > a:hover, #content a.report_title:hover, #content .report_creator a:hover, #content .politician_name a:hover {
+.cause a:hover, .subject > a:hover, a.report_title:hover, .report_creator a:hover, .politician_name a:hover {
   border-bottom: 1px solid;
 }
 
@@ -84,7 +83,7 @@ h1 {
   margin-bottom: 5px;
 }
 
-.publicize .buttons a, #visibility .buttons a {
+.buttons a.negative {
   background-color: #E2E1DE;
   border-color: #C4C4C4;
 }
