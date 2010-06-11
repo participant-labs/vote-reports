@@ -26,6 +26,11 @@ module ApplicationHelper
     @page_title = page_title.to_s
   end
 
+  def md_to_text(md)
+    strip_tags(md_to_html(md))
+  end
+  safe_helper :md_to_text
+
   def md_to_html(md)
     BlueCloth::new(md).to_html
   end

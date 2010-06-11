@@ -1,8 +1,8 @@
 <%- float_description ||= false -%>
 
 <% div_for(report, :class => 'clearfix') do %>
-  <%- description = truncate(strip_tags(md_to_html(report.description)), :length => 180 - report.name.length) -%>
-  <%- attrs = float_description ? {:title => strip_tags(md_to_html(report.description))} : {} if  -%>
+  <%- description = truncate(md_to_text(report.description), :length => 180 - report.name.length) -%>
+  <%- attrs = float_description ? {:title => md_to_text(report.description)} : {}  -%>
   <div class="report_header">
     <%= link_to report_name(report), report_path(report), attrs.merge(:class => 'report_title').merge(hover_image_attrs(report.thumbnail)) %>
     <%= render 'reports/follows/button', :report => report %>
@@ -11,6 +11,6 @@
     <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
   <%- end -%>
   <%- unless description.blank? || float_description || report.name.size > 60 -%>
-    <blockquote><p><%= h(description) %></p></blockquote>
+    <blockquote><p><%= description %></p></blockquote>
   <%- end -%>
 <% end %>
