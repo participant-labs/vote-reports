@@ -2,7 +2,6 @@ class UserSessionsController < ApplicationController
   filter_resource_access
 
   def new
-    @return_to = params[:return_to]
     @user_session = UserSession.new
 
     respond_to do |format|
