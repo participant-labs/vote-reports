@@ -2,6 +2,10 @@
   list-style-type: none;
 }
 
+.score_sources {
+  font-size: .3em;
+}
+
 .login_section,
 .signup_section {
   width: 660px;

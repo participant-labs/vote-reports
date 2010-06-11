@@ -1,3 +1,7 @@
+#fancybox-close {
+  border-bottom: none;
+}
+
 .fancyboxy-content {
   max-width: 560px;
 }
