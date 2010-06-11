@@ -7,17 +7,10 @@
   width: 40%;
 }
 
-.cause_header h1, .report_header h1 {
+.report_header .report_title, .report_header h1, .cause_header h1 {
   float: left;
-}
-
-.cause_header .buttons {
-  margin: .45em .7em .7em 0;
-}
-
-.report_header .report_title {
-  float: left;
-  margin: .45em .7em .7em 0;
+  margin-left: .7em;
+  margin-right: .7em;
 }
 
 .report_score_evidence_link > ul {

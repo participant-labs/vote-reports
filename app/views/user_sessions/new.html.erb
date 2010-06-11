@@ -20,6 +20,7 @@
         <%= f.password_field :password %><br />
 
         <%= hidden_field_tag :return_to, params[:return_to] %>
+        <%= hidden_field_tag :return_method, params[:return_method] %>
 
         <%= f.submit "Log in" %>
       </p>
