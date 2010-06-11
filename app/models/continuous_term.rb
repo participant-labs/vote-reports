@@ -32,22 +32,26 @@ class ContinuousTerm
       )
     end
 
+    def regenerate_for(politician)
+      terms = politician.terms
+      return if terms.blank?
+
+      current_terms = [terms.pop]
+      while terms.present?
+        if related?(current_terms.last, terms.last)
+          current_terms << terms.pop
+        else
+          create_from_terms(politician, current_terms)
+          current_terms = [terms.pop]
+        end
+      end
+      create_from_terms(politician, current_terms)
+    end
+
     def regenerate!
       delete_all
       Politician.paginated_each do |politician|
-        terms = politician.terms
-        next if terms.blank?
-
-        current_terms = [terms.pop]
-        while terms.present?
-          if related?(current_terms.last, terms.last)
-            current_terms << terms.pop
-          else
-            create_from_terms(politician, current_terms)
-            current_terms = [terms.pop]
-          end
-        end
-        create_from_terms(politician, current_terms)
+        regenerate_for(politician)
       end
     end
 
