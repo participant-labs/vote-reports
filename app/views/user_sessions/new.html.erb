@@ -19,7 +19,7 @@
         <%= f.label :password %><br />
         <%= f.password_field :password %><br />
 
-        <%= hidden_field_tag :return_to, @return_to %>
+        <%= hidden_field_tag :return_to, params[:return_to] %>
 
         <%= f.submit "Log in" %>
       </p>
