@@ -27,6 +27,7 @@ stylesheets:
     - public/stylesheets/menu.css
     - public/stylesheets/us.css
     - public/stylesheets/reports.css
+    - public/stylesheets/politicians.css
     - public/stylesheets/causes.css
     - public/stylesheets/interest_groups.css
     - public/stylesheets/tag_cloud.css
