@@ -28,7 +28,12 @@ class ApplicationController < ActionController::Base
       end
     else
       flash[:notice] = "You must be logged in to access this page"
-      redirect_to login_path(:return_to => request.path + (request.path.include?('?') ? '&' : '?') + {:method => request.request_method}.to_param)
+      return_path = request.path
+      if request.request_method && request.request_method != :get
+        return_path += (request.path.include?('?') ? '&' : '?') + {:method => request.request_method}.to_param
+      end
+
+      redirect_to login_path(:return_to => return_path)
     end
   end
 
