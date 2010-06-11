@@ -15,9 +15,6 @@
   <p><%= link_to "Create a Report", new_user_report_path(@user) %></p>
 
   <%- if @user.followed_reports.present? -%>
-    <h2><%= link_to "Your Personalized Report", '#' %></h2>
-    <p>Followed reports are collectively factored into a single personalized report, which is specific to you.</p>
-
     <h3>Reports you Follow</h3>
     <ul>
     <% @user.followed_reports.each do |report| %>
