@@ -1,6 +1,6 @@
 <% div_for(report, :class => 'clearfix') do %>
   <%- description = truncate(md_to_text(report.description), :length => 100 - report.name.length) -%>
-  <%= content_tag :span, report_name(report), hover_image_attrs(report.thumbnail).merge(:class => 'report_title') %>
+  <%= content_tag :span, report_name(report), :class => 'report_title' %>
   <%- if report.user_id -%>
     <span class="report_creator">By <%= render 'users/search_result', :user => report.user %></span>
   <%- end -%>
