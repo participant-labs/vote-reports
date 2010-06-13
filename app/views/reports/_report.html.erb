@@ -4,7 +4,7 @@
   <%- description = truncate(md_to_text(report.description), :length => 180 - report.name.length) -%>
   <%- attrs = float_description ? {:title => md_to_text(report.description)} : {}  -%>
   <div class="report_header clearfix">
-    <%= link_to report_name(report), report_path(report), attrs.merge(:class => 'report_title').merge(hover_image_attrs(report.thumbnail)) %>
+    <%= link_to report_name(report), report_path(report), attrs.merge(:class => 'report_title') %>
     <%= render 'reports/follows/button', :report => report %>
   </div>
   <%- if report.user_id -%>
