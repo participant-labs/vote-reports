@@ -25,7 +25,7 @@
     </div>
 
     <div id="followed_reports" class="reports">
-      <h3>Reports you Follow</h3>
+      <h2>Reports you Follow</h2>
       <ul class="reports">
       <% @user.followed_reports.each do |report| %>
         <li><%= render 'reports/report', :report => report %></li>
