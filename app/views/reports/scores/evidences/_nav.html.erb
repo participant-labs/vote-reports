@@ -1,8 +1,0 @@
-<div class="report_score_evidence_link score_sources">
-  based on
-  <ul>
-    <%- score_evidence_components(score, :short_form => true).each do |component| -%>
-      <li><%= link_to component, report_score_path(score), :class => 'fancyboxy', :'data-width' => '450', :'data-height' => '450' %></li>
-    <%- end -%>
-  </ul>
-</div>
