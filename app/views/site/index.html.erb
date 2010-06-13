@@ -7,7 +7,7 @@
   <%= link_to "set your location", new_location_path(:return_to => request.path), :class => 'fancyboxy' %>
   <div id="score_examples">
     <ul class="report_scores">
-      <%- scores.each do |score| -%>
+      <%- @scores.each do |score| -%>
         <li class="clearfix"><%= render score.report %><%= render 'politicians/score', :score => score %></li>
       <%- end -%>
     </ul>
