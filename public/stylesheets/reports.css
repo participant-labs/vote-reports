@@ -55,10 +55,6 @@
   padding-left: 0;
 }
 
-.politician_name {
-  font-size: 1.1em;
-}
-
 h4, .report_title {
   font-size: 1.1em;
   font-weight: bold;
@@ -66,6 +62,7 @@ h4, .report_title {
 }
 
 .politician_name {
+  font-size: 1.1em;
   font-weight: bold;
 }
 
