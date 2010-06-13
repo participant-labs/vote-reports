@@ -1,16 +1,14 @@
 <div class="politician_score">
   <%- politician = score.politician -%>
   <% div_for politician do %>
-    <div class="clearfix">
-      <%- if politician.headshot.url(:small) -%>
-        <%= link_to_unless_current image_with_hover_tag(politician.headshot, politician_title(politician), :style => :small, :size => '50x61', :alt => politician.full_name), politician_path(politician), :class => 'politician_headshot' %>
+    <%- if politician.headshot.url(:small) -%>
+      <%= link_to_unless_current image_with_hover_tag(politician.headshot, politician_title(politician), :style => :small, :size => '50x61', :alt => politician.full_name), politician_path(politician), :class => 'politician_headshot' %>
+    <%- end -%>
+    <span class="politician_name"><%= link_to_unless_current politician_last_name(politician), politician  %>
+      <%- if politician.location -%>
+        <%= link_to politician.location.abbreviation, polymorphic_path(politician.location), :class => 'fancyboxy politician_location', :title => location_title(politician.location) %>
       <%- end -%>
-      <span class="politician_name"><%= link_to_unless_current politician_last_name(politician), politician  %>
-        <%- if politician.location -%>
-          <%= link_to politician.location.abbreviation, polymorphic_path(politician.location), :class => 'fancyboxy politician_location', :title => location_title(politician.location) %>
-        <%- end -%>
-      </span>
-      <%= render 'reports/scores/score', :score => score %>
-    </div>
+    </span>
+    <%= render 'reports/scores/score', :score => score %>
   <% end %>
 </div>
