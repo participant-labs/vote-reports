@@ -145,6 +145,10 @@ input.tagged {
   width: 100%;
 }
 
+.report_scores table td {
+  padding: 7px 0;
+}
+
 .report_scores .scores_generating {
   font-weight: bold;
   text-align: center;
