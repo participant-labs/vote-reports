@@ -9,11 +9,11 @@
 <div class="section">
   <div class="ui-tabs">
     <ul>
-      <li><%= link_to 'Your Reports', '#Your_Reports' %></li>
-      <li><%= link_to 'Reports you Follow', '#Followed_Reports' %></li>
+      <li><%= link_to 'Your Reports', '#reports' %></li>
+      <li><%= link_to 'Reports you Follow', '#followed_reports' %></li>
     </ul>
 
-    <div id="Your_Reports">
+    <div id="reports">
       <h2>Your Reports</h2>
       <%- if @reports.empty? -%>
         <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
@@ -24,9 +24,9 @@
       <p><%= link_to "Create a Report", new_user_report_path(@user) %></p>
     </div>
 
-    <div id="Followed_Reports">
+    <div id="followed_reports" class="reports">
       <h3>Reports you Follow</h3>
-      <ul>
+      <ul class="reports">
       <% @user.followed_reports.each do |report| %>
         <li><%= render 'reports/report', :report => report %></li>
       <% end %>
