@@ -441,3 +441,7 @@ div.report_score .score {
 div.report_score {
     margin-top: 5px;
 }
+
+.politician_scores div.report_score {
+    width: 3em;
+}
