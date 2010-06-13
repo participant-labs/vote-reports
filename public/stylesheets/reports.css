@@ -1,4 +1,4 @@
-#reports > ul {
+.reports > ul, ul.reports {
   list-style-type: none;
 }
 
