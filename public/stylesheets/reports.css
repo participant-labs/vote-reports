@@ -1,3 +1,11 @@
+.report_excerpt {
+  margin-right: 50px;
+}
+
+.follow_report {
+  float: right;
+}
+
 .reports > ul, ul.reports {
   list-style-type: none;
 }

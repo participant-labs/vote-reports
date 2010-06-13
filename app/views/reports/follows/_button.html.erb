@@ -1,4 +1,4 @@
-<div class="buttons clearfix">
+<div class="buttons clearfix follow_report">
   <%- if current_user.try(:follows?, report) -%>
     <%= link_to(image_tag('icons/thumb_up.png', :alt => 'Stop Following'), report_follows_path(report), :method => :delete, :class => 'negative') %>
   <%- else -%>
