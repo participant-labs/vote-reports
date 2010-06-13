@@ -3,7 +3,7 @@
   replace ||= 'report_scores'
 -%>
 
-<div class="report_scores">
+<div class="report_scores" id="report_scores">
   <%- if report.delayed_jobs.passing.present? -%>
     <p class="scores_generating notice">
       Updates have been made to this report, and its scores are being updated.<br />
