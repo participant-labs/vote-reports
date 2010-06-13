@@ -2,7 +2,7 @@
   <%- description = truncate(md_to_text(report.description), :length => 100 - report.name.length) -%>
   <%= content_tag :span, report_name(report), :class => 'report_title' %>
   <%- if report.user_id -%>
-    <span class="report_creator">By <%= render 'users/search_result', :user => report.user %></span>
+    <span class="report_creator">by <%= render 'users/search_result', :user => report.user %></span>
   <%- end -%>
   <%- unless description.blank? || report.name.size > 60 -%>
     <blockquote><p><%= h(description) %></p></blockquote>
