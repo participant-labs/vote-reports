@@ -440,4 +440,5 @@ div.report_score .score {
 
 div.report_score {
     margin-top: 5px;
+    width: 3em;
 }
