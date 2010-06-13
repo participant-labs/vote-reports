@@ -25,10 +25,6 @@ img {
   margin-bottom: 0;
 }
 
-#report_scores > table {
-  width: 100%;
-}
-
 #cropbox {
   max-width: 100%;
 }
