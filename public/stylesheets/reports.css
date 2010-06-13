@@ -2,6 +2,14 @@
   margin-right: 50px;
 }
 
+#report_scores td {
+  vertical-align: middle;
+}
+
+#report_scores td + td {
+  padding-left: 1em;
+}
+
 .follow_report {
   float: right;
 }
