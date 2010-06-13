@@ -1,3 +1,7 @@
+.ui-tabs #report_scores {
+  font: normal 13px/1.6em 'Lucida Grande', Lucida, Verdana, sans-serif;
+}
+
 #fancybox-close {
   border-bottom: none;
 }
