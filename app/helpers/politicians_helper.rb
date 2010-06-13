@@ -10,4 +10,8 @@ module PoliticiansHelper
   def politician_name(politician)
     "#{politician.short_title} #{politician.full_name}"
   end
+
+  def politician_last_name(politician)
+    "#{politician.short_title} #{politician.last_name}"
+  end
 end

@@ -1,8 +1,10 @@
-<div class="cause_header">
-  <h1><%= link_to_unless_current cause.name, cause %></h1>
-  <%= render 'reports/follows/button', :report => cause.report %>
-</div>
+<% div_for cause do %>
+  <div class="cause_header">
+    <h1><%= link_to_unless_current cause.name, cause %></h1>
+    <%= render 'reports/follows/button', :report => cause.report %>
+  </div>
 
-<blockquote>
-  <%= md_to_html(cause.description) %>
-</blockquote>
+  <blockquote>
+    <%= md_to_html(cause.description) %>
+  </blockquote>
+<% end %>

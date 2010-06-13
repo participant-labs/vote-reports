@@ -3,13 +3,11 @@
 <% div_for(report, :class => 'clearfix') do %>
   <%- description = truncate(md_to_text(report.description), :length => 180 - report.name.length) -%>
   <%- attrs = float_description ? {:title => md_to_text(report.description)} : {}  -%>
-  <div class="report_header clearfix">
-    <%= link_to report_name(report), report_path(report), attrs.merge(:class => 'report_title') %>
-    <%= render 'reports/follows/button', :report => report %>
-  </div>
+  <%= link_to report_name(report), report_path(report), attrs.merge(:class => 'report_title') %>
   <%- if report.user_id -%>
-    <span class="report_creator">By <%= render 'users/user', :user => report.user %></span>
+    <span class="report_creator">by <%= render 'users/user', :user => report.user %></span>
   <%- end -%>
+  <%= render 'reports/follows/button', :report => report %>
   <%- unless description.blank? || float_description || report.name.size > 60 -%>
     <blockquote class="report_excerpt"><p><%= description %></p></blockquote>
   <%- end -%>

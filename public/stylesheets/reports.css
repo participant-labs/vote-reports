@@ -23,9 +23,10 @@
   width: 40%;
 }
 
-.report_header .report_title, .report_header h1, .cause_header h1, .cause_header .cause_title {
+.report_header h1, .cause_header h1, .cause_header .cause_title {
   float: left;
   margin-right: .7em;
+  width: 100%;
 }
 
 .report_score_evidence_link > ul {
@@ -54,6 +55,14 @@ h4, .report_title {
   font-size: 1.1em;
   font-weight: bold;
   color: #282625;
+}
+
+.politician_name {
+  font-weight: bold;
+}
+
+.cause a, .subject > a, a.report_title, .politician_name a {
+  text-transform: uppercase;
 }
 
 .cause a, .subject > a, a.report_title, .report_creator a, .politician_name a {

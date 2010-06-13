@@ -1,8 +1,6 @@
 <% div_for cause do %>
-  <div class="cause_header clearfix">
-    <%= link_to cause.name, cause, :class => 'cause_title' %>
-    <%= render 'reports/follows/button', :report => cause.report %>
-  </div>
+  <%= link_to cause.name, cause, :class => 'cause_title' %>
+  <%= render 'reports/follows/button', :report => cause.report %>
   <blockquote class="description">
     <p><%= truncate(md_to_text(cause.description), :length => 180) %></p>
   </blockquote>
