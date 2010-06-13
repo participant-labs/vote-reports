@@ -23,7 +23,7 @@
   width: 40%;
 }
 
-.report_header h1, .cause_header h1, .cause_header .cause_title {
+.cause_header h1, .cause_header .cause_title {
   float: left;
   margin-right: .7em;
   width: 100%;
