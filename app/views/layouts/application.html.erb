@@ -5,7 +5,7 @@
     <div id="inner">
       <ul id="account">
         <%- if current_user -%>
-          <li><%= link_to_unless_current "Your reports", user_path(current_user) %></li>
+          <li><%= link_to_unless_current "Dashboard", user_path(current_user) %></li>
           <li><%= link_to_unless_current "Log out", logout_path %></li>
         <%- else -%>
           <li><%= link_to_unless_current "Log in", request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy' %></li>
