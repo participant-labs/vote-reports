@@ -1,13 +1,20 @@
 <%- title score_title(@score) -%>
 <div>
   <%= render 'reports/scores/evidences/list', :score => @score %>
-  <dl>
+  <dl class="cause_score_evidence">
     <%- @score.evidence.group_by(&:subject).each_pair do |subject, subject_scores| -%>
-      <%- subject_scores.each do |bill_score| -%>
-        <%- roll = bill_score.evidence.roll -%>
-        <dt><%= link_to "On #{roll.voted_at.to_date.to_s(:long)} voted #{bill_score.evidence.position}", roll %></dt>
+      <%- if subject.is_a?(Report) -%>
+        <%- subject_scores.each do |report_score| -%>
+            <dt><%= render 'reports/scores/score', :score => report_score.evidence %></dt>
+            <dd><%= render 'reports/report', :report => subject %></dd>
+        <%- end -%>
+      <%- else -%>
+        <%- subject_scores.each do |bill_score| -%>
+          <%- roll = bill_score.evidence.roll -%>
+          <dt><%= link_to "On #{roll.voted_at.to_date.to_s(:long)} voted #{bill_score.evidence.position}", roll %></dt>
+        <%- end -%>
+        <dd>On <%= render 'bills/bill', :bill => subject, :hide_year => true, :no_titles => true %> which this report <%= subject_scores.first.criterion.position %>s</dd>
       <%- end -%>
-      <dd>On <%= render 'bills/bill', :bill => subject, :hide_year => true, :no_titles => true %> which this report <%= subject_scores.first.criterion.position %>s</dd>
     <%- end -%>
   </dl>
 </div>
