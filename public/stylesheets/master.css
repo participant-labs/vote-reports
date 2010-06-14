@@ -2,6 +2,17 @@
   font: normal 13px/1.6em 'Lucida Grande', Lucida, Verdana, sans-serif;
 }
 
+.ui-tabs-nav .count {
+  font-size: 13px;
+}
+
+.ui-tabs-nav .count:before {
+  content: '(';
+}
+.ui-tabs-nav .count:after {
+  content: ')';
+}
+
 #fancybox-close {
   border-bottom: none;
 }

@@ -19,22 +19,22 @@
 <div class="ui-tabs">
   <ul>
     <%- if @reports.present? -%>
-      <li><a href="#reports">Reports</a></li>
+      <li><a href="#reports">Reports <span class="count"><%= @reports.count %></span></a></li>
     <%- end -%>
     <%- if @bill.subjects.present? -%>
-      <li><a href="#bill_subjects">Subjects</a></li>
+      <li><a href="#bill_subjects">Subjects <span class="count"><%= @bill.subjects.count %></span></a></li>
     <%- end -%>
     <%- if @bill.titles.present? -%>
-      <li><a href="#bill_titles">All Titles</a></li>
+      <li><a href="#bill_titles">All Titles <span class="count"><%= @bill.titles.count %></span></a></li>
     <%- end -%>
     <%- if @bill.summary.present? -%>
       <li><a href="#bill_summary">Summary</a></li>
     <%- end -%>
     <%- if @amendments.present? -%>
-      <li><a href="#amendments">Amendments</a></li>
+      <li><a href="#amendments">Amendments <span class="count"><%= @amendments.count %></span></a></li>
     <% end %>
     <%- if @rolls.present? -%>
-      <li><a href="#votes">Votes</a></li>
+      <li><a href="#votes">Votes <span class="count"><%= @rolls.count %></span></a></li>
     <%- end -%>
   </ul>
 
