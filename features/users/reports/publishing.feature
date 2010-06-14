@@ -37,7 +37,7 @@ Feature: Browsing Reports
     And I follow "Unlist this Report"
     Then I should see "Successfully updated report"
     When I follow "Visibility"
-    Then I should see "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
+    Then I should see "This report is unlisted, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
 
   @emulate_rails_javascript
   Scenario: Published report is unpublishable after deleting all criteria
@@ -64,6 +64,6 @@ Feature: Browsing Reports
     When I wait for delayed job to finish
     And I go to my report page for "My Report"
     And I follow "Visibility"
-    And I should see "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
+    And I should see "This report is unlisted, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
     And I should see "You'll need to add bills to this report in order to publish it."
     And I should not see "Publish this Report"

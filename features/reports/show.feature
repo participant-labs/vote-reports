@@ -14,12 +14,12 @@ Feature: Browsing Reports
   Examples:
     | type      |
     | published |
-    | personal  |
+    | unlisted  |
     | scored    |
     | unscored  |
     | private   |
 
-  Scenario Outline: Non-owner can visit personal and published reports of others
+  Scenario Outline: Non-owner can visit unlisted and published reports of others
     Given I am signed in as "Owner"
     And I have the following <type> report:
       | name      | description                |
@@ -32,7 +32,7 @@ Feature: Browsing Reports
   Examples:
     | type      | see     | destination                                |
     | published |     see | user "Owner"'s page for report "My Report" |
-    | personal  |     see | user "Owner"'s page for report "My Report" |
+    | unlisted  |     see | user "Owner"'s page for report "My Report" |
     | scored    | not see | the reports page for "Owner"               |
     | unscored  | not see | the reports page for "Owner"               |
     | private   | not see | the reports page for "Owner"               |

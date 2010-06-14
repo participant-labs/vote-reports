@@ -9,7 +9,7 @@ Feature: Adding Bill Criteria to Reports
     When I go to the new bills page for my report "My report"
 
   Scenario Outline: User adds a bill to a report
-    Given I have a personal report named "Target Report"
+    Given I have an unlisted report named "Target Report"
     And <bill type> named "USA PATRIOT Reauthorization Act of 2009"
     When I fill in "Search" with "patriot"
     And I press "Search"
@@ -36,7 +36,7 @@ Feature: Adding Bill Criteria to Reports
     | a pass-voted, previous-congress bill |
 
   Scenario: User adds to a report from 2 bill searches in succession
-    Given I have a personal report named "Target Report"
+    Given I have an unlisted report named "Target Report"
     And a pass-voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
     And a pass-voted, previous-congress bill named "Iraq War Authorization"
     When I fill in "Search" with "patriot"

@@ -8,7 +8,7 @@ Feature: Browsing Reports
     And I have a report named "Empty Report"
     And I have an unscored report named "Unscored Report"
     And I have a scored report named "Scored Report"
-    And I have a personal report named "Personal Report"
+    And I have an unlisted report named "Personal Report"
     And I have a published report named "Active Report"
 
   Scenario: Browse excludes unpublished reports

@@ -78,19 +78,19 @@ class Report < ActiveRecord::Base
 
   state_machine :initial => :private do
     event :publish do
-      transition [:private, :personal] => :published
+      transition [:private, :unlisted] => :published
     end
 
     event :share do
-      transition [:private, :published] => :personal
+      transition [:private, :published] => :unlisted
     end
 
     event :unshare do
-      transition [:published, :personal] => :private
+      transition [:published, :unlisted] => :private
     end
 
     event :unlist do
-      transition :published => :personal
+      transition :published => :unlisted
     end
 
     state :private do
@@ -113,9 +113,9 @@ class Report < ActiveRecord::Base
       end
     end
 
-    state :personal do
+    state :unlisted do
       def status
-        "This report is personal, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
+        "This report is unlisted, so it will not show up in lists or searches on this site. However, anyone can access it at this url."
       end
 
       def next_steps
@@ -207,7 +207,7 @@ class Report < ActiveRecord::Base
     end
   end
 
-  named_scope :unpublished, :conditions => "reports.state != 'published'"
+  named_scope :unpublished, :conditions => ["reports.state IN(?)", %w[unlisted private]]
   named_scope :with_criteria, :select => 'DISTINCT reports.*', :joins => :bill_criteria
   named_scope :scored, :select => 'DISTINCT reports.*', :joins => {:bill_criteria => {:bill => :passage_rolls}}
   named_scope :by_updated_at, :order => 'updated_at DESC'

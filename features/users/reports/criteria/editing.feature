@@ -20,7 +20,7 @@ Feature: Editing Criteria from Reports
     And I should be on the reports page for "Empact"
 
   Scenario: Report owner adds an explanatory url to an existing bill criterion
-    Given I have a personal report named "Target Report"
+    Given I have an unlisted report named "Target Report"
     When I go to my report page for "Active Report"
     And I follow "Agenda"
     Then I should see "Bovine Security Act of 2009"
