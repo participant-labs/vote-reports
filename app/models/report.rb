@@ -293,7 +293,7 @@ class Report < ActiveRecord::Base
 private
 
   def add_creator_to_followers
-    if user
+    if user && state != 'personal'
       self.followers << user
     end
   end
