@@ -70,7 +70,7 @@ h4, .report_title {
   text-transform: uppercase;
 }
 
-.cause a, .subject > a, a.report_title, .report_creator a, .politician_name a, a.score {
+.cause > a, .subject > a, a.report_title, .report_creator a, .politician_name a, a.score {
   border-bottom: 0;
 }
 
