@@ -28,21 +28,25 @@ class ApplicationController < ActionController::Base
       end
     else
       flash[:notice] = "You must be logged in to access this page"
-      return_path = request.path
+      new_params = {}
       if request.request_method && request.request_method != :get
-        return_path += (request.path.include?('?') ? '&' : '?') + {:method => request.request_method}.to_param
+        new_params.merge!(:method => request.request_method)
       end
+      if params[:return_to]
+        new_params.merge!(:return_to => params[:return_to])
+      end
+      return_path = request.path + (request.path.include?('?') ? '&' : '?') + new_params.to_param
 
       redirect_to login_path(:return_to => return_path)
     end
   end
 
-  def report_path(report)
-    polymorphic_path(report_path_components(report))
+  def report_path(report, params = {})
+    polymorphic_path(report_path_components(report), params)
   end
 
-  def report_follows_path(report)
-    polymorphic_path([report_path_components(report), :follows].flatten)
+  def report_follows_path(report, params = {})
+    polymorphic_path([report_path_components(report), :follows].flatten, params)
   end
 
   def report_path_components(report)

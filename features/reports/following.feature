@@ -9,11 +9,11 @@ Feature: Report Following
       | username | password |
       | Empact   | password |
     When I go to the report page for "Published Report"
-    And I follow "Follow this Report"
+    And I follow "Follow Published Report"
     And I enter my credentials "Empact/password"
-    Then I should see "You are now following this report"
+    Then I should see "You are now following 'Published Report'"
     And I should be on the report page for "Published Report"
-    And I should see "You're following this report"
+    And I should see the title "Unfollow Published Report"
 
   Scenario: Logged-out user follows a report
     Given I am signed in as "Empact"
@@ -22,31 +22,31 @@ Feature: Report Following
     And I am signed in as "User"
     And I sign out
     When I go to the report page for "Published Report"
-    And I follow "Follow this Report"
+    And I follow "Follow Published Report"
     And I enter my credentials "User/password"
-    Then I should see "You are now following this report"
+    Then I should see "You are now following 'Published Report'"
     And I should be on the report page for "Published Report"
-    And I should see "You're following this report"
+    And I should see the title "Unfollow Published Report"
 
   Scenario: Logged-out report creator follows their own report
     Given I am signed in as "Empact"
     And I have a published report named "Published Report"
     And I sign out
     When I go to the report page for "Published Report"
-    And I follow "Follow this Report"
+    And I follow "Follow Published Report"
     And I enter my credentials "Empact/password"
-    Then I should see "You are already following this report"
+    Then I should see "You are already following 'Published Report'"
     And I should be on the report page for "Published Report"
-    And I should see "You're following this report"
+    And I should see the title "Unfollow Published Report"
 
   Scenario: Logged-in user follows a report
     Given a published report named "Published Report"
     And I am signed in as "Empact"
     When I go to the report page for "Published Report"
-    And I follow "Follow this Report"
-    Then I should see "You are now following this report"
+    And I follow "Follow Published Report"
+    Then I should see "You are now following 'Published Report'"
     And I should be on the report page for "Published Report"
-    And I should see "You're following this report"
+    And I should see the title "Unfollow Published Report"
 
   Scenario: Followed reports show up on user page, not reports page
     Given a published report named "A Certain Published Report"
@@ -61,4 +61,4 @@ Feature: Report Following
     Given I am signed in
     And I have a published report named "Published Report"
     And I go to the report page for "Published Report"
-    And I should see "You're following this report"
+    And I should see the title "Unfollow Published Report"
