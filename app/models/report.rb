@@ -252,7 +252,11 @@ class Report < ActiveRecord::Base
 
   def score_criteria
     if user
-      bill_criteria.active
+      if state != 'personal'
+        bill_criteria.active
+      else
+        user.report_follows
+      end
     else
       owner.score_criteria
     end

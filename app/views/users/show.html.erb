@@ -11,6 +11,7 @@
     <ul>
       <li><%= link_to 'Your Reports', '#reports' %></li>
       <li><%= link_to 'Reports you Follow', '#followed_reports' %></li>
+      <li><%= link_to content_tag(:span, 'Personalized Report'), user_scores_path(@user), :title => 'Personalized Report' %></li>
     </ul>
 
     <div id="reports">

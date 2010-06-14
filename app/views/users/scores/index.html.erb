@@ -1,0 +1,9 @@
+<%- title "Your Personal Report Scores" -%>
+
+<div class="section" id="personalized_scores">
+  <h2>Personalized Report</h2>
+  <p>We score just for you based on <%= link_to "the reports you follow", '#followed_reports', :'data-tab-select' => 'Followed Reports' %>.</p>
+  <%= render 'politicians/search', :in_office => @in_office, :url => user_scores_path(@user), :replace => 'personalized_scores' %>
+  <%= render 'reports/scores/table', :report => @report, :scores => @scores, :replace => 'personalized_scores',
+    :reset_path => user_scores_path(@user, :representing => '') %>
+</div>

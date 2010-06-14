@@ -52,6 +52,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :rpx_identities, :only => [:create, :destroy], :controller => 'users/rpx_identities'
     user.resource :adminship, :only => [:create, :destroy], :controller => 'users/adminships'
     user.resource :moderatorship, :only => [:create, :destroy], :controller => 'users/moderatorships'
+    user.resources :scores, :only => :index, :controller => 'users/scores'
   end
   map.resources :user_sessions
 
