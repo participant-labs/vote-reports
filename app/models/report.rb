@@ -93,6 +93,8 @@ class Report < ActiveRecord::Base
       transition :published => :unlisted
     end
 
+    state :personal
+
     state :private do
       def status
         "This report is private, so only you can access it."

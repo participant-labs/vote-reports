@@ -371,6 +371,10 @@ Fixjour :verify => false do
     end
   end
 
+  def create_personal_report(attrs = {})
+    create_report(attrs.merge(:state => 'personal'))
+  end
+
   def create_unlisted_report(attrs = {})
     create_report(attrs).tap do |report|
       report.share
