@@ -39,7 +39,7 @@ authorization do
     has_permission_on :causes, :causes_reports, :causes_scores, :to => [:index, :show]
     has_permission_on :reports, :users_reports, :to => :index
     has_permission_on :reports, :users_reports, :to => :show do
-      if_attribute :state => ['published', 'personal']
+      if_attribute :state => ['published', 'unlisted']
     end
   end
 end

@@ -42,11 +42,10 @@ Feature: Personalized report scoring
 
     When I go to my profile page
     And I follow "Reports you Follow"
-    And I follow "Unfollow 'Brady Campaign to Prevent Gun Violence'"
+    And I follow "Unfollow Brady Campaign to Prevent Gun Violence"
     And I wait for delayed job to finish
     And I go to my profile page
     And I follow "Personalized Report"
-    And show me the page
     Then I should see the following scores:
       | politician    | score |
       | Piyush Jindal | 11    |
