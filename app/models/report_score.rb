@@ -17,6 +17,8 @@ class ReportScore < ActiveRecord::Base
     "reports.state = ? OR reports.user_id IS NULL", 'published']
 
   named_scope :for_causes, :joins => :report, :conditions => ['reports.cause_id IS NOT NULL']
+  named_scope :for_published_reports, :joins => :report, :conditions => [
+    "(reports.state = ? OR reports.user_id IS NULL) AND reports.cause_id IS NULL", 'published']
 
   named_scope :for_reports_with_subjects, lambda {|subjects|
     subjects = Array(subjects)

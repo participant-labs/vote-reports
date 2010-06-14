@@ -18,6 +18,6 @@ class Politicians::ReportsController < ApplicationController
   private
 
   def topical_scores
-    @politician.report_scores.published.for_reports_with_subjects(params[:subjects])
+    @politician.report_scores.for_published_reports.for_reports_with_subjects(params[:subjects])
   end
 end
