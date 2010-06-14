@@ -14,17 +14,20 @@
   margin-bottom: 0;
 }
 
-.cause_score_evidence dt {
+.cause_score_evidence dt,
+dt.report_score_evidence {
   float: left;
   margin-top: 8px;
   width: 8em;
 }
 
-.cause_score_evidence dd {
+.cause_score_evidence dd,
+dd.report_score_evidence {
   margin-left: 8em;
 }
 
-.cause_score_evidence .report_score {
+.cause_score_evidence .report_score,
+.report_score_evidence .report_score {
   float: right;
   padding-right: 0.5em;
 }
