@@ -1,7 +1,7 @@
 Feature: Personal Report
   In order to stay know who to vote for
   As a user
-  I want to create a personal report based on those reports I agree with
+  I want to create an unlisted report based on those reports I agree with
 
   Scenario: User follows one report, whose scores are displayed on the personal report
     Given a published report named "A Certain Published Report"

@@ -52,6 +52,24 @@ describe Report do
     end
   end
 
+  describe ".unpublished" do
+    it  "should include private and unlisted reports" do
+      unlisted = create_unlisted_report
+      private_report = create_private_report
+      Report.unpublished.should =~ [unlisted, private_report]
+    end
+
+    it "should not include personal reports" do
+      pending
+      Report.unpublished.should_not include(personal)
+    end
+
+    it "should not include published reports" do
+      published = create_published_report
+      Report.unpublished.should_not include(published)
+    end
+  end
+
   describe ".scored" do
     before do
       create_report
