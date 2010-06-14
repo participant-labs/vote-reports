@@ -5,8 +5,12 @@
 
   <div class="ui-tabs">
     <ul>
-      <li><%= link_to content_tag(:span, 'Reports'), subject_reports_path(@subject), :title => 'Reports' %></li>
-      <li><%= link_to content_tag(:span, 'Bills'), subject_bills_path(@subject), :title => 'Bills' %></li>
+      <li><% link_to subject_reports_path(@subject), :title => 'Reports' do %>
+        <span>Reports <span class="count"><%= @subject.reports.published.count %></span></span>
+      <% end %></li>
+      <li><% link_to subject_bills_path(@subject), :title => 'Bills' do %>
+        <span>Bills <span class="count"><%= @subject.bills.count %></span></span>
+      <% end %></li>
     </ul>
   </div>
 </div>
