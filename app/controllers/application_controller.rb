@@ -35,7 +35,11 @@ class ApplicationController < ActionController::Base
       if params[:return_to]
         new_params.merge!(:return_to => params[:return_to])
       end
-      return_path = request.path + (request.path.include?('?') ? '&' : '?') + new_params.to_param
+
+      return_path = request.path
+      if new_params.present?
+        return_path += (request.path.include?('?') ? '&' : '?') + new_params.to_param
+      end
 
       redirect_to login_path(:return_to => return_path)
     end
