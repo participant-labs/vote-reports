@@ -7,6 +7,13 @@ class ReportFollow < ActiveRecord::Base
   validates_presence_of :report, :user
   validates_uniqueness_of :report_id, :scope => :user_id
 
+  delegate :scores, :to => :report
+
+  alias_method :events, :scores
+  def event_score(event)
+    event.score
+  end
+
   private
 
   def rescore_personal_report

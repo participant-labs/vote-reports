@@ -29,7 +29,7 @@ end
 Then /^I should see the following scores?:$/ do |table|
   table.map_column!('politician') {|name| Politician.with_name(name).first }
   table.hashes.each do |hash|
-    Then %{I should see "#{hash['politician'].full_name}"}
+    Then %{I should see "#{hash['politician'].last_name}"}
     Then %{I should see "#{hash['score']}"}
     hash['politician'].report_scores.map {|s| s.score.round }.should include(hash['score'].to_i)
   end
