@@ -181,7 +181,12 @@ class Report < ActiveRecord::Base
   has_many :cause_reports
   has_many :causes, :through => :cause_reports
 
-  has_many :bill_criteria, :dependent => :destroy
+  has_many :bill_criteria, :dependent => :destroy do
+    def active_count
+      # due to an apparent bug in rails, the joins are not distincting, so this is necessary
+      active.count(:distinct => true, :select => 'bill_criteria.*')
+    end
+  end
   has_many :bills, :through => :bill_criteria
 
   has_many :follows, :class_name => 'ReportFollow'
