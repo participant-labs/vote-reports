@@ -60,7 +60,7 @@ describe Report do
     end
 
     it "should not include personal reports" do
-      pending
+      personal = create_personal_report
       Report.unpublished.should_not include(personal)
     end
 
@@ -97,6 +97,7 @@ describe Report do
   describe "#rescore!" do
     before do
       @report = create_report
+      Delayed::Worker.new(:quiet => true).work_off(1)
     end
 
     it "should create a delayed job accessible via #delayed_jobs" do
@@ -110,7 +111,7 @@ describe Report do
         @report.rescore!
       end
 
-      it "completeing the rescore should remove it from the active jobs" do
+      it "completing the rescore should remove it from the active jobs" do
         lambda {
           Delayed::Worker.new(:quiet => true).work_off(1)
         }.should change(@report.delayed_jobs, :count).by(-1)
