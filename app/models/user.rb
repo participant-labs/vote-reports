@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   has_one :adminship
   has_one :moderatorship
-  has_many :reports, :conditions => ['reports.state != ?', 'personal']
+  has_many :reports
   has_one :personal_report, :class_name => 'Report', :conditions => {:state => 'personal'}
 
   has_many :report_follows

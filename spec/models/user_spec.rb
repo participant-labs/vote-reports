@@ -26,9 +26,9 @@ describe User do
       @user.reports.should include(private_report)
     end
 
-    it "should not include #personal_report" do
+    it "should include #personal_report" do
       personal = create_personal_report(:user => @user)
-      @user.reports.should_not include(personal)
+      @user.reports.should include(personal)
     end
   end
 
