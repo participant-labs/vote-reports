@@ -1,11 +1,11 @@
-<div class="publicize">
-  <%- if permitted_to?(:edit, @report) && !report.published? -%>
+<%= render 'reports/follows/button', :report => @report %>
+
+<%- if permitted_to?(:edit, @report) && !report.published? -%>
+  <div class="publicize">
     <h2>Publicize Your Report!</h2>
     <%= report_next_step(report) %>
-  <%- end -%>
-
-  <%= render 'reports/follows/button', :report => @report %>
-</div>
+  </div>
+<%- end -%>
 
 <div class="clearfix section report_description">
   <%- if report.thumbnail.exists? -%>

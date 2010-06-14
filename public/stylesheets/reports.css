@@ -92,8 +92,7 @@ h1 {
 
 .publicize {
   float: right;
-  margin-left: 15px;
-  width: 20em;
+  margin: 0 15px;
 }
 
 .publicize h2 {
