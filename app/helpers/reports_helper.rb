@@ -1,6 +1,6 @@
 module ReportsHelper
-  def report_name(report)
-    if report.cause
+  def report_name(report, opts = {})
+    if report.cause && !opts[:cause_only]
       "#{report.name} (Cause)"
     else
       report.name
