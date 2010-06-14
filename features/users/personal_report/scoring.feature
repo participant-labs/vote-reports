@@ -20,6 +20,7 @@ Feature: Personalized report scoring
       | Piyush Jindal | 11.3  |
       | Ron Wyden     | 28.6  |
 
+  @emulate_rails_javascript
   Scenario: User sees scores for followed reports
     And user "Empact" is following report "Brady Campaign to Prevent Gun Violence"
     And I wait for delayed job to finish
@@ -38,3 +39,15 @@ Feature: Personalized report scoring
       | politician    | score |
       | Piyush Jindal | 54    |
       | Ron Wyden     | 31    |
+
+    When I go to my profile page
+    And I follow "Reports you Follow"
+    And I follow "Unfollow 'Brady Campaign to Prevent Gun Violence'"
+    And I wait for delayed job to finish
+    And I go to my profile page
+    And I follow "Personalized Report"
+    And show me the page
+    Then I should see the following scores:
+      | politician    | score |
+      | Piyush Jindal | 11    |
+      | Ron Wyden     | 29    |
