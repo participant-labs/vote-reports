@@ -1,7 +1,7 @@
 <%- title 'Guide' -%>
 
 <div class="section">
-  <% form_tag guide_path, :method => :get, :'data-replace' => 'content' do %>
+  <% form_tag new_guide_path, :method => :get, :'data-replace' => 'content' do %>
     <dl>
       <dt><%= label_tag :representing, '1) Enter your zip code' %></dt>
       <dd>
@@ -10,7 +10,7 @@
       </dd>
       <dt>2) Pick your causes</dt>
       <dd><%= render 'causes/selector', :causes => @causes, :target => lambda {|causes|
-        [guide_path(:causes => causes, :representing => params[:representing]),
+        [new_guide_path(:causes => causes, :representing => params[:representing]),
         {:'data-replace' => 'content'}] } %></dd>
       <dt>3) See your reps' report cards</dt>
       <dd><%= render 'scores/table', :politicians => @politicians, :reports => @topical_reports %></dd>
