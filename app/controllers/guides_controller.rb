@@ -27,7 +27,7 @@ class GuidesController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :partial => 'site/guide', :locals => {:target_path => 'guide_path'}
+        render :layout => false
       }
     end
   end
