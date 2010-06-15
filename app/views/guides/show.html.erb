@@ -8,9 +8,9 @@
         <%= text_field_tag :representing, requested_location, :tabindex => 1, :size => 10 %>
         <%= submit_tag 'Show Reps' %>
       </dd>
-      <dt>2) Pick your issues</dt>
-      <dd><%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
-        [guide_path(:subjects => subjects, :representing => params[:representing]),
+      <dt>2) Pick your causes</dt>
+      <dd><%= render 'causes/selector', :causes => @causes, :target => lambda {|causes|
+        [guide_path(:causes => causes, :representing => params[:representing]),
         {:'data-replace' => 'content'}] } %></dd>
       <dt>3) See your reps' report cards</dt>
       <dd><%= render 'scores/table', :politicians => @politicians, :reports => @topical_reports %></dd>
