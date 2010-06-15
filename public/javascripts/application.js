@@ -45,6 +45,20 @@
       return false;
     });
 
+    $('[data-hover]').live('mouseover', function() {
+      var hoverable = $(this);
+      if (!hoverable.data('hover-init')) {
+        hoverable.data('hover-init', true);
+        var target = $('#' + hoverable.attr('data-hover'));
+        hoverable.hoverIntent({
+          timeout: 500,
+          over: function() { target.fadeIn(); },
+          out: function() { target.fadeOut(); }
+        });
+        hoverable.mouseover();
+      }
+    });
+
     $('.hoverable, .dropdown').live('mouseover', function() {
       var self = $(this);
       if (!self.data('init')) {
