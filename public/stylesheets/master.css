@@ -152,7 +152,7 @@ input.tagged {
   display: inline;
 }
 
-.report_scores table {
+.report_scores table, .politician_scores table {
   width: 100%;
 }
 
