@@ -4,8 +4,19 @@ class Guide < ActiveRecord::Base
   belongs_to :zip_code
   belongs_to :district
 
+  has_friendly_id :secure_token
+
   has_many :guide_reports
   has_many :reports, :through => :guide_reports
+
+  before_validation_on_create :initialize_report
+  delegate :scores, :to => :report
+
+  validates_presence_of :secure_token, :report
+
+  delegate :scores, :rescore!, :to => :report
+
+  alias_method :score_criteria, :guide_reports
 
   def zip_code=(zip_code)
     return if zip_code.blank?
@@ -24,5 +35,12 @@ class Guide < ActiveRecord::Base
 
   def full_zip
     [zip_code, plus_4].map(&:presence).compact.join('-')
+  end
+
+  private
+
+  def initialize_report
+    self.secure_token = ActiveSupport::SecureRandom.hex(10)
+    build_report(:name => secure_token).save!
   end
 end
