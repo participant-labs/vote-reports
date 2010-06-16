@@ -13,7 +13,7 @@ class CongressionalDistrict < ActiveRecord::Base
   delegate :senators, :to => :state
 
   named_scope :with_zip, lambda {|zip_code|
-    zip_code, plus_4 = zip_code.to_s.match(/(?:^|[^\d])(\d\d\d\d\d)[-\s]*(\d{0,4})\s*$/).try(:captures)
+    zip_code, plus_4 = ZipCode.sections_of(zip_code)
     if zip_code.blank?
       {:conditions => '0 = 1'}
     elsif plus_4.blank?
