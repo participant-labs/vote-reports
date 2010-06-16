@@ -1,0 +1,13 @@
+.guide dl {
+  text-align: center;
+  font-size: 1.7em;
+}
+
+.guide dl > dt {
+  font-weight: normal;
+}
+
+.guide ul {
+  margin-left: 0;
+  list-style-type: none;
+}

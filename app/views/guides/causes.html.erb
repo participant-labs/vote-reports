@@ -1,0 +1,14 @@
+<%- title 'Guide - Causes' -%>
+
+<div class="section guide">
+  <% form_for @guide do |f| %>
+    <h1>Which causes do you support?</h1>
+    <%= render 'causes/selector', :f => f, :causes => @causes, :target => lambda {|causes|
+      [new_guide_path(:causes => causes, :representing => params[:representing]),
+      {:'data-replace' => 'content'}] } %>
+    <p>
+      <%= f.hidden_field :district_id, :value => params[:district_id] %>
+      <%= f.submit 'Save' %>
+    </p>
+  <% end %>
+</div>
