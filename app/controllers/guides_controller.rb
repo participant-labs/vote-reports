@@ -1,7 +1,7 @@
 class GuidesController < ApplicationController
   def new
-    if params[:representing].present? && ZipCode.zip_code?(params[:representing])
-      session[:zip_code] = params[:representing]
+    if params[:representing].present? && zip_code = ZipCode.zip_code(params[:representing])
+      session[:zip_code] = zip_code
     end
     if params[:guide][:district_id].present?
       session[:district_id] = params[:guide][:district_id]

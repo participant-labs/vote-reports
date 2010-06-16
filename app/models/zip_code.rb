@@ -5,11 +5,12 @@ class ZipCode < ActiveRecord::Base
 
   class << self
     def sections_of(zip_code)
-      zip_code.to_s.match(/^[^\d]*(\d{5})[-\s]*(\d{0,4})?\s*$/).try(:captures)
+      zip_code.to_s.match(/^[^\d]*(\d{5})[-\s]*(\d{4})?\s*$/).try(:captures)
     end
 
-    def zip_code?(location)
-      sections_of(location).present?
+    def zip_code(location)
+      sections = sections_of(location).try(:map, &:presence).try(:compact)
+      sections.join('-') if sections.present?
     end
   end
 
