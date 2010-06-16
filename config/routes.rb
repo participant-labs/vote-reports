@@ -2,13 +2,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :search, :only => :show
 
   map.resources :causes do |cause|
-    cause.resources :scores, :controller => 'causes/scores', :only => [:index, :show]
+    cause.resources :report_scores, :as => :scores, :controller => 'causes/scores', :only => [:index, :show]
     cause.resource :follows, :controller => 'causes/follows', :only => [:show, :create, :destroy]
     cause.resources :reports, :controller => 'causes/reports', :only => [:new, :create, :index, :destroy]
   end
   map.resources :reports, :only => [:index, :new]
   map.resources :reports, :as => '', :name_prefix => 'user_', :path_prefix => "reports/:user_id", :controller => 'users/reports' do |report|
-    report.resources :scores, :controller => 'users/reports/scores', :only => [:index, :show]
+    report.resources :report_scores, :as => :scores, :controller => 'users/reports/scores', :only => [:index, :show]
     report.resource :follows, :controller => 'users/reports/follows', :only => [:show, :create, :destroy]
     report.resources :causes, :controller => 'users/reports/causes', :only => :index
     report.resources :subjects, :controller => 'users/reports/subjects', :only => :index
@@ -18,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
     report.resources :bill_criteria, :only => [:index, :new, :create, :destroy], :controller => 'users/reports/bill_criteria'
   end
   map.resources :interest_groups, :only => [:index, :show] do |interest_group|
-    interest_group.resources :scores, :controller => 'interest_groups/scores', :only => [:index, :show]
+    interest_group.resources :report_scores, :as => :scores, :controller => 'interest_groups/scores', :only => [:index, :show]
     interest_group.resource :follows, :controller => 'interest_groups/follows', :only => [:show, :create, :destroy]
     interest_group.resources :causes, :controller => 'interest_groups/causes', :only => :index
     interest_group.resources :subjects, :controller => 'interest_groups/subjects', :only => :index
@@ -53,7 +53,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :rpx_identities, :only => [:create, :destroy], :controller => 'users/rpx_identities'
     user.resource :adminship, :only => [:create, :destroy], :controller => 'users/adminships'
     user.resource :moderatorship, :only => [:create, :destroy], :controller => 'users/moderatorships'
-    user.resources :scores, :only => :index, :controller => 'users/scores'
+    user.resources :report_scores, :as => :scores, :only => :index, :controller => 'users/scores'
   end
   map.resources :user_sessions
 
