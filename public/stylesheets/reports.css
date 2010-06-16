@@ -45,6 +45,10 @@
   padding-top: 0;
 }
 
+.report_excerpt {
+  margin-right: 45px;
+}
+
 #report_scores td, table#scores td {
   vertical-align: middle;
 }
