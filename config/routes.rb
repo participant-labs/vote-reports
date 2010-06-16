@@ -40,7 +40,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :rolls, :only => [:show]
 
   map.resource :location
-  map.resources :guides, :only => [:new, :create, :show]
+  map.resources :guides, :only => [:new, :create, :show] do |guide|
+    guide.resources :report_scores, :as => :scores, :controller => 'guides/scores', :only => :show
+  end
 
   map.resources :us_states, :as => 'us/states', :controller => 'us/states', :only => 'show' do |state|
     state.resource :map, :controller => 'us/states/maps', :only => 'show'
