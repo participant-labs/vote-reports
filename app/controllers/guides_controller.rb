@@ -3,7 +3,7 @@ class GuidesController < ApplicationController
     if params[:representing].present? && zip_code = ZipCode.zip_code(params[:representing])
       session[:zip_code] = zip_code
     end
-    if params[:guide][:district_id].present?
+    if params[:guide].try(:[], :district_id).present?
       session[:district_id] = params[:guide][:district_id]
     end
 
@@ -43,6 +43,19 @@ class GuidesController < ApplicationController
       redirect_to guide_path(@guide)
     else
       render :action => next_step
+    end
+  end
+
+  def show
+    @guide = Guide.find(params[:id])
+    @scores = @guide.scores.for_politicians(sought_politicians)
+    @report = @guide.report
+
+    respond_to do |format|
+      format.html
+      format.js {
+        render :partial => 'reports/scores/table', :locals => {:report => @report, :scores => @scores}
+      }
     end
   end
 

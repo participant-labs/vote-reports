@@ -2,8 +2,9 @@ class Report < ActiveRecord::Base
   belongs_to :user
   belongs_to :interest_group
   belongs_to :cause
+  has_one :guide
   def owner
-    user || interest_group || cause
+    user || interest_group || cause || guide
   end
 
   belongs_to :image
@@ -204,7 +205,7 @@ class Report < ActiveRecord::Base
 
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
 
-  validates_presence_of :owner, :name
+  validates_presence_of :name
   validate :ensure_only_one_owner
   before_validation_on_create :add_creator_to_followers
 
