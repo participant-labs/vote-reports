@@ -30,7 +30,7 @@
   margin-top: 10px;
 }
 
-.reports > ul, ul.reports, #causes > ul {
+.reports > ul, ul.reports, #causes > ul, #interest_groups > ul {
   list-style-type: none;
   padding-left: 0;
 }
@@ -67,7 +67,7 @@
   content: ', ';
 }
 
-.cause blockquote, .report blockquote, .report_description blockquote {
+.cause blockquote, .report blockquote, .report_description blockquote, .interest_group blockquote {
   border-left: 0;
   padding-left: 0;
   color: #333;
