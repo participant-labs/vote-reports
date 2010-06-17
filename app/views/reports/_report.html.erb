@@ -4,14 +4,16 @@
 -%>
 
 <% div_for report, :class => 'clearfix', :'data-hover' => dom_id(report, :follow) do %>
-  <%- description = truncate(md_to_text(report.description), :length => 180 - report.name.length) -%>
+  <%- if report.image_id -%>
+    <%= image_with_hover_tag report.image, report.name, :style => :tiny, :class => 'report_image' %>
+  <%- end -%>
   <%- attrs = float_description ? {:title => md_to_text(report.description)} : {}  -%>
   <%= link_to report_name(report, :cause_only => cause_only), report_path(report), attrs.merge(:class => 'report_title') %>
   <%- if report.user_id -%>
     <span class="report_creator">by <%= render 'users/user', :user => report.user %></span>
   <%- end -%>
   <%= render 'reports/follows/button', :report => report, :hidden => true %>
-  <%- unless description.blank? || float_description || report.name.size > 60 -%>
-    <blockquote class="report_excerpt"><p><%= description %></p></blockquote>
+  <%- unless report.description.blank? || float_description || report.name.size > 60 -%>
+    <blockquote class="report_excerpt"><p><%= truncate(md_to_text(report.description), :length => 180) %></p></blockquote>
   <%- end -%>
 <% end %>
