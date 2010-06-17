@@ -133,17 +133,6 @@ input.tagged {
   margin-bottom: 20px;
 }
 
-#inner {
-  position: relative;
-}
-
-#account {
-  position: absolute;
-  right: 0;
-  margin-right: 15px;
-  margin-top: 10px;
-}
-
 #account li {
   display: inline;
 }

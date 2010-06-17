@@ -2,37 +2,38 @@
   <%= flash_helper %>
 
   <div id="header" class="container_12">
-    <%= link_to image_tag('header_logo.png', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
-    <ul id="account" class="grid_9">
-      <%- if current_user -%>
-        <li><%= link_to_unless_current "Dashboard", user_path(current_user) %></li>
-        <li><%= link_to_unless_current "Log out", logout_path %></li>
-      <%- else -%>
-        <li><%= link_to_unless_current "Log in", request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy' %></li>
-        <li><%= link_to_unless_current "Sign up", signup_path, :class => 'fancyboxy' %></li>
-      <%- end -%>
-      <%= render 'locations/location' %>
-    </ul>
-
-    <ul id="menu" class="sidebar-links">
-      <li class="<%= "selected" if request.path.starts_with?('/causes') %>">
-        <%= link_to "Causes", causes_path, :class => 'causes_nav' %>
-      </li>
-      <li class="<%= "selected" if request.path.starts_with?('/politicians') %>">
-        <%= link_to "Politicians", politicians_path, :class => 'politicians_nav' %>
-      </li>
-      <li class="<%= " selected" if request.path.starts_with?('/reports') %>">
-        <%= link_to "Reports", reports_path, :class => 'reports_nav' %>
-      </li>
-      <li>
-        <% form_tag search_path, :method => :get, :id => 'header_search' do %>
-          <%= label_tag :term, 'Search' %>
-          <%= text_field_tag :term, '', :class => 'fieldtag', :id => 'nav_search',
-            :title => ' Causes, Reports and Politicians',
-            :size => 29 %>
-        <% end %>
-      </li>
-    </ul>
+    <div class="grid_9">
+      <%= link_to image_tag('header_logo.png', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
+      <ul id="menu" class="sidebar-links">
+        <li class="grid_3 alpha<%= " selected" if request.path.starts_with?('/causes') %>">
+          <%= link_to "Causes", causes_path, :class => 'causes_nav' %>
+        </li>
+        <li class="grid_3<%= " selected" if request.path.starts_with?('/politicians') %>">
+          <%= link_to "Politicians", politicians_path, :class => 'politicians_nav' %>
+        </li>
+        <li class="grid_3 omega<%= " selected" if request.path.starts_with?('/reports') %>">
+          <%= link_to "Reports", reports_path, :class => 'reports_nav' %>
+        </li>
+      </ul>
+    </div>
+    <div class="grid_3">
+      <ul id="account">
+        <%- if current_user -%>
+          <li><%= link_to_unless_current "Dashboard", user_path(current_user) %></li>
+          <li><%= link_to_unless_current "Log out", logout_path %></li>
+        <%- else -%>
+          <li><%= link_to_unless_current "Log in", request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy' %></li>
+          <li><%= link_to_unless_current "Sign up", signup_path, :class => 'fancyboxy' %></li>
+        <%- end -%>
+        <%= render 'locations/location' %>
+      </ul>
+      <% form_tag search_path, :method => :get, :id => 'header_search', :class => 'grid_3 alpha omega' do %>
+        <%= label_tag :term, 'Search' %>
+        <%= text_field_tag :term, '', :class => 'fieldtag', :id => 'nav_search',
+          :title => ' Causes, Reports and Politicians',
+          :size => 29 %>
+      <% end %>
+    </div>
   </div>
 
   <div id="content" class="container_12">
