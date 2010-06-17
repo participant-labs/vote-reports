@@ -24,7 +24,6 @@
         <% end %>
       </div>
       <ul id="menu" class="sidebar-links">
-        <li <%= raw %{class="selected"} if [root_path, about_path].include?(request.path) %>><h2><%= link_to_unless_current "Home", root_path %></h2></li>
         <li <%= raw %{class="selected"} if request.path.starts_with?('/politicians') %>><h2><%= link_to_unless_current "Politicians", politicians_path %></h2></li>
         <li <%= raw %{class="selected"} if request.path.starts_with?('/causes') %>><h2><%= link_to_unless_current "Causes", causes_path %></h2></li>
         <li <%= raw %{class="selected"} if request.path.starts_with?('/reports') %>><h2><%= link_to_unless_current "Reports", reports_path %></h2></li>
