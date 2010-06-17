@@ -266,15 +266,6 @@ table tbody {
   border-top: 15px solid transparent;
 }
 
-.report_description {
-  display: inline-block;
-  padding-bottom: 5px;
-}
-
-.report_creator {
-  display: inline-block;
-}
-
 .clearfix:after {
   content:"\0020";
   display:block;

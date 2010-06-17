@@ -9,7 +9,8 @@
 }
 
 .report_score {
-  font-family: 'Lucida Grande',Lucida,Verdana,sans-serif
+  font-family: 'Lucida Grande',Lucida,Verdana,sans-serif;
+  padding-top: 7px;
 }
 
 #report_scores td, table#scores td {
@@ -93,8 +94,17 @@ h1 {
   font: 35px/1.8em Georgia,Palatino,'Palatino Linotype',Times,'Times New Roman',serif;
 }
 
+.report_description {
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.report_creator {
+  display: inline-block;
+}
+
 .report_description h1 {
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .report_description h1, .report_description p {
