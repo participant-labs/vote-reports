@@ -47,6 +47,7 @@
 
 #menu {
   float:left;
+  padding-left: 0;
 }
 
 #menu li:first-of-type {
