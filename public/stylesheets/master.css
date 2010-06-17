@@ -180,12 +180,6 @@ table#reports td {
   padding: 1em 0.5em;
 }
 
-.politician_score > .report_score > .score {
-  position: relative;
-  top: 20px;
-  left: 75px;
-}
-
 .report_score.hovering > .report_score_evidence_link {
   display: block;
   z-index: 1000;

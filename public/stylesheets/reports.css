@@ -10,7 +10,6 @@
 
 .report_score {
   font-family: 'Lucida Grande',Lucida,Verdana,sans-serif;
-  padding-top: 7px;
 }
 
 #score_examples .report_score {
@@ -145,10 +144,10 @@ div.report_score .score {
     width: 3em;
 }
 
-.report_score_evidence_link ul {
-  padding-left: 0;
+.report_scores .report_score {
+  padding-top: 7px;
 }
 
-.report_scores {
+.report_score_evidence_link ul, .report_scores {
   padding-left: 0;
 }
