@@ -10,6 +10,12 @@ module LocationsHelper
     "#{city}#{geoloc.state}#{zip}"
   end
 
+  def current_location
+    if session[:geo_location].try(:is_us?)
+      geo_description(session[:geo_location])
+    end
+  end
+
   def sought_politicians
     @in_office = !params.has_key?(:in_office) || ['1', true].include?(params[:in_office])
     result =
@@ -28,7 +34,7 @@ module LocationsHelper
   end
 
   def shown_location
-    requested_location || (geo_description(session[:geo_location]) if session[:geo_location].try(:is_us?))
+    requested_location || current_location
   end
 
   def requested_location
