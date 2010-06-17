@@ -3,7 +3,8 @@ class Image < ActiveRecord::Base
         :styles => {
           :large => ["200x200", :png],
           :header =>  ["120x120", :png],
-          :normal => ["100x100", :png]
+          :normal => ["100x100", :png],
+          :tiny => ['30x30', :png]
         },
         :processors => [:jcropper],
         :default_style => :normal

@@ -1,3 +1,13 @@
+.report_image {
+  float: left;
+  margin-right: 7px;
+  margin-top: 9px;
+}
+
+.report_score {
+  font-family: 'Lucida Grande',Lucida,Verdana,sans-serif
+}
+
 .report_excerpt {
   margin-right: 50px;
 }
@@ -68,6 +78,7 @@ h4, .report_title {
 
 .cause > a, .subject > a, a.report_title, .report_creator a, .politician_name a, a.score {
   border-bottom: 0;
+  vertical-align: top;
 }
 
 .cause a:hover, .subject > a:hover, a.report_title:hover, .report_creator a:hover, .politician_name a:hover {
