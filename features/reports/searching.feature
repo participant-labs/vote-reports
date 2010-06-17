@@ -10,7 +10,7 @@ Feature: Report Searching
     Then I should not see "Zach's Views"
 
     When I fill in "Search" with "Views"
-    And I press "Search" within "#content"
+    And I press "Search"
     And I should see "Zach's Views"
 
   Scenario: User searches for and doesn't find a reports
@@ -18,7 +18,7 @@ Feature: Report Searching
     When I go to the reports page
     Then I should see "Reports"
     And I fill in "Search" with "smelly roses"
-    And I press "Search" within "#content"
+    And I press "Search"
     Then I should see "No Reports Found - Try again?"
 
   Scenario: Search excludes unpublished reports
@@ -28,7 +28,7 @@ Feature: Report Searching
     And a published report named "Active Report"
     When I go to the reports page
     And I fill in "Search" with "Report"
-    And I press "Search" within "#content"
+    And I press "Search"
     Then I should see "Active Report"
     But I should not see "Empty Report"
     And I should not see "Unscored Report"

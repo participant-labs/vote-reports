@@ -14,7 +14,7 @@ Feature: Subject Searching
     And I should not see "Marijuana"
 
     When I fill in "Search" with "Marijuana"
-    And I press "Search" within "#content"
+    And I press "Search"
     And I should see "Marijuana"
     And I should not see "Taxation"
 
@@ -23,6 +23,6 @@ Feature: Subject Searching
     When I go to the subjects page
     Then I should see "Popular Subjects"
     And I fill in "Search" with "smelly roses"
-    And I press "Search" within "#content"
+    And I press "Search"
     Then I should see "Matching Subjects"
     Then I should see "No matching subjects found..."
