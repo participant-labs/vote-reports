@@ -41,18 +41,20 @@
   </div>
 
   <div id="footer" class="container_12">
-    <div class="grid_5">
-      <%= link_to image_tag('footer_logo.png', :alt => 'VoteReports'), root_path %>
-      <%= link_to "© #{Date.today.year} Participant Labs Inc", participant_labs_path %>
+    <div class="footer grid_12">
+      <div class="grid_3 alpha">
+        <%= link_to image_tag('footer_logo.png', :alt => 'VoteReports'), root_path %>
+        <%= link_to "© #{Date.today.year} Participant Labs Inc", participant_labs_path %>
+      </div>
+      <ul class="sidebar-links push_1">
+        <li><%= link_to_unless_current "About us", about_path %></li>
+        <li><%= link_to 'Our Blog', blog_path %></li>
+        <li><%= mail_to 'all_ears@votereports.org', "Contact us" %></li>
+        <li><%= link_to 'Feedback', get_satisfaction_path, :title => 'We welcome it' %></li>
+        <li><%= link_to 'Support Our Efforts', new_donation_path,
+          :title => "We've got plenty more to do, and we need your help to do it" %></li>
+      </ul>
     </div>
-    <ul class="sidebar-links grid_7">
-      <li><%= link_to_unless_current "About us", about_path %></li>
-      <li><%= link_to 'Our Blog', blog_path %></li>
-      <li><%= mail_to 'all_ears@votereports.org', "Contact us" %></li>
-      <li><%= link_to 'Feedback', get_satisfaction_path, :title => 'We welcome it' %></li>
-      <li><%= link_to 'Support Our Efforts', new_donation_path,
-        :title => "We've got plenty more to do, and we need your help to do it" %></li>
-    </ul>
   </div>
 
   <%= render 'layouts/mail_chimp' %>
