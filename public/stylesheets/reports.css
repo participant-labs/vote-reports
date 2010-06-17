@@ -92,7 +92,7 @@
   content: ', ';
 }
 
-.cause blockquote, .report blockquote, .report_description blockquote, .interest_group blockquote {
+.report blockquote, .report_description blockquote, .interest_group blockquote {
   border-left: 0;
   padding-left: 0;
   color: #333;
@@ -100,7 +100,7 @@
   margin: 5px 50px 0 0;
 }
 
-.cause blockquote p, .report blockquote p, .report_description blockquote p, .interest_group blockquote p {
+.report blockquote p, .report_description blockquote p, .interest_group blockquote p {
   margin-bottom: 5px;
 }
 
@@ -110,11 +110,11 @@ h4, .report_title, .politician_name a {
   color: #282625;
 }
 
-.cause > a, .subject > a, a.report_title, .report_creator a, .politician_name a, a.score {
+.subject > a, a.report_title, .report_creator a, .politician_name a, a.score {
   border-bottom: 0;
 }
 
-.cause a:hover, .subject > a:hover, a.report_title:hover, .report_creator a:hover, .politician_name a:hover {
+.subject > a:hover, a.report_title:hover, .report_creator a:hover, .politician_name a:hover {
   border-bottom: 1px solid;
 }
 
