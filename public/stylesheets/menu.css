@@ -21,6 +21,10 @@
   margin-left: 20px;
 }
 
+#header_search {
+  float:right;
+}
+
 #nav_search {
   background: url(../images/navigation/search_bg.png);
   width: 213px;
@@ -31,6 +35,10 @@
 #advocates .see_reports span,
 #advocates .create_report span {
   display: none;
+}
+
+#menu {
+  float:left;
 }
 
 #menu li:first-of-type {
@@ -83,6 +91,10 @@
 
 #menu .reports_nav:active, #menu .selected > .reports_nav {
   background: url(../images/navigation/button_reports_pressed.png);
+}
+
+#account {
+  float:right;
 }
 
 #account .login,

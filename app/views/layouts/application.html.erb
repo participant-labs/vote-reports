@@ -2,8 +2,25 @@
   <%= flash_helper %>
 
   <div id="header" class="container_12">
-    <div class="grid_9">
+    <div class="grid_8">
       <%= link_to image_tag('header_logo.png', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
+    </div>
+    <div class="grid_4">
+      <div id="account">
+        <%= render 'locations/location' %>
+        <%- if current_user -%>
+          <%= link_to_unless_current "Dashboard", user_path(current_user) %>
+          <%= link_to_unless_current "Log out", logout_path %>
+        <%- else -%>
+          <%= link_to content_tag(:span, "Log in"), request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy login' %>
+          <%= link_to content_tag(:span, "Register"), signup_path, :class => 'fancyboxy register' %>
+        <%- end -%>
+      </div>
+    </div>
+  </div>
+
+  <div id="nav" class="container_12">
+    <div class="grid_12">
       <ul id="menu" class="sidebar-links">
         <li class="<%= "selected" if request.path.starts_with?('/causes') %>">
           <%= link_to content_tag(:span, "Causes"), causes_path, :class => 'causes_nav' %>
@@ -15,23 +32,11 @@
           <%= link_to content_tag(:span, "Reports"), reports_path, :class => 'reports_nav' %>
         </li>
       </ul>
-    </div>
-    <div class="grid_3">
-      <%= render 'locations/location' %>
-      <div id="account">
-        <%- if current_user -%>
-          <%= link_to_unless_current "Dashboard", user_path(current_user) %>
-          <%= link_to_unless_current "Log out", logout_path %>
-        <%- else -%>
-          <%= link_to content_tag(:span, "Log in"), request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy login' %>
-          <%= link_to content_tag(:span, "Register"), signup_path, :class => 'fancyboxy register' %>
-        <%- end -%>
-      </div>
-      <% form_tag search_path, :method => :get, :id => 'header_search', :class => 'grid_3 alpha omega' do %>
+      <% form_tag search_path, :method => :get, :id => 'header_search' do %>
         <%= label_tag :term, 'Search' %>
         <%= text_field_tag :term, '', :class => 'fieldtag', :id => 'nav_search',
           :title => 'Causes, Reports, Politicians',
-          :size => 24 %>
+          :size => 20 %>
       <% end %>
     </div>
   </div>
