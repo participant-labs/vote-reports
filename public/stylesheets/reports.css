@@ -13,6 +13,10 @@
   padding-top: 7px;
 }
 
+#score_examples .report_score {
+  padding-top: 0;
+}
+
 #report_scores td, table#scores td {
   vertical-align: middle;
 }
