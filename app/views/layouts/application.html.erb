@@ -41,9 +41,11 @@
   </div>
 
   <div id="footer" class="container_12">
-    <h3><%= link_to image_tag('footer_logo.png', :alt => 'VoteReports'), root_path %></h3>
-    <p id="copy"><%= link_to "© #{Date.today.year} Participant Labs Inc", participant_labs_path %></p>
-    <ul class="sidebar-links">
+    <div class="grid_5">
+      <%= link_to image_tag('footer_logo.png', :alt => 'VoteReports'), root_path %>
+      <%= link_to "© #{Date.today.year} Participant Labs Inc", participant_labs_path %>
+    </div>
+    <ul class="sidebar-links grid_7">
       <li><%= link_to_unless_current "About us", about_path %></li>
       <li><%= link_to 'Our Blog', blog_path %></li>
       <li><%= mail_to 'all_ears@votereports.org', "Contact us" %></li>
