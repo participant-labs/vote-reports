@@ -4,7 +4,7 @@ class Image < ActiveRecord::Base
           :large => ["200x200", :png],
           :header =>  ["120x120", :png],
           :normal => ["100x100", :png],
-          :tiny => ['30x30', :png]
+          :tiny => ['35x35', :png]
         },
         :processors => [:jcropper],
         :default_style => :normal
