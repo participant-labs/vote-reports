@@ -1,59 +1,55 @@
 <% content_for :minimal_content do %>
   <%= flash_helper %>
 
-  <div id="main">
-    <div id="inner">
-      <ul id="account">
-        <%- if current_user -%>
-          <li><%= link_to_unless_current "Dashboard", user_path(current_user) %></li>
-          <li><%= link_to_unless_current "Log out", logout_path %></li>
-        <%- else -%>
-          <li><%= link_to_unless_current "Log in", request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy' %></li>
-          <li><%= link_to_unless_current "Sign up", signup_path, :class => 'fancyboxy' %></li>
-        <%- end -%>
-        <%= render 'locations/location' %>
-      </ul>
+  <div id="header" class="container_12">
+    <%= link_to image_tag('header_logo.png', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
+    <ul id="account" class="grid_9">
+      <%- if current_user -%>
+        <li><%= link_to_unless_current "Dashboard", user_path(current_user) %></li>
+        <li><%= link_to_unless_current "Log out", logout_path %></li>
+      <%- else -%>
+        <li><%= link_to_unless_current "Log in", request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy' %></li>
+        <li><%= link_to_unless_current "Sign up", signup_path, :class => 'fancyboxy' %></li>
+      <%- end -%>
+      <%= render 'locations/location' %>
+    </ul>
 
-      <div id="header" class="clearfix">
-        <%= link_to image_tag('header_logo.png', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
-      </div>
-      <ul id="menu" class="sidebar-links">
-        <li class="<%= "selected" if request.path.starts_with?('/causes') %>">
-          <%= link_to "Causes", causes_path, :class => 'causes_nav' %>
-        </li>
-        <li class="<%= "selected" if request.path.starts_with?('/politicians') %>">
-          <%= link_to "Politicians", politicians_path, :class => 'politicians_nav' %>
-        </li>
-        <li class="<%= " selected" if request.path.starts_with?('/reports') %>">
-          <%= link_to "Reports", reports_path, :class => 'reports_nav' %>
-        </li>
-        <li>
-          <% form_tag search_path, :method => :get, :id => 'header_search' do %>
-            <%= label_tag :term, 'Search' %>
-            <%= text_field_tag :term, '', :class => 'fieldtag', :id => 'nav_search',
-              :title => ' Causes, Reports and Politicians',
-              :size => 29 %>
-          <% end %>
-        </li>
-      </ul>
+    <ul id="menu" class="sidebar-links">
+      <li class="<%= "selected" if request.path.starts_with?('/causes') %>">
+        <%= link_to "Causes", causes_path, :class => 'causes_nav' %>
+      </li>
+      <li class="<%= "selected" if request.path.starts_with?('/politicians') %>">
+        <%= link_to "Politicians", politicians_path, :class => 'politicians_nav' %>
+      </li>
+      <li class="<%= " selected" if request.path.starts_with?('/reports') %>">
+        <%= link_to "Reports", reports_path, :class => 'reports_nav' %>
+      </li>
+      <li>
+        <% form_tag search_path, :method => :get, :id => 'header_search' do %>
+          <%= label_tag :term, 'Search' %>
+          <%= text_field_tag :term, '', :class => 'fieldtag', :id => 'nav_search',
+            :title => ' Causes, Reports and Politicians',
+            :size => 29 %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
 
-      <div id="content">
-        <%= yield(:content) || yield %>
-      </div>
+  <div id="content" class="container_12">
+    <%= yield(:content) || yield %>
+  </div>
 
-      <div class="footer" id="footer">
-        <h3><%= link_to image_tag('footer_logo.png', :alt => 'VoteReports'), root_path %></h3>
-        <p id="copy"><%= link_to "© #{Date.today.year} Participant Labs Inc", participant_labs_path %></p>
-        <ul class="sidebar-links">
-          <li><%= link_to_unless_current "About us", about_path %></li>
-          <li><%= link_to 'Our Blog', blog_path %></li>
-          <li><%= mail_to 'all_ears@votereports.org', "Contact us" %></li>
-          <li><%= link_to 'Feedback', get_satisfaction_path, :title => 'We welcome it' %></li>
-          <li><%= link_to 'Support Our Efforts', new_donation_path,
-            :title => "We've got plenty more to do, and we need your help to do it" %></li>
-        </ul>
-      </div>
-    </div>
+  <div id="footer" class="container_12">
+    <h3><%= link_to image_tag('footer_logo.png', :alt => 'VoteReports'), root_path %></h3>
+    <p id="copy"><%= link_to "© #{Date.today.year} Participant Labs Inc", participant_labs_path %></p>
+    <ul class="sidebar-links">
+      <li><%= link_to_unless_current "About us", about_path %></li>
+      <li><%= link_to 'Our Blog', blog_path %></li>
+      <li><%= mail_to 'all_ears@votereports.org', "Contact us" %></li>
+      <li><%= link_to 'Feedback', get_satisfaction_path, :title => 'We welcome it' %></li>
+      <li><%= link_to 'Support Our Efforts', new_donation_path,
+        :title => "We've got plenty more to do, and we need your help to do it" %></li>
+    </ul>
   </div>
 
   <%= render 'layouts/mail_chimp' %>
