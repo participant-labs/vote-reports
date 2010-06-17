@@ -9,7 +9,7 @@ class ReportSubject < ActiveRecord::Base
   class << self
     def generate_for(report)
       ReportSubject.delete_all(:report_id => report.id)
-      bill_criteria_subjects = report.bill_criteria_subjects.scoped(
+      subjects = report.bill_criteria_subjects.scoped(
         :select => "DISTINCT(subjects.id), COUNT(subjects.id) AS count",
         :group => 'subjects.id').inject({}) do |hash, subject|
         hash[subject] = subject.count
@@ -19,15 +19,22 @@ class ReportSubject < ActiveRecord::Base
       if report.interest_group
         count = report.interest_group.reports.count
         report.interest_group.subjects.each do |subject|
-          bill_criteria_subjects[subject] ||= 0
-          bill_criteria_subjects[subject] += count
+          subjects[subject] ||= 0
+          subjects[subject] += count
         end
       end
 
-      if bill_criteria_subjects.present?
+      if report.cause
+        report.cause.report_subjects.each do |report_subject|
+          subjects[report_subject.subject] ||= 0
+          subjects[report_subject.subject] += report_subject.count
+        end
+      end
+
+      if subjects.present?
         ReportSubject.import_without_validations_or_callbacks(
           [:report_id, :subject_id, :count],
-          bill_criteria_subjects.map do |(subject, count)|
+          subjects.map do |(subject, count)|
             [report.id, subject.id, count]
           end
         )
