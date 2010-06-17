@@ -24,9 +24,15 @@
         <% end %>
       </div>
       <ul id="menu" class="sidebar-links">
-        <li <%= raw %{class="selected"} if request.path.starts_with?('/politicians') %>><%= link_to_unless_current "Politicians", politicians_path %></li>
-        <li <%= raw %{class="selected"} if request.path.starts_with?('/causes') %>><%= link_to_unless_current "Causes", causes_path %></li>
-        <li <%= raw %{class="selected"} if request.path.starts_with?('/reports') %>><%= link_to_unless_current "Reports", reports_path %></li>
+        <li <%= raw %{class="selected"} if request.path.starts_with?('/causes') %>>
+          <%= link_to "Causes", causes_path %>
+        </li>
+        <li <%= raw %{class="selected"} if request.path.starts_with?('/politicians') %>>
+          <%= link_to "Politicians", politicians_path %>
+        </li>
+        <li <%= raw %{class="selected"} if request.path.starts_with?('/reports') %>>
+          <%= link_to "Reports", reports_path %>
+        </li>
       </ul>
 
       <div id="content">
