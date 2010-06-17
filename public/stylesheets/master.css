@@ -125,10 +125,6 @@ input.tagged {
   font-size: 13px;
 }
 
-#footer .sidebar-links li + li:before, #account li + li:before {
-  content: " / ";
-}
-
 #advocates #reports ol {
   list-style-type: none;
 }
