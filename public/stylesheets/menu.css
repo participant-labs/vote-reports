@@ -4,7 +4,9 @@
   height: 26px;
 }
 
-#account span, #menu span {
+#account span, #menu span,
+#advocates .see_reports span,
+#advocates .create_report span {
   display: none;
 }
 
@@ -70,4 +72,28 @@
 }
 #account .register:hover {
   background: url(../images/navigation/button_register_rollover.png);
+}
+
+#advocates .see_reports,
+#advocates .create_report {
+  display: inline-block;
+  height: 25px;
+}
+
+#advocates .see_reports {
+  background: url(../images/navigation/button_seeMore.png);
+  width: 73px;
+}
+
+#advocates .create_report {
+  background: url(../images/navigation/button_createreport.png);
+  width: 113px;
+}
+
+#advocates .see_reports:hover {
+  background: url(../images/navigation/button_seeMore_rollover.png);
+}
+
+#advocates .create_report:hover {
+  background: url(../images/navigation/button_createreport_rollover.png);
 }

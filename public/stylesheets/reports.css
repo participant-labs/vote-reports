@@ -1,3 +1,7 @@
+.reports li {
+  margin-left: 0;
+}
+
 .report_image {
   float: left;
   margin-right: 7px;
