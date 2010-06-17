@@ -1,6 +1,6 @@
 <%- if session[:zip_code] -%>
-  <li>Zip: <%= session[:zip_code] %>
-    <%= link_to 'clear', location_path(:return_to => request.request_uri), :method => :delete %></li>
+  Zip: <%= session[:zip_code] %>
+    <%= link_to 'clear', location_path(:return_to => request.request_uri), :method => :delete %>
 <%- else -%>
-  <li><%= link_to 'Set your location', new_location_path(:return_to => request.path), :class => 'fancyboxy' %></li>
+  <%= link_to 'Set your location', new_location_path(:return_to => request.path), :class => 'fancyboxy' %>
 <%- end -%>
