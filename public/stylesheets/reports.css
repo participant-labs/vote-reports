@@ -13,7 +13,7 @@
 }
 
 .report_excerpt {
-  margin-right: 50px;
+  margin: 5px 50px 10px 0;
 }
 
 #report_scores td, table#scores td {
@@ -26,10 +26,12 @@
 
 .follow_report {
   float: right;
+  margin-top: 10px;
 }
 
 .reports > ul, ul.reports {
   list-style-type: none;
+  padding-left: 0;
 }
 
 .score_sources {
@@ -70,7 +72,7 @@
 }
 
 h4, .report_title {
-  font-size: 1.1em;
+  font-size: 1.2em;
   font-weight: bold;
   color: #282625;
 }
@@ -82,7 +84,6 @@ h4, .report_title {
 
 .cause > a, .subject > a, a.report_title, .report_creator a, .politician_name a, a.score {
   border-bottom: 0;
-  vertical-align: top;
 }
 
 .cause a:hover, .subject > a:hover, a.report_title:hover, .report_creator a:hover, .politician_name a:hover {
@@ -123,7 +124,23 @@ h1 {
   margin-bottom: 5px;
 }
 
-.buttons a.negative {
-  background-color: #E2E1DE;
-  border-color: #C4C4C4;
+.report blockquote p {
+    color: #333;
+    font-style: normal;
+}
+
+div.report_score .score {
+    color: #3c3c3c;
+}
+
+.politician_scores div.report_score {
+    width: 3em;
+}
+
+.score_sources ul {
+  padding-left: 0;
+}
+
+.report_scores {
+  padding-left: 0;
 }

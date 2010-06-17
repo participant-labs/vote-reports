@@ -1,3 +1,14 @@
+#copyright {
+  color: black;
+  font-weight: bold;
+  vertical-align: top;
+  padding-left: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+
 .section_header {
   color: #cf0200;
   text-transform: uppercase;
@@ -408,18 +419,7 @@ button.positive, .buttons a.positive{
    color:#fff;
 }
 
-.report blockquote p {
-    color: #666;
-}
-
-div.report_score .score {
-    color: #3c3c3c;
-}
-
-div.report_score {
-    margin-top: 5px;
-}
-
-.politician_scores div.report_score {
-    width: 3em;
+.buttons a.negative {
+  background-color: #E2E1DE;
+  border-color: #C4C4C4;
 }
