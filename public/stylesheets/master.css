@@ -104,24 +104,12 @@ input.tagged {
   color: gray;
 }
 
-.footer {
-  text-align: center;
-  padding-bottom: 1em;
-  padding-top: .8em;
-  border-top: 1px solid #D5D5D5;
-}
-
 .footer h3, .footer p, .footer ul, .footer li, .sidebar-links ul, .sidebar-links li {
   display:inline;
 }
 
 .footer h3 {
   font-size: 1.4em;
-}
-
-.footer ul {
-  margin-right: 30px;
-  font-size: 13px;
 }
 
 #advocates #reports ol {
