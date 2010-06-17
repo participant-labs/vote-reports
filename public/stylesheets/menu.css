@@ -1,5 +1,7 @@
-#header_search {
-  float: right;
+#nav_search {
+  background: url(../images/navigation/search_bg.png);
+  width: 213px;
+  height: 26px;
 }
 
 #menu span {
