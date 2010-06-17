@@ -10,7 +10,7 @@ Feature: Bill Searching
     Then I should not see "USA PATRIOT Reauthorization Act of 2009"
 
     When I fill in "Search" with "Patriot Act"
-    And I press "Search" within "#content"
+    And I press "Search"
     And I should see "USA PATRIOT Reauthorization Act of 2009"
 
   Scenario: User searches for and doesn't find a bills
@@ -18,6 +18,6 @@ Feature: Bill Searching
     When I go to the bills page
     Then I should see "Recent Bills"
     And I fill in "Search" with "smelly roses"
-    And I press "Search" within "#content"
+    And I press "Search"
     Then I should see "Matching Bills"
     And I should see "No bills found..."

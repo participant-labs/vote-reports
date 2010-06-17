@@ -14,7 +14,7 @@ Feature: Managing Cause Reports
     And I follow "Reports" within "#content"
     And I follow "Add Reports"
     And I fill in "Search Reports" with "Brady"
-    And I press "Search" within "#content"
+    And I press "Search"
     Then I should see "Brady Campaign to Prevent Gun Violence"
     And I check "Support"
     And I press "Save"
@@ -28,7 +28,7 @@ Feature: Managing Cause Reports
     And I follow "Reports" within "#content"
     And I follow "Add Reports"
     And I fill in "Search Reports" with "Control"
-    And I press "Search" within "#content"
+    And I press "Search"
     Then I should not see "Gun Control" within "#cause_reports"
     But I should see "No reports found for 'Control'"
 
