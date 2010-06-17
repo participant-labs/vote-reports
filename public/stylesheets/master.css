@@ -51,7 +51,7 @@ img {
 .politician_score .politician_headshot,
 .ui-menu-item .politician_headshot {
   float:left;
-  padding-right: 1em;
+  padding-right: 0.5em;
 }
 
 .ui-menu-item .politician_name {
