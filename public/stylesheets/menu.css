@@ -4,7 +4,7 @@
   height: 26px;
 }
 
-#menu span {
+#account span, #menu span {
   display: none;
 }
 
@@ -50,4 +50,24 @@
 
 #menu .reports_nav:active, #menu .selected > .reports_nav {
   background: url(../images/navigation/button_reports_pressed.png);
+}
+
+#account .login,
+#account .register {
+  display: inline-block;
+  width: 64px;
+  height: 25px;
+}
+
+#account .login {
+  background: url(../images/navigation/button_login.png);
+}
+#account .register {
+  background: url(../images/navigation/button_register.png);
+}
+#account .login:hover {
+  background: url(../images/navigation/button_login_rollover.png);
+}
+#account .register:hover {
+  background: url(../images/navigation/button_register_rollover.png);
 }
