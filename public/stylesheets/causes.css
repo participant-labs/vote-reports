@@ -1,8 +1,4 @@
 /* see also: .report_title */
-#causes > ul {
-  list-style-type: none;
-}
-
 .cause_title {
   font-size: 1.1em;
   font-weight: bold;
