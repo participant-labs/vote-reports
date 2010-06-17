@@ -9,10 +9,10 @@ a {
   text-decoration: none;
 }
 
-.pagination a {
+.pagination a, .score_sources a {
   border-bottom: 1px dotted #666;
 }
-.pagination a:hover {
+.pagination a:hover, .score_sources a:hover {
   border-bottom-style: solid;
 }
 
