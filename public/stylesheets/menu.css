@@ -1,7 +1,47 @@
-#logo {
-  float: left;
+#header_search {
+  float: right;
 }
 
-#header_search {
-  padding-top: 60px;
+#menu .causes_nav,
+#menu .politicians_nav,
+#menu .reports_nav {
+  display: inline-block;
+  width: 204px;
+  height: 38px;
+}
+
+#menu .causes_nav {
+  background: url(../images/navigation/button_causes.png);
+}
+
+#menu .causes_nav:hover {
+  background: url(../images/navigation/button_causes_rollover.png);
+}
+
+#menu .causes_nav:active, #menu .selected > .causes_nav {
+  background: url(../images/navigation/button_causes_pressed.png);
+}
+
+#menu .politicians_nav {
+  background: url(../images/navigation/button_politicians.png);
+}
+
+#menu .politicians_nav:hover {
+  background: url(../images/navigation/button_politicians_rollover.png);
+}
+
+#menu .politicians_nav:active, #menu .selected > .politicians_nav {
+  background: url(../images/navigation/button_politicians_pressed.png);
+}
+
+#menu .reports_nav {
+  background: url(../images/navigation/button_reports.png);
+}
+
+#menu .reports_nav:hover {
+  background: url(../images/navigation/button_reports_rollover.png);
+}
+
+#menu .reports_nav:active, #menu .selected > .reports_nav {
+  background: url(../images/navigation/button_reports_pressed.png);
 }
