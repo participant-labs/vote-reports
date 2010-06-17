@@ -9,6 +9,13 @@ a {
   text-decoration: none;
 }
 
+.pagination a {
+  border-bottom: 1px dotted #666;
+}
+.pagination a:hover {
+  border-bottom-style: solid;
+}
+
 .section_header {
   color: #cf0200;
   text-transform: uppercase;
