@@ -2,6 +2,10 @@
   float: right;
 }
 
+#menu span {
+  display: none;
+}
+
 #menu .causes_nav,
 #menu .politicians_nav,
 #menu .reports_nav {
