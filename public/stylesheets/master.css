@@ -128,10 +128,6 @@ input.tagged {
   list-style-type: none;
 }
 
-#advocates #reports li {
-  margin-bottom: 20px;
-}
-
 #account li {
   display: inline;
 }
@@ -253,7 +249,6 @@ dl.chart_tooltip {
 
 .cause, .report {
   margin-top: 1em;
-  margin-bottom: 1em;
 }
 
 table {
