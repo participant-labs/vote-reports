@@ -17,6 +17,9 @@ javascripts:
 
 stylesheets:
   common:
+    - public/stylesheets/vendor/960gs/reset.css
+    - public/stylesheets/vendor/960gs/text.css
+    - public/stylesheets/vendor/960gs/960.css
     - public/stylesheets/vendor/smoothness/jquery-ui-1.8.2.custom.css
     - public/stylesheets/vendor/jquery.Jcrop.css
     - public/stylesheets/vendor/fancybox/jquery.fancybox-1.3.1.css
