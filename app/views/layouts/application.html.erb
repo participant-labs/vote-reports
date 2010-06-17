@@ -6,13 +6,13 @@
       <%= link_to image_tag('header_logo.png', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
       <ul id="menu" class="sidebar-links">
         <li class="grid_3 alpha<%= " selected" if request.path.starts_with?('/causes') %>">
-          <%= link_to "Causes", causes_path, :class => 'causes_nav' %>
+          <%= link_to content_tag(:span, "Causes"), causes_path, :class => 'causes_nav' %>
         </li>
         <li class="grid_3<%= " selected" if request.path.starts_with?('/politicians') %>">
-          <%= link_to "Politicians", politicians_path, :class => 'politicians_nav' %>
+          <%= link_to content_tag(:span, "Politicians"), politicians_path, :class => 'politicians_nav' %>
         </li>
         <li class="grid_3 omega<%= " selected" if request.path.starts_with?('/reports') %>">
-          <%= link_to "Reports", reports_path, :class => 'reports_nav' %>
+          <%= link_to content_tag(:span, "Reports"), reports_path, :class => 'reports_nav' %>
         </li>
       </ul>
     </div>
