@@ -1,3 +1,12 @@
+#footer .sidebar-links {
+  float: right;
+  margin-bottom: 0.5em;
+}
+
+#footer .sidebar-links a {
+  font-weight: bold;
+}
+
 #copyright {
   color: black;
   font-weight: bold;
@@ -7,6 +16,7 @@
 
 a {
   text-decoration: none;
+  color: #005fbe;
 }
 
 .pagination a, .score_sources a {

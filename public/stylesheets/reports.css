@@ -74,15 +74,10 @@
   margin: 5px 50px 10px 0;
 }
 
-h4, .report_title {
+h4, .report_title, .politician_name a {
   font-size: 1.2em;
   font-weight: bold;
   color: #282625;
-}
-
-.politician_name {
-  font-size: 1.1em;
-  font-weight: bold;
 }
 
 .cause > a, .subject > a, a.report_title, .report_creator a, .politician_name a, a.score {
