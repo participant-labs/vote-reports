@@ -39,6 +39,14 @@
   margin-top: 7px;
 }
 
+#advocates .reports {
+  margin-bottom: 0;
+}
+
+#advocates .reports li {
+  margin-bottom: 0.5em;
+}
+
 #account span, #menu span,
 #advocates .see_reports span,
 #advocates .create_report span {

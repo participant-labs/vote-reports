@@ -1,3 +1,24 @@
+.report_subject {
+  font-size: 0.9em;
+}
+
+.report_subject dt, .report_subject dd, .report_subject div.subject {
+  display: inline;
+}
+
+.report_subject dt {
+  color: #bbb;
+  font-weight: normal;
+}
+.report_subject dt:after {
+  content: ': ';
+}
+
+.report_subject dd {
+  margin-left: 0;
+  font-weight: bold;
+}
+
 .reports li {
   margin-left: 0;
 }
@@ -71,7 +92,11 @@
   padding-left: 0;
   color: #333;
   font-style: normal;
-  margin: 5px 50px 10px 0;
+  margin: 5px 50px 0 0;
+}
+
+.cause blockquote p, .report blockquote p, .report_description blockquote p, .interest_group blockquote p {
+  margin-bottom: 5px;
 }
 
 h4, .report_title, .politician_name a {

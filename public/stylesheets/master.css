@@ -104,10 +104,6 @@ img {
   padding-bottom: 0.5em;
 }
 
-#causes li + li, .report_scores > li + li, .reports > li + li {
-  border-top: 1px dotted gray;
-}
-
 #score_examples .report {
   width: 68%;
   float: right;
@@ -203,17 +199,6 @@ thead th {
   font-size: 1.4em;
 }
 
-dl {
-  margin: 0 0 1.5em 0; }
-
-dl dt {
-  font-weight: bold;
-  margin-left: 0;
-}
-
-dd {
-  margin-left: 1.5em; }
-
 dl.chart_tooltip {
   margin: 0.5em;
 }
@@ -256,10 +241,6 @@ dl.chart_tooltip {
 .image.large {
   max-width: 120px;
   max-height: 120px;
-}
-
-.cause, .report {
-  margin-top: 1em;
 }
 
 table {
