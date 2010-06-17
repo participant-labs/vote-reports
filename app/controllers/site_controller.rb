@@ -9,13 +9,12 @@ class SiteController < ApplicationController
 
     @recent_reports = Report.user_published.by_created_at.all(:limit => 3)
 
-    if shown_location
-      @reps = ['Your Local', 'local']
-      @politicians = sought_politicians.scoped(:limit => 5)
-    else
-      @reps = ['These Example', 'example']
-      @politicians = Politician.in_office.scoped(:limit => 5)
-    end
+    @politicians =
+      if shown_location
+        sought_politicians.scoped(:limit => 5)
+      else
+        Politician.in_office.scoped(:limit => 5)
+      end
     @scores =  @politicians.map {|politician| politician.report_scores.published.first(:order => 'random()') }.compact
 
     respond_to do |format|
