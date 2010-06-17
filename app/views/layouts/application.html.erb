@@ -5,13 +5,13 @@
     <div class="grid_9">
       <%= link_to image_tag('header_logo.png', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
       <ul id="menu" class="sidebar-links">
-        <li class="grid_3 alpha<%= " selected" if request.path.starts_with?('/causes') %>">
+        <li class="<%= "selected" if request.path.starts_with?('/causes') %>">
           <%= link_to content_tag(:span, "Causes"), causes_path, :class => 'causes_nav' %>
         </li>
-        <li class="grid_3<%= " selected" if request.path.starts_with?('/politicians') %>">
+        <li class="<%= "selected" if request.path.starts_with?('/politicians') %>">
           <%= link_to content_tag(:span, "Politicians"), politicians_path, :class => 'politicians_nav' %>
         </li>
-        <li class="grid_3 omega<%= " selected" if request.path.starts_with?('/reports') %>">
+        <li class="<%= "selected" if request.path.starts_with?('/reports') %>">
           <%= link_to content_tag(:span, "Reports"), reports_path, :class => 'reports_nav' %>
         </li>
       </ul>
@@ -30,8 +30,8 @@
       <% form_tag search_path, :method => :get, :id => 'header_search', :class => 'grid_3 alpha omega' do %>
         <%= label_tag :term, 'Search' %>
         <%= text_field_tag :term, '', :class => 'fieldtag', :id => 'nav_search',
-          :title => ' Causes, Reports and Politicians',
-          :size => 29 %>
+          :title => 'Causes, Reports, Politicians',
+          :size => 24 %>
       <% end %>
     </div>
   </div>

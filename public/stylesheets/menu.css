@@ -10,6 +10,14 @@
   display: none;
 }
 
+#menu li:first-of-type {
+  margin-left: 0;
+}
+
+#menu li {
+  margin-left: 10px;
+}
+
 #menu .causes_nav,
 #menu .politicians_nav,
 #menu .reports_nav {
