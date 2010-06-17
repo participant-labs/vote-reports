@@ -286,6 +286,7 @@ table tbody {
 
 #data_sources > li {
   display: inline;
+  margin-left: 0;
 }
 
 #data_sources > li + li {
