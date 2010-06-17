@@ -1,7 +1,0 @@
-<% div_for cause, :'data-hover' => dom_id(cause.report, :follow) do %>
-  <%= link_to cause.name, cause, :class => 'cause_title' %>
-  <%= render 'reports/follows/button', :report => cause.report, :hidden => true %>
-  <blockquote class="description">
-    <p><%= truncate(md_to_text(cause.description), :length => 180) %></p>
-  </blockquote>
-<% end %>
