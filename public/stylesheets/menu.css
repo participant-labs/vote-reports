@@ -1,3 +1,11 @@
+#header {
+  padding: 20px 0;
+}
+
+#logo {
+  padding-bottom: 20px;
+}
+
 .footer {
   background-color: #efefef;
 }
