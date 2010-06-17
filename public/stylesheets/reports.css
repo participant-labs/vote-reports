@@ -1,5 +1,10 @@
+.report {
+  margin-bottom: 1.5em;
+}
+
 .report_subject {
   font-size: 0.9em;
+  margin-bottom: 0;
 }
 
 .report_subject dt, .report_subject dd, .report_subject div.subject {
