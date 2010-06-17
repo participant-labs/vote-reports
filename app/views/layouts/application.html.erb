@@ -46,11 +46,11 @@
 
     <div id="footer" class="span-24">
       <div class="footer span-24">
-        <div class="span-6 alpha">
+        <div class="span-6">
           <%= link_to image_tag('footer_logo.png', :alt => 'VoteReports'), root_path %>
-          <%= link_to "© #{Date.today.year} Participant Labs Inc", participant_labs_path %>
+          <%= link_to "© #{Date.today.year} Participant Labs Inc", participant_labs_path, :id => 'copyright' %>
         </div>
-        <ul class="sidebar-links push_1">
+        <ul class="sidebar-links">
           <li><%= link_to_unless_current "About us", about_path %></li>
           <li><%= link_to 'Our Blog', blog_path %></li>
           <li><%= mail_to 'all_ears@votereports.org', "Contact us" %></li>

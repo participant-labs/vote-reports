@@ -14,6 +14,6 @@
   <%- end -%>
   <%= render 'reports/follows/button', :report => report, :hidden => true %>
   <%- unless report.description.blank? || float_description || report.name.size > 60 -%>
-    <blockquote class="report_excerpt"><p><%= truncate(md_to_text(report.description), :length => 180) %></p></blockquote>
+    <blockquote class="report_excerpt"><p><%= truncate(md_to_text(report.description), :length => 150) %></p></blockquote>
   <%- end -%>
 <% end %>
