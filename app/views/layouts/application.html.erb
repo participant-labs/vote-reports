@@ -15,7 +15,7 @@
       </ul>
 
       <div id="header" class="clearfix">
-        <%= link_to image_tag('logo.png', :size => '521x150', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
+        <%= link_to image_tag('header_logo.png', :alt => 'VoteReports: Knowing is Half the Ballot', :id => 'logo'), root_path %>
 
         <% form_tag search_path, :method => :get, :id => 'header_search' do %>
           <%= text_field_tag :term, '', :class => 'fieldtag', :id => 'nav_search',
