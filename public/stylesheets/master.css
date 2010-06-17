@@ -128,10 +128,6 @@ input.tagged {
   font-size: 1.4em;
 }
 
-#advocates #reports ol {
-  list-style-type: none;
-}
-
 #account li {
   display: inline;
 }
