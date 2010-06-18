@@ -169,6 +169,9 @@ div.report_score .score {
 .politician_scores div.report_score {
     width: 3em;
 }
+.politician_scores div.report {
+    margin-bottom: 0;
+}
 
 .report_scores .report_score {
   padding-top: 7px;
