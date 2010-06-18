@@ -1,7 +1,11 @@
 <%- title 'Knowing is Half the Ballot' -%>
 <div class="section clearfix span-16" id="voters">
   <h3>Know what your representatives <em>really</em> stand for</h3>
-  <p>We want you to be empowered to make good choices when you vote, so we make it easy to know how your representatives vote on the issues important to you.  Just tell us your zip code, tell us what you care about, and we'll tell you how they're doing.</p>
+  <p>We know how hard it is to make sense of what the candidates are <em>really</em> up to, so we set out to create an open system for grading politicians from every possible political perspective, based on their actual votes.  Each of our "<%= link_to 'Reports', reports_path %>" has scores for representatives based on their actual votes, either directly or through an interest group's ratings.</p>
+
+  <p>We go one step farther, by grouping these reports into "<%= link_to 'Causes', causes_path %>", which help to give a full picture of an important political issue.  Cause scores are based on the scores for the reports that went into that cause, and causes are curated with your input, so please <%= mail_to 'causes@votereports.org', 'let us know' %> if you have something to add, or any comment for that matter.</p>
+
+  <p>Take a look around, check out your own representatives.  And come back soon, this project is moving fast!</p>
 
   <h4 style="display: inline" class="section_header">Sample Reps<%= " in your area - #{requested_location}" if requested_location %></h4>
   (<%= link_to "set location", new_location_path(:return_to => request.path), :class => 'fancyboxy' %>)
@@ -17,6 +21,8 @@
 
 <div class="section clearfix span-8 last" id="advocates">
   <h3>Share Your Own Cause</h3>
+
+  <p>On VoteReports, if you don't find the politician report card you're looking for, you can always create your own.</p>
 
   <p>To publish your own report, simply flag the legislation you support or oppose, and we'll track and score the politicians based on their votes.</p>
 
