@@ -117,10 +117,6 @@ img {
   float: left;
 }
 
-.hidden, div.hidden {
-  display: none;
-}
-
 form {
   padding-bottom: 10px;
 }
@@ -143,10 +139,6 @@ input.tagged {
 
 #account li {
   display: inline;
-}
-
-.report_scores table, .politician_scores table {
-  width: 100%;
 }
 
 .report_scores table td {
@@ -189,10 +181,6 @@ table#reports td {
 .report_score.hovering > .report_score_evidence_link {
   display: block;
   z-index: 1000;
-}
-
-thead th {
-  background: #C3D9FF none repeat scroll 0 0;
 }
 
 .loading {
@@ -243,27 +231,6 @@ dl.chart_tooltip {
   max-height: 120px;
 }
 
-table {
-  border-collapse: collapse;
-}
-
-table tbody {
-  border-top: 15px solid transparent;
-}
-
-.clearfix:after {
-  content:"\0020";
-  display:block;
-  height:0;
-  clear:both;
-  visibility:hidden;
-  overflow:hidden;
-}
-
-.clearfix {
-  display:block;
-}
-
 #fdbk_container a {
   border-bottom: 0;
 }
@@ -301,10 +268,6 @@ table tbody {
 /* removed bottom border on tabbed links*/
 .ui-tabs-nav a{
   border-bottom: none !important;
-}
-
-.clear {
-  clear:both;
 }
 
 div.buttons.open-congress a{
