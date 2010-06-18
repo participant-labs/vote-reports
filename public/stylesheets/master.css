@@ -238,7 +238,7 @@ dl.chart_tooltip {
   overflow: hidden;
   width: 1000%;
 }
-.image.large {
+.image_large {
   max-width: 120px;
   max-height: 120px;
 }
