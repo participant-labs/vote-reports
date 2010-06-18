@@ -1,66 +1,68 @@
 <% title "Politician - #{politician_title(@politician)}" %>
 
 <div class="section clearfix">
-  <h2><%= render @politician, :no_image => true %></h2>
-  <%= image_tag @politician.headshot.url(:large), :size => '200x245', :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' if @politician.headshot.url(:large) %>
+  <div class="span-24">
+    <h2 class="span-20"><%= render @politician, :no_image => true %></h2>
 
-  <%- if @politician.in_office? || @politician.congresspedia_url -%>
-  <ul class="details">
-  <%- if @politician.website.present? -%>
-    <li><%= link_to 'Website', @politician.website %></li>
-  <%- end -%>
-  <%- if @politician.email.present? -%>
-    <li><%= mail_to @politician.email, 'Email' %></li>
-  <%- end -%>
-    <li class="dropdown">
-      <h2>Contact</h2>
-      <dl class="dropdown_target">
-      <%- if @politician.congresspedia_url -%>
-        <dt><%= link_to('On Congresspedia', @politician.congresspedia_url) %></dt>
-      <%- end -%>
-      <%- if @politician.webform.present? -%>
-        <dt><%= link_to 'Contact Form', @politician.webform %></dt>
-      <%- end -%>
-      <%- if @politician.youtube_url.present? -%>
-        <dt><%= link_to 'Youtube', @politician.youtube_url %></dt>
-      <%- end -%>
-      <%- if @politician.twitter_id.present? -%>
-        <dt>Twitter</dt>
-        <dd><%= link_to "@#{@politician.twitter_id}", "http://twitter.com/#{@politician.twitter_id}" %></dd>
-      <%- end -%>
-      <%- if @politician.phone.present? -%>
-        <dt>Phone</dt>
-        <dd><%= @politician.phone %></dd>
-      <%- end -%>
-      <%- if @politician.fax.present? -%>
-        <dt>Fax</dt>
-        <dd><%= @politician.fax %></dd>
-      <%- end -%>
-      </dl>
-    </li>
-  </ul>
-  <%- end -%>
+    <%- if @politician.in_office? || @politician.congresspedia_url -%>
+    <ul class="details span-4 last">
+    <%- if @politician.website.present? -%>
+      <li><%= link_to 'Website', @politician.website %></li>
+    <%- end -%>
+    <%- if @politician.email.present? -%>
+      <li><%= mail_to @politician.email, 'Email' %></li>
+    <%- end -%>
+      <li class="dropdown">
+        <h2>Contact</h2>
+        <dl class="dropdown_target">
+        <%- if @politician.congresspedia_url -%>
+          <dt><%= link_to('On Congresspedia', @politician.congresspedia_url) %></dt>
+        <%- end -%>
+        <%- if @politician.webform.present? -%>
+          <dt><%= link_to 'Contact Form', @politician.webform %></dt>
+        <%- end -%>
+        <%- if @politician.youtube_url.present? -%>
+          <dt><%= link_to 'Youtube', @politician.youtube_url %></dt>
+        <%- end -%>
+        <%- if @politician.twitter_id.present? -%>
+          <dt>Twitter</dt>
+          <dd><%= link_to "@#{@politician.twitter_id}", "http://twitter.com/#{@politician.twitter_id}" %></dd>
+        <%- end -%>
+        <%- if @politician.phone.present? -%>
+          <dt>Phone</dt>
+          <dd><%= @politician.phone %></dd>
+        <%- end -%>
+        <%- if @politician.fax.present? -%>
+          <dt>Fax</dt>
+          <dd><%= @politician.fax %></dd>
+        <%- end -%>
+        </dl>
+      </li>
+    </ul>
+    <%- end -%>
+  </div>
+
+  <%= image_tag @politician.headshot.url(:large), :size => '200x245', :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' if @politician.headshot.url(:large) %>
 
   <%- if location = @politician.latest_term.try(:location) -%>
     <iframe width="400" height="272" frameborder="0"
      scrolling="no" marginheight="0" marginwidth="0"
-     src="<%= gov_track_map_url(location) %>" style="float:right;"></iframe>
+     src="<%= gov_track_map_url(location) %>" style="float:left;"></iframe>
   <%- end -%>
-</div>
 
-<div class="section">
-  <h3>Terms in Office</h3>
-  <%- if @terms.present? -%>
-  <ul>
-    <% @terms.each do |term|  %>
-      <li><%= render 'politicians/terms/term', :term => term %></li>
-    <% end %>
-  </ul>
-  <%- else -%>
-    <p>We have no record of elections for this politician</p>
-  <%- end -%>
+  <div class="section" style="float:left; width: 320px; margin-left: 10px">
+    <h3>Terms in Office</h3>
+    <%- if @terms.present? -%>
+    <ul>
+      <% @terms.each do |term|  %>
+        <li><%= render 'politicians/terms/term', :term => term %></li>
+      <% end %>
+    </ul>
+    <%- else -%>
+      <p>We have no record of elections for this politician</p>
+    <%- end -%>
+  </div>
 </div>
-
 
 <div class="ui-tabs">
   <ul>
