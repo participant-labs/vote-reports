@@ -62,6 +62,8 @@
 
 .score_sources {
   font-size: .3em;
+  margin-top: .5em;
+  line-height: 1.5em;
 }
 
 .login_section,
