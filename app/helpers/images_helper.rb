@@ -15,6 +15,7 @@ module ImagesHelper
     style = attrs.delete(:style) || image.thumbnail.default_style
     attrs.reverse_merge!(:alt => title, :title => title)
     attrs.merge!(hover_image_attrs(image)) if style != :large
+    attrs.merge!(:size => image.thumbnail.styles[style][:geometry])
     image_tag(image.thumbnail.url(style), attrs)
   end
 end
