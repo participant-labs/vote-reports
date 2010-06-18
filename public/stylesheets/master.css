@@ -19,7 +19,7 @@ a {
   color: #0070e0;
 }
 
-.pagination a, .score_sources a {
+.pagination a, .score_sources a, .show_all {
   border-bottom: 1px dotted #666;
 }
 .pagination a:hover, .score_sources a:hover {
