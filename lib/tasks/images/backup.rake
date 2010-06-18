@@ -9,6 +9,6 @@ namespace :images do
   end
 
   task :sync do
-    `rsync -avz -e ssh vote-reports:/srv/vote-reports/current/public/system/ public/system/`
+    `rsync -avz -e ssh votereports.org:/srv/vote-reports/current/public/system/ public/system/`
   end
 end
