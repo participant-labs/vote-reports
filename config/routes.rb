@@ -30,6 +30,7 @@ ActionController::Routing::Routes.draw do |map|
     politician.resources :reports, :controller => 'politicians/reports', :only => :index
   end
   map.resources :subjects, :only => [:index, :show] do |subject|
+    subject.resources :causes, :controller => 'subjects/causes', :only => :index
     subject.resources :reports, :controller => 'subjects/reports', :only => :index
     subject.resources :bills, :controller => 'subjects/bills', :only => :index
   end

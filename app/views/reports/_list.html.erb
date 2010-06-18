@@ -1,6 +1,7 @@
 <%-
   param_name ||= :page
   replace ||= 'reports'
+  cause_only ||= false
 -%>
 <div id="reports">
   <%- if reports.present? -%>
@@ -8,7 +9,7 @@
       <% paginated_section reports, :param_name => param_name, :'data-replace' => replace do %>
         <ul class="reports">
           <%- reports.each do |report| -%>
-            <li><%= render 'reports/report', :report => report %></li>
+            <li><%= render 'reports/report', :report => report, :cause_only => cause_only %></li>
           <%- end -%>
         </ul>
       <% end %>
