@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100614010722) do
+ActiveRecord::Schema.define(:version => 20100617223608) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -228,6 +228,34 @@ ActiveRecord::Schema.define(:version => 20100614010722) do
 
   add_index "districts", ["us_state_id", "district"], :name => "districts_us_state_id_district_unique", :unique => true
   add_index "districts", ["us_state_id"], :name => "index_districts_on_us_state_id"
+
+  create_table "guide_reports", :force => true do |t|
+    t.integer  "guide_id",   :null => false
+    t.integer  "report_id",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "guide_reports", ["guide_id", "report_id"], :name => "index_guide_reports_on_guide_id_and_report_id", :unique => true
+  add_index "guide_reports", ["guide_id"], :name => "index_guide_reports_on_guide_id"
+  add_index "guide_reports", ["report_id"], :name => "index_guide_reports_on_report_id"
+
+  create_table "guides", :force => true do |t|
+    t.integer  "district_id"
+    t.integer  "zip_code_id"
+    t.integer  "plus_4"
+    t.integer  "report_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "secure_token", :null => false
+  end
+
+  add_index "guides", ["district_id"], :name => "index_guides_on_district_id"
+  add_index "guides", ["report_id"], :name => "index_guides_on_report_id", :unique => true
+  add_index "guides", ["secure_token"], :name => "index_guides_on_secure_token", :unique => true
+  add_index "guides", ["user_id"], :name => "index_guides_on_user_id"
+  add_index "guides", ["zip_code_id"], :name => "index_guides_on_zip_code_id"
 
   create_table "images", :force => true do |t|
     t.string   "thumbnail_file_name",    :null => false
