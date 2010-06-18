@@ -7,8 +7,14 @@ class Report < ActiveRecord::Base
   end
 
   belongs_to :image
+  # this is a hack, to be fixed by separating out UserReports
+  def current_image
+    image || begin
+        owner.present? && owner.respond_to?(:image) && owner.image
+      end
+  end
   def thumbnail
-    image || interest_group.try(:image) || build_image
+    current_image || build_image
   end
 
   has_friendly_id :name, :use_slug => true, :scope => :user
