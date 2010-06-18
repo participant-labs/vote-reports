@@ -4,8 +4,8 @@
 -%>
 
 <% div_for report, :class => 'clearfix', :'data-hover' => dom_id(report, :follow) do %>
-  <%- if report.image_id -%>
-    <%= image_with_hover_tag report.image, report.name, :style => :tiny, :class => 'report_image' %>
+  <%- if report.current_image -%>
+    <%= image_with_hover_tag report.current_image, report.name, :style => :tiny, :class => 'report_image' %>
   <%- end -%>
   <%- attrs = float_description ? {:title => md_to_text(report.description)} : {}  -%>
   <%= link_to report_name(report, :cause_only => cause_only), report_path(report), attrs.merge(:class => 'report_title') %>

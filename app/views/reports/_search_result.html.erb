@@ -1,4 +1,7 @@
 <% div_for(report, :class => 'clearfix') do %>
+  <%- if report.current_image -%>
+    <%= image_tag report.current_image.thumbnail.url(:tiny), :alt => report.name, :class => 'report_image' %>
+  <%- end -%>
   <%- description = truncate(md_to_text(report.description), :length => 100 - report.name.length) -%>
   <%= content_tag :span, report_name(report), :class => 'report_title' %>
   <%- if report.user_id -%>
