@@ -1,6 +1,6 @@
 (function($) {
   $(function(){
-    $('[data-qtip-image]').live('mouseover mouseout', function(event) {
+    $('[data-qtip-image]').live('mouseover', function(event) {
       var self = $(event.target).closest('[data-qtip-image]');
       if (!self.data('init')) {
         self.data('init', true);
