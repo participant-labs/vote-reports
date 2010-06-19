@@ -1,13 +1,5 @@
-<%-
-  no_titles ||= false
-  hide_year ||= false
-  attrs = (!no_titles && bill.titles.present?) ? {
-    :'data-qtip-path' => bill_titles_path(bill),
-    :'data-qtip-title' => %{Bill Titles for "#{bill.titles.first}"},
-    :'data-qtip-delay' => 2000
-  } : {}
--%>
+<%- hide_year ||= false -%>
 
 <span class="bill">
-  <%= link_to_unless_current "#{bill.bill_type.to_s} #{bill.bill_number}#{" (#{bill.introduced_on.year})" unless hide_year }: #{bill.titles.first}", bill, attrs.merge(:class => 'title') %>
+  <%= link_to_unless_current "#{bill.bill_type.to_s} #{bill.bill_number}#{" (#{bill.introduced_on.year})" unless hide_year }: #{bill.titles.first}", bill, :class => 'title' %>
 </span>
