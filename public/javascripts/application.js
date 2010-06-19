@@ -45,17 +45,13 @@
       return false;
     });
 
-    $('[data-hover]').live('mouseover', function() {
-      var hoverable = $(this);
-      if (!hoverable.data('hover-init')) {
-        hoverable.data('hover-init', true);
-        var target = $('#' + hoverable.attr('data-hover'));
-        hoverable.hoverIntent({
-          timeout: 500,
-          over: function() { target.fadeIn(); },
-          out: function() { target.fadeOut(); }
-        });
-        hoverable.mouseover();
+    $('[data-hover]').hoverIntent({
+      timeout: 500,
+      over: function() {
+        $('#' + $(this).attr('data-hover')).fadeIn();
+      },
+      out: function() {
+        $('#' + $(this).attr('data-hover')).fadeOut();
       }
     });
 
