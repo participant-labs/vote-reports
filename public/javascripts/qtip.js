@@ -1,8 +1,10 @@
 ;(function($) {
   $(document).ready(function(){
     $('[data-qtip-image]').live('mouseover', function(event) {
+      console.info('mouser!');
       var self = $(event.target).closest('[data-qtip-image]');
       if (!self.data('init')) {
+        console.info('initer!');
         self.data('init', true);
         var title = self.attr('alt');
         var width = self.attr('data-qtip-width');
@@ -39,6 +41,7 @@
             effect: { length: 500 }
          }
         });
+        console.info('remouse!');
         self.mouseover();
       }
     });
