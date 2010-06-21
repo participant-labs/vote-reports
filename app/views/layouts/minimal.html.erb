@@ -11,6 +11,7 @@
     <%= raw include_stylesheets(:common, :media => 'all') %>
     <%= render 'layouts/google_analytics' %>
     <%= javascript_include_tag 'vendor/jquery-1.4.2.min.js' %>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <link rel="shortcut icon" href="/images/favicon.ico" />
 
     <!--[if IE]>
@@ -22,6 +23,9 @@
     <%= render 'layouts/ienomore' %>
     <%= yield(:minimal_content) || yield %>
 
+    <% javascript_tag do %>
+      location_set = <%= session[:geo_location].present? %>;
+    <% end %>
     <%= raw include_javascripts(:common) %>
     <%= yield :javascript_area %>
   </body>
