@@ -8,16 +8,19 @@
   $(function () {
     var map = new google.maps.Map(document.getElementById("map_canvas"), {
       zoom: 11,
-      center: new google.maps.LatLng(<%= @center.lat %>,<%= @center.lng %>),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
+    map.fitBounds(new google.maps.LatLngBounds(
+      <%= mapy(@bounds.lower_corner) %>,
+      <%= mapy(@bounds.upper_corner) %>
+    ));
 
     <%- @districts.each do |district| -%>
       var district_<%= district.gid %> = new google.maps.Polygon({
         paths: [
-          <%- district.linear_ring.each do |point| -%>
-          new google.maps.LatLng(<%= point.y %>, <%= point.x %>),
-          <%- end -%>
+        <%- district.linear_ring.each do |point| -%>
+          <%= mapy(point) %>,
+        <%- end -%>
         ],
         strokeColor: "<%= district.level.stroke_color %>",
         strokeOpacity: 0.8,

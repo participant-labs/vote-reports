@@ -13,7 +13,7 @@ class District < ActiveRecord::Base
     end
   }
 
-  Level.levels.each do |level|
+  District::Level.levels.each do |level|
     named_scope level, :conditions => {:level => level}
   end
 

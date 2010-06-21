@@ -1,4 +1,8 @@
 module LocationsHelper
+  def mapy(point)
+    "new google.maps.LatLng(#{ point.y }, #{ point.x })".html_safe
+  end
+
   def zip_code?(location)
     (location =~ /^\s*\d{5}([-\s]*\d{4})?\s*$/).present?
   end
