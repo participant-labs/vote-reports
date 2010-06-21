@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100621034528) do
+ActiveRecord::Schema.define(:version => 20100621041028) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -230,14 +230,15 @@ ActiveRecord::Schema.define(:version => 20100621034528) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "index_delayed_jobs_on_priority_and_run_at"
 
   create_table "districts", :primary_key => "gid", :force => true do |t|
-    t.string        "state",      :limit => 2
-    t.string        "cd",         :limit => 2
-    t.string        "lsad",       :limit => 2
-    t.string        "name",       :limit => 90
-    t.string        "lsad_trans", :limit => 50
-    t.multi_polygon "the_geom",   :limit => nil
+    t.string        "state",         :limit => 2
+    t.string        "cd",            :limit => 3
+    t.string        "lsad",          :limit => 2
+    t.string        "name",          :limit => 90
+    t.string        "lsad_trans",    :limit => 50
+    t.multi_polygon "the_geom",      :limit => nil
     t.string        "state_name"
     t.string        "level"
+    t.string        "census_geo_id"
   end
 
   add_index "districts", ["the_geom"], :name => "index_districts_on_the_geom", :spatial => true
