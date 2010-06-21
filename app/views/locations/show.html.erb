@@ -7,7 +7,6 @@
 <% javascript_tag do %>
   $(function () {
     var map = new google.maps.Map(document.getElementById("map_canvas"), {
-      zoom: 11,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
     map.fitBounds(new google.maps.LatLngBounds(
