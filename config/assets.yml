@@ -11,8 +11,10 @@ javascripts:
     - public/javascripts/vendor/jquery.qtip.preload.js
     - public/javascripts/vendor/highcharts/highcharts.src.js
     - public/javascripts/vendor/fancybox/jquery.fancybox-1.3.1.js
+    - public/javascripts/vendor/google/gears_init.js
     - public/javascripts/replace.js
     - public/javascripts/qtip.js
+    - public/javascripts/geolocation.js
     - public/javascripts/application.js
 
 stylesheets:
