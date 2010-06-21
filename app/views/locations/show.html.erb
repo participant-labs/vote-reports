@@ -4,7 +4,7 @@
   <h2>
     <% form_tag location_path do %>
       <%= label_tag :location, 'Your Location', :style => 'font-weight: normal;' %>
-      <%= text_field_tag :location, params[:location] %>
+      <%= text_field_tag :location, session[:location] %>
       <%= submit_tag 'Set' %>
     <% end %>
   </h2>
@@ -31,7 +31,10 @@
 </div>
 
 <% javascript_tag do %>
+<%- unless @js -%>
   $(function () {
+<%- end -%>
+
     var map = new google.maps.Map(document.getElementById("map_canvas"), {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
@@ -60,6 +63,7 @@
         content: "Howdy"
     });
 
+  <%- unless @js -%>
     var location = new google.maps.Marker({
       position: <%= mapy(@geoloc) %>,
       map: map,
@@ -69,5 +73,9 @@
     google.maps.event.addListener(location, 'click', function() {
       districtInfo.open(map,location);
     });
+  <%- end -%>
+
+<%- unless @js -%>
   });
+<%- end -%>
 <% end %>

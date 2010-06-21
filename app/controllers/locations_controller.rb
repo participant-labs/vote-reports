@@ -22,20 +22,36 @@ class LocationsController < ApplicationController
       else
         flash.now[:success] = "Successfully set location"
       end
-      @districts = District.lookup(@geoloc)
-      @federal = @districts.federal.first
-      @bounds = @federal.polygon.envelope
-      @politicians = Politician.for_districts(@districts).in_office
-
+      session[:location] = params[:location]
       session[:geo_location] = @geoloc
-      session[:district_ids] = @districts.map(&:id)
 
-      render :action => 'show'
+      redirect_to :action => 'show'
+    end
+  end
+
+  def show
+    unless @geoloc = session[:geo_location]
+      render :action => :new
+      return
+    end
+
+    @districts = District.lookup(@geoloc)
+    @federal = @districts.federal.first
+    @bounds = @federal.polygon.envelope
+    @politicians = Politician.for_districts(@districts).in_office
+
+    respond_to do |format|
+      format.html
+      format.js {
+        @js = true
+        render :layout => false
+      }
     end
   end
 
   def destroy
     flash[:success] = "Successfully cleared location"
+    session[:location] = nil
     session[:geo_location] = nil
     redirect_to params[:return_to] || root_path
   end
