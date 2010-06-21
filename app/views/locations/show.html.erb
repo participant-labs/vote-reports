@@ -29,5 +29,19 @@
       });
       district_<%= district.gid %>.setMap(map);
     <%- end -%>
+
+    var districtInfo = new google.maps.InfoWindow({
+        content: "Howdy"
+    });
+
+    var location = new google.maps.Marker({
+      position: <%= mapy(@geoloc) %>,
+      map: map,
+      title: "Your Location"
+    });
+
+    google.maps.event.addListener(location, 'click', function() {
+      districtInfo.open(map,location);
+    });
   });
 <% end %>

@@ -1,6 +1,10 @@
 module LocationsHelper
   def mapy(point)
-    "new google.maps.LatLng(#{ point.y }, #{ point.x })".html_safe
+    if point.respond_to?(:lat)
+      "new google.maps.LatLng(#{ point.lat }, #{ point.lng })"
+    else
+      "new google.maps.LatLng(#{ point.y }, #{ point.x })"
+    end.html_safe
   end
 
   def zip_code?(location)
