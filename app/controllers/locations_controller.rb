@@ -9,13 +9,22 @@ class LocationsController < ApplicationController
   end
 
   def create
-    if zip_code?(params[:zip_code])
-      flash[:success] = "Successfully set location"
-      session[:zip_code] = params[:zip_code]
-      redirect_to params[:return_to] || root_path
-    else
-      flash[:error] = %Q{"#{params[:zip_code]}" doesn't look like a zip code.  Try again?}
+    geoloc = Geokit::Geocoders::MultiGeocoder.geocode(params[:location])
+    if !geoloc.success?
+      flash.now[:error] = %Q{Sorry, we were unable to understand this location. Could you clarify it?}
       render :action => 'new'
+    elsif !geoloc.is_us?
+      flash.now[:error] = %Q{Sorry, we currently only handle representatives for the United States of America.}
+      render :action => 'new'
+    elsif !%w[street address].include?(geoloc.precision)
+      flash.now[:error] = %Q{In order to pinpoint both state and federal officals, we need an address or intersection.}
+      render :action => 'new'
+    else
+      flash.now[:success] = "Successfully set location"
+      sess = Patron::Session.new
+      session[:location] = JSON.parse(sess.get('http://congress.mcommons.com/districts/lookup.json?' + {:lat => geoloc.lat, :lng => geoloc.lng}.to_param).body)
+
+      render :action => 'show'
     end
   end
 

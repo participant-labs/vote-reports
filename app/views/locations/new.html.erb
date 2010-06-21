@@ -3,11 +3,11 @@
 <div class="section fancyboxy-content">
   <h4>Help us show just the scores relevant to you</h4>
 
-  <p>Just tell us where you vote (zip code is best, + 4 is even better) and we'll focus on your representatives throughout the site.</p>
+  <p>Just tell us where you vote and we'll focus on your representatives throughout the site.</p>
 
   <% form_tag location_path do %>
-    <%= label_tag :zip_code, "Location" %>
-    <%= text_field_tag :zip_code %>
+    <%= label_tag :location %>
+    <%= text_field_tag :location %>
     <%- if params[:return_to].present? -%>
       <%= hidden_field_tag :return_to, params[:return_to] %>
     <%- end -%>
