@@ -21,8 +21,8 @@ class LocationsController < ApplicationController
       render :action => 'new'
     else
       flash.now[:success] = "Successfully set location"
-      sess = Patron::Session.new
-      session[:location] = JSON.parse(sess.get('http://congress.mcommons.com/districts/lookup.json?' + {:lat => geoloc.lat, :lng => geoloc.lng}.to_param).body)
+      @center = geoloc
+      @districts = District.lookup(geoloc)
 
       render :action => 'show'
     end
