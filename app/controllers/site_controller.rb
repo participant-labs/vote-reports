@@ -3,10 +3,6 @@ class SiteController < ApplicationController
   def index
     params[:in_office] = true
 
-    if params[:representing].present? && zip_code?(params[:representing])
-      session[:zip_code] = params[:representing]
-    end
-
     @recent_reports = Report.user_published.by_created_at.all(:limit => 3)
 
     @politicians =

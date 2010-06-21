@@ -36,7 +36,7 @@ class LocationsController < ApplicationController
 
   def destroy
     flash[:success] = "Successfully cleared location"
-    session[:zip_code] = nil
+    session[:geo_location] = nil
     redirect_to params[:return_to] || root_path
   end
 end

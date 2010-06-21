@@ -116,6 +116,10 @@
   float:right;
 }
 
+#account p {
+  display: inline;
+}
+
 #account .login,
 #account .register {
   display: inline-block;

@@ -1,6 +1,6 @@
-<%- if session[:zip_code] -%>
-  Zip: <%= session[:zip_code] %>
-    <%= link_to 'clear', location_path(:return_to => request.request_uri), :method => :delete %>
+<%= current_location %>
+<%- if session[:geo_location].present? -%>
+  (<%= link_to 'clear', location_path(:return_to => request.request_uri), :method => :delete %>)
 <%- else -%>
-  <%= current_location %> (<%= link_to 'set location', new_location_path(:return_to => request.path), :class => 'fancyboxy' %>)
+  (<%= link_to 'set location', new_location_path(:return_to => request.path), :class => 'fancyboxy' %>)
 <%- end -%>

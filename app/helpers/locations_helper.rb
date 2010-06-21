@@ -20,7 +20,7 @@ module LocationsHelper
 
   def current_location
     if session[:geo_location].try(:is_us?)
-      geo_description(session[:geo_location])
+      content_tag :p, geo_description(session[:geo_location]), :class => "location precision-#{session[:geo_location].precision}"
     end
   end
 
@@ -48,8 +48,8 @@ module LocationsHelper
   def requested_location
     if params.has_key?(:representing)
       params[:representing]
-    elsif session[:zip_code].present?
-      session[:zip_code]
+    elsif session[:geo_location].present?
+      geo_description(session[:geo_location])
     end
   end
 
