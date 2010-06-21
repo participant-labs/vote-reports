@@ -236,22 +236,10 @@ dl.chart_tooltip {
 }
 
 #data_sources {
-  list-style-type: none;
-  margin-left: 0;
   text-align: center;
 }
-
-#data_sources > li {
-  display: inline;
-  margin-left: 0;
-}
-
-#data_sources > li + li {
-  padding-left: 2em;
-}
-
-#data_sources > li > a {
-  border-bottom: 0;
+#data_sources td {
+  padding: 0;
 }
 
 .actions_menu {
