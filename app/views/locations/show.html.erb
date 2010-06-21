@@ -2,7 +2,21 @@
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-<div id="map_canvas" style="width: 100%; height: 30em;"></div>
+<div class="left">
+  <h2>
+    <% form_tag location_path do %>
+      <%= label_tag :location, 'Your Location', :style => 'font-weight: normal;' %>
+      <%= text_field_tag :location, params[:location] %>
+      <%= submit_tag 'Set' %>
+    <% end %>
+  </h2>
+
+  <div id="map_canvas" style="height: 30em;"></div>
+</div>
+
+<div class="right">
+  <h2>Your Representatives</h2>
+</div>
 
 <% javascript_tag do %>
   $(function () {
