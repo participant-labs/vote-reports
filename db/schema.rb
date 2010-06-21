@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100621042016) do
+ActiveRecord::Schema.define(:version => 20100621074655) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -200,7 +200,7 @@ ActiveRecord::Schema.define(:version => 20100621042016) do
   end
 
   add_index "congressional_districts", ["us_state_id", "district"], :name => "districts_us_state_id_district_unique", :unique => true
-  add_index "congressional_districts", ["us_state_id"], :name => "index_districts_on_us_state_id"
+  add_index "congressional_districts", ["us_state_id"], :name => "index_congressional_districts_on_us_state_id"
 
   create_table "cosponsorships", :force => true do |t|
     t.integer  "bill_id",       :null => false
@@ -229,19 +229,19 @@ ActiveRecord::Schema.define(:version => 20100621042016) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "index_delayed_jobs_on_priority_and_run_at"
 
-  create_table "districts", :primary_key => "gid", :force => true do |t|
-    t.string        "state",         :limit => 2
+  create_table "districts", :force => true do |t|
     t.string        "cd",            :limit => 3
     t.string        "lsad",          :limit => 2
     t.string        "name",          :limit => 90
     t.string        "lsad_trans",    :limit => 50
     t.multi_polygon "the_geom",      :limit => nil
-    t.string        "state_name"
     t.string        "level"
     t.string        "census_geo_id"
+    t.integer       "us_state_id",                  :null => false
   end
 
   add_index "districts", ["the_geom"], :name => "index_districts_on_the_geom", :spatial => true
+  add_index "districts", ["us_state_id"], :name => "index_districts_on_us_state_id"
 
   create_table "guide_reports", :force => true do |t|
     t.integer  "guide_id",   :null => false
@@ -617,6 +617,7 @@ ActiveRecord::Schema.define(:version => 20100621042016) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state_type",                :null => false
+    t.string   "fips_code"
   end
 
   add_index "us_states", ["abbreviation"], :name => "index_us_states_on_abbreviation"

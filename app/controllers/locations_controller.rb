@@ -24,6 +24,7 @@ class LocationsController < ApplicationController
       end
       @districts = District.lookup(@geoloc)
       @bounds = @districts.federal.first.polygon.envelope
+      @politicians = Politician.for_districts(@districts).in_office
 
       render :action => 'show'
     end

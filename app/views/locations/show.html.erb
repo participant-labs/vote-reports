@@ -16,6 +16,9 @@
 
 <div class="right">
   <h2>Your Representatives</h2>
+  <%- @politicians.each do |politician| -%>
+    <%= render 'politicians/politician', :politician => politician %>
+  <%- end -%>
 </div>
 
 <% javascript_tag do %>
@@ -29,7 +32,7 @@
     ));
 
     <%- @districts.each do |district| -%>
-      var district_<%= district.gid %> = new google.maps.Polygon({
+      var district_<%= district.id %> = new google.maps.Polygon({
         paths: [
         <%- district.linear_ring.each do |point| -%>
           <%= mapy(point) %>,
@@ -41,7 +44,7 @@
         fillColor: "<%= district.level.fill_color %>",
         fillOpacity: 0.3
       });
-      district_<%= district.gid %>.setMap(map);
+      district_<%= district.id %>.setMap(map);
     <%- end -%>
 
     var districtInfo = new google.maps.InfoWindow({
