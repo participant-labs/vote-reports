@@ -16,11 +16,12 @@ class LocationsController < ApplicationController
     elsif !@geoloc.is_us?
       flash.now[:error] = %Q{Sorry, we currently only handle representatives for the United States of America.}
       render :action => 'new'
-    elsif !%w[street address].include?(@geoloc.precision)
-      flash.now[:error] = %Q{In order to pinpoint both state and federal officals, we need an address or intersection.}
-      render :action => 'new'
     else
-      flash.now[:success] = "Successfully set location"
+      if !%w[street address].include?(@geoloc.precision)
+        flash.now[:notice] = %Q{For more accurate results, an address or intersection is best, but here's our best guess from what you've said.}
+      else
+        flash.now[:success] = "Successfully set location"
+      end
       @districts = District.lookup(@geoloc)
       @bounds = @districts.federal.first.polygon.envelope
 
