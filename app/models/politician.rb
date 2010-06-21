@@ -30,7 +30,7 @@ class Politician < ActiveRecord::Base
 
   def terms
     (
-      representative_terms.all(:include => [:party, :district])  +
+      representative_terms.all(:include => [:party, :congressional_district])  +
       senate_terms.all(:include => [:party, :state]) +
       presidential_terms.all(:include => :party)
     ).sort_by(&:ended_on).reverse
@@ -45,10 +45,10 @@ class Politician < ActiveRecord::Base
     cterms
   end
 
-  belongs_to :district
+  belongs_to :congressional_district
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
   def location
-    district || state
+    congressional_district || state
   end
 
   searchable do
@@ -133,10 +133,10 @@ class Politician < ActiveRecord::Base
     {:conditions => {:first_name => first, :last_name => last}}
   }
   named_scope :by_birth_date, :order => 'birthday DESC NULLS LAST'
-  named_scope :by_district, :order => 'districts.district'
-  named_scope :from_district, lambda {|districts|
+  named_scope :by_district, :order => 'congressional_districts.district'
+  named_scope :from_congressional_district, lambda {|districts|
     {:conditions => [
-        "(senate_terms.us_state_id IN(?) OR representative_terms.district_id IN(?))",
+        "(senate_terms.us_state_id IN(?) OR representative_terms.congressional_district_id IN(?))",
          Array(districts).map(&:us_state_id), districts
       ], :joins => [
         %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
@@ -148,11 +148,11 @@ class Politician < ActiveRecord::Base
     state = UsState.first(:conditions => ["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]) if state.is_a?(String)
     if state
       {:select => 'DISTINCT politicians.*', :conditions => [
-        'senate_terms.us_state_id = ? OR districts.us_state_id = ?', state, state
+        'senate_terms.us_state_id = ? OR congressional_districts.us_state_id = ?', state, state
       ], :joins => [
         %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
         %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
-        %{LEFT OUTER JOIN "districts" ON representative_terms.district_id = districts.id},
+        %{LEFT OUTER JOIN "congressional_districts" ON representative_terms.congressional_district_id = congressional_districts.id},
       ]}
     else
       {:conditions => '0 = 1'}
@@ -162,9 +162,9 @@ class Politician < ActiveRecord::Base
     state = UsState.first(:conditions => ["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]) if state.is_a?(String)
     if state
       {
-        :select => 'DISTINCT politicians.*, districts.district',
-        :conditions => ['districts.us_state_id = ?', state],
-        :joins => {:representative_terms => :district}
+        :select => 'DISTINCT politicians.*, congressional_districts.district',
+        :conditions => ['congressional_districts.us_state_id = ?', state],
+        :joins => {:representative_terms => :congressional_district}
       }
     else
       {:conditions => '0 = 1'}
@@ -173,11 +173,11 @@ class Politician < ActiveRecord::Base
 
   class << self
     def from_zip_code(zip_code)
-      from_district(District.with_zip(zip_code))
+      from_congressional_district(CongressionalDistrict.with_zip(zip_code))
     end
 
     def from_city(address)
-      from_district(District.for_city(address))
+      from_congressional_district(CongressionalDistrict.for_city(address))
     end
 
     def from_location(location)

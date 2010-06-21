@@ -1,7 +1,7 @@
-class District < ActiveRecord::Base
+class CongressionalDistrict < ActiveRecord::Base
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
-  has_many :district_zip_codes
-  has_many :zip_codes, :through => :district_zip_codes
+  has_many :congressional_district_zip_codes
+  has_many :zip_codes, :through => :congressional_district_zip_codes
 
   has_many :representative_terms
   has_many :representatives, :through => :representative_terms, :source => :politician, :uniq => true do
@@ -9,7 +9,6 @@ class District < ActiveRecord::Base
       scoped(:conditions => ['politicians.current_office_type = ?', 'RepresentativeTerm'])
     end
   end
-  has_many :cached_politicians, :class_name => 'Politician'
 
   delegate :senators, :to => :state
 
@@ -19,15 +18,15 @@ class District < ActiveRecord::Base
       {:conditions => '0 = 1'}
     elsif plus_4.blank?
       {:joins => :zip_codes, :conditions => {:'zip_codes.zip_code' => zip_code}}
-    elsif DistrictZipCode.scoped(:joins => :zip_code, :conditions => {
-        :'zip_codes.zip_code' => zip_code, :'district_zip_codes.plus_4' => plus_4
+    elsif CongressionalDistrictZipCode.scoped(:joins => :zip_code, :conditions => {
+        :'zip_codes.zip_code' => zip_code, :'congressional_district_zip_codes.plus_4' => plus_4
       }).exists?
       {:joins => :zip_codes, :conditions => {
-        :'zip_codes.zip_code' => zip_code, :'district_zip_codes.plus_4' => plus_4
+        :'zip_codes.zip_code' => zip_code, :'congressional_district_zip_codes.plus_4' => plus_4
       }}
     else
       {:joins => :zip_codes, :conditions => [
-        "zip_codes.zip_code = ? AND (district_zip_codes.plus_4 = ? OR district_zip_codes.plus_4 IS NULL)", zip_code, plus_4
+        "zip_codes.zip_code = ? AND (congressional_district_zip_codes.plus_4 = ? OR congressional_district_zip_codes.plus_4 IS NULL)", zip_code, plus_4
       ]}
     end
   }
@@ -37,11 +36,11 @@ class District < ActiveRecord::Base
     if city.blank?
       {:conditions => '0 = 1'}
     elsif state.blank?
-      {:select => 'DISTINCT districts.*',
+      {:select => 'DISTINCT congressional_districts.*',
       :joins => {:zip_codes => :locations},
       :conditions => {:'locations.city' => city}}
     else
-      {:select => 'DISTINCT districts.*',
+      {:select => 'DISTINCT congressional_districts.*',
       :joins => {:zip_codes => :locations},
       :conditions => {:'locations.city' => city, :'locations.state' => state}}
     end
@@ -51,12 +50,12 @@ class District < ActiveRecord::Base
     def find_by_name(name)
       state, district = name.split('-')
       district = 0 if district == 'At_large'
-      first(:conditions => {'districts.district' => district, 'us_states.abbreviation' => state}, :joins => :state)
+      first(:conditions => {'congressional_districts.district' => district, 'us_states.abbreviation' => state}, :joins => :state)
     end
   end
 
   def politicians
-    Politician.from_district(self)
+    Politician.from_congressional_district(self)
   end
 
   def abbreviation

@@ -14,7 +14,7 @@ Feature: Browsing Report Scores by State
       | Connie Mack           |
       | Neil Abercrombie      |
     And the following representative term records:
-      | name                  | state | district |
+      | name                  | state | congressional_district |
       | Michael Burgess       | TX    | 26       |
       | J. Kerrey             | TX    | 11       |
       | Kay Hutchison         | TX    | 9        |
@@ -23,8 +23,8 @@ Feature: Browsing Report Scores by State
       | name                  | state |
       | John Cornyn           | TX    |
       | Connie Mack           | OH    |
-    And the following district zip code records:
-      | state | district | zip_code |
+    And the following congressional district zip code records:
+      | state | congressional_district | zip_code |
       | TX    | 26       | 75028    |
       | TX    | 11       | 75028    |
       | TX    | 11       | 78704    |

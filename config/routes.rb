@@ -45,8 +45,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :us_states, :as => 'us/states', :controller => 'us/states', :only => 'show' do |state|
     state.resource :map, :controller => 'us/states/maps', :only => 'show'
   end
-  map.resources :districts, :as => 'us/congressional_districts', :controller => 'us/districts', :only => 'show' do |district|
-    district.resource :map, :controller => 'us/districts/maps', :only => 'show'
+  map.resources :congressional_districts, :as => 'us/congressional_districts', :controller => 'us/congressional_districts', :only => 'show' do |congressional_district|
+    congressional_district.resource :map, :controller => 'us/congressional_districts/maps', :only => 'show'
   end
 
   map.resources :users do |user|
