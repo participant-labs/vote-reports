@@ -43,6 +43,7 @@ Rails::Initializer.run do |config|
   config.gem 'rpx_now', :version => '>= 0.6.12'
   config.gem 'sexy_pg_constraints'
   config.gem 'state_machine'
+  config.gem 'spatial_adapter'
   config.gem 'sunspot', :lib => 'sunspot', :version => '= 0.10.8'
   config.gem 'sunspot_rails', :lib => 'sunspot/rails', :version => '= 0.11.5'
   config.gem 'polly-suppress_validations', :source => "http://gems.github.com", :lib => 'suppress_validations'
