@@ -21,8 +21,8 @@ class LocationsController < ApplicationController
       render :action => 'new'
     else
       flash.now[:success] = "Successfully set location"
-      @center = geoloc
       @districts = District.lookup(geoloc)
+      @bounds = @districts.federal.first.polygon.envelope
 
       render :action => 'show'
     end
