@@ -8,7 +8,7 @@
   <p>Take a look around, check out your own representatives.  And come back soon, this project is moving fast!</p>
 
   <h4 style="display: inline" class="section_header">Sample Reps<%= " in your area - #{requested_location}" if requested_location %></h4>
-  (<%= link_to "set location", new_location_path(:return_to => request.path), :class => 'fancyboxy' %>)
+  (<%= link_to "set location", location_path(:return_to => request.path), :class => 'fancyboxy' %>)
   <div id="score_examples">
     <ul class="report_scores">
       <%- @scores.each do |score| -%>
