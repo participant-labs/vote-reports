@@ -9,11 +9,31 @@
   <h2>About Us</h2>
   <p>VoteReports is a national nonprofit, nonpartisan organization led by Benjamin Woosley and built on data provided by:</p>
 
-  <ul id="data_sources">
-    <li><%= link_to image_tag('gov_track_logo.png', :alt => 'GovTrack.us: a civic project to track Congress', :width => '30%'), 'http://www.govtrack.us/' %></li>
-    <li><%= link_to image_tag('sunlight_foundation_logo.gif', :alt => 'Sunlight Foundation', :width => '30%'), 'http://sunlightfoundation.com/' %></li>
-    <li><%= link_to image_tag('vote_smart_logo.jpg', :alt => 'Project Vote Smart', :width => '30%'), 'http://votesmart.org/' %></li>
-  </ul>
+  <table id="data_sources">
+    <tr>
+      <td><%= link_to image_tag('gov_track_logo.png', :alt => 'GovTrack.us: a civic project to track Congress', :width => '100%'), 'http://www.govtrack.us/' %></td>
+      <td><%= link_to image_tag('sunlight_foundation_logo.gif', :alt => 'Sunlight Foundation', :width => '100%'), 'http://sunlightfoundation.com/' %></td>
+      <td><%= link_to image_tag('vote_smart_logo.jpg', :alt => 'Project Vote Smart', :width => '100%'), 'http://votesmart.org/' %></td>
+    </tr>
+    <tr>
+      <td>
+        <ul>
+          <li>Bill, Vote &amp; Politician Data</li>
+          <li>Politician Photos</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Politician Contact Info</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Interest Group Ratings</li>
+        </ul>
+      </td>
+    </tr>
+  </table>
 
   <p>The site was launched in November 2009 at a startup weekend event in New York City, thanks to the efforts of James Croft, Alex Fradkin, Richard Renzulli, Gilbert Reimschussel, David A. Sampayo, Benjamin Woosley and Ricardo Zulueta, Jr.</p>
 </div>
