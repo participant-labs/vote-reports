@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100617223608) do
+ActiveRecord::Schema.define(:version => 20100621015404) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -179,6 +179,29 @@ ActiveRecord::Schema.define(:version => 20100617223608) do
 
   add_index "congresses", ["meeting"], :name => "index_congresses_on_meeting", :unique => true
 
+  create_table "congressional_district_zip_codes", :force => true do |t|
+    t.integer  "congressional_district_id", :null => false
+    t.integer  "zip_code_id",               :null => false
+    t.integer  "plus_4"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "congressional_district_zip_codes", ["congressional_district_id", "zip_code_id", "plus_4"], :name => "district_zip_codes_district_id_zip_code_plus_4_unique", :unique => true
+  add_index "congressional_district_zip_codes", ["congressional_district_id"], :name => "index_district_zip_codes_on_district_id"
+  add_index "congressional_district_zip_codes", ["zip_code_id", "plus_4"], :name => "index_district_zip_codes_on_zip_code_and_plus_4"
+  add_index "congressional_district_zip_codes", ["zip_code_id"], :name => "index_district_zip_codes_on_zip_code"
+
+  create_table "congressional_districts", :force => true do |t|
+    t.integer  "us_state_id", :null => false
+    t.integer  "district"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "congressional_districts", ["us_state_id", "district"], :name => "districts_us_state_id_district_unique", :unique => true
+  add_index "congressional_districts", ["us_state_id"], :name => "index_districts_on_us_state_id"
+
   create_table "cosponsorships", :force => true do |t|
     t.integer  "bill_id",       :null => false
     t.integer  "politician_id", :null => false
@@ -205,29 +228,6 @@ ActiveRecord::Schema.define(:version => 20100617223608) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "index_delayed_jobs_on_priority_and_run_at"
-
-  create_table "district_zip_codes", :force => true do |t|
-    t.integer  "district_id", :null => false
-    t.integer  "zip_code_id", :null => false
-    t.integer  "plus_4"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "district_zip_codes", ["district_id", "zip_code_id", "plus_4"], :name => "district_zip_codes_district_id_zip_code_plus_4_unique", :unique => true
-  add_index "district_zip_codes", ["district_id"], :name => "index_district_zip_codes_on_district_id"
-  add_index "district_zip_codes", ["zip_code_id", "plus_4"], :name => "index_district_zip_codes_on_zip_code_and_plus_4"
-  add_index "district_zip_codes", ["zip_code_id"], :name => "index_district_zip_codes_on_zip_code"
-
-  create_table "districts", :force => true do |t|
-    t.integer  "us_state_id", :null => false
-    t.integer  "district"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "districts", ["us_state_id", "district"], :name => "districts_us_state_id_district_unique", :unique => true
-  add_index "districts", ["us_state_id"], :name => "index_districts_on_us_state_id"
 
   create_table "guide_reports", :force => true do |t|
     t.integer  "guide_id",   :null => false
@@ -510,17 +510,17 @@ ActiveRecord::Schema.define(:version => 20100617223608) do
   add_index "reports", ["user_id"], :name => "index_reports_on_user_id"
 
   create_table "representative_terms", :force => true do |t|
-    t.integer  "politician_id", :null => false
+    t.integer  "politician_id",             :null => false
     t.date     "started_on"
     t.date     "ended_on"
     t.integer  "party_id"
-    t.integer  "district_id",   :null => false
+    t.integer  "congressional_district_id", :null => false
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "representative_terms", ["district_id"], :name => "index_representative_terms_on_district_id"
+  add_index "representative_terms", ["congressional_district_id"], :name => "index_representative_terms_on_district_id"
   add_index "representative_terms", ["party_id"], :name => "index_representative_terms_on_party_id"
   add_index "representative_terms", ["politician_id"], :name => "index_representative_terms_on_politician_id"
 

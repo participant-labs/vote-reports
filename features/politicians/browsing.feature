@@ -22,15 +22,15 @@ Feature: Browsing Politicians
       | name      | gov_track_id |
       | Ron Wyden | 300100       |
     And the following representative terms for politician "Ron Wyden":
-      | district   | state   | party   |
-      | <district> | <state> | <party> |
+      | congressional_district   | state   | party   |
+      | <congressional_district> | <state> | <party> |
     When I go to the politician page for "Ron Wyden"
     Then I should see "Terms in Office"
     And I should see "<description>"
     And I should see "Rep. Ron Wyden (<state>)"
 
   Examples:
-    | district | state | party      | party_abbrev | description |
+    | congressional_district | state | party      | party_abbrev | description |
     | 3        | IA    | Republican | R            | Representative for the 3rd congressional district of Iowa; Republican |
     | 0        | TX    | Republican | R            | Representative for the at-large congressional district of Texas; Republican |
     | 3        | IA    |            | I            | Representative for the 3rd congressional district of Iowa |

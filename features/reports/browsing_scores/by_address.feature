@@ -15,7 +15,7 @@ Feature: Browsing Report Scores by State
       | Connie Mack           |
       | Neil Abercrombie      |
     And the following representative term records:
-      | name                  | state | district |
+      | name                  | state | congressional_district |
       | Piyush Jindal         | TX    | 26       |
       | J. Kerrey             | TX    | 11       |
       | Neil Abercrombie      | NY    | 7        |
@@ -24,8 +24,8 @@ Feature: Browsing Report Scores by State
       | Martin Sabo           | TX    |
       | Edward Kaufman        | TX    |
       | Connie Mack           | OH    |
-    Given the following district zip code records:
-      | state | district | zip_code | plus_4 |
+    Given the following congressional district zip code records:
+      | state | congressional_district | zip_code | plus_4 |
       | TX    | 26       | 75028    |        |
       | TX    | 11       | 75028    | 7      |
       | NY    | 7        | 11111    | 111    |

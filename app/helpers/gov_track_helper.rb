@@ -2,7 +2,7 @@ module GovTrackHelper
   def gov_track_map_params(object)
     if object.is_a?(UsState)
       {:state => object.abbreviation}
-    elsif object.is_a?(District)
+    elsif object.is_a?(CongressionalDistrict)
       if object.at_large?
         {:state => object.state.abbreviation}
       else

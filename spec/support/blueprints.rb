@@ -254,7 +254,7 @@ Fixjour :verify => false do
     )
   end
 
-  define_builder(District) do |klass, overrides|
+  define_builder(CongressionalDistrict) do |klass, overrides|
     klass.new(
       :state => new_us_state,
       :district => rand(53)
@@ -274,16 +274,16 @@ Fixjour :verify => false do
     )
   end
 
-  define_builder(DistrictZipCode) do |klass, overrides|
-    overrides.process(:district) do |district|
-      overrides[:district] = District.find_or_create_by_us_state_id_and_district(us_state(overrides.send(:delete, :state)).id, district)
+  define_builder(CongressionalDistrictZipCode) do |klass, overrides|
+    overrides.process(:congressional_district) do |district|
+      overrides[:congressional_district] = CongressionalDistrict.find_or_create_by_us_state_id_and_district(us_state(overrides.send(:delete, :state)).id, district)
     end
     overrides.process(:zip_code) do |zip_code|
       overrides[:zip_code] = ZipCode.find_or_create_by_zip_code(zip_code)
     end
 
     klass.new(
-      :district => new_district,
+      :congressional_district => new_congressional_district,
       :zip_code => new_zip_code
     )
   end
@@ -292,13 +292,13 @@ Fixjour :verify => false do
     politician_term_overrides(overrides, 2)
 
     overrides.process(:state) do |state|
-      overrides[:district] = District.find_or_create_by_us_state_id_and_district(state.id, overrides[:district].present? ? overrides[:district].to_i : rand(53))
+      overrides[:congressional_district] = CongressionalDistrict.find_or_create_by_us_state_id_and_district(state.id, overrides[:congressional_district].present? ? overrides[:congressional_district].to_i : rand(53))
     end
 
     klass.new(
       :politician => new_politician,
       :party => new_party,
-      :district => new_district,
+      :congressional_district => new_congressional_district,
       :started_on => 1.year.ago,
       :ended_on => 1.year.from_now
     )

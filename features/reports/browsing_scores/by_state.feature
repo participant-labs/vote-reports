@@ -15,7 +15,7 @@ Feature: Browsing Report Scores by State
       | Connie Mack           |
       | Neil Abercrombie      |
     And the following representative term records:
-      | name                  | state | district |
+      | name                  | state | congressional_district |
       | Piyush Jindal         | TX    | 1        |
       | J. Kerrey             | TX    | 11       |
       | Neil Abercrombie      | NY    | 7        |

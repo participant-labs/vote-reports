@@ -5,8 +5,8 @@ class UsState < ActiveRecord::Base
 
   has_friendly_id :abbreviation
 
-  has_many :districts
-  has_many :representative_terms, :through => :districts
+  has_many :congressional_districts
+  has_many :representative_terms, :through => :congressional_districts
   def representatives
     Politician.representatives_from_state(self)
   end
