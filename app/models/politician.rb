@@ -144,6 +144,12 @@ class Politician < ActiveRecord::Base
       ], :select => 'DISTINCT politicians.*'
     }
   }
+  class << self
+    def for_districts(districts)
+      from_congressional_district(districts.federal.map(&:congressional_district))
+    end
+  end
+
   named_scope :from_state, lambda {|state|
     state = UsState.first(:conditions => ["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]) if state.is_a?(String)
     if state
