@@ -6,15 +6,26 @@
 
 <% javascript_tag do %>
   $(function () {
-    var myLatlng = new google.maps.LatLng(41.875696,-87.624207);
-    var myOptions = {
+    var map = new google.maps.Map(document.getElementById("map_canvas"), {
       zoom: 11,
-      center: myLatlng,
+      center: new google.maps.LatLng(<%= @center.lat %>,<%= @center.lng %>),
       mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
+    });
 
-    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-    var kml = new google.maps.KmlLayer('http://congress.mcommons.com/districts/lookup.georss?lat=<%= session[:location]['lat'] %>&lng=<%= session[:location]['lng'] %>', {map: map});
+    <%- @districts.each do |district| -%>
+      var district_<%= district.gid %> = new google.maps.Polygon({
+        paths: [
+          <%- district.linear_ring.each do |point| -%>
+          new google.maps.LatLng(<%= point.y %>, <%= point.x %>),
+          <%- end -%>
+        ],
+        strokeColor: "<%= district.level.stroke_color %>",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "<%= district.level.fill_color %>",
+        fillOpacity: 0.35
+      });
+      district_<%= district.gid %>.setMap(map);
+    <%- end -%>
   });
 <% end %>

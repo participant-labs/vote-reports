@@ -1,8 +1,9 @@
 class District < ActiveRecord::Base
   composed_of :level, :mapping => %w(level level), :class_name => 'District::Level'
 
-  named_scope :lookup, lambda {|lat, lng|
-    {:conditions => ["ST_Contains(the_geom, GeometryFromText('POINT(? ?)', -1))",lng.to_f,lat.to_f]}
+  named_scope :lookup, lambda {|geoloc|
+    {:conditions => ["ST_Contains(the_geom, GeometryFromText('POINT(? ?)', -1))",
+      geoloc.lng, geoloc.lat]}
   }
   named_scope :level, lambda {|level|
     if level.present?
@@ -18,6 +19,9 @@ class District < ActiveRecord::Base
 
   def polygon
     @polygon ||= the_geom[0]
+  end
+  def linear_ring
+    @linear_ring ||= the_geom[0][0]
   end
 
   def display_name
