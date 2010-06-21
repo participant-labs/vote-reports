@@ -27,6 +27,9 @@ class LocationsController < ApplicationController
       @bounds = @federal.polygon.envelope
       @politicians = Politician.for_districts(@districts).in_office
 
+      session[:geo_location] = @geoloc
+      session[:district_ids] = @districts.map(&:id)
+
       render :action => 'show'
     end
   end
