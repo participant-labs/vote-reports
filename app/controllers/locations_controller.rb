@@ -23,7 +23,8 @@ class LocationsController < ApplicationController
         flash.now[:success] = "Successfully set location"
       end
       @districts = District.lookup(@geoloc)
-      @bounds = @districts.federal.first.polygon.envelope
+      @federal = @districts.federal.first
+      @bounds = @federal.polygon.envelope
       @politicians = Politician.for_districts(@districts).in_office
 
       render :action => 'show'

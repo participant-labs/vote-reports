@@ -128,6 +128,9 @@ class Politician < ActiveRecord::Base
     !current_office_id.nil?
   end
 
+  named_scope :senators, :conditions => {:current_office_type => 'SenateTerm'}
+  named_scope :representatives, :conditions => {:current_office_type => 'RepresentativeTerm'}
+
   named_scope :with_name, lambda {|name|
     first, last = name.split(' ', 2)
     {:conditions => {:first_name => first, :last_name => last}}
