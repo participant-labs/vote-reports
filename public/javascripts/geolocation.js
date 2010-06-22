@@ -1,6 +1,13 @@
+function togglePolygon(map, polygon) {
+  if (polygon.getMap() == map) {
+    polygon.setMap(null);
+  } else {
+    polygon.setMap(map);
+  }
+}
+
 ;(function($) {
   $(function() {
-
     if(location_set) {
     } else if(navigator.geolocation) {
       // Try W3C Geolocation (Preferred)
