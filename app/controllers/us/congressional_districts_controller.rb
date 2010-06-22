@@ -8,7 +8,8 @@ class Us::CongressionalDistrictsController < ApplicationController
         @senators = @district.senators.in_office
       }
       format.js {
-        render :partial => 'us/congressional_districts/maps/map', :locals => {:district => @district}
+        @js = true
+        render :partial => 'districts/map', :locals => {:district => @district}
       }
     end
   end
