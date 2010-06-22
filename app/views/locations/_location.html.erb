@@ -1,4 +1,4 @@
-<%= current_location %>
+<p id="location" class="precision-<%= session[:geo_location].precision %>"><%= current_location %></p>
 <%- if session[:geo_location].present? -%>
   (<%= link_to 'clear', location_path(:return_to => request.request_uri), :method => :delete %>)
 <%- else -%>
