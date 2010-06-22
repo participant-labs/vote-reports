@@ -4,14 +4,16 @@ class CreateDistrictsAlaMcommons < ActiveRecord::Migration
     db     = config.database_configuration[RAILS_ENV]["database"]
     user   = config.database_configuration[RAILS_ENV]["username"]
     host   = config.database_configuration[RAILS_ENV]["host"]
-    execute 'CREATE LANGUAGE plpgsql'
+    password   = config.database_configuration[RAILS_ENV]["password"]
 
+    `export PGPASSWORD="#{password}"`
+    `psql -d #{db} -U #{user} -c 'CREATE LANGUAGE plpgsql' -h #{host}`
     if Rails.env.development?
       `psql -d #{db} -f /opt/local/share/postgresql84/contrib/postgis-1.5/postgis.sql -U #{user} -h #{host}`
       `psql -d #{db} -f /opt/local/share/postgresql84/contrib/postgis-1.5/spatial_ref_sys.sql -U #{user} -h #{host}`
     else
-      execute(IO.read('/usr/share/postgresql/8.4/contrib/postgis.sql'))
-      execute(IO.read('/usr/share/postgresql/8.4/contrib/spatial_ref_sys.sql'))
+      `psql -d #{db} -f /usr/share/postgresql/8.4/contrib/postgis.sql -U #{user} -h #{host}`
+      `psql -d #{db} -f /usr/share/postgresql/8.4/contrib/spatial_ref_sys.sql -U #{user} -h #{host}`
     end
     `psql -d #{db} -f #{Rails.root.join('db/congress.sql')} -U #{user} -h #{host}`
 
