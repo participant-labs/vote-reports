@@ -39,6 +39,7 @@
 - :version: ">= 0.6.12"
   :name: rpx_now
 - :name: state_machine
+- :name: spatial_adapter
 - :version: = 0.10.8
   :name: sunspot
 - :version: = 0.11.5
