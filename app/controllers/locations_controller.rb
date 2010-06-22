@@ -10,7 +10,7 @@ class LocationsController < ApplicationController
 
   def create
     @geoloc =
-      if params[:location].presen?
+      if params[:location].present?
         Geokit::Geocoders::MultiGeocoder.geocode(params[:location])
       elsif params[:lat].present?
         GeoLoc.new(params.slice(:lat, :lng))
