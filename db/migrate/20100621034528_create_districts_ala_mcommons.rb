@@ -3,10 +3,11 @@ class CreateDistrictsAlaMcommons < ActiveRecord::Migration
     config = Rails::Configuration.new
     db     = config.database_configuration[RAILS_ENV]["database"]
     user   = config.database_configuration[RAILS_ENV]["username"]
-    `psql -d #{db} -U #{user} -c 'CREATE LANGUAGE plpgsql'`
-    `psql -d #{db} -f /opt/local/share/postgresql84/contrib/postgis-1.5/postgis.sql -U #{user}`
-    `psql -d #{db} -f /opt/local/share/postgresql84/contrib/postgis-1.5/spatial_ref_sys.sql -U #{user}`
-    `psql -d #{db} -f #{Rails.root.join('db/congress.sql')} -U #{user}`
+    host   = config.database_configuration[RAILS_ENV]["host"]
+    execute 'CREATE LANGUAGE plpgsql'
+    `psql -d #{db} -f /opt/local/share/postgresql84/contrib/postgis-1.5/postgis.sql -U #{user} -h #{host}`
+    `psql -d #{db} -f /opt/local/share/postgresql84/contrib/postgis-1.5/spatial_ref_sys.sql -U #{user} -h #{host}`
+    `psql -d #{db} -f #{Rails.root.join('db/congress.sql')} -U #{user} -h #{host}`
 
     add_index "districts", "the_geom", :spatial=>true
 
