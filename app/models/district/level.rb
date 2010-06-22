@@ -9,7 +9,7 @@ class District::Level
     },
     'state_upper' => {
       :fill_color => '#0f0',
-      :text_color => '#0d0',
+      :text_color => '#0c0',
       :stroke_color => '#006400',
       :description => 'Upper House District',
       :sort_order => 2
