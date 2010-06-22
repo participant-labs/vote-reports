@@ -54,12 +54,15 @@ a {
   max-width: 560px;
 }
 
+.politician + .politician {
+  margin-top: 0.5em;
+}
+
 .politician_headshot img {
   display: block;
 }
 
-.politician_score .politician_headshot,
-.ui-menu-item .politician_headshot {
+.politician_headshot {
   float:left;
   padding-right: 0.5em;
 }
