@@ -20,6 +20,7 @@ class CreateDistrictsAlaMcommons < ActiveRecord::Migration
 
     add_column :districts, :state_name, :string
     add_column :districts, :level, :string
+    District.reset_column_information
 
     execute "UPDATE districts SET level = 'federal'"
     execute "UPDATE districts SET name = '1' where name = 'One'"

@@ -1,5 +1,6 @@
 class AddFipsCodesToStates < ActiveRecord::Migration
   def self.up
+    District.reset_column_information
     rename_column :districts, :gid, :id
     
     add_column :us_states, :fips_code, :string
