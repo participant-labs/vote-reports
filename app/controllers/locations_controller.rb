@@ -74,7 +74,7 @@ class LocationsController < ApplicationController
   def load_districts
     @districts = District.lookup(@geoloc).index_by(&:full_name).values.sort_by {|d| d.level.sort_order }
     @federal = @districts.detect {|d| d.level.to_s == 'federal' }
-    @bounds = @federal.polygon.envelope
+    @bounds = @federal.envelope
     @politicians = Politician.for_districts(@districts).in_office
   end
 end
