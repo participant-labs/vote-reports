@@ -13,3 +13,6 @@
 [submodule "vendor/plugins/moonshine_astrails_safe"]
 	path = vendor/plugins/moonshine_astrails_safe
 	url = git@github.com:Empact/moonshine_astrails_safe.git
+[submodule "vendor/gems/mongo_session_store-1.1.2"]
+	path = vendor/gems/mongo_session_store-1.1.2
+	url = http://github.com/compressed/mongo_session_store.git
