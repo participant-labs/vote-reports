@@ -15,8 +15,10 @@ function togglePolygons(map, polygons) {
       // Try W3C Geolocation (Preferred)
       navigator.geolocation.getCurrentPosition(function(position) {
         $.post('location', {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
+          autoloc: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          }
         });
       });
     } else if (google.gears) {
@@ -24,8 +26,10 @@ function togglePolygons(map, polygons) {
       var geo = google.gears.factory.create('beta.geolocation');
       geo.getCurrentPosition(function(position) {
         $.post('location', {
-          lat: position.latitude,
-          lng: position.longitude
+          autoloc: {
+            lat: position.latitude,
+            lng: position.longitude
+          }
         });
       });
     }

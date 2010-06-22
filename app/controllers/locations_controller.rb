@@ -12,8 +12,10 @@ class LocationsController < ApplicationController
     @geoloc =
       if params[:location].present?
         Geokit::Geocoders::MultiGeocoder.geocode(params[:location])
-      elsif params[:lat].present?
-        Geokit::GeoLoc.new(params.slice(:lat, :lng))
+      elsif params[:autoloc]
+        Geokit::GeoLoc.new(params[:autoloc])).tap do |loc|
+          loc.success = true
+        end
       end
     session[:geo_location_declared] = @geoloc.success?
     action =
@@ -51,7 +53,7 @@ class LocationsController < ApplicationController
   end
 
   def show
-    if params[:location].present? || params[:lat].present?
+    if params[:location].present? || params[:autoloc].present?
       create
       return
     end
