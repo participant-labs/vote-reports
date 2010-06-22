@@ -1,5 +1,6 @@
 class CleanUpDistrictNamesAlaMcommons < ActiveRecord::Migration
   def self.up
+    District.reset_column_information
     # West Virginia Senate District 8 & 17 will be formatted properly; right now it comes back as District 817.
     execute "UPDATE districts SET name = '8 & 17' WHERE level = 'state_upper' AND state = '54' AND name = '817'"
     
