@@ -1,4 +1,13 @@
-<% div_for politician, :class => 'clearfix' do %>
+<%-
+  tag ||= :div
+  full_name ||= false
+-%>
+
+<% content_tag_for tag, politician, :class => 'clearfix' do %>
   <%= render 'politicians/headshot', :politician => politician %>
-  <%= render 'politicians/name', :politician => politician %>
+  <%- if full_name -%>
+    <%= render 'politicians/full_name', :politician => politician %>
+  <%- else -%>
+    <%= render 'politicians/name', :politician => politician %>
+  <%- end -%>
 <% end %>
