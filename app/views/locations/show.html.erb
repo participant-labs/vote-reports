@@ -42,10 +42,7 @@
         mapTypeControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
-      show_location_map.fitBounds(new google.maps.LatLngBounds(
-        <%= mapy(@bounds.lower_corner) %>,
-        <%= mapy(@bounds.upper_corner) %>
-      ));
+      show_location_map.fitBounds(<%= mapy(@bounds) %>);
 
       var info_content = '';
 
