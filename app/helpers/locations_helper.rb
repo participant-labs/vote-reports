@@ -1,9 +1,16 @@
 module LocationsHelper
-  def mapy(point)
-    if point.respond_to?(:lat)
-      "new google.maps.LatLng(#{ point.lat }, #{ point.lng })"
+  def mapy(object)
+    if object.is_a?(GeoRuby::SimpleFeatures::Envelope)
+      %{new google.maps.LatLngBounds(
+         #{ mapy(object.lower_corner) },
+         #{ mapy(object.upper_corner) }
+      )}
+    elsif object.respond_to?(:lat)
+      "new google.maps.LatLng(#{ object.lat }, #{ object.lng })"
+    elsif object.respond_to?(:y)
+      "new google.maps.LatLng(#{ object.y }, #{ object.x })"
     else
-      "new google.maps.LatLng(#{ point.y }, #{ point.x })"
+      raise "Unrecognize map object #{object}"
     end.html_safe
   end
 
