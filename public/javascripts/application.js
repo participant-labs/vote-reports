@@ -79,10 +79,10 @@
       }
     });
 
-    $('.fancyboxy').live('mouseover', function() {
+    $('a.fancyboxy').live('mouseover', function() {
       var self = $(this);
-      if (!self.data('init')) {
-        self.data('init', true);
+      if (!self.data('fancybox-init')) {
+        self.data('fancybox-init', true);
         self.fancybox({
           hideOnContentClick: false
         });
