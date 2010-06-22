@@ -1,17 +1,20 @@
 class District::Level
   LEVELS = {
     'federal' => {
-      :fill_color => '#ff0000',
+      :fill_color => '#f00',
+      :text_color => '#d00',
       :stroke_color => '#8b0000',
       :description => 'Congressional District'
     },
     'state_upper' => {
-      :fill_color => '#00ff00',
+      :fill_color => '#0f0',
+      :text_color => '#0d0',
       :stroke_color => '#006400',
       :description => 'Upper House District'
     },
     'state_lower' => {
-      :fill_color => '#0000ff',
+      :fill_color => '#00f',
+      :text_color => '#00d',
       :stroke_color => '#00008b',
       :description => 'Lower House District'
     }
