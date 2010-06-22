@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
       if params[:location].present?
         Geokit::Geocoders::MultiGeocoder.geocode(params[:location])
       elsif params[:lat].present?
-        GeoLoc.new(params.slice(:lat, :lng))
+        Geokit::GeoLoc.new(params.slice(:lat, :lng))
       end
     session[:geo_location_declared] = @geoloc.success?
     action =
