@@ -4,19 +4,22 @@ class District::Level
       :fill_color => '#f00',
       :text_color => '#d00',
       :stroke_color => '#8b0000',
-      :description => 'Congressional District'
+      :description => 'Congressional District',
+      :sort_order => 1
     },
     'state_upper' => {
       :fill_color => '#0f0',
       :text_color => '#0d0',
       :stroke_color => '#006400',
-      :description => 'Upper House District'
+      :description => 'Upper House District',
+      :sort_order => 2
     },
     'state_lower' => {
       :fill_color => '#00f',
       :text_color => '#00d',
       :stroke_color => '#00008b',
-      :description => 'Lower House District'
+      :description => 'Lower House District',
+      :sort_order => 3
     }
   }
 
