@@ -6,7 +6,6 @@
 .cause_score_evidence dt,
 dt.report_score_evidence {
   float: left;
-  margin-top: 8px;
   width: 8em;
 }
 
