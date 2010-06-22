@@ -1,4 +1,4 @@
-<% div_for politician do %>
+<% div_for politician, :class => 'clearfix' do %>
   <%= render 'politicians/headshot', :politician => politician %>
   <%= render 'politicians/name', :politician => politician %>
 <% end %>
