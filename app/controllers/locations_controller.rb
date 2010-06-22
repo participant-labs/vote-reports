@@ -23,10 +23,13 @@ class LocationsController < ApplicationController
         else
           flash.now[:success] = "Successfully set location"
         end
-        session[:location] = params[:location]
-        session[:geo_location] = @geoloc
 
         load_districts
+
+        session[:declared_location] = params[:location]
+        session[:location] = geo_description(@geoloc) + " (#{@federal.display_name})"
+        session[:congressional_district] = @federal.congressional_district
+        session[:declared_geo_location] = @geoloc
 
         'show'
       end

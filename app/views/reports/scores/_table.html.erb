@@ -66,8 +66,8 @@
     <thead>
       <tr>
         <th>All Scores
-          <%- if params[:representing].present? -%>
-          for Representatives from "<%= params[:representing] %>"
+          <%- if requested_location -%>
+          for Representatives from "<%= requested_location %>"
           <%= link_to 'show all', reset_path, :'data-replace' => replace, :class => 'show_all' %>
           <%- end -%>
         </th>

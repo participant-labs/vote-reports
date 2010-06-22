@@ -5,7 +5,7 @@
     <h2>
       <% form_tag location_path, :'data-replace' => (@js ? 'fancybox-inner' : 'content')  do %>
         <%= label_tag :location, 'Your Location', :style => 'font-weight: normal;' %>
-        <%= text_field_tag :location, session[:location] %>
+        <%= text_field_tag :location, session[:declared_location] %>
         <%= submit_tag 'Set' %>
       <% end %>
     </h2>
