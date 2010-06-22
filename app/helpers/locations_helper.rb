@@ -19,28 +19,40 @@ module LocationsHelper
   end
 
   def geo_description(geoloc)
+    return '' if geoloc.blank?
+
     # unlike #full_address, doesn't include the country
     zip = " #{geoloc.zip}" if geoloc.zip
     city = "#{geoloc.city}, " if geoloc.city
     "#{city}#{geoloc.state}#{zip}"
   end
 
+  def declared_geo_location
+    session[:declared_geo_location] if session[:declared_geo_location].try(:is_us?)
+  end
+
+  def detected_geo_location
+    session[:geo_location] if session[:geo_location].try(:is_us?)
+  end
+
   def current_location
-    if session[:geo_location].try(:is_us?)
-      geo_description(session[:geo_location])
-    end
+    geo_description(declared_geo_location || detected_geo_location)
   end
 
   def sought_politicians
     @in_office = !params.has_key?(:in_office) || ['1', true].include?(params[:in_office])
     result =
-      if !requested_location.nil?
-        Politician.from(requested_location)
-      elsif session[:geo_location].try(:is_us?)
+      if params.has_key?(:representing)
+        Politician.from(params[:representing])
+      elsif current_location
         unless @dont_show_geo_address
-          params[:representing] = geo_description(session[:geo_location])
+          params[:representing] = current_location
         end
-        Politician.from(session[:geo_location])
+        if session[:congressional_district].present?
+          Politician.from_congressional_district(session[:congressional_district])
+        else
+          Politician.from(session[:geo_location])
+        end
       else
         Politician
       end
@@ -55,8 +67,8 @@ module LocationsHelper
   def requested_location
     if params.has_key?(:representing)
       params[:representing]
-    elsif session[:geo_location].present?
-      geo_description(session[:geo_location])
+    else
+      current_location
     end
   end
 
