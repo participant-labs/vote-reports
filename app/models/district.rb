@@ -22,6 +22,7 @@ class District < ActiveRecord::Base
     end
   end
 
+  delegate :envelope, :to => :the_geom
   def polygon
     @polygon ||= the_geom[0]
   end
