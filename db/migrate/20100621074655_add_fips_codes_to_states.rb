@@ -11,9 +11,9 @@ class AddFipsCodesToStates < ActiveRecord::Migration
     add_column :districts, :us_state_id, :integer
     constrain :districts, :us_state_id, :reference => {:us_states => :id}
     
-    states = UsState.all.index_by(&:fips_code)
+    states = UsState.all.index_by(&:abbreviation)
     District.paginated_each do |district|
-      district.update_attribute(:us_state_id, states.fetch(district.state).id)
+      district.update_attribute(:us_state_id, states.fetch(district.state_name).id)
       print '.'
     end
     puts
