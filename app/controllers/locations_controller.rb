@@ -26,10 +26,7 @@ class LocationsController < ApplicationController
         session[:location] = params[:location]
         session[:geo_location] = @geoloc
 
-        @districts = District.lookup(@geoloc)
-        @federal = @districts.federal.first
-        @bounds = @federal.polygon.envelope
-        @politicians = Politician.for_districts(@districts).in_office
+        load_districts
 
         'show'
       end
@@ -54,10 +51,7 @@ class LocationsController < ApplicationController
       return
     end
 
-    @districts = District.lookup(@geoloc)
-    @federal = @districts.federal.first
-    @bounds = @federal.polygon.envelope
-    @politicians = Politician.for_districts(@districts).in_office
+    load_districts
 
     respond_to do |format|
       format.html
@@ -73,5 +67,14 @@ class LocationsController < ApplicationController
     session[:location] = nil
     session[:geo_location] = nil
     redirect_to params[:return_to] || root_path
+  end
+
+  private
+
+  def load_districts
+    @districts = District.lookup(@geoloc).index_by(&:full_name).values
+    @federal = @districts.detect {|d| d.level.to_s == 'federal' }
+    @bounds = @federal.polygon.envelope
+    @politicians = Politician.for_districts(@districts).in_office
   end
 end

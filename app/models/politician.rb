@@ -149,7 +149,7 @@ class Politician < ActiveRecord::Base
   }
   class << self
     def for_districts(districts)
-      from_congressional_district(districts.federal.map(&:congressional_district))
+      from_congressional_district(districts.map(&:congressional_district).compact)
     end
   end
 
