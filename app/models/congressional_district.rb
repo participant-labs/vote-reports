@@ -58,6 +58,9 @@ class CongressionalDistrict < ActiveRecord::Base
     Politician.from_congressional_district(self)
   end
 
+  def title
+    "The #{which} Congressional District of #{state.full_name}"
+  end
   def abbreviation
     district_abbrv = at_large? || district.nil? ? 'At large' : self.district.to_s
     "#{state.abbreviation}-#{district_abbrv}"

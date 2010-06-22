@@ -62,7 +62,7 @@ module LocationsHelper
 
   def location_title(location)
     if location.is_a?(CongressionalDistrict)
-      district_title(location)
+      location.title
     else
       state_title(location)
     end
