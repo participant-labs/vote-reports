@@ -9,8 +9,8 @@ class ImportStateDistrictsFromMcommons < ActiveRecord::Migration
     (1..72).each do | n |
       n = n.to_s.rjust(2, '0')
       
-      `psql -d #{db} -f #{RAILS_ROOT}/tmp/state/lower/senate_lower_#{n}.sql -U #{user} -h #{host}`
-      `psql -d #{db} -f #{RAILS_ROOT}/tmp/state/upper/senate_upper_#{n}.sql -U #{user} -h #{host}`
+      execute(IO.read("#{RAILS_ROOT}/tmp/state/lower/senate_lower_#{n}.sql"))
+      execute(IO.read("#{RAILS_ROOT}/tmp/state/upper/senate_lower_#{n}.sql"))
     end
     
     change_column(:districts, :cd, :string, :limit => 3)
