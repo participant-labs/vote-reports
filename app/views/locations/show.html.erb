@@ -2,7 +2,7 @@
 
 <div class="left">
   <h2>
-    <% form_tag location_path do %>
+    <% form_tag location_path, :'data-replace' => (@js ? 'fancybox-inner' : 'content')  do %>
       <%= label_tag :location, 'Your Location', :style => 'font-weight: normal;' %>
       <%= text_field_tag :location, session[:location] %>
       <%= submit_tag 'Set' %>
