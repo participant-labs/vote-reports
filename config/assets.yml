@@ -25,7 +25,6 @@ stylesheets:
     - public/stylesheets/master.css
     - public/stylesheets/interaction.css
     - public/stylesheets/menu.css
-    - public/stylesheets/us.css
     - public/stylesheets/reports.css
     - public/stylesheets/politicians.css
     - public/stylesheets/causes.css

@@ -1,21 +1,25 @@
 <%- title state_title(@state) -%>
 
-<% div_for @state, :class => "section clearfix" do %>
-  <h2><%= state_title(@state) %></h2>
+<% div_for @state do %>
+  <h2 class="span-24 last"><%= state_title(@state) %></h2>
 
-  <%= render 'us/states/maps/map', :state => @state %>
+  <div class="span-12">
+    <h3>Senators</h3>
+    <ul>
+      <%- @senators.each do |senator| -%>
+        <%= render 'politicians/politician', :politician => senator, :full_name => true, :tag => :li %>
+      <%- end -%>
+    </ul>
 
-  <h3>Senators</h3>
-  <ul>
-    <%- @senators.each do |senator| -%>
-      <li><%= render 'politicians/politician', :politician => senator %></li>
-    <%- end -%>
-  </ul>
+    <h3>Representatives (<%= @representatives.count %>)</h3>
+    <ul>
+      <%- @representatives.each do |representative| -%>
+        <%= render 'politicians/politician', :politician => representative, :full_name => true, :tag => :li %>
+      <%- end -%>
+    </ul>
+  </div>
 
-  <h3>Representatives (<%= @representatives.count %>)</h3>
-  <ul>
-    <%- @representatives.each do |representative| -%>
-      <li><%= render 'politicians/politician', :politician => representative %></li>
-    <%- end -%>
-  </ul>
+  <div class="span-12 last">
+    <%= render 'us/states/maps/map', :state => @state %>
+  </div>
 <% end %>
