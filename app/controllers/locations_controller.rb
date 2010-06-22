@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
       if params[:location].present?
         Geokit::Geocoders::MultiGeocoder.geocode(params[:location])
       elsif params[:autoloc]
-        Geokit::GeoLoc.new(params[:autoloc])).tap do |loc|
+        Geokit::GeoLoc.new(params[:autoloc]).tap do |loc|
           loc.success = true
         end
       end
