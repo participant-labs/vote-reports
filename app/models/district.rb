@@ -31,7 +31,9 @@ class District < ActiveRecord::Base
   end
 
   def display_name
-    if /^\d*$/ =~ name
+    if federal?
+      "#{state.abbreviation}-#{name}"
+    elsif /^\d*$/ =~ name
       "#{state.abbreviation} #{name.to_i.ordinalize}"
     else
       "#{state.abbreviation} #{name}"
