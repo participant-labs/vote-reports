@@ -10,6 +10,7 @@ class LocationsController < ApplicationController
 
   def create
     @geoloc = Geokit::Geocoders::MultiGeocoder.geocode(params[:location])
+    session[:geo_location_declared] = @geoloc.success?
     action =
       if !@geoloc.success?
         flash.now[:error] = %Q{Sorry, we were unable to understand this location. Could you clarify it?}
