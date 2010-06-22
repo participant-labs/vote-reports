@@ -46,21 +46,23 @@
 
       var info_content = '';
 
-      <%- @districts.each do |district| -%>
-        district_<%= district.id %> = new google.maps.Polygon({
-          paths: [
-          <%- district.linear_ring.each do |point| -%>
-            <%= mapy(point) %>,
-          <%- end -%>
-          ],
-          strokeColor: "<%= district.level.stroke_color %>",
-          strokeOpacity: 0.8,
-          strokeWeight: 1,
-          fillColor: "<%= district.level.fill_color %>",
-          fillOpacity: 0.3
-        });
-        district_<%= district.id %>.setMap(show_location_map);
-        info_content += '<a style="color: <%= district.level.text_color %>;" onclick="togglePolygon(show_location_map, district_<%= district.id %>)"><%= district.full_name %></a><br />'
+      <%- @districts.group_by(&:full_name).each_pair do |district_name, district_polygons| -%>
+        <%- district_polygons.each do |district| -%>
+          district_<%= district.id %> = new google.maps.Polygon({
+            paths: [
+            <%- district.linear_ring.each do |point| -%>
+              <%= mapy(point) %>,
+            <%- end -%>
+            ],
+            strokeColor: "<%= district.level.stroke_color %>",
+            strokeOpacity: 0.8,
+            strokeWeight: 1,
+            fillColor: "<%= district.level.fill_color %>",
+            fillOpacity: 0.3
+          });
+          district_<%= district.id %>.setMap(show_location_map);
+        <%- end -%>
+        info_content += '<a style="color: <%= district_polygons.first.level.text_color %>;" onclick="togglePolygons(show_location_map, [<%= district_polygons.map {|district| "district_#{district.id}" }.join(', ') %>])"><%= district_name %></a><br />'
       <%- end -%>
 
       var districtInfo = new google.maps.InfoWindow({
