@@ -84,7 +84,12 @@
       if (!self.data('fancybox-init')) {
         self.data('fancybox-init', true);
         self.fancybox({
-          hideOnContentClick: false
+          hideOnContentClick: false,
+          onComplete: function () {
+            if ($.isFunction(init_map)) {
+              init_map();
+            }
+          }
         });
         self.mouseover();
       }

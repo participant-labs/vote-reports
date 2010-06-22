@@ -15,6 +15,9 @@
     target.block({message: '<p class="loading">Loading...</p>'});
     target.load(url, function() {
       target.unblock();
+      if ($.isFunction(init_map)) {
+        init_map();
+      }
     });
     return false;
   }
