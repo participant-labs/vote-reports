@@ -86,7 +86,7 @@
         self.fancybox({
           hideOnContentClick: false,
           onComplete: function () {
-            if ($.isFunction(init_map)) {
+            if (typeof(init_map) != 'undefined' && $.isFunction(init_map)) {
               init_map();
             }
           }
