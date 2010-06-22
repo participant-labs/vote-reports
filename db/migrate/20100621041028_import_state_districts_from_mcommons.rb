@@ -25,7 +25,7 @@ class ImportStateDistrictsFromMcommons < ActiveRecord::Migration
              SELECT state, sldu, lsad, name, lsad_trans, the_geom, '', 'state_upper', geo_id 
              FROM upper_districts"
     
-    District::FIPS_CODES.each do |fips_code, name|
+    UsState::FIPS_CODES.each do |fips_code, name|
       execute "UPDATE districts SET state_name = '#{name}' WHERE state = '#{fips_code}'"
     end
     
