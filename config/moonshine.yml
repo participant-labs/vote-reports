@@ -59,6 +59,8 @@
 # http://github.com/railsmachine/moonshine/issues if there are additional gem
 # dependencies moonshine should know about.
 :apt_gems:
+ :spatial_adapter:
+   - postgresql-8.4-postgis
  :patron:
    - libcurl3
    - libcurl3-dev

@@ -26,7 +26,6 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   def application_packages
     # If you've already told Moonshine about a package required by a gem with
     # :apt_gems in <tt>moonshine.yml</tt> you do not need to include it here.
-    package 'postgis', :ensure => :installed
 
     # some_rake_task = "/usr/bin/rake -f #{configuration[:deploy_to]}/current/Rakefile custom:task RAILS_ENV=#{ENV['RAILS_ENV']}"
     # cron 'custom:task', :command => some_rake_task, :user => configuration[:user], :minute => 0, :hour => 0
