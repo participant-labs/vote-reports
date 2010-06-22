@@ -5,6 +5,7 @@
 #logo {
   display: block;
   margin-bottom: 20px;
+  float: left;
 }
 
 .footer {
