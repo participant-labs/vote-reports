@@ -24,7 +24,7 @@ class CreateDistrictsAlaMcommons < ActiveRecord::Migration
     execute "UPDATE districts SET level = 'federal'"
     execute "UPDATE districts SET name = '1' where name = 'One'"
 
-    District::FIPS_CODES.each do |fips_code, name|
+    UsState::FIPS_CODES.each do |fips_code, name|
       District.update_all({:state_name => name}, {:state => fips_code})
     end
   end
