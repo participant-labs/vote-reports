@@ -1,5 +1,10 @@
+<%-
+  no_fancybox ||= false
+  classes = no_fancybox ? 'politician_location' : 'fancyboxy politician_location'
+-%>
+
 <span class="politician_name"><%= link_to_unless_current politician_name(politician), politician  %>
   <%- if politician.location -%>
-    <%= link_to politician.location.abbreviation, polymorphic_path(politician.location), :class => 'fancyboxy politician_location', :title => location_title(politician.location) %>
+    <%= link_to politician.location.abbreviation, polymorphic_path(politician.location), :class => classes, :title => location_title(politician.location) %>
   <%- end -%>
 </span>
