@@ -13,9 +13,7 @@ class LocationsController < ApplicationController
       if params[:location].present?
         Geokit::Geocoders::MultiGeocoder.geocode(params[:location])
       elsif params[:autoloc]
-        Geokit::GeoLoc.new(params[:autoloc]).tap do |loc|
-          loc.success = true
-        end
+        Geokit::LatLng.new(*params[:autoloc].values_at(:lat, :lng)).reverse_geocode
       end
     session[:geo_location_declared] = @geoloc.success?
     action =
