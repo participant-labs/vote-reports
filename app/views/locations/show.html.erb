@@ -47,22 +47,27 @@
       var info_content = '';
 
       <%- @districts.group_by(&:full_name).each_pair do |district_name, district_polygons| -%>
+        <%- district_ids = [] -%>
         <%- district_polygons.each do |district| -%>
-          district_<%= district.id %> = new google.maps.Polygon({
-            paths: [
-            <%- district.linear_ring.each do |point| -%>
-              <%= mapy(point) %>,
-            <%- end -%>
-            ],
-            strokeColor: "<%= district.level.stroke_color %>",
-            strokeOpacity: 0.8,
-            strokeWeight: 1,
-            fillColor: "<%= district.level.fill_color %>",
-            fillOpacity: 0.3
-          });
-          district_<%= district.id %>.setMap(show_location_map);
+          <%- district.the_geom.each_with_index do |polygon, index| -%>
+            <%- district_id = "district_#{ district.id }_#{ index }" -%>
+            <%= district_id %> = new google.maps.Polygon({
+              paths: [
+              <%- polygon.first.each do |point| -%>
+                <%= mapy(point) %>,
+              <%- end -%>
+              ],
+              strokeColor: "<%= district.level.stroke_color %>",
+              strokeOpacity: 0.8,
+              strokeWeight: 1,
+              fillColor: "<%= district.level.fill_color %>",
+              fillOpacity: 0.3
+            });
+            <%= district_id %>.setMap(show_location_map);
+            <%- district_ids << district_id -%>
+          <%- end -%>
         <%- end -%>
-        info_content += '<a style="color: <%= district_polygons.first.level.text_color %>;" onclick="togglePolygons(show_location_map, [<%= district_polygons.map {|district| "district_#{district.id}" }.join(', ') %>])"><%= district_name %></a><br />'
+        info_content += '<a style="color: <%= district_polygons.first.level.text_color %>;" onclick="togglePolygons(show_location_map, [<%= district_ids.join(', ') %>])"><%= district_name %></a><br />'
       <%- end -%>
 
       var districtInfo = new google.maps.InfoWindow({
