@@ -32,6 +32,8 @@
   float: left;
   margin-right: 7px;
   margin-top: 7px;
+  max-width: 35px;
+  max-height: 35px;
 }
 
 .report_score {
