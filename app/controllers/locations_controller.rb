@@ -55,7 +55,7 @@ class LocationsController < ApplicationController
       create
       return
     end
-    unless @geoloc = session[:geo_location]
+    unless @geoloc = current_geo_location
       render :action => :new
       return
     end

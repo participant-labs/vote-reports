@@ -35,8 +35,12 @@ module LocationsHelper
     session[:geo_location] if session[:geo_location].try(:is_us?)
   end
 
+  def current_geo_location
+    declared_geo_location || detected_geo_location
+  end
+
   def current_location
-    geo_description(declared_geo_location || detected_geo_location)
+    geo_description(current_geo_location)
   end
 
   def sought_politicians
