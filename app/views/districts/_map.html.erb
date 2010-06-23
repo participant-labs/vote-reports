@@ -1,52 +1,58 @@
 <%- style ||= 'height: 300px; width: 425px;' -%>
 
-<div id="map_canvas" style="<%= style %>"></div>
+<%- if district.district_geometry -%>
+  <div id="map_canvas" style="<%= style %>"></div>
 
-<% javascript_tag do %>
-<%- if @js -%>
-  function init_map() {
+  <% javascript_tag do %>
+  <%- if @js -%>
+    function init_map() {
+  <%- else -%>
+    $(function () {
+  <%- end -%>
+
+      show_district_map = new google.maps.Map(document.getElementById("map_canvas"), {
+        mapTypeControl: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+      var bounds = <%= mapy(district.envelope) %>;
+      show_district_map.fitBounds(bounds);
+
+      district_<%= district.id %> = new google.maps.Polygon({
+        paths: [
+        <%- district.linear_ring.each do |point| -%>
+          <%= mapy(point) %>,
+        <%- end -%>
+        ],
+        strokeColor: "<%= district.level.stroke_color %>",
+        strokeOpacity: 0.8,
+        strokeWeight: 1,
+        fillColor: "<%= district.level.fill_color %>",
+        fillOpacity: 0.3
+      });
+      district_<%= district.id %>.setMap(show_district_map);
+
+      var districtInfo = new google.maps.InfoWindow({
+          content: '<p style="color: <%= district.level.text_color %>;"><%= district.full_name %></p>'
+      });
+
+      var location = new google.maps.Marker({
+        position: bounds.getCenter(),
+        map: show_district_map,
+        title: "Your Location"
+      });
+
+      google.maps.event.addListener(location, 'click', function() {
+        districtInfo.open(show_district_map,location);
+      });
+
+  <%- if @js -%>
+    }
+  <%- else -%>
+    });
+  <%- end -%>
+  <% end %>
 <%- else -%>
-  $(function () {
+  <div id="map_canvas" style="<%= style %>">
+    <p>We don't have a map for this district, likely because this district is historical and does not exist for the current Congress.</p>
+  </div>
 <%- end -%>
-
-    show_district_map = new google.maps.Map(document.getElementById("map_canvas"), {
-      mapTypeControl: false,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
-    var bounds = <%= mapy(district.envelope) %>;
-    show_district_map.fitBounds(bounds);
-
-    district_<%= district.id %> = new google.maps.Polygon({
-      paths: [
-      <%- district.linear_ring.each do |point| -%>
-        <%= mapy(point) %>,
-      <%- end -%>
-      ],
-      strokeColor: "<%= district.level.stroke_color %>",
-      strokeOpacity: 0.8,
-      strokeWeight: 1,
-      fillColor: "<%= district.level.fill_color %>",
-      fillOpacity: 0.3
-    });
-    district_<%= district.id %>.setMap(show_district_map);
-
-    var districtInfo = new google.maps.InfoWindow({
-        content: '<p style="color: <%= district.level.text_color %>;"><%= district.full_name %></p>'
-    });
-
-    var location = new google.maps.Marker({
-      position: bounds.getCenter(),
-      map: show_district_map,
-      title: "Your Location"
-    });
-
-    google.maps.event.addListener(location, 'click', function() {
-      districtInfo.open(show_district_map,location);
-    });
-
-<%- if @js -%>
-  }
-<%- else -%>
-  });
-<%- end -%>
-<% end %>
