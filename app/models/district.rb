@@ -46,7 +46,7 @@ class District < ActiveRecord::Base
 
   def congressional_district
     if federal?
-      state.congressional_districts.find_by_district(name)
+      state.congressional_districts.find_by_district(name == 'At large' ? 0 : name)
     end
   end
 end

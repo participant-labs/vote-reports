@@ -65,25 +65,32 @@ class CongressionalDistrict < ActiveRecord::Base
 
   def district_geometry
     @district_geometry ||= District.federal.first(:conditions => {
-      :us_state_id => us_state_id, :name => (at_large? ? '1' : district.to_s)})
+      :us_state_id => us_state_id, :name => district_abbreviation})
   end
   delegate :the_geom, :envelope, :polygon, :linear_ring, :display_name, :level, :to => :district_geometry
 
+  def district_abbreviation
+    at_large? || unidentified? ? 'At large' : self[:district].to_s
+  end
+
   def abbreviation
-    district_abbrv = at_large? || district.nil? ? 'At large' : self.district.to_s
-    "#{state.abbreviation}-#{district_abbrv}"
+    "#{state.abbreviation}-#{district_abbreviation}"
   end
 
   def to_param
     abbreviation.gsub(' ', '_')
   end
 
+  def unidentified?
+    self[:district] == nil
+  end
+
   def at_large?
-    district == 0
+    self[:district] == 0
   end
 
   def which
-    if district.nil?
+    if unidentified?
       'Unidentified'
     elsif at_large?
       'At-large'
