@@ -90,7 +90,9 @@
 <%- elsif report.delayed_jobs.present? -%>
   <p>Scores are being generated. Please try again in a moment.</p>
 <%- elsif params[:representing].present? -%>
-  <p>No scores found for: "<%= params[:representing] %>"</p>
+  <p>No scores found for: "<%= params[:representing] %>"
+    <%= link_to 'show all', reset_path, :'data-replace' => replace, :class => 'show_all' %>
+  </p>
 <%- elsif report.owner.is_a?(User) -%>
   <%- if report.bill_criteria.blank? -%>
     <p>No scores yet, as this report has no criteria to judge representatives by.</p>
