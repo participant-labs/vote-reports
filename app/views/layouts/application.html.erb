@@ -3,7 +3,7 @@
 
   <div class="container">
     <div id="header" class="span-24">
-      <%= link_to image_tag('header_logo.png', :alt => 'VoteReports: Knowing is Half the Ballot'), root_path, :id => 'logo' %>
+      <%= link_to image_tag('header_logo.png', :alt => 'VoteReports: Knowing is Half the Ballot', :size => '238x54'), root_path, :id => 'logo' %>
       <div id="account">
         <%= render 'locations/location' %>
         <%- if current_user -%>
@@ -42,7 +42,7 @@
 
     <div id="footer" class="footer span-24">
       <div class="span-6">
-        <%= link_to image_tag('footer_logo.png', :alt => 'VoteReports'), root_path %>
+        <%= link_to image_tag('footer_logo.png', :alt => 'VoteReports', :size => '25x18'), root_path %>
         <%= link_to "© #{Date.today.year} Participant Labs", participant_labs_path, :id => 'copyright' %>
       </div>
       <ul class="sidebar-links">
