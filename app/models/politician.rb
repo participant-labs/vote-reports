@@ -136,7 +136,6 @@ class Politician < ActiveRecord::Base
     {:conditions => {:first_name => first, :last_name => last}}
   }
   named_scope :by_birth_date, :order => 'birthday DESC NULLS LAST'
-  named_scope :by_district, :order => 'congressional_districts.district'
   named_scope :from_congressional_district, lambda {|districts|
     {:conditions => [
         "(senate_terms.us_state_id IN(?) OR representative_terms.congressional_district_id IN(?))",
@@ -171,7 +170,7 @@ class Politician < ActiveRecord::Base
     state = UsState.first(:conditions => ["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]) if state.is_a?(String)
     if state
       {
-        :select => 'DISTINCT politicians.*, congressional_districts.district',
+        :select => 'DISTINCT politicians.*',
         :conditions => ['congressional_districts.us_state_id = ?', state],
         :joins => {:representative_terms => :congressional_district}
       }
