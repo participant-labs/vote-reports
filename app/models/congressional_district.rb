@@ -64,7 +64,8 @@ class CongressionalDistrict < ActiveRecord::Base
   alias_method :full_name, :title
 
   def district_geometry
-    @district_geometry ||= District.federal.first(:conditions => {:us_state_id => us_state_id, :name => district.to_s})
+    @district_geometry ||= District.federal.first(:conditions => {
+      :us_state_id => us_state_id, :name => (at_large? ? '1' : district.to_s)})
   end
   delegate :the_geom, :envelope, :polygon, :linear_ring, :display_name, :level, :to => :district_geometry
 
