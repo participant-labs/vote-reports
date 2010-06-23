@@ -1,2 +1,4 @@
-<p id="location" class="precision-<%= session[:geo_location].precision %>"><%= current_location %></p>
+<%- if current_geo_location -%>
+  <p id="location" class="precision-<%= current_geo_location.precision %>"><%= current_location %></p>
+<%- end -%>
 (<%= link_to 'set location', location_path(:return_to => request.path), :class => 'fancyboxy' %>)
