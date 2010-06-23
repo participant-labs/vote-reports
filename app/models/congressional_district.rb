@@ -6,7 +6,7 @@ class CongressionalDistrict < ActiveRecord::Base
   has_many :representative_terms
   has_many :representatives, :through => :representative_terms, :source => :politician, :uniq => true do
     def in_office
-      scoped(:conditions => ['politicians.current_office_type = ?', 'RepresentativeTerm'])
+      scoped(:conditions => ['politicians.current_office_type = ? AND politicians.current_office_id IN(?)', 'RepresentativeTerm', proxy_owner.representative_terms])
     end
   end
 
