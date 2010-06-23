@@ -14,6 +14,9 @@ class District < ActiveRecord::Base
       {}
     end
   }
+  named_scope :state, lambda {|abbr|
+    {:joins => :state, :conditions => {'us_states.abbreviation' => abbr}}
+  }
 
   District::Level.levels.each do |level|
     named_scope level, :conditions => {:level => level}
@@ -23,12 +26,6 @@ class District < ActiveRecord::Base
   end
 
   delegate :envelope, :to => :the_geom
-  def polygon
-    @polygon ||= the_geom[0]
-  end
-  def linear_ring
-    @linear_ring ||= the_geom[0][0]
-  end
 
   def display_name
     if federal?

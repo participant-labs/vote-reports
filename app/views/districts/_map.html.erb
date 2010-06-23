@@ -1,6 +1,6 @@
 <%- style ||= 'height: 300px; width: 425px;' -%>
 
-<%- if district.district_geometry -%>
+<%- if (districts = district.district_geometries).present? -%>
   <div id="map_canvas" style="<%= style %>"></div>
 
   <% javascript_tag do %>
@@ -14,22 +14,26 @@
         mapTypeControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
-      var bounds = <%= mapy(district.envelope) %>;
+      var bounds = <%= mapy(districts.first.envelope) %>;
       show_district_map.fitBounds(bounds);
 
-      district_<%= district.id %> = new google.maps.Polygon({
-        paths: [
-        <%- district.linear_ring.each do |point| -%>
-          <%= mapy(point) %>,
+      <%- districts.each do |district| -%>
+        <%- district.the_geom.each_with_index do |polygon, index| -%>
+          district_<%= district.id %>_<%= index %> = new google.maps.Polygon({
+            paths: [
+            <%- polygon.first.each do |point| -%>
+              <%= mapy(point) %>,
+            <%- end -%>
+            ],
+            strokeColor: "<%= district.level.stroke_color %>",
+            strokeOpacity: 0.8,
+            strokeWeight: 1,
+            fillColor: "<%= district.level.fill_color %>",
+            fillOpacity: 0.3
+          });
+          district_<%= district.id %>_<%= index %>.setMap(show_district_map);
         <%- end -%>
-        ],
-        strokeColor: "<%= district.level.stroke_color %>",
-        strokeOpacity: 0.8,
-        strokeWeight: 1,
-        fillColor: "<%= district.level.fill_color %>",
-        fillOpacity: 0.3
-      });
-      district_<%= district.id %>.setMap(show_district_map);
+      <%- end -%>
 
       var districtInfo = new google.maps.InfoWindow({
           content: '<p style="color: <%= district.level.text_color %>;"><%= district.full_name %></p>'

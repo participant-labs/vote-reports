@@ -63,11 +63,10 @@ class CongressionalDistrict < ActiveRecord::Base
   end
   alias_method :full_name, :title
 
-  def district_geometry
-    @district_geometry ||= District.federal.first(:conditions => {
+  def district_geometries
+    @district_geometry ||= District.federal.scoped(:conditions => {
       :us_state_id => us_state_id, :name => district_abbreviation})
   end
-  delegate :the_geom, :envelope, :polygon, :linear_ring, :display_name, :level, :to => :district_geometry
 
   def district_abbreviation
     at_large? || unidentified? ? 'At large' : self[:district].to_s
