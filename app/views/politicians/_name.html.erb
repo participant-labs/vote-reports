@@ -1,3 +1,12 @@
-<span class="politician_name"><%= link_to_unless_current politician_last_name(politician), politician  %>
-  <%= render 'politicians/location', :politician => politician %>
-</span>
+<%-
+  full ||= false
+  name = full ? politician_name(politician) : politician_last_name(politician)
+  no_fancybox ||= false
+-%>
+
+<%- if current_page?(politician) -%>
+  <span class="politician_name"><%= name %></span>
+<%- else -%>
+  <%= link_to_unless_current name, politician, :class => 'politician_name' %>
+<%- end -%>
+<%= render 'politicians/location', :politician => politician, :no_fancybox => no_fancybox %>

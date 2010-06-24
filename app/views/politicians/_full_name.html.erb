@@ -1,5 +1,0 @@
-<%- no_fancybox ||= false -%>
-
-<span class="politician_name"><%= link_to_unless_current politician_name(politician), politician  %>
-  <%= render 'politicians/location', :politician => politician, :no_fancybox => no_fancybox %>
-</span>
