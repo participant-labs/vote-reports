@@ -14,7 +14,7 @@ function togglePolygons(map, polygons) {
     } else if(navigator.geolocation) {
       // Try W3C Geolocation (Preferred)
       navigator.geolocation.getCurrentPosition(function(position) {
-        $.post('location', {
+        $.post('/location', {
           autoloc: {
             lat: position.coords.latitude,
             lng: position.coords.longitude
@@ -25,7 +25,7 @@ function togglePolygons(map, polygons) {
       // Try Google Gears Geolocation
       var geo = google.gears.factory.create('beta.geolocation');
       geo.getCurrentPosition(function(position) {
-        $.post('location', {
+        $.post('/location', {
           autoloc: {
             lat: position.latitude,
             lng: position.longitude
