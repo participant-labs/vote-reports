@@ -22,7 +22,7 @@
     return false;
   }
 
-  $(document).ready(function(){
+  $(function(){
     $(':input[data-replace]').live('click', function(event) {
       var target = $(event.target);
       return replaceWith(
