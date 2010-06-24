@@ -1,0 +1,13 @@
+<%-
+  no_fancybox ||= false
+  classes = no_fancybox ? 'politician_location' : 'fancyboxy politician_location'
+  path = polymorphic_path(politician.location)
+-%>
+
+<%- if politician.location -%>
+  <%- if current_page?(path) -%>
+    <%= content_tag :span, politician.location.abbreviation, :class => 'politician_location', :title => location_title(politician.location) %>
+  <%- else -%>
+    <%= link_to politician.location.abbreviation, path, :class => classes, :title => location_title(politician.location) %>
+  <%- end -%>
+<%- end -%>

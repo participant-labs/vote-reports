@@ -109,7 +109,7 @@
   margin-bottom: 5px;
 }
 
-h4, .report_title, .politician_name a {
+h4, .report_title, .politician_name a, .politician_name span {
   font-size: 1.2em;
   font-weight: bold;
   color: #282625;
