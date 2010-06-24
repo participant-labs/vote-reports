@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100623182434) do
+ActiveRecord::Schema.define(:version => 20100624063735) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -255,17 +255,16 @@ ActiveRecord::Schema.define(:version => 20100623182434) do
   add_index "guide_reports", ["report_id"], :name => "index_guide_reports_on_report_id"
 
   create_table "guides", :force => true do |t|
-    t.integer  "district_id"
+    t.integer  "congression_district_id"
     t.integer  "zip_code_id"
-    t.integer  "plus_4"
     t.integer  "report_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "secure_token", :null => false
+    t.string   "secure_token",            :null => false
   end
 
-  add_index "guides", ["district_id"], :name => "index_guides_on_district_id"
+  add_index "guides", ["congression_district_id"], :name => "index_guides_on_district_id"
   add_index "guides", ["report_id"], :name => "index_guides_on_report_id", :unique => true
   add_index "guides", ["secure_token"], :name => "index_guides_on_secure_token", :unique => true
   add_index "guides", ["user_id"], :name => "index_guides_on_user_id"
