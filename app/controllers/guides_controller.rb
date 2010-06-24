@@ -1,5 +1,12 @@
 class GuidesController < ApplicationController
   def new
+    if params[:from] == 'location' && !session[:congressional_district]
+      @geoloc = session[:declared_geo_location] = session[:geo_location]
+      load_location_show_support
+      session[:location] = geo_description(@geoloc) + " (#{@federal.display_name})"
+      session[:congressional_district] = @federal.congressional_district
+    end
+
     @guide = Guide.new(:district_id => session[:congressional_district])
 
     respond_to do |format|

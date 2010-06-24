@@ -2,7 +2,7 @@
 
 <h1>Set your Location</h1>
 
-<p>First, we need to know which politicians to show...</p>
+<p>First, we need to know which politicians to score...</p>
 
 <div style="min-width: 750px" class="clearfix" id="location_setter">
   <div class="left">
@@ -33,4 +33,7 @@
 </div>
 
 <p>Change your location above, and when it looks good:</p>
-<%= button_to "Let's continue...", new_location_path(:from => :location), :method => :get %>
+<% form_tag new_guide_path, :method => :get do %>
+  <%= hidden_field_tag :from, :location %>
+  <%= submit_tag "Let's continue..." %>
+<% end %>
