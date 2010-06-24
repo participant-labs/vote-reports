@@ -8,7 +8,7 @@ class GuidesController < ApplicationController
       session[:congressional_district] = @federal.congressional_district
     end
 
-    @guide = Guide.new(:district_id => session[:congressional_district])
+    @guide = Guide.new(:congressional_district => session[:congressional_district])
 
     respond_to do |format|
       format.html {
@@ -45,7 +45,7 @@ class GuidesController < ApplicationController
   private
 
   def next_step
-    if @guide.district.present?
+    if @guide.congressional_district.present?
       @causes = Cause.all
       :causes
     else
