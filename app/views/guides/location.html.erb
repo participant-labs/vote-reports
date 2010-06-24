@@ -1,10 +1,14 @@
 <% title 'Your Districts' %>
 
-<div style="min-width: 750px" id="location_setter">
+<h1>Set your Location</h1>
+
+<p>First, we need to know which politicians to show...</p>
+
+<div style="min-width: 750px" class="clearfix" id="location_setter">
   <div class="left">
     <h2><%= render 'locations/form' %></h2>
 
-    <div id="location_show_map_canvas"></div>
+    <div id="guide_location_map_canvas"></div>
   </div>
 
   <div class="right">
@@ -25,5 +29,8 @@
     </div>
   </div>
 
-  <%= render 'locations/map_js', :canvas_id => 'location_show_map_canvas' %>
+  <%= render 'locations/map_js', :canvas_id => 'guide_location_map_canvas' %>
 </div>
+
+<p>Change your location above, and when it looks good:</p>
+<%= button_to "Let's continue...", new_location_path(:from => :location), :method => :get %>

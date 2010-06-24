@@ -1,3 +1,7 @@
+#location_show_map_canvas, #guide_location_map_canvas {
+  height: 30em;
+}
+
 h2 > form {
   padding-bottom: 0;
 }

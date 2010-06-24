@@ -30,7 +30,7 @@ class LocationsController < ApplicationController
           flash.now[:success] = "Successfully set location"
         end
 
-        load_districts
+        load_location_show_support
 
         session[:declared_location] = params[:location]
         session[:location] = geo_description(@geoloc) + " (#{@federal.display_name})"
@@ -60,7 +60,7 @@ class LocationsController < ApplicationController
       return
     end
 
-    load_districts
+    load_location_show_support
 
     respond_to do |format|
       format.html
@@ -73,17 +73,8 @@ class LocationsController < ApplicationController
 
   def destroy
     flash[:success] = "Successfully cleared location"
-    session[:location] = nil
-    session[:geo_location] = nil
+    session.clear
     redirect_to params[:return_to] || root_path
   end
 
-  private
-
-  def load_districts
-    @districts = District.lookup(@geoloc).sort_by {|d| d.level.sort_order }
-    @federal = @districts.detect {|d| d.level.to_s == 'federal' }
-    @bounds = @federal.envelope
-    @politicians = Politician.for_districts(@districts).in_office
-  end
 end
