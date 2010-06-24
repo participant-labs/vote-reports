@@ -98,6 +98,11 @@ a {
   width: 48%;
 }
 
+ul.causes_selector {
+  padding-left: 0;
+  margin-right: 0;
+}
+
 #content a.politician_headshot, #content a.politician_headshot:hover {
   border-bottom: 0;
 }
