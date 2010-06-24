@@ -1,13 +1,6 @@
 class GuidesController < ApplicationController
   def new
-    if params[:representing].present? && zip_code = ZipCode.zip_code(params[:representing])
-      session[:zip_code] = zip_code
-    end
-    if params[:guide].try(:[], :district_id).present?
-      session[:district_id] = params[:guide][:district_id]
-    end
-
-    @guide = Guide.new(:zip_code => session[:zip_code], :district_id => session[:district_id])
+    @guide = Guide.new(:district_id => session[:congressional_district])
 
     respond_to do |format|
       format.html {
@@ -65,11 +58,9 @@ class GuidesController < ApplicationController
     if @guide.district.present?
       @causes = Cause.all
       :causes
-    elsif @guide.zip_code.present?
-      @districts = District.with_zip(@guide.full_zip)
-      :district
     else
-      :zip_code
+      load_location_show_support
+      :location
     end
   end
 

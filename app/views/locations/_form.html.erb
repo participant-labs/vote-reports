@@ -1,0 +1,10 @@
+<%- no_ajax ||= false -%>
+
+<% form_tag location_path, no_ajax ? {} : {:'data-replace' => (@js ? 'fancybox-inner' : 'location_setter')}  do %>
+  <%= label_tag :location, 'Your Location', :style => 'font-weight: normal;' %>
+  <%= text_field_tag :location, session[:declared_location] %>
+  <%- if params[:return_to].present? -%>
+    <%= hidden_field_tag :return_to, params[:return_to] %>
+  <%- end -%>
+  <%= submit_tag 'Set' %>
+<% end %>

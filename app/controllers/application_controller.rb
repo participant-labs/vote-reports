@@ -45,6 +45,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def load_location_show_support
+    @geoloc ||= current_geo_location
+    @districts = District.lookup(@geoloc).sort_by {|d| d.level.sort_order }
+    @federal = @districts.detect {|d| d.level.to_s == 'federal' }
+    @bounds = @federal.envelope
+    @politicians = Politician.for_districts(@districts).in_office
+  end
+
   def report_path(report, params = {})
     polymorphic_path(report_path_components(report), params)
   end
