@@ -19,8 +19,10 @@ class Guide < ActiveRecord::Base
 
   def immediate_scores
     return [] unless congressional_district.present? && reports.present?
+    report_ids = reports.map(&:id)
     congressional_district.politicians.map do |politician|
-      GuideScore.find_or_create_by_politician_id_and_report_ids(politician.id, reports.map(&:id))
+      GuideScore.first(:conditions => {:politician_id => politician.id, :report_ids.all => report_ids, :report_ids.size => report_ids.size}) \
+       || GuideScore.create!(:politician_id => politician.id, :report_ids => report_ids)
     end
   end
 

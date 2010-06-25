@@ -16,7 +16,7 @@ class GuideScore
   end
 
   def reports
-    Report.scoped(:conditions => {:id => self.report_ids})
+    Report.find(self.report_ids)
   end
 
   def evidence
@@ -33,6 +33,7 @@ class GuideScore
   private
 
   def build_scores
+    return if self.score
     scores = politician.report_scores.for_reports(reports)
     self.score = scores.average(:score)
     self.evidence_ids = scores.map(&:id)

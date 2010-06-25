@@ -25,9 +25,10 @@
   $(function(){
     $(':input[data-replace]').live('click', function(event) {
       var target = $(event.target);
-      return replaceWith(
+      replaceWith(
         target.attr('data-replace'),
-        current_url() + '?' + target.serialize());
+        current_url() + '?' + target.closest('form').serialize());
+      return true;
     });
 
     $('[data-replace] > a, a[data-replace]').live('click', function(event) {
