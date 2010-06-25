@@ -1,7 +1,10 @@
 module Reports::ScoresHelper
   def score_title(score)
-    by = " by #{score.report.owner}" unless score.report.interest_group_id
-    "#{score} for #{score.politician.full_name} on '#{score.report.name}' #{by}"
+    on = if score.respond_to?(:report)
+        by = " by #{score.report.owner}" unless score.report.interest_group_id
+        " on '#{score.report.name}'#{by}"
+      end
+    "#{score} for #{score.politician.full_name}#{on}"
   end
 
   def score_evidence_components(score, opts = {})
