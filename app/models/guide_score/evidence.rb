@@ -1,0 +1,19 @@
+class GuideScore::Evidence
+  include MongoMapper::Document
+
+  key :politician_id, Integer, :required => true
+  key :report_score_id, Integer, :required => true
+
+  def evidence_type
+    'ReportScore'
+  end
+
+  def evidence
+    ReportScore.find(report_score_id)
+  end
+
+  def report
+    evidence.report
+  end
+  alias_method :criterion, :report
+end

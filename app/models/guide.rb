@@ -17,10 +17,17 @@ class Guide < ActiveRecord::Base
 
   alias_method :score_criteria, :guide_reports
 
+  def immediate_scores
+    return [] unless congressional_district.present? && reports.present?
+    congressional_district.politicians.map do |politician|
+      GuideScore.find_or_create_by_politician_id_and_report_ids(politician.id, reports.map(&:id))
+    end
+  end
+
   private
 
   def initialize_report
     self.secure_token = ActiveSupport::SecureRandom.hex(10)
-    build_report(:name => secure_token).save!
+    build_report(:name => secure_token, :guide => self).save!
   end
 end
