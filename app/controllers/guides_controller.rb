@@ -8,7 +8,8 @@ class GuidesController < ApplicationController
       session[:congressional_district] = @federal.congressional_district
     end
 
-    @guide = Guide.new(:congressional_district => session[:congressional_district])
+    reports = params[:causes].present? ? Cause.find(params[:causes], :include => :report).map(&:report) : []
+    @guide = Guide.new(:congressional_district => session[:congressional_district], :reports => reports)
 
     respond_to do |format|
       format.html {
@@ -45,7 +46,11 @@ class GuidesController < ApplicationController
   private
 
   def next_step
-    if @guide.congressional_district.present?
+    if @guide.reports.present?
+      @causes = Cause.all
+      @scores = @guide.immediate_scores
+      :cause_scores
+    elsif @guide.congressional_district.present?
       @causes = Cause.all
       :causes
     else

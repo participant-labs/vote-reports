@@ -1,10 +1,10 @@
 <%- title 'Guide - Causes' -%>
 
-<div class="section guide">
+<div class="guide">
   <% form_for @guide do |f| %>
     <h1>Which causes do you support?</h1>
-    <%= render 'causes/selector', :f => f, :causes => @causes, :target => lambda {|causes|
-      [new_guide_path(:causes => causes, :representing => params[:representing]),
-      {:'data-replace' => 'content'}] } %>
+    <%= render 'causes/selector', :causes => @causes, :replace => 'instant_scores' %>
   <% end %>
 </div>
+
+<div id="instant_scores"></div>
