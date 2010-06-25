@@ -15,5 +15,5 @@ class GuideScore::Evidence
   def report
     evidence.report
   end
-  alias_method :criterion, :report
+  alias_method :subject, :report
 end
