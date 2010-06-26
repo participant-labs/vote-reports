@@ -1,3 +1,5 @@
-<%- @scores.each do |score| -%>
-  <%= render 'politicians/score', :score => score %>
-<%- end -%>
+<ul>
+  <%- @scores.each do |score| -%>
+  <li><%= render 'politicians/bar_score', :score => score %></li>
+  <%- end -%>
+</ul>
