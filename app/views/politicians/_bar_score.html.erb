@@ -1,6 +1,5 @@
-<%= render 'politicians/score', :score => score %>
-
-<div id="<%= dom_id(score) %>"></div>
+<div class="span-6"><%= render 'politicians/score', :score => score %></div>
+<div id="<%= dom_id(score) %>" class="span-18 last"></div>
 
 
 <% javascript_tag do %>

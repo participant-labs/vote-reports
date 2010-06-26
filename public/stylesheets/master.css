@@ -1,3 +1,7 @@
+#instant_scores > ul {
+  list-style-type: none;
+}
+
 #location_show_map_canvas, #guide_location_map_canvas {
   height: 30em;
 }
