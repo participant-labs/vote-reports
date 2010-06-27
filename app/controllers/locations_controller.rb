@@ -33,7 +33,6 @@ class LocationsController < ApplicationController
         load_location_show_support
 
         session[:declared_location] = params[:location]
-        session[:location] = geo_description(@geoloc) + " (#{@federal.display_name})"
         session[:congressional_district] = @federal.congressional_district
         session[:declared_geo_location] = @geoloc
 

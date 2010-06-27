@@ -49,7 +49,6 @@ class ApplicationController < ActionController::Base
     @geoloc ||= current_geo_location
     @districts = District.lookup(@geoloc).sort_by {|d| d.level.sort_order }
     @federal = @districts.detect {|d| d.level.to_s == 'federal' }
-    @bounds = @federal.envelope
     @politicians = Politician.for_districts(@districts).in_office
   end
 
