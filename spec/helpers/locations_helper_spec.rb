@@ -35,35 +35,6 @@ describe LocationsHelper do
       end
     end
 
-    context "when zip code is set" do
-      before do
-        session[:zip_code] = 'zip'
-      end
-
-      it "should defer to representing" do
-        params[:representing] = 'param'
-        mock(Politician).from('param') { Politician }
-        helper.sought_politicians
-      end
-
-      it "should defer to blank representing" do
-        params[:representing] = ''
-        mock(Politician).from('') { Politician }
-        helper.sought_politicians
-      end
-
-      it "should be favored over geolocation" do
-        session[:geo_location] = @geo
-        mock(Politician).from('zip') { Politician }
-        helper.sought_politicians
-      end
-
-      it "should be used when alone" do
-        mock(Politician).from('zip') { Politician }
-        helper.sought_politicians
-      end
-    end
-
     context "when geocode has results" do
       before do
         session[:geo_location] = @geo
@@ -78,12 +49,6 @@ describe LocationsHelper do
       it "should defer to blank representing" do
         params[:representing] = ''
         mock(Politician).from('') { Politician }
-        helper.sought_politicians
-      end
-
-      it "should defer to zip code" do
-        session[:zip_code] = 'zip'
-        mock(Politician).from('zip') { Politician }
         helper.sought_politicians
       end
 

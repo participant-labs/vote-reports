@@ -9,26 +9,6 @@ describe Report do
       end.should_not change(Report,:count)
       @report.errors.on(:name).should include("can't be blank")
     end
-
-    it "should be validate presence of owner" do
-      lambda do
-        @report = Report.new(:user_id => nil)
-        @report.save
-      end.should_not change(Report,:count)
-      @report.errors.on(:owner).should include("can't be blank")
-      lambda do
-        @report = Report.new(:interest_group_id => nil)
-        @report.save
-      end.should_not change(Report,:count)
-      @report.errors.on(:owner).should include("can't be blank")
-
-      @report = Report.new(:user => create_user)
-      @report.save
-      @report.errors.on(:owner).should be_blank
-      @report = Report.new(:interest_group => create_interest_group)
-      @report.save
-      @report.errors.on(:owner).should be_blank
-    end
   end
 
   describe "destruction" do
