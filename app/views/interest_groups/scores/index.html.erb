@@ -3,10 +3,10 @@
   <p>We score representatives based on <a href="#Agenda" data-tab-select="Agenda">the actual ratings</a> this interest group has released over time.</p>
   <%- if @report -%>
     <%- if @scores.present? -%>
-      <%= render 'politicians/search', :in_office => @in_office, :url => interest_group_scores_path(@interest_group), :replace => 'report_scores' %>
+      <%= render 'politicians/search', :in_office => @in_office, :url => interest_group_report_scores_path(@interest_group), :replace => 'report_scores' %>
     <%- end -%>
     <%= render 'reports/scores/table', :report => @report, :scores => @scores,
-    :reset_path => interest_group_scores_path(@interest_group, :representing => '') %>
+    :reset_path => interest_group_report_scores_path(@interest_group, :representing => '') %>
   <%- else -%>
     <p>No ratings on record for this group</p>
   <%- end -%>

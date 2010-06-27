@@ -33,7 +33,7 @@
 
 <div class="ui-tabs">
   <ul>
-    <li><%= link_to content_tag(:span, 'Scores'), interest_group_scores_path(@interest_group), :title => 'Scores' %></li>
+    <li><%= link_to content_tag(:span, 'Scores'), interest_group_report_scores_path(@interest_group), :title => 'Scores' %></li>
     <li><%= link_to content_tag(:span, 'Agenda'), interest_group_agenda_path(@interest_group), :title => 'Agenda' %></li>
     <li><% link_to interest_group_subjects_path(@interest_group), :title => 'Subjects' do %>
       <span>Subjects <span class="count"><%= @interest_group.subjects.count %></span></span>

@@ -8,7 +8,7 @@
 
 <div class="ui-tabs">
   <ul>
-    <li><%= link_to content_tag(:span, 'Scores'), user_report_scores_path(@report.user, @report), :title => 'Scores' %></li>
+    <li><%= link_to content_tag(:span, 'Scores'), user_report_report_scores_path(@report.user, @report), :title => 'Scores' %></li>
     <li><% link_to user_report_agenda_path(@report.user, @report), :title => 'Agenda' do %>
       <span>Agenda <span class="count"><%= @report.bill_criteria.active_count %></span></span>
     <% end %></li>
