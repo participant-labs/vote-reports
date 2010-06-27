@@ -4,7 +4,7 @@ class Causes::ScoresController < ApplicationController
 
   def index
     if !@cause.friendly_id_status.best?
-      redirect_to cause_scores_path(@cause), :status => 301
+      redirect_to cause_report_scores_path(@cause), :status => 301
       return
     end
 
