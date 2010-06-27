@@ -9,7 +9,7 @@
       mapTypeControl: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
-    show_location_map.fitBounds(<%= mapy(@bounds) %>);
+    show_location_map.fitBounds(<%= mapy(@federal.envelope) %>);
 
     var info_content = '';
 

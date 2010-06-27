@@ -4,7 +4,6 @@ class GuidesController < ApplicationController
       session[:geo_location_declared] = true
       @geoloc = session[:declared_geo_location] = session[:geo_location]
       load_location_show_support
-      session[:location] = geo_description(@geoloc) + " (#{@federal.display_name})"
       session[:congressional_district] = @federal.congressional_district
     end
 
