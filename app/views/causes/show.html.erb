@@ -9,7 +9,7 @@
 
 <div class="ui-tabs">
   <ul>
-    <li><%= link_to content_tag(:span, 'Scores'), cause_scores_path(@cause), :title => 'Scores' %></li>
+    <li><%= link_to content_tag(:span, 'Scores'), cause_report_scores_path(@cause), :title => 'Scores' %></li>
     <li><% link_to cause_reports_path(@cause), :title => 'Reports' do %>
       <span>Reports <span class="count"><%= @cause.reports.count %></span></span>
     <% end %></li>
