@@ -1,6 +1,9 @@
 #hero {
   background-color: #4D8BC8;
   margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  margin-bottom: 35px;
   width: 100%;
 }
 
@@ -8,8 +11,17 @@
   text-align: center;
 }
 
+#hero h2 {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
 #hero p, #hero h2 {
   color: #FFF;
+}
+
+#hero .guide_explanation > img {
+  padding-left: 50px;
 }
 
 #instant_scores > ul {
