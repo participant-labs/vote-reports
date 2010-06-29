@@ -1,3 +1,17 @@
+#hero {
+  background-color: #4D8BC8;
+  margin: 0 auto;
+  width: 100%;
+}
+
+#hero h1 {
+  text-align: center;
+}
+
+#hero p, #hero h2 {
+  color: #FFF;
+}
+
 #instant_scores > ul {
   list-style-type: none;
 }

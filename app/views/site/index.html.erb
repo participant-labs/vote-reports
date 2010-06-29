@@ -1,12 +1,23 @@
 <%- title 'Knowing is Half the Ballot' -%>
+
+<% content_for :above_content do %>
+  <div id="hero" class="span-24">
+    <div class="container">
+      <h1><%= image_tag 'know_what_your_representatives_really_stand_for.png', :alt => 'Know what your representatives really stand for' %></h1>
+      <div class="span-6">
+        <h2>Get a quick overview</h2>
+        <p>We know how hard it is to make sense of what the candidates are <em>really</em> up to, so we set out to create an open system for grading politicians from every possible political perspective, based on their actual votes.  Each of our reports has scores for representatives based on their actual votes, or ratings from leading interest groups.</p>
+
+        <p>We go one step farther, by grouping these reports into "<%= link_to 'Causes', causes_path %>", which help to give a full picture of an important political issue.  Cause scores are based on the scores for the reports that went into that cause, and causes are curated with your input, so please <%= mail_to 'causes@votereports.org', 'let us know' %> if you have something to add, or any comment for that matter.</p>
+
+        <%= image_tag 'get_started_now.png', :alt => 'Get Started Now' %>
+      </div>
+      <%= image_tag 'guide_explanation.png', :alt => 'Select Your Location → Choose Your Causes → See How Your Reps Rate', :class => 'span-18 last' %>
+    </div>
+  </div>
+<% end %>
+
 <div class="section clearfix span-16" id="voters">
-  <h3>Know what your representatives <em>really</em> stand for</h3>
-  <p>We know how hard it is to make sense of what the candidates are <em>really</em> up to, so we set out to create an open system for grading politicians from every possible political perspective, based on their actual votes.  Each of our "<%= link_to 'Reports', reports_path %>" has scores for representatives based on their actual votes, either directly or through an interest group's ratings.</p>
-
-  <p>We go one step farther, by grouping these reports into "<%= link_to 'Causes', causes_path %>", which help to give a full picture of an important political issue.  Cause scores are based on the scores for the reports that went into that cause, and causes are curated with your input, so please <%= mail_to 'causes@votereports.org', 'let us know' %> if you have something to add, or any comment for that matter.</p>
-
-  <p>Take a look around, check out your own representatives.  And come back soon, this project is moving fast!</p>
-
   <h4 style="display: inline" class="section_header"><%= requested_location ? "Reps in your area - #{requested_location}" : "Sample Reps" %></h4>
   (<%= link_to "set location", location_path(:return_to => request.path), :class => 'fancyboxy' %>)
   <div id="score_examples">
