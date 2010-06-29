@@ -146,19 +146,12 @@ class Politician < ActiveRecord::Base
       ], :select => 'DISTINCT politicians.*'
     }
   }
-  named_scope :in_office_for_congressional_district, lambda {|districts|
-    {:conditions => [
-        '(senate_terms.us_state_id IN(:states) OR representative_terms.congressional_district_id IN(:districts)) AND ' \
-        '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
-        '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
-        {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow,
-        :states => Array(districts).map(&:us_state_id), :districts => districts}
-      ], :joins => [
-        %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
-        %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
-      ], :select => 'DISTINCT politicians.*'
-    }
-  }
+  named_scope :with_in_office_terms, :conditions => [
+      '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
+      '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
+      {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
+  ]
+
   class << self
     def for_districts(districts)
       from_congressional_district(districts.map(&:congressional_district).compact)
