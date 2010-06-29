@@ -55,7 +55,7 @@ class CongressionalDistrict < ActiveRecord::Base
   end
 
   def politicians
-    Politician.in_office_for_congressional_district(self)
+    Politician.from_congressional_district(self).with_in_office_terms
   end
 
   def title
