@@ -7,8 +7,8 @@
       <div id="account">
         <%= render 'locations/location' %>
         <%- if current_user -%>
-          <%= link_to_unless_current "Dashboard", user_path(current_user) %>
-          <%= link_to_unless_current "Log out", logout_path %>
+          <%= link_to "Dashboard", user_path(current_user), :class => 'dashboard' %>
+          <%= link_to "Log out", logout_path, :class => 'logout' %>
         <%- else -%>
           <%= link_to content_tag(:span, "Log in"), request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy login' %>
           <%= link_to content_tag(:span, "Register"), signup_path, :class => 'fancyboxy register' %>
