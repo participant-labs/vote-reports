@@ -1,3 +1,7 @@
 #nav_search {
   border: 1px solid gray;
 }
+
+#hero {
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#549AD8', endColorstr='#4B87C3');
+}
