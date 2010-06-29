@@ -27,6 +27,10 @@ class District < ActiveRecord::Base
 
   delegate :envelope, :to => :the_geom
 
+  def level=(level)
+    self[:level] = level
+  end
+
   def display_name
     if federal?
       "#{state.abbreviation}-#{name}"

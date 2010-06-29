@@ -3,7 +3,7 @@ class GuidesController < ApplicationController
     if params[:from] == 'location' && !session[:congressional_district]
       session[:geo_location_declared] = true
       @geoloc = session[:declared_geo_location] = session[:geo_location]
-      load_location_show_support
+      load_location_show_support(@geoloc)
       session[:congressional_district] = @federal.congressional_district
     end
 
@@ -53,7 +53,7 @@ class GuidesController < ApplicationController
       @causes = Cause.all
       :causes
     else
-      load_location_show_support
+      load_location_show_support(current_geo_location)
       :location
     end
   end

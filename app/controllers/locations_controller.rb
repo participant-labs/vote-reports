@@ -15,9 +15,10 @@ class LocationsController < ApplicationController
       elsif params[:autoloc]
         Geokit::LatLng.new(*params[:autoloc].values_at(:lat, :lng)).reverse_geocode
       end
-    session[:geo_location_declared] = @geoloc.success?
+    session[:geo_location_declared] = @geoloc.try(:success?)
+
     action =
-      if !@geoloc.success?
+      if !session[:geo_location_declared]
         flash.now[:error] = %Q{Sorry, we were unable to understand this location. Could you clarify it?}
         'new'
       elsif !@geoloc.is_us?
@@ -30,7 +31,7 @@ class LocationsController < ApplicationController
           flash.now[:success] = "Successfully set location"
         end
 
-        load_location_show_support
+        load_location_show_support(@geoloc)
 
         session[:declared_location] = params[:location]
         session[:congressional_district] = @federal.congressional_district
@@ -59,7 +60,7 @@ class LocationsController < ApplicationController
       return
     end
 
-    load_location_show_support
+    load_location_show_support(@geoloc)
 
     respond_to do |format|
       format.html
