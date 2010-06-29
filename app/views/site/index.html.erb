@@ -17,9 +17,10 @@
   </div>
 <% end %>
 
-<div class="section clearfix span-16" id="voters">
-  <h4 style="display: inline" class="section_header"><%= requested_location ? "Reps in your area - #{requested_location}" : "Sample Reps" %></h4>
-  (<%= link_to "set location", location_path(:return_to => request.path), :class => 'fancyboxy' %>)
+<div class="clearfix span-16" id="voters">
+  <h3><%= requested_location ? "Reps in your area -" : "Sample Reps" %>
+    <%= link_to requested_location, location_path(:return_to => request.path), :class => 'fancyboxy location' %>
+  </h3>
   <div id="score_examples">
     <ul class="report_scores">
       <%- @scores.each do |score| -%>
@@ -31,11 +32,7 @@
 </div>
 
 <div class="section clearfix span-8 last" id="advocates">
-  <h3>Share Your Own Cause</h3>
-
-  <p>On VoteReports, if you don't find the politician report card you're looking for, you can always create your own.</p>
-
-  <p>To publish your own report, simply flag the legislation you support or oppose, and we'll track and score the politicians based on their votes.</p>
+  <h3>Advocates</h3>
 
   <p>Check out a few of our recent user-created reports:</p>
 

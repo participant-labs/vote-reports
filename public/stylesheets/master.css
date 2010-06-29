@@ -72,9 +72,14 @@ a {
   border-bottom-style: solid;
 }
 
-.section_header {
+#voters h3, #advocates h3 {
   color: #cf0200;
   text-transform: uppercase;
+  font-size: 1.2em;
+}
+
+.location {
+  color: #999;
 }
 
 .ui-tabs #report_scores {
