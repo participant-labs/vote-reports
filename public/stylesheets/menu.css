@@ -117,6 +117,10 @@
   float:right;
 }
 
+#account .location {
+  vertical-align: 40%;
+}
+
 #account p {
   display: inline;
 }
