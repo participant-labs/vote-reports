@@ -35,11 +35,17 @@
         <% end %>
       </div>
     </div>
+  </div>
 
+  <%= yield :above_content %>
+
+  <div class="container">
     <div id="content" class="span-24">
       <%= yield(:content) || yield %>
     </div>
+  </div>
 
+  <div class="container">
     <div id="footer" class="footer span-24">
       <div class="span-6">
         <%= link_to image_tag('footer_logo.png', :alt => 'VoteReports', :size => '25x18'), root_path %>
