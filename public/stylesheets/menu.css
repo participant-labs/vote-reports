@@ -117,7 +117,7 @@
   float:right;
 }
 
-#account .location {
+#account .location, #account .logout, #account .dashboard {
   vertical-align: 40%;
 }
 
