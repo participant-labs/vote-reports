@@ -73,6 +73,7 @@ class ApplicationController < ActionController::Base
     if report.user
       [report.user, report]
     else
+      raise "No owner for report: #{report.inspect}" if report.owner.nil?
       report.owner
     end
   end
