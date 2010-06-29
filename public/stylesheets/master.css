@@ -15,15 +15,20 @@
 }
 
 #hero h2 {
-  font-size: 1.3em;
-  font-weight: bold;
+  font-size: 1.5em;
 }
 
 #hero p, #hero h2 {
   color: #FFF;
 }
 
-#hero .guide_explanation > img {
+#hero p {
+  font-size: 1.1em;
+  font-weight: 200;
+  letter-spacing: 0.03em;
+}
+
+#hero .guide_explanation img {
   padding-left: 50px;
 }
 
