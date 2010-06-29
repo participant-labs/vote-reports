@@ -28,9 +28,9 @@ Feature: Browsing the Guide
       | TX    | 11       | 78704    |
       | NY    | 7        | 11111    |
 
-    When I go to the guide page
-    And I fill in "representing" with "75028"
-    And I press "Show Reps"
+    When I go to the new guide page
+    And I fill in "Your Location" with "75028"
+    And I press "Set"
     Then I should see "Michael Burgess"
     And I should see "John Cornyn"
     But I should not see "J. Kerrey"

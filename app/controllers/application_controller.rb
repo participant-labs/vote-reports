@@ -45,10 +45,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def load_location_show_support
-    @geoloc ||= current_geo_location
+  def load_location_show_support(geoloc)
+    @geoloc = geoloc
     @districts = District.lookup(@geoloc).sort_by {|d| d.level.sort_order }
     @federal = @districts.detect {|d| d.level.to_s == 'federal' }
+    raise "No federal districts for #{geoloc.inspect}" unless @federal
     @politicians = Politician.for_districts(@districts).in_office
   end
 

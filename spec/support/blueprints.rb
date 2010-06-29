@@ -182,6 +182,10 @@ Fixjour :verify => false do
     klass.new(:report => new_report, :bill => new_bill, :support => true)
   end
 
+  define_builder(District) do |klass, overrides|
+    klass.new(:level => 'state_lower', :state => new_us_state)
+  end
+
   define_builder(Politician) do |klass, overrides|
     Party.find_or_create_by_name('Independent')
 

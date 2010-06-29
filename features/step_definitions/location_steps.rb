@@ -10,6 +10,7 @@ Given /^my (location is "[^"]*")$/ do |address|
 end
 
 Given /^my location is set to "([^"]*)"/ do |zip|
+  mock(District).lookup(anything) { [create_district(:level => 'federal'), create_district] }
   visit new_location_path
   fill_in 'Location', :with => zip
   click_button 'Set'
