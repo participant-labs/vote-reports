@@ -50,7 +50,7 @@
   margin-bottom: 0.5em;
 }
 
-a.sprites {
+a.sprites, span.sprites {
   display: inline-block;
 }
 

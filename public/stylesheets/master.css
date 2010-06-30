@@ -1,18 +1,3 @@
-.get_started_now {
-  width: 234px;
-  height: 56px;
-  display: block;
-  background: url(../images/get_started_now.png);
-}
-
-.get_started_now > span {
-  display: none;
-}
-
-.get_started_now:hover {
-  background: url(../images/get_started_now_rollover.png);
-}
-
 #hero {
   background-color: #549AD8;
   background: -webkit-gradient(linear, left top, left bottom, from(#549AD8), to(#4B87C3));
@@ -42,8 +27,8 @@
   margin-top: 5px
 }
 
-#hero .guide_explanation img {
-  padding-left: 50px;
+#hero .guide_explanation a {
+  margin-left: 50px;
 }
 
 #instant_scores > ul {
