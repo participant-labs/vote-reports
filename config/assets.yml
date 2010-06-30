@@ -31,3 +31,4 @@ stylesheets:
     - public/stylesheets/interest_groups.css
     - public/stylesheets/tag_cloud.css
     - public/stylesheets/guide.css
+    - public/stylesheets/sprites.css
