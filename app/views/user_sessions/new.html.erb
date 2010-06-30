@@ -1,6 +1,6 @@
 <% title "Log in" %>
 
-<div class="section clearfix login_section">
+<div class="clearfix" id="login_section">
   <%- unless @user_session.errors.present? -%>
   <div class="left">
     <h2>Log in via...</h2>
@@ -25,5 +25,7 @@
         <%= f.submit "Log in" %>
       </p>
     <% end %>
+
+    <%= link_to 'No account? Signup here', new_user_path, :'data-replace' => 'login_section' %>
   </div>
 </div>

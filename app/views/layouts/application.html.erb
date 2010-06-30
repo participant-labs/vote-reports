@@ -11,7 +11,6 @@
           <%= link_to "Log out", logout_path, :class => 'logout' %>
         <%- else -%>
           <%= link_to content_tag(:span, "Log in"), request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy sprites navigation-button_login' %>
-          <%= link_to content_tag(:span, "Register"), signup_path, :class => 'fancyboxy sprites navigation-button_register' %>
         <%- end -%>
       </div>
 

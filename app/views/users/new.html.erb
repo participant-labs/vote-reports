@@ -1,6 +1,6 @@
 <% title "Sign up" %>
 
-<div class="section clearfix signup_section">
+<div class="clearfix" id="signup_section">
   <%- unless @user.errors.present? -%>
   <div class="left">
     <h2>Sign up via...</h2>
@@ -11,5 +11,6 @@
   <div class="right">
     <h2>Sign up via Email</h2>
     <%= render 'users/form', :user => @user %>
+    <%= link_to 'Already have an account? Sign in here', login_path, :'data-replace' => 'signup_section' %>
   </div>
 </div>
