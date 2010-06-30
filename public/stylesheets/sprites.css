@@ -80,39 +80,29 @@
   width: 204px;
   height: 38px;
 }
-.sprites.navigation-button_register {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -278px;
-  width: 64px;
-  height: 25px;
-}
-.sprites.navigation-button_register_hover, .sprites.navigation-button_register:hover {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -303px;
-  width: 64px;
-  height: 25px;
-}
 .sprites.navigation-button_reports {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -328px;
+  background: url('/images/sprites/navigation.png') no-repeat 0px -278px;
   width: 204px;
   height: 38px;
 }
 .sprites.navigation-button_reports_hover, .sprites.navigation-button_reports:hover {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -404px;
+  background: url('/images/sprites/navigation.png') no-repeat 0px -354px;
   width: 204px;
   height: 38px;
 }
 .sprites.navigation-button_reports_active, .sprites.navigation-button_reports:active,
 .selected .sprites.navigation-button_reports {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -366px;
+  background: url('/images/sprites/navigation.png') no-repeat 0px -316px;
   width: 204px;
   height: 38px;
 }
 .sprites.navigation-footer_logo {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -442px;
+  background: url('/images/sprites/navigation.png') no-repeat 0px -392px;
   width: 25px;
   height: 18px;
 }
 .sprites.navigation-header_logo {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -460px;
+  background: url('/images/sprites/navigation.png') no-repeat 0px -410px;
   width: 238px;
   height: 54px;
 }

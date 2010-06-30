@@ -73,12 +73,17 @@
   line-height: 1.5em;
 }
 
-.login_section,
-.signup_section {
+#login_section,
+#signup_section {
   width: 660px;
 }
 
-.login_section .right, .signup_section .right {
+#login_section form,
+#signup_section form {
+  padding-bottom: 0;
+}
+
+#login_section .right, #signup_section .right {
   width: 40%;
 }
 
