@@ -29,18 +29,17 @@
   text-align: center;
 }
 
-#hero h2 {
-  font-size: 1.5em;
-}
-
-#hero p, #hero h2 {
-  color: #FFF;
-}
-
 #hero p {
-  font-size: 1.1em;
+  color: #FFF;
+  font-size: 1.27em;
   font-weight: 200;
   letter-spacing: 0.03em;
+}
+
+#hero .no_reg {
+  margin-bottom:0;
+  text-align: center;
+  margin-top: 5px
 }
 
 #hero .guide_explanation img {
