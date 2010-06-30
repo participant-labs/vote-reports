@@ -24,7 +24,8 @@
 #hero .no_reg {
   margin-bottom:0;
   text-align: center;
-  margin-top: 5px
+  margin-top: 5px;
+  font-size: 1em;
 }
 
 #hero .guide_explanation a {
