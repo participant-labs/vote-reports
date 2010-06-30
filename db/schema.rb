@@ -200,7 +200,6 @@ ActiveRecord::Schema.define(:version => 20100624063735) do
   end
 
   add_index "congressional_districts", ["us_state_id", "district"], :name => "districts_us_state_id_district_unique", :unique => true
-  add_index "congressional_districts", ["us_state_id"], :name => "index_congressional_districts_on_us_state_id"
 
   create_table "cosponsorships", :force => true do |t|
     t.integer  "bill_id",       :null => false
@@ -255,16 +254,16 @@ ActiveRecord::Schema.define(:version => 20100624063735) do
   add_index "guide_reports", ["report_id"], :name => "index_guide_reports_on_report_id"
 
   create_table "guides", :force => true do |t|
-    t.integer  "congression_district_id"
+    t.integer  "congressional_district_id"
     t.integer  "zip_code_id"
     t.integer  "report_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "secure_token",            :null => false
+    t.string   "secure_token",              :null => false
   end
 
-  add_index "guides", ["congression_district_id"], :name => "index_guides_on_district_id"
+  add_index "guides", ["congressional_district_id"], :name => "index_guides_on_congressional_district_id"
   add_index "guides", ["report_id"], :name => "index_guides_on_report_id", :unique => true
   add_index "guides", ["secure_token"], :name => "index_guides_on_secure_token", :unique => true
   add_index "guides", ["user_id"], :name => "index_guides_on_user_id"
