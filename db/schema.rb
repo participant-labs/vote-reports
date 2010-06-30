@@ -510,10 +510,11 @@ ActiveRecord::Schema.define(:version => 20100624063735) do
     t.datetime "updated_at"
     t.text     "description"
     t.string   "cached_slug"
-    t.string   "state"
+    t.string   "state",             :null => false
     t.integer  "interest_group_id"
     t.integer  "image_id"
     t.integer  "cause_id"
+    t.string   "source"
   end
 
   add_index "reports", ["cached_slug"], :name => "index_reports_on_cached_slug"
