@@ -1,0 +1,2 @@
+config:
+  pseudo_classes: ['hover', 'active']
