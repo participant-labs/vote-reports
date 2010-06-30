@@ -213,6 +213,7 @@ class Report < ActiveRecord::Base
 
   named_scope :random, :order => 'random()'
 
+  named_scope :laws_i_like, :conditions => {:source => 'laws_i_like'}
   named_scope :user_published, :conditions => {:state => 'published'}, :include => :user
   named_scope :for_causes, :conditions => 'reports.cause_id IS NOT NULL'
   named_scope :non_cause, :conditions => 'reports.cause_id IS NULL'
