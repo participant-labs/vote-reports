@@ -43,13 +43,14 @@
   width: 204px;
   height: 38px;
 }
-.sprites.navigation-button_causes_active, .sprites.navigation-button_causes:active {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -38px;
+.sprites.navigation-button_causes_hover, .sprites.navigation-button_causes:hover {
+  background: url('/images/sprites/navigation.png') no-repeat 0px -76px;
   width: 204px;
   height: 38px;
 }
-.sprites.navigation-button_causes_hover, .sprites.navigation-button_causes:hover {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -76px;
+.sprites.navigation-button_causes_active, .sprites.navigation-button_causes:active,
+.selected .sprites.navigation-button_causes {
+  background: url('/images/sprites/navigation.png') no-repeat 0px -38px;
   width: 204px;
   height: 38px;
 }
@@ -68,13 +69,14 @@
   width: 204px;
   height: 38px;
 }
-.sprites.navigation-button_politicians_active, .sprites.navigation-button_politicians:active {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -202px;
+.sprites.navigation-button_politicians_hover, .sprites.navigation-button_politicians:hover {
+  background: url('/images/sprites/navigation.png') no-repeat 0px -240px;
   width: 204px;
   height: 38px;
 }
-.sprites.navigation-button_politicians_hover, .sprites.navigation-button_politicians:hover {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -240px;
+.sprites.navigation-button_politicians_active, .sprites.navigation-button_politicians:active,
+.selected .sprites.navigation-button_politicians {
+  background: url('/images/sprites/navigation.png') no-repeat 0px -202px;
   width: 204px;
   height: 38px;
 }
@@ -93,13 +95,14 @@
   width: 204px;
   height: 38px;
 }
-.sprites.navigation-button_reports_active, .sprites.navigation-button_reports:active {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -366px;
+.sprites.navigation-button_reports_hover, .sprites.navigation-button_reports:hover {
+  background: url('/images/sprites/navigation.png') no-repeat 0px -404px;
   width: 204px;
   height: 38px;
 }
-.sprites.navigation-button_reports_hover, .sprites.navigation-button_reports:hover {
-  background: url('/images/sprites/navigation.png') no-repeat 0px -404px;
+.sprites.navigation-button_reports_active, .sprites.navigation-button_reports:active,
+.selected .sprites.navigation-button_reports {
+  background: url('/images/sprites/navigation.png') no-repeat 0px -366px;
   width: 204px;
   height: 38px;
 }
