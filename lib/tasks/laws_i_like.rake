@@ -68,15 +68,19 @@ namespace :laws_i_like do
           name = fb_user.name if name.blank?
           name = fb_user.id.to_s if name.blank?
 
-          #fake the user - due to validation problems :-(
-          identifier.user_id = User.first.id
-          identifier.save!
-
-          user = identifier.user_id ? User.find(identifier.user_id) : User.create!(
-            :username => name,
-            :email => "#{name.gsub(' ', '_')}+facebook@votereports.org",
-            :rpx_identifiers => [identifier]
-          )
+          user =
+            if identifier.user_id
+              User.find(identifier.user_id)
+            else
+              #fake the user - due to validation problems :-(
+              identifier.user_id = User.first.id
+              identifier.save!
+              User.create!(
+                :username => name,
+                :email => "#{name.gsub(' ', '_')}+facebook@votereports.org",
+                :rpx_identifiers => [identifier]
+              )
+            end
           identifier.update_attribute(:user_id, user.id)
           report = user.reports.find_or_create_by_name(
             :name => 'Laws I Like',
