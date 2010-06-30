@@ -11,14 +11,17 @@
 - :version: ">= 2.0.3"
   :name: delayed_job
 - :name: erubis
-- :name: hoptoad_notifier
+- :name: excelsior
 - :name: fastercsv
+- :version: = 1.7.1
+  :name: facebooker
 - :version: = 2.3.2
   :name: friendly_id
 - :name: gemcutter
 - :name: geokit
 - :version: ">= 2.1.0"
   :name: gravtastic
+- :name: hoptoad_notifier
 - :name: jammit
 - :version: ">= 1.4.3"
   :name: json

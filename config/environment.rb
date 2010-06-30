@@ -25,7 +25,7 @@ Rails::Initializer.run do |config|
   config.gem 'erubis'
   config.gem 'excelsior'
   config.gem 'fastercsv'
-  config.gem 'facebooker'
+  config.gem 'facebooker', :version => '= 1.0.71'
   config.gem 'friendly_id', :version => '= 2.3.2'
   config.gem 'gemcutter' # required by whenever
   config.gem 'geokit'
