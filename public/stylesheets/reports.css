@@ -155,6 +155,7 @@ h1 {
 .publicize {
   float: right;
   margin: 0 15px;
+  width: 250px;
 }
 
 .publicize h2 {
