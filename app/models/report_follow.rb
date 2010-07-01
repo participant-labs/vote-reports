@@ -17,7 +17,5 @@ class ReportFollow < ActiveRecord::Base
 
   private
 
-  def rescore_personal_report
-    (user.personal_report || user.build_personal_report(:name => 'Personal Report', :state => 'personal')).tap(&:save!).rescore!
-  end
+  delegate :rescore_personal_report, :to => :user
 end
