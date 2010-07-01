@@ -64,7 +64,7 @@ a {
   color: #0070e0;
 }
 
-#header a, #footer a, a.user {
+#header a, #footer a, a.user, .politician_score a {
   text-decoration: none;
 }
 
@@ -83,6 +83,7 @@ a {
 }
 
 .location {
+  text-decoration: none;
   color: #999;
 }
 
