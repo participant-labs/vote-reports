@@ -60,7 +60,7 @@ h2 > form {
   padding-left: 5px;
 }
 
-a {
+a, .subject a {
   color: #0070e0;
 }
 
