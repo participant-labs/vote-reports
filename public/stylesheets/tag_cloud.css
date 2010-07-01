@@ -19,6 +19,7 @@
 }
 
 .tag_cloud li a {
+  text-decoration: none;
   border-bottom-width: 0;
 }
 
@@ -32,6 +33,10 @@
 .tag4 a {font-size: 1.9em; color: #333;}
 .tag5 a {font-size: 2.2em; color: #444;}
 .tag6 a {font-size: 2.5em; color: #666;}
+
+.subject a {
+  text-decoration: none;
+}
 
 .subject.selected {
   border: .2em solid #444;

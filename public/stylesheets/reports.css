@@ -122,6 +122,7 @@ h4, .report_title, a.politician_name, span.politician_name, a.politician_locatio
   font-size: 1.2em;
   font-weight: bold;
   color: #282625;
+  text-decoration: none;
 }
 
 .causes_selector a, .cause > a, .subject > a, a.report_title, .report_creator a, a.politician_name, a.politician_location, a.score {
