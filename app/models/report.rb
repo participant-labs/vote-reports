@@ -301,7 +301,7 @@ class Report < ActiveRecord::Base
   end
 
   def rescore!
-    unless delayed_jobs.unlocked.present?
+    unless delayed_jobs.unlocked.present? || (scores.blank? && score_criteria.blank?)
       delayed_jobs << Delayed::Job.enqueue(Report::Scorer.new(id))
     end
   end
