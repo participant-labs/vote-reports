@@ -13,7 +13,7 @@
 - :name: erubis
 - :name: excelsior
 - :name: fastercsv
-- :version: = 1.7.1
+- :version: = 1.0.71
   :name: facebooker
 - :version: = 2.3.2
   :name: friendly_id
