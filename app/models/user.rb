@@ -52,6 +52,10 @@ class User < ActiveRecord::Base
     followed_reports.include?(report)
   end
 
+  def rescore_personal_report
+    (personal_report || build_personal_report(:name => 'Personal Report', :state => 'personal')).tap(&:save!).rescore!
+  end
+
 private
 
   def fake_email?
