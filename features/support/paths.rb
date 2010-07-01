@@ -18,9 +18,9 @@ module NavigationHelpers
       user = User.find_by_username($1)
       user_report_path(user, user.reports.find_by_name($2))
     when /my report page for "(.+)"/i
-      user_report_path(current_user, Report.find_by_name($1))
+      user_report_path(current_user, current_user.reports.find_by_name($1))
     when /the edit page for my report "(.+)"/i
-      edit_user_report_path(current_user, Report.find_by_name($1))
+      edit_user_report_path(current_user, current_user.reports.find_by_name($1))
     when /the new bills page for my report "(.+)"/
       new_user_report_bill_criterion_path(current_user, Report.find_by_name($1))
     when /the edit bills page for my report "(.+)"/
