@@ -45,7 +45,7 @@ class GuidesController < ApplicationController
   private
 
   def next_step
-    if @guide.reports.present?
+    if @guide.reports.present? || params[:from] == 'causes'
       @causes = Cause.all
       @scores = @guide.immediate_scores
       :cause_scores
