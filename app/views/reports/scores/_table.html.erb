@@ -89,24 +89,18 @@
   </table>
 <%- elsif report.delayed_jobs.present? -%>
   <p>Scores are being generated. Please try again in a moment.</p>
-<%- elsif params[:representing].present? -%>
+<%- elsif report.scores.present? && params[:representing].present? -%>
   <p>No scores found for: "<%= params[:representing] %>"
     <%= link_to 'show all', reset_path, :'data-replace' => replace, :class => 'show_all' %>
   </p>
-<%- elsif report.owner.is_a?(User) -%>
-  <%- if report.bill_criteria.blank? -%>
+<%- elsif report.owner.is_a?(User) && report.bill_criteria.blank? -%>
     <p>No scores yet, as this report has no criteria to judge representatives by.</p>
-  <%- elsif report.bills.scoped(:joins => :passage_rolls).empty? -%>
+<%- elsif report.owner.is_a?(User) && report.bills.scoped(:joins => :passage_rolls).empty? -%>
     <p>No scores yet, as the associated bills have not been voted on.</p>
-  <%- end -%>
-<%- elsif report.owner.is_a?(InterestGroup) -%>
-  <%- if report.owner.ratings.blank? -%>
-    <p>No ratings on record for this group</p>
-  <%- end -%>
-<%- elsif report.owner.is_a?(Cause) -%>
-  <%- if report.owner.reports.blank? -%>
-    <p>No reports on record for this cause</p>
-  <%- end -%>
+<%- elsif report.owner.is_a?(InterestGroup) && report.owner.ratings.blank? -%>
+  <p>No ratings on record for this group</p>
+<%- elsif report.owner.is_a?(Cause) && report.owner.reports.blank? -%>
+  <p>No reports on record for this cause</p>
 <%- else -%>
   <p>No scores found</p>
 <%- end -%>
