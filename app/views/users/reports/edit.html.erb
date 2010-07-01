@@ -10,7 +10,7 @@
   <ul>
     <li><a href="#Edit_Report" title="Edit Report">Edit Report</a></li>
     <li><%= link_to content_tag(:span, 'Edit Thumbnail'), edit_user_report_image_path(@report.user, @report), :title => 'Edit Thumbnail' %></li>
-    <li><%= link_to content_tag(:span, 'Add Bills to Agenda'), new_user_report_bill_criterion_path(@report.user, @report), :title => 'Add Bills' %></li>
+    <li><%= link_to content_tag(:span, 'Add Bills to Agenda'), new_user_report_bill_criterion_path(@report.user, @report, :format => :html), :title => 'Add Bills' %></li>
     <li><%= link_to content_tag(:span, 'Edit Agenda'), user_report_bill_criteria_path(@report.user, @report), :title => 'Edit Agenda' %></li>
     <%- permitted_to? :destroy, @report do -%>
       <li><%= link_to 'Delete Report', '#delete_report' %></li>
