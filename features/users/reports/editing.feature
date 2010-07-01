@@ -49,3 +49,11 @@ Feature: User edits reports
     And I press "Update Report"
     Then I should see "Name can't be blank"
     And I should not see "Successfully updated report."
+
+  @javascript
+  Scenario: User navigates to the new bill criteria page
+    When I go to the edit page for my report "My Report"
+    And I follow "Edit Report"
+    And I follow "Add Bills to Agenda"
+    Then I should see "Declare Your Opposition/Support to Bills"
+    And I should see "Search" within "#content"
