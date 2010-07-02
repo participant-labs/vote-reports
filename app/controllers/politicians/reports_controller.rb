@@ -12,7 +12,14 @@ class Politicians::ReportsController < ApplicationController
 
     @subjects = Subject.for_report(@scores.map(&:report)).for_tag_cloud.all(:limit => 20)
 
-    render :layout => false
+    respond_to do |format|
+      format.html {
+        render :layout => false
+      }
+      format.js {
+        render :partial => 'politicians/scores/table', :locals => {:scores => @scores, :replace => 'report_scores'}
+      }
+    end
   end
 
   private

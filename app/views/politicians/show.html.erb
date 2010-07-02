@@ -70,10 +70,10 @@
 
 <div class="ui-tabs">
   <ul>
-    <li><% link_to politician_causes_path(@politician), :title => 'Causes' do %>
+    <li><% link_to politician_causes_path(@politician, :format => :html), :title => 'Causes' do %>
       <span>Causes <span class="count"><%= @politician.report_scores.for_causes.count %></span></span>
     <% end %></li>
-    <li><% link_to politician_reports_path(@politician), :title => 'Reports' do %>
+    <li><% link_to politician_reports_path(@politician, :format => :html), :title => 'Reports' do %>
       <span>Reports <span class="count"><%= @politician.report_scores.for_published_reports.count %></span></span>
     <% end %></li>
   </ul>

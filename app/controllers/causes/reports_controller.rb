@@ -33,7 +33,7 @@ class Causes::ReportsController < ApplicationController
   def index
     @cause_reports = @cause.cause_reports
     respond_to do |format|
-      format.js {
+      format.html {
         render :layout => false
       }
     end

@@ -1,5 +1,5 @@
 <div class="section" id="causes_section">
   <h2>Causes</h2>
   <p>Cause scores are curated by VoteReports to summarize a set of report scores.  Hover over the score to see what report scores went into that cause score.</p>
-  <%= render 'politicians/scores/table', :scores => @scores, :replace => 'report_scores', :source => 'Cause' %>
+  <%= render 'politicians/scores/table', :scores => @scores, :id => 'cause_scores', :replace => 'cause_scores', :source => 'Cause' %>
 </div>

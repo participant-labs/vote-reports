@@ -15,7 +15,7 @@
       <li><% link_to '#Followed_Reports', :title => 'Followed Reports' do %>
         <span>Reports you Follow <span class="count"><%= @user.report_follows.count %></span></span>
       <% end %></li>
-      <li><%= link_to content_tag(:span, 'Personalized Report'), user_report_scores_path(@user), :title => 'Personalized Report' %></li>
+      <li><%= link_to content_tag(:span, 'Personalized Report'), user_report_scores_path(@user, :format => :html), :title => 'Personalized Report' %></li>
     </ul>
 
     <div id="Your_Reports" class="reports">
