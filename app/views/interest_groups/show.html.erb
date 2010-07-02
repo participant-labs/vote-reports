@@ -33,16 +33,16 @@
 
 <div class="ui-tabs">
   <ul>
-    <li><%= link_to content_tag(:span, 'Scores'), interest_group_report_scores_path(@interest_group), :title => 'Scores' %></li>
-    <li><%= link_to content_tag(:span, 'Agenda'), interest_group_agenda_path(@interest_group), :title => 'Agenda' %></li>
-    <li><% link_to interest_group_subjects_path(@interest_group), :title => 'Subjects' do %>
+    <li><%= link_to content_tag(:span, 'Scores'), interest_group_report_scores_path(@interest_group, :format => :html), :title => 'Scores' %></li>
+    <li><%= link_to content_tag(:span, 'Agenda'), interest_group_agenda_path(@interest_group, :format => :html), :title => 'Agenda' %></li>
+    <li><% link_to interest_group_subjects_path(@interest_group, :format => :html), :title => 'Subjects' do %>
       <span>Subjects <span class="count"><%= @interest_group.subjects.count %></span></span>
     <% end %></li>
-    <li><% link_to interest_group_causes_path(@interest_group), :title => 'Causes' do %>
+    <li><% link_to interest_group_causes_path(@interest_group, :format => :html), :title => 'Causes' do %>
       <span>Causes <span class="count"><%= @interest_group.causes.count %></span></span>
     <% end %></li>
     <%- permitted_to? :edit, :interest_groups_images do -%>
-    <li><%= link_to content_tag(:span, 'Admin'), edit_interest_group_image_path(@interest_group), :title => 'Admin' %></li>
+    <li><%= link_to content_tag(:span, 'Admin'), edit_interest_group_image_path(@interest_group, :format => :html), :title => 'Admin' %></li>
     <%- end -%>
   </ul>
 </div>

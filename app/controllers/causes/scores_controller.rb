@@ -11,8 +11,14 @@ class Causes::ScoresController < ApplicationController
     @report = @cause.report
     @scores = @report.scores.for_politicians(sought_politicians)
     respond_to do |format|
-      format.js {
+      format.html {
         render :layout => false
+      }
+      format.js {
+        render :partial => 'reports/scores/table', :locals => {
+          :report => @report, :scores => @scores, :replace => 'cause_scores',
+          :reset_path => cause_report_scores_path(@cause, :representing => '')
+        }
       }
     end
   end

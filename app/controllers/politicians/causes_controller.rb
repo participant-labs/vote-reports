@@ -8,7 +8,7 @@ class Politicians::CausesController < ApplicationController
       }
       format.js {
         render :partial => 'politicians/scores/table',
-          :locals => {:scores => @scores, :replace => 'report_scores', :source => 'Cause'}
+          :locals => {:scores => @scores, :id => 'cause_scores', :replace => 'cause_scores', :source => 'Cause'}
       }
     end
   end

@@ -1,4 +1,7 @@
-<%- source ||= 'Report' -%>
+<%-
+  source ||= 'Report'
+  id ||= "report_scores"
+-%>
 
 <%- if scores.blank? -%>
   <p>No <%= source.pluralize %> for this politician yet.
@@ -9,8 +12,8 @@
   <%- end -%>
   </p>
 <%- else -%>
-<div id="report_scores" class="politician_scores">
-  <%- paginated_section scores, :'data-replace' => replace do -%>
+<div id="<%= id %>" class="politician_scores">
+  <%- paginated_section scores, :'data-replace' => replace, :params => {:format => :js} do -%>
     <table>
       <thead>
         <tr>
