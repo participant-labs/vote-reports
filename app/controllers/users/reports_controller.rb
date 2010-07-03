@@ -1,7 +1,5 @@
 class Users::ReportsController < ApplicationController
   filter_resource_access :nested_in => :users
-  before_filter :find_user
-  before_filter :find_report, :only => [:show, :edit, :update, :destroy]
 
   def index
     @reports = @user.reports.published
@@ -50,7 +48,7 @@ class Users::ReportsController < ApplicationController
     redirect_to user_reports_path(@user)
   end
 
-  private
+  protected
 
   def permission_denied_path
     if permitted_to?(:show, @report, :context => :users_reports)
@@ -60,11 +58,12 @@ class Users::ReportsController < ApplicationController
     end
   end
 
-  def find_user
+  def load_user
     @user = User.find(params[:user_id])
   end
 
-  def find_report
+  def load_report
+    @user = User.find(params[:user_id])
     @report = @user.reports.find(params[:id], :scope => @user)
   end
 end
