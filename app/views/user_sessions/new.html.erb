@@ -1,23 +1,24 @@
 <% title "Log in" %>
 
 <div class="clearfix" id="login_section">
-  <%- unless @user_session.errors.present? -%>
   <div class="left">
     <h2>Log in via...</h2>
     <%= raw rpx_embed(:app_name => RPX_APP_NAME, :return_url => user_sessions_url(params.slice(:return_to))) %><br />
   </div>
-  <%- end -%>
 
   <div class="right">
-    <%= error_messages_for(:user_session) %>
     <h2>Log in via Email</h2>
     <% form_for @user_session do |f| %>
+      <%= f.error_messages %>
+      <%= errors_for f, :base %>
       <p>
         <%= f.label :username, 'Username/Email' %><br />
         <%= f.text_field :username %><br />
+        <%= errors_for f, :username, :email %>
 
         <%= f.label :password %><br />
         <%= f.password_field :password %><br />
+        <%= errors_for f, :password %>
 
         <%= hidden_field_tag :return_to, params[:return_to] %>
         <%= hidden_field_tag :return_method, params[:return_method] %>

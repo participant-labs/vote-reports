@@ -78,9 +78,8 @@
   width: 660px;
 }
 
-#login_section form,
-#signup_section form {
-  padding-bottom: 0;
+#login_section p, #signup_section p {
+  margin-bottom: 0;
 }
 
 #login_section .right, #signup_section .right {
