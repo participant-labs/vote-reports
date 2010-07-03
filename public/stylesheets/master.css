@@ -24,8 +24,10 @@
 #hero .no_reg {
   margin-bottom:0;
   text-align: center;
-  margin-top: 5px;
-  font-size: 1em;
+  font-size: 0.97em;
+  color: #A9C7E1;
+  letter-spacing: 0.085em;
+  font-weight: 500;
 }
 
 #hero .guide_explanation a {
