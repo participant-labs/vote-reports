@@ -25,9 +25,6 @@ authorization do
     has_permission_on :reports, :users_reports, :users_reports_bill_criteria, :users_reports_thumbnails, :to => [:show, :index, :new, :create, :edit, :update, :destroy] do
       if_attribute :user_id => is {user.id}
     end
-    has_permission_on [:reports, :users_reports], :to => :show do
-      if_attribute :state => 'private', :user_id => is { user.id }
-    end
   end
 
   role :guest do

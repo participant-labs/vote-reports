@@ -10,6 +10,8 @@ Feature: Browsing Reports
       | My Report | I made this because I care |
     When I go to my report page for "My Report"
     Then I should see "I made this because I care"
+    And I should not see "You may not access this page"
+    And I should be on my report page for "My Report"
 
   Examples:
     | type      |
