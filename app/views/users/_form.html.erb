@@ -5,12 +5,15 @@
 
 <% form_for user, :url => url do |f| %>
   <%= f.error_messages %>
+  <%= errors_for f, :base %>
   <p>
     <%= f.label :username %><br />
     <%= f.text_field :username %><br />
+    <%= errors_for f, :username %>
 
     <%= f.label :email %><br />
     <%= f.text_field :email %><br />
+    <%= errors_for f, :email %>
 
     <%- if user.rpx_identifiers.present? -%>
       <p>You've linked to an existing account to log in with, so no other password is needed.</p>
@@ -20,6 +23,7 @@
 
       <%= f.label :password_confirmation %><br />
       <%= f.password_field :password_confirmation %><br />
+      <%= errors_for f, :password %>
     <%- end -%>
 
     <%- pass_through.each_pair do |key, value| -%>

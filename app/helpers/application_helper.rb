@@ -26,6 +26,20 @@ module ApplicationHelper
     @page_title = page_title.to_s
   end
 
+  def errors_for(form, *fields)
+    fields.map do |field|
+      if field == :base
+        Array(form.object.errors.on_base || []).uniq.map do |error|
+          content_tag :p, error, :class => 'error'
+        end
+      else
+        (form.object.errors.on(field) || []).uniq.map do |error|
+          content_tag :p, error, :class => 'error'
+        end
+      end
+    end.flatten.join.html_safe
+  end
+
   def md_to_text(md)
     strip_tags(md_to_html(md))
   end
