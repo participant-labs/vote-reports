@@ -18,7 +18,7 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   config.gem 'ancestry', :version => '>=1.2.0'
   config.gem "Empact-authlogic", :lib => 'authlogic', :version => '>=2.1.5'
-  config.gem 'Empact-authlogic_rpx', :lib => 'authlogic_rpx', :version => '>= 1.1.7'
+  config.gem 'Empact-authlogic_rpx', :lib => 'authlogic_rpx', :version => '>= 1.1.8'
   config.gem 'bluecloth', :version => '>=2.0.5'
   config.gem "declarative_authorization"
   config.gem 'delayed_job', :version => '>= 2.0.3'

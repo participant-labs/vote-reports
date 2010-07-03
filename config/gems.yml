@@ -3,7 +3,7 @@
   :name: ancestry
 - :version: ">= 2.1.5"
   :name: Empact-authlogic
-- :version: ">= 1.1.7"
+- :version: ">= 1.1.8"
   :name: Empact-authlogic_rpx
 - :version: ">= 2.0.5"
   :name: bluecloth
