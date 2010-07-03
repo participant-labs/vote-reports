@@ -46,6 +46,7 @@ describe Report do
 
     it "should not include published reports" do
       published = create_published_report
+      published.state.should == 'published'
       Report.unpublished.should_not include(published)
     end
   end
@@ -77,30 +78,43 @@ describe Report do
   describe "#rescore!" do
     before do
       @report = create_report
-      Delayed::Worker.new(:quiet => true).work_off(1)
     end
 
-    it "should create a delayed job accessible via #delayed_jobs" do
+    it "should not create a delayed job accessible via #delayed_jobs" do
       lambda {
         @report.rescore!
-      }.should change(@report.delayed_jobs, :count).by(1)
+      }.should_not change(@report.delayed_jobs, :count)
     end
 
-    context "when a rescore is active" do
+    context "when the report has a score criteria" do
       before do
-        @report.rescore!
+        create_bill_criterion(:report => @report)
+        roll = create_roll(:subject => @report.reload.bill_criteria.first.bill, :roll_type => "On Passage")
       end
 
-      it "completing the rescore should remove it from the active jobs" do
-        lambda {
-          Delayed::Worker.new(:quiet => true).work_off(1)
-        }.should change(@report.delayed_jobs, :count).by(-1)
-      end
-
-      it "should not create duplicate jobs for the pending action" do
+      it "should create a delayed job accessible via #delayed_jobs" do
         lambda {
           @report.rescore!
-        }.should_not change(@report.delayed_jobs, :count)
+        }.should change(@report.delayed_jobs, :count).by(1)
+      end
+
+      context "when a rescore is active" do
+        before do
+          Delayed::Worker.new(:quiet => true).work_off(10)
+          @report.rescore!
+        end
+
+        it "completing the rescore should remove it from the active jobs" do
+          lambda {
+            Delayed::Worker.new(:quiet => true).work_off(1)
+          }.should change(@report.delayed_jobs, :count).by(-1)
+        end
+
+        it "should not create duplicate jobs for the pending action" do
+          lambda {
+            @report.rescore!
+          }.should_not change(@report.delayed_jobs, :count)
+        end
       end
     end
   end
