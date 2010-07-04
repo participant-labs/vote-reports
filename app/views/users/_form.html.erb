@@ -12,7 +12,7 @@
     <%= errors_for f, :username %>
 
     <%= f.label :email %><br />
-    <%= f.text_field :email %><br />
+    <%= f.text_field :email, :value => (f.object.fake_email? ? '' : f.object.email)  %><br />
     <%= errors_for f, :email %>
 
     <%- if user.rpx_identifiers.present? -%>

@@ -56,11 +56,11 @@ class User < ActiveRecord::Base
     (personal_report || build_personal_report(:name => 'Personal Report', :state => 'personal')).tap(&:save!).rescore!
   end
 
-private
-
   def fake_email?
     email.ends_with?('+facebook@votereports.org')
   end
+
+private
 
   def username_not_reserved
     if %w[new edit].include?(username.to_s.downcase)
