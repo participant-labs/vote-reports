@@ -5,6 +5,7 @@ class UserSession < Authlogic::Session::Base
 
 private
   def map_rpx_data_each_login
+    save_rpx_data
     if attempted_record.email.blank? || attempted_record.email.ends_with?('+facebook@votereports.org')
       email = attempted_record.email
       attempted_record.send("#{klass.email_field}=", @rpx_data['profile']['email'])
@@ -16,10 +17,6 @@ private
 
   def new_rpx_user(params)
     User.new(params[:user])
-  end
-
-  def map_rpx_data_each_login
-    save_rpx_data
   end
 
   def save_rpx_data
