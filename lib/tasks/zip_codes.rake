@@ -3,8 +3,9 @@ namespace :zip_codes do
 
   task :download do
     FileUtils.mkdir_p(DATA_PATH.dirname)
+    log = Rails.root.join('log/zip-code-data.log')
     Dir.chdir(DATA_PATH.dirname) do
-      `wget -N http://federalgovernmentzipcodes.us/free-zipcode-database.csv`
+      `wget -N http://federalgovernmentzipcodes.us/free-zipcode-database.csv --append-output=#{log}`
     end
   end
 

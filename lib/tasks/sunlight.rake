@@ -5,8 +5,9 @@ namespace :sunlight do
     desc "download sunlight data"
     task :download do
       FileUtils.mkdir_p(SUNLIGHT_POLITICIAN_DATA_PATH.dirname)
+      log = Rails.root.join('log/sunlight-rsync.log')
       Dir.chdir(SUNLIGHT_POLITICIAN_DATA_PATH.dirname) do
-        `wget -N http://github.com/Empact/sunlight-labs-api-data/raw/master/legislators/legislators.csv`
+        `wget -N http://github.com/Empact/sunlight-labs-api-data/raw/master/legislators/legislators.csv --append-output=#{log}`
       end
     end
 
