@@ -16,7 +16,7 @@
 <%- end -%>
 
 <%- unless [@bill.titles, @bill.summary, @amendments, @rolls, @bill.subjects, @reports].all?(&:blank?) -%>
-<div class="ui-tabs">
+<div class="ui-tabs" id="<%= dom_id(@bill, :tabs) %>">
   <ul>
     <%- if @reports.present? -%>
       <li><a href="#reports">Reports <span class="count"><%= @reports.count %></span></a></li>

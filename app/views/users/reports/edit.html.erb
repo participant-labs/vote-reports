@@ -6,7 +6,7 @@
   <%= link_to 'View this Report', user_report_path(@report.user, @report) %>
 <%- end -%>
 
-<div id="admin" class="ui-tabs">
+<div class="ui-tabs" id="<%= dom_id(@report, :edit_tabs) %>">
   <ul>
     <li><a href="#Edit_Report" title="Edit Report">Edit Report</a></li>
     <li><%= link_to content_tag(:span, 'Edit Thumbnail'), edit_user_report_image_path(@report.user, @report, :format => :html), :title => 'Edit Thumbnail' %></li>

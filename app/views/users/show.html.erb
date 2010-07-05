@@ -7,7 +7,7 @@
 </div>
 
 <div class="section">
-  <div class="ui-tabs">
+  <div class="ui-tabs" id="<%= dom_id(@user, :tabs) %>">
     <ul>
       <li><% link_to '#Your_Reports', :title => 'Your Reports' do %>
         <span>Your Reports <span class="count"><%= @user.reports.except_personal.count %></span></span>

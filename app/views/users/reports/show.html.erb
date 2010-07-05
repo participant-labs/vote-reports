@@ -6,7 +6,7 @@
   <%= link_to 'Edit Report', edit_user_report_path(@report.user, @report) %>
 <%- end -%>
 
-<div class="ui-tabs">
+<div class="ui-tabs" id="<%= dom_id(@report, :tabs) %>">
   <ul>
     <li><%= link_to content_tag(:span, 'Scores'), user_report_report_scores_path(@report.user, @report, :format => :html), :title => 'Scores' %></li>
     <li><% link_to user_report_agenda_path(@report.user, @report, :format => :html), :title => 'Agenda' do %>
