@@ -9,11 +9,7 @@ log/*.lck
 tmp/
 public/system
 public/assets
-data/backup
-data/federalgovernmentzipcodes.us
-data/gov_track
-data/sunlight_labs
-data/watchdog
+/data/
 spec/support/web_requests.marshal
 solr
 rerun.txt
