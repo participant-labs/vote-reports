@@ -18,8 +18,6 @@ every 1.day do
 end
 
 every 1.days do
-  rake "images:backup"
-
   rake "gov_track:download_all"
   rake "gov_track:politicians:unpack"  # 18.0m
   rake "gov_track:committees:unpack"   #  2.5m
