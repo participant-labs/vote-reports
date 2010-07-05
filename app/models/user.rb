@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   end
 
   def fake_email?
-    email.ends_with?('+facebook@votereports.org')
+    email.to_s.ends_with?('+facebook@votereports.org')
   end
 
 private
