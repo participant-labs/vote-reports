@@ -113,14 +113,14 @@ namespace :gov_track do
 
   task :download_all => :support do
     rescue_and_reraise do
-      log = Rails.root.join('log/govtrack-rsync.log')
+      log = Rails.root.join('log/govtrack-data.log')
       chdir(Rails.root.join("data/gov_track/us/")) do
-        `wget -N http://www.govtrack.us/data/us/people.xml >> #{log}`
-        `wget -N http://www.govtrack.us/data/us/committees.xml >> #{log}`
+        `wget -N http://www.govtrack.us/data/us/people.xml --append-output=#{log}`
+        `wget -N http://www.govtrack.us/data/us/committees.xml --append-output=#{log}`
       end
       meetings do |meeting|
-        `wget -N http://www.govtrack.us/data/us/#{meeting}/committees.xml >> #{log}`
-        `wget -N http://www.govtrack.us/data/us/#{meeting}/people.xml  >> #{log}`
+        `wget -N http://www.govtrack.us/data/us/#{meeting}/committees.xml --append-output=#{log}`
+        `wget -N http://www.govtrack.us/data/us/#{meeting}/people.xml --append-output=#{log}`
         `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/bills . >> #{log}`
         `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/bills.amdt . >> #{log}`
         `rsync -avz govtrack.us::govtrackdata/us/#{meeting}/rolls . >> #{log}`

@@ -4,9 +4,10 @@ namespace :watchdog do
 
     task :download do
       FileUtils.mkdir_p(DATA_PATH)
+      log = Rails.root.join('log/sunlight-data.log')
       Dir.chdir(DATA_PATH) do
-        `wget -N http://github.com/aaronsw/watchdog/raw/master/utils/zipdict.txt`
-        `wget -N http://github.com/aaronsw/watchdog/raw/master/utils/zip_per_dist.tsv`
+        `wget -N http://github.com/aaronsw/watchdog/raw/master/utils/zipdict.txt --append-output=#{log}`
+        `wget -N http://github.com/aaronsw/watchdog/raw/master/utils/zip_per_dist.tsv --append-output=#{log}`
       end
     end
 
