@@ -88,6 +88,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
         :path => '/srv/vote-reports/shared/data/backup/safe'
       },
       :keep => {
+        :local: 3,
         :s3 => 100
       },
       :gpg => {
