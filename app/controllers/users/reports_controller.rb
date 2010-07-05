@@ -60,15 +60,9 @@ class Users::ReportsController < ApplicationController
 
   def load_user
     @user = User.find(params[:user_id])
-  rescue
-    redirect_to root_path, :status => 404, :notice => "User not found"
-    return false
   end
 
   def load_report
     @report = @user.reports.except_personal.find(params[:id], :scope => @user)
-  rescue
-    redirect_to user_reports_path(@user), :status => 404, :notice => "Report not found"
-    return false
   end
 end
