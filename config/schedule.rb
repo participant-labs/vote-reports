@@ -17,7 +17,7 @@ every 1.day do
   runner "Politician.update_current_office_status!"
 end
 
-every 7.days do
+every 1.days do
   rake "images:backup"
 
   rake "gov_track:download_all"
