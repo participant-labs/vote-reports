@@ -49,12 +49,14 @@ class GuidesController < ApplicationController
       @causes = Cause.all
       @scores = @guide.immediate_scores
       :cause_scores
-    elsif @guide.congressional_district.present?
+    elsif @guide.congressional_district.present? && params[:from] != 'set_location'
       @causes = Cause.all
       :causes
-    else
+    elsif current_geo_location
       load_location_show_support(current_geo_location)
       :location
+    else
+      :set_location
     end
   end
 
