@@ -18,10 +18,10 @@ namespace :gov_track do
         node.xpath('member').each do |member_node|
           meeting = committee.meetings.find_or_create_by_congress_id(@congress.id)
           raise meeting.errors.full_messages.inspect if meeting.new_record?
-          membership = meeting.memberships.find_or_create_by_politician_id_and_role(
-              politician(member_node['id'].to_s).id,
-              member_node['role'].to_s
+          membership = meeting.memberships.find_or_create_by_politician_id(
+              politician(member_node['id'].to_s).id
             )
+          membership.update_attribute(:role, member_node['role'].to_s)
           raise membership.errors.full_messages.inspect if membership.new_record?
         end
       end
