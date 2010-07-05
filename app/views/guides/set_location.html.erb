@@ -1,0 +1,12 @@
+<%- title "Set your location" -%>
+
+<h1>Set your Location</h1>
+
+<p>First, we need to know which politicians to score...</p>
+
+<% form_tag location_path do %>
+  <%= label_tag :location %>
+  <%= text_field_tag :location %>
+  <%= hidden_field_tag :return_to, new_guide_path(:from => :set_location) %>
+  <%= submit_tag 'Set' %>
+<% end %>
