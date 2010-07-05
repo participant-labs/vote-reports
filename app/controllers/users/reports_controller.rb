@@ -63,6 +63,6 @@ class Users::ReportsController < ApplicationController
   end
 
   def load_report
-    @report = @user.reports.find(params[:id], :scope => @user)
+    @report = @user.reports.except_personal.find(params[:id], :scope => @user)
   end
 end
