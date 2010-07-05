@@ -63,7 +63,6 @@ class Users::ReportsController < ApplicationController
   end
 
   def load_report
-    @user = User.find(params[:user_id])
     @report = @user.reports.find(params[:id], :scope => @user)
   end
 end
