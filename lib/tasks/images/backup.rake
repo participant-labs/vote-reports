@@ -4,7 +4,7 @@ namespace :images do
       require 'date'
       dest = Rails.root.join('data/backup/system')
       FileUtils.mkdir_p dest
-      `tar -zcvf #{dest.join("#{Date.today.to_s}.tar")} public/system`
+      `tar -zcvf #{dest.join("#{Date.today.to_s}.tar")} public/system &> /dev/null`
     end
   end
 
