@@ -104,7 +104,6 @@ class ApplicationManifest < Moonshine::Manifest::Rails
           :files =>  '/srv/vote-reports',
           :exclude => [
             '/srv/vote-reports/shared/log',
-            '/srv/vote-reports/shared/public/system',
             '/srv/vote-reports/shared/solr',
             '/srv/vote-reports/shared/cached-copy',
             '/srv/vote-reports/shared/data',
