@@ -3,7 +3,7 @@
 <div class="section">
   <h2><%= @subject.name %></h2>
 
-  <div class="ui-tabs">
+  <div class="ui-tabs" id="<%= dom_id(@subject, :tabs) %>">
     <ul>
       <li><% link_to subject_reports_path(@subject, :format => :html), :title => 'Reports' do %>
         <span>Reports <span class="count"><%= @subject.reports.published.non_cause.count %></span></span>

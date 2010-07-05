@@ -7,7 +7,7 @@
   <%- end -%>
 </div>
 
-<div class="ui-tabs">
+<div class="ui-tabs" id="<%= dom_id(@cause, :tabs) %>">
   <ul>
     <li><%= link_to content_tag(:span, 'Scores'), cause_report_scores_path(@cause, :format => :html), :title => 'Scores' %></li>
     <li><% link_to cause_reports_path(@cause, :format => :html), :title => 'Reports' do %>

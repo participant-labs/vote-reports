@@ -31,7 +31,7 @@
 </div>
 <%- end -%>
 
-<div class="ui-tabs">
+<div class="ui-tabs" id="<%= dom_id(@interest_group, :tabs) %>">
   <ul>
     <li><%= link_to content_tag(:span, 'Scores'), interest_group_report_scores_path(@interest_group, :format => :html), :title => 'Scores' %></li>
     <li><%= link_to content_tag(:span, 'Agenda'), interest_group_agenda_path(@interest_group, :format => :html), :title => 'Agenda' %></li>

@@ -96,7 +96,7 @@
     });
   });
 
-  $current_tabs = $(".ui-tabs").tabs();
+  $current_tabs = $(".ui-tabs").tabs({cookie: {expires: 30, name: $('.ui-tabs').attr('id')}});
 
   $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script;
   $.ajaxSetup({

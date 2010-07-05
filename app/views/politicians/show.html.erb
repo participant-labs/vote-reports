@@ -68,7 +68,7 @@
   </div>
 </div>
 
-<div class="ui-tabs">
+<div class="ui-tabs" id="<%= dom_id(@politician, :tabs) %>">
   <ul>
     <li><% link_to politician_causes_path(@politician, :format => :html), :title => 'Causes' do %>
       <span>Causes <span class="count"><%= @politician.report_scores.for_causes.count %></span></span>
