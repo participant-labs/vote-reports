@@ -29,11 +29,11 @@ module ApplicationHelper
   def errors_for(form, *fields)
     fields.map do |field|
       if field == :base
-        Array(form.object.errors.on_base || []).uniq.map do |error|
+        Array(form.object.errors.on_base).uniq.map do |error|
           content_tag :p, error, :class => 'error'
         end
       else
-        (form.object.errors.on(field) || []).uniq.map do |error|
+        Array(form.object.errors.on(field)).uniq.map do |error|
           content_tag :p, error, :class => 'error'
         end
       end
