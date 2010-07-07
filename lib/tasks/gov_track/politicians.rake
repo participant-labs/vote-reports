@@ -60,7 +60,8 @@ namespace :gov_track do
                   politician(attrs['gov_track_id']).tap do |pol|
                     pol.update_attributes!(attrs)
                   end
-                rescue
+                rescue => e
+                  notify_hoptoad(e)
                   Politician.create!(attrs)
                 end
               representative_terms = politician.representative_terms.index_by(&:started_on)
