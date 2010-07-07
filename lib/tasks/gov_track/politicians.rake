@@ -40,8 +40,7 @@ namespace :gov_track do
         ActiveRecord::Base.transaction do
           suppress_validations do
             doc.xpath('people/person').each do |person|
-              politician = politician(person['id'])
-              politician.update_attributes({
+              attrs = {
                   'lastname' => 'last_name',
                   'middlename' => 'middle_name',
                   'firstname' => 'first_name',
@@ -50,11 +49,20 @@ namespace :gov_track do
                   'osid' => 'open_secrets_id',
                   'birthday' => 'birthday',
                   'gender' => 'gender',
-                  'religion' => 'religion'
+                  'religion' => 'religion',
+                  'id' => 'gov_track_id'
                 }.inject({}) do |attrs, (attr, method)|
                   attrs[method] = person[attr] if person[attr].present?
                   attrs
-              end)
+              end
+              politician =
+                begin
+                  politician(attrs['gov_track_id']).tap do |pol|
+                    pol.update_attributes!(attrs)
+                  end
+                rescue
+                  Politician.create!(attrs)
+                end
               representative_terms = politician.representative_terms.index_by(&:started_on)
               senate_terms = politician.senate_terms.index_by(&:started_on)
               presidential_terms = politician.presidential_terms.index_by(&:started_on)
