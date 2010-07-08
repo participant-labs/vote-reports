@@ -139,40 +139,4 @@ class ApplicationManifest < Moonshine::Manifest::Rails
 
   configure(:mongodb => {:version => '1.4.2'})
   recipe :mongodb
-
-  def integrity_vhost
-    file '/srv/integrity',
-      :ensure => :directory,
-      :owner => configuration[:user]
-
-    static_vhost = <<-VHOST
-    <VirtualHost *:80>
-        ServerName ci.votereports.org
-        DocumentRoot /srv/integrity/public
-        <Directory /srv/integrity/public>
-            Allow from all
-            Options -MultiViews
-        </Directory>
-    </VirtualHost>
-    VHOST
-
-    file "/etc/apache2/sites-available/integrity",
-      :alias => 'integrity',
-      :ensure => :present,
-      :content => static_vhost,
-      :notify => service("apache2"),
-      :require => file('/srv/integrity')
-
-    cron 'cleanup integrity builds nightly',
-      :command => "cd /srv/integrity && /usr/bin/rake cleanup",
-      :user => configuration[:user],
-      :minute => 0,
-      :hour => 0,
-      :require => file('/srv/integrity')
-
-    a2ensite "integrity"
-  end
-  if deploy_stage == 'staging'
-    recipe :integrity_vhost
-  end
 end
