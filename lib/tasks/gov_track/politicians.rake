@@ -57,7 +57,7 @@ namespace :gov_track do
               end
               politician =
                 if pol = Politician.find_by_gov_track_id(attrs['gov_track_id'])
-                  pol.update_attributes!(attrs.merge('current_office' => nil))
+                  pol.update_attributes!(attrs)
                   pol
                 else
                   Politician.create!(attrs)
