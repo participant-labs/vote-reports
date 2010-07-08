@@ -40,18 +40,18 @@ class LocationsController < ApplicationController
         'show'
       end
 
-    if params[:return_to]
-      redirect_to params[:return_to]
-    else
-      respond_to do |format|
-        format.html {
+    respond_to do |format|
+      format.html {
+        if params[:return_to]
+          redirect_to params[:return_to]
+        else
           render :action => action
-        }
-        format.js {
-          @js = true
-          render :action => action, :layout => false
-        }
-      end
+        end
+      }
+      format.js {
+        @js = true
+        render :action => action, :layout => false
+      }
     end
   end
 
