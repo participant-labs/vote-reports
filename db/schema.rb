@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100708043957) do
+ActiveRecord::Schema.define(:version => 20100708052227) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -338,6 +338,17 @@ ActiveRecord::Schema.define(:version => 20100708043957) do
   add_index "interest_groups", ["ancestry"], :name => "index_interest_groups_on_ancestry"
   add_index "interest_groups", ["cached_slug"], :name => "index_interest_groups_on_cached_slug"
   add_index "interest_groups", ["vote_smart_id"], :name => "index_interest_groups_on_vote_smart_id", :unique => true
+
+  create_table "issue_causes", :force => true do |t|
+    t.integer  "issue_id",   :null => false
+    t.integer  "cause_id",   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "issue_causes", ["cause_id"], :name => "index_issue_causes_on_cause_id"
+  add_index "issue_causes", ["issue_id", "cause_id"], :name => "index_issue_causes_on_issue_id_and_cause_id"
+  add_index "issue_causes", ["issue_id"], :name => "index_issue_causes_on_issue_id"
 
   create_table "issues", :force => true do |t|
     t.string   "title",       :null => false
