@@ -67,7 +67,13 @@ namespace :gov_track do
         require 'ar-extensions/import/postgresql'
 
         @subjects = Subject.all.index_by(&:name)
-        @update = ENV['UPDATE'].present?
+        @update = !ENV['FRESH'].present?
+
+        if ENV['MEETING'] == 'ALL'
+          ENV['MEETING'] = ''
+        elsif ENV['MEETING'].blank?
+          ENV['MEETING'] = '111'
+        end
 
         meetings do |meeting|
           puts "Fetching Bills for Meeting #{meeting}"

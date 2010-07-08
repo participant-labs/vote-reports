@@ -23,8 +23,6 @@ task :update do
   Rake::Task['gov_track:download_all'].invoke
   Rake::Task['gov_track:politicians:unpack'].invoke  # 18.0m
   Rake::Task['gov_track:committees:unpack'].invoke  #  2.5m
-  ENV['UPDATE'] = 'true'
-  ENV['MEETING'] = '111'
   Rake::Task["gov_track:bills:unpack"].invoke
   Rake::Task["gov_track:amendments:unpack"].invoke
   Rake::Task["gov_track:votes:unpack"].invoke
