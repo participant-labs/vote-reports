@@ -12,13 +12,6 @@ class SiteController < ApplicationController
         Politician.in_office.scoped(:limit => 5)
       end
     @scores =  @politicians.map {|politician| politician.report_scores.published.first(:order => 'random()') }.compact
-
-    respond_to do |format|
-      format.html
-      format.js {
-        render :partial => 'scores/list', :locals => {:scores => @scores}
-      }
-    end
   end
 
   def about
