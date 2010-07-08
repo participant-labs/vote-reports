@@ -27,7 +27,6 @@ Rails::Initializer.run do |config|
   config.gem 'fastercsv'
   config.gem 'facebooker', :version => '= 1.0.71'
   config.gem 'friendly_id', :version => '>= 3.0.6'
-  config.gem 'gemcutter' # required by whenever
   config.gem 'geokit'
   config.gem 'gravtastic', :version => '>= 2.1.0'
   config.gem 'hoptoad_notifier'
@@ -50,7 +49,6 @@ Rails::Initializer.run do |config|
   config.gem 'sunspot_rails', :lib => 'sunspot/rails', :version => '= 0.11.5'
   config.gem 'polly-suppress_validations', :source => "http://gems.github.com", :lib => 'suppress_validations'
   config.gem 'votesmart', :version => '>= 0.3.0'
-  config.gem 'whenever', :lib => false
   config.gem 'will_paginate', :version => '>=2.3.14'
   config.gem 'ym4r'
   config.gem 'httparty'
