@@ -56,12 +56,9 @@ namespace :gov_track do
                   attrs
               end
               politician =
-                begin
-                  politician(attrs['gov_track_id']).tap do |pol|
-                    pol.update_attributes!(attrs)
-                  end
-                rescue => e
-                  notify_hoptoad(e)
+                if pol = Politician.find_by_gov_track_id(attrs['gov_track_id'])
+                  pol.update_attributes!(attrs.merge('current_office' => nil))
+                else
                   Politician.create!(attrs)
                 end
               representative_terms = politician.representative_terms.index_by(&:started_on)
