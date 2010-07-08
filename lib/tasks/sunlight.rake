@@ -21,7 +21,12 @@ namespace :sunlight do
           FasterCSV.new(open(SUNLIGHT_POLITICIAN_DATA_PATH), :headers => true, :skip_blanks => true).each do |row|
             row = row.to_hash.except('senate_class', 'state', 'in_office', 'district', 'party')
             row.delete_if {|k, v| v.blank? }
-            Politician.find_by_gov_track_id(row['govtrack_id']).update_attributes!(row)
+            begin
+              Politician.find_by_gov_track_id(row['govtrack_id']).update_attributes!(row)
+            rescue
+              notify_hoptoad("Sunllight error on #{row.inspect}")
+              raise
+            end
           end
         end
       end
