@@ -1,0 +1,10 @@
+<%- title 'Issues' -%>
+<h1>Explore the Issues of the Day</h1>
+
+<p>Issues are meaningful groupings of <%= link_to 'Causes', causes_path %>: Pro &amp; Con. They say we don't talk enough with people who disagree with us, so we brought them together here.</p>
+
+<%#= render 'issues/list', :issues => @issues %>
+
+<%- permitted_to? :create, :issues do -%>
+  <%= link_to "Create a new Issue", new_issue_path %>
+<%- end -%>

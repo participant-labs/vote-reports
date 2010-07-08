@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resource :search, :only => :show
 
+  map.resources :issues
   map.resources :causes do |cause|
     cause.resources :report_scores, :as => :scores, :controller => 'causes/scores', :only => [:index, :show]
     cause.resource :follows, :controller => 'causes/follows', :only => [:show, :create, :destroy]

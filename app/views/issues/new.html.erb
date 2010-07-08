@@ -1,0 +1,15 @@
+<%- title 'New Issue' -%>
+<h1>New Issue</h1>
+
+<% form_for @issue do |f| %>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title, :class => 'title' %>
+  </p>
+  
+  <%= render 'causes/selector', :causes => @causes, :replace => 'causes_list' %>
+  <div id="causes_list">
+  </div>
+
+  <p><%= f.submit 'Create Issue' %></p>
+<% end %>
