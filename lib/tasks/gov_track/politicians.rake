@@ -83,7 +83,7 @@ namespace :gov_track do
 
                 case role['type']
                 when 'rep'
-                  attrs.merge!(:district => district(role['state'], role['district']))
+                  attrs.merge!(:congressional_district => district(role['state'], role['district']))
                   representative_terms[role['startdate'].to_date].tap do |term|
                     term && term.update_attributes(attrs)
                   end || politician.representative_terms.create(attrs)
