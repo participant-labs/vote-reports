@@ -20,7 +20,7 @@ class Roll < ActiveRecord::Base
   belongs_to :subject, :polymorphic => true
   belongs_to :congress
 
-  has_friendly_id :friendly_id
+  has_friendly_id :display_name
 
   named_scope :by_voted_at, :order => "voted_at DESC"
   named_scope :not_on_bill_passage, :conditions => [
@@ -28,19 +28,9 @@ class Roll < ActiveRecord::Base
   named_scope :on_bill_passage, :conditions => [
     "rolls.roll_type IN(?) AND rolls.subject_type = ?", PASSAGE_TYPES, 'Bill']
 
-  before_validation :set_friendly_id
+  before_validation :set_display_name
 
   class << self
-    def find_by_friendly_id(friendly_id, options = {})
-      if match = friendly_id.to_s.match(/(\d+)-([hs])(\d+)/)
-        year, where, number = match.captures
-        where = (where == 'h' ? 'house' : 'senate')
-        find_by_where_and_year_and_number(where, year, number, options)
-      else
-        find_by_id(friendly_id, options = {})
-      end
-    end
-
     def update_roll_types_for_consistency!
       CONSISTENT_TYPES.each_pair do |consistent, inconsistent|
         update_all({:roll_type => consistent}, {:roll_type => inconsistent})
@@ -58,7 +48,7 @@ class Roll < ActiveRecord::Base
 
 private
 
-  def set_friendly_id
-    self.friendly_id = "#{year}-#{where.first}#{number}" if year.present? && where.present? && number.present?
+  def set_display_name
+    self.display_name = "#{year}-#{where.first}#{number}" if year.present? && where.present? && number.present?
   end
 end

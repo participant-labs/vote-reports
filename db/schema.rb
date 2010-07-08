@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100624063735) do
+ActiveRecord::Schema.define(:version => 20100708005524) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -555,11 +555,11 @@ ActiveRecord::Schema.define(:version => 20100624063735) do
     t.string   "subject_type", :null => false
     t.integer  "year",         :null => false
     t.integer  "number",       :null => false
-    t.string   "friendly_id"
+    t.string   "display_name"
   end
 
   add_index "rolls", ["congress_id"], :name => "index_rolls_on_congress_id"
-  add_index "rolls", ["friendly_id"], :name => "index_rolls_on_friendly_id"
+  add_index "rolls", ["display_name"], :name => "index_rolls_on_friendly_id"
   add_index "rolls", ["subject_id", "subject_type"], :name => "index_rolls_on_subject_id_and_subject_type"
 
   create_table "rpx_identifiers", :force => true do |t|
