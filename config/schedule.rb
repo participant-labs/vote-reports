@@ -13,25 +13,8 @@
 
 set :output, "/srv/vote-reports/shared/log/cron_log.log"
 
-every 1.day do
-  runner "Politician.update_current_office_status!"
-end
-
 every 1.days do
-  rake "gov_track:download_all"
-  rake "gov_track:politicians:unpack"  # 18.0m
-  rake "gov_track:committees:unpack"   #  2.5m
-  env 'UPDATE', true
-  env 'MEETING', 111
-  rake "gov_track:bills:unpack"
-  rake "gov_track:amendments:unpack"
-  rake "gov_track:votes:unpack"
-
-  rake "sunlight:politicians:download"
-  rake "sunlight:politicians:unpack"
-
-  runner "Politician.update_titles!"
-  runner "ContinuousTerm.regenerate!"
+  rake "update"
 end
 
 # Learn more: http://github.com/javan/whenever

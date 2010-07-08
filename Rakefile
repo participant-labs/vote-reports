@@ -18,3 +18,21 @@ rescue => e
 end
 
 task :default => [:spec, :'cucumber:rerun']
+
+task :update do
+  Rake::Task['gov_track:download_all'].invoke
+  Rake::Task['gov_track:politicians:unpack'].invoke  # 18.0m
+  Rake::Task['gov_track:committees:unpack'].invoke  #  2.5m
+  ENV['UPDATE'] = true
+  ENV['MEETING'] = 111
+  Rake::Task["gov_track:bills:unpack"].invoke
+  Rake::Task["gov_track:amendments:unpack"].invoke
+  Rake::Task["gov_track:votes:unpack"].invoke
+
+  Rake::Task["sunlight:politicians:download"].invoke
+  Rake::Task["sunlight:politicians:unpack"].invoke
+
+  Politician.update_current_office_status!
+  Politician.update_titles!
+  ContinuousTerm.regenerate!
+end
