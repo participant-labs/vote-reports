@@ -1,5 +1,5 @@
 <div id="causes">
-  <% paginated_section causes, :'data-replace' => 'causes' do %>
+  <% paginated_section causes, :class => "act-replace", :rel => causes do %>
     <ul>
       <%- causes.each do |cause| -%>
         <li><%= render 'reports/report', :report => cause.report, :cause_only => true %></li>

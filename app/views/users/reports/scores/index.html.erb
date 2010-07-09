@@ -1,6 +1,6 @@
 <div id="report_scores_section" class="report_scores">
   <h2>Scores</h2>
-  <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#Agenda', :'data-tab-select' => 'Agenda' %> lead to a high score, votes against, a low one.</p>
+  <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this report's agenda", '#Agenda', :class => 'act-tab-select', :rel => 'Agenda' %> lead to a high score, votes against, a low one.</p>
   <%- if @report.scores.present? -%>
     <%= render 'politicians/search', :in_office => @in_office, :url => user_report_report_scores_path(@report.user, @report), :replace => 'report_scores' %>
   <%- end -%>

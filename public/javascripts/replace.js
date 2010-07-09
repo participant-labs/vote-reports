@@ -23,23 +23,23 @@
   }
 
   $(function(){
-    $(':input[data-replace]').live('click', function(event) {
+    $(':input.act-replace').live('click', function(event) {
       var target = $(event.target);
       replaceWith(
-        target.attr('data-replace'),
+        target.attr('rel'),
         current_url() + '?' + target.closest('form').serialize());
       return true;
     });
 
-    $('[data-replace] > a, a[data-replace]').live('click', function(event) {
+    $('.act-replace > a, a.act-replace').live('click', function(event) {
       var target = $(event.target);
       target.trigger('update_selected');
-      return replaceWith(target.closest('[data-replace]').attr('data-replace'), target.attr('href'));
+      return replaceWith(target.closest('.act-replace').attr('rel'), target.attr('href'));
     })
 
-    $('form[data-replace]').live('submit', function(event){
+    $('form.act-replace').live('submit', function(event){
       var source = $(event.target);
-      return replaceWith(source.attr('data-replace'), source.attr('action') + '?' + source.serialize());
+      return replaceWith(source.attr('rel'), source.attr('action') + '?' + source.serialize());
     });
   });
 })(jQuery);

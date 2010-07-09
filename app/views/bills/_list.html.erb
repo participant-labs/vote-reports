@@ -4,7 +4,7 @@
 -%>
 <div id="bills">
   <%- if bills.present? -%>
-    <% paginated_section bills, :param_name => param_name, :'data-replace' => replace do %>
+    <% paginated_section bills, :param_name => param_name, :class => "act-replace", :rel => replace do %>
       <ul>
         <%- bills.each do |bill| -%>
           <li><%= render 'bills/bill', :bill => bill %></li>

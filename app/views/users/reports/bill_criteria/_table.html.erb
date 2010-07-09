@@ -24,7 +24,7 @@
                     <%= bill_criteria_fields.radio_button :support, true %><br />
                     <%= bill_criteria_fields.label :support_false, 'Oppose' %>
                     <%= bill_criteria_fields.radio_button :support, false %>
-                    <a href="#" title="Show additional options" data-toggle="<%= dom_id(criterion.bill, :extra_fields) %>">+</a>
+                    <a href="#" title="Show additional options" class="act-toggle" rel="<%= dom_id(criterion.bill, :extra_fields) %>">+</a>
                   <%- end -%>
                 </td>
                 <td id="<%= dom_id(criterion.bill, :extra_fields) %>" class="hide">
@@ -36,7 +36,7 @@
           <%- end -%>
         </tbody>
       </table>
-      <%= will_paginate bills, :'data-replace' => 'report_bills_results_table' %>
+      <%= will_paginate bills, :class => 'act-replace', :rel => 'report_bills_results_table' %>
       <p><%= f.submit 'Save Bills to Report' %></p>
     <% end %>
   <%- elsif @new_report -%>

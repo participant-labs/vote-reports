@@ -1,5 +1,5 @@
 <div id="report_subjects" class="section last report_subjects">
   <h2>Subjects</h2>
-  <p>Subjects for this report are drawn from <%= link_to "the associated bills", '#Agenda', :'data-tab-select' => 'Agenda' %>.  Follow the links below to find reports on related subjects.</p>
+  <p>Subjects for this report are drawn from <%= link_to "the associated bills", '#Agenda', :class => 'act-tab-select', :rel => 'Agenda' %>.  Follow the links below to find reports on related subjects.</p>
   <%= render 'subjects/cloud', :subjects => @subjects %>
 </div>

@@ -11,5 +11,5 @@
     <p>No <%= title.downcase %> found...</p>
   <%- end -%>
 
-  <%= will_paginate subjects, :param_name => param_name, :'data-replace' => 'subjects' %>
+  <%= will_paginate subjects, :param_name => param_name, :class => 'act-replace', :rel => 'subjects' %>
 </div>

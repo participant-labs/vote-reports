@@ -1,6 +1,6 @@
 <div id="report_scores_section" class="section report_scores">
   <h3>Scores</h3>
-  <p>We score representatives based on <a href="#Agenda" data-tab-select="Agenda">the actual ratings</a> this interest group has released over time.</p>
+  <p>We score representatives based on <a href="#Agenda" class="act-tab-select" rel="Agenda">the actual ratings</a> this interest group has released over time.</p>
   <%- if @report -%>
     <%- if @scores.present? -%>
       <%= render 'politicians/search', :in_office => @in_office, :url => interest_group_report_scores_path(@interest_group), :replace => 'report_scores' %>

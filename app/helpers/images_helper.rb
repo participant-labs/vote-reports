@@ -3,8 +3,8 @@ module ImagesHelper
     attachment = image.thumbnail
     if attachment.file?
       {
-        :'data-qtip-image' => attachment.url(:large),
-        :'data-qtip-width' => attachment.styles[:large][:geometry].split('x').first.to_i
+        :class => "act-qtip-image qtip-width-#{attachment.styles[:large][:geometry].split('x').first.to_i}",
+        :rel => attachment.url(:large)
       }
     else
       {}
