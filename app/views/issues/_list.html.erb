@@ -1,0 +1,7 @@
+<% paginated_section issues do %>
+  <ul>
+    <%- issues.each do |issue| -%>
+      <li><%= render 'issues/issue', :issue => issue %></li>
+    <%- end -%>
+  </ul>
+<% end %>
