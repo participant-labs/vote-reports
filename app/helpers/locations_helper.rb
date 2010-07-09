@@ -27,8 +27,16 @@ module LocationsHelper
     "#{city}#{geoloc.state}#{zip}"
   end
 
+  def declared_geo_location
+    session[:declared_geo_location] if session[:declared_geo_location].try(:is_us?)
+  end
+
+  def detected_geo_location
+    session[:geo_location] if session[:geo_location].try(:is_us?)
+  end
+
   def current_geo_location
-    session.values_at(:declared_geo_location, :geo_location).detect {|geo| geo if geo.try(:is_us?) }
+    declared_geo_location || detected_geo_location
   end
 
   def current_location
