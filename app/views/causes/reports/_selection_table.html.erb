@@ -1,6 +1,6 @@
 <div id="<%= id %>">
   <%- if reports.present? -%>
-    <% paginated_section reports, :'data-replace' => id do %>
+    <% paginated_section reports, :class => "act-replace", :rel => id do %>
       <% form_for cause, :url => cause_reports_path(cause), :html => {:id => id, :method => :post} do |f| %>
       <table>
         <tbody>

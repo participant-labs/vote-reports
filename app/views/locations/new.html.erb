@@ -1,11 +1,12 @@
 <%- title "Set your location" -%>
+<%- replace = (@js ? 'fancybox-inner' : 'content') -%>
 
 <div class="section fancyboxy-content">
   <h4>Help us show just the scores relevant to you</h4>
 
   <p>Just tell us where you vote and we'll focus on your representatives throughout the site.</p>
 
-  <% form_tag location_path, :'data-replace' => (@js ? 'fancybox-inner' : 'content') do %>
+  <% form_tag location_path, :class => "act-replace", :rel => replace do %>
     <%= label_tag :location %>
     <%= text_field_tag :location %>
     <%- if params[:return_to].present? -%>

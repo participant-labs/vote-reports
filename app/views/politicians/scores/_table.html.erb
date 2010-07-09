@@ -8,12 +8,12 @@
   <%- if source == 'Report' -%>  
     Maybe you can <%= link_to 'make the first', new_report_path %>?
   <%- elsif source == 'Cause' -%>
-    <%= mail_to 'causes@votereports.org', 'Let us know' %> if one of <%= link_to 'their report scores', '#Reports', :'data-tab-select' => 'Reports' %> should be included in a cause.
+    <%= mail_to 'causes@votereports.org', 'Let us know' %> if one of <%= link_to 'their report scores', '#Reports', :class => 'act-tab-select', :rel => 'Reports' %> should be included in a cause.
   <%- end -%>
   </p>
 <%- else -%>
 <div id="<%= id %>" class="politician_scores">
-  <%- paginated_section scores, :'data-replace' => replace, :params => {:format => :js} do -%>
+  <%- paginated_section scores, :class => 'act-replace', :rel => replace, :params => {:format => :js} do -%>
     <table>
       <thead>
         <tr>

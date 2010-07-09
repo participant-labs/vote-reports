@@ -1,14 +1,18 @@
 (function($) {
   $(function(){
-    $('[data-qtip-image]').live('mouseover', function(event) {
-      var self = $(event.target).closest('[data-qtip-image]');
+    $('.act-qtip-image').live('mouseover', function(event) {
+      var self = $(event.target).closest('.act-qtip-image');
       if (!self.data('init')) {
         self.data('init', true);
         var title = self.attr('alt');
-        var width = self.attr('data-qtip-width');
+        var width = self.attr('class').split(' ').map(function(e) {
+          return e.split('qtip-width-')[1];
+        }).filter(function (e) {
+          return (typeof(e) != 'undefined')
+        })[0];
         self.qtip({
           content: {
-            text: '<img src="' + self.attr('data-qtip-image') + '" alt="' + title + '" width="' + width + '" />',
+            text: '<img src="' + self.attr('rel') + '" alt="' + title + '" width="' + width + '" />',
             title: { text: title }
           },
           position: {

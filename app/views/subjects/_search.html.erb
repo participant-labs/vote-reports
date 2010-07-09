@@ -1,4 +1,4 @@
-<% form_tag subjects_path, :method => :get, :'data-replace' => replace do %>
+<% form_tag subjects_path, :method => :get, :class => 'act-replace', :rel => replace do %>
   <%= label_tag :term, 'Search' %>
   <%= text_field_tag :term, term %>
   <%= submit_tag 'Search' %>

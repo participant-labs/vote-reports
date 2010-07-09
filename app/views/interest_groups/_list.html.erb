@@ -4,7 +4,7 @@
 -%>
 
 <div id="interest_groups">
-  <% paginated_section interest_groups, :'data-replace' => replace, :param_name => param_name do %>
+  <% paginated_section interest_groups, :class => "act-replace", :rel => replace, :param_name => param_name do %>
     <ul>
     <%- interest_groups.each do |interest_group| -%>
       <li><%= render interest_group %></li>

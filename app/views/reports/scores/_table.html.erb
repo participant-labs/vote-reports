@@ -36,11 +36,13 @@
         <td><%= will_paginate top_scores,
                 :param_name => :top_page,
                 :params => {:bottom_page => bottom_scores.current_page},
-                :'data-replace' => replace %></td>
+                :class => 'act-replace',
+                :rel => replace %></td>
         <td><%= will_paginate bottom_scores,
                 :param_name => :bottom_page,
                 :params => {:top_page => top_scores.current_page},
-                :'data-replace' => replace %></td>
+                :class => 'act-replace',
+                :rel => replace %></td>
       </tr>
       <%- top_scores.zip(bottom_scores).each do |(top_score, bottom_score)| -%>
         <tr>
@@ -52,11 +54,13 @@
         <td><%= will_paginate top_scores,
                 :param_name => :top_page,
                 :params => {:bottom_page => bottom_scores.current_page},
-                :'data-replace' => replace %></td>
+                :class => 'act-replace',
+                :rel => replace %></td>
         <td><%= will_paginate bottom_scores,
                 :param_name => :bottom_page,
                 :params => {:top_page => top_scores.current_page},
-                :'data-replace' => replace %></td>
+                :class => 'act-replace',
+                :rel => replace %></td>
       </tr>
     </tbody>
   </table>
@@ -68,14 +72,14 @@
         <th>All Scores
           <%- if requested_location -%>
           for Representatives from "<%= requested_location %>"
-          <%= link_to 'show all', reset_path, :'data-replace' => replace, :class => 'show_all' %>
+          <%= link_to 'show all', reset_path, :class => 'act-replace show_all', :rel => replace %>
           <%- end -%>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><%= will_paginate scores, :'data-replace' => replace %></td>
+        <td><%= will_paginate scores, :class => 'act-replace', :rel => replace %></td>
       </tr>
       <%- scores.each do |score| -%>
         <tr>
@@ -83,7 +87,7 @@
         </tr>
       <%- end -%>
       <tr>
-        <td><%= will_paginate scores, :'data-replace' => replace %></td>
+        <td><%= will_paginate scores, :class => 'act-replace', :rel => replace %></td>
       </tr>
     </tbody>
   </table>
@@ -91,7 +95,7 @@
   <p>Scores are being generated. Please try again in a moment.</p>
 <%- elsif report.scores.present? && params[:representing].present? -%>
   <p>No scores found for: "<%= params[:representing] %>"
-    <%= link_to 'show all', reset_path, :'data-replace' => replace, :class => 'show_all' %>
+    <%= link_to 'show all', reset_path, :class => 'act-replace show_all', :rel => replace %>
   </p>
 <%- elsif report.owner.is_a?(User) && report.bill_criteria.blank? -%>
     <p>No scores yet, as this report has no criteria to judge representatives by.</p>
