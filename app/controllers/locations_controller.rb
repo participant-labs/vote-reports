@@ -25,11 +25,7 @@ class LocationsController < ApplicationController
         flash[:error] = %Q{Sorry, we currently only handle representatives for the United States of America.}
         'new'
       else
-        if !%w[street address].include?(@geoloc.precision)
-          flash[:notice] = %Q{For more accurate results, an address or intersection is best, but here's our best guess from what you've said.}
-        else
-          flash[:success] = "Successfully set location"
-        end
+        flash[:success] = "Successfully set location"
 
         load_location_show_support(@geoloc)
 
