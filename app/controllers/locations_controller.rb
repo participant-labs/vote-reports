@@ -19,13 +19,13 @@ class LocationsController < ApplicationController
 
     action =
       if !session[:geo_location_declared]
-        flash[:error] = %Q{Sorry, we were unable to understand this location. Could you clarify it?}
+        message = {:error => %Q{Sorry, we were unable to understand this location. Could you clarify it?}}
         'new'
       elsif !@geoloc.is_us?
-        flash[:error] = %Q{Sorry, we currently only handle representatives for the United States of America.}
+        message = {:error => %Q{Sorry, we currently only handle representatives for the United States of America.}}
         'new'
       else
-        flash[:success] = "Successfully set location"
+        message = {:success => "Successfully set location"}
 
         load_location_show_support(@geoloc)
 
@@ -38,6 +38,7 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       format.html {
+        flash[message.first.first] = message.first.last
         if params[:return_to]
           redirect_to params[:return_to]
         else
@@ -46,6 +47,7 @@ class LocationsController < ApplicationController
       }
       format.js {
         @js = true
+        flash.now[message.first.first] = message.first.last
         render :action => action, :layout => false
       }
     end
