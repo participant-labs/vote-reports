@@ -33,7 +33,7 @@ authorization do
   end
 
   role :all do
-    has_permission_on :causes, :causes_reports, :causes_scores, :to => [:index, :show]
+    has_permission_on :issues, :causes, :causes_reports, :causes_scores, :to => [:index, :show]
     has_permission_on :reports, :users_reports, :to => :index
     has_permission_on :reports, :users_reports, :to => :show do
       if_attribute :state => ['published', 'unlisted']
