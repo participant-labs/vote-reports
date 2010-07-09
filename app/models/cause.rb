@@ -4,6 +4,9 @@ class Cause < ActiveRecord::Base
   has_many :cause_reports
   has_many :reports, :through => :cause_reports
 
+  has_many :issue_causes
+  has_many :issues, :through => :issue_causes
+
   def report_subjects
     ReportSubject.scoped(:conditions => {:report_id => reports})
   end

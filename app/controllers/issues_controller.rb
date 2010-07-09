@@ -16,7 +16,7 @@ class IssuesController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :partial => 'causes/list', :locals => {:causes => @issue.causes.paginate(:page => params[:page])}
+        render :partial => 'causes/list', :locals => {:causes => @issue.causes}
       }
     end
   end
