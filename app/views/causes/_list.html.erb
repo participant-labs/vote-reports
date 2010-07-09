@@ -1,9 +1,17 @@
 <div id="causes">
-  <% paginated_section causes, :class => "act-replace", :rel => causes do %>
+  <%- if causes.respond_to?(:total_pages) -%>
+    <% paginated_section causes, :'data-replace' => 'causes' do %>
+      <ul>
+        <%- causes.each do |cause| -%>
+          <li><%= render 'reports/report', :report => cause.report, :cause_only => true %></li>
+        <%- end -%>
+      </ul>
+    <% end %>
+  <%- else -%>
     <ul>
       <%- causes.each do |cause| -%>
         <li><%= render 'reports/report', :report => cause.report, :cause_only => true %></li>
       <%- end -%>
     </ul>
-  <% end %>
+  <%- end -%>
 </div>
