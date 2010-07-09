@@ -5,4 +5,7 @@
       <li><%= link_to cause.name, cause %></li>
     <%- end -%>
   </ul>
+  <%- permitted_to? :destroy, :issues do -%>
+    <%= link_to 'delete', issue_path(issue), :method => :delete %>
+  <%- end -%>
 <% end %>

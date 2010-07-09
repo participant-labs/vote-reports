@@ -1,4 +1,6 @@
 class IssuesController < ApplicationController
+  filter_resource_access
+
   def index
     @issues = Issue.paginate :page => params[:page]
   end
@@ -33,5 +35,11 @@ class IssuesController < ApplicationController
       render :action => :new
     end
   end
-  
+
+  def destroy
+    @issue = Issue.find(params[:id])
+    @issue.destroy
+    flash[:notice] = "Issue destroyed"
+    redirect_to :action => :index
+  end
 end
