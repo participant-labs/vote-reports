@@ -61,7 +61,15 @@ class LocationsController < ApplicationController
       return
     end
     unless @geoloc = current_geo_location
-      render :action => :new
+      respond_to do |format|
+        format.html {
+          render :action => :new
+        }
+        format.js {
+          @js = true
+          render :action => :new, :layout => false
+        }
+      end
       return
     end
 
