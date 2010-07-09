@@ -21,18 +21,6 @@
       return true;
     });
 
-    $('[data-dialog]').live('mouseover', function() {
-      var target = $('#' + $(this).attr('data-dialog'));
-      target.dialog({
-        autoOpen: false,
-        title: target.attr('data-dialog-title'),
-        width: target.attr('data-dialog-width') || 740});
-    });
-    $('[data-dialog]').live('click', function(event) {
-      $('#' + $(event.target).attr('data-dialog')).dialog('open');
-      return false;
-    });
-
     $('.act-toggle').live('click', function(event) {
       $.each($(event.target).attr('rel').split(' '), function() {
         $('#' + this).toggle();
