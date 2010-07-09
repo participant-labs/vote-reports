@@ -1,0 +1,8 @@
+<% div_for issue do %>
+  <%= link_to issue.title, issue %>
+  <ul>
+    <%- issue.causes.each do |cause| -%>
+      <li><%= link_to cause.name, cause %></li>
+    <%- end -%>
+  </ul>
+<% end %>
