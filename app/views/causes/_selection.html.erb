@@ -1,0 +1,6 @@
+<%- replace ||= 'causes' -%>
+
+<div id="causes_selection">
+  <%= render 'causes/selector', :causes => from, :selected => selected, :replace => replace %>
+  <%= render 'causes/list', :causes => selected %>
+</div>
