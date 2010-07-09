@@ -1,7 +1,9 @@
+<%- selected ||= [] -%>
+
 <ul class="clearfix causes_selector">
   <%- causes.each do |cause| -%>
     <% content_tag :li, :class => cycle('span-8', 'span-8', 'span-8 last') do %>
-      <%= check_box_tag 'causes[]', cause.to_param, false, :id => "causes_#{cause.to_param}", :class => "act-replace", :rel => replace %>
+      <%= check_box_tag 'causes[]', cause.to_param, selected.include?(cause), :id => "causes_#{cause.to_param}", :class => "act-replace", :rel => replace %>
       <%= label_tag "causes_#{cause.to_param}", cause.name, :class => 'cause_title', :title => cause.description %>
       <%= link_to image_tag('icons/link_go.png'), cause %>
     <% end %>

@@ -7,9 +7,7 @@
     <%= f.text_field :title, :class => 'title' %>
   </p>
   
-  <%= render 'causes/selector', :causes => @causes, :replace => 'causes_list' %>
-  <div id="causes_list">
-  </div>
+  <%= render 'causes/selection', :from => @causes, :selected => @issue.causes %>
 
   <p><%= f.submit 'Create Issue' %></p>
 <% end %>
