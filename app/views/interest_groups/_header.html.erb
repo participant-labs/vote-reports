@@ -11,9 +11,9 @@
   <%- if @interest_group.email.present? -%>
     <li><%= mail_to @interest_group.email, 'Email' %></li>
   <%- end -%>
-  <li class="dropdown">
+  <li class="act-hover" rel="dropdown_target">
     <h2>Contact</h2>
-    <dl class="dropdown_target">
+    <dl id="dropdown_target" class="hide">
       <%- if @interest_group.contact_name.present? -%>
         <dt>Contact</dt>
         <dd><%= @interest_group.contact_name %></dd>

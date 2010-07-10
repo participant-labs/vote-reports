@@ -230,11 +230,6 @@ table#reports td {
   padding: 1em 0.5em;
 }
 
-.report_score.hovering > .report_score_evidence_link {
-  display: block;
-  z-index: 1000;
-}
-
 .loading {
   font-size: 1.4em;
 }
