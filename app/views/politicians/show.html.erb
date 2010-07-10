@@ -12,9 +12,9 @@
     <%- if @politician.email.present? -%>
       <li><%= mail_to @politician.email, 'Email' %></li>
     <%- end -%>
-      <li class="dropdown">
+      <li class="act-hover" rel="dropdown_target">
         <h2>Contact</h2>
-        <dl class="dropdown_target">
+        <dl id="dropdown_target" class="hide">
         <%- if @politician.congresspedia_url -%>
           <dt><%= link_to('On Congresspedia', @politician.congresspedia_url) %></dt>
         <%- end -%>

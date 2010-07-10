@@ -43,19 +43,6 @@
       }
     });
 
-    $('.hoverable, .dropdown').live('mouseover', function() {
-      var self = $(this);
-      if (!self.data('init')) {
-        self.data('init', true);
-        self.hoverIntent({
-          timeout: 500,
-          over: function() { $(this).addClass("hovering"); },
-          out: function() { $(this).removeClass("hovering"); }
-        });
-        self.mouseover();
-      }
-    });
-
     $('.fieldtag').fieldtag();
     $('label.fieldtag').hide();
 
