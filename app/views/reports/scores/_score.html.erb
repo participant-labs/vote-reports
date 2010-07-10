@@ -3,13 +3,6 @@
 <%- else -%>
   <div class="report_score">
     <%= link_to score, report_score_path(score), :class => 'fancyboxy score' %>
-    <div class="report_score_evidence_link score_sources">
-      based on
-      <ul>
-        <%- score_evidence_components(score).each do |component| -%>
-          <li><%= link_to component, report_score_path(score), :class => 'fancyboxy' %></li>
-        <%- end -%>
-      </ul>
-    </div>
+    <%= render 'reports/scores/evidence', :score => score %>
   </div>
 <%- end -%>
