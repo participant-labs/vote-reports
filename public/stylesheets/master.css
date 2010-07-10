@@ -161,6 +161,11 @@ h2 .your_location {
   font-weight: normal;
 }
 
+.embed ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 #hero {
   background-color: #549AD8;
   background: -webkit-gradient(linear, left top, left bottom, from(#549AD8), to(#4B87C3));
