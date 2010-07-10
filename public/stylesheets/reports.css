@@ -51,6 +51,23 @@
   padding-top: 0;
 }
 
+.politician_score > .report_score {
+  height: 0;
+}
+
+#scores .report_score {
+  text-align: center;
+}
+
+.report_score.blank:after {
+  content: '—';
+}
+
+#score_examples li {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
 .report_excerpt {
   margin-right: 45px;
 }
@@ -193,7 +210,7 @@ div.report_score .score {
 }
 
 .report_scores .report_score {
-  padding-top: 7px;
+  padding-top: 3px;
 }
 
 .report_score_evidence_link ul, .report_scores {
