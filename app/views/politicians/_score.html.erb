@@ -1,7 +1,12 @@
+<%-
+  headshot_style ||= :medium
+  headshot_size ||= nil
+-%>
+
 <div class="politician_score">
   <%- politician = score.politician -%>
   <% div_for politician do %>
-    <%= render 'politicians/headshot', :politician => politician %>
+    <%= render 'politicians/headshot', :politician => politician, :style => headshot_style, :size => headshot_size %>
     <%= render 'politicians/name', :politician => politician %>
     <%= render 'reports/scores/score', :score => score %>
   <% end %>
