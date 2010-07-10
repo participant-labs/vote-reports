@@ -2,6 +2,12 @@
   margin-bottom: 1.5em;
 }
 
+.report > img {
+  float: left;
+  padding-right: 5px;
+  padding-bottom: 5px;
+}
+
 .report_subject {
   font-size: 0.9em;
   margin-bottom: 0;
