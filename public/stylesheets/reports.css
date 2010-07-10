@@ -91,8 +91,11 @@
 }
 
 .score_sources {
-  font-size: .3em;
   margin-top: .5em;
+}
+
+.report_score .score_sources {
+  font-size: .3em;
   line-height: 1.5em;
 }
 
