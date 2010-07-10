@@ -1,3 +1,8 @@
-<%- if politician.headshot.url(:small) -%>
-  <%= link_to_unless_current image_with_hover_tag(politician.headshot, politician_title(politician), :style => :small, :size => '50x61', :alt => politician.full_name), politician_path(politician), :class => 'politician_headshot' %>
+<%-
+  style ||= :small
+  size ||= nil
+-%>
+
+<%- if politician.headshot.url(style) -%>
+  <%= link_to_unless_current image_with_hover_tag(politician.headshot, politician_title(politician), :style => style, :size => size || politician.headshot.size(style), :alt => politician.full_name), politician_path(politician), :class => 'politician_headshot' %>
 <%- end -%>
