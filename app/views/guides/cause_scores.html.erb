@@ -1,5 +1,5 @@
 <ul class="span-24 clearfix">
   <%- @scores.each do |score| -%>
-  <li><%= render 'politicians/bar_score', :score => score %></li>
+  <li class="clearfix"><%= render 'politicians/bar_score', :score => score %></li>
   <%- end -%>
 </ul>
