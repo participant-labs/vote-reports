@@ -174,19 +174,6 @@ ul.causes_selector {
   padding-bottom: 0.5em;
 }
 
-#score_examples .report {
-  width: 68%;
-  float: right;
-  padding-left: 2%;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-#score_examples .politician_score {
-  width: 30%;
-  float: left;
-}
-
 form {
   padding-bottom: 10px;
 }
