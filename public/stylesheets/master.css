@@ -38,6 +38,10 @@
   list-style-type: none;
 }
 
+#instant_scores > ul > li + li {
+  margin-top: 0.5em;
+}
+
 #location_show_map_canvas, #guide_location_map_canvas {
   height: 30em;
 }
