@@ -1,4 +1,5 @@
 <%-
+  width ||= 600
   headshot_style ||= :medium
   headshot_size ||= nil
 -%>
@@ -14,45 +15,51 @@
 </div>
 
 <% javascript_tag do %>
-  var chart = new Highcharts.Chart({
-     chart: {
-        renderTo: '<%= dom_id(score) %>',
-        defaultSeriesType: 'bar',
-        height: '70',
-        width: '600',
-        margin: [10, 10, 14, 10]
-     },
-     title: false,
-     xAxis: {
-        title: {
-           text: null
-        }
-     },
-     yAxis: {
-        min: 0,
-        max: 100,
-        title: false
-     },
-     tooltip: {
-        formatter: function() {
-           return this.y + '%';
-        }
-     },
-     plotOptions: {
-        bar: {
-          pointWidth: '85',
-          dataLabels: {
-            enabled: true,
-            color: 'auto'
+<%- unless @js -%>
+  $(function() {
+<%- end -%>
+    var chart = new Highcharts.Chart({
+       chart: {
+          renderTo: '<%= dom_id(score) %>',
+          defaultSeriesType: 'bar',
+          height: '70',
+          width: '<%= width %>',
+          margin: [10, 10, 14, 10]
+       },
+       title: false,
+       xAxis: {
+          title: {
+             text: null
           }
-        }
-     },
-     legend: false,
-     credits: {
-        enabled: false
-     },
-      series: [{
-        data: [<%= score.score.round %>]
-     }]
+       },
+       yAxis: {
+          min: 0,
+          max: 100,
+          title: false
+       },
+       tooltip: {
+          formatter: function() {
+             return this.y + '%';
+          }
+       },
+       plotOptions: {
+          bar: {
+            pointWidth: '85',
+            dataLabels: {
+              enabled: true,
+              color: 'auto'
+            }
+          }
+       },
+       legend: false,
+       credits: {
+          enabled: false
+       },
+        series: [{
+          data: [<%= score.score.round %>]
+       }]
+    });
+<%- unless @js -%>
   });
+<%- end -%>
 <% end %>
