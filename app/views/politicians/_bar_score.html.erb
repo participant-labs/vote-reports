@@ -1,6 +1,17 @@
-<div class="span-6"><%= render 'politicians/score', :score => score %></div>
-<div id="<%= dom_id(score) %>" class="span-18 last"></div>
+<%-
+  headshot_style ||= :medium
+  headshot_size ||= nil
+-%>
 
+<div class="politician_score">
+  <%- politician = score.politician -%>
+  <% div_for politician do %>
+    <%= render 'politicians/headshot', :politician => politician, :style => headshot_style, :size => headshot_size %>
+    <%= render 'politicians/name', :politician => politician, :full => true %>
+    <div id="<%= dom_id(score) %>"></div>
+    <%= render 'reports/scores/evidence', :score => score %>
+  <% end %>
+</div>
 
 <% javascript_tag do %>
   var chart = new Highcharts.Chart({
