@@ -1,6 +1,6 @@
 class Reports::EmbedsController < ApplicationController
   before_filter :load_report
-  layout nil
+  layout 'minimal'
 
   def show
     @scores = @report.scores.for_politicians(sought_politicians)
