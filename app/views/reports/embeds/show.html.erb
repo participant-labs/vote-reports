@@ -12,7 +12,7 @@
     <%= render 'reports/follows/button', :report => @report, :hide => true %>
   <% end %>
 
-  <ul>
+  <ul class="report_scores">
     <%- @scores.each do |score| -%>
       <li><%= render 'politicians/score', :score => score %></li>
     <%- end -%>
