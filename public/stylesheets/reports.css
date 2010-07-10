@@ -94,6 +94,14 @@
   margin-top: .5em;
 }
 
+.bar_score .score_sources {
+  float: right;
+}
+
+.bar_score .report_image {
+  float: left;
+}
+
 .report_score .score_sources {
   font-size: .3em;
   line-height: 1.5em;

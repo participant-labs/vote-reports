@@ -4,13 +4,23 @@
   headshot_size ||= nil
 -%>
 
-<div class="politician_score">
+<div class="politician_score bar_score">
   <%- politician = score.politician -%>
   <% div_for politician do %>
     <%= render 'politicians/headshot', :politician => politician, :style => headshot_style, :size => headshot_size %>
     <%= render 'politicians/name', :politician => politician, :full => true %>
-    <div id="<%= dom_id(score) %>"></div>
     <%= render 'reports/scores/evidence', :score => score %>
+    <div id="<%= dom_id(score) %>"></div>
+    <%- if with_report_title -%>
+      <%- report = score.report -%>
+      <%- if report.current_image -%>
+        <%= image_with_hover_tag report.current_image, report.name, :style => :tiny, :class => 'report_image' %>
+      <%- end -%>
+      <%= link_to report_name(report), report_path(report), :class => 'report_title' %>
+      <%- if report.user_id -%>
+        <span class="report_creator">by <%= render 'users/user', :user => report.user %></span>
+      <%- end -%>
+    <%- end -%>
   <% end %>
 </div>
 
