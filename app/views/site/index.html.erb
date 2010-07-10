@@ -24,7 +24,7 @@
   <div id="score_examples">
     <ul class="report_scores">
       <%- @scores.each do |score| -%>
-        <li class="clearfix"><%= render score.report %><%= render 'politicians/score', :score => score %></li>
+        <li class="clearfix"><%= render 'politicians/bar_score', :score => score, :width => 460 %></li>
       <%- end -%>
     </ul>
     <p>Customize an overview of your reps: <%= link_to "Get Started Now", new_guide_path %></p>
