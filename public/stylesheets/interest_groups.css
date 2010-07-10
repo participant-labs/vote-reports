@@ -13,47 +13,17 @@ ul.details li {
   font-size: 1.3em;
 }
 
-ul.details li.dropdown h2:hover {
-  text-decoration: underline;
-}
-
 ul.details li h2 {
   font-size: 1em;
 }
 
-ul.details li .dropdown_target {
-  font-size: 0.7em;
-}
-
-ul.details li.dropdown h2 {
+ul.details li.act-hover h2 {
   padding-right: 1em;
   background: transparent url(../images/bullet_arrow_down.png) center right no-repeat;
 }
 
-ul.details li.dropdown > .dropdown_target {
-  display: none;
-  border: 1px solid #dda;
-  min-width: 10em;
-  position: absolute;
-  top: 1.6em;
-  left: 0em;
-  padding: 1.3em;
-  background: #ffc;
-  text-align: left;
-}
-
-ul.details li.dropdown > .dropdown_target a {
-padding: 0;
-background-image: none;
-}
-
 ul.details li h2 {
   display: inline;
-}
-
-ul.details li.hovering.dropdown > .dropdown_target {
-  display: block;
-  z-index: 1000;
 }
 
 .details h2 a {
