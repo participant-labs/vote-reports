@@ -1,3 +1,12 @@
+#embed textarea {
+  width: 50%;
+  height: 1.5em;
+}
+
+#embed object {
+  vertical-align: 30%;
+}
+
 .report {
   margin-bottom: 1.5em;
 }

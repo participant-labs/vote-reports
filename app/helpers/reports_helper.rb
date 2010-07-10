@@ -1,4 +1,8 @@
 module ReportsHelper
+  def report_embed_code(report)
+    content_tag :iframe, '', :src => user_report_embed_url(report.user, report)
+  end
+
   def report_name(report, opts = {})
     if report.cause && !opts[:cause_only]
       "#{report.name} (Cause)"
