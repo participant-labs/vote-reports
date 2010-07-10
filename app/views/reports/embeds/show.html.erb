@@ -14,7 +14,7 @@
 
   <ul class="report_scores">
     <%- @scores.each do |score| -%>
-      <li><%= render 'politicians/score', :score => score %></li>
+      <li><%= render 'politicians/score', :score => score, :headshot_size => '70x84' %></li>
     <%- end -%>
   </ul>
 
