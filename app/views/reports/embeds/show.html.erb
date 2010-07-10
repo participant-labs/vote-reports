@@ -17,4 +17,9 @@
       <li><%= render 'politicians/score', :score => score %></li>
     <%- end -%>
   </ul>
+
+  <div class="footer">
+    <%= link_to content_tag(:span, 'VoteReports'), root_path, :class => "sprites navigation-footer_logo" %>
+    Powered by <%= link_to 'VoteReports', root_path %>
+  </div>
 </div>
