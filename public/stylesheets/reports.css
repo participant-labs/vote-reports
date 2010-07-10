@@ -68,6 +68,18 @@
   padding-bottom: 0.5em;
 }
 
+#score_examples .report {
+  width: 50%;
+  float: right;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#score_examples .politician_score {
+  width: 50%;
+  float: left;
+}
+
 .report_excerpt {
   margin-right: 45px;
 }
