@@ -1,6 +1,6 @@
 module ReportsHelper
   def report_embed_code(report)
-    content_tag :iframe, '', :src => user_report_embed_url(report.user, report)
+    content_tag :iframe, '', :src => user_report_embed_url(report.user, report), :width => 200, :height => 320
   end
 
   def report_name(report, opts = {})

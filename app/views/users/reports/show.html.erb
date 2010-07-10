@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%- title "#{@report.name} - Reports" -%>
 
 <div class="report-show">
@@ -59,6 +58,7 @@
           <%= text_area_tag '', report_embed_code(@report), :onclick => 'this.focus(); this.select();' %>
           <%= clippy(report_embed_code(@report)) %>
         <% end %>
+        <%= report_embed_code(@report) %>
       </div>
     </div>
   </div>

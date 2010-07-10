@@ -1,0 +1,16 @@
+<% div_for @report, :class => 'act-hover', :rel => dom_id(@report, :follow) do %>
+  <%- if @report.current_image -%>
+    <%= image_with_hover_tag @report.current_image, @report.name, :style => :tiny, :class => 'report_image' %>
+  <%- end -%>
+  <%= link_to report_name(@report), report_path(@report), :class => 'report_title' %>
+  <%- if @report.user_id -%>
+    <span class="report_creator">by <%= render 'users/user', :user => @report.user %></span>
+  <%- end -%>
+  <%= render 'reports/follows/button', :report => @report, :hide => true %>
+<% end %>
+
+<ul>
+  <%- @scores.each do |score| -%>
+    <li><%= render 'politicians/score', :score => score %></li>
+  <%- end -%>
+</ul>
