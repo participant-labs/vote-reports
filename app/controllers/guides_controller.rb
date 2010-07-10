@@ -15,6 +15,7 @@ class GuidesController < ApplicationController
         render :action => next_step
       }
       format.js {
+        @js = true
         render :action => next_step, :layout => false
       }
     end
