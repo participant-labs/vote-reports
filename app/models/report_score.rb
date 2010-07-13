@@ -1,4 +1,6 @@
 class ReportScore < ActiveRecord::Base
+  include Score
+
   belongs_to :report
   belongs_to :politician
   has_many :evidence, :class_name => 'ReportScoreEvidence', :dependent => :destroy
@@ -64,7 +66,7 @@ class ReportScore < ActiveRecord::Base
   end
 
   def to_s
-    "#{score.round}%"
+    letter_grade
   end
 
   def event_date
