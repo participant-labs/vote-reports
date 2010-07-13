@@ -1,5 +1,6 @@
 class GuideScore
   include MongoMapper::Document
+  include Score
 
   key :politician_id, Integer, :required => true, :numeric => true
   key :report_ids, Array, :required => true
@@ -27,7 +28,7 @@ class GuideScore
 
   def to_s
     build_scores unless score
-    "#{score.round}%"
+    letter_grade
   end
 
   private
