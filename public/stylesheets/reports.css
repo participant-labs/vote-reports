@@ -382,6 +382,11 @@ div.report_score .score.f_minus {
   background-color: #3C3C3C;
 }
 
+.embed div.report_score .score {
+  line-height: 0.9em;
+  font-size: 3em;
+}
+
 .politician_scores div.report {
     margin-bottom: 0;
 }
