@@ -220,10 +220,6 @@ input.tagged {
   content: ')';
 }
 
-.report_score {
-  font-size: 2.3em;
-}
-
 .politician_score > .report_score {
   height: 0;
 }

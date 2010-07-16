@@ -107,7 +107,7 @@
 }
 
 .report_score .score_sources {
-  font-size: .3em;
+  font-size: .8em;
   line-height: 1.5em;
 }
 
@@ -218,12 +218,10 @@ h1 {
 }
 
 div.report_score .score {
-    color: #3c3c3c;
+  font-size: 2.3em;
+  color: #3c3c3c;
 }
 
-.politician_scores div.report_score {
-    width: 3em;
-}
 .politician_scores div.report {
     margin-bottom: 0;
 }
