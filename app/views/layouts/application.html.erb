@@ -16,14 +16,14 @@
 
       <div class="span-24">
         <ul id="menu" class="sidebar-links">
-          <li class="<%= "selected" if request.path.starts_with?('/causes') %>">
-            <%= link_to content_tag(:span, "Causes"), causes_path, :class => 'sprites navigation-button_causes' %>
-          </li>
           <li class="<%= "selected" if request.path.starts_with?('/politicians') %>">
             <%= link_to content_tag(:span, "Politicians"), politicians_path, :class => 'sprites navigation-button_politicians' %>
           </li>
           <li class="<%= "selected" if request.path.starts_with?('/reports') %>">
             <%= link_to content_tag(:span, "Reports"), reports_path, :class => 'sprites navigation-button_reports' %>
+          </li>
+          <li class="<%= "selected" if request.path.starts_with?('/causes') %>">
+            <%= link_to content_tag(:span, "Causes"), causes_path, :class => 'sprites navigation-button_causes' %>
           </li>
         </ul>
         <% form_tag search_path, :method => :get, :id => 'header_search' do %>
