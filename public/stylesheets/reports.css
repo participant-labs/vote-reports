@@ -63,9 +63,8 @@
   content: '—';
 }
 
-#score_examples li {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+#score_examples > li + li, #politicians > ul > li + li {
+  padding-top: 1em;
 }
 
 #score_examples .report {
@@ -218,7 +217,7 @@ h1 {
 }
 
 div.report_score .score {
-  font-size: 2.3em;
+  font-size: 4em;
   color: #3c3c3c;
 }
 
@@ -227,7 +226,7 @@ div.report_score .score {
 }
 
 .report_scores .report_score {
-  padding-top: 3px;
+  padding-top: 1em;
 }
 
 .report_score_evidence_link ul, .report_scores {
