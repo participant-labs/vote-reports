@@ -163,6 +163,7 @@ h2 .your_location {
 
 .embed {
   border: solid 1px gray;
+  width: 200px;
 }
 
 .embed ul {
