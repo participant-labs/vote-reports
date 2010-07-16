@@ -12,6 +12,8 @@
     <%= render 'reports/follows/button', :report => @report, :hide => true %>
   <% end %>
 
+  <p>Ratings for politicians from<%= link_to requested_location, location_path(:return_to => request.path), :class => 'fancyboxy location' %></p>
+
   <ul class="report_scores">
     <%- @scores.each do |score| -%>
       <li><%= render 'politicians/score', :score => score, :headshot_style => :small %></li>
