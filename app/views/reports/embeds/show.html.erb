@@ -1,23 +1,6 @@
-<div class="embed">
-  <% div_for @report, :class => 'act-hover', :rel => dom_id(@report, :follow) do %>
-    <%- if @report.current_image -%>
-      <%= image_with_hover_tag @report.current_image, @report.name, :style => :tiny, :class => 'report_image' %>
-    <%- end -%>
-    <%= link_to report_name(@report), report_path(@report), :class => 'report_title' %>
-    <%- if @report.user_id -%>
-      <span class="report_creator">by <%= render 'users/user', :user => @report.user %></span>
-    <%- end -%>
-    <%= render 'reports/follows/button', :report => @report, :hide => true %>
-  <% end %>
-
-  <p>Ratings for politicians from <%= link_to requested_location, location_path(:return_to => request.path), :class => 'fancyboxy location' %></p>
-
-  <div id="embeded_report_scores">
-    <%= render 'reports/embeds/scores', :scores => @scores, :replace => 'embeded_report_scores' %>
-  </div>
-
-  <div class="footer">
-    <%= link_to content_tag(:span, 'VoteReports'), root_path, :class => "sprites navigation-footer_logo" %>
-    Powered by <%= link_to 'VoteReports', root_path %>
-  </div>
-</div>
+<h1>Embed this report in your website</h1>
+<% form_tag do %>
+  <%= text_area_tag '', report_embed_code(@report), :onclick => 'this.focus(); this.select();' %>
+  <%= clippy(report_embed_code(@report)) %>
+<% end %>
+<%= report_embed_code(@report) %>
