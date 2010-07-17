@@ -94,6 +94,15 @@ class ApplicationController < ActionController::Base
     dom_id(report, :votereports_embed)
   end
 
+  def js_render(options = {})
+    partial_html = render_to_string(options.except(:css))
+    if options[:css]
+      css_path = File.read(Rails.root.join("public/stylesheets/#{options[:css]}.css"))
+      partial_html = TamTam.inline(:css => css_path, :body => partial_html)
+    end
+    partial_html.to_json
+  end
+
   private
 
   def current_user_session

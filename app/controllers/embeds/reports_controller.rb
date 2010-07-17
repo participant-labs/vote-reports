@@ -9,7 +9,10 @@ class Embeds::ReportsController < ApplicationController
       render :partial => 'embeds/reports/scores',
         :locals => {:scores => @scores, :replace => 'embeded_report_scores'}
     else
-      render :js => %{document.getElementById("#{report_embed_id(@report)}").innerHTML = #{ render_to_string(:action => 'show').to_json };}
+      render :js => %{
+        document.getElementById("#{report_embed_id(@report)}").innerHTML =
+          #{js_render(:action => 'show', :css => 'reports')};
+      }
     end
   end
 
