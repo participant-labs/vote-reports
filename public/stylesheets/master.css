@@ -169,16 +169,6 @@ ul.causes_selector {
   display: inline;
 }
 
-#score_examples li {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-}
-
-#score_examples .politician_score {
-  width: 30%;
-  float: left;
-}
-
 form {
   padding-bottom: 10px;
 }
