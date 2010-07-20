@@ -7,7 +7,7 @@ Feature: User Location
   Scenario Outline: User with no location stored can follow a link to set it
     When I go to <page>
     And I follow "set location"
-    And I fill in "Location" with "75028"
+    And I fill in "Your Location" with "75028"
     And I press "Set"
     Then I should be on <page>
     And I should see "Successfully set location"

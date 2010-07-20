@@ -19,11 +19,11 @@ Feature: Browsing the Home Page
   Scenario: User sets their zip code from the instant grat section
     When I go to the home page
     And I follow "set location"
-    And I fill in "Location" with "75028"
+    And I fill in "Your Location" with "75028"
     And I press "Set"
     Then I should see "Zip: 75028"
 
     When I follow "set location"
-    And I fill in "Location" with "90210"
+    And I fill in "Your Location" with "90210"
     And I press "Set"
     Then I should see "Zip: 90210"
