@@ -23,33 +23,49 @@ Feature: Browsing Politician Reports
       | Ron Wyden     | 33    |
     When I go to the politician page for "Piyush Jindal"
     And I follow "Reports" within "#content"
-    Then I should see "Active Report"
-    And I should see "Other Report"
-    And I should see "11%"
-    And I should see "97%"
-    And I should not see "29%"
-    And I should not see "33%"
+    Then I should see the following report scores:
+      | name          | score |
+      | Other Report  | 97    |
+      | Active Report | 11    |
+    But I should not see the following report scores:
+      | score |
+      | 29    |
+      | 33    |
 
     When I fill in "Search Reports" with "active" within "#content"
     And I press "Search"
-    Then I should see "Active Report"
-    And I should see "11%"
-    But I should not see "Other Report"
-    And I should not see "97%"
+    Then I should see the following report scores:
+      | name          | score |
+      | Active Report | 11    |
+    But I should not see the following report scores:
+      | score |
+      | 29    |
+      | 33    |
+      | 97    |
+    And I should not see "Other Report"
 
     When I fill in "Search Reports" with "other" within "#content"
     And I press "Search"
-    Then I should not see "Active Report"
-    And I should not see "11%"
-    But I should see "Other Report"
-    And I should see "97%"
+    Then I should see the following report scores:
+      | name         | score |
+      | Other Report | 97    |
+    But I should not see the following report scores:
+      | score |
+      | 29    |
+      | 33    |
+      | 11    |
+    And I should not see "Active Report"
 
     When I fill in "Search Reports" with "" within "#content"
     And I press "Search"
-    Then I should see "Active Report"
-    And I should see "Other Report"
-    And I should see "11%"
-    And I should see "97%"
+    Then I should see the following report scores:
+      | name          | score |
+      | Other Report  | 97    |
+      | Active Report | 11    |
+    But I should not see the following report scores:
+      | score |
+      | 29    |
+      | 33    |
 
   Scenario: Viewing related reports from the Politicians Page
     Given I have a published report named "Active Report"
@@ -70,8 +86,9 @@ Feature: Browsing Politician Reports
     When I wait for delayed job to finish
     When I go to the politician page for "Piyush Jindal"
     And I follow "Reports" within "#content"
-    Then I should see "Active Report"
-    And I should see "100%"
+    Then I should see the following report scores:
+      | name          | score |
+      | Active Report | 100   |
 
     Given bill "USA PATRIOT Reauthorization Act of 2009" has the following rolls:
       | roll_type                                          |
@@ -83,6 +100,7 @@ Feature: Browsing Politician Reports
       | Ron Wyden  | -    |
     When I go to the politician page for "Ron Wyden"
     And I follow "Reports" within "#content"
-    Then I should see "Active Report"
-    And I should see "50%"
-    And I should not see "Piyush Jindal"
+    Then I should see the following report scores:
+      | name          | score |
+      | Active Report | 50    |
+    But I should not see "Piyush Jindal"
