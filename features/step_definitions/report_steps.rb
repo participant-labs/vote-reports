@@ -26,11 +26,27 @@ Given /^the following (.*) reports?:$/ do |type, table|
   end
 end
 
+# for use reading score lists from a report page
 Then /^I should see the following scores?:$/ do |table|
   table.map_column!('politician') {|name| Politician.with_name(name).first }
   table.hashes.each do |hash|
     Then %{I should see "#{hash['politician'].last_name}"}
-    Then %{I should see "#{hash['score']}"}
+    Then %{I should see "#{ReportScore.new(:score => hash['score']).letter_grade}" within ".report_score"}
     hash['politician'].report_scores.map {|s| s.score.round }.should include(hash['score'].to_i)
+  end
+end
+
+# for use reading score lists from a politician page
+Then /^I should see the following report scores?:$/ do |table|
+  table.hashes.each do |hash|
+    Then %{I should see "#{hash['name']}"} if hash['name'].present?
+    Then %{I should see "#{ReportScore.new(:score => hash['score']).letter_grade}" within ".report_score"}
+  end
+end
+
+Then /^I should not see the following report scores?:$/ do |table|
+  table.hashes.each do |hash|
+    Then %{I should not see "#{hash['name']}"} if hash['name'].present?
+    Then %{I should not see "#{ReportScore.new(:score => hash['score']).letter_grade} within ".report_score""}
   end
 end
