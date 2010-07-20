@@ -27,6 +27,12 @@ class District < ActiveRecord::Base
 
   delegate :envelope, :to => :the_geom
 
+  class << self
+    def geocode(loc)
+      lookup(Geokit::Geocoders::MultiGeocoder.geocode(loc))
+    end
+  end
+
   def level=(level)
     self[:level] = level
   end
