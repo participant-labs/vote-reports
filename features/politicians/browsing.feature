@@ -3,6 +3,7 @@ Feature: Browsing Politicians
   As a user
   I want to browse politician info
 
+  @homepagey
   Scenario: Navigating to politicians from the sidebar
     When I go to the home page
     And I follow "Politicians"
