@@ -23,6 +23,15 @@
   }
 
   $(function(){
+    $('.act-refresh').each(function() {
+      var self = this;
+      function refresh() {
+        $(self).load(current_url());
+      }
+
+      setInterval(refresh, 5000);
+    });
+
     $(':input.act-replace').live('click', function(event) {
       var target = $(event.target);
       replaceWith(

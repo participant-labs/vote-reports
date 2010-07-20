@@ -21,15 +21,10 @@
   <h3><%= requested_location ? "Sample Grades for Reps in your area -" : "Sample Politician Grades" %>
     <%= link_to requested_location, location_path(:return_to => request.path), :class => 'fancyboxy location' %>
   </h3>
-  <div id="score_examples">
-    <%= render @sample_report %>
-    <ul class="report_scores">
-      <%- @scores.each do |score| -%>
-        <li class="clearfix"><%= render 'politicians/score', :score => score %></li>
-      <%- end -%>
-    </ul>
-    <p>Customize an overview of your reps: <%= link_to "Get Started Now", new_guide_path %></p>
+  <div id="score_examples" class="act-refresh">
+    <%= render 'reports/report_and_scores', :report => @sample_report, :scores => @scores %>
   </div>
+  <p>Customize an overview of your reps: <%= link_to "Get Started Now", new_guide_path %></p>
 </div>
 
 <div class="section clearfix span-9 last" id="advocates">

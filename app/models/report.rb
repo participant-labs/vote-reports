@@ -259,11 +259,10 @@ class Report < ActiveRecord::Base
       {}
     else
       {
-        :select => 'DISTINCT reports.*, COUNT(report_scores.id) AS score_count',
         :joins => :scores,
         :conditions => {:'report_scores.politician_id' => politicians},
         :group => qualified_column_names,
-        :order => 'score_count DESC'
+        :having => 'COUNT(report_scores.id) > 0'
       }
     end
   }
