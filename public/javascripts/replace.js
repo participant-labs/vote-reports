@@ -27,11 +27,11 @@
       var self = $(this);
       function refresh() {
         self.load(current_url(), function() {
-          self.show('highlight', {}, 1000);
+          self.show('highlight', {}, 2000);
         });
       }
 
-      setInterval(refresh, 5000);
+      setInterval(refresh, 10000);
     });
 
     $(':input.act-replace').live('click', function(event) {
