@@ -16,3 +16,6 @@
 [submodule "vendor/gems/mongo_session_store-1.1.2"]
 	path = vendor/gems/mongo_session_store-1.1.2
 	url = http://github.com/compressed/mongo_session_store.git
+[submodule "vendor/plugins/parallel_tests"]
+	path = vendor/plugins/parallel_tests
+	url = http://github.com/grosser/parallel_tests.git
