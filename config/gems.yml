@@ -33,6 +33,7 @@
   :name: mongo
 - :version: ">= 0.7.6"
   :name: mongo_mapper
+- :name: Empact-mongo_session_store
 - :version: ">= 2.11.2"
   :name: newrelic_rpm
 - :name: nokogiri

@@ -37,7 +37,7 @@ Rails::Initializer.run do |config|
   config.gem 'bson', :version => '= 1.0.0'
   config.gem 'mongo', :version => '= 1.0.0'
   config.gem 'mongo_mapper', :version => '>= 0.7.6'
-  config.gem 'mongo_session_store'
+  config.gem 'Empact-mongo_session_store', :lib => 'mongo_session_store'
   config.gem 'newrelic_rpm', :version => '>= 2.11.2'
   config.gem 'nokogiri'
   config.gem 'paperclip'
