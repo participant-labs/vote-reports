@@ -1,3 +1,4 @@
+@homepagey
 Feature: Browsing the Home Page
   In order to find the most important stuff quickly
   As a user
@@ -14,6 +15,7 @@ Feature: Browsing the Home Page
     And I should not see "Unscored Report"
     And I should not see "Scored Report"
 
+  @locationy
   Scenario: User sets their zip code from the instant grat section
     When I go to the home page
     And I follow "set location"

@@ -47,6 +47,6 @@ end
 Then /^I should not see the following report scores?:$/ do |table|
   table.hashes.each do |hash|
     Then %{I should not see "#{hash['name']}"} if hash['name'].present?
-    Then %{I should not see "#{ReportScore.new(:score => hash['score']).letter_grade} within ".report_score""}
+    Then %{I should not see "#{ReportScore.new(:score => hash['score']).letter_grade}" within ".report_score"}
   end
 end

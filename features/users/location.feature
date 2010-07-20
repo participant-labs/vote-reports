@@ -1,3 +1,4 @@
+@homepagey @locationy
 Feature: User Location
   In order to offer scores relevant to the user
   A user

@@ -12,7 +12,7 @@ class SiteController < ApplicationController
         else
           Politician.in_office
         end.scoped(:limit => 6)
-      @sample_report = Report.published.with_scores_for(@politicians).random.first
+      @sample_report = Report.with_scores_for(@politicians).published.random.first
       @scores = @sample_report.scores.for_politicians(@politicians)
 
       respond_to do |format|
