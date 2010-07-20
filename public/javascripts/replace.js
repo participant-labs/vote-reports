@@ -24,9 +24,11 @@
 
   $(function(){
     $('.act-refresh').each(function() {
-      var self = this;
+      var self = $(this);
       function refresh() {
-        $(self).load(current_url());
+        self.load(current_url(), function() {
+          self.show('highlight', {}, 1000);
+        });
       }
 
       setInterval(refresh, 5000);
