@@ -24,7 +24,8 @@ Feature: Sign up
     Scenario: User signs up from another page and is sent to their user page
       Given a published report named "Published Report"
       When I go to the report page for "Published Report"
-      And I follow "Register"
+      And I follow "Log in"
+      And I follow "No account? Signup here"
       And I fill in "Username" with "James"
       And I fill in "Email" with "email@person.com"
       And I fill in "Password" with "password"

@@ -12,7 +12,7 @@ Feature: Issue Creation
     And I fill in "Title" with "Guns"
     And I check "Gun Rights"
     And I check "Gun Control"
-    And I press "Save"
+    And I press "Create Issue"
     Then I should be on the issue page for "Guns"
     And I should see "Gun Rights"
     And I should see "Gun Control"
