@@ -17,7 +17,6 @@
   :name: facebooker
 - :version: ">= 3.0.6"
   :name: friendly_id
-- :name: gemcutter
 - :name: geokit
 - :version: ">= 2.1.0"
   :name: gravtastic
