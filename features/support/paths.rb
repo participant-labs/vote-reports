@@ -30,7 +30,7 @@ module NavigationHelpers
     when /the edit bills page for the report "(.+)"/
       user_report_bill_criteria_path(Report.find_by_name($1).user, Report.find_by_name($1))
     when /the edit image page for the report "(.+)"/
-      edit_user_report_image_path(Report.find_by_name($1).user, Report.find_by_name($1))
+      edit_user_report_image_path(Report.find_by_name($1).user, Report.find_by_name($1), :format => :html)
 
     when /my reports page/i
       user_reports_path(current_user)
