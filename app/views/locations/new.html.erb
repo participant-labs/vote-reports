@@ -7,7 +7,7 @@
   <p>Just tell us where you vote and we'll focus on your representatives throughout the site.</p>
 
   <% form_tag location_path, :class => "act-replace", :rel => replace do %>
-    <%= label_tag :location %>
+    <%= label_tag :location, 'Your Location' %>
     <%= text_field_tag :location %>
     <%- if params[:return_to].present? -%>
       <%= hidden_field_tag :return_to, params[:return_to] %>

@@ -5,7 +5,7 @@
 <p>First, we need to know which politicians to score...</p>
 
 <% form_tag location_path do %>
-  <%= label_tag :location %>
+  <%= label_tag :location, 'Your Location' %>
   <%= text_field_tag :location %>
   <%= hidden_field_tag :return_to, new_guide_path(:from => :set_location) %>
   <%= submit_tag 'Set' %>
