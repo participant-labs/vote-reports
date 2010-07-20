@@ -60,7 +60,7 @@ module NavigationHelpers
     when /the interest group page for "(.+)"/
       interest_group_path(InterestGroup.find_by_name($1))
     when /the edit interest group image page for "(.+)"/
-      edit_interest_group_image_path(InterestGroup.find_by_name($1))
+      edit_interest_group_image_path(InterestGroup.find_by_name($1), :format => :html)
 
     when /^the (.+) page$/i
       send("#{$1.gsub(' ', '_')}_path")
