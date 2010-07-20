@@ -63,20 +63,19 @@
   content: '—';
 }
 
-#score_examples > li + li, #politicians > ul > li + li {
+#score_examples > ul.report_scores {
+  margin-right: 0;
+}
+
+#score_examples > ul > li + li, #politicians > ul > li + li {
   padding-top: 1em;
 }
 
-#score_examples .report {
-  width: 50%;
-  float: right;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-#score_examples .politician_score {
-  width: 50%;
-  float: left;
+#score_examples li {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  display: inline-block;
+  width: 49%;
 }
 
 .report_excerpt {

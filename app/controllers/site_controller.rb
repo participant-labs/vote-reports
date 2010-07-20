@@ -5,12 +5,14 @@ class SiteController < ApplicationController
 
     @politicians =
       if shown_location
-        sought_politicians.scoped(:limit => 5)
+        sought_politicians
       else
-        Politician.in_office.scoped(:limit => 5)
-      end
-    @scores =  @politicians.map {|politician| politician.report_scores.published.first(:order => 'random()') }.compact
-    @recent_reports = Report.user_published.by_created_at.all(:limit => @scores.size)
+        Politician.in_office
+      end.scoped(:limit => 6)
+    @sample_report = Report.published.with_scores_for(@politicians).random.first
+    @scores = @sample_report.scores.for_politicians(@politicians)
+
+    @recent_reports = Report.user_published.by_created_at.all(:limit => 3)
   end
 
   def about
