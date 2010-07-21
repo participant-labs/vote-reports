@@ -19,7 +19,7 @@ module ApplicationHelper
 
   def page_title
     raise "Missing page title" if @page_title.blank?
-    ['VoteReports', @page_title].compact.join(' :: ')
+    [@page_title, 'VoteReports'].compact.join(' - ')
   end
 
   def title(page_title)

@@ -1,4 +1,4 @@
-<% title %Q{Crop Thumbnail for "#{@interest_group.name}"} %>
+<%- title %Q{Crop Thumbnail for "#{@interest_group.name}"} -%>
 
 <%- thumb_width, thumb_height = @image.thumbnail.styles[:normal][:geometry].split('x').map(&:to_i) -%>
 
