@@ -256,30 +256,24 @@ module ActiveRecord::Extensions
     STARTS_WITH_RGX = /(.+)_starts_with$/
     ENDS_WITH_RGX =  /(.+)_ends_with$/
     def self.process( key, val, caller )
-      values = Array(val)
-      result_values = []
-      case key.to_s
-      when LIKE_RGX
-        str = values.collect do |v|
-          result_values << "%%#{v}%%"
-          "#{caller.quoted_table_name}.#{caller.connection.quote_column_name( $1 )} LIKE ?"
-        end
-      when STARTS_WITH_RGX
-        str = values.collect do |v|
-          result_values << "#{v}%%"
-           "#{caller.quoted_table_name}.#{caller.connection.quote_column_name( $1 )} LIKE ?"
-        end
-      when ENDS_WITH_RGX
-        str = values.collect do |v|
-          result_values << "%%#{v}"
-          "#{caller.quoted_table_name}.#{caller.connection.quote_column_name( $1 )} LIKE ?"
-        end
-      else
-        return nil
-      end
+      return if val.nil?
+      values = val.respond_to?(:map) ? val : [val]
 
-      str = str.join(' OR ')
-      return Result.new(str, result_values)
+      result_values =
+        case key.to_s
+        when LIKE_RGX
+          values.map {|v| "%%#{v}%%" }
+        when STARTS_WITH_RGX
+          values.map {|v| "#{v}%%" }
+        when ENDS_WITH_RGX
+          values.map {|v| "%%#{v}" }
+        else
+          return nil
+        end
+
+      Result.new(values.map do |v|
+          "#{caller.quoted_table_name}.#{caller.connection.quote_column_name( $1 )} LIKE ?"
+        end.join(' OR '), result_values)
     end
   end
 
