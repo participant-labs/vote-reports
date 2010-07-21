@@ -60,10 +60,9 @@ class ActiveRecord::Base
           conditions << sanitize_sql_hash_for_conditions({key => val}, table_name)
         else
           sql = nil
-          result = ActiveRecord::Extensions.process( key, val, self )
-          if result
+          if result = ActiveRecord::Extensions.process( key, val, self )
             conditions << result.sql
-            Array(result.value).each do |value|
+            (result.value.respond_to?(:each) ? result.value : [result.value]).each do |value|
               values.push(value)
             end
           else
