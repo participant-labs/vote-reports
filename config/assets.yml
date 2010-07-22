@@ -24,6 +24,7 @@ stylesheets:
     - public/stylesheets/vendor/smoothness/jquery-ui-1.8.2.custom.css
     - public/stylesheets/vendor/jquery.Jcrop.css
     - public/stylesheets/vendor/fancybox/jquery.fancybox-1.3.1.css
+    - public/stylesheets/vendor/blueprint/screen.css
     - public/stylesheets/master.css
     - public/stylesheets/interaction.css
     - public/stylesheets/menu.css
