@@ -560,10 +560,6 @@ table#reports td {
   font-size: 1.4em;
 }
 
-dl.chart_tooltip {
-  margin: 0.5em;
-}
-
 #guide > dl > dt:first-of-type {
   display: inline;
 }
