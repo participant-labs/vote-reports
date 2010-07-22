@@ -1,9 +1,10 @@
 <%-
   tag ||= :div
   full_name ||= false
+  headshot_style ||= :medium
 -%>
 
 <% content_tag_for tag, politician, :class => 'clearfix' do %>
-  <%= render 'politicians/headshot', :politician => politician %>
+  <%= render 'politicians/headshot', :politician => politician, :style => headshot_style %>
   <%= render 'politicians/name', :politician => politician, :full => full_name %>
 <% end %>
