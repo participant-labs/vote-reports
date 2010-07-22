@@ -10,8 +10,8 @@
 </div>
 
 <%- if @bill.opencongress_url -%>
-<div class="buttons open-congress clearfix">
-<%= link_to 'View on OpenCongress', @bill.opencongress_url %>
+<div class="clearfix">
+<%= link_to 'View on OpenCongress', @bill.opencongress_url, :class => 'button' %>
 </div>
 <%- end -%>
 

@@ -1,9 +1,9 @@
 <%- hide ||= false -%>
 
-<% content_tag :div, :class => "buttons follow_report #{'hide' if hide}", :id => dom_id(report, :follow) do %>
+<% content_tag :div, :class => "follow_report #{'hide' if hide}", :id => dom_id(report, :follow) do %>
   <%- if current_user.try(:follows?, report) -%>
-    <%= link_to(image_tag('icons/thumb_up.png', :alt => 'Stop Following'), report_follows_path(report, :return_to => request.path), :method => :delete, :class => 'negative', :title => "Unfollow #{report.name}") %>
+    <%= link_to(image_tag('icons/thumb_up.png', :alt => 'Stop Following'), report_follows_path(report, :return_to => request.path), :method => :delete, :class => 'button negative', :title => "Unfollow #{report.name}") %>
   <%- else -%>
-    <%= link_to(image_tag('icons/thumb_up.png', :alt => 'Follow'), report_follows_path(report, :return_to => request.path), :method => :post, :class => 'positive', :title => "Follow #{report.name}") %>
+    <%= link_to(image_tag('icons/thumb_up.png', :alt => 'Follow'), report_follows_path(report, :return_to => request.path), :method => :post, :class => 'button positive', :title => "Follow #{report.name}") %>
   <%- end -%>
 <% end %>
