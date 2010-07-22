@@ -2,6 +2,7 @@ embed_assets: on
 
 javascripts:
   common:
+    - public/javascripts/vendor/jquery-1.4.2.min.js
     - public/javascripts/vendor/jquery-ui-1.8.2.custom.min.js
     - public/javascripts/vendor/jquery.enumerable.js
     - public/javascripts/vendor/jquery.blockUI.js
