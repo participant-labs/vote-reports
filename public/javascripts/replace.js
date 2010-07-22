@@ -7,8 +7,12 @@
     return target_id + '/' + url.substring(url.indexOf('?') + 1);
   }
 
-  function replaceWith(target_id, url) {
-    target = $('#' + target_id);
+  function replaceWith(target_ids, url) {
+    target_id = $(target_ids.split(' ')).select(function() {
+      return $('#' + this + ':visible').length != 0;
+    });
+
+    target = $('#' + target_id + ':visible');
     if (target.length == 0) {
       return true;
     }

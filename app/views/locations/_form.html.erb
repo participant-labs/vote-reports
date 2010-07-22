@@ -1,11 +1,10 @@
 <%-
   no_ajax ||= false
-  replace ||= @js ? 'fancybox-inner' : 'location_setter'
-  format ||= @js ? 'js' : 'html'
+  replace ||= 'fancybox-inner location_setter content' unless no_ajax
 -%>
 
-<% form_tag location_path(:format => format), no_ajax ? {} : {:class => "act-replace", :rel => replace}  do %>
-  <%= label_tag :location, 'Your Location', :style => 'font-weight: normal;' %>
+<% form_tag location_path, replace ? {:class => "act-replace", :rel => replace} : {} do %>
+  <%= label_tag :location, 'Your Location', :class => 'your_location' %>
   <%= text_field_tag :location, session[:declared_location] %>
   <%- if params[:return_to].present? -%>
     <%= hidden_field_tag :return_to, params[:return_to] %>
