@@ -19,7 +19,7 @@ module LocationsHelper
   end
 
   def geo_description(geoloc)
-    return '' if geoloc.blank?
+    return if geoloc.blank?
 
     # unlike #full_address, doesn't include the country
     zip = " #{geoloc.zip}" if geoloc.zip
