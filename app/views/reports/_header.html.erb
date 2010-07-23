@@ -9,7 +9,7 @@
 
 <div class="clearfix section report_description">
   <%- if report.thumbnail.exists? -%>
-  <div class="image image_large"><%= image_with_hover_tag report.thumbnail, report.name, :style => :header %></div>
+  <div class="image image_large"><%= sized_image_tag report.thumbnail, report.name, :style => :header %></div>
   <%- end -%>
   <h1 class="report_title<%= ' big' if report.name.length < 14 %>"><%= report.name %></h1>
   <p>by <%= render 'users/user', :user => report.user %></p>
