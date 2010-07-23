@@ -53,6 +53,7 @@ Rails::Initializer.run do |config|
   config.gem 'will_paginate', :version => '>=2.3.14'
   config.gem 'ym4r'
   config.gem 'httparty'
+  config.gem 'parallel' # only needed because parallel_test is a plugin... lame
 
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
