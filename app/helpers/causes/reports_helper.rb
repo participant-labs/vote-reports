@@ -1,2 +1,0 @@
-module Causes::ReportsHelper
-end
