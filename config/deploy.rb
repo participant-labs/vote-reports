@@ -23,6 +23,11 @@ namespace :deploy do
     top.upload "#{root_path}/public/assets", "#{current_release}/public", :via => :scp, :recursive => true
   end
   after 'deploy:symlink', 'deploy:precache_assets'
+
+  task :optimize_pngs, :roles => :app do
+    run %{find public/images public/system -name "*.png" | xargs optipng}
+  end
+  after 'deploy:symlink', 'deploy:optimize_pngs'
 end
 
 namespace :monit do

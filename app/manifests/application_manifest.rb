@@ -48,6 +48,8 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     #   file '/etc/motd', :ensure => :file, :content => "Welcome to the TEST server!"
     # end
 
+    package 'optipng', :ensure => :installed
+
     nightly_update = "/usr/bin/rake -f #{configuration[:deploy_to]}/current/Rakefile update RAILS_ENV=#{ENV['RAILS_ENV']}"
     cron 'nightly update', :command => nightly_update, :user => configuration[:user], :minute => 0, :hour => 2
 
