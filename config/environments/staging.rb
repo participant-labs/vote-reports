@@ -24,9 +24,6 @@ config.action_view.cache_template_loading            = true
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
 
-all_plugins = self.class.send(:find_plugins, config.plugin_paths).map {|path| File.basename(path)}
-config.plugins = all_plugins - %w[parallel_tests]
-
 # Enable threaded mode
 # config.threadsafe!
 
