@@ -1,5 +1,5 @@
 <%- title score_title(@score) -%>
-<div style="width: 450px">
+<div style="width: 600px">
   <%- data = score_evidence_points(@score) -%>
   <% javascript_tag do %>
   <%- unless @js -%>
@@ -9,18 +9,17 @@
         chart: {
           renderTo: '<%= dom_id(@score, :evidence) %>',
           defaultSeriesType: 'line',
-          margin: [90, 10, 40, 60],
-          width: 420
+          width: 600
         },
         credits: {
           text: 'Ratings thanks to Project Vote Smart',
           href: 'http://votesmart.org/issue_rating_category_about.php'
         },
         title: {
-          text: '<%= escape_javascript(score_title(@score)) %> based on <%= pluralize @score.evidence.count, 'rating' %>',
+          text: '<%= "#{@score} for #{@score.politician.full_name}" %> based on <%= pluralize @score.evidence.count, 'rating' %>',
         },
         subtitle: {
-          text: 'Click a point on the chart to view the data source for that point',
+          text: 'click a data point to view the source for that point',
         },
         xAxis: {
           categories: <%= raw pare_down_score_dates(data.map {|p| p[:x] }).to_json %>
@@ -41,9 +40,6 @@
           style: {
             whiteSpace: 'normal'
           }
-        },
-        legend: {
-          enabled: false
         },
         plotOptions: {
            line: {
