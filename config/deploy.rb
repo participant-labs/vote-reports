@@ -25,7 +25,7 @@ namespace :deploy do
   after 'deploy:symlink', 'deploy:precache_assets'
 
   task :optimize_pngs, :roles => :app do
-    run %{find public/images public/system -name "*.png" | xargs optipng}
+    run %{find #{current_release}/public/images #{current_release}/public/system -name "*.png" | xargs optipng}
   end
   after 'deploy:symlink', 'deploy:optimize_pngs'
 end
