@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100708052227) do
+ActiveRecord::Schema.define(:version => 20100723162036) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -276,6 +276,10 @@ ActiveRecord::Schema.define(:version => 20100708052227) do
     t.datetime "thumbnail_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "thumbnail_tiny_size"
+    t.string   "thumbnail_normal_size"
+    t.string   "thumbnail_header_size"
+    t.string   "thumbnail_large_size"
   end
 
   create_table "interest_group_ratings", :force => true do |t|

@@ -1,4 +1,4 @@
-class Image < ActiveRecord::Base
+class Image < PaperclipAutosizer
   has_attached_file :thumbnail,
         :styles => {
           :large => ["200x200", :png],
@@ -6,8 +6,10 @@ class Image < ActiveRecord::Base
           :normal => ["100x100", :png],
           :tiny => ['35x35', :png]
         },
-        :processors => [:jcropper],
+        :processors => [:autosize],
         :default_style => :normal
+
+  after_post_process :autosize_attached_files
 
   validates_attachment_presence :thumbnail
   validates_attachment_content_type :thumbnail, :content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-png']
