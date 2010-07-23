@@ -19,3 +19,6 @@
 [submodule "vendor/plugins/parallel_tests"]
 	path = vendor/plugins/parallel_tests
 	url = http://github.com/grosser/parallel_tests.git
+[submodule "vendor/plugins/paperclip_autosizer"]
+	path = vendor/plugins/paperclip_autosizer
+	url = git@github.com:Empact/Paperclip-Autosizer.git
