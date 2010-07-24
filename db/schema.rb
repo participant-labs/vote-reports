@@ -292,7 +292,7 @@ ActiveRecord::Schema.define(:version => 20100723183705) do
     t.float    "numeric_rating"
   end
 
-  add_index "interest_group_ratings", ["interest_group_report_id", "politician_id"], :name => "index_interest_group_ratings_on_p_and_ig"
+  add_index "interest_group_ratings", ["interest_group_report_id", "politician_id"], :name => "index_ig_ratings_on_p_and_ig", :unique => true
   add_index "interest_group_ratings", ["interest_group_report_id"], :name => "index_interest_group_ratings_on_interest_group_id"
   add_index "interest_group_ratings", ["politician_id"], :name => "index_interest_group_ratings_on_politician_id"
 
