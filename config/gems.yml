@@ -20,7 +20,8 @@
 - :name: geokit
 - :version: ">= 2.1.0"
   :name: gravtastic
-- :name: hoptoad_notifier
+- :version: ">= 2.3.2"
+  :name: hoptoad_notifier
 - :name: jammit
 - :version: ">= 1.4.3"
   :name: json
