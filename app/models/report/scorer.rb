@@ -1,5 +1,12 @@
 class Report
-  class Scorer < Struct.new(:report_id)
+  class Scorer
+    attr_reader :report_id
+
+    def initialize(report_id)
+      @report_id = report_id
+      raise "Bad report_id #{report_id}" unless Report.find_by_id(report_id)
+    end
+
     def perform
       rescue_and_reraise do
         require 'ar-extensions'
