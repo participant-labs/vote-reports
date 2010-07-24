@@ -24,7 +24,10 @@
 - :name: jammit
 - :version: ">= 1.4.3"
   :name: json
-- :name: shadow_puppet
+- :version: ">= 2.6.0"
+  :name: puppet
+- :version: ">= 0.3.3"
+  :name: shadow_puppet
 - :version: = 1.0.0
   :name: bson_ext
 - :version: = 1.0.0
