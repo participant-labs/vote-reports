@@ -9,7 +9,7 @@ class ContrainInterestGroupRatingsToUniquePairs < ActiveRecord::Migration
     dups = InterestGroupRating.all(:conditions => {:interest_group_report_id => dups.map(&:interest_group_report_id), :politician_id => 602})
 
     InterestGroupRating.update_all(
-      {:politician_id => Politician.find_all_by_first_name_and_last_name('William', 'Jefferson')},
+      {:politician_id => Politician.find_by_first_name_and_last_name('William', 'Jefferson')},
       {:id => dups.select {|dup| dup.description.include?('William Jefferson')}})
 
     remove_index "interest_group_ratings", :name => "index_interest_group_ratings_on_p_and_ig"
