@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
+    <%= render 'layouts/chartbeat_start' %>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title><%= page_title %></title>
     <%= raw include_stylesheets(:common, :media => 'all') %>
@@ -26,5 +27,6 @@
     <% end %>
     <%= raw include_javascripts(:common) %>
     <%= yield :javascript_area %>
+    <%= render 'layouts/chartbeat_end' %>
   </body>
 </html>
