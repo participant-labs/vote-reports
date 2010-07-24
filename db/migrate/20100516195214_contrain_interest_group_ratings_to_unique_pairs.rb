@@ -4,6 +4,7 @@ class ContrainInterestGroupRatingsToUniquePairs < ActiveRecord::Migration
     if dups.map(&:politician_id).uniq != [602]
       raise "Unexpected politician dups #{dups.map(&:politician_id).inspect}"
     end
+    reports = dups.map(&:interest_group_report).map(&:interest_group)
 
     dups = InterestGroupRating.all(:conditions => {:interest_group_report_id => dups.map(&:interest_group_report_id), :politician_id => 602})
 
@@ -13,6 +14,8 @@ class ContrainInterestGroupRatingsToUniquePairs < ActiveRecord::Migration
 
     remove_index "interest_group_ratings", :name => "index_interest_group_ratings_on_p_and_ig"
     add_index "interest_group_ratings", ["interest_group_report_id", "politician_id"], :unique => true, :name => "index_ig_ratings_on_p_and_ig"
+
+    reports.each(&:rescore!)
   end
 
   def self.down
