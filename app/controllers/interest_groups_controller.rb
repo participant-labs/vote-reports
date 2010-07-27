@@ -38,4 +38,8 @@ class InterestGroupsController < ApplicationController
       render :action => :new
     end
   end
+
+  def new_interest_group_from_params
+    @interest_group = InterestGroup.new(params[:interest_group].reject {|k, v| v.blank? })
+  end
 end
