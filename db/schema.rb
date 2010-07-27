@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100724200430) do
+ActiveRecord::Schema.define(:version => 20100727011703) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -319,7 +319,7 @@ ActiveRecord::Schema.define(:version => 20100724200430) do
   add_index "interest_group_subjects", ["subject_id"], :name => "index_interest_group_subjects_on_subject_id"
 
   create_table "interest_groups", :force => true do |t|
-    t.integer  "vote_smart_id", :null => false
+    t.integer  "vote_smart_id"
     t.string   "ancestry"
     t.string   "name",          :null => false
     t.text     "description"
