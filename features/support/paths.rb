@@ -13,6 +13,8 @@ module NavigationHelpers
 
     when /the cause page for "(.*)"/
       cause_path(Cause.find_by_name($1))
+    when /the issue page for "(.*)"/
+      issue_path(Issue.find_by_title($1))
 
     when /user "(.*)"'s page for report "(.*)"/
       user = User.find_by_username($1)
