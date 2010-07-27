@@ -1,4 +1,6 @@
 class InterestGroupsController < ApplicationController
+  filter_resource_access
+
   def index
     params[:subjects] ||= []
     @interest_groups =
@@ -18,10 +20,22 @@ class InterestGroupsController < ApplicationController
   end
 
   def show
-    @interest_group = InterestGroup.find(params[:id])
     if !@interest_group.friendly_id_status.best?
       redirect_to interest_group_path(@interest_group), :status => 301
       return
+    end
+  end
+
+  def new
+  end
+
+  def create
+    if @interest_group.save
+      flash[:notice] = "Successfully created Interest Group"
+      redirect_to @interest_group
+    else
+      flash[:error] = "Unable to create Interest Group"
+      render :action => :new
     end
   end
 end
