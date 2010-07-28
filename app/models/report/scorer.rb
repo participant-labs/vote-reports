@@ -16,6 +16,7 @@ class Report
           report = Report.find(report_id)
           evidences = []
           ReportScore.delete_all(:report_id => report.id)
+          GuideScore.delete_all(:report_ids => report.id)
           report.score_criteria.inject({}) do |criterion_events, criterion|
             # Collect up all important events by politician and criteria
             # e.g.
