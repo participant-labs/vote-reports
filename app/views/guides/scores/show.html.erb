@@ -5,7 +5,7 @@
     <%- @score.evidence.group_by(&:subject).each_pair do |subject, subject_scores| -%>
       <%- subject_scores.each do |report_score| -%>
         <dt><%= render 'reports/scores/score', :score => report_score.evidence %></dt>
-        <dd><%= render 'reports/report', :report => subject %></dd>
+        <dd class="clearfix"><%= render 'reports/report', :report => subject %></dd>
       <%- end -%>
     <%- end -%>
   </dl>
