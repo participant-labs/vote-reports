@@ -4,7 +4,7 @@ class InterestGroups::ImagesController < ApplicationController
 
   def create
     @interest_group.build_image(params[:image])
-    if @interest_group.save
+    if @interest_group.image.save
       flash[:notice] = "Successfully updated thumbnail."
     else
       flash[:error] = "Unable to update thumbnail."
