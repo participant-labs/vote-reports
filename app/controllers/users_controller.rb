@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   filter_resource_access
-  before_filter :find_user, :only => [:show, :edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -59,9 +58,5 @@ class UsersController < ApplicationController
     else
       root_path
     end
-  end
-
-  def find_user
-    @user = User.find(params[:id])
   end
 end
