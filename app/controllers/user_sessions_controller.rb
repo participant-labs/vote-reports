@@ -26,7 +26,7 @@ class UserSessionsController < ApplicationController
         redirect_to edit_user_path(@user_session.record, :new_user => true)
       else
         flash[:notice] = "Logged in successfully"
-        redirect_to (params[:return_to].present? ? params[:return_to] : @user_session.record)
+        redirect_to (params[:return_to].present? ? params[:return_to] : root_path)
       end
     else
       flash[:error] = "Failed to login or register."
