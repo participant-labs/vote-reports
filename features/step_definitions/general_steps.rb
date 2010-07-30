@@ -9,6 +9,10 @@ Given /^the following (.+) records?:$/ do |type, table|
   Politician.update_current_office_status! if type.include?(' term')
 end
 
+Given /^this is pending$/ do
+  pending
+end
+
 When /^I wait (\d+) seconds$/ do |seconds|
   print seconds
   sleep seconds.to_i
