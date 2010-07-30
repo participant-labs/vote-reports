@@ -1,0 +1,15 @@
+<p>
+  <%= f.label :name %>
+  <%= f.text_field :name, :class => 'title' %>
+</p>
+<p>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+</p>
+
+<dl>
+<%- %w[email url contact_name phone1 phone2 fax address city state zip].each do |attr| -%>
+  <dt><%= f.label attr %></dt>
+  <dd><%= f.text_field attr %></dd>
+<%- end -%>
+</dl>

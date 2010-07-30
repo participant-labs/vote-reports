@@ -2,21 +2,7 @@
 <h1>New Interest Group</h1>
 
 <% form_for @interest_group do |f| %>
-  <p>
-    <%= f.label :name %>
-    <%= f.text_field :name, :class => 'title' %>
-  </p>
-  <p>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </p>
-
-  <dl>
-  <%- %w[email url contact_name phone1 phone2 fax address city state zip].each do |attr| -%>
-    <dt><%= f.label attr %></dt>
-    <dd><%= f.text_field attr %></dd>
-  <%- end -%>
-  </dl>
+  <%= render 'interst_groups/fields', :f => f %>
 
   <p><%= f.submit 'Create Interest Group' %></p>
 <% end %>
