@@ -6,7 +6,7 @@ class Image < PaperclipAutosizer
           :normal => ["100x100", :png],
           :tiny => ['35x35', :png]
         },
-        :processors => [:autosize],
+        :processors => [:autosize, :jcropper],
         :default_style => :normal
 
   after_post_process :autosize_attached_files
