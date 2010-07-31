@@ -20,7 +20,7 @@ class Users::Reports::BillCriteriaController < ApplicationController
         render :layout => false
       }
       format.js {
-        render :partial => 'users/reports/bill_criteria/table', :locals => {
+        render :partial => 'reports/bill_criteria/table', :locals => {
           :report => @report, :bills => @bills
         }
       }

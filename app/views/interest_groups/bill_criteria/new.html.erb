@@ -6,6 +6,6 @@
   <h3><small style="color:gray">Step 1: Name &amp; Describe your report,</small> Step 2: Select the Bills to include in your report:</h3>
   <%- end -%>
 
-  <%= render 'reports/bill_criteria/search', :report => @report, :url => new_user_report_bill_criterion_path(@report.user, @report) %>
+  <%= render 'reports/bill_criteria/search', :report => @report, :url => new_interest_group_bill_criterion_path(@interest_group) %>
   <%= render 'reports/bill_criteria/table', :report => @report, :bills => @bills %>
 </div>

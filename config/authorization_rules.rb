@@ -8,7 +8,7 @@ authorization do
 
   role :moderator do
     includes :all
-    has_permission_on :interest_groups, :issues, :causes, :causes_reports, :to => [:new, :create, :edit, :update, :destroy]
+    has_permission_on :interest_groups, :interest_groups_bill_criteria, :issues, :causes, :causes_reports, :to => [:index, :new, :create, :edit, :update, :destroy]
     has_permission_on :interest_groups_images, :to => [:edit, :create, :update]
   end
 
