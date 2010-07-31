@@ -43,7 +43,10 @@ class InterestGroupsController < ApplicationController
   end
 
   def update
-    if @interest_group.update_attributes(params[:interest_group])
+    if params[:report].present? && @interest_group.report.update_attributes(params[:report])
+      flash[:notice] = "Successfully updated interest group"
+      redirect_to @interest_group
+    elsif @interest_group.update_attributes(params[:interest_group])
       flash[:notice] = "Successfully updated interest group"
       redirect_to @interest_group
     else
