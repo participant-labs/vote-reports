@@ -17,8 +17,6 @@ class Cause < ActiveRecord::Base
 
   validates_presence_of :description
 
-  delegate :rescore!, :to => :report
-
   alias_method :score_criteria, :cause_reports
 
   class << self

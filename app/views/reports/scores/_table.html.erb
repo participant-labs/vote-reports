@@ -99,7 +99,7 @@
   </p>
 <%- elsif report.owner.is_a?(User) && report.bill_criteria.blank? -%>
     <p>No scores yet, as this report has no criteria to judge representatives by.</p>
-<%- elsif report.owner.is_a?(User) && report.bills.scoped(:joins => :passage_rolls).empty? -%>
+<%- elsif report.bills.present? && report.bills.scoped(:joins => :passage_rolls).empty? -%>
     <p>No scores yet, as the associated bills have not been voted on.</p>
 <%- elsif report.owner.is_a?(InterestGroup) && report.owner.ratings.blank? -%>
   <p>No ratings on record for this group</p>
