@@ -5,7 +5,7 @@
   <%- if @report.bill_criteria.empty? -%>
     <p>This report doesn't have any bills selected</p>
   <%- else -%>
-    <% form_for @report, :url => interest_group_path(@interest_group) do |f| %>
+    <% form_for @report do |f| %>
       <table>
         <thead>
           <th>Bill</th>
@@ -14,32 +14,31 @@
           <td></td>
         </thead>
         <tbody>
-          <%- @report.bill_criteria.each do |criterion| -%>
-            <%- f.fields_for :bill_criteria, criterion do |bill_criteria_fields| -%>
-              <tr>
-                <td>
-                  <%= render 'bills/bill', :bill => criterion.bill %>
-                  <%= bill_criteria_fields.hidden_field :bill_id %>
-                  <%= bill_criteria_fields.hidden_field :id unless criterion.new_record? %>
-                </td>
-                <td>
-                  <%= bill_criteria_fields.label :support_true, 'Support' %>
-                  <%= bill_criteria_fields.radio_button :support, true %><br />
-                  <%= bill_criteria_fields.label :support_false, 'Oppose' %>
-                  <%= bill_criteria_fields.radio_button :support, false %>
-                </td>
-                <td>
-                  <%= bill_criteria_fields.label :explanatory_url, 'Explanatory Link', :class => 'hide' %>
-                  <%= bill_criteria_fields.text_field :explanatory_url, :size => '20' %>
-                </td>
-                <td>
-                  <%= link_to('Remove', interest_group_bill_criterion_path(@report.user, @report, criterion),
-                            :method => :delete,
-                            :title => "Delete criterion for '#{criterion.bill.titles.first}'",
-                            :confirm => "Are you sure you want to delete the criterion for '#{criterion.bill.titles.first}'?") -%>
-                </td>
-              </tr>
-            <%- end -%>
+          <%- f.fields_for :bill_criteria do |bill_criteria_fields| -%>
+            <%- criterion = bill_criteria_fields.object -%>
+            <tr>
+              <td>
+                <%= render 'bills/bill', :bill => criterion.bill %>
+                <%= bill_criteria_fields.hidden_field :bill_id %>
+                <%= bill_criteria_fields.hidden_field :id %>
+              </td>
+              <td>
+                <%= bill_criteria_fields.label :support_true, 'Support' %>
+                <%= bill_criteria_fields.radio_button :support, true %><br />
+                <%= bill_criteria_fields.label :support_false, 'Oppose' %>
+                <%= bill_criteria_fields.radio_button :support, false %>
+              </td>
+              <td>
+                <%= bill_criteria_fields.label :explanatory_url, 'Explanatory Link', :class => 'hide' %>
+                <%= bill_criteria_fields.text_field :explanatory_url, :size => '20' %>
+              </td>
+              <td>
+                <%= link_to('Remove', interest_group_bill_criterion_path(@report.user, @report, criterion),
+                          :method => :delete,
+                          :title => "Delete criterion for '#{criterion.bill.titles.first}'",
+                          :confirm => "Are you sure you want to delete the criterion for '#{criterion.bill.titles.first}'?") -%>
+              </td>
+            </tr>
           <%- end -%>
         </tbody>
       </table>
