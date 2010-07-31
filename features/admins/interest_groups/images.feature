@@ -9,7 +9,8 @@ Feature: Editing Interest Group Images
 
   Scenario: Navigating to the image edit page on an interest group
     When I go to the interest group page for "AARP"
-    And I follow "Admin"
+    And I follow "Edit Interest Group"
+    And I follow "Edit Thumbnail"
     Then I should see "Replace Thumbnail"
     And I should be on the edit interest group image page for "AARP"
 
