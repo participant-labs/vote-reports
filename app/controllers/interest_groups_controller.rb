@@ -39,6 +39,21 @@ class InterestGroupsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @interest_group.update_attributes(params[:interest_group])
+      flash[:notice] = "Successfully updated interest group"
+      redirect_to @interest_group
+    else
+      flash[:error] = "Unable to update interest group"
+      render :action => :edit
+    end
+  end
+
+  protected
+
   def new_interest_group_from_params
     @interest_group = InterestGroup.new((params[:interest_group] || {}).reject {|k, v| v.blank? })
   end
