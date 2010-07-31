@@ -14,8 +14,8 @@ module Reports::ScoresHelper
     end
   end
 
-  def score_evidence_points(score)
-    score.evidence.group_by(&:subject).map do |(subject, subject_scores)|
+  def interest_group_score_evidence_points(score)
+    score.evidence.interest_group_ratings.group_by(&:subject).map do |(subject, subject_scores)|
       notify_hoptoad("Multiple interest group ratings #{subject_scores.inspect}") if subject_scores.size > 1
       rating = subject_scores.first.evidence
       tooltip = content_tag :dl, :class => 'chart_tooltip' do

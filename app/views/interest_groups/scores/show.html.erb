@@ -1,68 +1,90 @@
 <%- title score_title(@score) -%>
 <div style="width: 600px">
-  <%- data = score_evidence_points(@score) -%>
-  <% javascript_tag do %>
-  <%- unless @js -%>
-    $(function () {
-  <%- end -%>
-      new Highcharts.Chart({
-        chart: {
-          renderTo: '<%= dom_id(@score, :evidence) %>',
-          defaultSeriesType: 'line',
-          width: 600
-        },
-        credits: {
-          text: 'Ratings thanks to Project Vote Smart',
-          href: 'http://votesmart.org/issue_rating_category_about.php'
-        },
-        title: {
-          text: '<%= "#{@score} for #{@score.politician.full_name}" %> based on <%= pluralize @score.evidence.count, 'rating' %>',
-        },
-        subtitle: {
-          text: 'click a data point to view the source for that point',
-        },
-        xAxis: {
-          categories: <%= raw pare_down_score_dates(data.map {|p| p[:x] }).to_json %>
-        },
-        yAxis: {
-          min: -4,
-          max: 104,
-          endOnTick: false,
-          startOnTick: false,
-          title: {
-             text: 'Rating'
-          }
-        },
-        tooltip: {
-          formatter: function() {
-            return this.point.tooltip;
+  <%- if @score.evidence.interest_group_ratings.present? -%>
+    <%- data = interest_group_score_evidence_points(@score) -%>
+    <% javascript_tag do %>
+    <%- unless @js -%>
+      $(function () {
+    <%- end -%>
+        new Highcharts.Chart({
+          chart: {
+            renderTo: '<%= dom_id(@score, :evidence) %>',
+            defaultSeriesType: 'line',
+            width: 600
           },
-          style: {
-            whiteSpace: 'normal'
-          }
-        },
-        plotOptions: {
-           line: {
-              point: {
-                 events: {
-                    click: function() {
-                      window.location = this.vote_smart_url;
-                    }
-                 }
-              }
-           }
-        },
-        series: [{
-          name: '<%= escape_javascript(@score.report.name) %>',
-          type: 'line',
-          data: <%= raw data.map {|p| p.slice(:y, :tooltip, :vote_smart_url) }.to_json %>
-        }]
+          credits: {
+            text: 'Ratings thanks to Project Vote Smart',
+            href: 'http://votesmart.org/issue_rating_category_about.php'
+          },
+          title: {
+            text: '<%= "#{@score} for #{@score.politician.full_name}" %> based on <%= pluralize @score.evidence.interest_group_ratings.count, 'rating' %>',
+          },
+          subtitle: {
+            text: 'click a data point to view the source for that point',
+          },
+          xAxis: {
+            categories: <%= raw pare_down_score_dates(data.map {|p| p[:x] }).to_json %>
+          },
+          yAxis: {
+            min: -4,
+            max: 104,
+            endOnTick: false,
+            startOnTick: false,
+            title: {
+               text: 'Rating'
+            }
+          },
+          tooltip: {
+            formatter: function() {
+              return this.point.tooltip;
+            },
+            style: {
+              whiteSpace: 'normal'
+            }
+          },
+          plotOptions: {
+             line: {
+                point: {
+                   events: {
+                      click: function() {
+                        window.location = this.vote_smart_url;
+                      }
+                   }
+                }
+             }
+          },
+          series: [{
+            name: '<%= escape_javascript(@score.report.name) %>',
+            type: 'line',
+            data: <%= raw data.map {|p| p.slice(:y, :tooltip, :vote_smart_url) }.to_json %>
+          }]
+        });
+    <%- unless @js -%>
       });
-  <%- unless @js -%>
-    });
-  <%- end -%>
-  <% end %>
+    <%- end -%>
+    <% end %>
 
-  <% div_for(@score, :evidence, :style => "width: 100%; height: 400px") do %>
-  <% end %>
+    <% div_for(@score, :evidence, :style => "width: 100%; height: 400px") do %>
+    <% end %>
+  <%- end -%>
+
+  <%- if @score.evidence.votes.present? -%>
+    <%= render 'reports/scores/evidences/list', :score => @score %>
+    <dl>
+      <%- @score.evidence.group_by(&:subject).each_pair do |subject, subject_scores| -%>
+        <%- if subject.is_a?(Report) -%>
+          <%- subject_scores.each do |report_score| -%>
+              <dt class="report_score_evidence"><%= render 'reports/scores/score', :score => report_score.evidence %></dt>
+              <dd class="report_score_evidence"><%= render 'reports/report', :report => subject %></dd>
+          <%- end -%>
+        <%- else -%>
+          <%- subject_scores.each do |bill_score| -%>
+            <%- roll = bill_score.evidence.roll -%>
+            <dt><%= link_to "On #{roll.voted_at.to_date.to_s(:long)} voted #{bill_score.evidence.position}", roll %></dt>
+          <%- end -%>
+          <dd>On <%= render 'bills/bill', :bill => subject, :hide_year => true %> which this report <%= subject_scores.first.criterion.position %>s</dd>
+        <%- end -%>
+      <%- end -%>
+    </dl>
+  <%- end -%>
 </div>
