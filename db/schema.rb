@@ -699,4 +699,88 @@ ActiveRecord::Schema.define(:version => 20100727011703) do
 
   add_index "zip_codes", ["zip_code"], :name => "index_zip_codes_on_zip_code", :unique => true
 
+  add_foreign_key "adminships", "users", :name => "adminships_created_by_id_reference", :column => "created_by_id"
+  add_foreign_key "adminships", "users", :name => "adminships_user_id_reference"
+
+  add_foreign_key "bill_criteria", "bills", :name => "bill_criteria_bill_id_reference", :dependent => :delete
+  add_foreign_key "bill_criteria", "reports", :name => "bill_criteria_report_id_reference", :dependent => :delete
+
+  add_foreign_key "cause_reports", "causes", :name => "cause_reports_cause_id_reference"
+  add_foreign_key "cause_reports", "reports", :name => "cause_reports_report_id_reference"
+
+  add_foreign_key "congressional_district_zip_codes", "congressional_districts", :name => "district_zip_codes_district_id_reference"
+  add_foreign_key "congressional_district_zip_codes", "zip_codes", :name => "district_zip_codes_zip_code_id_reference"
+
+  add_foreign_key "congressional_districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "congressional_districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "congressional_districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "congressional_districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "congressional_districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "congressional_districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "congressional_districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "congressional_districts", "us_states", :name => "districts_us_state_id_reference"
+
+  add_foreign_key "districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "districts", "us_states", :name => "districts_us_state_id_reference"
+  add_foreign_key "districts", "us_states", :name => "districts_us_state_id_reference"
+
+  add_foreign_key "guide_reports", "guides", :name => "guide_reports_guide_id_reference"
+  add_foreign_key "guide_reports", "reports", :name => "guide_reports_report_id_reference"
+
+  add_foreign_key "guides", "congressional_districts", :name => "guides_congressional_district_id_reference"
+  add_foreign_key "guides", "reports", :name => "guides_report_id_reference"
+  add_foreign_key "guides", "users", :name => "guides_user_id_reference"
+  add_foreign_key "guides", "zip_codes", :name => "guides_zip_code_id_reference"
+
+  add_foreign_key "interest_group_ratings", "interest_group_reports", :name => "interest_group_ratings_interest_group_report_id_reference"
+  add_foreign_key "interest_group_ratings", "politicians", :name => "interest_group_ratings_politician_id_reference"
+
+  add_foreign_key "interest_group_reports", "interest_groups", :name => "interest_group_reports_interest_group_id_reference"
+
+  add_foreign_key "interest_group_subjects", "interest_groups", :name => "interest_group_subjects_interest_group_id_reference"
+  add_foreign_key "interest_group_subjects", "subjects", :name => "interest_group_subjects_subject_id_reference"
+
+  add_foreign_key "interest_groups", "images", :name => "interest_groups_image_id_reference"
+
+  add_foreign_key "issue_causes", "causes", :name => "issue_causes_cause_id_reference"
+  add_foreign_key "issue_causes", "issues", :name => "issue_causes_issue_id_reference"
+
+  add_foreign_key "locations", "zip_codes", :name => "location_zip_codes_zip_code_id_reference"
+
+  add_foreign_key "moderatorships", "users", :name => "moderatorships_created_by_id_reference", :column => "created_by_id"
+  add_foreign_key "moderatorships", "users", :name => "moderatorships_user_id_reference"
+
+  add_foreign_key "politicians", "congressional_districts", :name => "politicians_district_id_reference"
+
+  add_foreign_key "presidential_terms", "parties", :name => "presidential_terms_party_id_reference"
+  add_foreign_key "presidential_terms", "politicians", :name => "presidential_terms_politician_id_reference"
+
+  add_foreign_key "report_delayed_jobs", "delayed_jobs", :name => "report_delayed_jobs_delayed_job_id_reference", :dependent => :delete
+  add_foreign_key "report_delayed_jobs", "reports", :name => "report_delayed_jobs_report_id_reference", :dependent => :delete
+
+  add_foreign_key "report_follows", "reports", :name => "report_follows_report_id_reference"
+  add_foreign_key "report_follows", "users", :name => "report_follows_user_id_reference"
+
+  add_foreign_key "report_subjects", "reports", :name => "report_subjects_report_id_reference", :dependent => :delete
+  add_foreign_key "report_subjects", "subjects", :name => "report_subjects_subject_id_reference", :dependent => :delete
+
+  add_foreign_key "reports", "causes", :name => "reports_cause_id_reference"
+  add_foreign_key "reports", "images", :name => "reports_thumbnail_id_reference"
+  add_foreign_key "reports", "interest_groups", :name => "reports_interest_group_id_reference"
+
+  add_foreign_key "representative_terms", "congressional_districts", :name => "representative_terms_district_id_reference"
+  add_foreign_key "representative_terms", "parties", :name => "representative_terms_party_id_reference"
+  add_foreign_key "representative_terms", "politicians", :name => "representative_terms_politician_id_reference"
+
+  add_foreign_key "rpx_identifiers", "users", :name => "rpx_identifiers_user_id_reference", :dependent => :delete
+
+  add_foreign_key "senate_terms", "parties", :name => "senate_terms_party_id_reference"
+  add_foreign_key "senate_terms", "politicians", :name => "senate_terms_politician_id_reference"
+  add_foreign_key "senate_terms", "us_states", :name => "senate_terms_us_state_id_reference"
+
 end
