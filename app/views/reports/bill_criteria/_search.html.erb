@@ -1,6 +1,6 @@
 <%- label ||= 'Search' -%>
 
-<% form_tag new_user_report_bill_criterion_path(report.user, report), :method => :get, :class => 'act-replace', :rel => 'report_bills_results_table' do %>
+<% form_tag url, :method => :get, :class => 'act-replace', :rel => 'report_bills_results_table' do %>
   <%= label_tag :term, label %>
   <%= text_field_tag :term, params[:term] %>
   <%= check_box_tag :voted, @voted %>

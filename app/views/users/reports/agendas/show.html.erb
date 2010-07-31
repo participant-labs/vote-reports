@@ -3,7 +3,7 @@
   <p>This report's scores are derived from the bills below.  Votes in favor of supported bills or against opposed bills will lead to higher scores, while votes against these positions will lead to lower scores.</p>
   <ul>
     <%- if @report.bill_criteria.any? {|bc| bc.explanatory_url? }  -%>
-    <li>Follow the Evidence links on the right to see the report creator's explanation</li>
+    <li>Follow the Evidence links on the right to see the supporting evidence</li>
     <%- end -%>
     <li>Click on the bill to see its details</li>
   </ul>

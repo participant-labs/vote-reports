@@ -10,8 +10,8 @@
   <ul>
     <li><a href="#Edit_Interest_Group" title="Edit Interest Group">Edit Report</a></li>
     <li><%= link_to content_tag(:span, 'Edit Thumbnail'), edit_interest_group_image_path(@interest_group, :format => :html), :title => 'Edit Thumbnail' %></li>
-    <li><%# link_to content_tag(:span, 'Add Bills to Agenda'), new_interest_group_bill_criterion_path(@interest_group, :format => :html), :title => 'Add Bills' %></li>
-    <li><%# link_to content_tag(:span, 'Edit Agenda'), interest_group_bill_criteria_path(@interest_group, :format => :html), :title => 'Edit Agenda' %></li>
+    <li><%= link_to content_tag(:span, 'Add Bills to Agenda'), new_interest_group_bill_criterion_path(@interest_group, :format => :html), :title => 'Add Bills' %></li>
+    <li><%= link_to content_tag(:span, 'Edit Agenda'), interest_group_bill_criteria_path(@interest_group, :format => :html), :title => 'Edit Agenda' %></li>
     <%- permitted_to? :destroy, @interest_group do -%>
       <li><%= link_to 'Delete Report', '#delete_report' %></li>
     <%- end -%>

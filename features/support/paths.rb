@@ -61,8 +61,15 @@ module NavigationHelpers
 
     when /the interest group page for "(.+)"/
       interest_group_path(InterestGroup.find_by_name($1))
+    when /the edit interest group page for "(.+)"/
+      edit_interest_group_path(InterestGroup.find_by_name($1))
     when /the edit interest group image page for "(.+)"/
       edit_interest_group_image_path(InterestGroup.find_by_name($1), :format => :html)
+
+    when /the interest group new bills page for "(.+)"/
+      new_interest_group_bill_criterion_path(InterestGroup.find_by_name($1))
+    when /the interest group edit bills page for "(.+)"/
+      interest_group_bill_criteria_path(InterestGroup.find_by_name($1))
 
     when /^the (.+) page$/i
       send("#{$1.gsub(' ', '_')}_path")
