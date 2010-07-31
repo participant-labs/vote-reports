@@ -26,6 +26,7 @@ Rails::Initializer.run do |config|
   config.gem 'excelsior'
   config.gem 'fastercsv'
   config.gem 'facebooker', :version => '= 1.0.71'
+  config.gem "matthuhiggins-foreigner", :lib => "foreigner"
   config.gem 'friendly_id', :version => '>= 3.0.6'
   config.gem 'geokit'
   config.gem 'gravtastic', :version => '>= 2.1.0'
