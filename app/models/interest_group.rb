@@ -58,11 +58,7 @@ class InterestGroup < ActiveRecord::Base
     [phone1, phone2].compact
   end
 
-  def rescore!
-    if ratings.present?
-      report.rescore!
-    end
+  def score_criteria
+    reports + report.bill_criteria
   end
-
-  alias_method :score_criteria, :reports
 end
