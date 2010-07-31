@@ -2,7 +2,6 @@ class InterestGroups::ScoresController < ApplicationController
   before_filter :load_interest_group
 
   def index
-    @report = @interest_group.report
     @scores = @report.scores.for_politicians(sought_politicians)
 
     respond_to do |format|
@@ -19,7 +18,7 @@ class InterestGroups::ScoresController < ApplicationController
   end
 
   def show
-    @score = @interest_group.report.scores.find(params[:id])
+    @score = @report.scores.find(params[:id])
     respond_to do |format|
       format.html
       format.js {
@@ -32,6 +31,7 @@ class InterestGroups::ScoresController < ApplicationController
   private
 
   def load_interest_group
-    @interest_group = InterestGroup.find(params[:interest_group_id])
+    @interest_group = InterestGroup.find(params[:interest_group_id], :include => :report)
+    @report = @interest_group.report
   end
 end
