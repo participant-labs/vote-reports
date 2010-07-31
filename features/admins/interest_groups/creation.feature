@@ -21,6 +21,6 @@ Feature: Creating Interest Groups
      | Url          | http://place.org                               |
      | Contact name | Mr. Tops                                       |
     And I press "Create Interest Group"
-    Then I should see "Successfully created Interest Group"
+    Then I should see "Successfully created interest group"
     And I should be on the interest group page for "My favorite interest group"
     And I should see "Why do I like it so much? It boggles the mind."

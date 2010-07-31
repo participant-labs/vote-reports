@@ -31,10 +31,10 @@ class InterestGroupsController < ApplicationController
 
   def create
     if @interest_group.save
-      flash[:notice] = "Successfully created Interest Group"
+      flash[:notice] = "Successfully created interest group"
       redirect_to @interest_group
     else
-      flash[:error] = "Unable to create Interest Group"
+      flash[:error] = "Unable to create interest group"
       render :action => :new
     end
   end
