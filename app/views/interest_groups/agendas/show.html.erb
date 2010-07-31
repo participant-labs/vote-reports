@@ -1,9 +1,9 @@
 <div id="interest_group_ratings" class="section">
-  <h2>Agenda</h2>
+  <h1>Agenda</h1>
   <p>This report's scores are based on ratings periodically issued by the <%= @interest_group.name %>. In addition, many interest groups issue a specific legislative agenda which we collect to include in our politician scores.</p>
 
   <%- if @interest_group.reports.present? -%>
-    <h3>Historical Ratings</h3>
+    <h2>Historical Ratings</h2>
     <ul>
     <%- @interest_group.reports.each do |report| -%>
       <li><%= render 'interest_group_reports/interest_group_report', :report => report %></li>
@@ -12,7 +12,7 @@
   <%- end -%>
 
   <%- if @report.bill_criteria.present? -%>
-    <h3>Legislative Agenda</h3>
+    <h2>Legislative Agenda</h2>
     <ul>
       <%- if @report.bill_criteria.any? {|bc| bc.explanatory_url? }  -%>
       <li>Follow the Evidence links on the right to see the supporting evidence</li>
