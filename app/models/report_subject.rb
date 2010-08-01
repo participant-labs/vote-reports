@@ -46,7 +46,10 @@ class ReportSubject < ActiveRecord::Base
       require 'ar-extensions/import/postgresql'
 
       transaction do
-        paginated_each do |report|
+        Report.paginated_each(:conditions => {:cause_id => nil}) do |report|
+          generate_for(report)
+        end
+        Report.paginated_each(:conditions => 'cause_id is not null') do |report|
           generate_for(report)
         end
       end
