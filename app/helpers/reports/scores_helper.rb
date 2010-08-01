@@ -16,6 +16,18 @@ module Reports::ScoresHelper
     end.to_sentence
   end
 
+  def evidence_types(report)
+    types = []
+    score_criteria = report.score_criteria
+    if score_criteria.detect {|c| c.is_a?(InterestGroupReport) }
+      types << link_to("historical interest group ratings", "#historical_ratings")
+    end
+    if score_criteria.detect {|c| c.is_a?(BillCriterion) }
+      types << link_to("a specific legislative agenda", "#legislative_agenda")
+    end
+    types.join(' and ').html_safe
+  end
+
   def interest_group_score_evidence_points(score)
     score.evidence.interest_group_ratings.group_by(&:subject).map do |(subject, subject_scores)|
       notify_hoptoad("Multiple interest group ratings #{subject_scores.inspect}") if subject_scores.size > 1
