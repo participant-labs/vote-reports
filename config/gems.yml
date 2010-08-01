@@ -30,13 +30,13 @@
   :name: puppet
 - :version: ">= 0.3.3"
   :name: shadow_puppet
-- :version: = 1.0.0
+- :version: ">= 1.0.4"
   :name: bson_ext
-- :version: = 1.0.0
+- :version: ">= 1.0.4"
   :name: bson
-- :version: = 1.0.0
+- :version: ">= 1.0.6"
   :name: mongo
-- :version: ">= 0.7.6"
+- :version: ">= 0.8.2"
   :name: mongo_mapper
 - :name: Empact-mongo_session_store
 - :version: ">= 2.11.2"

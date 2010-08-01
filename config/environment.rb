@@ -35,10 +35,10 @@ Rails::Initializer.run do |config|
   config.gem 'json', :version => '>= 1.4.3'
   config.gem 'puppet', :version => '>= 2.6.0'
   config.gem 'shadow_puppet', :version => '>= 0.3.3'
-  config.gem 'bson_ext', :version => '= 1.0.0', :lib => false
-  config.gem 'bson', :version => '= 1.0.0'
-  config.gem 'mongo', :version => '= 1.0.0'
-  config.gem 'mongo_mapper', :version => '>= 0.7.6'
+  config.gem 'bson_ext', :version => '>= 1.0.4', :lib => false
+  config.gem 'bson', :version => '>= 1.0.4'
+  config.gem 'mongo', :version => '>= 1.0.6'
+  config.gem 'mongo_mapper', :version => '>= 0.8.2'
   config.gem 'Empact-mongo_session_store', :lib => 'mongo_session_store'
   config.gem 'newrelic_rpm', :version => '>= 2.11.2'
   config.gem 'nokogiri'
