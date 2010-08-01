@@ -390,6 +390,7 @@ Fixjour :verify => false do
     create_scored_report(attrs).tap do |report|
       report.reload
       report.publish
+      raise report.errors.full_messages.inspect unless report.published?
     end
   end
 end
