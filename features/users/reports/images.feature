@@ -16,15 +16,17 @@ Feature: Editing Report Images
     Then I should see "Replace Thumbnail"
     And I should be on the edit image page for the report "My Report"
 
-  Scenario Outline: Updating the image on my report
+  Scenario: Updating the image on my report
     When I go to the edit image page for the report "My Report"
-    And I attach the file "public/images/<image>" to "image_thumbnail"
+    And I attach the file "public/images/gov_track_logo.png" to "image_thumbnail"
     And I press "Replace!"
     Then I should be on my report page for "My Report"
     And I should see "Successfully updated thumbnail."
-    And I should see the image "<image>"
-
-  Examples:
-    | image                   |
-    | gov_track_logo.png      |
-    | mobile_commons_logo.png |
+    And I should see the image "gov_track_logo.png"
+    # Updating
+    When I go to the edit image page for the report "My Report"
+    And I attach the file "public/images/mobile_commons_logo.png" to "image_thumbnail"
+    And I press "Replace!"
+    Then I should be on my report page for "My Report"
+    And I should see "Successfully updated thumbnail."
+    And I should see the image "mobile_commons_logo.png"
