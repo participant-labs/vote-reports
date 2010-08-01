@@ -1,5 +1,9 @@
 <%- title score_title(@score) -%>
 <div style="width: 600px">
+  <%- if @score.evidence.votes.present? -%>
+    <%= render 'reports/scores/evidence', :score => @score %>
+  <%- end -%>
+
   <%- if @score.evidence.interest_group_ratings.present? -%>
     <%- data = interest_group_score_evidence_points(@score) -%>
     <% javascript_tag do %>
@@ -69,9 +73,8 @@
   <%- end -%>
 
   <%- if @score.evidence.votes.present? -%>
-    <%= render 'reports/scores/evidences/list', :score => @score %>
     <dl>
-      <%- @score.evidence.group_by(&:subject).each_pair do |subject, subject_scores| -%>
+      <%- @score.evidence.not_interest_group_ratings.group_by(&:subject).each_pair do |subject, subject_scores| -%>
         <%- if subject.is_a?(Report) -%>
           <%- subject_scores.each do |report_score| -%>
               <dt class="report_score_evidence"><%= render 'reports/scores/score', :score => report_score.evidence %></dt>
