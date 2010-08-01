@@ -5,9 +5,4 @@ Before('@homepagey') do
   mock(Report).with_scores_for(anything) { Report }
 end
 
-Before('@locationy') do
-  Marshal.load(open(Rails.root.join('spec/fixtures/districts.marshal'))).map(&:save!)
-  mock(District).lookup(anything) { District.all }
-end
-
 World(Fixjour)

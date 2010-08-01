@@ -9,8 +9,26 @@ Given /^my (location is "[^"]*")$/ do |address|
   mock(Geokit::Geocoders::MultiGeocoder).geocode(anything) { address }
 end
 
+Given /^my location is assured(?: to "([^"]*)")?$/ do |congressional_district|
+  Fixtures.reset_cache
+  Fixtures.create_fixtures(Rails.root.join('spec/fixtures'), ['districts'])
+  stub(District).lookup(anything) { District.all }
+
+  if congressional_district
+    state, district_number = congressional_district.split('-')
+    state = UsState.find_by_abbreviation(state) || create_us_state(:abbreviation => state)
+    District.all.each do |district|
+      district.update_attributes!(:state => state, :name => district_number)
+    end
+  else
+    state = create_us_state
+    District.all.each do |district|
+      district.update_attributes!(:state => state)
+    end
+  end
+end
+
 Given /^my location is set to "([^"]*)"/ do |zip|
-  mock(District).lookup(anything) { [create_district(:level => 'federal'), create_district] }
   visit new_location_path
   fill_in 'Location', :with => zip
   click_button 'Set'
