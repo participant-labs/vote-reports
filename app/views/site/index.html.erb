@@ -18,8 +18,13 @@
 <% end %>
 
 <div class="clearfix span-15" id="voters">
-  <h3><%= requested_location ? "Sample Grades for Reps in your area -" : "Sample Politician Grades" %>
+  <h3><%- if requested_location -%>
+    Sample Grades for Reps in your area -
     <%= link_to requested_location, location_path(:return_to => request.path), :class => 'fancyboxy location' %>
+  <%- else -%>
+    Sample Politician Grades -
+    <%= link_to 'Set Location', location_path(:return_to => request.path), :class => 'fancyboxy location' %>
+  <%- end -%>
   </h3>
   <div id="score_examples" class="act-refresh">
     <%= render 'reports/report_and_scores', :report => @sample_report, :scores => @scores %>
