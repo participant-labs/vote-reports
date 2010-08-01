@@ -61,7 +61,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     DJ
 
     file '/etc/monit.d/delayed_job',
-      :mode => '600',
+      :mode => '700',
       :owner => configuration[:user],
       :group => configuration[:group] || configuration[:user],
       :require => file('/etc/monit.d'),
@@ -70,12 +70,12 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     mongo_monit = <<-MONIT
       check process mongodb
         with pidfile /srv/vote-reports/shared/pids/mongodb.pid
-        start program = "/etc/init.d/mongodb start"
-        stop program = "/etc/init.d/mongodb stop"
+        start program = "/opt/local/mongo-1.4.2/bin/mongod --dbpath /data/db run"
+        stop program = "pgrep mongod | xargs kill -15"
     MONIT
 
     file '/etc/monit.d/mongodb',
-      :mode => '600',
+      :mode => '700',
       :owner => configuration[:user],
       :group => configuration[:group] || configuration[:user],
       :require => file('/etc/monit.d'),
