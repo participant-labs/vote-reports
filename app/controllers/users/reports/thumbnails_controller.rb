@@ -4,7 +4,7 @@ class Users::Reports::ThumbnailsController < ApplicationController
 
   def create
     @report.build_image(params[:image])
-    if @report.save
+    if @report.save && @report.image.save
       flash[:notice] = "Successfully updated thumbnail."
     else
       flash[:error] = "Unable to update thumbnail."
