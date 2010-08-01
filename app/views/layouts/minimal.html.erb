@@ -24,7 +24,7 @@
     <%= yield(:minimal_content) || yield %>
 
     <% javascript_tag do %>
-      location_set = <%= session[:geo_location_declared].present? %>;
+      location_set = <%= Rails.env.test? || Rails.env.cucumber? || session[:geo_location_declared].present? %>;
     <% end %>
     <%= raw include_javascripts(:common) %>
     <%= yield :javascript_area %>
