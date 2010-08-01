@@ -7,11 +7,13 @@ module Reports::ScoresHelper
     "#{score} for #{score.politician.full_name}#{on}"
   end
 
-  def score_evidence_components(score, opts = {})
-    score.evidence.group_by(&:evidence_type).map do |(type, evidence)|
+  def score_evidence_description(score)
+    evidence_by_type = score.evidence.group_by(&:evidence_type)
+    evidence_by_type.keys.sort.map do |type|
+      evidence = evidence_by_type.fetch(type)
       name = human_type_name(type)
       pluralize(evidence.size, name)
-    end
+    end.to_sentence
   end
 
   def interest_group_score_evidence_points(score)
