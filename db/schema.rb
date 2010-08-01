@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100731193726) do
+ActiveRecord::Schema.define(:version => 20100801170510) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -233,7 +233,7 @@ ActiveRecord::Schema.define(:version => 20100731193726) do
     t.string        "lsad",          :limit => 2
     t.string        "name",          :limit => 90
     t.string        "lsad_trans",    :limit => 50
-    t.multi_polygon "the_geom",      :limit => nil
+    t.multi_polygon "the_geom",      :limit => nil, :null => false
     t.string        "level"
     t.string        "census_geo_id"
     t.integer       "us_state_id",                  :null => false
