@@ -360,7 +360,7 @@ Fixjour :verify => false do
   def create_unscored_report(attrs = {})
     create_report(attrs).tap do |report|
       create_bill_criterion(:report => report)
-      Delayed::Worker.new(:quiet => true).work_off(1)
+      Delayed::Worker.new(:quiet => true).work_off(5)
     end
   end
 
@@ -372,7 +372,7 @@ Fixjour :verify => false do
         create_vote(:roll => roll, :politician => p, :vote => Vote::POSSIBLE_VALUES.random_element)
       end
       report.rescore!
-      Delayed::Worker.new(:quiet => true).work_off(1)
+      Delayed::Worker.new(:quiet => true).work_off(5)
     end
   end
 
