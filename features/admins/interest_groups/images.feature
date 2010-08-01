@@ -14,15 +14,17 @@ Feature: Editing Interest Group Images
     Then I should see "Replace Thumbnail"
     And I should be on the edit interest group image page for "AARP"
 
-  Scenario Outline: Updating the image on an interest group
+  Scenario: Updating the image on an interest group
     When I go to the edit interest group image page for "AARP"
-    And I attach the file "public/images/<image>" to "image_thumbnail"
+    And I attach the file "public/images/gov_track_logo.png" to "image_thumbnail"
     And I press "Replace!"
     Then I should be on the interest group page for "AARP"
     And I should see "Successfully updated thumbnail."
-    And I should see the image "<image>"
-
-  Examples:
-    | image                   |
-    | gov_track_logo.png      |
-    | mobile_commons_logo.png |
+    And I should see the image "gov_track_logo.png"
+    # Update image
+    When I go to the edit interest group image page for "AARP"
+    And I attach the file "public/images/mobile_commons_logo.png" to "image_thumbnail"
+    And I press "Replace!"
+    Then I should be on the interest group page for "AARP"
+    And I should see "Successfully updated thumbnail."
+    And I should see the image "mobile_commons_logo.png"
