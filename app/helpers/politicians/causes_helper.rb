@@ -1,2 +1,0 @@
-module Politicians::CausesHelper
-end
