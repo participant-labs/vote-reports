@@ -12,7 +12,6 @@ Feature: Browsing Causes
     When I follow "Lollipops!"
     Then I should be on the cause page for "Lollipops!"
 
-  @javascript
   Scenario: Viewing the reports associated with a cause
     Given a published report named "Brady Campaign to Prevent Gun Violence"
     And cause "Lollipops!" includes report "Brady Campaign to Prevent Gun Violence"
