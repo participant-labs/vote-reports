@@ -22,16 +22,12 @@ Feature: Browsing the Guide
       | John Cornyn           | TX    | true      |
       | Kay Hutchison         | TX    | false     |
       | Connie Mack           | OH    | false     |
-    And the following congressional district zip code records:
-      | state | congressional_district | zip_code |
-      | TX    | 26       | 75028    |
-      | TX    | 11       | 78704    |
-      | NY    | 7        | 11111    |
+    And my location is assured to "TX-26"
 
     When I go to the new guide page
     And I fill in "Your Location" with "75028"
     And I press "Set"
-    Then I should see "Michael Burgess"
-    And I should see "John Cornyn"
-    But I should not see "J. Kerrey"
-    And I should not see "Neil Abercrombie"
+    Then I should see "Rep. Burgess"
+    And I should see "Sen. Cornyn"
+    But I should not see "Kerrey"
+    And I should not see "Abercrombie"
