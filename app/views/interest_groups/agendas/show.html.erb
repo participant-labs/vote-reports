@@ -10,11 +10,14 @@
 
   <%- if @interest_group.reports.present? -%>
     <h2 id="historical_ratings">Historical Ratings</h2>
-    <ul>
+    <table class="interest_group_reports">
     <%- @interest_group.reports.each do |report| -%>
-      <li><%= render 'interest_group_reports/interest_group_report', :report => report %></li>
+    <tr>
+      <th>In <%= report.timespan %></th>
+      <td><%= link_to pluralize(report.ratings.count, 'ratings'), report.vote_smart_url %></td>
+    </tr>
     <%- end -%>
-    </ul>
+    </table>
   <%- end -%>
 
   <%- if @report.bill_criteria.present? -%>
