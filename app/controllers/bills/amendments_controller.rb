@@ -6,6 +6,11 @@ class Bills::AmendmentsController < ApplicationController
     @amendments = @bill.amendments.with_votes.by_offered_on
   end
 
+  def show
+    @amendment = @bill.amendments.find(params[:id])
+    @rolls = @amendment.rolls.by_voted_at
+  end
+
   private
 
   def load_bill
