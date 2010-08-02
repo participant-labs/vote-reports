@@ -10,6 +10,7 @@ class BillCriterion < ActiveRecord::Base
 
   named_scope :supported, :conditions => {:support => true}
   named_scope :opposed, :conditions => {:support => false}
+  named_scope :by_introduced_on, :select => 'DISTINCT(bill_criteria.*), bills.introduced_on', :joins => :bill, :order => 'bills.introduced_on DESC'
 
   named_scope :active, :select => 'DISTINCT bill_criteria.*',
     :joins => {:bill => :rolls},

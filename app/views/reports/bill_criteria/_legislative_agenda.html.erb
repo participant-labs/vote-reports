@@ -1,0 +1,33 @@
+<h2 id="legislative_agenda">Legislative Agenda</h2>
+<ul>
+  <%- if report.bill_criteria.any? {|bc| bc.explanatory_url? }  -%>
+  <li>Follow the Evidence links on the right to see the supporting evidence</li>
+  <%- end -%>
+  <li>Click on the bill to see its details</li>
+</ul>
+<%- active_bills = report.bill_criteria.by_introduced_on.active -%>
+<%- if (supported = active_bills.supported).present? -%>
+  <h3>Supported Bills</h3>
+  <ul>
+    <%- supported.each do |criterion| -%>
+      <li class="bill_criterion"><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %></li>
+    <%- end -%>
+  </ul>
+<%- end -%>
+<%- if (opposed = active_bills.opposed).present? -%>
+  <h3>Opposed Bills</h3>
+  <ul>
+    <%- opposed.each do |criterion| -%>
+      <li class="bill_criterion"><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %></li>
+    <%- end -%>
+  </ul>
+<%- end -%>
+<%- if (unvoted = report.bill_criteria.inactive).present? -%>
+  <h3>Inactive Bills</h3>
+  <p>These bills are supported or opposed by this report, but have not come to a roll call vote.</p>
+  <ul>
+    <%- unvoted.each do |criterion| -%>
+      <li class="bill_criterion"><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion, :with_support => true %></li>
+    <%- end -%>
+  </ul>
+<%- end -%>
