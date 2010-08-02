@@ -28,7 +28,8 @@ class InterestGroup < ActiveRecord::Base
   end
 
   has_many :interest_group_subjects
-  has_many :subjects, :through => :interest_group_subjects
+  # The ReportSubject generator takes InterestGroupSubjects into account
+  delegate :subjects, :to => :report
 
   has_many :reports, :class_name => 'InterestGroupReport'
   has_many :ratings, :through => :reports
