@@ -185,7 +185,7 @@ class Report < ActiveRecord::Base
     end
   end
 
-  has_many :cause_reports
+  has_many :cause_reports, :dependent => :destroy
   has_many :causes, :through => :cause_reports
 
   has_many :bill_criteria, :dependent => :destroy do
