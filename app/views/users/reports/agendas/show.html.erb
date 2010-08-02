@@ -1,39 +1,8 @@
 <div id="bill_criteria" class="section">
-  <h2>Agenda</h2>
+  <h1>Agenda</h1>
   <p>This report's scores are derived from the bills below.  Votes in favor of supported bills or against opposed bills will lead to higher scores, while votes against these positions will lead to lower scores.</p>
-  <ul>
-    <%- if @report.bill_criteria.any? {|bc| bc.explanatory_url? }  -%>
-    <li>Follow the Evidence links on the right to see the supporting evidence</li>
-    <%- end -%>
-    <li>Click on the bill to see its details</li>
-  </ul>
   <%- if @report.bill_criteria.present? -%>
-    <%- active_bills = @report.bill_criteria.active -%>
-    <%- if (supported = active_bills.supported).present? -%>
-      <h3>Supported Bills</h3>
-      <ul>
-        <%- supported.each do |criterion| -%>
-          <li class="bill_criterion"><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %></li>
-        <%- end -%>
-      </ul>
-    <%- end -%>
-    <%- if (opposed = active_bills.opposed).present? -%>
-      <h3>Opposed Bills</h3>
-      <ul>
-        <%- opposed.each do |criterion| -%>
-          <li class="bill_criterion"><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %></li>
-        <%- end -%>
-      </ul>
-    <%- end -%>
-    <%- if (unvoted = @report.bill_criteria.inactive).present? -%>
-      <h3>Inactive Bills</h3>
-      <p>These bills are supported or opposed by this report, but have not come to a roll call vote.</p>
-      <ul>
-        <%- unvoted.each do |criterion| -%>
-          <li class="bill_criterion"><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion, :with_support => true %></li>
-        <%- end -%>
-      </ul>
-    <%- end -%>
+    <%= render 'reports/bill_criteria/legislative_agenda', :report => @report %>
   <%- elsif @report.user == current_user -%>
     <p>You need to add bills to this report in order to generate a score:</p>
   <%- else -%>
