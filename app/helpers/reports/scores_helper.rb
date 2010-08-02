@@ -16,16 +16,27 @@ module Reports::ScoresHelper
     end.to_sentence
   end
 
-  def evidence_types(report)
+  def evidence_types(report, tab = :different_tab)
     types = []
     score_criteria = report.score_criteria
-    if score_criteria.detect {|c| c.is_a?(InterestGroupReport) }
-      types << link_to("historical interest group ratings", "#historical_ratings")
+
+    if tab == :same_tab
+      if score_criteria.detect {|c| c.is_a?(InterestGroupReport) }
+        types << link_to("interest group ratings", "#historical_ratings")
+      end
+      if score_criteria.detect {|c| c.is_a?(BillCriterion) }
+        types << link_to("a specific legislative agenda", "#legislative_agenda")
+      end
+      types.join(' and ').html_safe
+    else
+      if score_criteria.detect {|c| c.is_a?(InterestGroupReport) }
+        types << "interest group ratings"
+      end
+      if score_criteria.detect {|c| c.is_a?(BillCriterion) }
+        types << "a specific legislative agenda"
+      end
+      link_to types.to_sentence, '#Agenda', :class => 'act-tab-select', :rel => 'Agenda'
     end
-    if score_criteria.detect {|c| c.is_a?(BillCriterion) }
-      types << link_to("a specific legislative agenda", "#legislative_agenda")
-    end
-    types.join(' and ').html_safe
   end
 
   def interest_group_score_evidence_points(score)
