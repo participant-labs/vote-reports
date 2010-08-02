@@ -62,4 +62,8 @@ class InterestGroup < ActiveRecord::Base
   def score_criteria
     reports + report.bill_criteria
   end
+
+  def vote_smart_url
+    "http://votesmart.org/issue_group_detail.php?sig_id=#{vote_smart_id}" if vote_smart_id
+  end
 end

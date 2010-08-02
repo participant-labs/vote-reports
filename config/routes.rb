@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
     report.resources :report_scores, :as => :scores, :controller => 'users/reports/scores', :only => [:index, :show]
     report.resource :follows, :controller => 'users/reports/follows', :only => [:show, :create, :destroy]
     report.resources :causes, :controller => 'users/reports/causes', :only => :index
-    report.resources :subjects, :controller => 'users/reports/subjects', :only => :index
+    report.resources :subjects, :controller => 'reports/subjects', :only => :index
     report.resource :agenda, :controller => 'users/reports/agendas', :only => :show
     report.resource :visibility, :controller => 'users/reports/visibilities', :only => :show
     report.resource :image, :as => 'thumbnail', :only => [:edit, :update, :create], :controller => 'users/reports/thumbnails'
@@ -22,7 +22,7 @@ ActionController::Routing::Routes.draw do |map|
     interest_group.resources :report_scores, :as => :scores, :controller => 'interest_groups/scores', :only => [:index, :show]
     interest_group.resource :follows, :controller => 'interest_groups/follows', :only => [:show, :create, :destroy]
     interest_group.resources :causes, :controller => 'interest_groups/causes', :only => :index
-    interest_group.resources :subjects, :controller => 'interest_groups/subjects', :only => :index
+    interest_group.resources :subjects, :controller => 'reports/subjects', :only => :index
     interest_group.resource :agenda, :controller => 'interest_groups/agendas', :only => :show
     interest_group.resource :image, :controller => 'interest_groups/images', :only => [:edit, :create, :update]
     interest_group.resources :bill_criteria, :only => [:index, :new, :create, :destroy], :controller => 'interest_groups/bill_criteria'
