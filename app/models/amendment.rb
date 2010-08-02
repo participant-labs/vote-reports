@@ -5,6 +5,7 @@ class Amendment < ActiveRecord::Base
 
   has_many :rolls, :as => :subject, :dependent => :destroy
 
+  named_scope :by_offered_on, :order => 'offered_on DESC'
   named_scope :with_votes, :select => 'DISTINCT amendments.*', :joins => :rolls
 
   def title
