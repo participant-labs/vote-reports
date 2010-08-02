@@ -42,7 +42,8 @@
 - :version: ">= 2.11.2"
   :name: newrelic_rpm
 - :name: nokogiri
-- :name: paperclip
+- :version: ">= 2.3.3"
+  :name: paperclip
 - :name: pg
 - :version: ">= 0.6.12"
   :name: rpx_now
