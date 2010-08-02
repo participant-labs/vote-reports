@@ -11,7 +11,7 @@
   <%- if @interest_group.reports.present? -%>
     <h2 id="historical_ratings">Historical Ratings</h2>
     <table class="interest_group_reports">
-    <%- @interest_group.reports.each do |report| -%>
+    <%- @interest_group.reports.by_rated_on.each do |report| -%>
     <tr>
       <th>In <%= report.timespan %></th>
       <td><%= link_to pluralize(report.ratings.count, 'ratings'), report.vote_smart_url %></td>
