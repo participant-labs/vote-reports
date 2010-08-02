@@ -38,7 +38,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :bills, :only => [:index, :show] do |bill|
     bill.resource :titles, :controller => 'bills/titles', :only => :show
-    bill.resources :amendments, :controller => 'bills/amendments', :only => :index
+    bill.resources :amendments, :controller => 'bills/amendments', :only => [:index, :show]
   end
   map.resources :rolls, :only => [:show]
 

@@ -1,3 +1,5 @@
 <span class="amendment">
-  <span class="title"><%= amendment.chamber.upcase %><%= amendment.number %>: <%= amendment.title %></span>
+  <% link_to bill_amendment_path(amendment.bill, amendment), :class => 'fancyboxy title' do %>
+    <%= amendment.chamber.upcase %><%= amendment.number %>: <%= amendment.title %>
+  <% end %>
 </span>
