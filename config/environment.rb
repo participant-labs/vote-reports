@@ -42,7 +42,7 @@ Rails::Initializer.run do |config|
   config.gem 'Empact-mongo_session_store', :lib => 'mongo_session_store'
   config.gem 'newrelic_rpm', :version => '>= 2.11.2'
   config.gem 'nokogiri'
-  config.gem 'paperclip'
+  config.gem 'paperclip', :version => '>= 2.3.3'
   config.gem 'pg'
   config.gem 'rpx_now', :version => '>= 0.6.12'
   config.gem 'sexy_pg_constraints'
