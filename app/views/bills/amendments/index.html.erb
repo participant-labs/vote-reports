@@ -16,7 +16,14 @@
           <%- end -%>
         </td>
         <td><%= amendment.title %></td>
-        <td><%= link_to pluralize(amendment.rolls.count, 'vote'), bill_amendment_path(@bill, amendment), :class => 'fancyboxy' if amendment.rolls.present? %></td>
+        <td>
+          <%- if amendment.rolls.count > 1 -%>
+            <%= link_to pluralize(amendment.rolls.count, 'vote'), bill_amendment_path(@bill, amendment), :class => 'fancyboxy' %>
+          <%- elsif amendment.rolls.count == 1 -%>
+            <%- roll = amendment.rolls.first -%>
+            <%= link_to roll.result, roll_path(roll), :title => roll.question %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </table>
