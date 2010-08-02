@@ -30,8 +30,10 @@
     <%- if @bill.summary.present? -%>
       <li><a href="#bill_summary">Summary</a></li>
     <%- end -%>
-    <%- if @amendments.present? -%>
-      <li><a href="#amendments">Amendments <span class="count"><%= @amendments.count %></span></a></li>
+    <%- if @amendments_count > 0 -%>
+      <li><% link_to bill_amendments_path(@bill) do %>
+        <span>Amendments <span class="count"><%= @amendments_count %></span></span>
+      <% end %></li>
     <% end %>
     <%- if @rolls.present? -%>
       <li><a href="#votes">Votes <span class="count"><%= @rolls.count %></span></a></li>
@@ -67,28 +69,6 @@
   <%- if @bill.summary.present? -%>
   <div id="bill_summary">
     <%= to_html(@bill.summary) %>
-  </div>
-  <%- end -%>
-
-  <%- if @amendments.present? -%>
-  <div id="amendments" class="section">
-    <h2>Amendments</h2>
-    <table>
-      <tr>
-        <th></th>
-        <th>Offered On</th>
-        <th>Description</th>
-        <th></th>
-      </tr>
-      <% @amendments.by_offered_on.each do |amendment|  %>
-        <tr>
-          <th><%= amendment.chamber.upcase %><%= amendment.number %></th>
-          <td><%= amendment.offered_on.to_s(:rfc822) %></td>
-          <td><%= amendment.title %></td>
-          <td><%= pluralize(amendment.rolls.count, 'vote') if amendment.rolls.present? %></td>
-        </tr>
-      <% end %>
-    </table>
   </div>
   <%- end -%>
 
