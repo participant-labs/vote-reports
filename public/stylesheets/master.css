@@ -3,6 +3,13 @@ table.interest_group_reports {
   padding-left: 3.333em;
 }
 
+#amendments th a {
+  text-decoration: none;
+}
+#amendments th a:hover {
+  text-decoration: underline;
+}
+
 h2 .your_location {
   font-weight: normal;
 }

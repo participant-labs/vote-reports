@@ -15,4 +15,8 @@ class Amendment < ActiveRecord::Base
   def sponsoring_politician
     sponsor if sponsor_type == 'Politician'
   end
+
+  def display_name
+    "#{chamber.upcase}.Amdt. #{number}"
+  end
 end
