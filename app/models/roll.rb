@@ -28,6 +28,9 @@ class Roll < ActiveRecord::Base
   named_scope :on_bill_passage, :conditions => [
     "rolls.roll_type IN(?) AND rolls.subject_type = ?", PASSAGE_TYPES, 'Bill']
 
+  named_scope :house, :conditions => {:where => 'house'}
+  named_scope :senate, :conditions => {:where => 'senate'}
+
   before_validation :set_display_name
 
   class << self
