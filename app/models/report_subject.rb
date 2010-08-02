@@ -8,6 +8,9 @@ class ReportSubject < ActiveRecord::Base
 
   class << self
     def generate_for(report)
+      require 'ar-extensions'
+      require 'ar-extensions/import/postgresql'
+
       ReportSubject.delete_all(:report_id => report.id)
       subjects = report.bill_criteria_subjects.scoped(
         :select => "DISTINCT(subjects.id), COUNT(subjects.id) AS count",
@@ -18,9 +21,9 @@ class ReportSubject < ActiveRecord::Base
 
       if report.interest_group
         count = report.interest_group.reports.count
-        report.interest_group.subjects.each do |subject|
-          subjects[subject] ||= 0
-          subjects[subject] += count
+        report.interest_group.interest_group_subjects.each do |interest_group_subject|
+          subjects[interest_group_subject.subject] ||= 0
+          subjects[interest_group_subject.subject] += count
         end
       end
 
@@ -42,9 +45,6 @@ class ReportSubject < ActiveRecord::Base
     end
 
     def generate!
-      require 'ar-extensions'
-      require 'ar-extensions/import/postgresql'
-
       transaction do
         Report.paginated_each(:conditions => {:cause_id => nil}) do |report|
           generate_for(report)
