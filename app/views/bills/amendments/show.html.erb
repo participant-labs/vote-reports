@@ -1,5 +1,5 @@
 <div style="max-width: 750px;">
-  <h2><%= @amendment.chamber.upcase %><%= @amendment.number %> - <%= @amendment.title %></h2>
+  <h2><%= @amendment.display_name %> - <%= @amendment.title %></h2>
   <dl>
     <dt>Offered on</dt>
     <dd><%= @amendment.offered_on.to_s(:rfc822) %></dd>
