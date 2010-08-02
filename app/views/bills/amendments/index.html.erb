@@ -1,0 +1,19 @@
+<div id="amendments" class="section">
+  <h2>Amendments</h2>
+  <table>
+    <tr>
+      <th></th>
+      <th>Offered On</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+    <% @amendments.each do |amendment|  %>
+      <tr>
+        <th><%= amendment.chamber.upcase %><%= amendment.number %></th>
+        <td><%= amendment.offered_on.to_s(:rfc822) %></td>
+        <td><%= amendment.title %></td>
+        <td><%= link_to pluralize(amendment.rolls.count, 'vote'), bill_amendment_path(@bill, amendment), :class => 'fancyboxy' if amendment.rolls.present? %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
