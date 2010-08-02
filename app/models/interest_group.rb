@@ -31,7 +31,12 @@ class InterestGroup < ActiveRecord::Base
   # The ReportSubject generator takes InterestGroupSubjects into account
   delegate :subjects, :to => :report
 
-  has_many :reports, :class_name => 'InterestGroupReport'
+  has_many :reports, :class_name => 'InterestGroupReport' do
+    def by_rated_on
+      sort_by(&:rated_on).reverse
+    end
+  end
+
   has_many :ratings, :through => :reports
   def rated_politicians
     Politician.scoped(
