@@ -44,7 +44,7 @@ class Users::ReportsController < ApplicationController
 
   def destroy
     @report.destroy
-    flash[:notice] = "Successfully destroyed report."
+    flash[:notice] = "Successfully deleted report."
     redirect_to user_reports_path(@user)
   end
 

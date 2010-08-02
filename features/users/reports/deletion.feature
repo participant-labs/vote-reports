@@ -13,7 +13,7 @@ Feature: Deleting Reports
     And I follow "Edit Report"
     And I follow "Delete Report"
     And I press "Delete Report"
-    Then I should see "Successfully destroyed report."
+    Then I should see "Successfully deleted report."
     And I should not see "My Report"
 
   Scenario: Attempting to deleting someone else's report from the show page
