@@ -11,4 +11,8 @@ class Amendment < ActiveRecord::Base
   def title
     purpose || description
   end
+
+  def sponsoring_politician
+    sponsor if sponsor_type == 'Politician'
+  end
 end
