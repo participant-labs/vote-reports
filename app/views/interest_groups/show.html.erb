@@ -38,7 +38,13 @@
 <div class="ui-tabs" id="<%= dom_id(@interest_group, :tabs) %>">
   <ul>
     <li><%= link_to content_tag(:span, 'Scores'), interest_group_report_scores_path(@interest_group, :format => :html), :title => 'Scores' %></li>
-    <li><%= link_to content_tag(:span, 'Agenda'), interest_group_agenda_path(@interest_group, :format => :html), :title => 'Agenda' %></li>
+    <li><%- link_to interest_group_agenda_path(@interest_group, :format => :html), :title => 'Agenda' do -%>
+      <span>Agenda
+        <%- if (count = @interest_group.bill_criteria.active_count) > 0 -%>
+          <span class="count"><%= count %></span>
+        <%- end -%>
+      </span>
+    <%- end -%></li>
     <li><% link_to interest_group_subjects_path(@interest_group, :format => :html), :title => 'Subjects' do %>
       <span>Subjects <span class="count"><%= @interest_group.subjects.count %></span></span>
     <% end %></li>
