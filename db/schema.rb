@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100803045912) do
+ActiveRecord::Schema.define(:version => 20100803133755) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -20,6 +20,20 @@ ActiveRecord::Schema.define(:version => 20100803045912) do
 
   add_index "adminships", ["created_by_id"], :name => "index_adminships_on_created_by_id"
   add_index "adminships", ["user_id"], :name => "index_adminships_on_user_id", :unique => true
+
+  create_table "amendment_criteria", :force => true do |t|
+    t.integer  "amendment_id",    :null => false
+    t.integer  "report_id",       :null => false
+    t.boolean  "support",         :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "explanatory_url"
+  end
+
+  add_index "amendment_criteria", ["amendment_id", "report_id"], :name => "index_amendment_criteria_on_amendment_id_and_report_id", :unique => true
+  add_index "amendment_criteria", ["amendment_id"], :name => "index_amendment_criteria_on_amendment_id"
+  add_index "amendment_criteria", ["report_id"], :name => "index_amendment_criteria_on_report_id"
+  add_index "amendment_criteria", ["support"], :name => "index_amendment_criteria_on_support"
 
   create_table "amendments", :force => true do |t|
     t.integer  "bill_id",      :null => false
@@ -706,6 +720,8 @@ ActiveRecord::Schema.define(:version => 20100803045912) do
 
   add_foreign_key "adminships", "users", :name => "adminships_created_by_id_reference", :column => "created_by_id"
   add_foreign_key "adminships", "users", :name => "adminships_user_id_reference"
+
+  add_foreign_key "amendment_criteria", "amendments", :name => "amendment_criteria_amendment_id_fk"
 
   add_foreign_key "bill_criteria", "bills", :name => "bill_criteria_bill_id_reference", :dependent => :delete
   add_foreign_key "bill_criteria", "reports", :name => "bill_criteria_report_id_reference", :dependent => :delete

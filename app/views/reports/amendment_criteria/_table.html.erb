@@ -1,0 +1,41 @@
+<div id="report_amendments_results_table">
+  <%- if amendments.present? -%>
+    <% form_for report, :url => report_bill_amendment_criteria_path(report, bill), :html => {:method => :post} do |f| %>
+      <table>
+        <thead>
+          <th>Bill</th>
+          <th>Support/Oppose</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <%- build_criteria_for(report, amendments).each do |criterion| -%>
+            <%- f.fields_for :amendment_criteria, criterion do |amendment_criteria_fields| -%>
+              <tr>
+                <td>
+                  <%= render 'amendments/amendment', :amendment => criterion.amendment %>
+                  <%= amendment_criteria_fields.hidden_field :amendment_id %>
+                  <%= amendment_criteria_fields.hidden_field :id unless criterion.new_record? %>
+                </td>
+                <td>
+                  <%= amendment_criteria_fields.label :support_true, 'Support' %>
+                  <%= amendment_criteria_fields.radio_button :support, true %><br />
+                  <%= amendment_criteria_fields.label :support_false, 'Oppose' %>
+                  <%= amendment_criteria_fields.radio_button :support, false %>
+                  <a href="#" title="Show additional options" class="act-toggle" rel="<%= dom_id(criterion.amendment, :extra_fields) %>">url</a>
+                </td>
+                <td id="<%= dom_id(criterion.amendment, :extra_fields) %>" class="hide">
+                  <%= amendment_criteria_fields.label :explanatory_url, 'Explanatory Link' %>
+                  <%= amendment_criteria_fields.text_field :explanatory_url %>
+                </td>
+              </tr>
+            <%- end -%>
+          <%- end -%>
+        </tbody>
+      </table>
+      <%= will_paginate amendments, :class => 'act-replace', :rel => 'report_amendments_results_table' %>
+      <p><%= f.submit 'Save Amendments to Report' %></p>
+    <% end %>
+  <%- else -%>
+    <p>No amendments found</p>
+  <%- end -%>
+</div>

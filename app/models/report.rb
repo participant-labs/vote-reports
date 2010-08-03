@@ -196,6 +196,8 @@ class Report < ActiveRecord::Base
   end
   has_many :bills, :through => :bill_criteria
 
+  has_many :amendment_criteria, :dependent => :destroy
+
   has_many :follows, :class_name => 'ReportFollow', :dependent => :destroy
   has_many :followers, :through => :follows, :source => :user
 
