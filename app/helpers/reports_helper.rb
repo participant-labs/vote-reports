@@ -16,10 +16,17 @@ module ReportsHelper
     end
   end
 
-  def build_criteria_for(report, bills)
-    bills.map do |bill|
-      report.bill_criteria.find_by_bill_id(bill.id) ||
-        report.bill_criteria.build(:bill_id => bill.id)
+  def build_criteria_for(report, criteria_targets)
+    if criteria_targets.first.is_a?(Bill)
+      criteria_targets.map do |bill|
+        report.bill_criteria.find_by_bill_id(bill.id) ||
+          report.bill_criteria.build(:bill_id => bill.id)
+      end
+    else
+      criteria_targets.map do |amendment|
+        report.amendment_criteria.find_by_amendment_id(amendment.id) ||
+          report.amendment_criteria.build(:amendment_id => amendment.id)
+      end
     end
   end
 

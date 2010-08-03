@@ -13,6 +13,9 @@
               <tr>
                 <td>
                   <%= render 'bills/bill', :bill => criterion.bill %>
+                  <%- if criterion.bill.amendments.present? -%>
+                    (<%= link_to 'amendments', new_report_bill_amendment_criterion_path(report, criterion.bill), :class => 'fancyboxy' %>)
+                  <%- end -%>
                   <%= bill_criteria_fields.hidden_field :bill_id %>
                   <%= bill_criteria_fields.hidden_field :id unless criterion.new_record? %>
                 </td>
