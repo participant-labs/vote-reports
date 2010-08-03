@@ -24,7 +24,7 @@
                     <%= bill_criteria_fields.radio_button :support, true %><br />
                     <%= bill_criteria_fields.label :support_false, 'Oppose' %>
                     <%= bill_criteria_fields.radio_button :support, false %>
-                    <a href="#" title="Show additional options" class="act-toggle" rel="<%= dom_id(criterion.bill, :extra_fields) %>">+</a>
+                    <a href="#" title="Show additional options" class="act-toggle" rel="<%= dom_id(criterion.bill, :extra_fields) %>">url</a>
                   <%- end -%>
                 </td>
                 <td id="<%= dom_id(criterion.bill, :extra_fields) %>" class="hide">
