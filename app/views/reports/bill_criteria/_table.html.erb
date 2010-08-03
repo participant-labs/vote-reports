@@ -20,15 +20,11 @@
                   <%= bill_criteria_fields.hidden_field :id unless criterion.new_record? %>
                 </td>
                 <td>
-                  <%- if criterion.bill.old_and_unvoted? -%>
-                    <span class="info" title="This bill has no roll-call votes to score by">unvoted</span>
-                  <%- else -%>
-                    <%= bill_criteria_fields.label :support_true, 'Support' %>
-                    <%= bill_criteria_fields.radio_button :support, true %><br />
-                    <%= bill_criteria_fields.label :support_false, 'Oppose' %>
-                    <%= bill_criteria_fields.radio_button :support, false %>
-                    <a href="#" title="Show additional options" class="act-toggle" rel="<%= dom_id(criterion.bill, :extra_fields) %>">url</a>
-                  <%- end -%>
+                  <%= bill_criteria_fields.label :support_true, 'Support' %>
+                  <%= bill_criteria_fields.radio_button :support, true %><br />
+                  <%= bill_criteria_fields.label :support_false, 'Oppose' %>
+                  <%= bill_criteria_fields.radio_button :support, false %>
+                  <a href="#" title="Show additional options" class="act-toggle" rel="<%= dom_id(criterion.bill, :extra_fields) %>">url</a>
                 </td>
                 <td id="<%= dom_id(criterion.bill, :extra_fields) %>" class="hide">
                   <%= bill_criteria_fields.label :explanatory_url, 'Explanatory Link' %>

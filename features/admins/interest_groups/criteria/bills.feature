@@ -10,7 +10,7 @@ Feature: Adding Bill Criteria to Interest Groups
 
   Scenario Outline: Admin adds a bill to an interest group
     Given an interest group named "Target Interest Group"
-    And <bill type> named "USA PATRIOT Reauthorization Act of 2009"
+    And a <bill type> bill named "USA PATRIOT Reauthorization Act of 2009"
     When I fill in "Search" with "patriot"
     And I press "Search"
     Then the "Search" field should contain "patriot"
@@ -31,9 +31,9 @@ Feature: Adding Bill Criteria to Interest Groups
     Then I should be on the interest group page for "Target Interest Group"
 
   Examples:
-    | bill type                            |
-    | a pass-voted, current-congress bill  |
-    | a pass-voted, previous-congress bill |
+    | bill type                     |
+    | pass-voted, current-congress  |
+    | pass-voted, previous-congress |
 
   Scenario: Admin adds to a report from 2 bill searches in succession
     Given a pass-voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
@@ -57,8 +57,8 @@ Feature: Adding Bill Criteria to Interest Groups
     And I should see "USA PATRIOT Reauthorization Act of 2009"
     And I should see "Iraq War Authorization"
 
-  Scenario Outline: Admin can't add an unvoted bill to a report
-    Given <bill type> named "USA PATRIOT Reauthorization Act of 2009"
+  Scenario Outline: Admin can add an unvoted bill to a report
+    Given a <bill type> bill named "USA PATRIOT Reauthorization Act of 2009"
     When I fill in "Search" with "patriot"
     And I press "Search"
     Then the "Search" field should contain "patriot"
@@ -69,28 +69,16 @@ Feature: Adding Bill Criteria to Interest Groups
     When I follow "View this Interest Group"
     Then I should be on the interest group page for "AARP"
     When I follow "Agenda"
-    Then I should see "no votes yet"
+    Then I should see "<vote status>"
     And I should see "Support"
     And I should see "USA PATRIOT Reauthorization Act of 2009"
 
   Examples:
-    | bill type                            |
-    | a voted, current-congress bill       |
-    | an un-voted, current-congress bill   |
-
-  Scenario Outline: Admin is unable to select an invalid bill for report
-    Given an <bill type> bill named "USA PATRIOT Reauthorization Act of 2009"
-    When I fill in "Search" with "patriot"
-    And I press "Search"
-    Then the "Search" field should contain "patriot"
-    And I should see "USA PATRIOT Reauthorization Act of 2009"
-    And I should see "unvoted"
-    And I should not see "No bills found"
-
-  Examples:
-    | bill type                   |
-    | voted, previous-congress    |
-    | un-voted, previous-congress |
+    | bill type                   | vote status  |
+    | voted, current-congress     | no votes yet |
+    | un-voted, current-congress  | no votes yet |
+    | voted, previous-congress    | no votes     |
+    | un-voted, previous-congress | no votes     |
 
   Scenario Outline: Admin can search voted bills only
     Given a <bill type> bill named "USA PATRIOT Reauthorization Act of 2009"
@@ -102,9 +90,9 @@ Feature: Adding Bill Criteria to Interest Groups
     And I should not see "No bills found"
 
   Examples:
-    | bill type                          |
-    | pass-voted, current-congress       |
-    | pass-voted, previous-congress      |
+    | bill type                     |
+    | pass-voted, current-congress  |
+    | pass-voted, previous-congress |
 
   Scenario Outline: Admin will not see unvoted bills when searching voted bills only
     Given a <bill type> bill named "USA PATRIOT Reauthorization Act of 2009"
