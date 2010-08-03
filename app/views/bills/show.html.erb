@@ -75,18 +75,22 @@
   <%- if @rolls.present? -%>
   <div id="votes" class="section">
     <h2>Roll Call Votes</h2>
-    <h3>In the Senate</h3>
-    <ul>
-      <% @rolls.senate.each do |roll|  %>
-        <li><%= render roll %></li>
-      <% end %>
-    </ul>
-    <h3>In the House of Representatives</h3>
-    <ul>
-      <% @rolls.house.each do |roll|  %>
-        <li><%= render roll %></li>
-      <% end %>
-    </ul>
+    <%- if @rolls.senate.present? -%>
+      <h3>In the Senate</h3>
+      <ul>
+        <% @rolls.senate.each do |roll|  %>
+          <li><%= render roll %></li>
+        <% end %>
+      </ul>
+    <%- end -%>
+    <%- if @rolls.house.present? -%>
+      <h3>In the House of Representatives</h3>
+      <ul>
+        <% @rolls.house.each do |roll|  %>
+          <li><%= render roll %></li>
+        <% end %>
+      </ul>
+    <%- end -%>
   </div>
   <%- end -%>
 </div>
