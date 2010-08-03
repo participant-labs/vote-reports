@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100801170510) do
+ActiveRecord::Schema.define(:version => 20100803045912) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20100801170510) do
     t.text     "purpose"
     t.integer  "sequence"
     t.integer  "congress_id",  :null => false
+    t.string   "short_name",   :null => false
   end
 
   add_index "amendments", ["bill_id", "chamber", "number"], :name => "amendments_number_bill_id_chamber_unique", :unique => true
@@ -42,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20100801170510) do
   add_index "amendments", ["bill_id"], :name => "index_amendments_on_bill_id"
   add_index "amendments", ["chamber", "congress_id", "number"], :name => "amendments_number_chamber_congress_id_unique", :unique => true
   add_index "amendments", ["congress_id"], :name => "index_amendments_on_congress_id"
+  add_index "amendments", ["short_name", "bill_id"], :name => "index_amendments_on_short_name_and_bill_id", :unique => true
+  add_index "amendments", ["short_name"], :name => "index_amendments_on_short_name"
   add_index "amendments", ["sponsor_id", "sponsor_type"], :name => "index_amendments_on_sponsor_id_and_sponsor_type"
 
   create_table "bill_committee_actions", :force => true do |t|
@@ -137,6 +140,8 @@ ActiveRecord::Schema.define(:version => 20100801170510) do
     t.datetime "updated_at"
     t.string   "cached_slug"
   end
+
+  add_index "causes", ["cached_slug"], :name => "index_causes_on_cached_slug"
 
   create_table "committee_meetings", :force => true do |t|
     t.string   "name"

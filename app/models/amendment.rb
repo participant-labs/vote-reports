@@ -5,6 +5,9 @@ class Amendment < ActiveRecord::Base
 
   has_many :rolls, :as => :subject, :dependent => :destroy
 
+  has_friendly_id :short_name, :scope => :bill
+  before_create :set_short_name
+
   named_scope :by_offered_on, :order => 'offered_on DESC'
   named_scope :with_votes, :select => 'DISTINCT amendments.*', :joins => :rolls
 
@@ -18,5 +21,11 @@ class Amendment < ActiveRecord::Base
 
   def display_name
     "#{chamber.upcase}.Amdt. #{number}"
+  end
+
+  private
+
+  def set_short_name
+    self.short_name = "#{chamber}-#{number}"
   end
 end
