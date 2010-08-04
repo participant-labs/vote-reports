@@ -1,6 +1,6 @@
 <div id="report_amendments_results_table">
   <%- if amendments.present? -%>
-    <% form_for report, :url => report_bill_amendment_criteria_path(report, bill), :html => {:method => :post} do |f| %>
+    <% form_for report, :url => report_amendment_criteria_path(report), :html => {:method => :post} do |f| %>
       <table>
         <thead>
           <th>Bill</th>
