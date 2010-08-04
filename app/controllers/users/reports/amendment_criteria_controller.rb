@@ -31,7 +31,7 @@ class Users::Reports::AmendmentCriteriaController < ApplicationController
 
   def destroy
     @report.amendment_criteria.find(params[:id]).destroy
-    flash[:notice] = "Successfully deleted report amendment criterion"
+    flash[:notice] = "Successfully deleted amendment from report agenda"
     redirect_to edit_user_report_path(@user, @report, :anchor => 'Edit_Agenda')
   end
 

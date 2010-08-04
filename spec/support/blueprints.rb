@@ -182,6 +182,10 @@ Fixjour :verify => false do
     klass.new(:report => new_report, :bill => new_bill, :support => true)
   end
 
+  define_builder(AmendmentCriterion) do |klass, overrides|
+    klass.new(:report => new_report, :amendment => new_amendment, :support => true)
+  end
+
   define_builder(District) do |klass, overrides|
     klass.new(:level => 'state_lower', :state => new_us_state)
   end
