@@ -1,9 +1,12 @@
-<%- with_support ||= false -%>
+<%-
+  with_support ||= false
+  show_year ||= false
+-%>
 
 <%- if with_support -%>
-  <%= support_or_oppose(amendment_criterion) %> - <%= render 'amendments/amendment', :amendment => amendment_criterion.amendment %> <%= criterion_status(amendment_criterion) %>
+  <%= support_or_oppose(amendment_criterion) %> - <%= render 'amendments/amendment', :amendment => amendment_criterion.amendment, :show_year => show_year %> <%= criterion_status(amendment_criterion) %>
 <%- else -%>
   <%- evidence = criterion_evidence(amendment_criterion) -%>
 
-  <%= render 'amendments/amendment', :amendment => amendment_criterion.amendment %> <%= criterion_status(amendment_criterion) %> <%=  raw "- #{evidence}" if evidence %>
+  <%= render 'amendments/amendment', :amendment => amendment_criterion.amendment, :show_year => show_year %> <%= criterion_status(amendment_criterion) %> <%=  raw "- #{evidence}" if evidence %>
 <%- end -%>
