@@ -1,7 +1,7 @@
 authorization do
   role :admin do
     includes :moderator
-    has_permission_on :users, :users_reports, :users_reports_bill_criteria, :reports,
+    has_permission_on :users, :users_reports, :users_reports_bill_criteria, :users_reports_amendment_criteria, :reports,
       :to => [:index, :show, :edit, :update, :new, :create, :destroy]
     has_permission_on :users_adminships, :users_moderatorships, :to => [:create, :destroy]
   end
@@ -22,7 +22,7 @@ authorization do
     has_permission_on :users_rpx_identities, :to => [:create, :destroy] do
       if_attribute :user_id => is {user.id}
     end
-    has_permission_on :reports, :users_reports, :users_reports_bill_criteria, :users_reports_thumbnails, :to => [:show, :index, :new, :create, :edit, :update, :destroy] do
+    has_permission_on :reports, :users_reports, :users_reports_bill_criteria, :users_reports_amendment_criteria, :users_reports_thumbnails, :to => [:show, :index, :new, :create, :edit, :update, :destroy] do
       if_attribute :user_id => is {user.id}
     end
   end
