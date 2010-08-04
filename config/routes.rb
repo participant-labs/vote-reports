@@ -17,6 +17,9 @@ ActionController::Routing::Routes.draw do |map|
     report.resource :visibility, :controller => 'users/reports/visibilities', :only => :show
     report.resource :image, :as => 'thumbnail', :only => [:edit, :update, :create], :controller => 'users/reports/thumbnails'
     report.resources :bill_criteria, :only => [:index, :new, :create, :destroy], :controller => 'users/reports/bill_criteria'
+    report.resources :bills, :only => [] do |bill|
+      bill.resources :amendment_criteria, :only => [:new, :create, :index], :controller => 'users/reports/amendment_criteria'
+    end
   end
   map.resources :interest_groups do |interest_group|
     interest_group.resources :report_scores, :as => :scores, :controller => 'interest_groups/scores', :only => [:index, :show]
