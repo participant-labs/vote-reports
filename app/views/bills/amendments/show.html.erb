@@ -14,9 +14,13 @@
   </dl>
 
   <h3>Votes</h3>
+  <%- if @rolls.present? -%>
   <ul>
     <%- @rolls.each do |roll| -%>
     <li><%= render 'rolls/roll', :roll => roll %></li>
     <%- end -%>
   </ul>
+  <%- else -%>
+    <p>No roll call votes for this amendment</p>
+  <%- end -%>
 </div>
