@@ -49,7 +49,7 @@ Feature: Scoring Reports
     And I wait for delayed job to finish
     When I go to the interest group page for "AARP"
     And I follow "Scores"
-    Then I should see "No scores yet, as the associated bills have not been voted on."
+    Then I should see "No scores yet, as the associated legislation has not been voted on."
 
   Scenario: With Criteria on bills without passage rolls, I should see message noting that as the bills are unvoted, no scores exist
     Given bill "Bovine Security Act of 2009" has the following rolls:
@@ -69,7 +69,7 @@ Feature: Scoring Reports
     And I wait for delayed job to finish
     When I go to the interest group page for "AARP"
     And I follow "Scores"
-    Then I should see "No scores yet, as the associated bills have not been voted on."
+    Then I should see "No scores yet, as the associated legislation has not been voted on."
 
   Scenario: Bill Criteria report generates scores
     Given bill "Bovine Security Act of 2009" has the following passage votes:
