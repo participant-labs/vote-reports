@@ -20,7 +20,7 @@
   <%- if active_amendments.supported.present? -%>
   <ul>
     <%- active_amendments.supported.each do |criterion| -%>
-      <li class="amendment_criterion"><%= render 'amendment_criteria/amendment_criterion', :amendment_criterion => criterion %></li>
+      <li class="amendment_criterion"><%= render 'amendment_criteria/amendment_criterion', :amendment_criterion => criterion, :show_year => true %></li>
     <%- end -%>
   </ul>
   <%- end -%>
@@ -38,7 +38,7 @@
   <%- if active_amendments.opposed.present? -%>
   <ul>
     <%- active_amendments.opposed.each do |criterion| -%>
-      <li class="amendment_criterion"><%= render 'amendment_criteria/amendment_criterion', :amendment_criterion => criterion %></li>
+      <li class="amendment_criterion"><%= render 'amendment_criteria/amendment_criterion', :amendment_criterion => criterion, :show_year => true %></li>
     <%- end -%>
   </ul>
   <%- end -%>
@@ -59,7 +59,7 @@
   <%- if unvoted_amendments.present? -%>
   <ul>
     <%- unvoted_amendments.each do |criterion| -%>
-      <li class="amendment_criterion"><%= render 'amendment_criteria/amendment_criterion', :amendment_criterion => criterion, :with_support => true %></li>
+      <li class="amendment_criterion"><%= render 'amendment_criteria/amendment_criterion', :amendment_criterion => criterion, :with_support => true, :show_year => true %></li>
     <%- end -%>
   </ul>
   <%- end -%>
