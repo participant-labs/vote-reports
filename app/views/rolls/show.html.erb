@@ -22,18 +22,10 @@
   <table>
     <thead>
       <tr>
-        <%- if @roll.aye > 0 -%>
-          <th>For: <%= @roll.aye %></th>
-        <%- end -%>
-        <%- if @roll.nay > 0 -%>
-          <th>Against: <%= @roll.nay %></th>
-        <%- end -%>
-        <%- if @roll.not_voting > 0 -%>
-          <th>Not Voting: <%= @roll.not_voting %></th>
-        <%- end -%>
-        <%- if @roll.present > 0 -%>
-          <th>Present: <%= @roll.present %></th>
-        <%- end -%>
+        <th>For: <%= @roll.aye %></th>
+        <th>Against: <%= @roll.nay %></th>
+        <th>Not Voting: <%= @roll.not_voting %></th>
+        <th>Present: <%= @roll.present %></th>
       </tr>
     </thead>
     <tbody>
