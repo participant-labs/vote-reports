@@ -1,14 +1,16 @@
-Given /^(report "[^\"]*") has the following bill criteri(?:a|on):$/ do |report, table|
-  table.map_column!('bill') {|title| Bill.with_title(title).first }
+Given /^(report "[^\"]*") has the following (.*) criteri(?:a|on):$/ do |report, criterion_type, table|
+  type = criterion_type.classify.constantize
+  table.map_column!(criterion_type) {|title| type.with_title(title).first }
   table.hashes.each do |attrs|
-    create_bill_criterion(attrs.symbolize_keys.merge(:report => report))
+    send(:"create_#{criterion_type}_criterion", attrs.symbolize_keys.merge(:report => report))
   end
 end
 
-Given /^(interest group "[^\"]*") has the following bill criteri(?:a|on):$/ do |interest_group, table|
-  table.map_column!('bill') {|title| Bill.with_title(title).first }
+Given /^(interest group "[^\"]*") has the following (.*) criteri(?:a|on):$/ do |interest_group, criterion_type, table|
+  type = criterion_type.classify.constantize
+  table.map_column!(criterion_type) {|title| type.with_title(title).first }
   table.hashes.each do |attrs|
-    create_bill_criterion(attrs.symbolize_keys.merge(:report => interest_group.report))
+    send(:"create_#{criterion_type}_criterion", attrs.symbolize_keys.merge(:report => interest_group.report))
   end
 end
 
