@@ -8,7 +8,7 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
       return
     end
     @bill = Bill.find(params[:bill_id])
-    @amendments = @bill.amendments.paginate :page => params[:page]
+    @amendments = @bill.amendments.paginate :page => params[:page], :order => 'chamber, number'
 
     render :partial => 'reports/amendment_criteria/table', :locals => {
       :report => @report, :bill => @bill, :amendments => @amendments
@@ -16,8 +16,8 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
   end
 
   def create
-    if @report.update_attributes(params[:report].slice(:bill_criteria_attributes))
-      flash[:notice] = "Successfully updated interest group bills."
+    if @report.update_attributes(params[:report].slice(:amendment_criteria_attributes))
+      flash[:notice] = "Successfully updated interest group amendments."
       redirect_to edit_interest_group_path(@interest_group, :anchor => 'Add_Bills')
     else
       render :action => 'new', :layout => false

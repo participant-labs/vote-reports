@@ -20,7 +20,7 @@
     </table>
   <%- end -%>
 
-  <%- if @report.bill_criteria.present? -%>
+  <%- if @report.has_criteria? -%>
     <%= render 'reports/bill_criteria/legislative_agenda', :report => @report %>
   <%- end -%>
 </div>

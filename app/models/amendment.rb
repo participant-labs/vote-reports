@@ -6,10 +6,14 @@ class Amendment < ActiveRecord::Base
   has_many :rolls, :as => :subject, :dependent => :destroy
 
   has_friendly_id :short_name, :scope => :bill
-  before_create :set_short_name
+  before_validation_on_create :set_short_name
 
   named_scope :by_offered_on, :order => 'offered_on DESC'
   named_scope :with_votes, :select => 'DISTINCT amendments.*', :joins => :rolls
+
+  has_many :passage_rolls, :as => :subject, :class_name => 'Roll', :conditions => [
+    "rolls.roll_type IN(?)", Roll::PASSAGE_TYPES
+  ]
 
   def title
     purpose || description

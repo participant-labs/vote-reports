@@ -27,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
     interest_group.resource :image, :controller => 'interest_groups/images', :only => [:edit, :create, :update]
     interest_group.resources :bill_criteria, :only => [:index, :new, :create, :destroy], :controller => 'interest_groups/bill_criteria'
     interest_group.resources :bills, :only => [] do |bill|
-      bill.resources :amendment_criteria, :only => [:new, :index], :controller => 'interest_groups/amendment_criteria'
+      bill.resources :amendment_criteria, :only => [:new, :create, :index], :controller => 'interest_groups/amendment_criteria'
     end
   end
   map.resources :politicians, :only => [:index, :show] do |politician|

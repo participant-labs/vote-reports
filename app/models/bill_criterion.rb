@@ -2,6 +2,7 @@ class BillCriterion < ActiveRecord::Base
   include Criterion
 
   belongs_to :bill
+  alias_method :subject, :bill
 
   validates_presence_of :bill, :report
   validates_uniqueness_of :bill_id, :scope => "report_id"
