@@ -8,15 +8,15 @@ module BillCriteriaHelper
     end
   end
 
-  def bill_criterion_evidence(criterion)
+  def criterion_evidence(criterion)
     if criterion.explanatory_url.present?
       link_to 'Evidence', criterion.explanatory_url
     end
   end
 
-  def bill_criterion_status(criterion)
+  def criterion_status(criterion)
     if criterion.unvoted?
-      content_tag :span, criterion.bill.congress.current? ? "(no votes yet)" : "(no votes)", :class => 'info', :title => 'We have no record of roll call votes for this bill'
+      content_tag :span, criterion.subject.congress.current? ? "(no votes yet)" : "(no votes)", :class => 'info', :title => 'We have no record of roll call votes for this bill'
     end
   end
 end

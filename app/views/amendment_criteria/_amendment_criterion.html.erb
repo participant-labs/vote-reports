@@ -1,0 +1,9 @@
+<%- with_support ||= false -%>
+
+<%- if with_support -%>
+  <%= support_or_oppose(amendment_criterion) %> - <%= render 'amendments/amendment', :amendment => amendment_criterion.amendment %> <%= criterion_status(amendment_criterion) %>
+<%- else -%>
+  <%- evidence = criterion_evidence(amendment_criterion) -%>
+
+  <%= render 'amendments/amendment', :amendment => amendment_criterion.amendment %> <%= criterion_status(amendment_criterion) %> <%=  raw "- #{evidence}" if evidence %>
+<%- end -%>

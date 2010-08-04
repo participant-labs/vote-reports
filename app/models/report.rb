@@ -198,6 +198,10 @@ class Report < ActiveRecord::Base
 
   has_many :amendment_criteria, :dependent => :destroy
 
+  def has_criteria?
+    bill_criteria.present? || amendment_criteria.present?
+  end
+
   has_many :follows, :class_name => 'ReportFollow', :dependent => :destroy
   has_many :followers, :through => :follows, :source => :user
 
@@ -206,6 +210,7 @@ class Report < ActiveRecord::Base
   validate :name_not_reserved
 
   accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
+  accepts_nested_attributes_for :amendment_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
 
   validates_presence_of :name
   validate :ensure_only_one_owner
