@@ -23,12 +23,12 @@ Given /^the following bill passage votes:$/ do |table|
   end
 end
 
-Given /^(bill "[^\"]*") has the following roll votes:$/ do |bill, table|
+Given /^((?:bill|amendment) "[^\"]*") has the following roll votes:$/ do |bill_or_amendment, table|
   table.map_column!('politician') {|name| Politician.with_name(name).first }
   table.hashes.each do |attrs|
     politician = attrs.delete('politician')
     rolls = attrs.keys.inject({}) do |rolls, roll_type|
-      rolls[roll_type] = bill.rolls.find_by_roll_type(roll_type)
+      rolls[roll_type] = bill_or_amendment.rolls.find_by_roll_type(roll_type)
       raise "Roll type '#{roll_type}' not found" unless rolls[roll_type]
       rolls
     end
