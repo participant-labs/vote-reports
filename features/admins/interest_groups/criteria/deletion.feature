@@ -37,3 +37,22 @@ Feature: Deleting Criteria from Reports
     And I follow "Scores"
     Then I should not see "Piyush Jindal"
     And I should see "No ratings on record for this group"
+
+  Scenario: Report owner deletes an existing amendment criterion
+    Given I am signed in as an Admin
+    And an interest group named "AARP"
+    And a pass-voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
+    And an amendment named "Fix this thing" on bill "USA PATRIOT Reauthorization Act of 2009"
+    And interest group "AARP" has the following amendment criterion:
+      | amendment      | support |
+      | Fix this thing | true    |
+    When I go to the interest group page for "AARP"
+    And I follow "Edit Interest Group"
+    And I follow "Edit Agenda"
+    And I follow "Remove"
+    Then I should see "Successfully deleted amendment from agenda"
+    And I should be on the edit interest group page for "AARP"
+    When I wait for delayed job to finish
+    And I go to the interest group page for "AARP"
+    And I follow "Agenda"
+    Then I should not see "Fix this thing"

@@ -4,7 +4,7 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
 
   def new
     if !@interest_group.friendly_id_status.best?
-      redirect_to new_interest_group_bill_criterion_path(@interest_group), :status => 301
+      redirect_to new_interest_group_amendment_criterion_path(@interest_group), :status => 301
       return
     end
     @bill = Bill.find(params[:bill_id])
@@ -29,8 +29,8 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
   end
 
   def destroy
-    @report.bill_criteria.find(params[:id]).destroy
-    flash[:notice] = "Successfully deleted interest group bill criterion"
+    @report.amendment_criteria.find(params[:id]).destroy
+    flash[:notice] = "Successfully deleted amendment from agenda"
     redirect_to edit_interest_group_path(@interest_group, :anchor => 'Edit_Agenda')
   end
 
