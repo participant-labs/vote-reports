@@ -3,6 +3,10 @@ class Amendment < ActiveRecord::Base
   belongs_to :sponsor, :polymorphic => true
   belongs_to :congress
 
+  ROLL_PASSAGE_TYPES = [
+    "On Agreeing to the Amendments en bloc", "On Agreeing to the Amendment"
+  ]
+
   has_many :rolls, :as => :subject, :dependent => :destroy
 
   has_friendly_id :short_name, :scope => :bill
@@ -15,7 +19,7 @@ class Amendment < ActiveRecord::Base
   }
 
   has_many :passage_rolls, :as => :subject, :class_name => 'Roll', :conditions => [
-    "rolls.roll_type IN(?)", Roll::PASSAGE_TYPES
+    "rolls.roll_type IN(?)", ROLL_PASSAGE_TYPES
   ]
 
   def title

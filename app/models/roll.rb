@@ -1,10 +1,4 @@
 class Roll < ActiveRecord::Base
-  PASSAGE_TYPES = [
-    "On Passage", "Passage, Objections of the President Notwithstanding", "On Agreeing to the Resolution", "On Agreeing to the Resolution, as Amended", "On Motion to Suspend the Rules and Agree", "On Motion to Suspend the Rules and Agree, as Amended", "On Motion to Suspend the Rules and Pass", "On Motion to Suspend the Rules and Pass, as Amended", "On the Cloture Motion", "On Cloture on the Motion to Proceed",
-
-    "On Agreeing to the Amendments en bloc", "On Agreeing to the Amendment"
-  ]
-
   CONSISTENT_TYPES = {
     "On the Motion to Reconsider" => ["On Motion to Reconsider"],
     "On Motion to Suspend the Rules and Pass, as Amended" => ["Suspend Rules and Pass, As Amended", "SUSPEND THE RULES AND PASS, AS AMENDED", "SUSPEND RULES AND PASS, AS AMENDED", "On Motion to Suspend the Rules and Pass, as amended", "SUSPEND THE RULES AND PASS AS AMENDED", "Suspend rules and pass, as amended", "Suspend the Rules and Pass, As Amended", "On motion to Suspend the Rules and Pass, as Amended", "On Motion To Suspend the Rules and Pass, As Amended", "On motion to suspend the rules and pass, as amended", "Suspend the Rules and Pass, as Amended", "On Motion to Suspend the Rules and Pass, As Amended", "ON Motion to Suspend the Rules and Pass, as Amended", "On Motion to Suspend the Rules and Pass, Amended", "On Motion to Supend the Rules and Pass, as Amended", "On Motions to Suspend the Rules and Pass, as Amended", "On motion to Suspend the Rules and Pass, as amended", "On Motion to Suspend Rules and Pass, as Amended", "Motion to Suspend the Rules and Pass, as Amended", "Suspend the Rules and Pass, as amended", "Suspend the rules and Pass, as amended", "SUSPEND THE RULES AND PASS, AS AMENDED .", "Suspend the rules and pass, as amended"],
@@ -30,9 +24,9 @@ class Roll < ActiveRecord::Base
 
   named_scope :by_voted_at, :order => "voted_at DESC"
   named_scope :not_on_bill_passage, :conditions => [
-    "rolls.roll_type NOT IN(?) AND rolls.subject_type = ?", PASSAGE_TYPES, 'Bill']
+    "rolls.roll_type NOT IN(?) AND rolls.subject_type = ?", Bill::ROLL_PASSAGE_TYPES, 'Bill']
   named_scope :on_bill_passage, :conditions => [
-    "rolls.roll_type IN(?) AND rolls.subject_type = ?", PASSAGE_TYPES, 'Bill']
+    "rolls.roll_type IN(?) AND rolls.subject_type = ?", Bill::ROLL_PASSAGE_TYPES, 'Bill']
 
   named_scope :house, :conditions => {:where => 'house'}
   named_scope :senate, :conditions => {:where => 'senate'}
@@ -45,10 +39,6 @@ class Roll < ActiveRecord::Base
         update_all({:roll_type => consistent}, {:roll_type => inconsistent})
       end
     end
-  end
-
-  def passage?
-    PASSAGE_TYPES.include?(roll_type)
   end
 
   def opencongress_url
