@@ -17,9 +17,7 @@ ActionController::Routing::Routes.draw do |map|
     report.resource :visibility, :controller => 'users/reports/visibilities', :only => :show
     report.resource :image, :as => 'thumbnail', :only => [:edit, :update, :create], :controller => 'users/reports/thumbnails'
     report.resources :bill_criteria, :only => [:index, :new, :create, :destroy], :controller => 'users/reports/bill_criteria'
-    report.resources :bills, :only => [] do |bill|
-      bill.resources :amendment_criteria, :only => [:new, :create, :index], :controller => 'users/reports/amendment_criteria'
-    end
+    report.resources :amendment_criteria, :only => [:new, :create, :destroy, :index], :controller => 'users/reports/amendment_criteria'
   end
   map.resources :interest_groups do |interest_group|
     interest_group.resources :report_scores, :as => :scores, :controller => 'interest_groups/scores', :only => [:index, :show]
@@ -29,9 +27,7 @@ ActionController::Routing::Routes.draw do |map|
     interest_group.resource :agenda, :controller => 'interest_groups/agendas', :only => :show
     interest_group.resource :image, :controller => 'interest_groups/images', :only => [:edit, :create, :update]
     interest_group.resources :bill_criteria, :only => [:index, :new, :create, :destroy], :controller => 'interest_groups/bill_criteria'
-    interest_group.resources :bills, :only => [] do |bill|
-      bill.resources :amendment_criteria, :only => [:new, :create, :index], :controller => 'interest_groups/amendment_criteria'
-    end
+    interest_group.resources :amendment_criteria, :only => [:new, :create, :index], :controller => 'interest_groups/amendment_criteria'
   end
   map.resources :politicians, :only => [:index, :show] do |politician|
     politician.resources :causes, :controller => 'politicians/causes', :only => :index
