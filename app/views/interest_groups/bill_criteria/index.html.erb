@@ -59,8 +59,8 @@
               <td>
                 <%= link_to('Remove', interest_group_amendment_criterion_path(@report.user, @report, criterion),
                           :method => :delete,
-                          :title => "Delete criterion for '#{criterion.amendment.titles.first}'",
-                          :confirm => "Are you sure you want to delete the criterion for '#{criterion.amendment.titles.first}'?") -%>
+                          :title => "Delete criterion for '#{criterion.amendment.title}'",
+                          :confirm => "Are you sure you want to delete the criterion for '#{criterion.amendment.title}'?") -%>
               </td>
             </tr>
           <%- end -%>
