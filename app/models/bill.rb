@@ -5,6 +5,10 @@ class Bill < ActiveRecord::Base
     {:select => 'DISTINCT bills.*', :joins => :titles, :conditions => {:'bill_titles.title' => title}}
   }
 
+  ROLL_PASSAGE_TYPES = [
+    "On Passage", "Passage, Objections of the President Notwithstanding", "On Agreeing to the Resolution", "On Agreeing to the Resolution, as Amended", "On Motion to Suspend the Rules and Agree", "On Motion to Suspend the Rules and Agree, as Amended", "On Motion to Suspend the Rules and Pass", "On Motion to Suspend the Rules and Pass, as Amended", "On the Cloture Motion", "On Cloture on the Motion to Proceed",
+  ]
+
   has_friendly_id :opencongress_id
 
   searchable do
@@ -55,7 +59,7 @@ class Bill < ActiveRecord::Base
   has_many :amendments, :dependent => :destroy
   has_many :rolls, :as => :subject, :dependent => :destroy
   has_many :passage_rolls, :as => :subject, :class_name => 'Roll', :conditions => [
-    "rolls.roll_type IN(?)", Roll::PASSAGE_TYPES
+    "rolls.roll_type IN(?)", ROLL_PASSAGE_TYPES
   ]
   has_many :votes, :through => :rolls
   def politicians
