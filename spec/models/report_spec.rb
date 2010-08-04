@@ -63,13 +63,13 @@ describe Report do
 
     it "should not return reports with non-passage votes" do
       roll = create_roll(:subject => @bill)
-      Roll::PASSAGE_TYPES.should_not include(roll.roll_type)
+      Bill::ROLL_PASSAGE_TYPES.should_not include(roll.roll_type)
 
       Report.scored.should == []
     end
 
     it "should return reports with voted bill_criteria" do
-      create_roll(:subject => @bill, :roll_type => Roll::PASSAGE_TYPES.random_element)
+      create_roll(:subject => @bill, :roll_type => Bill::ROLL_PASSAGE_TYPES.random_element)
 
       Report.scored.should == [@report]
     end

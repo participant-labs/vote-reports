@@ -2,11 +2,11 @@ Given /^(bill "[^\"]*") has a roll on the question "([^\"]*)"$/ do |bill, questi
   create_roll(:subject => bill, :question => question)
 end
 
-Given /^(bill "[^\"]*") has the following rolls?:$/ do |bill, table|
+Given /^((?:bill|amendment) "[^\"]*") has the following rolls?:$/ do |bill_or_amendment, table|
   table.hashes.each do |hash|
     if hash['voted_at'].to_s.include?('.')
       hash['voted_at'] = eval(hash['voted_at'])
     end
-    create_roll(hash.merge(:subject => bill))
+    create_roll(hash.merge(:subject => bill_or_amendment))
   end
 end

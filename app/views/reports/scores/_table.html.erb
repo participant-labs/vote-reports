@@ -97,9 +97,9 @@
   <p>No scores found for: "<%= params[:representing] %>"
     <%= link_to 'show all', reset_path, :class => 'act-replace show_all', :rel => replace %>
   </p>
-<%- elsif report.owner.is_a?(User) && report.bill_criteria.blank? -%>
+<%- elsif report.owner.is_a?(User) && !report.has_criteria? -%>
     <p>No scores yet, as this report has no criteria to judge representatives by.</p>
-<%- elsif report.bills.present? && report.bills.scoped(:joins => :passage_rolls).empty? -%>
+<%- elsif report.has_criteria? && report.bill_criteria.active.count == 0 && report.amendment_criteria.active.count == 0 -%>
     <p>No scores yet, as the associated legislation has not been voted on.</p>
 <%- elsif report.owner.is_a?(InterestGroup) && report.owner.ratings.blank? -%>
   <p>No ratings on record for this group</p>

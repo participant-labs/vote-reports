@@ -8,6 +8,7 @@ Feature: Scoring Reports
     And an un-voted, current-congress bill named "Bovine Security Act of 2009"
     And an un-voted, current-congress bill named "USA PATRIOT Reauthorization Act of 2009"
     And an un-voted, current-congress bill named "Honoring Miss America Act of 2009"
+    And an amendment named "Fix this thing" on bill "Bovine Security Act of 2009"
     And the following in-office politician records:
       | name                  |
       | Piyush Jindal         |
@@ -66,6 +67,26 @@ Feature: Scoring Reports
     And report "Active Report" has the following bill criteria:
       | bill                                    | support |
       | Bovine Security Act of 2009             | true    |
+    And I wait for delayed job to finish
+    When I go to my report page for "Active Report"
+    And I follow "Scores"
+    Then I should see "No scores yet, as the associated legislation has not been voted on."
+
+  Scenario: With Criteria on amendments without passage rolls, I should see message noting that as the bills are unvoted, no scores exist
+    Given amendment "Fix this thing" has the following rolls:
+      | roll_type                   |
+      | On the Motion to Reconsider |
+    And amendment "Fix this thing" has the following roll votes:
+      | politician       | On the Motion to Reconsider |
+      | Piyush Jindal    | + |
+      | J. Kerrey        | P |
+      | Martin Sabo      | 0 |
+      | Edward Kaufman   | - |
+      | Connie Mack      |   |
+      | Neil Abercrombie | - |
+    And report "Active Report" has the following amendment criterion:
+      | amendment           | support |
+      | Fix this thing      | true    |
     And I wait for delayed job to finish
     When I go to my report page for "Active Report"
     And I follow "Scores"
