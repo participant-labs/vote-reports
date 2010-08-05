@@ -1,7 +1,7 @@
 <%- if subject.is_a?(Report) -%>
   <%- scores.each do |report_score| -%>
-      <dt class="report_score_evidence"><%= render 'reports/scores/score', :score => report_score.evidence %></dt>
-      <dd class="report_score_evidence"><%= render 'reports/report', :report => subject %></dd>
+      <dt><%= render 'reports/scores/score', :score => report_score.evidence %></dt>
+      <dd class="clearfix"><%= render 'reports/report', :report => subject %></dd>
   <%- end -%>
 <%- else -%>
   <%- scores.each do |bill_score| -%>
