@@ -75,18 +75,7 @@
   <%- if @score.evidence.votes.present? -%>
     <dl>
       <%- @score.evidence.not_interest_group_ratings.group_by(&:subject).each_pair do |subject, subject_scores| -%>
-        <%- if subject.is_a?(Report) -%>
-          <%- subject_scores.each do |report_score| -%>
-              <dt class="report_score_evidence"><%= render 'reports/scores/score', :score => report_score.evidence %></dt>
-              <dd class="report_score_evidence"><%= render 'reports/report', :report => subject %></dd>
-          <%- end -%>
-        <%- else -%>
-          <%- subject_scores.each do |bill_score| -%>
-            <%- roll = bill_score.evidence.roll -%>
-            <dt><%= link_to "On #{roll.voted_at.to_date.to_s(:long)} voted #{bill_score.evidence.position}", roll %></dt>
-          <%- end -%>
-          <dd>On <%= render 'bills/bill', :bill => subject, :hide_year => true %> which this report <%= subject_scores.first.criterion.position %>s</dd>
-        <%- end -%>
+        <%= render 'reports/scores/evidences/evidence', :subject => subject, :subject_scores => subject_scores %>
       <%- end -%>
     </dl>
   <%- end -%>
