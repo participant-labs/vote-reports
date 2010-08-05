@@ -65,7 +65,7 @@ class InterestGroup < ActiveRecord::Base
   end
 
   def score_criteria
-    reports + report.bill_criteria
+    reports + report.bill_criteria + report.amendment_criteria
   end
 
   def vote_smart_url

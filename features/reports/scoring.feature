@@ -92,6 +92,34 @@ Feature: Scoring Reports
     And I follow "Scores"
     Then I should see "No scores yet, as the associated legislation has not been voted on."
 
+  Scenario: Amendment Criteria report generates scores
+    Given amendment "Fix this thing" has the following rolls:
+      | roll_type                    |
+      | On Agreeing to the Amendment |
+    And amendment "Fix this thing" has the following roll votes:
+      | politician       | On Agreeing to the Amendment |
+      | Piyush Jindal    | + |
+      | J. Kerrey        | P |
+      | Martin Sabo      | 0 |
+      | Edward Kaufman   | - |
+      | Connie Mack      |   |
+    And report "Active Report" has the following amendment criterion:
+      | amendment           | support |
+      | Fix this thing      | true    |
+    When I wait for delayed job to finish
+    And I go to my report page for "Active Report"
+    And I follow "Scores"
+    Then I should see the following scores:
+      | politician           | score |
+      | Piyush Jindal        | 100   |
+      | J. Kerrey            | 50    |
+      | Martin Sabo          | 50    |
+      | Edward Kaufman       | 0    |
+    And I should not see "Connie Mack"
+
+    When I follow "Piyush Jindal"
+    Then I should be on the politician page for "Piyush Jindal"
+
   Scenario: Bill Criteria report generates scores
     Given bill "Bovine Security Act of 2009" has the following passage votes:
       | politician     | vote |
