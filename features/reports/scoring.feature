@@ -116,8 +116,12 @@ Feature: Scoring Reports
       | Martin Sabo          | 50    |
       | Edward Kaufman       | 0    |
     And I should not see "Connie Mack"
+    When I follow "A+"
+    Then I should see "Fix this thing"
 
-    When I follow "Piyush Jindal"
+    When I go to my report page for "Active Report"
+    And I follow "Scores"
+    And I follow "Piyush Jindal"
     Then I should be on the politician page for "Piyush Jindal"
 
   Scenario: Bill Criteria report generates scores

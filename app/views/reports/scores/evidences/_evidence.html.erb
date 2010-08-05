@@ -5,12 +5,21 @@
           <dt class="report_evidence"><%= render 'reports/scores/score', :score => report_score.evidence %></dt>
           <dd class="report_evidence clearfix"><%= render 'reports/report', :report => subject %></dd>
       <%- end -%>
-    <%- else -%>
+    <%- elsif subject.is_a?(Bill) -%>
       <%- scores.each do |bill_score| -%>
         <%- roll = bill_score.evidence.roll -%>
         <dt><%= link_to "On #{roll.voted_at.to_date.to_s(:long)} voted #{bill_score.evidence.position}", roll %></dt>
       <%- end -%>
       <dd>On <%= render 'bills/bill', :bill => subject, :hide_year => true %> which this report <%= scores.first.criterion.position %>s</dd>
+    <%- elsif subject.is_a?(Amendment) -%>
+      <%- scores.each do |score| -%>
+        <%- roll = score.evidence.roll -%>
+        <dt><%= link_to "On #{roll.voted_at.to_date.to_s(:rfc822)} voted #{score.evidence.position}", roll %></dt>
+      <%- end -%>
+      <dd>On <%= render 'amendments/amendment', :amendment => subject, :hide_year => true %> which this report <%= scores.first.criterion.position %>s</dd>
+    <%- else -%>
+      <% notify_hoptoad("unrecognized score evidence type: #{subject.inspect} for #{scores.inspect}") %>
+      <p>Sorry, there was an error displaying this score's evidence - we'll be addressing it shortly.</p>
     <%- end -%>
   <%- end -%>
 </dl>
