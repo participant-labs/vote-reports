@@ -3,19 +3,16 @@
   margin-bottom: 0;
 }
 
-.cause_score_evidence > dt,
-dt.report_score_evidence {
+dt.report_evidence {
   float: left;
   width: 8em;
 }
 
-.cause_score_evidence > dd,
-dd.report_score_evidence {
+dd.report_evidence {
   margin-left: 8em;
 }
 
-.cause_score_evidence .report_score,
-.report_score_evidence .report_score {
+.report_evidence .report_score {
   float: right;
   padding-right: 0.5em;
 }

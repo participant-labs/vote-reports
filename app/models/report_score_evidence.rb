@@ -5,7 +5,6 @@ class ReportScoreEvidence < ActiveRecord::Base
 
   named_scope :interest_group_ratings, :conditions => {:criterion_type => 'InterestGroupReport'}
   named_scope :not_interest_group_ratings, :conditions => ["report_score_evidences.criterion_type !=  ?", 'InterestGroupReport']
-  named_scope :votes, :conditions => {:criterion_type => 'BillCriterion'}
 
   # validates_presence_of :evidence, :score, :criterion
   delegate :subject, :to => :evidence

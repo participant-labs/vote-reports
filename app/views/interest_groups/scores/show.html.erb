@@ -1,6 +1,6 @@
 <%- title score_title(@score) -%>
 <div style="width: 600px">
-  <%- if @score.evidence.votes.present? -%>
+  <%- if @score.evidence.not_interest_group_ratings.present? -%>
     <%= render 'reports/scores/evidence_summary', :score => @score %>
   <%- end -%>
 
@@ -72,11 +72,7 @@
     <% end %>
   <%- end -%>
 
-  <%- if @score.evidence.votes.present? -%>
-    <dl>
-      <%- @score.evidence.not_interest_group_ratings.group_by(&:subject).each_pair do |subject, scores| -%>
-        <%= render 'reports/scores/evidences/evidence', :subject => subject, :scores => scores %>
-      <%- end -%>
-    </dl>
+  <%- if @score.evidence.not_interest_group_ratings.present? -%>
+    <%= render 'reports/scores/evidences/evidence', :evidence => @score.evidence.not_interest_group_ratings %>
   <%- end -%>
 </div>
