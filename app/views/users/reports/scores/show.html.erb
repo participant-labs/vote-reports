@@ -1,5 +1,5 @@
 <%- title score_title(@score) -%>
 <div>
   <%= render 'reports/scores/evidence_summary', :score => @score %>
-  <%= render 'reports/scores/evidences/evidence', :evidence => @score.evidence %>
+  <%= render 'reports/scores/evidence', :evidence => @score.evidence %>
 </div>
