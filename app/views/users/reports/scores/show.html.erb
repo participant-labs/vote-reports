@@ -2,8 +2,8 @@
 <div>
   <%= render 'reports/scores/evidence', :score => @score %>
   <dl>
-    <%- @score.evidence.group_by(&:subject).each_pair do |subject, subject_scores| -%>
-      <%= render 'reports/scores/evidences/evidence', :subject => subject, :subject_scores => subject_scores %>
+    <%- @score.evidence.group_by(&:subject).each_pair do |subject, scores| -%>
+      <%= render 'reports/scores/evidences/evidence', :subject => subject, :scores => scores %>
     <%- end -%>
   </dl>
 </div>

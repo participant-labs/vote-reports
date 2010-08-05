@@ -74,8 +74,8 @@
 
   <%- if @score.evidence.votes.present? -%>
     <dl>
-      <%- @score.evidence.not_interest_group_ratings.group_by(&:subject).each_pair do |subject, subject_scores| -%>
-        <%= render 'reports/scores/evidences/evidence', :subject => subject, :subject_scores => subject_scores %>
+      <%- @score.evidence.not_interest_group_ratings.group_by(&:subject).each_pair do |subject, scores| -%>
+        <%= render 'reports/scores/evidences/evidence', :subject => subject, :scores => scores %>
       <%- end -%>
     </dl>
   <%- end -%>
