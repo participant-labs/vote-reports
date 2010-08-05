@@ -10,7 +10,7 @@ Feature: Browsing Rolls
       | On Passage | 12/24/2009 |
     And I go to the roll page for "On Passage"
     Then I should see "On Passage"
-    And I should see "December 24, 2009"
+    And I should see "24 Dec 2009"
     And I should see "Subject"
     And I should see "Bovine Security Act of 2009"
   
