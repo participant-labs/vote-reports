@@ -1,5 +1,5 @@
 <%- title score_title(@score) -%>
-<div style="min-width: 600px">
+<div style="min-width: 600px; max-width: 900px;">
   <%- if @score.evidence.not_interest_group_ratings.present? -%>
     <%= render 'reports/scores/evidence_summary', :score => @score %>
   <%- end -%>
