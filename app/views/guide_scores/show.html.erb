@@ -1,6 +1,6 @@
 <%- title score_title(@score) -%>
 <div>
-  <%= render 'reports/scores/evidence', :score => @score %>
+  <%= render 'reports/scores/evidence_summary', :score => @score %>
   <dl class="cause_score_evidence">
     <%- @score.evidence.group_by(&:subject).each_pair do |subject, subject_scores| -%>
       <%= render 'reports/scores/evidences/evidence', :subject => subject, :scores => scores %>

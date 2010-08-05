@@ -3,6 +3,6 @@
 <%- else -%>
   <div class="report_score">
     <%= link_to score, report_score_path(score), :class => 'fancyboxy score' %>
-    <%= render 'reports/scores/evidence', :score => score %>
+    <%= render 'reports/scores/evidence_summary', :score => score %>
   </div>
 <%- end -%>

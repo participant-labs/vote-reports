@@ -10,7 +10,7 @@
     <%= render 'politicians/headshot', :politician => politician, :style => headshot_style, :size => headshot_size %>
     <%= render 'politicians/name', :politician => politician, :full => true %>
     <div id="<%= dom_id(score) %>"></div>
-    <%= render 'reports/scores/evidence', :score => score %>
+    <%= render 'reports/scores/evidence_summary', :score => score %>
   <% end %>
 </div>
 

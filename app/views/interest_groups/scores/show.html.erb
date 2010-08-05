@@ -1,7 +1,7 @@
 <%- title score_title(@score) -%>
 <div style="width: 600px">
   <%- if @score.evidence.votes.present? -%>
-    <%= render 'reports/scores/evidence', :score => @score %>
+    <%= render 'reports/scores/evidence_summary', :score => @score %>
   <%- end -%>
 
   <%- if @score.evidence.interest_group_ratings.present? -%>
