@@ -1,3 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif);
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Droid Sans', arial, serif;
+}
+
 .politician-search {
   background-color: #F0F8FB;
   padding: 5px 20px 5px 10px;
@@ -27,33 +34,41 @@
   font-weight: bold;
 }
 
-.sidebar {
+.report-show {
+  margin-top: 30px;
+}
+
+.report-show h1 {
+  font-size: 2.5em;
+}
+
+.report-show > .sidebar {
   font-size: 1.1em;
 }
 
-.sidebar .name {
+.report-show > .sidebar .name {
   font-weight: bold;
   font-size: 1.1em;
 }
 
-.sidebar dl {
+.report-show > .sidebar dl {
   padding-top: 1em;
 }
 
-.sidebar dl + dl {
+.report-show > .sidebar dl + dl {
   border-top: 1px solid #e5e5e5;
 }
 
-.sidebar dt {
+.report-show > .sidebar dt {
   color: #bababa;
   font-weight: normal;
 }
 
-.sidebar dt:after {
+.report-show > .sidebar dt:after {
   content: ':';
 }
 
-.sidebar dd {
+.report-show > .sidebar dd {
   margin-left: 0;
   margin-bottom: 1em;
 }
@@ -65,8 +80,9 @@
 div#interest_group_ratings > h1 {
   border-bottom: 1px solid black;
 }
-div#interest_group_ratings p, .body > .description p {
+div#interest_group_ratings p, .report-show > .body > .description p {
   font-size: 1.2em;
+  font-family: 'Droid Serif', arial, serif;
 }
 
 ul.interest_group_reports {
