@@ -72,6 +72,9 @@ ul.interest_group_reports > li > span {
   color: #8f8f8f;
   font-size: 1.3em;
 }
+ul.interest_group_reports > li a {
+  text-decoration: none;
+}
 ul.interest_group_reports > li + li {
   padding-top: 1em;
 }
