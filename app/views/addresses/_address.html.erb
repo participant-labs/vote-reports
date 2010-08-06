@@ -1,5 +1,6 @@
 <div class="address">
   <%= format_newlines(address.address) %><%= raw '<br />' if address.address.present? %>
   <%= address.city %><%= ',' if address.address.present? || address.city.present? %>
-  <%= address.state %> <%= address.zip %>
+  <%= address.state %> <%= address.zip %><br />
+  <%= link_to 'View Google Map', google_maps_url(address.full_address) %>
 </div>

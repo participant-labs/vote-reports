@@ -13,6 +13,10 @@ module ApplicationHelper
     'http://getsatisfaction.com/votereports'
   end
 
+  def google_maps_url(address)
+    "http://mapof.it/#{URI.escape(address.to_s)}"
+  end
+
   def page_title
     raise "Missing page title" if @page_title.blank?
     [@page_title, 'VoteReports'].compact.join(' - ')
