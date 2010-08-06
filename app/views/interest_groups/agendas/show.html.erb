@@ -4,7 +4,7 @@
     <%- if @report.score_criteria.blank? -%>
       Unfortunately, we don't have any agenda for this interest group, though we'll be looking to add that shortly.
     <%- else -%>
-      This report's scores are based on <%= evidence_types(@report, :same_tab) %> periodically issued by the <%= @report.name %>:
+      This report's scores are based on <%= evidence_types(@report) %> periodically issued by the <%= @report.name %>:
     <%- end -%>
   </p>
 
