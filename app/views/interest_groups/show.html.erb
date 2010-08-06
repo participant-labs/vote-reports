@@ -14,7 +14,7 @@
   <%- if @interest_group.thumbnail.exists? -%>
   <div class="logo span-6 last"><%= sized_image_tag @interest_group.thumbnail, @interest_group.name, :style => :header, :class => 'image_large' %></div>
   <%- end -%>
-  <span class="name"><%= @interest_group.name %></span>
+  <div class="name"><%= @interest_group.name %></div>
 
   <%- permitted_to? :edit, @interest_group do -%>
     <%= link_to 'Edit Interest Group', edit_interest_group_path(@interest_group) %>
@@ -34,7 +34,6 @@
       <%- end -%>
     <%- end -%>
   </dl>
-  <hr />
   <dl>
     <%- if @interest_group.url.present? -%>
       <dt>Website</dt>

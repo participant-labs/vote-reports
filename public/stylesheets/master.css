@@ -27,6 +27,37 @@
   font-weight: bold;
 }
 
+.sidebar {
+  font-size: 1.1em;
+}
+
+.sidebar .name {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.sidebar dl {
+  padding-top: 1em;
+}
+
+.sidebar dl + dl {
+  border-top: 1px solid #e5e5e5;
+}
+
+.sidebar dt {
+  color: #bababa;
+  font-weight: normal;
+}
+
+.sidebar dt:after {
+  content: ':';
+}
+
+.sidebar dd {
+  margin-left: 0;
+  margin-bottom: 1em;
+}
+
 #report_amendments_results_table {
   min-width: 800px;
 }
