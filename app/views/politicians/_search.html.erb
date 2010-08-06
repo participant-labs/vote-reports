@@ -5,8 +5,8 @@
   <%= link_to 'show all reps', reset_path, :class => 'act-replace show_all', :rel => replace %>
 
   <span class="in-office">
-    <%= check_box_tag :in_office, '1', in_office, :id => 'in_office_true' %>
     <%= hidden_field_tag :in_office, '0', :id => 'in_office_false' %>
+    <%= check_box_tag :in_office, '1', in_office, :id => 'in_office_true' %>
     <%= label_tag :in_office_true, 'In Office' %>
   </span>
 <% end %>
