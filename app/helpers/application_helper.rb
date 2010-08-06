@@ -13,10 +13,6 @@ module ApplicationHelper
     'http://getsatisfaction.com/votereports'
   end
 
-  def human_type_name(type)
-    type.underscore.humanize.downcase
-  end
-
   def page_title
     raise "Missing page title" if @page_title.blank?
     [@page_title, 'VoteReports'].compact.join(' - ')

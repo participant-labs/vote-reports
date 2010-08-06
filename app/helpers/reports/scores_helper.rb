@@ -11,8 +11,7 @@ module Reports::ScoresHelper
     evidence_by_type = score.evidence.group_by(&:evidence_type)
     evidence_by_type.keys.sort.map do |type|
       evidence = evidence_by_type.fetch(type)
-      name = human_type_name(type)
-      pluralize(evidence.size, name)
+      pluralize(evidence.size, ReportScoreEvidence.type_name(type))
     end.to_sentence
   end
 
