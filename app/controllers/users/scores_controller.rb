@@ -11,8 +11,7 @@ class Users::ScoresController < ApplicationController
       }
       format.js {
         render :partial => 'reports/scores/table', :locals => {
-          :report => @report, :scores => @scores, :replace => 'report_scores',
-          :reset_path => user_report_scores_path(@user, :representing => '') }
+          :report => @report, :scores => @scores, :replace => 'report_scores' }
       }
     end
   end

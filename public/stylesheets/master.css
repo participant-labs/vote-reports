@@ -1,3 +1,32 @@
+.politician-search {
+  background-color: #F0F8FB;
+  padding: 5px 20px 5px 10px;
+  margin-bottom: 10px;
+}
+
+.politician-search label.reps-from:after {
+  content: ':';
+  font-size: 1.1em;
+}
+.politician-search input.reps-from {
+  padding: .3em .5em;
+  margin-left: .5em;
+}
+.politician-search .in-office {
+  float: right;
+  padding-top: .5em;
+}
+.politician-search .in-office label {
+  position: relative;
+  top: 0.25em;
+}
+.politician-search .show_all {
+  margin-left: 0.5em;
+  color: #015FC1;
+  border-bottom: none;
+  font-weight: bold;
+}
+
 #report_amendments_results_table {
   min-width: 800px;
 }

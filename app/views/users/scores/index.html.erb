@@ -3,7 +3,8 @@
 <div class="section" id="personalized_scores">
   <h2>Personalized Report</h2>
   <p>We score just for you based on <%= link_to "the reports you follow", '#Followed_Reports', :class => 'act-tab-select', :rel => 'Followed_Reports' %>.</p>
-  <%= render 'politicians/search', :in_office => @in_office, :url => user_report_scores_path(@user), :replace => 'report_scores' %>
-  <%= render 'reports/scores/table', :report => @report, :scores => @scores, :replace => 'report_scores',
+  <%= render 'politicians/search', :in_office => @in_office, :replace => 'report_scores',
+    :url => user_report_scores_path(@user),
     :reset_path => user_report_scores_path(@user, :representing => '') %>
+  <%= render 'reports/scores/table', :report => @report, :scores => @scores, :replace => 'report_scores' %>
 </div>
