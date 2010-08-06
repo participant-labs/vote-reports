@@ -62,6 +62,13 @@
   min-width: 800px;
 }
 
+div#interest_group_ratings > h1 {
+  border-bottom: 1px solid black;
+}
+div#interest_group_ratings p, .body > .description p {
+  font-size: 1.2em;
+}
+
 ul.interest_group_reports {
   color: #2eae0f;
   font-size: 0.8em;
