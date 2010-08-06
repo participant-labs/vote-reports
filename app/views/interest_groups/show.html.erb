@@ -1,65 +1,67 @@
 <%- title "#{@interest_group.name} - Interest Groups" -%>
 
-<div class="body span-18">
-  <h1><%= @interest_group.name %></h1>
-  <%= render 'reports/follows/button', :report => @interest_group.report %>
-  <div class="description"><%= md_to_html(@interest_group.description) %></div>
+<div class="report-show">
+  <div class="body span-18">
+    <h1><%= @interest_group.name %></h1>
+    <%= render 'reports/follows/button', :report => @interest_group.report %>
+    <div class="description"><%= md_to_html(@interest_group.description) %></div>
 
-  <div class="act-fill"
-    rel="<%= interest_group_report_scores_path(@interest_group, :format => :html) %>"
-     id="scores"></div>
-</div>
+    <div class="act-fill"
+      rel="<%= interest_group_report_scores_path(@interest_group, :format => :html) %>"
+       id="scores"></div>
+  </div>
 
-<div class="sidebar span-6 last">
-  <%- if @interest_group.thumbnail.exists? -%>
-  <div class="logo span-6 last"><%= sized_image_tag @interest_group.thumbnail, @interest_group.name, :style => :header, :class => 'image_large' %></div>
-  <%- end -%>
-  <div class="name"><%= @interest_group.name %></div>
-
-  <%- permitted_to? :edit, @interest_group do -%>
-    <%= link_to 'Edit Interest Group', edit_interest_group_path(@interest_group) %>
-  <%- end -%>
-
-  <dl>
-    <dt>Subjects</dt>
-    <%- @subjects.each do |subject| -%>
-      <dd><%= render 'subjects/subject', :subject => subject, :subject_only => true %></dd>
+  <div class="sidebar span-6 last">
+    <%- if @interest_group.thumbnail.exists? -%>
+    <div class="logo span-6 last"><%= sized_image_tag @interest_group.thumbnail, @interest_group.name, :style => :header, :class => 'image_large' %></div>
     <%- end -%>
-    <dt>Causes</dt>
-    <%- if @causes.blank? -%>
-      <dd>None</dd>
-    <%- else -%>
-      <%- @causes.each do |cause| -%>
-        <dd><%= render 'causes/cause', :cause => cause %></dd>
+    <div class="name"><%= @interest_group.name %></div>
+
+    <%- permitted_to? :edit, @interest_group do -%>
+      <%= link_to 'Edit Interest Group', edit_interest_group_path(@interest_group) %>
+    <%- end -%>
+
+    <dl>
+      <dt>Subjects</dt>
+      <%- @subjects.each do |subject| -%>
+        <dd><%= render 'subjects/subject', :subject => subject, :subject_only => true %></dd>
       <%- end -%>
-    <%- end -%>
-  </dl>
-  <dl>
-    <%- if @interest_group.url.present? -%>
-      <dt>Website</dt>
-      <dd><%= link_to @interest_group.url %></dd>
-    <%- end -%>
-    <%- if @interest_group.email.present? -%>
-      <dt>Email</dt>
-      <dd><%= mail_to @interest_group.email %></d>
-    <%- end -%>
-    <%- if @interest_group.contact_name.present? -%>
-      <dt>Contact</dt>
-      <dd><%= @interest_group.contact_name %></dd>
-    <%- end -%>
-    <%- if @interest_group.phone_numbers.present? -%>
-      <dt>Phone Numbers</dt>
-      <%- @interest_group.phone_numbers.each do |number| -%>
-        <dd><%= number %></dd>
+      <dt>Causes</dt>
+      <%- if @causes.blank? -%>
+        <dd>None</dd>
+      <%- else -%>
+        <%- @causes.each do |cause| -%>
+          <dd><%= render 'causes/cause', :cause => cause %></dd>
+        <%- end -%>
       <%- end -%>
-    <%- end -%>
-    <%- if @interest_group.fax.present? -%>
-      <dt>Fax</dt>
-      <dd><%= @interest_group.fax %></dd>
-    <%- end -%>
-      <dt>Address</dt>
-      <dd><%= render 'addresses/address', :address => @interest_group %></dd>
-  </dl>
+    </dl>
+    <dl>
+      <%- if @interest_group.url.present? -%>
+        <dt>Website</dt>
+        <dd><%= link_to @interest_group.url %></dd>
+      <%- end -%>
+      <%- if @interest_group.email.present? -%>
+        <dt>Email</dt>
+        <dd><%= mail_to @interest_group.email %></d>
+      <%- end -%>
+      <%- if @interest_group.contact_name.present? -%>
+        <dt>Contact</dt>
+        <dd><%= @interest_group.contact_name %></dd>
+      <%- end -%>
+      <%- if @interest_group.phone_numbers.present? -%>
+        <dt>Phone Numbers</dt>
+        <%- @interest_group.phone_numbers.each do |number| -%>
+          <dd><%= number %></dd>
+        <%- end -%>
+      <%- end -%>
+      <%- if @interest_group.fax.present? -%>
+        <dt>Fax</dt>
+        <dd><%= @interest_group.fax %></dd>
+      <%- end -%>
+        <dt>Address</dt>
+        <dd><%= render 'addresses/address', :address => @interest_group %></dd>
+    </dl>
+  </div>
 </div>
 
 <div class="span-24 last act-fill"
