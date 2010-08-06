@@ -1,8 +1,12 @@
-<% form_tag url, :method => :get, :class => "act-replace", :rel => replace do %>
-  <%= label_tag :representing, 'Reps From' %>
-  <%= text_field_tag :representing, requested_location, :title => %{e.g. "TX", "98101", "San Francisco, CA"}, :size => 33, :class => 'fieldtag' %>
-  <%= hidden_field_tag :in_office, '0', :id => 'in_office_false' %>
-  <%= check_box_tag :in_office, '1', in_office, :id => 'in_office_true' %>
-  <%= label_tag :in_office_true, 'In Office' %>
+<% form_tag url, :method => :get, :class => "act-replace politician-search", :rel => replace do %>
+  <%= label_tag :representing, 'Reps from', :class => 'reps-from' %>
+  <%= text_field_tag :representing, requested_location, :title => %{e.g. "TX", "98101", "San Francisco"}, :size => 23, :class => 'fieldtag reps-from' %>
   <%= submit_tag 'Show Reps' %>
+  <%= link_to 'show all reps', reset_path, :class => 'act-replace show_all', :rel => replace %>
+
+  <span class="in-office">
+    <%= check_box_tag :in_office, '1', in_office, :id => 'in_office_true' %>
+    <%= hidden_field_tag :in_office, '0', :id => 'in_office_false' %>
+    <%= label_tag :in_office_true, 'In Office' %>
+  </span>
 <% end %>

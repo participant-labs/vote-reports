@@ -1,10 +1,11 @@
 <div id="report_scores_section" class="section report_scores">
   <%- if @report -%>
     <%- if @scores.present? -%>
-      <%= render 'politicians/search', :in_office => @in_office, :url => interest_group_report_scores_path(@interest_group), :replace => 'report_scores' %>
+      <%= render 'politicians/search', :in_office => @in_office, :replace => 'report_scores',
+        :url => interest_group_report_scores_path(@interest_group),
+        :reset_path => interest_group_report_scores_path(@interest_group, :representing => '') %>
     <%- end -%>
-    <%= render 'reports/scores/table', :report => @report, :scores => @scores,
-    :reset_path => interest_group_report_scores_path(@interest_group, :representing => '') %>
+    <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
   <%- else -%>
     <p>No ratings on record for this group</p>
   <%- end -%>
