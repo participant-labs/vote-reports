@@ -24,6 +24,10 @@ class InterestGroupsController < ApplicationController
       redirect_to interest_group_path(@interest_group), :status => 301
       return
     end
+    @subjects = @interest_group.subjects.for_tag_cloud.all(
+      :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
+      :limit => 3)
+    @causes = @interest_group.causes.all(:limit => 3)
   end
 
   def new

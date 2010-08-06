@@ -1,55 +1,68 @@
 <%- title "#{@interest_group.name} - Interest Groups" -%>
 
-<%= render 'interest_groups/header', :interest_group => @interest_group %>
+<div class="body span-18">
+  <h1><%= @interest_group.name %></h1>
+  <%= render 'reports/follows/button', :report => @interest_group.report %>
+  <div class="description"><%= md_to_html(@interest_group.description) %></div>
 
-<%- if parent = @interest_group.parent -%>
-<div class="section">
-  <h3>Parent Group</h3>
-  <%= render parent %>
+  <div class="act-fill"
+    rel="<%= interest_group_report_scores_path(@interest_group, :format => :html) %>"
+     id="report_scores"></div>
 </div>
-<%- end -%>
 
-<%- if @interest_group.parent && (siblings = @interest_group.siblings).present? -%>
-<div class="section">
-  <h3><%= pluralize siblings.count, 'Sibling Group' %></h3>
-  <ul>
-    <%- siblings.each do |sibling| -%>
-    <li><%= render sibling %></li>
+<div class="sidebar span-6 last">
+  <%- if @interest_group.thumbnail.exists? -%>
+  <div class="logo span-6 last"><%= sized_image_tag @interest_group.thumbnail, @interest_group.name, :style => :header, :class => 'image_large' %></div>
+  <%- end -%>
+  <span class="name"><%= @interest_group.name %></span>
+
+  <%- permitted_to? :edit, @interest_group do -%>
+    <%= link_to 'Edit Interest Group', edit_interest_group_path(@interest_group) %>
+  <%- end -%>
+
+  <dl>
+    <dt>Subjects</dt>
+    <%- @subjects.each do |subject| -%>
+      <dd><%= render 'subjects/subject', :subject => subject, :subject_only => true %></dd>
     <%- end -%>
-  </ul>
-</div>
-<%- end -%>
-
-<%- if (children = @interest_group.children).present? -%>
-<div class="section">
-  <h3><%= pluralize children.count, 'Child Group' %></h3>
-  <ul>
-    <%- children.each do |child| -%>
-    <li><%= render child %></li>
+    <dt>Causes</dt>
+    <%- if @causes.blank? -%>
+      <dd>None</dd>
+    <%- else -%>
+      <%- @causes.each do |cause| -%>
+        <dd><%= render 'causes/cause', :cause => cause %></dd>
+      <%- end -%>
     <%- end -%>
-  </ul>
+  </dl>
+  <hr />
+  <dl>
+    <%- if @interest_group.url.present? -%>
+      <dt>Website</dt>
+      <dd><%= link_to @interest_group.url %></dd>
+    <%- end -%>
+    <%- if @interest_group.email.present? -%>
+      <dt>Email</dt>
+      <dd><%= mail_to @interest_group.email %></d>
+    <%- end -%>
+    <%- if @interest_group.contact_name.present? -%>
+      <dt>Contact</dt>
+      <dd><%= @interest_group.contact_name %></dd>
+    <%- end -%>
+    <%- if @interest_group.phone_numbers.present? -%>
+      <dt>Phone Numbers</dt>
+      <%- @interest_group.phone_numbers.each do |number| -%>
+        <dd><%= number %></dd>
+      <%- end -%>
+    <%- end -%>
+    <%- if @interest_group.fax.present? -%>
+      <dt>Fax</dt>
+      <dd><%= @interest_group.fax %></dd>
+    <%- end -%>
+      <dt>Address</dt>
+      <dd><%= render 'addresses/address', :address => @interest_group %></dd>
+  </dl>
 </div>
-<%- end -%>
 
-<%- permitted_to? :edit, @interest_group do -%>
-  <%= link_to 'Edit Interest Group', edit_interest_group_path(@interest_group) %>
-<%- end -%>
-
-<div class="ui-tabs" id="<%= dom_id(@interest_group, :tabs) %>">
-  <ul>
-    <li><%= link_to content_tag(:span, 'Scores'), interest_group_report_scores_path(@interest_group, :format => :html), :title => 'Scores' %></li>
-    <li><%- link_to interest_group_agenda_path(@interest_group, :format => :html), :title => 'Agenda' do -%>
-      <span>Agenda
-        <%- if (count = @interest_group.bill_criteria.active_count) > 0 -%>
-          <span class="count"><%= count %></span>
-        <%- end -%>
-      </span>
-    <%- end -%></li>
-    <li><% link_to interest_group_subjects_path(@interest_group, :format => :html), :title => 'Subjects' do %>
-      <span>Subjects <span class="count"><%= @interest_group.subjects.count %></span></span>
-    <% end %></li>
-    <li><% link_to interest_group_causes_path(@interest_group, :format => :html), :title => 'Causes' do %>
-      <span>Causes <span class="count"><%= @interest_group.causes.count %></span></span>
-    <% end %></li>
-  </ul>
-</div>
+<div class="span-24 last act-fill"
+  rel="<%= interest_group_agenda_path(@interest_group, :format => :html) %>"
+  id="<%= dom_id(@interest_group, :agenda) %>"></div>
