@@ -27,6 +27,11 @@
   }
 
   $(function(){
+    $('.act-fill').each(function() {
+      var self = $(this);
+      replaceWith(self.attr('id'), self.attr('rel'));
+    });
+
     $('.act-refresh').each(function() {
       var self = $(this);
       function refresh() {
