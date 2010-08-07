@@ -16,7 +16,7 @@
       We at VoteReports will be looking into it shortly, please be patient.
     </p>
   <%- end -%>
-<%- if score_count >= 10 -%>
+<%- if score_count > 36 -%>
   <% form_tag target_path, :class => 'act-replace-via-inputs', :rel => replace do %>
     <%- params.each_pair do |key, value| -%>
       <%= hidden_field_tag key, value %>
@@ -31,6 +31,16 @@
     </ul>
   <% end %>
   <%- scores = scores.with_evidence.votes_how(votes_how).paginate(:page => params[:page]) -%>
+  <ul class="clearfix">
+    <%- scores.each do |score| -%>
+      <li class="<%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score %></li>
+    <%- end -%>
+  </ul>
+  <%= will_paginate scores,
+        :class => 'act-replace score-pagination rounded',
+        :rel => replace %>
+<%- elsif score_count > 8 -%>
+  <%- scores = scores.with_evidence.paginate(:page => params[:page]) -%>
   <ul class="clearfix">
     <%- scores.each do |score| -%>
       <li class="<%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score %></li>
