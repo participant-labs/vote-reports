@@ -70,7 +70,7 @@ class ReportScore < ActiveRecord::Base
 
   class << self
     def per_page
-      8
+      12
     end
   end
 
