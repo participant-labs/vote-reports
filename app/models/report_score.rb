@@ -18,6 +18,11 @@ class ReportScore < ActiveRecord::Base
   named_scope :with, :conditions => "report_scores.score > 66.667"
   named_scope :against, :conditions => "report_scores.score < 33.333"
   named_scope :neutral, :conditions => "report_scores.score BETWEEN 33.333 AND 66.667"
+  class << self
+    def votes_how(how)
+      send(how.to_sym)
+    end
+  end
 
   named_scope :published, :joins => :report, :conditions => [
     "reports.state = ? OR reports.user_id IS NULL", 'published']
