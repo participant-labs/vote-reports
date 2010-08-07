@@ -5,3 +5,7 @@
 #hero {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#549AD8', endColorstr='#4B87C3');
 }
+
+.politician_score {
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#F7F7F7');
+}
