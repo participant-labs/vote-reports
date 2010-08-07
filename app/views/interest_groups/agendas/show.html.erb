@@ -1,4 +1,4 @@
-<div id="interest_group_ratings" class="section">
+<div id="agenda" class="section">
   <h2>Agenda</h2>
   <p>
     <%- if @report.score_criteria.blank? -%>
@@ -9,7 +9,7 @@
   </p>
 
   <%- if @interest_group.reports.present? -%>
-    <h2 id="historical_ratings">Historical Ratings</h2>
+    <h3 id="historical_ratings">Historical Ratings</h3>
     <ul class="interest_group_reports">
     <%- @interest_group.reports.by_rated_on.each do |report| -%>
       <li><span><%= report.timespan %> (<%= link_to pluralize(report.ratings.count, 'ratings'), report.vote_smart_url %>)</span></li>

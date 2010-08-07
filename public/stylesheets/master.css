@@ -77,28 +77,34 @@ h1, h2, h3, h4, h5, h6 {
   min-width: 800px;
 }
 
-div#interest_group_ratings > h1 {
+div#agenda > h2 {
   border-bottom: 1px solid black;
 }
-div#interest_group_ratings p, .report-show > .body > .description p {
+
+div#agenda h5 {
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+div#agenda > p, .report-show > .body > .description {
   font-size: 1.2em;
   font-family: 'Droid Serif', arial, serif;
 }
 
-ul.interest_group_reports {
+div#agenda ul {
   color: #2eae0f;
   font-size: 0.8em;
   padding-left: 1.7em;
 }
 
-ul.interest_group_reports > li > span {
+div#agenda ul > li > span {
   color: #8f8f8f;
   font-size: 1.3em;
 }
-ul.interest_group_reports > li a {
+div#agenda ul > li a {
   text-decoration: none;
 }
-ul.interest_group_reports > li + li {
+div#agenda ul > li + li {
   padding-top: 1em;
 }
 
