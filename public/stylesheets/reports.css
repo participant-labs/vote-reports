@@ -258,6 +258,8 @@ h4, .report_title, a.politician_name, span.politician_name, a.politician_locatio
 div.report_score .score {
   font-size: 30px;
   color: white;
+  font-family: arial, serif;
+  font-weight: bold;
 
   display: inline-block;
   width: 70px;
