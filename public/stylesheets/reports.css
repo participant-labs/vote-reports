@@ -80,6 +80,40 @@
   margin-right: 45px;
 }
 
+.score_view_options {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  width: 100%;
+}
+.score_view_options > li > label {
+  text-align: center;
+  text-transform: lowercase;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background-color: #d1d1d1;
+  color: white;
+}
+
+.score_view_options > li > input {
+  display: none;
+}
+.score_view_options > li > label {
+  cursor: pointer;
+  cursor: hand;
+}
+
+.score_view_options > li > label.selected, .score_view_options > li > label:hover {
+  background-color: #efefef;
+  color: black;
+}
+
+#report_scores > ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
 #report_scores td, table#scores td {
   vertical-align: middle;
 }

@@ -16,54 +16,26 @@
       We at VoteReports will be looking into it shortly, please be patient.
     </p>
   <%- end -%>
-<%- if score_count >= 25 -%>
-<%-
-  top_scores = scores.with_evidence.paginate(:page => params[:top_page],
-    :total_entries => score_count / 2)
-  bottom_scores = scores.with_evidence.paginate(:page => params[:bottom_page],
-    :total_entries => score_count / 2,
-    :order => :score)
--%>
-  <table>
-    <thead>
-      <tr>
-        <th>Votes With Report</th>
-        <th>Votes Against Report</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= will_paginate top_scores,
-                :param_name => :top_page,
-                :params => {:bottom_page => bottom_scores.current_page},
-                :class => 'act-replace',
-                :rel => replace %></td>
-        <td><%= will_paginate bottom_scores,
-                :param_name => :bottom_page,
-                :params => {:top_page => top_scores.current_page},
-                :class => 'act-replace',
-                :rel => replace %></td>
-      </tr>
-      <%- top_scores.zip(bottom_scores).each do |(top_score, bottom_score)| -%>
-        <tr>
-          <td><%= render 'politicians/score', :score => top_score %></td>
-          <td><%= render 'politicians/score', :score => bottom_score %></td>
-        </tr>
-      <%- end -%>
-      <tr>
-        <td><%= will_paginate top_scores,
-                :param_name => :top_page,
-                :params => {:bottom_page => bottom_scores.current_page},
-                :class => 'act-replace',
-                :rel => replace %></td>
-        <td><%= will_paginate bottom_scores,
-                :param_name => :bottom_page,
-                :params => {:top_page => top_scores.current_page},
-                :class => 'act-replace',
-                :rel => replace %></td>
-      </tr>
-    </tbody>
-  </table>
+<%- if score_count >= 10 -%>
+  <% form_tag request.path do %>
+    <ul class="score_view_options clearfix">
+      <li class="span-6"><%= radio_button_tag :votes, :with, @votes == :with, :class => 'act-replace', :rel => replace %>
+      <%= label_tag :votes_with, "Votes With (#{scores.with.count})", :class => 'span-6 last' %></li>
+      <li class="span-6"><%= radio_button_tag :votes, :against, @votes == :against, :class => 'act-replace', :rel => replace %>
+      <%= label_tag :votes_against, "Votes Against (#{scores.against.count})", :class => 'span-6 last' %></li>
+      <li class="span-6 last"><%= radio_button_tag :votes, :neutral, @votes == :neutral, :class => 'act-replace', :rel => replace %>
+      <%= label_tag :votes_neutral, "Neutral (#{scores.neutral.count})", :class => 'span-6 last' %></li>
+    </ul>
+  <% end %>
+  <%- scores = scores.with_evidence.paginate(:page => params[:page]) -%>
+  <ul class="clearfix">
+    <%- scores.each do |score| -%>
+      <li class="<%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score %></li>
+    <%- end -%>
+  </ul>
+  <%= will_paginate scores,
+        :class => 'act-replace',
+        :rel => replace %>
 <%- elsif score_count > 1 -%>
   <%- scores = scores.with_evidence.paginate(:page => params[:page], :total_entries => score_count) -%>
   <table>
