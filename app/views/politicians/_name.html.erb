@@ -4,9 +4,11 @@
   no_fancybox ||= false
 -%>
 
-<%- if current_page?(politician) -%>
-  <span class="politician_name"><%= name %></span>
-<%- else -%>
-  <%= link_to_unless_current name, politician, :class => 'politician_name' %>
-<%- end -%>
-<%= render 'politicians/location', :politician => politician, :no_fancybox => no_fancybox %>
+<span class="politician_name">
+  <%- if current_page?(politician) -%>
+    <span class="name"><%= name %></span>
+  <%- else -%>
+    <%= link_to_unless_current name, politician, :class => 'name' %>
+  <%- end -%>
+  <%= render 'politicians/location', :politician => politician, :no_fancybox => no_fancybox %>
+</span>

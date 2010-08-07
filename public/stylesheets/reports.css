@@ -66,6 +66,30 @@
   background: -moz-linear-gradient(top,  #FFFFFF,  #F7F7F7);
 }
 
+.politician_score.full_width .politician_name {
+  float: left;
+  line-height: 120px;
+  font-size: 16px;
+  margin-left: 15px;
+}
+.politician_score.full_width .report_score {
+  float: right;
+  margin-right: 20px;
+}
+
+.politician_score.full_width  .report_score .score {
+  font-size: 36px;
+
+  width: 86px;
+  height: 86px;
+  line-height: 86px;
+
+   -moz-border-radius: 43px;
+  -webkit-border-radius: 43px;
+  -khtml-border-radius: 43px;
+}
+
+
 #scores .report_score {
   text-align: center;
 }
@@ -196,7 +220,7 @@
   margin-bottom: 5px;
 }
 
-h4, .report_title, a.politician_name, span.politician_name, a.politician_location, span.politician_location {
+h4, .report_title, .politician_name > .name, a.politician_location, span.politician_location {
   font-size: 1.2em;
   font-weight: bold;
   color: #282625;
