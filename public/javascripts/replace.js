@@ -61,5 +61,10 @@
       var source = $(event.target);
       return replaceWith(source.attr('rel'), source.attr('action') + '?' + source.serialize());
     });
+
+    $('form.act-replace-via-inputs :input').live('click', function(event) {
+      var source = $(event.target).closest('form');
+      return replaceWith(source.attr('rel'), source.attr('action') + '?' + source.serialize());
+    });
   });
 })(jQuery);
