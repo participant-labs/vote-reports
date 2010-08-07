@@ -37,7 +37,7 @@
     <%- end -%>
   </ul>
   <%= will_paginate scores,
-        :class => 'act-replace',
+        :class => 'act-replace score-pagination rounded',
         :rel => replace %>
 <%- elsif score_count > 1 -%>
   <%- scores = scores.with_evidence.paginate(:page => params[:page], :total_entries => score_count) -%>
