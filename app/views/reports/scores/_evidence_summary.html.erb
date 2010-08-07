@@ -1,4 +1,6 @@
-<div class="report_score_evidence_link score_sources">
-  based on
+<%- prefix ||= 'based on' -%>
+
+<div class="score_sources">
+  <%= prefix %>
   <%= link_to_unless_current score_evidence_description(score), report_score_path(score), :class => 'fancyboxy' %>
 </div>

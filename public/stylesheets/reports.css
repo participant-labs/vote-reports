@@ -168,16 +168,16 @@
   width: 100%;
 }
 
-.report_score_evidence_link > ul {
+.score_sources > ul {
   display: inline;
   margin-left: 0;
 }
 
-.report_score_evidence_link > ul > li {
+.score_sources > ul > li {
   display: inline;
 }
 
-.report_score_evidence_link > ul > li + li {
+.score_sources > ul > li + li {
   content: ', ';
 }
 
@@ -265,6 +265,6 @@ div.report_score .score {
   padding-top: 1em;
 }
 
-.report_score_evidence_link ul, .report_scores {
+.score_sources ul, .report_scores {
   padding-left: 0;
 }
