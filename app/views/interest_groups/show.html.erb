@@ -28,11 +28,11 @@
       <%- end -%>
 
       <dl>
-        <dt>Subjects</dt>
+        <dt><%= pluralize_word(@subjects.size, 'Subject') %></dt>
         <%- @subjects.each do |subject| -%>
           <dd><%= render 'subjects/subject', :subject => subject, :subject_only => true %></dd>
         <%- end -%>
-        <dt>Causes</dt>
+        <dt><%= pluralize_word(@causes.size, 'Cause') %></dt>
         <%- if @causes.blank? -%>
           <dd>None</dd>
         <%- else -%>
@@ -55,7 +55,7 @@
           <dd><%= @interest_group.contact_name %></dd>
         <%- end -%>
         <%- if @interest_group.phone_numbers.present? -%>
-          <dt><%= pluralize @interest_group.phone_numbers.size, 'Phone Number' %></dt>
+          <dt><%= pluralize_word @interest_group.phone_numbers.size, 'Phone Number' %></dt>
           <%- @interest_group.phone_numbers.each do |number| -%>
             <dd><%= number %></dd>
           <%- end -%>
