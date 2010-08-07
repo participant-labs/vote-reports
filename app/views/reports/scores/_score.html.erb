@@ -2,7 +2,7 @@
   <div class="report_score blank" />
 <%- else -%>
   <div class="report_score">
-    <%= link_to score, report_score_path(score), :class => 'fancyboxy score' %>
+    <%= link_to score, report_score_path(score), :class => "fancyboxy score #{score_class(score)}" %>
     <%= render 'reports/scores/evidence_summary', :score => score, :prefix => '' %>
   </div>
 <%- end -%>

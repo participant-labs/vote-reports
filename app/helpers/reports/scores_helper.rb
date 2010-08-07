@@ -7,6 +7,18 @@ module Reports::ScoresHelper
     "#{score} for #{score.politician.full_name}#{on}"
   end
 
+  def score_class(score)
+    score = score.to_s
+    letter = score.first.downcase
+    if score.ends_with?('+')
+      "#{letter}_plus"
+    elsif score.ends_with?('-')
+      "#{letter}_minus"
+    else
+      letter
+    end
+  end
+
   def score_evidence_description(score)
     evidence_by_type = score.evidence.group_by(&:evidence_type)
     evidence_by_type.keys.sort.map do |type|
