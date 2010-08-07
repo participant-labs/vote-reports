@@ -288,12 +288,12 @@ a, .subject a {
 
 .left {
   float: left;
-  width: 48%;
+  width: 49.3%;
 }
 
 .right {
   float: right;
-  width: 48%;
+  width: 49.3%;
 }
 
 ul.causes_selector {
@@ -352,10 +352,6 @@ input.tagged {
 
 .politician_location:after {
   content: ')';
-}
-
-.politician_score > .report_score {
-  height: 0;
 }
 
 #scores .report_score {
