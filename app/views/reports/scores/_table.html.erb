@@ -50,22 +50,15 @@
         :class => 'act-replace score-pagination rounded',
         :rel => replace %>
 <%- elsif score_count > 1 -%>
-  <%- scores = scores.with_evidence.paginate(:page => params[:page], :total_entries => score_count) -%>
-  <table>
-    <tbody>
-      <tr>
-        <td><%= will_paginate scores, :class => 'act-replace', :rel => replace %></td>
-      </tr>
-      <%- scores.each do |score| -%>
-        <tr>
-          <td><%= render 'politicians/score', :score => score %></td>
-        </tr>
-      <%- end -%>
-      <tr>
-        <td><%= will_paginate scores, :class => 'act-replace', :rel => replace %></td>
-      </tr>
-    </tbody>
-  </table>
+  <%- scores = scores.with_evidence.paginate(:page => params[:page]) -%>
+  <ul class="clearfix">
+    <%- scores.each do |score| -%>
+      <li><%= render 'politicians/score', :score => score, :full_width => true %></li>
+    <%- end -%>
+  </ul>
+  <%= will_paginate scores,
+        :class => 'act-replace score-pagination rounded',
+        :rel => replace %>
 <%- elsif report.delayed_jobs.present? -%>
   <p>Scores are being generated. Please try again in a moment.</p>
 <%- elsif report.scores.present? && params[:representing].present? -%>
