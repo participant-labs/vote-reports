@@ -9,15 +9,17 @@
   </p>
 
   <%- if @interest_group.reports.present? -%>
-    <h3 id="historical_ratings">Historical Ratings</h3>
-    <ul class="interest_group_reports">
-    <%- @interest_group.reports.by_rated_on.each do |report| -%>
-      <li><span><%= report.timespan %> (<%= link_to pluralize(report.ratings.count, 'ratings'), report.vote_smart_url %>)</span></li>
-    <%- end -%>
-    </ul>
+    <div id="historical_ratings" class="span-6">
+      <h3>Historical Ratings</h3>
+      <ul class="interest_group_reports">
+      <%- @interest_group.reports.by_rated_on.each do |report| -%>
+        <li><span><%= report.timespan %> (<%= link_to pluralize(report.ratings.count, 'ratings'), report.vote_smart_url %>)</span></li>
+      <%- end -%>
+      </ul>
+    </div>
   <%- end -%>
 
   <%- if @report.has_criteria? -%>
-    <%= render 'reports/bill_criteria/legislative_agenda', :report => @report %>
+    <%= render 'reports/bill_criteria/legislative_agenda', :report => @report, :class_names => 'span-18 last' %>
   <%- end -%>
 </div>
