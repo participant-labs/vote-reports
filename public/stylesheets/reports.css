@@ -256,8 +256,63 @@ h4, .report_title, a.politician_name, span.politician_name, a.politician_locatio
 }
 
 div.report_score .score {
-  font-size: 4em;
-  color: #3c3c3c;
+  font-size: 30px;
+  color: white;
+
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+
+   -moz-border-radius: 35px;
+  -webkit-border-radius: 35px;
+  -khtml-border-radius: 35px;
+}
+
+div.report_score .score.a_plus {
+  background-color: #2EAE11;
+}
+div.report_score .score.a {
+  background-color: #3DAE23;
+}
+div.report_score .score.a_minus {
+  background-color: #4BAE34;
+}
+div.report_score .score.b_plus {
+  background-color: #5AAE46;
+}
+div.report_score .score.b {
+  background-color: #68AE58;
+}
+div.report_score .score.b_minus {
+  background-color: #77AF69;
+}
+div.report_score .score.c_plus {
+  background-color: #85AF7B;
+}
+div.report_score .score.c {
+  background-color: #94AF8D;
+}
+div.report_score .score.c_minus {
+  background-color: #A2AF9E;
+}
+div.report_score .score.d_plus {
+  background-color: #B1AFB0;
+}
+div.report_score .score.d {
+  background-color: #9A9899;
+}
+div.report_score .score.d_minus {
+  background-color: #828182;
+}
+div.report_score .score.f_plus {
+  background-color: #6B6A6A;
+}
+div.report_score .score.f {
+  background-color: #535353;
+}
+div.report_score .score.f_minus {
+  background-color: #3C3C3C;
 }
 
 .politician_scores div.report {
