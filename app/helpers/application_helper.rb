@@ -26,6 +26,10 @@ module ApplicationHelper
     @page_title = page_title.to_s
   end
 
+  def pluralize_word(count, word)
+    count == 0 || count > 1 ? word.pluralize : word
+  end
+
   def errors_for(form, *fields)
     fields.map do |field|
       if field == :base
