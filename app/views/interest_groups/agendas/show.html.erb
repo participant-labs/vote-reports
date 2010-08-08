@@ -13,7 +13,7 @@
       <h3>Historical Ratings</h3>
       <ul class="interest_group_reports">
       <%- @interest_group.reports.by_rated_on.each do |report| -%>
-        <li><span><%= report.timespan %> (<%= link_to pluralize(report.ratings.count, 'ratings'), report.vote_smart_url %>)</span></li>
+        <li><span><%= report.timespan %> (<%= link_to pluralize(report.ratings.count, 'rating'), report.vote_smart_url %>)</span></li>
       <%- end -%>
       </ul>
     </div>
