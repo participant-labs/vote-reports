@@ -1,5 +1,6 @@
 class InterestGroupsController < ApplicationController
   filter_resource_access
+  cache_sweeper :interest_group_sweeper, :only => [:create, :update]
 
   def index
     params[:subjects] ||= []
