@@ -85,6 +85,7 @@
 .report_score {
   font-family: 'Lucida Grande',Lucida,Verdana,sans-serif;
   text-align: center;
+  min-width: 100px;
 }
 
 .report_score.blank:after {

@@ -14,5 +14,5 @@ dd.report_evidence {
 
 .report_evidence .report_score {
   float: right;
-  padding-right: 0.5em;
+  padding-right: 1.5em;
 }
