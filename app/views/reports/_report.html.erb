@@ -12,7 +12,6 @@
   <%- if report.user_id -%>
     <span class="report_creator">by <%= render 'users/user', :user => report.user %></span>
   <%- end -%>
-  <%= render 'reports/follows/button', :report => report, :hide => true %>
   <%- unless report.description.blank? || float_description || report.name.size > 60 -%>
     <blockquote class="report_excerpt"><p><%= truncate(md_to_text(report.description), :length => 150) %></p></blockquote>
   <%- end -%>
