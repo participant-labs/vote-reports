@@ -1,11 +1,11 @@
 <div id="report_subjects" class="section last report_subjects">
   <h2>Subjects</h2>
   <p>Subjects for this report 
-    <%- if (url = @interest_group.vote_smart_url) && @subjects.size == 1 -%>
-      were selected by <a href="<%= url %>">Project Vote Smart</a>
+    <%- if (url = @interest_group.try(:vote_smart_url)) && @subjects.size == 1 -%>
+      were selected by <a href="<%= url %>">Project Vote Smart</a>.
     <%- else -%>
-      are drawn from <%= link_to "the associated legislation", '#Agenda', :class => 'act-tab-select', :rel => 'Agenda' %>
-    <%- end -%>.
+      are drawn from <%= link_to "the associated legislation", '#Agenda', :class => 'act-tab-select', :rel => 'Agenda' %>.
+    <%- end -%>
 Follow the links below to find reports on related subjects.</p>
   <%= render 'subjects/cloud', :subjects => @subjects %>
 </div>
