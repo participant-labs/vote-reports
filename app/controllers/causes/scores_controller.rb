@@ -16,7 +16,7 @@ class Causes::ScoresController < ApplicationController
       }
       format.js {
         render :partial => 'reports/scores/table', :locals => {
-          :report => @report, :scores => @scores, :replace => 'cause_scores')
+          :report => @report, :scores => @scores, :replace => 'cause_scores'
         }
       }
     end
