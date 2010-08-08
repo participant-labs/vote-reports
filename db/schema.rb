@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100804043708) do
+ActiveRecord::Schema.define(:version => 20100808060722) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -779,6 +779,7 @@ ActiveRecord::Schema.define(:version => 20100804043708) do
   add_foreign_key "reports", "causes", :name => "reports_cause_id_reference"
   add_foreign_key "reports", "images", :name => "reports_thumbnail_id_reference"
   add_foreign_key "reports", "interest_groups", :name => "reports_interest_group_id_reference"
+  add_foreign_key "reports", "users", :name => "reports_user_id_fk"
 
   add_foreign_key "representative_terms", "congressional_districts", :name => "representative_terms_district_id_reference"
   add_foreign_key "representative_terms", "parties", :name => "representative_terms_party_id_reference"
