@@ -43,10 +43,6 @@
   overflow: hidden;
 }
 
-.report_score {
-  font-family: 'Lucida Grande',Lucida,Verdana,sans-serif;
-}
-
 .politician_score > .report_score {
   height: 0;
 }
@@ -86,7 +82,8 @@
 }
 
 
-#scores .report_score {
+.report_score {
+  font-family: 'Lucida Grande',Lucida,Verdana,sans-serif;
   text-align: center;
 }
 
