@@ -47,10 +47,6 @@
   font-family: 'Lucida Grande',Lucida,Verdana,sans-serif;
 }
 
-#score_examples .report_score {
-  padding-top: 0;
-}
-
 .politician_score > .report_score {
   height: 0;
 }
@@ -96,19 +92,6 @@
 
 .report_score.blank:after {
   content: '—';
-}
-
-#score_examples > ul.report_scores {
-  margin-right: 0;
-}
-
-#score_examples > ul > li + li, #politicians > ul > li + li {
-  padding-top: 1em;
-}
-
-#score_examples > ul > li {
-  display: inline-block;
-  width: 49%;
 }
 
 .report_excerpt {
