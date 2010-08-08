@@ -330,6 +330,24 @@ div.report_score .score.f_minus {
   padding-top: 1em;
 }
 
+#score_examples .report_scores .report_score {
+  padding-top: 0;
+}
+
+#score_examples div.report_score .score {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+
+   -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -khtml-border-radius: 30px;
+}
+
+#score_examples .politician_name .name {
+  font-size: 1.1em;
+}
+
 .score_sources ul, .report_scores {
   padding-left: 0;
 }
