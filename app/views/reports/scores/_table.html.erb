@@ -51,9 +51,9 @@
         :rel => replace %>
 <%- elsif score_count > 1 -%>
   <%- scores = scores.with_evidence.paginate(:page => params[:page]) -%>
-  <ul class="clearfix">
+  <ul>
     <%- scores.each do |score| -%>
-      <li><%= render 'politicians/score', :score => score, :full_width => true %></li>
+      <li class="full_width"><%= render 'politicians/score', :score => score %></li>
     <%- end -%>
   </ul>
   <%= will_paginate scores,
