@@ -1,6 +1,7 @@
 class InterestGroups::BillCriteriaController < ApplicationController
   filter_resource_access :nested_in => :interest_groups
   before_filter :find_report
+  cache_sweeper :bill_criterion_sweeper, :only => [:create, :destroy]
 
   def new
     @new_report = true if params[:new_report]
