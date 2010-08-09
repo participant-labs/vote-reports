@@ -1,11 +1,8 @@
-<%-
-  headshot_style ||= :medium
-  headshot_size ||= nil
--%>
+<%- headshot_style ||= :medium -%>
 
 <div class="politician_score rounded clearfix">
   <%- politician = score.politician -%>
-  <%= render 'politicians/headshot', :politician => politician, :style => headshot_style, :size => headshot_size %>
+  <%= render 'politicians/headshot', :politician => politician, :style => headshot_style %>
   <%= render 'politicians/name', :politician => politician %>
   <%= render 'reports/scores/score', :score => score %>
 </div>
