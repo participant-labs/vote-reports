@@ -75,6 +75,6 @@
   <%- end -%>
 
   <%- if @score.evidence.not_interest_group_ratings.present? -%>
-    <%= render 'reports/scores/evidence', :evidence => @score.evidence.not_interest_group_ratings %>
+    <%= render 'reports/scores/evidence', :score => @score %>
   <%- end -%>
 </div>
