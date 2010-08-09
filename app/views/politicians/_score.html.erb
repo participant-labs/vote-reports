@@ -3,7 +3,7 @@
   headshot_size ||= nil
 -%>
 
-<div class="politician_score rounded clearfix <%= 'full_width' if defined?(full_width) %>">
+<div class="politician_score rounded clearfix">
   <%- politician = score.politician -%>
   <%= render 'politicians/headshot', :politician => politician, :style => headshot_style, :size => headshot_size %>
   <%= render 'politicians/name', :politician => politician %>

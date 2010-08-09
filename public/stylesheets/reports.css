@@ -58,18 +58,18 @@
   background: -moz-linear-gradient(top,  #FFFFFF,  #F7F7F7);
 }
 
-.politician_score.full_width .politician_name {
+.full_width > .politician_score .politician_name {
   float: left;
   line-height: 120px;
   font-size: 16px;
   margin-left: 15px;
 }
-.politician_score.full_width .report_score {
+.full_width > .politician_score .report_score {
   float: right;
   margin-right: 20px;
 }
 
-.politician_score.full_width  .report_score .score {
+.full_width > .politician_score .report_score .score {
   font-size: 36px;
 
   width: 86px;
