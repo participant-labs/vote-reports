@@ -5,11 +5,12 @@
   <%- end -%>
 
   <%- if @score.evidence.interest_group_ratings.present? -%>
-    <%- data = interest_group_score_evidence_points(@score) -%>
     <% javascript_tag do %>
     <%- unless @js -%>
       $(function () {
     <%- end -%>
+      <% cache dom_id(@score, :interest_group_ratings) do %>
+        <%- data = interest_group_score_evidence_points(@score) -%>
         new Highcharts.Chart({
           chart: {
             renderTo: '<%= dom_id(@score, :evidence) %>',
@@ -63,6 +64,7 @@
             data: <%= raw data.map {|p| p.slice(:y, :tooltip, :vote_smart_url) }.to_json %>
           }]
         });
+      <% end %>
     <%- unless @js -%>
       });
     <%- end -%>
