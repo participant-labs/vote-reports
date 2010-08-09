@@ -12,7 +12,7 @@ Rails::Initializer.run do |config|
   # -- all .rb files in that directory are automatically loaded.
 
   # Add additional load paths for your own custom dirs
-  config.load_paths += ['lib/extensions', 'app/sweepers'].map {|path| Rails.root.join(path).to_s }
+  config.load_paths += [Rails.root.join('lib/extensions').to_s]
 
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
