@@ -17,7 +17,8 @@ class ReportScoreSweeper < ActionController::Caching::Sweeper
 
   def expire_cache_for(report_score)
     %w[small medium large].each do |headshot_style|
-      expire_fragment([dom_id(score), headshot_style].join(':'))
+      expire_fragment(['politician', dom_id(score), headshot_style].join(':'))
     end
+    expire_fragment(dom_id(score))
   end
 end
