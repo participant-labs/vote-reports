@@ -6,9 +6,7 @@ class InterestGroups::ScoresController < ApplicationController
     @scores = @report.scores.for_politicians(sought_politicians)
 
     respond_to do |format|
-      format.html {
-        render :layout => false
-      }
+      format.html
       format.js {
         render :partial => 'reports/scores/table', :locals => {
           :report => @report, :scores => @scores, :votes_how => @votes_how, :target_path => interest_group_report_scores_path(@interest_group)
