@@ -9,48 +9,57 @@
       mapTypeControl: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
-    show_location_map.fitBounds(<%= mapy(@federal.envelope) %>);
+    <% if @federal %>
+      show_location_map.fitBounds(<%= mapy(@federal.envelope) %>);
+    <% else %>
+      show_location_map.fitBounds(new google.maps.LatLngBounds(
+         new google.maps.LatLng(48.197218, -127.529297),
+         new google.maps.LatLng(28.72913, -68.818359)
+      ));
+    <% end %>
 
-    var info_content = '';
+    <% if @districts %>
+      var info_content = '';
 
-    <%- @districts.group_by(&:full_name).each_pair do |district_name, district_polygons| -%>
-      <%- district_ids = [] -%>
-      <%- district_polygons.each do |district| -%>
-        <%- district.the_geom.each_with_index do |polygon, index| -%>
-          <%- district_id = "district_#{ district.id }_#{ index }" -%>
-          <%= district_id %> = new google.maps.Polygon({
-            paths: [
-            <%- polygon.first.each do |point| -%>
-              <%= mapy(point) %>,
-            <%- end -%>
-            ],
-            strokeColor: "<%= district.level.stroke_color %>",
-            strokeOpacity: 0.8,
-            strokeWeight: 1,
-            fillColor: "<%= district.level.fill_color %>",
-            fillOpacity: 0.3
-          });
-          <%= district_id %>.setMap(show_location_map);
-          <%- district_ids << district_id -%>
+      <%- @districts.group_by(&:full_name).each_pair do |district_name, district_polygons| -%>
+        <%- district_ids = [] -%>
+        <%- district_polygons.each do |district| -%>
+          <%- district.the_geom.each_with_index do |polygon, index| -%>
+            <%- district_id = "district_#{ district.id }_#{ index }" -%>
+            <%= district_id %> = new google.maps.Polygon({
+              paths: [
+              <%- polygon.first.each do |point| -%>
+                <%= mapy(point) %>,
+              <%- end -%>
+              ],
+              strokeColor: "<%= district.level.stroke_color %>",
+              strokeOpacity: 0.8,
+              strokeWeight: 1,
+              fillColor: "<%= district.level.fill_color %>",
+              fillOpacity: 0.3
+            });
+            <%= district_id %>.setMap(show_location_map);
+            <%- district_ids << district_id -%>
+          <%- end -%>
         <%- end -%>
+        info_content += '<a style="color: <%= district_polygons.first.level.text_color %>;" onclick="togglePolygons(show_location_map, [<%= district_ids.join(', ') %>])"><%= district_name %></a><br />'
       <%- end -%>
-      info_content += '<a style="color: <%= district_polygons.first.level.text_color %>;" onclick="togglePolygons(show_location_map, [<%= district_ids.join(', ') %>])"><%= district_name %></a><br />'
-    <%- end -%>
 
-    var districtInfo = new google.maps.InfoWindow({
-        content: info_content
-    });
+      var districtInfo = new google.maps.InfoWindow({
+          content: info_content
+      });
 
-    var location = new google.maps.Marker({
-      position: <%= mapy(@geoloc) %>,
-      map: show_location_map,
-      title: "Your Location"
-    });
-    districtInfo.open(show_location_map,location);
-
-    google.maps.event.addListener(location, 'click', function() {
+      var location = new google.maps.Marker({
+        position: <%= mapy(@geoloc) %>,
+        map: show_location_map,
+        title: "Your Location"
+      });
       districtInfo.open(show_location_map,location);
-    });
+
+      google.maps.event.addListener(location, 'click', function() {
+        districtInfo.open(show_location_map,location);
+      });
+    <% end %>
 
 <%- if @js -%>
   }
