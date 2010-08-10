@@ -72,9 +72,9 @@ Feature: Browsing Report Scores by IP Address
     But I should not see "Connie Mack"
     But I should not see "Neil Abercrombie"
 
-    But I should see "Flower Mound, TX 75028"
+    But the "Reps from" field should contain "Flower Mound, TX 75028"
     When I follow "show all"
-    Then I should not see "Flower Mound, TX 75028"
+    Then the "Reps from" field should not contain "Flower Mound, TX 75028"
     And I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 100   |

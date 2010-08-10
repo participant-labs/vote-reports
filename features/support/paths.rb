@@ -61,6 +61,10 @@ module NavigationHelpers
 
     when /the interest group page for "(.+)"/
       interest_group_path(InterestGroup.find_by_name($1))
+    when /the interest group agenda page for "(.+)"/
+      interest_group_agenda_path(InterestGroup.find_by_name($1))
+    when /the interest group scores page for "(.+)"/
+      interest_group_report_scores_path(InterestGroup.find_by_name($1))
     when /the edit interest group page for "(.+)"/
       edit_interest_group_path(InterestGroup.find_by_name($1))
     when /the edit interest group image page for "(.+)"/

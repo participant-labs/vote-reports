@@ -86,25 +86,26 @@ Feature: Scoring Reports
       | 2004     | Spencer Bachus        | 80     |
       | 2004     | Joe Baca              | 100    |
     When I wait for delayed job to finish
-    And I go to the interest group page for "AARP"
-    And I follow "Scores"
+    And I go to the interest group scores page for "AARP"
     Then I should see the following scores:
       | politician           | score |
-      | Connie Mack          | 50    |
       | Roscoe Bartlett      | 65    |
       | Edward Kaufman       | 73    |
-      | Frank Ballance       | 13    |
-      | Tammy Baldwin        | 40    |
       | J. Kerrey            | 83    |
-      | Martin Sabo          | 50    |
-      | Neil Abercrombie     | 27    |
       | Brad Carson          | 56    |
-      | Robert Aderholt      | 25    |
       | Thomas Allen         | 77    |
       | Brian Baird          | 50    |
+    When I follow "Next"
+    Then I should see the following scores:
+      | politician           | score |
+      | Martin Sabo          | 50    |
+      | Robert Aderholt      | 25    |
+      | Neil Abercrombie     | 27    |
+      | Frank Ballance       | 13    |
+      | Tammy Baldwin        | 40    |
+      | Connie Mack          | 50    |
       | Spencer Bachus       | 44    |
       | Joe Baca             | 34    |
-    And I should see "Next"
 
   Scenario: Bill Criteria report discounts the impact of past votes within the same criterion
     Given bill "Bovine Security Act of 2003" has the following rolls:
@@ -138,8 +139,7 @@ Feature: Scoring Reports
       | Fall 2003 | Connie Mack           | 12     |
       | Fall 2003 | Neil Abercrombie      | 100    |
     When I wait for delayed job to finish
-    And I go to the interest group page for "AARP"
-    And I follow "Scores"
+    And I go to the interest group scores page for "AARP"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 64    |

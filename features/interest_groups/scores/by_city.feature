@@ -50,8 +50,7 @@ Feature: Browsing Report Scores by State
     And the scores for interest group "Sierra Club" are calculated
 
   Scenario: When unscoped, report scores should be proper and complete
-    When I go to the interest group page for "Sierra Club"
-    And I follow "Scores"
+    When I go to the interest group scores page for "Sierra Club"
     Then I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 42    |
@@ -62,8 +61,7 @@ Feature: Browsing Report Scores by State
       | Neil Abercrombie     | 100   |
 
   Scenario Outline: Narrow report results to those within a certain zip code
-    When I go to the interest group page for "Sierra Club"
-    And I follow "Scores"
+    When I go to the interest group scores page for "Sierra Club"
     And I fill in "Reps from" with "<address>"
     And I press "Show Reps"
     Then I should see the following scores:

@@ -30,11 +30,9 @@ Feature: Deleting Criteria from Reports
     And I should be on the edit interest group page for "AARP"
 
     When I wait for delayed job to finish
-    And I go to the interest group page for "AARP"
-    And I follow "Agenda"
+    And I go to the interest group agenda page for "AARP"
     Then I should not see "Bovine Security Act of 2009"
-    When I go to the interest group page for "AARP"
-    And I follow "Scores"
+    When I go to the interest group scores page for "AARP"
     Then I should not see "Piyush Jindal"
     And I should see "No ratings on record for this group"
 
@@ -53,6 +51,5 @@ Feature: Deleting Criteria from Reports
     Then I should see "Successfully deleted amendment from agenda"
     And I should be on the edit interest group page for "AARP"
     When I wait for delayed job to finish
-    And I go to the interest group page for "AARP"
-    And I follow "Agenda"
+    And I go to the interest group agenda page for "AARP"
     Then I should not see "Fix this thing"
