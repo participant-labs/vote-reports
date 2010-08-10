@@ -1,66 +1,32 @@
-<% content_for :minimal_content do %>
-  <%= flash_helper %>
-
-  <div class="container">
-    <div id="header" class="span-24">
-      <%= link_to content_tag(:span, 'VoteReports: Knowing is Half the Ballot'), root_path, :id => 'logo', :class => 'sprites navigation-header_logo' %>
-      <div id="account">
-        <%= render 'locations/location' %>
-        <%- if current_user -%>
-          <%= link_to "Dashboard", user_path(current_user), :class => 'dashboard' %>
-          <%= link_to "Log out", logout_path, :class => 'logout' %>
-        <%- else -%>
-          <%= link_to content_tag(:span, "Log in"), request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy sprites navigation-button_login' %>
-        <%- end -%>
-      </div>
-
-      <div class="span-24">
-        <ul id="menu" class="sidebar-links">
-          <li class="<%= "selected" if request.path.starts_with?('/politicians') %>">
-            <%= link_to content_tag(:span, "Politicians"), politicians_path, :class => 'sprites navigation-button_politicians' %>
-          </li>
-          <li class="<%= "selected" if request.path.starts_with?('/reports') || request.path.starts_with?('/interest_groups') %>">
-            <%= link_to content_tag(:span, "Reports"), reports_path, :class => 'sprites navigation-button_reports' %>
-          </li>
-          <li class="<%= "selected" if request.path.starts_with?('/causes') %>">
-            <%= link_to content_tag(:span, "Causes"), causes_path, :class => 'sprites navigation-button_causes' %>
-          </li>
-        </ul>
-        <% form_tag search_path, :method => :get, :id => 'header_search' do %>
-          <%= label_tag :term, 'Search' %>
-          <%= text_field_tag :term, '', :class => 'fieldtag', :id => 'nav_search',
-            :title => 'Politicians, Reports and Causes',
-            :size => 20 %>
-        <% end %>
-      </div>
-    </div>
+<% content_for :header_content do %>
+  <div class="span-24">
+    <ul id="menu" class="sidebar-links">
+      <li class="<%= "selected" if request.path.starts_with?('/politicians') %>">
+        <%= link_to content_tag(:span, "Politicians"), politicians_path, :class => 'sprites navigation-button_politicians' %>
+      </li>
+      <li class="<%= "selected" if request.path.starts_with?('/reports') || request.path.starts_with?('/interest_groups') %>">
+        <%= link_to content_tag(:span, "Reports"), reports_path, :class => 'sprites navigation-button_reports' %>
+      </li>
+      <li class="<%= "selected" if request.path.starts_with?('/causes') %>">
+        <%= link_to content_tag(:span, "Causes"), causes_path, :class => 'sprites navigation-button_causes' %>
+      </li>
+    </ul>
+    <% form_tag search_path, :method => :get, :id => 'header_search' do %>
+      <%= label_tag :term, 'Search' %>
+      <%= text_field_tag :term, '', :class => 'fieldtag', :id => 'nav_search',
+        :title => 'Politicians, Reports and Causes',
+        :size => 20 %>
+    <% end %>
   </div>
+<% end %>
 
+<% content_for :minimal_content do %>
   <%= yield :above_content %>
-
+  
   <div class="container">
     <div id="content" class="span-24">
       <%= yield(:content) || yield %>
     </div>
   </div>
-
-  <div id="footer" class="footer">
-    <div class="container">
-      <div class="span-6">
-        <%= link_to content_tag(:span, 'VoteReports'), root_path, :class => "sprites navigation-footer_logo" %>
-        <%= link_to "© #{Date.today.year} Participant Labs", participant_labs_path, :id => 'copyright' %>
-      </div>
-      <ul class="sidebar-links">
-        <li><%= link_to_unless_current "About us", about_path %></li>
-        <li><%= link_to 'Our Blog', blog_path %></li>
-        <li><%= mail_to 'all_ears@votereports.org', "Contact us" %></li>
-        <li><%= link_to 'Feedback', get_satisfaction_path, :title => 'We welcome it' %></li>
-        <li><%= link_to 'Support Our Efforts', new_donation_path,
-          :title => "We've got plenty more to do, and we need your help to do it" %></li>
-      </ul>
-    </div>
-  </div>
-
-  <%= render 'layouts/get_satisfaction' %>
 <% end %>
 <%= render :file => 'layouts/minimal' %> 
