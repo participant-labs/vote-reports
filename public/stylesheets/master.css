@@ -5,7 +5,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Droid Sans', arial, serif;
 }
 
-.rounded {
+.round-4 {
    -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -khtml-border-radius: 4px;
