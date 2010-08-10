@@ -21,7 +21,46 @@
   </head>
   <body>
     <%= render 'layouts/ienomore' %>
+
+    <%= flash_helper %>
+
+    <div class="container">
+      <div id="header" class="span-24">
+        <%= link_to content_tag(:span, 'VoteReports: Knowing is Half the Ballot'), root_path, :id => 'logo', :class => 'sprites navigation-header_logo' %>
+        <div id="account">
+          <%= render 'locations/location' %>
+          <%- if current_user -%>
+            <%= link_to "Dashboard", user_path(current_user), :class => 'dashboard' %>
+            <%= link_to "Log out", logout_path, :class => 'logout' %>
+          <%- else -%>
+            <%= link_to content_tag(:span, "Log in"), request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy sprites navigation-button_login' %>
+          <%- end -%>
+        </div>
+
+        <%= yield(:header_content) %>
+      </div>
+    </div>
+
     <%= yield(:minimal_content) || yield %>
+
+    <div id="footer" class="footer">
+      <div class="container">
+        <div class="span-6">
+          <%= link_to content_tag(:span, 'VoteReports'), root_path, :class => "sprites navigation-footer_logo" %>
+          <%= link_to "© #{Date.today.year} Participant Labs", participant_labs_path, :id => 'copyright' %>
+        </div>
+        <ul class="sidebar-links">
+          <li><%= link_to_unless_current "About us", about_path %></li>
+          <li><%= link_to 'Our Blog', blog_path %></li>
+          <li><%= mail_to 'all_ears@votereports.org', "Contact us" %></li>
+          <li><%= link_to 'Feedback', get_satisfaction_path, :title => 'We welcome it' %></li>
+          <li><%= link_to 'Support Our Efforts', new_donation_path,
+            :title => "We've got plenty more to do, and we need your help to do it" %></li>
+        </ul>
+      </div>
+    </div>
+
+    <%= render 'layouts/get_satisfaction' %>
 
     <% javascript_tag do %>
       location_set = <%= Rails.env.test? || Rails.env.cucumber? || session[:geo_location_declared].present? %>;
