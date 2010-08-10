@@ -13,8 +13,7 @@ Feature: Editing Criteria from Reports
 
   Scenario: Report owner adds an explanatory url to an existing bill criterion
     Given an interest group named "Target"
-    When I go to the interest group page for "AARP"
-    And I follow "Agenda"
+    When I go to the interest group agenda page for "AARP"
     Then I should see "Bovine Security Act of 2009"
     When I go to the edit interest group page for "AARP"
     And I follow "Edit Agenda"
@@ -22,8 +21,8 @@ Feature: Editing Criteria from Reports
     And I press "Save Agenda"
     Then I should see "Successfully updated interest group"
     And I should be on the interest group page for "AARP"
-    And I follow "Agenda"
-    When I follow "Support"
+    When I go to the interest group agenda page for "AARP"
+    And I follow "Support"
     Then I should be on the interest group page for "Target"
 
   @wip

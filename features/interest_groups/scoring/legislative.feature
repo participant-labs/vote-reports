@@ -37,8 +37,7 @@ Feature: Scoring Reports
       | Joe Barton            |
 
   Scenario: Without Criteria, I should see message noting why no scores exist
-    When I go to the interest group page for "AARP"
-    And I follow "Scores"
+    When I go to the interest group scores page for "AARP"
     Then I should see "No ratings on record for this group"
 
   Scenario: With Criteria on unvoted bills, I should see message noting that as the bills are unvoted, no scores exist
@@ -47,8 +46,7 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009             | true    |
       | USA PATRIOT Reauthorization Act of 2009 | false   |
     And I wait for delayed job to finish
-    When I go to the interest group page for "AARP"
-    And I follow "Scores"
+    When I go to the interest group scores page for "AARP"
     Then I should see "No scores yet, as the associated legislation has not been voted on."
 
   Scenario: With Criteria on bills without passage rolls, I should see message noting that as the bills are unvoted, no scores exist
@@ -67,8 +65,7 @@ Feature: Scoring Reports
       | bill                                    | support |
       | Bovine Security Act of 2009             | true    |
     And I wait for delayed job to finish
-    When I go to the interest group page for "AARP"
-    And I follow "Scores"
+    When I go to the interest group scores page for "AARP"
     Then I should see "No scores yet, as the associated legislation has not been voted on."
 
   Scenario: Bill Criteria report generates scores
@@ -83,8 +80,7 @@ Feature: Scoring Reports
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
     When I wait for delayed job to finish
-    And I go to the interest group page for "AARP"
-    And I follow "Scores"
+    And I go to the interest group scores page for "AARP"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -114,8 +110,7 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009 | true    |
       | USA PATRIOT Reauthorization Act of 2009 | true    |
     When I wait for delayed job to finish
-    And I go to the interest group page for "AARP"
-    And I follow "Scores"
+    And I go to the interest group scores page for "AARP"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -153,28 +148,20 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009             | true    |
       | USA PATRIOT Reauthorization Act of 2009 | false   |
       | Honoring Miss America Act of 2009       | true   |
-    When I go to the interest group page for "AARP"
-    And I follow "Scores"
+    When I go to the interest group scores page for "AARP"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
-    And I go to the interest group page for "AARP"
-    And I follow "Scores"
+    And I go to the interest group scores page for "AARP"
     Then I should see the following scores:
       | politician           | score |
       | Connie Mack          | 100   |
       | Roscoe Bartlett      | 100   |
       | Edward Kaufman       | 100   |
-      | Frank Ballance       | 0     |
-      | Tammy Baldwin        | 0     |
       | J. Kerrey            | 75    |
       | Martin Sabo          | 75    |
-      | Neil Abercrombie     | 25    |
       | Brad Carson          | 75    |
-      | Robert Aderholt      | 25    |
       | Thomas Allen         | 75    |
-      | Brian Baird          | 25    |
-      | Spencer Bachus       | 25    |
-      | Joe Baca             | 0     |
+      | Piyush Jindal        | 50    |
     And I should see "Next"
 
   Scenario: Bill Criteria report generate scores from passing roles only
@@ -194,12 +181,10 @@ Feature: Scoring Reports
     And interest group "AARP" has the following bill criterion:
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
-    When I go to the interest group page for "AARP"
-    And I follow "Scores"
+    When I go to the interest group scores page for "AARP"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
-    And I go to the interest group page for "AARP"
-    And I follow "Scores"
+    And I go to the interest group scores page for "AARP"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -226,12 +211,10 @@ Feature: Scoring Reports
     And interest group "AARP" has the following bill criterion:
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
-    When I go to the interest group page for "AARP"
-    And I follow "Scores"
+    When I go to the interest group scores page for "AARP"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
-    And I go to the interest group page for "AARP"
-    And I follow "Scores"
+    And I go to the interest group scores page for "AARP"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -258,12 +241,10 @@ Feature: Scoring Reports
     And interest group "AARP" has the following bill criterion:
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
-    When I go to the interest group page for "AARP"
-    And I follow "Scores"
+    When I go to the interest group scores page for "AARP"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
-    And I go to the interest group page for "AARP"
-    And I follow "Scores"
+    And I go to the interest group scores page for "AARP"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -307,12 +288,10 @@ Feature: Scoring Reports
       | bill                            | support |
       | Bovine Security Act of 2009     | true    |
       | Honoring Bo Jackson Act of 2005 | false   |
-    When I go to the interest group page for "AARP"
-    And I follow "Scores"
+    When I go to the interest group scores page for "AARP"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
-    And I go to the interest group page for "AARP"
-    And I follow "Scores"
+    And I go to the interest group scores page for "AARP"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |

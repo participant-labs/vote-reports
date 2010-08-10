@@ -217,17 +217,10 @@ Feature: Scoring Reports
       | Connie Mack          | 100   |
       | Roscoe Bartlett      | 100   |
       | Edward Kaufman       | 100   |
-      | Frank Ballance       | 0     |
-      | Tammy Baldwin        | 0     |
       | J. Kerrey            | 75    |
       | Martin Sabo          | 75    |
-      | Neil Abercrombie     | 25    |
       | Brad Carson          | 75    |
-      | Robert Aderholt      | 25    |
       | Thomas Allen         | 75    |
-      | Brian Baird          | 25    |
-      | Spencer Bachus       | 25    |
-      | Joe Baca             | 0     |
     And I should see "Next"
 
   Scenario: Bill Criteria report generate scores from passing roles only
