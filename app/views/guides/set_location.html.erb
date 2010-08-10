@@ -1,12 +1,19 @@
 <%- title "Set your location" -%>
 
-<h1>Set your Location</h1>
+<div class="container">
+  <div class="span-24">
+    <p>Enter your location to narrow down the list of politicians:</p>
 
-<p>First, we need to know which politicians to score...</p>
+    <% form_tag location_path do %>
+      <%= label_tag :location, 'Your Location' %>
+      <%= text_field_tag :location, '', :class => 'title' %>
+      <%= hidden_field_tag :return_to, new_guide_path(:from => :set_location) %>
+      <%= submit_tag 'Continue' %>
+    <% end %>
+  </div>
+</div>
 
-<% form_tag location_path do %>
-  <%= label_tag :location, 'Your Location' %>
-  <%= text_field_tag :location %>
-  <%= hidden_field_tag :return_to, new_guide_path(:from => :set_location) %>
-  <%= submit_tag 'Set' %>
-<% end %>
+<div class="guide_map">
+  <div id="guide_location_map_canvas"></div>
+  <%= render 'locations/map_js', :canvas_id => 'guide_location_map_canvas' %>
+</div>
