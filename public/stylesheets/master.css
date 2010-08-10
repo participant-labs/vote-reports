@@ -12,6 +12,13 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 4px;
 }
 
+.round-6 {
+   -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+}
+
 .politician-search {
   background-color: #F0F8FB;
   padding: 5px 20px 5px 10px;

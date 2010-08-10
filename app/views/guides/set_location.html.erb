@@ -1,14 +1,40 @@
 <%- title "Set your location" -%>
 
-<div class="container">
+<div class="container guide_location">
   <div class="span-24">
-    <p>Enter your location to narrow down the list of politicians:</p>
+    <p class="span-24 last message">Enter your location to narrow down the list of politicians:</p>
 
     <% form_tag location_path do %>
-      <%= label_tag :location, 'Your Location' %>
-      <%= text_field_tag :location, '', :class => 'title' %>
-      <%= hidden_field_tag :return_to, new_guide_path(:from => :set_location) %>
-      <%= submit_tag 'Continue' %>
+      <dl class="span-18">
+        <dt><%= label_tag :location, 'Your Location' %></dt>
+        <dd><%= text_field_tag :location, '', :class => 'title fieldtag', :title => 'Address or zip code' %></dd>
+      </dl>
+
+      <%- if @politicians -%>
+        <div class="right">
+          <h2>Your Representatives for <%= @federal.display_name %></h2>
+          <div class="clearfix">
+            <div class="left">
+              <h3>Senators</h3>
+              <%- @politicians.senators.each do |politician| -%>
+                <%= render 'politicians/politician', :politician => politician %>
+              <%- end -%>
+            </div>
+            <div class="right">
+              <h3>Representative</h3>
+              <%- @politicians.representatives.each do |politician| -%>
+                <%= render 'politicians/politician', :politician => politician %>
+              <%- end -%>
+            </div>
+          </div>
+        </div>
+      <%- else -%>
+        <%= hidden_field_tag :return_to, new_guide_path(:from => :set_location) %>
+      <%- end -%>
+
+      <div class="span-6 last">
+        <button class="continue round-6">Continue</button>
+      </div>
     <% end %>
   </div>
 </div>
