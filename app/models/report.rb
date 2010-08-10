@@ -312,6 +312,17 @@ class Report < ActiveRecord::Base
     end
   end
 
+  class << self
+    def rescore!
+      non_cause.paginated_each do |report|
+        report.rescore!
+      end
+      for_causes.paginated_each do |report|
+        report.rescore!
+      end
+    end
+  end
+
   def interest_group=(ig)
     self.name ||= ig.name
     self.description ||= ig.description
