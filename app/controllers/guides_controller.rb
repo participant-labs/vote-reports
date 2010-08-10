@@ -1,4 +1,6 @@
 class GuidesController < ApplicationController
+  layout 'minimal'
+
   def new
     if params[:from] == 'location' && !session[:congressional_district]
       session[:geo_location_declared] = true

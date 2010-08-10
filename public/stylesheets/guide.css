@@ -11,3 +11,11 @@
   margin-left: 0;
   list-style-type: none;
 }
+
+.guide_map {
+  height: 560px;
+}
+#guide_location_map_canvas {
+  width: 100%;
+  height: 100%;
+}
