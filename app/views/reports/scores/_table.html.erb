@@ -23,11 +23,11 @@
     <%- end -%>
     <ul class="score_view_options clearfix">
       <li class="span-6"><%= radio_button_tag :votes_how, :with, votes_how == :with %>
-      <%= label_tag :votes_how_with, "Votes With (#{scores.with.count})", :class => "span-6 last rounded #{'selected' if votes_how == :with}" %></li>
+      <%= label_tag :votes_how_with, "Votes With (#{scores.with.count})", :class => "span-6 last round-4 #{'selected' if votes_how == :with}" %></li>
       <li class="span-6"><%= radio_button_tag :votes_how, :against, votes_how == :against %>
-      <%= label_tag :votes_how_against, "Votes Against (#{scores.against.count})", :class => "span-6 last rounded #{'selected' if votes_how == :against}" %></li>
+      <%= label_tag :votes_how_against, "Votes Against (#{scores.against.count})", :class => "span-6 last round-4 #{'selected' if votes_how == :against}" %></li>
       <li class="span-6 last"><%= radio_button_tag :votes_how, :neutral, votes_how == :neutral %>
-      <%= label_tag :votes_how_neutral, "Neutral (#{scores.neutral.count})", :class => "span-6 last rounded #{'selected' if votes_how == :neutral}" %></li>
+      <%= label_tag :votes_how_neutral, "Neutral (#{scores.neutral.count})", :class => "span-6 last round-4 #{'selected' if votes_how == :neutral}" %></li>
     </ul>
   <% end %>
   <%- scores = scores.with_evidence.votes_how(votes_how).paginate(:page => params[:page]) -%>
@@ -37,7 +37,7 @@
     <%- end -%>
   </ul>
   <%= will_paginate scores,
-        :class => 'act-replace score-pagination rounded',
+        :class => 'act-replace score-pagination round-4',
         :rel => replace %>
 <%- elsif score_count > 8 -%>
   <%- scores = scores.with_evidence.paginate(:page => params[:page]) -%>
@@ -47,7 +47,7 @@
     <%- end -%>
   </ul>
   <%= will_paginate scores,
-        :class => 'act-replace score-pagination rounded',
+        :class => 'act-replace score-pagination round-4',
         :rel => replace %>
 <%- elsif score_count > 1 -%>
   <%- scores = scores.with_evidence.paginate(:page => params[:page]) -%>
@@ -57,7 +57,7 @@
     <%- end -%>
   </ul>
   <%= will_paginate scores,
-        :class => 'act-replace score-pagination rounded',
+        :class => 'act-replace score-pagination round-4',
         :rel => replace %>
 <%- elsif report.delayed_jobs.present? -%>
   <p>Scores are being generated. Please try again in a moment.</p>
