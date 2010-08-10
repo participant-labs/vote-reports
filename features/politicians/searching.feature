@@ -30,7 +30,7 @@ Feature: Browsing Politicians
 
   Scenario: Browsing to a Politician from the Politicians Page
     When I go to the politicians page
-    And I fill in "Reps From" with "75028"
+    And I fill in "Reps from" with "75028"
     And I uncheck "In Office"
     And I press "Show Reps"
     Then I should see "Rep. Burgess"
@@ -50,7 +50,7 @@ Feature: Browsing Politicians
     But I should not see "Rep. Kerrey"
     And I should not see "Sen. Hutchison"
     And I should not see "Sen. Mack"
-    When I fill in "Reps From" with "TX"
+    When I fill in "Reps from" with "TX"
     And I press "Show Reps"
     Then I should see "Rep. Burgess"
     And I should see "Sen. Cornyn"
