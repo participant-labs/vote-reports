@@ -1,9 +1,12 @@
-<%- hide ||= false -%>
+<%-
+  hide ||= false
+  unfollow_only ||= false
+-%>
 
 <% content_tag :div, :class => "follow_report #{'hide' if hide}", :id => dom_id(report, :follow) do %>
   <%- if current_user.try(:follows?, report) -%>
     <%= link_to('Stop Following', report_follows_path(report, :return_to => request.path), :method => :delete, :class => 'button negative', :title => "Unfollow #{report.name}") %>
-  <%- else -%>
+  <%- elsif !unfollow_only -%>
     <%= link_to('Follow', report_follows_path(report, :return_to => request.path), :method => :post, :class => 'button positive', :title => "Follow #{report.name}") %>
   <%- end -%>
 <% end %>
