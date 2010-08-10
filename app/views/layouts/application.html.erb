@@ -23,7 +23,7 @@
 <% content_for :minimal_content do %>
   <%= yield :above_content %>
   
-  <div class="container">
+  <div id="body" class="container">
     <div id="content" class="span-24">
       <%= yield(:content) || yield %>
     </div>
