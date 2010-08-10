@@ -15,6 +15,29 @@
 .guide_map {
   height: 560px;
 }
+
+.guide_location .message {
+  font-size: 14px;
+  padding-bottom: 10px;
+  border-bottom: 4px solid black;
+}
+
+.guide_location input.title {
+  width: 280px;
+}
+
+.guide_location dd {
+  margin-left: 0;
+}
+
+.guide_location .continue {
+  background-color: #E11610;
+  color: white;
+  width: 160px;
+  height: 60px;
+  float:right;
+}
+
 #guide_location_map_canvas {
   width: 100%;
   height: 100%;
