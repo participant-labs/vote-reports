@@ -1,11 +1,13 @@
 <%- title 'Guide - Causes' -%>
 
-<div class="guide">
-  <% form_for @guide do |f| %>
-    <h1>Which causes do you support?</h1>
-    <%= render 'causes/selector', :causes => @causes, :replace => 'instant_scores' %>
-    <%= hidden_field_tag :from, 'causes' %>
-  <% end %>
-</div>
+<div class="container">
+  <div class="guide">
+    <% form_for @guide do |f| %>
+      <h1>Which causes do you support?</h1>
+      <%= render 'causes/selector', :causes => @causes, :replace => 'instant_scores' %>
+      <%= hidden_field_tag :from, 'causes' %>
+    <% end %>
+  </div>
 
-<div id="instant_scores"></div>
+  <div id="instant_scores"></div>
+</div>
