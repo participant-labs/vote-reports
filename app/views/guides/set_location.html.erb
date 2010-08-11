@@ -23,6 +23,10 @@
           <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
         <%- end -%>
       </dl>
+      <%- else -%>
+      <div class="span-4 last">
+        <button class="continue round-6">Continue</button>
+      </div>
       <%- end -%>
     <% end %>
 
