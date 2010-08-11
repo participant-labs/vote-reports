@@ -1,8 +1,8 @@
 <%- title "Set your location" -%>
 
-<div class="guide_location">
+<div class="guide_header">
   <div class="container">
-    <p class="span-24 last message">Enter your location to narrow down the list of politicians:</p>
+    <p class="span-24 message">Enter your location to narrow down the list of politicians:</p>
 
     <% form_tag location_path do %>
       <%= hidden_field_tag :return_to, new_guide_path(:from => :set_location) %>

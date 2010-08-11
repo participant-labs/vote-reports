@@ -16,46 +16,46 @@
   height: 560px;
 }
 
-.guide_location {
+.guide_header {
   background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#F5F5F5));
   background: -moz-linear-gradient(top,  #FFF,  #F5F5F5);
 }
 
-.guide_location .message {
+.guide_header .message {
   font-size: 14px;
   padding-bottom: 10px;
   border-bottom: 4px solid black;
 }
 
-.guide_location .politician_name .name {
+.guide_header .politician_name .name {
   font-weight: normal;
   line-height: 30px;
   color: #8E8E8E;
   font-size: 12px;
 }
 
-.guide_location .politician_headshot {
+.guide_header .politician_headshot {
   padding-right: 10px;
 }
 
-.guide_location input.title.tagged {
+.guide_header input.title.tagged {
   color: #BBB;
 }
 
-.guide_location input.title {
+.guide_header input.title {
   width: 280px;
   border: 2px solid #E8E8E8;
 }
 
-.guide_location .politician {
+.guide_header .politician {
   margin-top: 7px;
 }
 
-.guide_location dd {
+.guide_header dd {
   margin-left: 0;
 }
 
-.guide_location .continue {
+.guide_header .continue {
   font-size: 15px;
 
   background-color: #E11610;
