@@ -5,9 +5,12 @@
     <p class="span-24 message">Answer questions to see how your views align with those of your representatives</p>
 
     <div class="guide">
+      <% javascript_tag do %>
+        current_act_toggle_selected = '<%= dom_id(@issue) %>';
+      <% end %>
       <% form_for @guide do |f| %>
         <h1 class="span-16">What's your view on <%= select_tag :issue_selected,
-        Issue.all.map {|issue| content_tag(:option, issue.title, (@issue == issue ? {:selected => 'selected'} : {}).merge(:value => issue.to_param)) }.join.html_safe, :class => 'title' %>?
+        Issue.all.map {|issue| content_tag(:option, issue.title, (@issue == issue ? {:selected => 'selected'} : {}).merge(:value => dom_id(issue))) }.join.html_safe, :class => 'title act-toggle' %>?
         </h1>
         <div class="span-8 last">
           <%- Issue.all.each do |issue| -%>
