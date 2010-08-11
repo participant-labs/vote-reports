@@ -1,6 +1,6 @@
 <% cache dom_id(score, :evidence) do %>
   <dl class="score_evidence">
-    <%- score.evidence.not_interest_group_ratings.group_by(&:subject).each_pair do |subject, scores| -%>
+    <%- (score.evidence.respond_to?(:not_interest_group_ratings) ? score.evidence.not_interest_group_ratings :  score.evidence).group_by(&:subject).each_pair do |subject, scores| -%>
       <%- if subject.is_a?(Report) -%>
         <%- scores.each do |report_score| -%>
             <dt class="report_evidence"><%= render 'reports/scores/score', :score => report_score.evidence %></dt>
