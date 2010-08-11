@@ -55,10 +55,8 @@ class GuidesController < ApplicationController
     elsif @guide.congressional_district.present? && params[:from] != 'set_location'
       @causes = Cause.all
       :causes
-    elsif current_geo_location
-      load_location_show_support(current_geo_location)
-      :location
     else
+      load_location_show_support(current_geo_location) if current_geo_location
       :set_location
     end
   end

@@ -1,6 +1,14 @@
 <%-
+  name_only ||= false
   full ||= false
-  name = full ? politician_name(politician) : politician_last_name(politician)
+  name =
+    if name_only
+      politician.full_name
+    elsif full
+      politician_name(politician)
+    else
+      politician_last_name(politician)
+    end
   no_fancybox ||= false
 -%>
 
@@ -10,5 +18,5 @@
   <%- else -%>
     <%= link_to_unless_current name, politician, :class => 'name' %>
   <%- end -%>
-  <%= render 'politicians/location', :politician => politician, :no_fancybox => no_fancybox %>
+  <%= render 'politicians/location', :politician => politician, :no_fancybox => no_fancybox unless name_only %>
 </span>
