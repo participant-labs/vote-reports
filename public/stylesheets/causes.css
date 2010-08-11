@@ -11,6 +11,7 @@ dt.report_evidence {
 dd.report_evidence {
   margin-left: 8em;
   min-width: 20em;
+  margin-bottom: 10px;
 }
 
 .report_evidence .report_score {
