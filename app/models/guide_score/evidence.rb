@@ -12,6 +12,10 @@ class GuideScore::Evidence
     ReportScore.find(report_score_id)
   end
 
+  def public_evidence_count
+    evidence.evidence.count
+  end
+
   def report
     evidence.report
   end
