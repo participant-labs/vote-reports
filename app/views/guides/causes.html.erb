@@ -7,14 +7,16 @@
     <div class="guide">
       <% form_for @guide do |f| %>
         <h1 class="span-16">What's your view on <%= select_tag :issue_selected,
-        Issue.all.map {|issue| content_tag(:option, issue.title, :value => issue.to_param, :title => issue.title) }.join.html_safe, :class => 'title' %>?
+        Issue.all.map {|issue| content_tag(:option, issue.title, (@issue == issue ? {:selected => 'selected'} : {}).merge(:value => issue.to_param)) }.join.html_safe, :class => 'title' %>?
         </h1>
         <div class="span-8 last">
-          <ul class="clearfix">
-            <%- @issue.causes.each do |cause| -%>
-              <li><button value="<%= dom_id(cause) %>" class="cause_selection round-6"><%= cause.name %></button></li>
-            <%- end -%>
-          </ul>
+          <%- Issue.all.each do |issue| -%>
+            <ul class="clearfix" style="<%= 'display:none;' unless issue == @issue %>" id="<%= dom_id(issue) %>">
+              <%- issue.causes.each do |cause| -%>
+                <li><button value="<%= dom_id(cause) %>" class="cause_selection round-6" title="<%= cause.description %>"><%= cause.name %></button></li>
+              <%- end -%>
+            </ul>
+          <%- end -%>
           <%= hidden_field_tag :from, 'causes' %>
         </div>
       <% end %>
