@@ -1,4 +1,13 @@
-<ul class="span-22 clearfix">
+<div class="span-4 stances">
+  <h2>Your Stance</h2>
+  <ul>
+    <% @guide.reports.each do |report| %>
+      <li><%= report.name %></li>
+    <% end %>
+  </ul>
+</div>
+
+<ul class="span-20 last clearfix">
   <%- @scores.each do |score| -%>
   <li class="clearfix"><%= render 'politicians/bar_score', :score => score %></li>
   <%- end -%>
