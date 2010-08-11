@@ -49,11 +49,11 @@ class GuidesController < ApplicationController
 
   def next_step
     if @guide.reports.present? || params[:from] == 'causes'
-      @causes = Cause.all
+      @issue = @guide.next_issue
       @scores = @guide.immediate_scores
       :cause_scores
     elsif @guide.congressional_district.present? && params[:from] != 'set_location'
-      @causes = Cause.all
+      @issue = @guide.next_issue
       :causes
     else
       load_location_show_support(current_geo_location) if current_geo_location

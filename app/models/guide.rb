@@ -27,6 +27,10 @@ class Guide < ActiveRecord::Base
     end.compact
   end
 
+  def next_issue
+    Issue.random.first
+  end
+
   private
 
   def initialize_report

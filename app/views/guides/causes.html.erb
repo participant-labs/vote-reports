@@ -1,13 +1,25 @@
 <%- title 'Guide - Causes' -%>
 
-<div class="container">
-  <div class="guide">
-    <% form_for @guide do |f| %>
-      <h1>Which causes do you support?</h1>
-      <%= render 'causes/selector', :causes => @causes, :replace => 'instant_scores' %>
-      <%= hidden_field_tag :from, 'causes' %>
-    <% end %>
-  </div>
+<div class="guide_header">
+  <div class="container">
+    <p class="span-24 message">Answer questions to see how your views align with those of your representatives</p>
 
-  <div id="instant_scores"></div>
+    <div class="guide">
+      <% form_for @guide do |f| %>
+        <h1 class="span-16">What's your view on <%= select_tag :issue_selected,
+        Issue.all.map {|issue| content_tag(:option, issue.title, :value => issue.to_param, :title => issue.title) }.join.html_safe, :class => 'title' %>?
+        </h1>
+        <div class="span-8 last">
+          <ul class="clearfix">
+            <%- @issue.causes.each do |cause| -%>
+              <li><button value="<%= dom_id(cause) %>" class="cause_selection round-6"><%= cause.name %></button></li>
+            <%- end -%>
+          </ul>
+          <%= hidden_field_tag :from, 'causes' %>
+        </div>
+      <% end %>
+    </div>
+
+    <div id="instant_scores"></div>
+  </div>
 </div>
