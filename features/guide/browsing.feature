@@ -26,8 +26,8 @@ Feature: Browsing the Guide
 
     When I go to the new guide page
     And I fill in "Your Location" with "75028"
-    And I press "Set"
-    Then I should see "Rep. Burgess"
-    And I should see "Sen. Cornyn"
+    And I press "Continue"
+    Then I should see "Michael Burgess"
+    And I should see "John Cornyn"
     But I should not see "Kerrey"
     And I should not see "Abercrombie"
