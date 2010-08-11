@@ -57,6 +57,16 @@
       return replaceWith(target.closest('.act-replace').attr('rel'), target.attr('href'));
     })
 
+    $('form.act-replace :submit').live('click', function(event){
+      var source = $(event.target);
+      var form = source.closest('form');
+      var target = form.attr('action') + '?' + form.serialize();
+      if (source.attr('name')) {
+        target += '&' + source.attr('name') + '=' + source.attr('value');
+      }
+      return replaceWith(form.attr('rel'), target);
+    });
+
     $('form.act-replace').live('submit', function(event){
       var source = $(event.target);
       return replaceWith(source.attr('rel'), source.attr('action') + '?' + source.serialize());
