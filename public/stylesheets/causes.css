@@ -5,11 +5,12 @@
 
 dt.report_evidence {
   float: left;
-  width: 8em;
+  min-width: 8em;
 }
 
 dd.report_evidence {
   margin-left: 8em;
+  min-width: 20em;
 }
 
 .report_evidence .report_score {
