@@ -21,10 +21,17 @@
       return true;
     });
 
-    $('.act-toggle').live('click', function(event) {
+    $('a.act-toggle').live('click', function(event) {
       $.each($(event.target).attr('rel').split(' '), function() {
         $('#' + this).toggle();
       })
+      return false;
+    });
+
+    $('select.act-toggle').live('change', function(event) {
+      $('#' + current_act_toggle_selected).hide();
+      $('#' + event.target.value).show();
+      current_act_toggle_selected = event.target.value;
       return false;
     });
 
