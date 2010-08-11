@@ -188,6 +188,7 @@ h2 .your_location {
 
 #instant_scores > ul {
   list-style-type: none;
+  padding-left: 0;
 }
 
 #instant_scores > ul > li + li {
