@@ -13,8 +13,8 @@ class Politician < ActiveRecord::Base
     # this implements much of the Paperclip::Attachment api for the sake of our reuse
     class Headshot
       ROOT_PATH = "http://www.govtrack.us/data/"
-      TYPE_TO_WIDTH = {nil => nil, :small => '50px', :medium => '100px', :large => '200px'}.freeze
-      TYPE_TO_SIZE = {:small => '50x60', :medium => '100x120', :large => '200x240'}.freeze
+      TYPE_TO_WIDTH = {nil => nil, :tiny => '50px', :small => '50px', :medium => '100px', :large => '200px'}.freeze
+      TYPE_TO_SIZE = {:tiny => '25x30', :small => '50x60', :medium => '100x120', :large => '200x240'}.freeze
 
       def initialize(id)
         raise ArgumentError unless id.present?
