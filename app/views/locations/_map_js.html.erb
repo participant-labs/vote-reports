@@ -38,7 +38,9 @@
               fillColor: "<%= district.level.fill_color %>",
               fillOpacity: 0.3
             });
-            <%= district_id %>.setMap(show_location_map);
+            <%- if district_polygons.first.federal? -%>
+              <%= district_id %>.setMap(show_location_map);
+            <%- end -%>
             <%- district_ids << district_id -%>
           <%- end -%>
         <%- end -%>
