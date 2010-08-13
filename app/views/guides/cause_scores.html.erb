@@ -21,6 +21,6 @@
 
 <ul class="span-19 last clearfix">
   <%- @scores.each do |score| -%>
-  <li class="clearfix"><%= render 'politicians/bar_score', :score => score %></li>
+  <li class="clearfix full_width"><%= render 'politicians/score', :score => score %></li>
   <%- end -%>
 </ul>
