@@ -115,12 +115,18 @@
 
 .stances li {
   padding: 7px;
-  color: #49b6f5;
   background-color: #f5f5f5;
 }
+.stances li a {
+  color: #49b6f5;
+  text-decoration: none;
+  font-weight: bold;
+}
 .stances li.selected, .stances li.selected:hover {
-  color: white;
   background-color: black;
+}
+.stances li.selected a, .stances li.selected a:hover {
+  color: white;
 }
 
 .stances li + li {
@@ -128,14 +134,6 @@
 }
 .stances li:hover {
   background-color: #d6eefc;
-}
-
-.stances form {
-  padding-bottom: 0;
-}
-
-.stances input {
-  display: none;
 }
 
 .stances .remove_stance {
@@ -153,4 +151,8 @@
    -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   -khtml-border-radius: 8px;
+}
+
+ul.guide_scores > li {
+  margin-left: 20px;
 }
