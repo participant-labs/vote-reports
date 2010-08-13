@@ -50,7 +50,12 @@ class GuidesController < ApplicationController
   def next_step
     if @guide.reports.present? || params[:from] == 'causes'
       @issue = @guide.next_issue
-      @scores = @guide.immediate_scores
+      if params[:selected]
+        @selected = Report.find(params[:selected])
+        @scores = @selected.scores.for_politicians(sought_politicians)
+      else
+        @scores = @guide.immediate_scores
+      end
       :cause_scores
     elsif @guide.congressional_district.present? && params[:from] != 'set_location'
       @issue = @guide.next_issue
