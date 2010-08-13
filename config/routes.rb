@@ -76,5 +76,9 @@ ActionController::Routing::Routes.draw do |map|
   map.about "about", :controller => "site", :action => "show"
   map.root :controller => "site", :action => 'index'
 
+  if Rails.env.development?
+    map.about "fake_location", :controller => "site", :action => "fake_location"
+  end
+
   Jammit::Routes.draw(map)
 end

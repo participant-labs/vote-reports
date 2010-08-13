@@ -37,4 +37,13 @@ class SiteController < ApplicationController
     @reports = current_user.reports
     render :template => 'users/show'
   end
+
+  if Rails.env.development?
+    def fake_location
+      session[:geo_location] = session[:declared_geo_location] = Geokit::GeoLoc.new(:lat => 35, :lng => -90, :city => '- fake -', :state => 'TN', :zip => 88888)
+      session[:congressional_district] = District.lookup(session[:geo_location]).map(&:congressional_district).compact.first
+      flash[:success] = 'Location set'
+      redirect_to root_path
+    end
+  end
 end
