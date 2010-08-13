@@ -30,6 +30,11 @@
 
 .guide_header h1 {
   margin-bottom: 0;
+  color: #999;
+}
+
+.guide_header h1 select {
+  color: black;
 }
 
 .guide_header .politician_name .name {
