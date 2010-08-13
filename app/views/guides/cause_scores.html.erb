@@ -11,7 +11,7 @@
         <li class="round-4 act-hover" rel="<%= dom_id(report, :remove) %>">
           <%= radio_button_tag :selected, report.to_param %>
           <%= label_tag :"selected_#{report.to_param}", report.name %>
-          <%= link_to 'x', new_guide_path(:causes => @guide.reports.map(&:to_param) - [report.to_param], :from => 'causes'), :class => 'act-replace remove_stance', :rel => 'instant_scores', :id => dom_id(report, :remove) %>
+          <%= link_to 'x', new_guide_path(:causes => @guide.reports.map(&:to_param) - [report.to_param], :from => 'causes'), :class => 'act-replace remove_stance hide', :rel => 'instant_scores', :id => dom_id(report, :remove) %>
         </li>
       <% end %>
     </ul>
