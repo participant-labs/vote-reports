@@ -10,7 +10,7 @@
       <% end %>
       <% form_for @guide, :url => new_guide_path, :html => {:class => 'act-replace', :rel => 'instant_scores'} do |f| %>
         <h1 class="span-16">What's your view on <%= select_tag :issue_selected,
-        Issue.all.map {|issue| content_tag(:option, issue.title, (@issue == issue ? {:selected => 'selected'} : {}).merge(:value => dom_id(issue))) }.join.html_safe, :class => 'title act-toggle' %>?
+        Issue.all.map {|issue| content_tag(:option, issue.title.downcase, (@issue == issue ? {:selected => 'selected'} : {}).merge(:value => dom_id(issue))) }.join.html_safe, :class => 'title act-toggle' %>?
         </h1>
         <div class="span-8 last">
           <%- Issue.all.each do |issue| -%>
