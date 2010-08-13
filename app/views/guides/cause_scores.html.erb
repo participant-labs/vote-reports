@@ -1,13 +1,25 @@
-<div class="span-4 stances">
-  <h2>Your Stance</h2>
-  <ul>
-    <% @guide.reports.each do |report| %>
-      <li><%= report.name %></li>
+<div class="span-5">
+  <div class="stances round-4">
+    <h2>Your Stance</h2>
+    <% form_tag new_guide_path do %>
+    <ul>
+      <li class="selected round-4">
+        <%= radio_button_tag :selected, 'overall', true %>
+        <%= label_tag :selected_overall, 'Overall Score' %>
+      </li>
+      <% @guide.reports.each do |report| %>
+        <li class="round-4 act-hover" rel="<%= dom_id(report, :remove) %>">
+          <%= radio_button_tag :selected, report.to_param %>
+          <%= label_tag :"selected_#{report.to_param}", report.name %>
+          <%= link_to 'x', new_guide_path(:causes => @guide.reports.map(&:to_param) - [report.to_param], :from => 'causes'), :class => 'act-replace remove_stance', :rel => 'instant_scores', :id => dom_id(report, :remove) %>
+        </li>
+      <% end %>
+    </ul>
     <% end %>
-  </ul>
+  </div>
 </div>
 
-<ul class="span-20 last clearfix">
+<ul class="span-19 last clearfix">
   <%- @scores.each do |score| -%>
   <li class="clearfix"><%= render 'politicians/bar_score', :score => score %></li>
   <%- end -%>
