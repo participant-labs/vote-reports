@@ -7,6 +7,10 @@ class Cause < ActiveRecord::Base
   has_many :issue_causes
   has_many :issues, :through => :issue_causes
 
+  named_scope :without_issue,
+    :joins => 'LEFT OUTER JOIN issue_causes ON issue_causes.cause_id = causes.id',
+    :conditions => {:'issue_causes.issue_id' => nil}
+
   def report_subjects
     ReportSubject.scoped(:conditions => {:report_id => reports})
   end
