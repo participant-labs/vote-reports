@@ -44,7 +44,7 @@
       <dl>
         <%- if @interest_group.url.present? -%>
           <dt>Website</dt>
-          <dd><%= link_to @interest_group.url %></dd>
+          <dd><%= link_to @interest_group.url, @interest_group.url %></dd>
         <%- end -%>
         <%- if @interest_group.email.present? -%>
           <dt>Email</dt>
