@@ -82,6 +82,12 @@
       var form = source.closest('form');
 
       if (!source.hasClass('selected')) {
+        var sibling = source.closest('ul').find('li:has(button.selected)')
+        if (sibling.length > 0) {
+          sibling.find('button.selected').removeClass('selected');
+          sibling.find('input').remove();
+        }
+
         source.addClass('selected');
         source.after('<input type="hidden" name="causes[]" value="' + source.attr('value') + '" />')
         replaceWith(form.attr('rel'), form.attr('action') + '?' + form.serialize());
