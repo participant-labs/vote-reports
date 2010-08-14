@@ -3,6 +3,10 @@
 
 select.title {font-size:1em;}
 
+html, body {
+  height: 100%;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Droid Sans', arial, serif;
 }
@@ -203,6 +207,12 @@ h2 .your_location {
 
 h2 > form {
   padding-bottom: 0;
+}
+
+.guide_map + #footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 #footer .sidebar-links {

@@ -14,7 +14,12 @@
 }
 
 .guide_map {
-  height: 560px;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  margin-top: 260px;
+  margin-bottom: 45px;
 }
 
 .guide_header {
