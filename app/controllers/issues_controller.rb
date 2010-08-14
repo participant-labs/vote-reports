@@ -13,7 +13,7 @@ class IssuesController < ApplicationController
   def new
     params[:issue][:causes] = Cause.find(params[:causes]) if params[:causes].present?
     @issue = Issue.new(params[:issue])
-    @causes = Cause.all
+    @causes = Cause.without_issue.all
 
     respond_to do |format|
       format.html
