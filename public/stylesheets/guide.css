@@ -74,6 +74,10 @@
   float: right;
 }
 
+.guide_header .cause_selection.selected {
+  background-color: black;
+}
+
 .guide_header .continue {
   font-size: 15px;
 

@@ -76,5 +76,25 @@
       var source = $(event.target).closest('form');
       return replaceWith(source.attr('rel'), source.attr('action') + '?' + source.serialize());
     });
+
+    $('form#guide_causes :submit').live('click', function(event) {
+      var source = $(event.target);
+      var form = source.closest('form');
+
+      if (!source.hasClass('selected')) {
+        source.addClass('selected');
+        source.after('<input type="hidden" name="causes[]" value="' + source.attr('value') + '" />')
+        replaceWith(form.attr('rel'), form.attr('action') + '?' + form.serialize());
+      }
+
+      var next = form.find('.cause_buttons:not(:has(button.selected))');
+      if (next.length == 0) {
+        console.info('All done!');
+      } else {
+        form.find('h1 > select').attr('value', next.attr('id')).trigger('change');
+      }
+
+      return false;
+    });
   });
 })(jQuery);
