@@ -91,8 +91,8 @@
         source.addClass('selected');
         if (source.attr('value')) {
           source.after('<input type="hidden" name="causes[]" value="' + source.attr('value') + '" />')
-          replaceWith(form.attr('rel'), form.attr('action') + '?' + form.serialize());
         }
+        replaceWith(form.attr('rel'), form.attr('action') + '?' + form.serialize());
       }
 
       var next = form.find('.cause_buttons:not(:has(button.selected))');
