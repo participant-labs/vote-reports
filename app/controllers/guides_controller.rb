@@ -49,7 +49,7 @@ class GuidesController < ApplicationController
 
   def next_step
     if @guide.reports.present? || params[:from] == 'causes'
-      @issue = @guide.next_issue
+      @under_consideration = @guide.next_issue
       if params[:selected]
         @selected = Report.find(params[:selected])
         @scores = @selected.scores.for_politicians(sought_politicians)
@@ -58,7 +58,7 @@ class GuidesController < ApplicationController
       end
       :cause_scores
     elsif @guide.congressional_district.present? && params[:from] != 'set_location'
-      @issue = @guide.next_issue
+      @under_consideration = @guide.next_issue
       :causes
     else
       load_location_show_support(current_geo_location) if current_geo_location
