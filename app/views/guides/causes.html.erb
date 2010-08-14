@@ -6,20 +6,29 @@
 
     <div class="guide">
       <% javascript_tag do %>
-        current_act_toggle_selected = '<%= dom_id(@issue) %>';
+        current_act_toggle_selected = '<%= dom_id(@under_consideration) %>';
       <% end %>
       <% form_for @guide, :url => new_guide_path, :html => {:id => 'guide_causes', :rel => 'instant_scores'} do |f| %>
-        <h1 class="span-16">What's your view on <%= select_tag :issue_selected,
-        Issue.all.map {|issue| content_tag(:option, "#{issue.title.downcase}?", (@issue == issue ? {:selected => 'selected'} : {}).merge(:value => dom_id(issue))) }.join.html_safe, :class => 'title act-toggle' %>
+        <h1 class="span-17">What's your view on <%= select_tag :issue_selected,
+        (Issue.all.map {|issue| content_tag(:option, "#{issue.title.downcase}?", (@under_consideration == issue ? {:selected => 'selected'} : {}).merge(:value => dom_id(issue))) }.join +
+        Cause.without_issue.map {|cause| content_tag(:option, "#{cause.name.downcase}?", (@under_consideration == cause ? {:selected => 'selected'} : {}).merge(:value => dom_id(cause))) }.join).html_safe, :class => 'title act-toggle' %>
         </h1>
-        <div class="span-8 last">
+        <div class="span-7 last">
           <%- Issue.all.each do |issue| -%>
-            <ul class="clearfix cause_buttons" style="<%= 'display:none;' unless issue == @issue %>" id="<%= dom_id(issue) %>">
+            <ul class="clearfix cause_buttons" style="<%= 'display:none;' unless issue == @under_consideration %>" id="<%= dom_id(issue) %>">
+              <li><button class="cause_selection round-6">Meh</button></li>
               <%- issue.causes.each do |cause| -%>
                 <li><button name="causes[]" value="<%= cause.to_param %>" class="cause_selection round-6" title="<%= cause.description %>"><%= cause.name %></button></li>
               <%- end -%>
             </ul>
           <%- end -%>
+          <%- Cause.without_issue.map do |cause| -%>
+            <ul class="clearfix cause_buttons" style="<%= 'display:none;' unless cause == @under_consideration %>" id="<%= dom_id(cause) %>">
+              <li><button class="cause_selection round-6">Meh</button></li>
+              <li><button name="causes[]" value="<%= cause.to_param %>" class="cause_selection round-6" title="<%= cause.description %>">Support</button></li>
+            </ul>
+          <%- end -%>
+
           <%= hidden_field_tag :from, 'causes' %>
         </div>
       <% end %>

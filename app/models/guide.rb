@@ -28,7 +28,8 @@ class Guide < ActiveRecord::Base
   end
 
   def next_issue
-    Issue.random.first
+    cause = Cause.random.first
+    cause.issues.random.first || cause
   end
 
   private
