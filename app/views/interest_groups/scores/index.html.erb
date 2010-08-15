@@ -9,7 +9,7 @@
         :url => interest_group_report_scores_path(@interest_group),
         :reset_path => interest_group_report_scores_path(@interest_group, :representing => '') %>
     <%- end -%>
-    <%= render 'reports/scores/table', :report => @report, :scores => @scores, :votes_how => @votes_how, :target_path => interest_group_report_scores_path(@interest_group) %>
+    <%= render 'reports/scores/table', :report => @report, :scores => @scores, :target_path => interest_group_report_scores_path(@interest_group) %>
   <%- else -%>
     <p>No ratings on record for this group</p>
   <%- end -%>
