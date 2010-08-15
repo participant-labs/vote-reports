@@ -6,5 +6,5 @@
   <%= render 'politicians/search', :in_office => @in_office, :replace => 'report_scores',
     :url => user_report_scores_path(@user),
     :reset_path => user_report_scores_path(@user, :representing => '') %>
-  <%= render 'reports/scores/table', :report => @report, :scores => @scores, :replace => 'report_scores' %>
+  <%= render 'reports/scores/table', :report => @report, :scores => @scores, :replace => 'report_scores', :target_path => user_report_report_scores_path(@user, @report) %>
 </div>
