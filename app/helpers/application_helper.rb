@@ -45,7 +45,7 @@ module ApplicationHelper
   end
 
   def md_to_text(md)
-    strip_tags(md_to_html(md))
+    strip_tags(md_to_html(md)).gsub('&amp;', '&')
   end
   safe_helper :md_to_text
 
