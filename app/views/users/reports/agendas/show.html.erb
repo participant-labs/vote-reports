@@ -1,5 +1,5 @@
-<div id="bill_criteria" class="section">
-  <h1>Agenda</h1>
+<div id="agenda" class="section">
+  <h2>Agenda</h2>
   <p>This report's scores are derived from the bills below.  Votes in favor of supported bills or against opposed bills will lead to higher scores, while votes against these positions will lead to lower scores.</p>
   <%- if @report.has_criteria? -%>
     <%= render 'reports/bill_criteria/legislative_agenda', :report => @report %>
