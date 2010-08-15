@@ -2,14 +2,13 @@ class InterestGroups::ScoresController < ApplicationController
   before_filter :load_interest_group
 
   def index
-    @votes_how = params[:votes_how].present? ? params[:votes_how].to_sym : :with
     @scores = @report.scores.for_politicians(sought_politicians)
 
     respond_to do |format|
       format.html
       format.js {
         render :partial => 'reports/scores/table', :locals => {
-          :report => @report, :scores => @scores, :votes_how => @votes_how, :target_path => interest_group_report_scores_path(@interest_group)
+          :report => @report, :scores => @scores, :target_path => interest_group_report_scores_path(@interest_group)
         }
       }
     end
