@@ -1,23 +1,60 @@
 <%- title "#{@report.name} - Reports" -%>
 
-<%= render 'reports/header', :report => @report %>
+<div class="report-show">
+  <div class="body span-18">
+    <h1><%= @report.name %></h1>
+    <p>by <%= render 'users/user', :user => @report.user %></p>
 
-<%- permitted_to? :edit, @report do -%>
-  <%= link_to 'Edit Report', edit_user_report_path(@report.user, @report) %>
-<%- end -%>
+    <%= render 'reports/follows/button', :report => @report %>
+    <div class="description"><%= md_to_html(@report.description) %></div>
 
-<div class="ui-tabs" id="<%= dom_id(@report, :tabs) %>">
-  <ul>
-    <li><%= link_to content_tag(:span, 'Scores'), user_report_report_scores_path(@report.user, @report, :format => :html), :title => 'Scores' %></li>
-    <li><% link_to user_report_agenda_path(@report.user, @report, :format => :html), :title => 'Agenda' do %>
-      <span>Agenda <span class="count"><%= @report.bill_criteria.active_count %></span></span>
-    <% end %></li>
-    <li><% link_to user_report_subjects_path(@report.user, @report, :format => :html), :title => 'Subjects' do %>
-      <span>Subjects <span class="count"><%= @report.subjects.count %></span></span>
-    <% end %></li>
-    <li><%= link_to content_tag(:span, 'Visibility'), user_report_visibility_path(@report.user, @report, :format => :html), :title => 'Visibility' %></li>
-    <li><% link_to user_report_causes_path(@report.user, @report, :format => :html), :title => 'Causes' do %>
-      <span>Causes <span class="count"><%= @report.causes.count %></span></span>
-    <% end %></li>
-  </ul>
+    <div id="report_scores_section" class="section report_scores">
+      <%= render 'politicians/search', :in_office => true, :replace => 'report_scores',
+        :url => user_report_report_scores_path(@report.user, @report),
+        :reset_path => user_report_report_scores_path(@report.user, @report, :representing => '') %>
+      <div class="act-fill"
+        rel="<%= user_report_report_scores_path(@report.user, @report) %>"
+         id="scores"></div>
+    </div>
+  </div>
+
+  <div class="sidebar span-6 last">
+    <div class="spacer">
+      <%- if @report.thumbnail.exists? -%>
+      <div class="logo span-6 last"><%= sized_image_tag @report.thumbnail, @report.name, :style => :header, :class => 'image_large' %></div>
+      <%- end -%>
+      <div class="name"><%= @report.name %></div>
+      <p>by <%= render 'users/user', :user => @report.user %></p>
+
+      <%- permitted_to? :edit, @report do -%>
+        <%= link_to 'Edit Report', edit_user_report_path(@report.user, @report) %>
+      <%- end -%>
+
+      <%- if permitted_to?(:edit, @report) && !@report.published? -%>
+        <div class="publicize">
+          <h2>Publicize Your Report!</h2>
+          <%= report_next_step(@report) %>
+        </div>
+      <%- end -%>
+
+      <dl>
+        <dt><%= pluralize_word(@subjects.size, 'Subject') %></dt>
+        <%- @subjects.each do |subject| -%>
+          <dd><%= render 'subjects/subject', :subject => subject, :subject_only => true %></dd>
+        <%- end -%>
+        <dt><%= pluralize_word(@causes.size, 'Cause') %></dt>
+        <%- if @causes.blank? -%>
+          <dd>None</dd>
+        <%- else -%>
+          <%- @causes.each do |cause| -%>
+            <dd><%= render 'causes/cause', :cause => cause %></dd>
+          <%- end -%>
+        <%- end -%>
+      </dl>
+    </div>
+  </div>
 </div>
+
+<div class="span-24 last act-fill"
+  rel="<%= user_report_agenda_path(@report.user, @report, :format => :html) %>"
+  id="<%= dom_id(@report, :agenda) %>"></div>
