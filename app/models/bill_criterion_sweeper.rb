@@ -16,8 +16,11 @@ class BillCriterionSweeper < ActionController::Caching::Sweeper
   private
 
   def expire_cache_for(bill_criterion)
-    if interest_group = bill_criterion.report.interest_group
+    report = bill_criterion.report
+    if interest_group = report.interest_group
       expire_page interest_group_agenda_path(interest_group)
+    elsif user = report.user
+      expire_page user_report_agenda_path(user, report)
     end
   end
 end
