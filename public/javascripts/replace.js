@@ -62,7 +62,9 @@
       var form = source.closest('form');
       var target = form.attr('action') + '?' + form.serialize();
       if (source.attr('name')) {
-        target += '&' + source.attr('name') + '=' + source.attr('value');
+        var args = {}
+        args[source.attr('name')] = source.attr('value')
+        target += '&' + $.param(args);
       }
       return replaceWith(form.attr('rel'), target);
     });
