@@ -1,21 +1,26 @@
 class ReportSweeper < ActionController::Caching::Sweeper
   observe Report
 
-  def after_create(report_score)
-    expire_cache_for(report_score)
+  def after_create(report)
+    expire_cache_for(report)
   end
 
-  def after_update(report_score)
-    expire_cache_for(report_score)
+  def after_update(report)
+    expire_cache_for(report)
   end
 
-  def after_destroy(report_score)
-    expire_cache_for(report_score)
+  def after_destroy(report)
+    expire_cache_for(report)
+    if interest_group = report.interest_group
+      expire_page interest_group_agenda_path(interest_group)
+    elsif user = report.user
+      expire_page user_report_agenda_path(user, report)
+    end
   end
 
   private
 
-  def expire_cache_for(report_score)
+  def expire_cache_for(report)
     expire_fragment(:controller => 'site', :action => 'index')
   end
 end

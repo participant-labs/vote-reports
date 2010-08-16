@@ -10,7 +10,6 @@ class InterestGroupSweeper < ActionController::Caching::Sweeper
   end
 
   def after_destroy(interest_group)
-    expire_page interest_group_agenda_path(interest_group)
     expire_cache_for(interest_group)
   end
 
