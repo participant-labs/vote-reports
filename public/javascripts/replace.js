@@ -8,11 +8,11 @@
   }
 
   function replaceWith(target_ids, url) {
-    target_id = $(target_ids.split(' ')).select(function() {
+    var target_id = $(target_ids.split(' ')).select(function() {
       return $('#' + this + ':visible').length != 0;
     });
 
-    target = $('#' + target_id + ':visible');
+    var target = $('#' + target_id + ':visible');
     if (target.length == 0) {
       return true;
     }
