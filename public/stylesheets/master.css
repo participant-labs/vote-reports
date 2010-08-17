@@ -129,6 +129,10 @@ div#agenda ul {
   margin-bottom: 1em;
 }
 
+div#agenda.cause_agenda ul {
+  font-size: 1em;
+}
+
 div#agenda ul > li > span {
   color: #8f8f8f;
   font-size: 1.4em;

@@ -30,6 +30,10 @@ class CausesController < ApplicationController
       redirect_to cause_path(@cause), :status => 301
       return
     end
+    @subjects = @cause.subjects.for_tag_cloud.all(
+      :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
+      :limit => 3)
+    @related_causes = @cause.related_causes.all(:limit => 3)
   end
 
   def edit
