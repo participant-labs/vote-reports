@@ -1,6 +1,6 @@
 <%- end_offset = term.ended_on.month < 2 ? -1 : 0 -%>
 <div>
-  <p title="<%= "#{distance_of_time_in_words(term.started_on, term.ended_on)}, #{pluralize(term.terms.size, 'term')}" if term.is_a?(ContinuousTerm) %>"><%= content_tag :span, term.started_on.year, :title => term.started_on.to_s(:long), :class => 'info' %> -
-     <%= content_tag :span, term.ended_on.year + end_offset, :title => term.ended_on.to_s(:long), :class => 'info' %>:
+  <p><strong><%= content_tag :span, term.started_on.year, :title => term.started_on.to_s(:long), :class => 'info' %>  -
+     <%= content_tag :span, term.ended_on.year + end_offset, :title => term.ended_on.to_s(:long), :class => 'info' %></strong><%= " (#{pluralize(term.terms.size, 'term')}, #{distance_of_time_in_words(term.started_on, term.ended_on)})" if term.is_a?(ContinuousTerm) %>:
      <%= term_description(term) %></p>
 </div>
