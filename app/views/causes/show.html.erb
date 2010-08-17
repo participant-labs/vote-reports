@@ -1,17 +1,49 @@
-<%- title "#{h(@cause.name)} - Causes" -%>
-<div class="section">
-  <%= render 'causes/header', :cause => @cause %>
+<%- title "#{@cause.name} - Causes" -%>
 
-  <%- permitted_to? :edit, @cause do -%>
-    <%= link_to 'Edit Cause', edit_cause_path(@cause) %>
-  <%- end -%>
+<div class="report-show">
+  <div class="body span-18">
+    <h1><%= @cause.name %></h1>
+
+    <%= render 'reports/follows/button', :report => @cause.report %>
+    <div class="description"><%= md_to_html(@cause.description) %></div>
+
+
+    <div id="report_scores_section" class="section report_scores">
+      <%= render 'politicians/search', :in_office => true, :replace => 'report_scores',
+        :url => cause_report_scores_path(@cause),
+        :reset_path => cause_report_scores_path(@cause, :representing => '') %>
+      <div class="act-fill"
+        rel="<%= cause_report_scores_path(@cause) %>"
+         id="scores"></div>
+    </div>
+  </div>
+
+  <div class="sidebar span-6 last">
+    <div class="spacer">
+      <div class="name"><%= @cause.name %></div>
+
+      <%- permitted_to? :edit, @cause do -%>
+        <%= link_to 'Edit Cause', edit_cause_path(@cause) %>
+      <%- end -%>
+
+      <dl>
+        <dt><%= pluralize_word(@subjects.size, 'Subject') %></dt>
+        <%- @subjects.each do |subject| -%>
+          <dd><%= render 'subjects/subject', :subject => subject, :subject_only => true %></dd>
+        <%- end -%>
+        <dt><%= pluralize_word(@related_causes.size, 'Related Cause') %></dt>
+        <%- if @related_causes.empty? -%>
+          <dd>None</dd>
+        <%- else -%>
+          <%- @related_causes.each do |cause| -%>
+            <dd><%= render 'causes/cause', :cause => cause %></dd>
+          <%- end -%>
+        <%- end -%>
+      </dl>
+    </div>
+  </div>
 </div>
 
-<div class="ui-tabs" id="<%= dom_id(@cause, :tabs) %>">
-  <ul>
-    <li><%= link_to content_tag(:span, 'Scores'), cause_report_scores_path(@cause, :format => :html), :title => 'Scores' %></li>
-    <li><% link_to cause_reports_path(@cause, :format => :html), :title => 'Reports' do %>
-      <span>Reports <span class="count"><%= @cause.reports.count %></span></span>
-    <% end %></li>
-  </ul>
-</div>
+<div class="span-24 last act-fill"
+  rel="<%= cause_reports_path(@cause, :format => :html) %>"
+  id="<%= dom_id(@cause, :agenda) %>"></div>

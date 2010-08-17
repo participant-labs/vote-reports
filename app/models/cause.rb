@@ -17,6 +17,14 @@ class Cause < ActiveRecord::Base
     ReportSubject.scoped(:conditions => {:report_id => reports})
   end
 
+  def subjects
+    Subject.scoped(:joins => :report_subjects, :conditions => {:'report_subjects.report_id' => reports})
+  end
+
+  def related_causes
+    Cause.scoped(:joins => :issue_causes, :conditions => ['causes.id NOT IN(?) AND issue_causes.issue_id IN(?)', self, issues])
+  end
+
   accepts_nested_attributes_for :cause_reports, :reject_if => proc {|attributes| attributes['support'] == '0' }
 
   has_friendly_id :name, :use_slug => true
