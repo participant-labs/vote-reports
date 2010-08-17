@@ -1,4 +1,5 @@
 class Causes::ReportsController < ApplicationController
+  caches_page :index
   filter_access_to :all
   before_filter :load_cause
 
