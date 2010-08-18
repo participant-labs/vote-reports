@@ -16,6 +16,5 @@ class CauseReportSweeper < ActionController::Caching::Sweeper
   private
 
   def expire_cache_for(cause_report)
-    expire_page cause_reports_path(cause_report.cause)
   end
 end
