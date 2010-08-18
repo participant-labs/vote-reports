@@ -6,5 +6,6 @@
       :url => user_report_report_scores_path(@report.user, @report),
       :reset_path => user_report_report_scores_path(@user, @report, :representing => '') %>
   <%- end -%>
-  <%= render 'reports/scores/table', :report => @report, :scores => @scores %>
+  <%= render 'reports/scores/table', :report => @report, :scores => @scores,
+      :target_path => user_report_report_scores_path(@user, @report) %>
 </div>
