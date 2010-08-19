@@ -130,6 +130,7 @@ class Politician < ActiveRecord::Base
 
   named_scope :senators, :conditions => {:current_office_type => 'SenateTerm'}
   named_scope :representatives, :conditions => {:current_office_type => 'RepresentativeTerm'}
+  named_scope :presidents, :conditions => {:current_office_type => 'PresidentialTerm'}
 
   named_scope :with_name, lambda {|name|
     first, last = name.split(' ', 2)
@@ -138,17 +139,19 @@ class Politician < ActiveRecord::Base
   named_scope :by_birth_date, :order => 'birthday DESC NULLS LAST'
   named_scope :from_congressional_district, lambda {|districts|
     {:conditions => [
-        "(senate_terms.us_state_id IN(?) OR representative_terms.congressional_district_id IN(?))",
+        "(senate_terms.us_state_id IN(?) OR representative_terms.congressional_district_id IN(?) OR presidential_terms.id IS NOT NULL)",
          Array(districts).map(&:us_state_id), districts
       ], :joins => [
         %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
         %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
+        %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id},
       ], :select => 'DISTINCT politicians.*'
     }
   }
   named_scope :with_in_office_terms, :conditions => [
       '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
-      '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
+      '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
+      '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
       {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
   ]
 
@@ -166,6 +169,7 @@ class Politician < ActiveRecord::Base
       ], :joins => [
         %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
         %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
+        %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id},
         %{LEFT OUTER JOIN "congressional_districts" ON representative_terms.congressional_district_id = congressional_districts.id},
       ]}
     else

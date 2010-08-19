@@ -12,12 +12,18 @@
       </dl>
       <%- if @politicians -%>
       <dl class="span-4">
+        <dt>President of these US</dt>
+        <%- @politicians.presidents.each do |politician| -%>
+          <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
+        <%- end -%>
+      </dl>
+      <dl class="span-4">
         <dt>Senators for <%= @federal.state.abbreviation %></dt>
         <%- @politicians.senators.each do |politician| -%>
           <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
         <%- end -%>
       </dl>
-      <dl class="span-8">
+      <dl class="span-4">
         <dt>Representative for <%= @federal.congressional_district.abbreviation %></dt>
         <%- @politicians.representatives.each do |politician| -%>
           <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>

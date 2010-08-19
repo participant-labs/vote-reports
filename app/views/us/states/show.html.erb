@@ -4,6 +4,13 @@
   <h2 class="span-24 last"><%= state_title(@state) %></h2>
 
   <div class="span-12">
+    <h3>President</h3>
+    <ul>
+      <%- @presidents.each do |president| -%>
+        <%= render 'politicians/politician', :politician => president, :full_name => true, :tag => :li %>
+      <%- end -%>
+    </ul>
+
     <h3>Senators</h3>
     <ul>
       <%- @senators.each do |senator| -%>

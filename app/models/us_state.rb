@@ -84,4 +84,8 @@ class UsState < ActiveRecord::Base
       scoped(:conditions => ['politicians.current_office_type = ?', 'SenateTerm'])
     end
   end
+
+  def presidents
+    Politician.presidents
+  end
 end
