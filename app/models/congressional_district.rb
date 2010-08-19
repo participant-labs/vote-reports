@@ -10,7 +10,7 @@ class CongressionalDistrict < ActiveRecord::Base
     end
   end
 
-  delegate :senators, :to => :state
+  delegate :senators, :presidents, :to => :state
 
   named_scope :with_zip, lambda {|zip_code|
     zip_code, plus_4 = ZipCode.sections_of(zip_code)
