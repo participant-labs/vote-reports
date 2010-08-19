@@ -10,6 +10,9 @@ class ReportsController < ApplicationController
     if params[:term].present?
       @title = 'Matching Reports'
       @reports = Report.paginated_search(params).results
+    elsif params[:without_causes].present?
+      @title = 'Reports without Causes'
+      @reports = Report.non_cause.published.without_associated_cause.by_name.paginate(:page => params[:page])
     else
       @title = 'Reports'
       @reports = topical_reports.by_name.paginate(:page => params[:page])
