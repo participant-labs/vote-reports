@@ -48,8 +48,7 @@ Feature: Browsing Report Scores by State
     And I wait for delayed job to finish
 
   Scenario: User views scores for only in-office reps
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 100   |

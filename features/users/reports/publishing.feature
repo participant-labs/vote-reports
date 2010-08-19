@@ -58,8 +58,7 @@ Feature: Browsing Reports
     And I follow "Publish this Report"
     Then I should see "Successfully updated report."
     When I remove a bill criterion from report "My Report"
-    And I go to my report page for "My Report"
-    And I follow "Scores"
+    And I go to my report scores page for "My Report"
     Then I should see "Updates have been made to this report, and its scores are being updated."
     When I wait for delayed job to finish
     And I go to my report page for "My Report"

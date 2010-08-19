@@ -38,8 +38,7 @@ Feature: Scoring Reports
       | Joe Barton            |
 
   Scenario: Without Criteria, I should see message noting why no scores exist
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see "No scores yet, as this report has no criteria to judge representatives by."
 
   Scenario: With Criteria on unvoted bills, I should see message noting that as the bills are unvoted, no scores exist
@@ -48,8 +47,7 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009             | true    |
       | USA PATRIOT Reauthorization Act of 2009 | false   |
     And I wait for delayed job to finish
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see "No scores yet, as the associated legislation has not been voted on."
 
   Scenario: With Criteria on bills without passage rolls, I should see message noting that as the bills are unvoted, no scores exist
@@ -68,8 +66,7 @@ Feature: Scoring Reports
       | bill                                    | support |
       | Bovine Security Act of 2009             | true    |
     And I wait for delayed job to finish
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see "No scores yet, as the associated legislation has not been voted on."
 
   Scenario: With Criteria on amendments without passage rolls, I should see message noting that as the bills are unvoted, no scores exist
@@ -88,8 +85,7 @@ Feature: Scoring Reports
       | amendment           | support |
       | Fix this thing      | true    |
     And I wait for delayed job to finish
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see "No scores yet, as the associated legislation has not been voted on."
 
   Scenario: Amendment Criteria report generates scores
@@ -107,8 +103,7 @@ Feature: Scoring Reports
       | amendment           | support |
       | Fix this thing      | true    |
     When I wait for delayed job to finish
-    And I go to my report page for "Active Report"
-    And I follow "Scores"
+    And I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -119,8 +114,7 @@ Feature: Scoring Reports
     When I follow "A+"
     Then I should see "Fix this thing"
 
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     And I follow "Piyush Jindal"
     Then I should be on the politician page for "Piyush Jindal"
 
@@ -136,8 +130,7 @@ Feature: Scoring Reports
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
     When I wait for delayed job to finish
-    And I go to my report page for "Active Report"
-    And I follow "Scores"
+    And I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -167,8 +160,7 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009 | true    |
       | USA PATRIOT Reauthorization Act of 2009 | true    |
     When I wait for delayed job to finish
-    And I go to my report page for "Active Report"
-    And I follow "Scores"
+    And I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -206,12 +198,10 @@ Feature: Scoring Reports
       | Bovine Security Act of 2009             | true    |
       | USA PATRIOT Reauthorization Act of 2009 | false   |
       | Honoring Miss America Act of 2009       | true   |
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
-    And I go to my report page for "Active Report"
-    And I follow "Scores"
+    And I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Connie Mack          | 100   |
@@ -240,12 +230,10 @@ Feature: Scoring Reports
     And report "Active Report" has the following bill criterion:
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
-    And I go to my report page for "Active Report"
-    And I follow "Scores"
+    And I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -272,12 +260,10 @@ Feature: Scoring Reports
     And report "Active Report" has the following bill criterion:
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
-    And I go to my report page for "Active Report"
-    And I follow "Scores"
+    And I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -304,12 +290,10 @@ Feature: Scoring Reports
     And report "Active Report" has the following bill criterion:
       | bill                        | support |
       | Bovine Security Act of 2009 | true    |
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
-    And I go to my report page for "Active Report"
-    And I follow "Scores"
+    And I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -353,12 +337,10 @@ Feature: Scoring Reports
       | bill                            | support |
       | Bovine Security Act of 2009     | true    |
       | Honoring Bo Jackson Act of 2005 | false   |
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see "Scores are being generated. Please try again in a moment."
     When I wait for delayed job to finish
-    And I go to my report page for "Active Report"
-    And I follow "Scores"
+    And I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |

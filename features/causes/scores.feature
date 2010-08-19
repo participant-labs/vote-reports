@@ -24,8 +24,7 @@ Feature: Cause Scores
     And cause "Lollipops!" includes report "Brady Campaign to Prevent Gun Violence"
     And cause "Lollipops!" includes report "Aren't Circuses Great!?"
     When I wait for delayed job to finish
-    And I go to the cause page for "Lollipops!"
-    And I follow "Scores"
+    And I go to the cause scores page for "Lollipops!"
     Then I should see the following scores:
       | politician    | score |
       | Piyush Jindal | 54    |

@@ -40,11 +40,9 @@ Feature: Deleting Criteria from Reports
     And I should be on the edit page for my report "Active Report"
 
     When I wait for delayed job to finish
-    And I go to my report page for "Active Report"
-    And I follow "Agenda"
+    And I go to my report agenda page for "Active Report"
     Then I should not see "Bovine Security Act of 2009"
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should not see "Piyush Jindal"
     And I should see "No scores yet, as this report has no criteria to judge representatives by."
 
@@ -63,6 +61,5 @@ Feature: Deleting Criteria from Reports
     Then I should see "Successfully deleted amendment from report agenda"
     And I should be on the edit page for my report "Active Report"
     When I wait for delayed job to finish
-    And I go to my report page for "Active Report"
-    And I follow "Agenda"
+    And I go to my report agenda page for "Active Report"
     Then I should not see "Fix this thing"

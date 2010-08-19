@@ -21,6 +21,10 @@ module NavigationHelpers
       user_report_path(user, user.reports.find_by_name($2))
     when /my report page for "(.+)"/i
       user_report_path(current_user, current_user.reports.find_by_name($1))
+    when /my report agenda page for "(.+)"/i
+      user_report_agenda_path(current_user, current_user.reports.find_by_name($1))
+    when /my report scores page for "(.+)"/i
+      user_report_report_scores_path(current_user, current_user.reports.find_by_name($1))
     when /the edit page for my report "(.+)"/i
       edit_user_report_path(current_user, current_user.reports.find_by_name($1))
     when /the new bills page for my report "(.+)"/

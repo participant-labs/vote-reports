@@ -21,8 +21,7 @@ Feature: Editing Criteria from Reports
 
   Scenario: Report owner adds an explanatory url to an existing bill criterion
     Given I have an unlisted report named "Target Report"
-    When I go to my report page for "Active Report"
-    And I follow "Agenda"
+    When I go to my report agenda page for "Active Report"
     Then I should see "Bovine Security Act of 2009"
     When I go to the edit page for my report "Active Report"
     And I follow "Edit Agenda"
@@ -30,8 +29,8 @@ Feature: Editing Criteria from Reports
     And I press "Save Agenda"
     Then I should see "Successfully updated report"
     And I should be on my report page for "Active Report"
-    And I follow "Agenda"
-    When I follow "Support"
+    When I go to my report agenda page for "Active Report"
+    And I follow "Support"
     Then I should be on my report page for "Target Report"
 
   @wip
