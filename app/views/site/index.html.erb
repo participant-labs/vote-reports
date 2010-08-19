@@ -17,27 +17,25 @@
   </div>
 <% end %>
 
-<% cache do %>
-  <div class="clearfix span-15" id="voters">
-    <h3><%- if requested_location -%>
-      Sample Grades for Reps in your area -
-      <%= link_to requested_location, location_path(:return_to => request.path), :class => 'fancyboxy location' %>
-    <%- else -%>
-      Sample Politician Grades -
-      <%= link_to 'Set Location', location_path(:return_to => request.path), :class => 'fancyboxy location' %>
-    <%- end -%>
-    </h3>
-    <div id="score_examples" class="act-refresh">
-      <%= render 'reports/report_and_scores', :report => @sample_report, :scores => @scores %>
-    </div>
-    <p>Customize an overview of your reps: <%= link_to "Get Started Now", new_guide_path %></p>
+<div class="clearfix span-15" id="voters">
+  <h3><%- if requested_location -%>
+    Sample Grades for Reps in your area -
+    <%= link_to requested_location, location_path(:return_to => request.path), :class => 'fancyboxy location' %>
+  <%- else -%>
+    Sample Politician Grades -
+    <%= link_to 'Set Location', location_path(:return_to => request.path), :class => 'fancyboxy location' %>
+  <%- end -%>
+  </h3>
+  <div id="score_examples" class="act-refresh">
+    <%= render 'reports/report_and_scores', :report => @sample_report, :scores => @scores %>
   </div>
+  <p>Customize an overview of your reps: <%= link_to "Get Started Now", new_guide_path %></p>
+</div>
 
-  <div class="section clearfix span-9 last" id="advocates">
-    <h3>Sample User-created Reports</h3>
+<div class="section clearfix span-9 last" id="advocates">
+  <h3>Sample User-created Reports</h3>
 
-    <%= render 'reports/list', :reports => @recent_reports %>
-    <%= link_to content_tag(:span, 'See more Reports'), reports_path, :class => 'sprites front_page-button_seeMore' %>
-    <%= link_to content_tag(:span, 'Create your own'), new_report_path, :class => 'sprites front_page-button_createreport' %>
-  </div>
-<% end %>
+  <%= render 'reports/list', :reports => @recent_reports %>
+  <%= link_to content_tag(:span, 'See more Reports'), reports_path, :class => 'sprites front_page-button_seeMore' %>
+  <%= link_to content_tag(:span, 'Create your own'), new_report_path, :class => 'sprites front_page-button_createreport' %>
+</div>
