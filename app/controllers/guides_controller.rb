@@ -57,7 +57,7 @@ class GuidesController < ApplicationController
         @scores = @guide.immediate_scores
       end
       :cause_scores
-    elsif @guide.congressional_district.present? && params[:from] != 'set_location'
+    elsif params[:from] == 'location'
       @under_consideration = @guide.next_issue
       :causes
     else
