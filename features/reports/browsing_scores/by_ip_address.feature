@@ -48,8 +48,7 @@ Feature: Browsing Report Scores by IP Address
     And I wait for delayed job to finish
 
   Scenario: When unscoped, report scores should be proper and complete
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 100   |
@@ -61,8 +60,7 @@ Feature: Browsing Report Scores by IP Address
 
   Scenario: When unscoped, report scores should be proper and complete
     Given my location is "Flower Mound, TX 75028"
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 100   |

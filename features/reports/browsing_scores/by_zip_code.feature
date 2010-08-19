@@ -49,8 +49,7 @@ Feature: Browsing Report Scores by State
     And I wait for delayed job to finish
 
   Scenario: When unscoped, report scores should be proper and complete
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Michael Burgess      | 100   |
@@ -61,8 +60,7 @@ Feature: Browsing Report Scores by State
       | Neil Abercrombie     | 0     |
 
   Scenario Outline: Narrow report results to those within a certain zip code
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     And I fill in "Reps from" with "<zip code input>"
     And I press "Show Reps"
     Then I should see the following scores:
@@ -86,8 +84,7 @@ Feature: Browsing Report Scores by State
       | TX    | 26       | 75028    | 9300   |
       | TX    | 11       | 75028    | 7      |
       | NY    | 7        | 11111    | 111    |
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     And I fill in "Reps from" with "<zip code input>"
     And I press "Show Reps"
     Then I should see the following scores:

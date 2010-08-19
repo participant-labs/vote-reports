@@ -48,8 +48,7 @@ Feature: Browsing Report Scores by State
     And I wait for delayed job to finish
 
   Scenario: When unscoped, report scores should be proper and complete
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     Then I should see the following scores:
       | politician           | score |
       | Piyush Jindal        | 100   |
@@ -60,8 +59,7 @@ Feature: Browsing Report Scores by State
       | Neil Abercrombie     | 0     |
 
   Scenario Outline: Narrow report results to those within a certain zip code
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     And I fill in "Reps from" with "<location>"
     And I press "Show Reps"
     Then I should see the following scores:
@@ -80,8 +78,7 @@ Feature: Browsing Report Scores by State
     | 1115 oak drive flower mound      |
 
   Scenario Outline: Narrow report results to a state through imprecise language
-    When I go to my report page for "Active Report"
-    And I follow "Scores"
+    When I go to my report scores page for "Active Report"
     And I fill in "Reps from" with "<location>"
     And I press "Show Reps"
     Then I should see the following scores:
