@@ -27,6 +27,10 @@
   background: -moz-linear-gradient(top,  #FFF,  #F5F5F5);
 }
 
+.guide_map_header {
+  min-height: 166px;
+}
+
 .guide_header .message {
   font-size: 14px;
   padding-bottom: 10px;
