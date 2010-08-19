@@ -98,9 +98,7 @@
       }
 
       var next = form.find('.cause_buttons:not(:has(button.selected))');
-      if (next.length == 0) {
-        console.info('All done!');
-      } else {
+      if (next.length > 0) {
         form.find('h1 > select').attr('value', next.attr('id')).trigger('change');
       }
 
