@@ -2,6 +2,7 @@ class Guide < ActiveRecord::Base
   belongs_to :report
   belongs_to :user
   belongs_to :congressional_district
+  alias_method :district, :congressional_district
 
   has_friendly_id :secure_token
 
@@ -31,6 +32,8 @@ class Guide < ActiveRecord::Base
     cause = Cause.random.first
     cause.issues.random.first || cause
   end
+
+  delegate :representatives, :senators, :presidents, :to => :congressional_district
 
   private
 

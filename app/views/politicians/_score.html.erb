@@ -1,8 +1,8 @@
 <%- headshot_style ||= :medium -%>
 
-<% cache(['politician', dom_id(score), headshot_style].join(':')) do %>
+<% cache(['politician', score ? dom_id(score) : 'blank_score', headshot_style].join(':')) do %>
   <div class="politician_score round-4 clearfix">
-    <%- politician = score.politician -%>
+    <%- politician ||= score.politician -%>
     <%= render 'politicians/headshot', :politician => politician, :style => headshot_style %>
     <%= render 'politicians/name', :politician => politician %>
     <%= render 'reports/scores/score', :score => score %>
