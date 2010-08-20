@@ -131,6 +131,7 @@ div#agenda ul {
 
 div#agenda.cause_agenda ul {
   font-size: 1em;
+  list-style-type: none;
 }
 
 div#agenda ul > li > span {
