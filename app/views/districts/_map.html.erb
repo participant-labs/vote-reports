@@ -36,7 +36,7 @@
       <%- end -%>
 
       var districtInfo = new google.maps.InfoWindow({
-          content: '<p style="color: <%= district.level.text_color %>;"><%= district.full_name %></p>'
+          content: '<p style="color: <%= district.level.text_color %>;">The <%= district.full_name %></p>'
       });
 
       var location = new google.maps.Marker({

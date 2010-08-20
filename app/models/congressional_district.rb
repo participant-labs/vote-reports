@@ -59,7 +59,7 @@ class CongressionalDistrict < ActiveRecord::Base
   end
 
   def title
-    "The #{which} Congressional District of #{state.full_name}"
+    "#{which} Congressional District of #{state.full_name}"
   end
   alias_method :full_name, :title
 

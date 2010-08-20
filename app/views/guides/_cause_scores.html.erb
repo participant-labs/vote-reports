@@ -21,12 +21,12 @@
 </div>
 
 <dl class="span-19 last guide_scores">
-  <dt>President of these United State of America</dt>
+  <dt>President of these United States of America</dt>
   <%= render 'politicians/scores', :scores => scores, :politicians => guide.presidents %>
 
-  <dt>Senators for <%= state_title(guide.district.state) %></dt>
+  <dt>Senators for the <%= state_full_name(guide.district.state) %></dt>
   <%= render 'politicians/scores', :scores => scores, :politicians => guide.senators.in_office %>
 
-  <dt>Representative for <%= guide.district.full_name %></dt>
+  <dt>Representative for the <%= district_full_title_name(guide.district) %></dt>
   <%= render 'politicians/scores', :scores => scores, :politicians => guide.representatives.in_office %>
 </dl>
