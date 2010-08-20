@@ -12,7 +12,7 @@
       </dl>
       <%- if @politicians -%>
       <dl class="span-4">
-        <dt>President of these US</dt>
+        <dt>President</dt>
         <%- @politicians.presidents.each do |politician| -%>
           <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
         <%- end -%>
