@@ -1,5 +1,6 @@
 <%- if score.nil? -%>
-  <div class="report_score blank">
+  <div class="report_score">
+    <span class="score blank">?</span>
   </div>
 <%- else -%>
   <% cache dom_id(score) do %>
