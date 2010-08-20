@@ -16,7 +16,7 @@
         <div class="span-9 last">
           <%- Issue.all.each do |issue| -%>
             <ul class="clearfix cause_buttons" style="<%= 'display:none;' unless issue == @under_consideration %>" id="<%= dom_id(issue) %>">
-              <li><button class="cause_selection round-6">Meh</button></li>
+              <li><button class="cause_selection round-6">Skip</button></li>
               <%- issue.causes.each do |cause| -%>
                 <li><button name="causes[]" value="<%= cause.to_param %>" class="cause_selection round-6" title="<%= cause.description %>"><%= cause.name %></button></li>
               <%- end -%>
