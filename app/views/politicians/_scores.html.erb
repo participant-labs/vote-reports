@@ -1,0 +1,3 @@
+<%- politicians.each do |politician| -%>
+  <dd class="clearfix full_width"><%= render 'politicians/score', :politician => politician, :score => score_for(scores, politician) %></dd>
+<%- end -%>
