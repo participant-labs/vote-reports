@@ -773,6 +773,8 @@ ActiveRecord::Schema.define(:version => 20100808060722) do
   add_foreign_key "report_follows", "reports", :name => "report_follows_report_id_reference"
   add_foreign_key "report_follows", "users", :name => "report_follows_user_id_reference"
 
+  add_foreign_key "report_score_evidences", "report_scores", :name => "report_score_evidences_report_score_id_fk"
+
   add_foreign_key "report_subjects", "reports", :name => "report_subjects_report_id_reference", :dependent => :delete
   add_foreign_key "report_subjects", "subjects", :name => "report_subjects_subject_id_reference", :dependent => :delete
 
