@@ -24,7 +24,7 @@
           <%- end -%>
           <%- Cause.without_issue.map do |cause| -%>
             <ul class="clearfix cause_buttons" style="<%= 'display:none;' unless cause == @under_consideration %>" id="<%= dom_id(cause) %>">
-              <li><button class="cause_selection round-6">Meh</button></li>
+              <li><button class="cause_selection round-6">Skip</button></li>
               <li><button name="causes[]" value="<%= cause.to_param %>" class="cause_selection round-6" title="<%= cause.description %>">Support</button></li>
             </ul>
           <%- end -%>
