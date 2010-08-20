@@ -383,8 +383,8 @@ input.tagged {
   text-align: center;
 }
 
-.report_score.blank:after {
-  content: '—';
+.full_width .report_score {
+  content: '?';
 }
 
 table#reports td {
