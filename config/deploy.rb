@@ -27,7 +27,6 @@ namespace :deploy do
   task :optimize_pngs, :roles => :app do
     run %{find #{current_release}/public/images/ #{current_release}/public/system/ -name "*.png" | xargs optipng -quiet }
   end
-  after 'deploy:symlink', 'deploy:optimize_pngs'
 end
 
 namespace :monit do
