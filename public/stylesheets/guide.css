@@ -172,6 +172,6 @@
   -khtml-border-radius: 8px;
 }
 
-ul.guide_scores > li {
+dl.guide_scores > dd, dl.guide_scores > dt {
   margin-left: 20px;
 }

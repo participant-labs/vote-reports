@@ -13,7 +13,7 @@ module PoliticianTermsHelper
     when RepresentativeTerm
       "for #{district_full_name(term.congressional_district)}"
     when SenateTerm
-      "for #{state_full_name(term.state)}"
+      "for #{state_name(term.state)}"
     else
       notify_hoptoad("Unrecognized term #{term.inspect}")
       ''
