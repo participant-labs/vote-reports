@@ -4,5 +4,6 @@
   <%= render 'politicians/search', :in_office => @in_office, :replace => 'report_scores',
     :url => cause_report_scores_path(@cause),
     :reset_path => cause_report_scores_path(@cause, :representing => '') %>
-  <%= render 'reports/scores/table', :report => @report, :scores => @scores, :replace => 'report_scores' %>
+  <%= render 'reports/scores/table', :report => @report, :scores => @scores, :replace => 'report_scores',
+    :target_path => cause_report_scores_path(@cause) %>
 </div>
