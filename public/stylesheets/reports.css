@@ -357,6 +357,8 @@ div.report_score .score.f_minus {
   height: 60px;
   line-height: 60px;
 
+  margin-top: 5px;
+
    -moz-border-radius: 30px;
   -webkit-border-radius: 30px;
   -khtml-border-radius: 30px;
