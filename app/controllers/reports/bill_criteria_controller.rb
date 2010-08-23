@@ -7,10 +7,9 @@ class Reports::BillCriteriaController < ApplicationController
       raise ActiveRecord::RecordNotFound.new("No report for #{params[:report_id]}")
     end
     @criteria = @report.bill_criteria.autofetch_from!(params[:source])
-    @bills = @criteria.map(&:bill)
 
     render :partial => 'reports/bill_criteria/table', :locals => {
-      :report => @report, :bills => @bills
+      :report => @report, :criteria => @criteria
     }
   end
 end

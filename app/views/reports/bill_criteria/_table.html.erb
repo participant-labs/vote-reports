@@ -1,5 +1,10 @@
+<%-
+  bills ||= nil
+  criteria ||= nil
+-%>
+
 <div id="report_bills_results_table">
-  <%- if bills.present? -%>
+  <%- if bills.present? || criteria.present? -%>
     <% form_for report, :url => report_bill_criteria_path(report), :html => {:method => :post} do |f| %>
       <table>
         <thead>
@@ -8,7 +13,7 @@
           <th></th>
         </thead>
         <tbody>
-          <%- build_criteria_for(report, bills).each do |criterion| -%>
+          <%- (criteria || build_criteria_for(report, bills)).each do |criterion| -%>
             <%- f.fields_for :bill_criteria, criterion do |bill_criteria_fields| -%>
               <tr>
                 <td>
