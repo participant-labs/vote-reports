@@ -1,6 +1,7 @@
 authorization do
   role :admin do
     includes :moderator
+    has_permission_on :reports_bill_criteria, :to => :autofetch
     has_permission_on :users, :users_reports, :users_reports_bill_criteria, :users_reports_amendment_criteria, :reports,
       :to => [:index, :show, :edit, :update, :new, :create, :destroy]
     has_permission_on :users_adminships, :users_moderatorships, :to => [:create, :destroy]

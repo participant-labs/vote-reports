@@ -7,7 +7,9 @@ ActionController::Routing::Routes.draw do |map|
     cause.resource :follows, :controller => 'causes/follows', :only => [:show, :create, :destroy]
     cause.resources :reports, :controller => 'causes/reports', :only => [:new, :create, :index, :destroy]
   end
-  map.resources :reports, :only => [:index, :new]
+  map.resources :reports, :only => [:index, :new] do |report|
+    report.resources :bill_criteria, :only => [], :collection => {:autofetch => :get}, :controller => 'reports/bill_criteria'
+  end
   map.resources :reports, :as => '', :name_prefix => 'user_', :path_prefix => "reports/:user_id", :controller => 'users/reports' do |report|
     report.resources :report_scores, :as => :scores, :controller => 'users/reports/scores', :only => [:index, :show]
     report.resource :follows, :controller => 'users/reports/follows', :only => [:show, :create, :destroy]
