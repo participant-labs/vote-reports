@@ -27,12 +27,9 @@ class InterestGroups::BillCriteriaController < ApplicationController
   end
 
   def create
-    if @report.update_attributes(params[:report].slice(:bill_criteria_attributes))
-      flash[:notice] = "Successfully updated interest group bills."
-      redirect_to edit_interest_group_path(@interest_group, :anchor => 'Add_Bills')
-    else
-      render :action => 'new', :layout => false
-    end
+    @report.update_attributes!(params[:report].slice(:bill_criteria_attributes))
+    flash[:notice] = "Successfully updated interest group bills."
+    redirect_to edit_interest_group_path(@interest_group, :anchor => 'Add_Bills')
   end
 
   def index
