@@ -193,6 +193,16 @@ class Report < ActiveRecord::Base
       # due to an apparent bug in rails, the joins are not distincting, so this is necessary
       active.count(:distinct => true, :select => 'bill_criteria.*')
     end
+
+    def autofetch_from!(url)
+      BillCriterion.autofetch_from(url).map do |(bill_title, attrs)|
+        if bill = Bill.guess(bill_title)
+          build(attrs.merge(:bill => bill))
+        elsif Rails.env.production?
+          notify_hoptoad("No bill found for autofetch #{bill_title} from #{url}")
+        end
+      end.compact
+    end
   end
   has_many :bills, :through => :bill_criteria
 

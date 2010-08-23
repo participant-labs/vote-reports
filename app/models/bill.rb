@@ -39,6 +39,34 @@ class Bill < ActiveRecord::Base
     def reindex(opts = {})
       super(opts.reverse_merge(:include => [:titles, :rolls, :congress, :subjects]))
     end
+
+    def paginated_search(params)
+      search do
+        fulltext params[:term]
+        paginate :page => params[:page], :per_page => Bill.per_page
+        if params[:voted]
+          without :voted, false
+        end
+        if params[:current]
+          without :current, false
+        end
+      end
+    end
+
+    def guess(info)
+      number, name = info.split(' - ')
+      paginated_search(:term => "#{number} #{name}", :current => true).results.first || begin
+        words = name.split(' ')
+        count = words.size
+        while count > 2
+          words.combination(count) do |comb|
+            result = paginated_search(:term => "#{number} #{comb.join(' ')}", :current => true).results.first
+            return result if result
+          end
+          count -= 1
+        end
+      end
+    end
   end
 
   belongs_to :congress
@@ -72,21 +100,6 @@ class Bill < ActiveRecord::Base
 
   validates_format_of :gov_track_id, :with => /[a-z]+\d\d\d-\d+/
   validates_format_of :opencongress_id, :with => /\d\d\d-[a-z]+\d+/
-
-  class << self
-    def paginated_search(params)
-      search do
-        fulltext params[:term]
-        paginate :page => params[:page], :per_page => Bill.per_page
-        if params[:voted]
-          without :voted, false
-        end
-        if params[:current]
-          without :current, false
-        end
-      end
-    end
-  end
 
   def opencongress_url
     # As of the 111th, OpenCongress only maintains pages for bills for the current meeting
