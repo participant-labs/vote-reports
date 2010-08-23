@@ -60,6 +60,12 @@ class InterestGroupsController < ApplicationController
     end
   end
 
+  def destroy
+    @interest_group.destroy
+    flash[:notice] = "Successfully deleted interest group"
+    redirect_to interest_groups_path
+  end
+
   protected
 
   def new_interest_group_from_params

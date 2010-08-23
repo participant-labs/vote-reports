@@ -1,7 +1,7 @@
 module HasReport
   def self.included(base)
     base.class_eval do
-      has_one :report
+      has_one :report, :dependent => :destroy
       delegate :causes, :bill_criteria, :amendment_criteria, :rescore!, :has_criteria?, :to => :report
 
       before_validation_on_create :initialize_report
