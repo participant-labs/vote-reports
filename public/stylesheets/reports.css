@@ -344,10 +344,6 @@ div.report_score .score.f_minus {
     margin-bottom: 0;
 }
 
-.report_scores .report_score {
-  padding-top: 1em;
-}
-
 #score_examples .report_scores .report_score {
   padding-top: 0;
 }
