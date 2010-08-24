@@ -62,9 +62,6 @@
 
     <%= render 'layouts/get_satisfaction' %>
 
-    <% javascript_tag do %>
-      location_set = <%= Rails.env.test? || Rails.env.cucumber? || session[:geo_location_declared].present? %>;
-    <% end %>
     <%= raw include_javascripts(:common) %>
     <%= yield :javascript_area %>
     <%= render 'layouts/chartbeat_end' %>
