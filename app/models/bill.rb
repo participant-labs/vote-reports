@@ -61,13 +61,13 @@ class Bill < ActiveRecord::Base
       house, bill_number = number.split(' ')
       paginated_search(:term => "#{house} #{name}", :bill_number => bill_number).results.first || begin
         words = name.split(' ')
-        count = words.size
-        while count > 2
+        count = words.size / 2
+        while count > 1
           words.combination(count) do |comb|
             result = paginated_search(:term => "#{house} #{comb.join(' ')}", :bill_number => bill_number).results.first
             return result if result
           end
-          count -= 1
+          count /= 2
         end
       end
     end
