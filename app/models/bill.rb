@@ -50,17 +50,21 @@ class Bill < ActiveRecord::Base
         if params[:current]
           without :current, false
         end
+        if params[:bill_number]
+          with :bill_number, params[:bill_number]
+        end
       end
     end
 
     def guess(info)
       number, name = info.split(' - ')
-      paginated_search(:term => "#{number} #{name}", :current => true).results.first || begin
+      house, bill_number = number.split(' ')
+      paginated_search(:term => "#{house} #{name}", :bill_number => bill_number).results.first || begin
         words = name.split(' ')
         count = words.size
         while count > 2
           words.combination(count) do |comb|
-            result = paginated_search(:term => "#{number} #{comb.join(' ')}", :current => true).results.first
+            result = paginated_search(:term => "#{house} #{comb.join(' ')}", :bill_number => bill_number).results.first
             return result if result
           end
           count -= 1
