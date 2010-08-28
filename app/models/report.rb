@@ -201,7 +201,7 @@ class Report < ActiveRecord::Base
         elsif Rails.env.production?
           notify_hoptoad("No bill found for autofetch #{bill_title} from #{url}")
         end
-      end.compact
+      end.compact.index_by(&:bill).values
     end
   end
   has_many :bills, :through => :bill_criteria
