@@ -23,13 +23,21 @@ class BillCriterion < ActiveRecord::Base
     def autofetch_from(url)
       html = Nokogiri::HTML(open(url))
       stances = {}
-      html.css("img[src='http://images.capwiz.com/img/issues_images/stracktext_support.gif']").each do |supported|
-        supported = supported.parent.parent.parent.css('td[align=left]')
-        stances[supported.inner_text] = {:explanatory_url => "http://capwiz.com#{supported.css('a[href]').attr('href')}", :support => true}
-      end
-      html.css("img[src='http://images.capwiz.com/img/issues_images/stracktext_oppose.gif']").each do |opposed|
-        opposed = opposed.parent.parent.parent.css('td[align=left]')
-        stances[opposed.inner_text] = {:explanatory_url => "http://capwiz.com#{opposed.css('a[href]').attr('href')}", :support => false}
+      if html.css("img[src='http://images.capwiz.com/img/issues_images/stracktext_support.gif']").present? \
+        || html.css("img[src='http://images.capwiz.com/img/issues_images/stracktext_oppose.gif']").present?
+        html.css("img[src='http://images.capwiz.com/img/issues_images/stracktext_support.gif']").each do |supported|
+          supported = supported.parent.parent.parent.css('td[align=left]')
+          stances[supported.inner_text] = {:explanatory_url => "http://capwiz.com#{supported.css('a[href]').attr('href')}", :support => true}
+        end
+        html.css("img[src='http://images.capwiz.com/img/issues_images/stracktext_oppose.gif']").each do |opposed|
+          opposed = opposed.parent.parent.parent.css('td[align=left]')
+          stances[opposed.inner_text] = {:explanatory_url => "http://capwiz.com#{opposed.css('a[href]').attr('href')}", :support => false}
+        end
+      else
+        html.css("tr > td > span.casmallnormal > a[href]").each do |supported|
+          supported = supported.parent.parent
+          stances[supported.inner_text] = {:explanatory_url => "http://capwiz.com#{supported.css('a[href]').attr('href')}", :support => true}
+        end
       end
       stances
     end

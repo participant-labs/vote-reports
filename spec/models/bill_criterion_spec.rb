@@ -56,6 +56,14 @@ describe BillCriterion do
   end
 
   describe ".autofetch!" do
+    context "when there are no support or oppose images" do
+      it "should assume support for the the entries" do
+        BillCriterion.autofetch_from(Rails.root.join('spec/fixtures/files/capwiz/thearc.html')).should include({
+          "S. 3304 - Equal Access to 21st Century Communications Act  of  2010" => {:support => true, :explanatory_url => 'http://capwiz.com/thearc/issues/bills/?bill=15116426'}
+        })
+      end
+    end
+
     context "from a customized html source" do
       it "should extract supported/opposed bill names and positions" do
         BillCriterion.autofetch_from(Rails.root.join('spec/fixtures/files/capwiz/consumer_action.html')).should include({
