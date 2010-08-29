@@ -99,18 +99,6 @@
   padding-bottom: 0.5em;
 }
 
-#score_examples .report {
-  width: 50%;
-  float: right;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-#score_examples .politician_score {
-  width: 50%;
-  float: left;
-}
-
 .full_width > .politician_score .politician_name {
   float: left;
   line-height: 120px;
