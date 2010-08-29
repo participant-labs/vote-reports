@@ -7,10 +7,7 @@
     <%- if @report.user_id -%>
       <span class="report_creator">by <%= render 'users/user', :user => @report.user %></span>
     <%- end -%>
-    <%= render 'reports/follows/button', :report => @report, :hide => true %>
   <% end %>
-
-  <p>Ratings for politicians from <%= link_to requested_location, location_path(:return_to => request.path), :class => 'fancyboxy location' %></p>
 
   <div id="embeded_report_scores">
     <%= render 'embeds/reports/scores', :scores => @scores, :replace => 'embeded_report_scores' %>
