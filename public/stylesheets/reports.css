@@ -279,10 +279,6 @@ h4, .report_title, .politician_name > .name, a.politician_location, span.politic
   margin-bottom: .5em;
 }
 
-.report_scores .report_score {
-  padding-top: 1em;
-}
-
 .publicize {
   float: right;
   margin: 0 15px;
