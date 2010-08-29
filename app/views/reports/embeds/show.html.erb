@@ -1,6 +1,6 @@
 <h1>Embed this report in your website</h1>
 <% form_tag do %>
-  <%= text_area_tag '', report_embed_code(@report), :onclick => 'this.focus(); this.select();' %>
+  <%= text_field_tag '', report_embed_code(@report), :onclick => 'this.focus(); this.select();', :size => 80 %>
   <%= clippy(report_embed_code(@report)) %>
 <% end %>
 <%= report_embed_code(@report) %>
