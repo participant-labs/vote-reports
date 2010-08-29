@@ -1,6 +1,6 @@
 <ul class="report_scores">
   <%- scores.each do |score| -%>
-    <li><%= render 'politicians/score', :score => score, :headshot_style => :small %></li>
+    <li><%= render 'politicians/score', :score => score, :headshot_style => :tiny %></li>
   <%- end -%>
 </ul>
 <%= will_paginate scores, :page_links => false, :class => 'act-replace', :rel => replace %>
