@@ -254,12 +254,12 @@ h4, .report_title, .politician_name > .name, a.politician_location, span.politic
   font-weight: normal;
 }
 
-.causes_selector a, .cause > a, .subject > a, a.report_title, .report_creator a, a.politician_name, a.politician_location, a.score, .report-show > .sidebar a {
+.causes_selector a, .cause > a, .subject > a, a.report_title, .report_creator a, a.politician_name, a.politician_location, a.score, .report-show > .sidebar a:not(.button) {
   border-bottom: none;
   text-decoration: none;
 }
 
-.causes_selector a:hover, .cause a:hover, .subject > a:hover, a.report_title:hover, .report_creator a:hover, a.politician_name:hover, a.politician_location:hover, .report-show > .sidebar a:hover {
+.causes_selector a:hover, .cause a:hover, .subject > a:hover, a.report_title:hover, .report_creator a:hover, a.politician_name:hover, a.politician_location:hover, .report-show > .sidebar a:not(.button):hover {
   border-bottom: 1px solid;
 }
 
