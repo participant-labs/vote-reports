@@ -1,0 +1,147 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+
+html, body {
+  background-color: #E1E7E8;
+  color: #849699;
+  margin: 0;
+  padding: 0;
+  font-family: 'Droid Sans', arial, serif;
+}
+
+.header, .header a {
+  background-color: #322129;
+  color: white;
+}
+
+#embeded_report_scores {
+  font-size: 0.80em;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  border: none;
+}
+
+.politician_headshot, .politician_name {
+  float: left;
+}
+
+.politician_name, .report_score {
+  line-height: 35px;
+}
+
+dt {
+  margin-top: 20px;
+}
+
+dd {
+  height: 35px;
+  width: 170px;
+  margin-left: 0;
+  padding: 4px;
+
+  background-color: white;
+
+   -moz-border-radius: 6px;
+  -webkit-border-radius:6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+}
+
+dd a {
+  color: black;
+}
+
+dd + dd {
+  margin-top: 3px;
+}
+
+.report_score {
+  float: right;
+}
+
+.footer {
+  font-size: 0.75em;
+  text-align: center;
+}
+
+div.report_score {
+  text-align: center;
+}
+
+div.report_score .score {
+  color: white;
+  font-family: arial, serif;
+  font-weight: bold;
+
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+
+   -moz-border-radius: 13px;
+  -webkit-border-radius: 13px;
+  -khtml-border-radius: 13px;
+}
+
+div.report_score .score.blank {
+  color: gray;
+  border: gray solid 5px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+}
+
+div.report_score .score.a_plus {
+  background-color: #2EAE11;
+}
+div.report_score .score.a {
+  background-color: #3DAE23;
+}
+div.report_score .score.a_minus {
+  background-color: #4BAE34;
+}
+div.report_score .score.b_plus {
+  background-color: #5AAE46;
+}
+div.report_score .score.b {
+  background-color: #68AE58;
+}
+div.report_score .score.b_minus {
+  background-color: #77AF69;
+}
+div.report_score .score.c_plus {
+  background-color: #85AF7B;
+}
+div.report_score .score.c {
+  background-color: #94AF8D;
+}
+div.report_score .score.c_minus {
+  background-color: #A2AF9E;
+}
+div.report_score .score.d_plus {
+  background-color: #B1AFB0;
+}
+div.report_score .score.d {
+  background-color: #9A9899;
+}
+div.report_score .score.d_minus {
+  background-color: #828182;
+}
+div.report_score .score.f_plus {
+  background-color: #6B6A6A;
+}
+div.report_score .score.f {
+  background-color: #535353;
+}
+div.report_score .score.f_minus {
+  background-color: #3C3C3C;
+}
+
+.clearfix:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
+.clearfix {display:block;}

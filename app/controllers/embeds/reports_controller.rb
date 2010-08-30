@@ -1,9 +1,13 @@
 class Embeds::ReportsController < ApplicationController
   before_filter :load_report
-  layout nil
+  layout 'widget'
 
   def show
-    @scores = @report.scores.for_politicians(sought_politicians).paginate :page => params[:page], :per_page => 3
+    @congressional_district = (
+      session[:geo_location] ? District.lookup(session[:geo_location]) : District.random
+    ).federal.first.congressional_district
+    @politicians = Politician.from_congressional_district(@congressional_district)
+    @scores = @report.scores.for_politicians(@politicians).paginate :page => params[:page], :per_page => 3
   end
 
   private

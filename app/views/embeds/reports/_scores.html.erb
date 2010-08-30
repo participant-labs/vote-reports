@@ -1,6 +1,9 @@
-<ul class="report_scores">
-  <%- scores.each do |score| -%>
-    <li><%= render 'politicians/score', :score => score, :headshot_style => :tiny %></li>
-  <%- end -%>
-</ul>
-<%= will_paginate scores, :page_links => false, :class => 'act-replace', :rel => replace %>
+<dl class="report_scores">
+  <%= render 'politicians/scores', :scores => scores, :politicians => politicians.presidents, :headshot_style => :tiny, :hide_evidence => true, :name_only => true %>
+
+  <dt>Senators for the <%= state_full_name(@congressional_district.state) %></dt>
+  <%= render 'politicians/scores', :scores => scores, :politicians => politicians.senators.in_office, :headshot_style => :tiny, :hide_evidence => true, :name_only => true %>
+
+  <dt>Representative for the <%= district_full_title_name(@congressional_district) %></dt>
+  <%= render 'politicians/scores', :scores => scores, :politicians => politicians.representatives.in_office, :headshot_style => :tiny, :hide_evidence => true, :name_only => true %>
+</dl>
