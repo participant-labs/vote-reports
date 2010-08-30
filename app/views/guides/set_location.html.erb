@@ -24,9 +24,11 @@
         <%- end -%>
       </dl>
       <dl class="span-4">
-        <dt>Representative for <%= @federal.congressional_district.abbreviation %></dt>
-        <%- @politicians.representatives.each do |politician| -%>
-          <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
+        <%- if @federal.congressional_district -%>
+          <dt>Representative for <%= @federal.congressional_district.abbreviation %></dt>
+          <%- @politicians.representatives.each do |politician| -%>
+            <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
+          <%- end -%>
         <%- end -%>
       </dl>
       <%- else -%>
