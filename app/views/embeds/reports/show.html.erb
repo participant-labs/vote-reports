@@ -1,5 +1,7 @@
+<% title report_name(@report) %>
+
 <div class="embed">
-  <% div_for @report, :class => 'act-hover', :rel => dom_id(@report, :follow) do %>
+  <div class="header">
     <%- if @report.current_image -%>
       <%= sized_image_tag @report.current_image, @report.name, :style => :tiny, :class => 'report_image' %>
     <%- end -%>
@@ -7,14 +9,13 @@
     <%- if @report.user_id -%>
       <span class="report_creator">by <%= render 'users/user', :user => @report.user %></span>
     <%- end -%>
-  <% end %>
+  </div>
 
   <div id="embeded_report_scores">
-    <%= render 'embeds/reports/scores', :scores => @scores, :replace => 'embeded_report_scores' %>
+    <%= render 'embeds/reports/scores', :scores => @scores, :politicians => @politicians %>
   </div>
 
   <div class="footer">
-    <%= link_to content_tag(:span, 'VoteReports'), root_path, :class => "sprites navigation-footer_logo" %>
-    Powered by <%= link_to 'VoteReports', root_path %>
+    Grades provided by <%= link_to 'VoteReports', root_path %>
   </div>
 </div>

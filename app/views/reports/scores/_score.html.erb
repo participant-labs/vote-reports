@@ -1,3 +1,5 @@
+<%- hide_evidence ||= false -%>
+
 <%- if score.nil? -%>
   <div class="report_score">
     <span class="score blank">?</span>
@@ -6,7 +8,9 @@
   <% cache dom_id(score) do %>
     <div class="report_score">
       <%= link_to score, report_score_path(score), :class => "fancyboxy score #{score_class(score)}" %>
-      <%= render 'reports/scores/evidence_summary', :score => score, :prefix => '' %>
+      <%- unless hide_evidence -%>
+        <%= render 'reports/scores/evidence_summary', :score => score, :prefix => '' %>
+      <%- end -%>
     </div>
   <% end %>
 <%- end -%>

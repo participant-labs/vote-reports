@@ -1,3 +1,9 @@
+<%-
+  headshot_style ||= :medium
+  hide_evidence ||= false
+  name_only ||= false
+-%>
+
 <%- politicians.each do |politician| -%>
-  <dd class="clearfix full_width"><%= render 'politicians/score', :politician => politician, :score => score_for(scores, politician) %></dd>
+  <dd class="clearfix full_width"><%= render 'politicians/score', :politician => politician, :score => score_for(scores, politician), :headshot_style => headshot_style, :hide_evidence => hide_evidence, :name_only => name_only %></dd>
 <%- end -%>
