@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
     @districts = District.lookup(@geoloc).sort_by {|d| d.level.sort_order }
     @federal = @districts.detect {|d| d.level.to_s == 'federal' }
     raise "No federal districts for #{geoloc.inspect}" unless @federal
-    @politicians = Politician.for_districts(@districts).in_office
+    @politicians = Politician.for_districts(@districts).in_office_normal_form
   end
 
   def report_path(report, params = {})
