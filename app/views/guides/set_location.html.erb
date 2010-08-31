@@ -18,7 +18,7 @@
         <%- end -%>
       </dl>
       <dl class="span-4">
-        <%- if @federal.congressional_district -%>
+        <%- if @politicians.senators.present? -%>
           <dt>Senators for <%= @federal.state.abbreviation %></dt>
           <%- @politicians.senators.each do |politician| -%>
             <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
@@ -26,8 +26,8 @@
         <%- end -%>
       </dl>
       <dl class="span-4">
-        <%- if @federal.congressional_district -%>
-          <dt>Representative for <%= @federal.congressional_district.abbreviation %></dt>
+        <%- if @politicians.representatives.present? -%>
+          <dt>Rep for <%= @federal.congressional_district.abbreviation %></dt>
           <%- @politicians.representatives.each do |politician| -%>
             <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
           <%- end -%>

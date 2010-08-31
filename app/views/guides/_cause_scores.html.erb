@@ -24,9 +24,17 @@
   <dt>President of these United States of America</dt>
   <%= render 'politicians/scores', :scores => scores, :politicians => guide.presidents %>
 
-  <dt>Senators for the <%= state_full_name(guide.district.state) %></dt>
-  <%= render 'politicians/scores', :scores => scores, :politicians => guide.senators.in_office %>
+  <%- if (senators = guide.senators.in_office).present? -%>
+    <dt>Senators for the <%= state_full_name(guide.district.state) %></dt>
+    <%= render 'politicians/scores', :scores => scores, :politicians => senators %>
+  <%- end -%>
 
-  <dt>Representative for the <%= district_full_title_name(guide.district) %></dt>
-  <%= render 'politicians/scores', :scores => scores, :politicians => guide.representatives.in_office %>
+  <%- if (reps = guide.representatives.in_office).present? -%>
+    <dt>Representative
+      <%- if guide.congressional_district -%>
+        for the <%= district_full_title_name(guide.congressional_district) %>
+      <%- end -%>
+    </dt>
+    <%= render 'politicians/scores', :scores => scores, :politicians => reps %>
+  <%- end -%>
 </dl>
