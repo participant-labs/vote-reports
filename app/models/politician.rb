@@ -132,6 +132,8 @@ class Politician < ActiveRecord::Base
   named_scope :representatives, :conditions => {:current_office_type => 'RepresentativeTerm'}
   named_scope :presidents, :conditions => {:current_office_type => 'PresidentialTerm'}
 
+  named_scope :none, :conditions => '0 = 1'
+
   named_scope :with_name, lambda {|name|
     first, last = name.split(' ', 2)
     {:conditions => {:first_name => first, :last_name => last}}
@@ -154,12 +156,6 @@ class Politician < ActiveRecord::Base
       '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
       {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
   ]
-
-  class << self
-    def for_districts(districts)
-      from_congressional_district(districts.map(&:congressional_district).compact)
-    end
-  end
 
   named_scope :from_state, lambda {|state|
     state = UsState.first(:conditions => ["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]) if state.is_a?(String)
@@ -190,6 +186,10 @@ class Politician < ActiveRecord::Base
   }
 
   class << self
+    def for_districts(districts)
+      from_congressional_district(districts.map(&:congressional_district).compact)
+    end
+
     def from_zip_code(zip_code)
       from_congressional_district(CongressionalDistrict.with_zip(zip_code))
     end
@@ -198,12 +198,23 @@ class Politician < ActiveRecord::Base
       from_congressional_district(CongressionalDistrict.for_city(address))
     end
 
-    def from_location(location)
-      results = scoped(:conditions => '0 = 1')
-      results = from_zip_code(location.zip) if location.zip.present?
-      results = from_city("#{location.city}, #{location.state}") if results.empty? && location.city.present?
-      results = from_state(location.state) if results.empty? && location.state.present?
-      results
+    def from_location(geoloc)
+      case geoloc.precision
+      when 'country'
+        if geoloc.is_us?
+          Politician
+        else
+          Politician.none
+        end
+      when 'state'
+        from_state(geoloc.state)
+      when 'zip', 'zip+4'
+        from_zip_code(geoloc.zip)
+      when 'city'
+        from_city("#{geoloc.city}, #{geoloc.state}")
+      else # %w{street address building}
+        for_districts(District.lookup(geoloc))
+      end
     end
 
     def from(representing)
