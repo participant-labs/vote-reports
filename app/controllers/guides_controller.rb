@@ -2,15 +2,14 @@ class GuidesController < ApplicationController
   layout 'minimal'
 
   def new
-    if params[:from] == 'location' && !session[:congressional_district]
+    if params[:from] == 'location' && !session[:declared_geo_location]
       session[:geo_location_declared] = true
       @geoloc = session[:declared_geo_location] = session[:geo_location]
       load_location_show_support(@geoloc)
-      session[:congressional_district] = @federal.congressional_district
     end
 
     reports = params[:causes].present? ? Cause.find(params[:causes], :include => :report).map(&:report) : []
-    @guide = Guide.new(:congressional_district => session[:congressional_district], :reports => reports)
+    @guide = Guide.new(:geoloc => current_geo_location, :reports => reports)
 
     respond_to do |format|
       format.html {
