@@ -1,8 +1,6 @@
 class Guide < ActiveRecord::Base
   belongs_to :report
   belongs_to :user
-  belongs_to :congressional_district
-  alias_method :district, :congressional_district
 
   has_friendly_id :secure_token
 
@@ -19,9 +17,9 @@ class Guide < ActiveRecord::Base
   alias_method :score_criteria, :guide_reports
 
   def immediate_scores
-    return [] unless congressional_district.present? && reports.present?
+    return [] unless politicians.present? && reports.present?
     report_ids = reports.map(&:id)
-    congressional_district.politicians.map do |politician|
+    politicians.map do |politician|
       next unless reports.any? {|report| report.scores.for_politicians(politician).present? }
       GuideScore.first(:conditions => {:politician_id => politician.id, :report_ids.all => report_ids, :report_ids.size => report_ids.size}) \
        || GuideScore.create!(:politician_id => politician.id, :report_ids => report_ids)
@@ -33,7 +31,16 @@ class Guide < ActiveRecord::Base
     cause.issues.random.first || cause
   end
 
-  delegate :representatives, :senators, :presidents, :to => :congressional_district
+  def politicians
+    @politicians ||= Politician.from_location(geoloc)
+  end
+
+  def congressional_district
+    @congressional_district ||= District.lookup(geoloc).detect(&:federal?).congressional_district
+  end
+
+  attr_accessor :geoloc
+  delegate :representatives, :senators, :presidents, :to => :politicians
 
   private
 

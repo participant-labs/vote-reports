@@ -52,10 +52,10 @@ module LocationsHelper
         unless @dont_show_geo_address
           params[:representing] = current_location
         end
-        if session[:congressional_district].present?
-          Politician.from_congressional_district(session[:congressional_district])
+        if session[:declared_geo_location].present?
+          Politician.from_location(session[:declared_geo_location])
         else
-          Politician.from(session[:geo_location])
+          Politician.from_location(session[:geo_location])
         end
       else
         Politician
