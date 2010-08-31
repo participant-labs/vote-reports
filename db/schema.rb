@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100808060722) do
+ActiveRecord::Schema.define(:version => 20100831171017) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -273,16 +273,14 @@ ActiveRecord::Schema.define(:version => 20100808060722) do
   add_index "guide_reports", ["report_id"], :name => "index_guide_reports_on_report_id"
 
   create_table "guides", :force => true do |t|
-    t.integer  "congressional_district_id"
     t.integer  "zip_code_id"
     t.integer  "report_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "secure_token",              :null => false
+    t.string   "secure_token", :null => false
   end
 
-  add_index "guides", ["congressional_district_id"], :name => "index_guides_on_congressional_district_id"
   add_index "guides", ["report_id"], :name => "index_guides_on_report_id", :unique => true
   add_index "guides", ["secure_token"], :name => "index_guides_on_secure_token", :unique => true
   add_index "guides", ["user_id"], :name => "index_guides_on_user_id"
@@ -739,7 +737,6 @@ ActiveRecord::Schema.define(:version => 20100808060722) do
   add_foreign_key "guide_reports", "guides", :name => "guide_reports_guide_id_reference"
   add_foreign_key "guide_reports", "reports", :name => "guide_reports_report_id_reference"
 
-  add_foreign_key "guides", "congressional_districts", :name => "guides_congressional_district_id_reference"
   add_foreign_key "guides", "reports", :name => "guides_report_id_reference"
   add_foreign_key "guides", "users", :name => "guides_user_id_reference"
   add_foreign_key "guides", "zip_codes", :name => "guides_zip_code_id_reference"
