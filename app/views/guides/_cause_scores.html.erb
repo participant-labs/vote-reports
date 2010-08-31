@@ -25,7 +25,7 @@
   <%= render 'politicians/scores', :scores => scores, :politicians => guide.presidents %>
 
   <%- if (senators = guide.senators.in_office).present? -%>
-    <dt>Senators for the <%= state_full_name(guide.district.state) %></dt>
+    <dt>Senators for the <%= state_full_name(guide.congressional_district.state) %></dt>
     <%= render 'politicians/scores', :scores => scores, :politicians => senators %>
   <%- end -%>
 
