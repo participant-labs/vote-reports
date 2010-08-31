@@ -11,12 +11,14 @@
       <%- end -%>
     </ul>
 
-    <h3>Senators</h3>
-    <ul>
-      <%- @senators.each do |senator| -%>
-        <%= render 'politicians/politician', :politician => senator, :full_name => true, :tag => :li %>
-      <%- end -%>
-    </ul>
+    <%- if @senators -%>
+      <h3>Senators</h3>
+      <ul>
+        <%- @senators.each do |senator| -%>
+          <%= render 'politicians/politician', :politician => senator, :full_name => true, :tag => :li %>
+        <%- end -%>
+      </ul>
+    <%- end -%>
 
     <h3>Representatives (<%= @representatives.count %>)</h3>
     <ul>
