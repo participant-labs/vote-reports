@@ -1,9 +1,9 @@
 <dl class="report_scores">
   <%= render 'politicians/scores', :scores => scores, :politicians => politicians.presidents, :headshot_style => :tiny, :hide_evidence => true, :name_only => true %>
 
-  <dt>Senators for the <%= state_full_name(@congressional_district.state) %></dt>
+  <dt>Senators of <%= current_geo_location.state %></dt>
   <%= render 'politicians/scores', :scores => scores, :politicians => politicians.senators.in_office, :headshot_style => :tiny, :hide_evidence => true, :name_only => true %>
 
-  <dt>Representative for the <%= district_full_title_name(@congressional_district) %></dt>
+  <dt>Reps of <%= current_location %></dt>
   <%= render 'politicians/scores', :scores => scores, :politicians => politicians.representatives.in_office, :headshot_style => :tiny, :hide_evidence => true, :name_only => true %>
 </dl>
