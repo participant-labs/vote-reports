@@ -4,7 +4,7 @@ class Embeds::ReportsController < ApplicationController
 
   def show
     @politicians = Politician.from_location(current_geo_location)
-    @scores = @report.scores.for_politicians(@politicians).paginate :page => params[:page], :per_page => 3
+    @scores = @report.scores.for_politicians(@politicians).all(:limit => 7)
   end
 
   private
