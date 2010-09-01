@@ -1,3 +1,7 @@
+.embed_instructions {
+  min-width: 570px;
+}
+
 .embed_instructions > div, .embed_instructions > form {
   float: left;
   width: 50%;
