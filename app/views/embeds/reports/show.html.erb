@@ -5,21 +5,21 @@
     <% cache dom_id(@report, :embed_header) do %>
       <div class="header">
         <%= link_to report_name(@report), report_path(@report), :class => 'report_title' %>
-        <%- if @report.user_id -%>
-          <span class="report_creator">by <%= render 'users/user', :user => @report.user %></span>
+        <%- if @user -%>
+          <span class="report_creator">by <%= render 'users/user', :user => @user %></span>
         <%- end -%>
       </div>
     <% end %>
 
     <div id="embeded_report_scores">
       <dl class="report_scores">
-        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.presidents %>
+        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.select {|p| p.current_office_type == 'PresidentialTerm'} %>
 
         <dt>Senators of <%= current_geo_location.state %></dt>
-        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.senators.in_office %>
+        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.select {|p| p.current_office_type == 'SenateTerm'} %>
 
         <dt>Reps of <%= current_location %></dt>
-        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.representatives.in_office %>
+        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.select {|p| p.current_office_type == 'RepresentativeTerm'} %>
       </dl>
     </div>
 

@@ -1,7 +1,7 @@
 module PoliticiansHelper
   def politician_title(politician)
     location = 
-      if location = politician.location.try(:abbreviation)
+      if location = politician.location_abbreviation
         " (#{location})"
       end
     "#{politician_name(politician)}#{location}"
