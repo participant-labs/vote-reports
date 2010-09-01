@@ -141,7 +141,7 @@ class Politician < ActiveRecord::Base
   named_scope :by_birth_date, :order => 'birthday DESC NULLS LAST'
   named_scope :from_congressional_district, lambda {|districts|
     {:conditions => [
-        "(senate_terms.us_state_id IN(?) OR representative_terms.congressional_district_id IN(?) OR presidential_terms.id IS NOT NULL)",
+        "senate_terms.us_state_id IN(?) OR representative_terms.congressional_district_id IN(?) OR presidential_terms.id IS NOT NULL",
          Array(districts).map(&:us_state_id), districts
       ], :joins => [
         %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
@@ -161,7 +161,7 @@ class Politician < ActiveRecord::Base
     state = UsState.first(:conditions => ["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]) if state.is_a?(String)
     if state
       {:select => 'DISTINCT politicians.*', :conditions => [
-        'senate_terms.us_state_id = ? OR congressional_districts.us_state_id = ?', state, state
+        'senate_terms.us_state_id = ? OR congressional_districts.us_state_id = ? OR presi dential_terms.id IS NOT NULL', state, state
       ], :joins => [
         %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
         %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
