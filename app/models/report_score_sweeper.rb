@@ -23,5 +23,8 @@ class ReportScoreSweeper < ActionController::Caching::Sweeper
     expire_fragment(dom_id(score, 'evidence_summary'))
     expire_fragment(dom_id(score, 'interest_group_ratings'))
     expire_fragment(dom_id(score, 'evidence'))
+    expire_fragment([dom_id(score.politician), dom_id(score, :embed)].join(':'))
+    expire_fragment(dom_id(score, :embed))
+    expire_fragment(/#{dom_id(score.report, :embed)}:.*/)
   end
 end
