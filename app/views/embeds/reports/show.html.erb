@@ -2,9 +2,6 @@
 
 <div class="embed">
   <div class="header">
-    <%- if @report.current_image -%>
-      <%= sized_image_tag @report.current_image, @report.name, :style => :tiny, :class => 'report_image' %>
-    <%- end -%>
     <%= link_to report_name(@report), report_path(@report), :class => 'report_title' %>
     <%- if @report.user_id -%>
       <span class="report_creator">by <%= render 'users/user', :user => @report.user %></span>
