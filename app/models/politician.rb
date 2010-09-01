@@ -50,6 +50,13 @@ class Politician < ActiveRecord::Base
   def location
     congressional_district || state
   end
+  def location_abbreviation
+    if congressional_district
+      "#{state.abbreviation}-#{congressional_district.district_abbreviation}"
+    elsif state
+      state.abbreviation
+    end
+  end
 
   searchable do
     text :name
@@ -95,7 +102,7 @@ class Politician < ActiveRecord::Base
   has_many :report_scores
   has_many :reports, :through => :report_scores
 
-  default_scope :include => :state
+  default_scope :include => [:state, :congressional_district]
 
   belongs_to :current_office, :polymorphic => true
   named_scope :in_office, :conditions => 'politicians.current_office_id IS NOT NULL'
@@ -114,6 +121,7 @@ class Politician < ActiveRecord::Base
       ]
     }
   }
+
   class << self
     def update_current_office_status!
       Politician.transaction do
