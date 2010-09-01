@@ -40,7 +40,7 @@
 - :version: ">= 0.8.2"
   :name: mongo_mapper
 - :name: Empact-mongo_session_store
-- :version: ">= 2.11.2"
+- :version: ">= 2.12.3"
   :name: newrelic_rpm
 - :name: nokogiri
 - :version: ">= 2.3.3"
