@@ -1,6 +1,6 @@
 <%- report = scores.first.report -%>
-<%- politicians.each do |politician| -%>
-  <%- score = score_for(scores, politician) -%>
+<%- pol_score = politicians.map {|politician| [politician, score_for(scores, politician)] } -%>
+<%- pol_score.sort_by {|(pol, score)| score.try(:score) || -1 }.reverse.each do |politician, score| -%>
   <% cache([dom_id(politician), score ? dom_id(score, :embed) : dom_id(report, :blank_score_embed)].join(':')) do %>
     <dd class="clearfix full_width">
       <div class="politician_score round-4 clearfix">
