@@ -1,12 +1,11 @@
-.embed {
-  border: solid 1px gray;
-  width: 200px;
+.embed_instructions > div, .embed_instructions > form {
+  float: left;
+  width: 50%;
+  text-align: center;
 }
 
-.embed ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
+.embed_instructions > form > object {
+  text-align: left;
 }
 
 #Embed textarea {
