@@ -1,11 +1,30 @@
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans);
 
 html, body {
-  background-color: #E1E7E8;
-  color: #849699;
   margin: 0;
   padding: 0;
+}
+
+.embed {
+  background-color: #E1E7E8;
+  color: #849699;
+
   font-family: 'Droid Sans', arial, serif;
+
+   -moz-border-radius: 6px;
+  -webkit-border-radius:6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+}
+
+.header {
+  padding-top: 13px;
+  padding-bottom: 13px;
+
+   -moz-border-radius: 6px 6px 0 0;
+  -webkit-border-radius:6px 6px 0 0;
+  -khtml-border-radius: 6px 6px 0 0;
+  border-radius: 6px 6px 0 0;
 }
 
 .header, .header a {
@@ -27,12 +46,21 @@ img {
   border: none;
 }
 
+.politician_name {
+  padding-left: 5px;
+  font-size: 0.95em;
+}
+
+.politician_headshot {
+  height: 30px;
+}
+
 .politician_headshot, .politician_name {
   float: left;
 }
 
 .politician_name, .report_score {
-  line-height: 35px;
+  line-height: 30px;
 }
 
 dt {
@@ -40,7 +68,7 @@ dt {
 }
 
 dd {
-  height: 35px;
+  height: 30px;
   width: 170px;
   margin-left: 0;
   padding: 4px;
@@ -65,9 +93,14 @@ dd + dd {
   float: right;
 }
 
-.footer {
-  font-size: 0.75em;
+.header {
   text-align: center;
+}
+
+.footer {
+  font-size: 0.7em;
+  text-align: center;
+  padding: 10px;
 }
 
 div.report_score {
@@ -91,10 +124,10 @@ div.report_score .score {
 
 div.report_score .score.blank {
   color: gray;
-  border: gray solid 5px;
-  width: 16px;
-  height: 16px;
-  line-height: 16px;
+  border: gray solid 3px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
 }
 
 div.report_score .score.a_plus {
