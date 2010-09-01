@@ -18,6 +18,11 @@ class ReportSweeper < ActionController::Caching::Sweeper
     end
   end
 
+  def on_rescore(report)
+    expire_fragment(/#{dom_id(score.report, :blank_score_embed)}/)
+    expire_fragment(/#{dom_id(score.report, :embed)}/)
+  end
+
   private
 
   def expire_cache_for(report)
