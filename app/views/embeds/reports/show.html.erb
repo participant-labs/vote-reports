@@ -1,18 +1,32 @@
 <% title report_name(@report) %>
 
-<div class="embed">
-  <div class="header">
-    <%= link_to report_name(@report), report_path(@report), :class => 'report_title' %>
-    <%- if @report.user_id -%>
-      <span class="report_creator">by <%= render 'users/user', :user => @report.user %></span>
-    <%- end -%>
-  </div>
+<% cache [dom_id(@report, :embed), current_geo_location.inspect].join(':') do %>
+  <div class="embed">
+    <% cache dom_id(@report, :embed_header) do %>
+      <div class="header">
+        <%= link_to report_name(@report), report_path(@report), :class => 'report_title' %>
+        <%- if @report.user_id -%>
+          <span class="report_creator">by <%= render 'users/user', :user => @report.user %></span>
+        <%- end -%>
+      </div>
+    <% end %>
 
-  <div id="embeded_report_scores">
-    <%= render 'embeds/reports/scores', :scores => @scores, :politicians => @politicians %>
-  </div>
+    <div id="embeded_report_scores">
+      <dl class="report_scores">
+        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.presidents %>
 
-  <div class="footer">
-    Grades provided by <%= link_to 'VoteReports', root_path %>
+        <dt>Senators of <%= current_geo_location.state %></dt>
+        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.senators.in_office %>
+
+        <dt>Reps of <%= current_location %></dt>
+        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.representatives.in_office %>
+      </dl>
+    </div>
+
+    <% cache :embed_footer do %>
+      <div class="footer">
+        Grades provided by <%= link_to 'VoteReports', root_path %>
+      </div>
+    <% end %>
   </div>
-</div>
+<% end %>
