@@ -3,7 +3,6 @@ class District < ActiveRecord::Base
 
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
 
-  named_scope :random, :order => 'random()'
   named_scope :lookup, lambda {|geoloc|
     {:conditions => ["ST_Contains(the_geom, GeometryFromText('POINT(? ?)', -1))",
       geoloc.lng, geoloc.lat]}

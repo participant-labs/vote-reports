@@ -5,6 +5,4 @@ class Issue < ActiveRecord::Base
   has_many :causes, :through => :issue_causes
 
   validates_presence_of :title, :causes
-
-  named_scope :random, :order => 'random()'
 end
