@@ -1,20 +1,27 @@
-<%- report = scores.first.report -%>
-<%- pol_score = politicians.map {|politician| [politician, score_for(scores, politician)] } -%>
-<%- pol_score.sort_by {|(pol, score)| score.try(:score) || -1 }.reverse.each do |politician, score| -%>
-  <% cache([dom_id(politician), score ? dom_id(score, :embed) : dom_id(report, :blank_score_embed)].join(':')) do %>
-    <dd class="clearfix full_width">
-      <div class="politician_score round-4 clearfix">
-        <%= render 'politicians/headshot', :politician => politician, :style => :tiny %>
-        <%= render 'politicians/name', :politician => politician, :name_only => true %>
+<%- if scores.present? -%>
+  <%- report = scores.first.report -%>
+  <%- sort_scores(politicians, scores).each do |politician, score| -%>
+    <% cache([dom_id(politician), score ? dom_id(score, :embed) : dom_id(report, :blank_score_embed)].join(':')) do %>
+      <dd class="clearfix full_width">
+        <div class="politician_score round-4 clearfix">
+          <%= render 'politicians/headshot', :politician => politician, :style => :tiny %>
+          <%= render 'politicians/name', :politician => politician, :name_only => true %>
 
-        <div class="report_score">
-          <%- if score -%>
-            <%= link_to score, report_path(report), :class => "fancyboxy score #{score_class(score)}" %>
-          <%- else -%>
-            <span class="score blank">?</span>
-          <% end %>
+          <div class="report_score">
+            <%- if score -%>
+              <%= link_to score, report_path(report), :class => "fancyboxy score #{score_class(score)}" %>
+            <%- else -%>
+              <span class="score blank">?</span>
+            <% end %>
+          </div>
         </div>
-      </div>
-    </dd>
-  <% end %>
+      </dd>
+    <% end %>
+  <%- end -%>
+<%- else -%>
+  <dd class="clearfix full_width">
+    <div class="politician_score round-4 clearfix">
+      None
+    </div>
+  </dd>
 <%- end -%>
