@@ -11,6 +11,11 @@ class Embeds::ReportsController < ApplicationController
   private
 
   def load_report
-    @report = Report.published.find(Integer(params[:id]))
+    @report =
+      if params[:id] == 'random'
+        Report.published.random.first
+      else
+        Report.published.find(Integer(params[:id]))
+      end
   end
 end
