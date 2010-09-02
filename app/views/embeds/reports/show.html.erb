@@ -5,8 +5,8 @@
     <% cache dom_id(@report, :embed_header) do %>
       <div class="header">
         <%= link_to report_name(@report), report_path(@report), :class => 'report_title' %>
-        <%- if @user -%>
-          <span class="report_creator">by <%= render 'users/user', :user => @user %></span>
+        <%- if @report.user -%>
+          <span class="report_creator">by <%= render 'users/user', :user => @report.user %></span>
         <%- end -%>
       </div>
     <% end %>
