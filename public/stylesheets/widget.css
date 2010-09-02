@@ -21,7 +21,7 @@ html, body {
 }
 
 .header {
-  padding: 13px;
+  padding: 10px 13px;
 
    -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius:6px 6px 0 0;
@@ -90,10 +90,6 @@ dd + dd {
   margin-top: 3px;
 }
 
-.report_score {
-  float: right;
-}
-
 .header {
   text-align: center;
 }
@@ -109,6 +105,8 @@ dd + dd {
 
 div.report_score {
   text-align: center;
+  position: absolute;
+  right: 15px;
 }
 
 div.report_score .score {
