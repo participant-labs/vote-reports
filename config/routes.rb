@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :embed_reports, :as => '', :path_prefix => "/embeds/reports/:id", :controller => 'embeds/reports', :only => :show
 
   map.resources :causes do |cause|
+    cause.resource :embed, :controller => 'reports/embeds', :only => :show
     cause.resources :report_scores, :as => :scores, :controller => 'causes/scores', :only => [:index, :show]
     cause.resource :follows, :controller => 'causes/follows', :only => [:show, :create, :destroy]
     cause.resources :reports, :controller => 'causes/reports', :only => [:new, :create, :index, :destroy]
