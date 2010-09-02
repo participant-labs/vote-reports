@@ -7,7 +7,7 @@ class Embeds::ReportsController < ApplicationController
 
     @report =
       if params[:id] == 'random'
-        Report.published.with_scores_for(@politicians).random.first
+        Report.published.with_scores_for(@politicians).random.first || Report.published.random.first
       else
         Report.published.find(Integer(params[:id]))
       end
