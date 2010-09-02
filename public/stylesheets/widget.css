@@ -21,8 +21,7 @@ html, body {
 }
 
 .header {
-  padding-top: 13px;
-  padding-bottom: 13px;
+  padding: 13px;
 
    -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius:6px 6px 0 0;
