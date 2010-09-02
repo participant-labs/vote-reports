@@ -9,6 +9,11 @@ class Reports::EmbedsController < ApplicationController
   private
 
   def load_report
-    @report = User.find(params[:user_id]).reports.find(params[:report_id])
+    @report =
+      if params[:user_id]
+        User.find(params[:user_id]).reports.find(params[:report_id])
+      else
+        InterestGroup.find(params[:interest_group_id]).report
+      end
   end
 end
