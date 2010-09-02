@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :search, :only => :show
 
   map.resources :issues
-  map.resources :embed_reports, :as => '', :path_prefix => "/embeds/reports/:id", :controller => 'embeds/reports', :only => :show
+  map.resources :embed_reports, :as => '', :path_prefix => "/embeds/reports", :controller => 'embeds/reports', :only => :show
 
   map.resources :causes do |cause|
     cause.resource :embed, :controller => 'reports/embeds', :only => :show

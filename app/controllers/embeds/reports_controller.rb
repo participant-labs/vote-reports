@@ -11,6 +11,6 @@ class Embeds::ReportsController < ApplicationController
   private
 
   def load_report
-    @report = Report.published.find(params[:id])
+    @report = Report.published.find(Integer(params[:id]))
   end
 end
