@@ -207,21 +207,25 @@ class Politician < ActiveRecord::Base
     end
 
     def from_location(geoloc)
-      case geoloc.precision
-      when 'country'
-        if geoloc.is_us?
-          Politician
-        else
-          Politician.none
+      if geoloc.respond_to?(:precision)
+        case geoloc.precision
+        when 'country'
+          if geoloc.is_us?
+            Politician
+          else
+            Politician.none
+          end
+        when 'state'
+          from_state(geoloc.state)
+        when 'zip', 'zip+4'
+          from_zip_code(geoloc.zip)
+        when 'city'
+          from_city("#{geoloc.city}, #{geoloc.state}")
+        else # %w{street address building}
+          for_districts(District.lookup(geoloc))
         end
-      when 'state'
-        from_state(geoloc.state)
-      when 'zip', 'zip+4'
-        from_zip_code(geoloc.zip)
-      when 'city'
+      else
         from_city("#{geoloc.city}, #{geoloc.state}")
-      else # %w{street address building}
-        for_districts(District.lookup(geoloc))
       end
     end
 
