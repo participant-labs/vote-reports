@@ -11,6 +11,8 @@ class Cause < ActiveRecord::Base
     :joins => 'LEFT OUTER JOIN issue_causes ON issue_causes.cause_id = causes.id',
     :conditions => {:'issue_causes.issue_id' => nil}
 
+  named_scope :random, :order => 'random()'
+
   def report_subjects
     ReportSubject.scoped(:conditions => {:report_id => reports})
   end

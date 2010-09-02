@@ -228,6 +228,8 @@ class Report < ActiveRecord::Base
 
   before_create :ensure_state_is_set
 
+  named_scope :random, :order => 'random()'
+
   named_scope :laws_i_like, :conditions => {:source => 'laws_i_like'}
   named_scope :user_published, :conditions => {:state => 'published'}, :include => :user
   named_scope :for_causes, :conditions => 'reports.cause_id IS NOT NULL'
