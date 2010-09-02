@@ -18,7 +18,7 @@
         <dt>Senators of <%= @location.state %></dt>
         <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.select {|p| p.current_office_type == 'SenateTerm'} %>
 
-        <dt>Reps of <%= @location %></dt>
+        <dt>Reps of <%= geo_description(@location) %></dt>
         <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.select {|p| p.current_office_type == 'RepresentativeTerm'} %>
       </dl>
     </div>
