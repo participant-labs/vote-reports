@@ -1,9 +1,10 @@
 <div class="embed_instructions">
   <h1>Embed this report in your website</h1>
   <p>Your viewers will see politicians in their area with scores from this report.</p>
-  <div><%= report_embed_code(@report) %></div>
+  <%- embed_code = report_embed_code(@report) -%>
+  <div><%= embed_code %></div>
   <% form_tag do %>
-    <%= text_area_tag :code, report_embed_code(@report), :onclick => 'this.focus(); this.select();', :style => 'width: 200px' %>
-    <div style="width: 200px"><%= clippy(report_embed_code(@report)) %></div>
+    <%= text_area_tag :code, embed_code, :onclick => 'this.focus(); this.select();', :style => 'width: 200px' %>
+    <div style="width: 200px"><%= clippy(embed_code) %></div>
   <% end %>
 </div>
