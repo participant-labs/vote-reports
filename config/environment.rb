@@ -22,7 +22,7 @@ Rails::Initializer.run do |config|
   config.gem 'bluecloth', :version => '>=2.0.5'
   config.gem "declarative_authorization"
   config.gem 'delayed_job', :version => '>= 2.0.3'
-  config.gem 'erubis'
+  config.gem 'erubis', :version => '>= 2.6.6'
   config.gem 'excelsior'
   config.gem 'fastercsv'
   config.gem 'facebooker', :version => '= 1.0.71'
