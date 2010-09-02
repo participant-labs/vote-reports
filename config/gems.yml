@@ -10,7 +10,8 @@
 - :name: declarative_authorization
 - :version: ">= 2.0.3"
   :name: delayed_job
-- :name: erubis
+- :version: ">= 2.6.6"
+  :name: erubis
 - :name: excelsior
 - :name: fastercsv
 - :version: = 1.0.71
