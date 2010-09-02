@@ -68,9 +68,7 @@
           <dd><%= render 'addresses/address', :address => @interest_group %></dd>
       </dl>
 
-      <div id="embed">
-        <h3><%= link_to content_tag(:span, "<Embed>"), interest_group_embed_path(@interest_group), :class => 'fancyboxy button' %></h3>
-      </div>
+      <%= render 'reports/embeds/button', :href => interest_group_embed_path(@interest_group) %>
     </div>
   </div>
 </div>

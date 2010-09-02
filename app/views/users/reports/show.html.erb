@@ -52,9 +52,7 @@
         <%- end -%>
       </dl>
 
-      <div id="embed">
-        <h3><%= link_to content_tag(:span, "<Embed>"), user_report_embed_path(@user, @report), :class => 'fancyboxy button' %></h3>
-      </div>
+      <%= render 'reports/embeds/button', :href => user_report_embed_path(@user, @report) %>
     </div>
   </div>
 </div>
