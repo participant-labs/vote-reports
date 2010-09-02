@@ -41,8 +41,11 @@ class CongressionalDistrict < ActiveRecord::Base
       :conditions => {:'locations.city' => city}}
     else
       {:select => 'DISTINCT congressional_districts.*',
-      :joins => {:zip_codes => :locations},
-      :conditions => {:'locations.city' => city, :'locations.state' => state}}
+      :joins => [{:zip_codes => :locations}, :state],
+      :conditions => {
+        :'locations.city' => city, :'locations.state' => state,
+        :'us_states.abbreviation' => state
+      }}
     end
   }
 
