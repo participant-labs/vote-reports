@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :search, :only => :show
 
   map.resources :issues
-  map.resources :embed_user_reports, :as => '', :path_prefix => "/embeds/reports/:user_id", :controller => 'embeds/reports', :only => :show
+  map.resources :embed_reports, :as => '', :path_prefix => "/embeds/reports/:id", :controller => 'embeds/reports', :only => :show
 
   map.resources :causes do |cause|
     cause.resources :report_scores, :as => :scores, :controller => 'causes/scores', :only => [:index, :show]
@@ -25,6 +25,7 @@ ActionController::Routing::Routes.draw do |map|
     report.resources :amendment_criteria, :only => [:new, :create, :destroy, :index], :controller => 'users/reports/amendment_criteria'
   end
   map.resources :interest_groups do |interest_group|
+    interest_group.resource :embed, :controller => 'reports/embeds', :only => :show
     interest_group.resources :report_scores, :as => :scores, :controller => 'interest_groups/scores', :only => [:index, :show]
     interest_group.resource :follows, :controller => 'interest_groups/follows', :only => [:show, :create, :destroy]
     interest_group.resources :causes, :controller => 'interest_groups/causes', :only => :index

@@ -15,10 +15,10 @@
       <dl class="report_scores">
         <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.select {|p| p.current_office_type == 'PresidentialTerm'} %>
 
-        <dt>Senators of <%= current_geo_location.state %></dt>
+        <dt>Senators of <%= @location.state %></dt>
         <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.select {|p| p.current_office_type == 'SenateTerm'} %>
 
-        <dt>Reps of <%= current_location %></dt>
+        <dt>Reps of <%= @location %></dt>
         <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.select {|p| p.current_office_type == 'RepresentativeTerm'} %>
       </dl>
     </div>

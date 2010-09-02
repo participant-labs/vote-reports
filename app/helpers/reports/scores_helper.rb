@@ -1,4 +1,10 @@
 module Reports::ScoresHelper
+  def sort_scores(politicians, scores)
+    politicians.map do |politician|
+        [politician, score_for(scores, politician)]
+    end.sort_by {|(pol, score)| score.try(:score) || -1 }.reverse
+  end
+
   def score_title(score)
     on = if score.respond_to?(:report)
         by = " by #{score.report.owner}" unless score.report.interest_group_id
