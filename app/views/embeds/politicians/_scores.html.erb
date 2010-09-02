@@ -5,7 +5,7 @@
       <dd class="clearfix full_width">
         <div class="politician_score round-4 clearfix">
           <%= render 'politicians/headshot', :politician => politician, :style => :tiny %>
-          <%= render 'politicians/name', :politician => politician, :name_only => true %>
+          <%= render 'politicians/name', :politician => politician, :name_only => true, :max_length => 20 %>
 
           <div class="report_score">
             <%- if score -%>

@@ -9,6 +9,7 @@
     else
       politician_last_name(politician)
     end
+  name = name.ellipsize(max_length) if defined?(max_length)
   no_fancybox ||= false
 -%>
 
