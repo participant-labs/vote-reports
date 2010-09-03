@@ -26,9 +26,12 @@ class Guide < ActiveRecord::Base
     end.compact
   end
 
-  def next_issue
-    cause = Cause.random.first
-    cause.issues.random.first || cause
+  def questions
+    @questions ||= GuideQuestion.questions
+  end
+
+  def next_question
+    questions.random_element
   end
 
   def politicians
