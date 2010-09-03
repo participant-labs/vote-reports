@@ -9,15 +9,13 @@
         <ul id="guide_questions">
           <%- @questions.each do |question| -%>
             <li class="question<%= ' hide' if @under_consideration != question %>" id="<%= dom_id(question.object) %>">
-              <h1 class="span-15"><%= question.question %></h1>
-              <div class="span-9 last">
-                <ul class="clearfix cause_buttons">
-                  <li><button class="cause_selection round-6 skip">Skip this question</button></li>
-                  <%- question.options.each_pair do |cause, message| -%>
-                    <li><button name="causes[]" value="<%= cause.to_param %>" class="cause_selection round-6" title="<%= cause.description %>"><%= message %></button></li>
-                  <%- end -%>
-                </ul>
-              </div>
+              <h1><%= question.question %></h1>
+              <ul class="clearfix cause_buttons">
+                <li><button class="cause_selection round-6 skip">Skip this question</button></li>
+                <%- question.options.each_pair do |cause, message| -%>
+                  <li><button name="causes[]" value="<%= cause.to_param %>" class="cause_selection round-6" title="<%= cause.description %>"><%= message %></button></li>
+                <%- end -%>
+              </ul>
             </li>
           <%- end -%>
         </ul>
