@@ -8,7 +8,7 @@ class GuidesController < ApplicationController
       load_location_show_support(@geoloc)
     end
 
-    if params[:causes].present?
+    if params[:causes].present? || params[:reset]
       session[:guide_causes] = params[:causes]
     end
 
