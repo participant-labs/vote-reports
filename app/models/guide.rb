@@ -35,7 +35,7 @@ class Guide < ActiveRecord::Base
   end
 
   def politicians
-    @politicians ||= Politician.from_location(geoloc)
+    @politicians ||= Politician.from_congressional_district(congressional_district)
   end
 
   def congressional_district
