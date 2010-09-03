@@ -5,27 +5,23 @@
     <p class="span-24 message">Answer questions to see how your views align with those of your representatives</p>
 
     <div class="guide">
-      <% javascript_tag do %>
-        current_act_toggle_selected = '<%= dom_id(@under_consideration) %>';
-      <% end %>
       <% form_for @guide, :url => new_guide_path, :html => {:id => 'guide_causes', :rel => 'instant_scores'} do |f| %>
-        <h1 class="span-15">
+        <ul id="guide_questions">
           <%- @questions.each do |question| -%>
-            <%= content_tag(:span, question.question, (@under_consideration != question ? {:class => 'hide question'} : {}).merge(:rel => dom_id(question.object))) %>
+            <li class="question<%= ' hide' if @under_consideration != question %>" id="<%= dom_id(question.object) %>">
+              <h1 class="span-15"><%= question.question %></h1>
+              <div class="span-9 last">
+                <ul class="clearfix cause_buttons">
+                  <li><button class="cause_selection round-6">Skip</button></li>
+                  <%- question.options.each_pair do |cause, message| -%>
+                    <li><button name="causes[]" value="<%= cause.to_param %>" class="cause_selection round-6" title="<%= cause.description %>"><%= message %></button></li>
+                  <%- end -%>
+                </ul>
+              </div>
+            </li>
           <%- end -%>
-        </h1>
-        <div class="span-9 last">
-          <%- @questions.each do |question| -%>
-            <ul class="clearfix cause_buttons" style="<%= 'display:none;' unless question == @under_consideration %>" id="<%= dom_id(question.object) %>">
-              <li><button class="cause_selection round-6">Skip</button></li>
-              <%- question.options.each_pair do |cause, message| -%>
-                <li><button name="causes[]" value="<%= cause.to_param %>" class="cause_selection round-6" title="<%= cause.description %>"><%= message %></button></li>
-              <%- end -%>
-            </ul>
-          <%- end -%>
-
-          <%= hidden_field_tag :from, 'causes' %>
-        </div>
+        </ul>
+        <%= hidden_field_tag :from, 'causes' %>
       <% end %>
     </div>
   </div>

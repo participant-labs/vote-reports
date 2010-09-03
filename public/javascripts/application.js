@@ -28,13 +28,6 @@
       return false;
     });
 
-    $('select.act-toggle').live('change', function(event) {
-      $('#' + current_act_toggle_selected).hide();
-      $('#' + event.target.value).show();
-      current_act_toggle_selected = event.target.value;
-      return false;
-    });
-
     $('.act-tab-select').live('click', function(event) {
       $current_tabs.tabs('select', $(event.target).attr('rel'));
       return false;
