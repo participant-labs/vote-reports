@@ -8,7 +8,12 @@ class GuidesController < ApplicationController
       load_location_show_support(@geoloc)
     end
 
-    reports = params[:causes].present? ? Cause.find(params[:causes], :include => :report).map(&:report) : []
+    if params[:causes].present?
+      session[:guide_causes] = params[:causes]
+    end
+
+    reports = session[:guide_causes].present? ? Cause.find(session[:guide_causes], :include => :report).map(&:report) : []
+
     @guide = Guide.new(:geoloc => current_geo_location, :reports => reports)
 
     respond_to do |format|
@@ -47,7 +52,7 @@ class GuidesController < ApplicationController
   private
 
   def next_step
-    if @guide.reports.present? || params[:from] == 'causes'
+    if params[:from] == 'causes'
       @under_consideration = @guide.next_question
       if params[:selected]
         @selected = Report.find(params[:selected])
@@ -59,6 +64,7 @@ class GuidesController < ApplicationController
     elsif params[:from] == 'location'
       @questions = @guide.questions
       @under_consideration = @guide.next_question
+      @scores = @guide.immediate_scores
       :causes
     else
       load_location_show_support(current_geo_location) if current_geo_location
