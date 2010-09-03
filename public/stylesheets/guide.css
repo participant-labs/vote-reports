@@ -85,6 +85,12 @@
   float: right;
 }
 
+.guide_header .cause_selection.skip {
+  background-color:white;
+  border:medium none;
+  color:#049AF1;
+}
+
 .guide_header .cause_selection.selected {
   background-color: black;
 }
