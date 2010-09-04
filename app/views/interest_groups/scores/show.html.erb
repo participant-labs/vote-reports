@@ -1,7 +1,7 @@
 <%- title score_title(@score) -%>
 <div style="min-width: 600px; max-width: 900px;">
   <%- if @score.evidence.not_interest_group_ratings.present? -%>
-    <%= render 'reports/scores/evidence_summary', :score => @score %>
+    <%= render 'reports/scores/evidence_summary', :score => @score, :report => @report %>
   <%- end -%>
 
   <%- if @score.evidence.interest_group_ratings.present? -%>
@@ -59,7 +59,7 @@
              }
           },
           series: [{
-            name: '<%= escape_javascript(@score.report.name) %>',
+            name: '<%= escape_javascript(@report.name) %>',
             type: 'line',
             data: <%= raw data.map {|p| p.slice(:y, :tooltip, :vote_smart_url) }.to_json %>
           }]

@@ -73,11 +73,11 @@ class ApplicationController < ActionController::Base
     polymorphic_path([report_path_components(report), :amendment_criteria].flatten, params)
   end
 
-  def report_score_path(score)
+  def report_score_path(score, report = nil)
     if score.is_a?(GuideScore)
       guide_score_path(score.to_param)
     else
-      polymorphic_path([report_path_components(score.report), score].flatten)
+      polymorphic_path([report_path_components(report || score.report), score].flatten)
     end
   end
 

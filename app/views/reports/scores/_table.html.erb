@@ -35,7 +35,7 @@
   <%- scores = scores.with_evidence.votes_how(votes_how).paginate(:page => params[:page]) -%>
   <ul class="clearfix">
     <%- scores.each do |score| -%>
-      <li class="<%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score %></li>
+      <li class="<%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score, :report => report %></li>
     <%- end -%>
   </ul>
   <%= will_paginate scores,
@@ -45,7 +45,7 @@
   <%- scores = scores.with_evidence.paginate(:page => params[:page]) -%>
   <ul class="clearfix">
     <%- scores.each do |score| -%>
-      <li class="<%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score %></li>
+      <li class="<%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score, :report => report %></li>
     <%- end -%>
   </ul>
   <%= will_paginate scores,
@@ -55,7 +55,7 @@
   <%- scores = scores.with_evidence.paginate(:page => params[:page]) -%>
   <ul>
     <%- scores.each do |score| -%>
-      <li class="full_width"><%= render 'politicians/score', :score => score %></li>
+      <li class="full_width"><%= render 'politicians/score', :score => score, :report => report %></li>
     <%- end -%>
   </ul>
   <%= will_paginate scores,
