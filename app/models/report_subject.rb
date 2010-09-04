@@ -51,10 +51,10 @@ class ReportSubject < ActiveRecord::Base
 
     def generate!
       transaction do
-        Report.paginated_each(:conditions => {:cause_id => nil}) do |report|
+        Report.non_cause.paginated_each do |report|
           generate_for(report)
         end
-        Report.paginated_each(:conditions => 'cause_id is not null') do |report|
+        Report.for_causes.paginated_each do |report|
           generate_for(report)
         end
       end

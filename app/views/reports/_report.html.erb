@@ -16,10 +16,10 @@
   <%- unless report.description.blank? || float_description || report.name.size > 60 -%>
     <blockquote class="report_excerpt"><p><%= truncate(md_to_text(report.description), :length => 150) %></p></blockquote>
   <%- end -%>
-  <%- if report_subject = report.report_subjects.first(:order => 'count DESC') -%>
+  <%- if top_subject = report.top_subject -%>
     <dl class="report_subject">
       <dt>Subject</dt>
-      <dd><%= render 'subjects/subject', :subject => report_subject.subject, :subject_only => true %></dd>
+      <dd><%= render 'subjects/subject', :subject => top_subject, :subject_only => true %></dd>
     </dl>
   <%- end -%>
 <% end %>
