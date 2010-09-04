@@ -37,6 +37,8 @@ class Report < ActiveRecord::Base
 
   has_many :report_subjects
   has_many :subjects, :through => :report_subjects
+  belongs_to :top_subject, :class => 'Subject'
+
   def bill_criteria_subjects
     Subject.for_bill_criteria_on_report(self)
   end

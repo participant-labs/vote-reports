@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100831171017) do
+ActiveRecord::Schema.define(:version => 20100904041358) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -555,12 +555,14 @@ ActiveRecord::Schema.define(:version => 20100831171017) do
     t.integer  "image_id"
     t.integer  "cause_id"
     t.string   "source"
+    t.integer  "top_subject_id"
   end
 
   add_index "reports", ["cached_slug"], :name => "index_reports_on_cached_slug"
   add_index "reports", ["cause_id"], :name => "index_reports_on_cause_id", :unique => true
   add_index "reports", ["image_id"], :name => "index_reports_on_image_id"
   add_index "reports", ["interest_group_id"], :name => "index_reports_on_interest_group_id"
+  add_index "reports", ["top_subject_id"], :name => "index_reports_on_top_subject_id"
   add_index "reports", ["user_id"], :name => "index_reports_on_user_id"
 
   create_table "representative_terms", :force => true do |t|
@@ -778,6 +780,7 @@ ActiveRecord::Schema.define(:version => 20100831171017) do
   add_foreign_key "reports", "causes", :name => "reports_cause_id_reference"
   add_foreign_key "reports", "images", :name => "reports_thumbnail_id_reference"
   add_foreign_key "reports", "interest_groups", :name => "reports_interest_group_id_reference"
+  add_foreign_key "reports", "subjects", :name => "reports_top_subject_id_fk", :column => "top_subject_id", :dependent => :nullify
   add_foreign_key "reports", "users", :name => "reports_user_id_fk"
 
   add_foreign_key "representative_terms", "congressional_districts", :name => "representative_terms_district_id_reference"
