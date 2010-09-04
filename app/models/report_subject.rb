@@ -2,6 +2,8 @@ class ReportSubject < ActiveRecord::Base
   belongs_to :report
   belongs_to :subject
 
+  named_scope :by_count, :order => 'count DESC'
+
   # constraints on db:
   # report, subject presence
   # [report, subject] uniqueness
@@ -42,7 +44,7 @@ class ReportSubject < ActiveRecord::Base
           end
         )
       end
-      if top_report_subject = report.report_subjects.first(:order => 'count DESC')
+      if top_report_subject = report.report_subjects.by_count.first
         report.update_attribute(:top_subject_id, top_report_subject.subject_id)
       end
     end
