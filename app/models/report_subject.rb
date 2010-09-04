@@ -42,6 +42,9 @@ class ReportSubject < ActiveRecord::Base
           end
         )
       end
+      if top_report_subject = report.report_subjects.first(:order => 'count DESC')
+        report.update_attribute(:top_subject_id, top_report_subject.subject_id)
+      end
     end
 
     def generate!
