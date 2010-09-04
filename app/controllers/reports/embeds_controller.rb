@@ -3,7 +3,6 @@ class Reports::EmbedsController < ApplicationController
   layout nil
 
   def show
-    @scores = @report.scores.for_politicians(sought_politicians).paginate :page => params[:page], :per_page => 3
   end
 
   private
