@@ -39,6 +39,9 @@ class Report < ActiveRecord::Base
   has_many :subjects, :through => :report_subjects
   belongs_to :top_subject, :class_name => 'Subject'
 
+  named_scope :for_display, :include => [
+    :top_subject, :image, {:cause => :image}, :user, {:interest_group => :image}]
+
   def bill_criteria_subjects
     Subject.for_bill_criteria_on_report(self)
   end
