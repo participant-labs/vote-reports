@@ -2,7 +2,11 @@ class Cause < ActiveRecord::Base
   include HasReport
 
   has_many :cause_reports
-  has_many :reports, :through => :cause_reports
+  has_many :reports, :through => :cause_reports do
+    def report_subjects
+      ReportSubject.scoped(:conditions => {:report_id => self})
+    end
+  end
 
   has_many :issue_causes
   has_many :issues, :through => :issue_causes
@@ -12,14 +16,6 @@ class Cause < ActiveRecord::Base
     :conditions => {:'issue_causes.issue_id' => nil}
 
   named_scope :random, :order => 'random()'
-
-  def report_subjects
-    ReportSubject.scoped(:conditions => {:report_id => reports})
-  end
-
-  def subjects
-    Subject.scoped(:joins => :report_subjects, :conditions => {:'report_subjects.report_id' => reports})
-  end
 
   def related_causes
     Cause.scoped(:joins => :issue_causes, :conditions => ['causes.id NOT IN(?) AND issue_causes.issue_id IN(?)', self, issues])
