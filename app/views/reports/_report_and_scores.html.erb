@@ -1,6 +1,6 @@
 <%= render report %>
 <ul class="report_scores clearfix">
   <%- scores.each do |score| -%>
-    <li class="clearfix <%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score %></li>
+    <li class="clearfix <%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score, :report => report %></li>
   <%- end -%>
 </ul>
