@@ -269,7 +269,7 @@ class Report < ActiveRecord::Base
       {
         :select => 'DISTINCT reports.*',
         :joins => :report_subjects,
-        :conditions => ['report_subjects.subject_id IN(?)', subjects]
+        :conditions => {:'report_subjects.subject_id' => subjects}
       }
     end
   }
