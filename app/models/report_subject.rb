@@ -30,7 +30,7 @@ class ReportSubject < ActiveRecord::Base
       end
 
       if report.cause
-        report.cause.report_subjects.each do |report_subject|
+        report.cause.reports.report_subjects.each do |report_subject|
           subjects[report_subject.subject] ||= 0
           subjects[report_subject.subject] += report_subject.count
         end
