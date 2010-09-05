@@ -6,6 +6,6 @@
 <div class="score_sources">
   <%= prefix %>
   <% cache(dom_id(score, 'evidence_summary')) do %>
-    <%= link_to_unless_current score_evidence_description(score), report_score_path(score, report), :class => 'fancyboxy' %>
+    <%= link_to_unless_current score.evidence_description, report_score_path(score, report), :class => 'fancyboxy' %>
   <% end %>
 </div>

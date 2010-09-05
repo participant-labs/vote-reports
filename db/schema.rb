@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100904043903) do
+ActiveRecord::Schema.define(:version => 20100904073451) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -521,11 +521,12 @@ ActiveRecord::Schema.define(:version => 20100904043903) do
   add_index "report_score_evidences", ["report_score_id"], :name => "index_report_score_evidences_on_report_score_id"
 
   create_table "report_scores", :force => true do |t|
-    t.integer  "politician_id", :null => false
-    t.integer  "report_id",     :null => false
-    t.float    "score",         :null => false
+    t.integer  "politician_id",        :null => false
+    t.integer  "report_id",            :null => false
+    t.float    "score",                :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "evidence_description"
   end
 
   add_index "report_scores", ["politician_id"], :name => "index_report_scores_on_politician_id"

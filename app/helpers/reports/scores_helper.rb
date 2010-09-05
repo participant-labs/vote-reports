@@ -25,14 +25,6 @@ module Reports::ScoresHelper
     end
   end
 
-  def score_evidence_description(score)
-    evidence_by_type = score.evidence.group_by(&:evidence_type)
-    evidence_by_type.keys.sort.map do |type|
-      evidence = evidence_by_type.fetch(type)
-      pluralize(evidence.inject(0) {|count, e| count + (e.respond_to?(:public_evidence_count) ? e.public_evidence_count : 1)}, ReportScoreEvidence.type_name(type))
-    end.to_sentence
-  end
-
   def evidence_types(report)
     types = []
     score_criteria = report.score_criteria
