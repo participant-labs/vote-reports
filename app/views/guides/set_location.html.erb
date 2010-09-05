@@ -11,24 +11,25 @@
         <dd><%= text_field_tag :location, session[:declared_location], :class => 'title fieldtag round-4', :title => 'Address or zip code' %></dd>
       </dl>
       <%- if @politicians -%>
+      <%- @politicians = @politicians.group_by(&:current_office_type) -%>
       <dl class="span-4">
         <dt>President</dt>
-        <%- @politicians.presidents.each do |politician| -%>
+        <%- @politicians['PresidentialTerm'].each do |politician| -%>
           <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
         <%- end -%>
       </dl>
       <dl class="span-4">
-        <%- if @politicians.senators.present? -%>
+        <%- if senators = @politicians['SenateTerm'] -%>
           <dt>Senators for <%= @federal.state.abbreviation %></dt>
-          <%- @politicians.senators.each do |politician| -%>
+          <%- senators.each do |politician| -%>
             <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
           <%- end -%>
         <%- end -%>
       </dl>
       <dl class="span-4">
-        <%- if @politicians.representatives.present? -%>
+        <%- if representatives = @politicians['RepresentativeTerm'] -%>
           <dt>Rep for <%= @federal.congressional_district.abbreviation %></dt>
-          <%- @politicians.representatives.each do |politician| -%>
+          <%- representatives.each do |politician| -%>
             <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
           <%- end -%>
         <%- end -%>
