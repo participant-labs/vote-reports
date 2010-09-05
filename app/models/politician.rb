@@ -141,6 +141,7 @@ class Politician < ActiveRecord::Base
   named_scope :presidents, :conditions => {:current_office_type => 'PresidentialTerm'}
 
   named_scope :none, :conditions => '0 = 1'
+  named_scope :for_display, :include => [:state, :congressional_district]
 
   named_scope :with_name, lambda {|name|
     first, last = name.split(' ', 2)
