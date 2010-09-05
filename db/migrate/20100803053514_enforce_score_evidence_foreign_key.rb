@@ -5,8 +5,6 @@ class EnforceScoreEvidenceForeignKey < ActiveRecord::Migration
     GuideScore.delete_all
 
     add_foreign_key 'report_score_evidences', 'report_scores'
-
-    Report.rescore!
   end
 
   def self.down
