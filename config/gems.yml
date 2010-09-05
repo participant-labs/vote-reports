@@ -14,8 +14,6 @@
   :name: erubis
 - :name: excelsior
 - :name: fastercsv
-- :version: = 1.0.71
-  :name: facebooker
 - :name: matthuhiggins-foreigner
 - :version: ">= 3.0.6"
   :name: friendly_id
