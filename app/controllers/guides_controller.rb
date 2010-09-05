@@ -8,8 +8,12 @@ class GuidesController < ApplicationController
       load_location_show_support(@geoloc)
     end
 
-    if params[:causes].present? || params[:reset]
-      session[:guide_causes] = params[:causes]
+    session[:guide_causes] ||= []
+
+    if params[:add]
+      session[:guide_causes] << params[:add]
+    elsif params[:remove]
+      session[:guide_causes] -= [params[:remove]]
     end
 
     reports = session[:guide_causes].present? ? Cause.find(session[:guide_causes], :include => :report).map(&:report) : []
@@ -53,7 +57,7 @@ class GuidesController < ApplicationController
 
   def next_step
     if params[:from] == 'causes'
-      @under_consideration = @guide.next_question
+      @under_consideration = @guide.unanswered_question
       if params[:selected]
         @selected = Report.find(params[:selected])
         @scores = @selected.scores.for_politicians(sought_politicians)
@@ -63,7 +67,7 @@ class GuidesController < ApplicationController
       :cause_scores
     elsif params[:from] == 'location'
       @questions = @guide.questions
-      @under_consideration = @guide.next_question
+      @under_consideration = @guide.unanswered_question
       @scores = @guide.immediate_scores
       :causes
     else

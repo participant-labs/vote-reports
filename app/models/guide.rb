@@ -26,11 +26,15 @@ class Guide < ActiveRecord::Base
   end
 
   def questions
-    @questions ||= GuideQuestion.questions
+    @questions ||= GuideQuestion.all
   end
 
-  def next_question
-    questions.random_element
+  def unanswered_question
+    unanswered = nil
+    begin
+      unanswered = questions.random_element
+    end while unanswered.answered_by?(reports)
+    unanswered
   end
 
   def politicians

@@ -8,12 +8,18 @@
       <% form_for @guide, :url => new_guide_path, :html => {:id => 'guide_causes', :rel => 'instant_scores'} do |f| %>
         <ul id="guide_questions">
           <%- @questions.each do |question| -%>
-            <li class="question<%= ' hide' if @under_consideration != question %>" id="<%= dom_id(question.object) %>">
+            <li class="question<%= ' hide' if @under_consideration.object != question.object %>" id="<%= dom_id(question.object) %>">
               <h1><%= question.question %></h1>
               <ul class="clearfix cause_buttons">
                 <li><button class="cause_selection round-6 skip">Skip this question</button></li>
                 <%- question.options.each_pair do |cause, message| -%>
-                  <li><button name="causes[]" value="<%= cause.to_param %>" class="cause_selection round-6" title="<%= cause.description %>"><%= message %></button></li>
+                  <li>
+                    <%- if @guide.reports.include?(cause.report) -%>
+                      <button name="remove" value="<%= cause.to_param %>" class="cause_selection round-6 selected" title="<%= cause.description %>"><%= message %></button>
+                    <%- else -%>
+                      <button name="add" value="<%= cause.to_param %>" class="cause_selection round-6" title="<%= cause.description %>"><%= message %></button>
+                    <%- end -%>
+                  </li>
                 <%- end -%>
               </ul>
             </li>
