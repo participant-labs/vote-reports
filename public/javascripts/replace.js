@@ -85,16 +85,16 @@
 
       if (!source.hasClass('selected')) {
         var sibling = source.closest('ul').find('li:has(button.selected)')
+        var remove = null;
         if (sibling.length > 0) {
-          sibling.find('button.selected').removeClass('selected');
+          var sibling_button = sibling.find('button.selected');
+          sibling_button.removeClass('selected');
+          remove = sibling_button.attr('value');
           sibling.find('input').remove();
         }
 
         source.addClass('selected');
-        if (source.attr('value')) {
-          source.after('<input type="hidden" name="causes[]" value="' + source.attr('value') + '" />')
-        }
-        replaceWith(form.attr('rel'), form.attr('action') + '?' + form.serialize());
+        replaceWith(form.attr('rel'), form.attr('action') + '?' + form.serialize() + '&' + $.param({'add': source.attr('value'), 'remove': remove}));
       }
 
       var next = form.find('li.question:not(:has(button.selected))');
