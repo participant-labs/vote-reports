@@ -10,9 +10,8 @@ class GuideScore
   key :evidence_description, String
 
   def initialize(*args)
-    scores = args.first.delete(:scores)
     super
-    build_scores(scores)
+    build_scores
   end
 
   def politician
@@ -44,10 +43,11 @@ class GuideScore
     pluralize(evidence_count, ReportScoreEvidence.type_name('ReportScore'))
   end
 
-  def build_scores(scores)
+  def build_scores
     return if self.score
-    self.score = scores.sum {|s| s.score } / scores.size
-    self.evidence_ids = scores.map(&:id)
+    scores = ReportScore.scoped(:conditions => {:politician_id => politician_id, :report_id => report_ids})
+    self.score = scores.average(:score)
+    self.evidence_ids = scores.all(:select => :id).map(&:id)
     self.evidence_description = build_evidence_description
   end
 
