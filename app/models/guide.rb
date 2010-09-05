@@ -35,7 +35,7 @@ class Guide < ActiveRecord::Base
   end
 
   def politicians
-    @politicians ||= Politician.from_congressional_district(congressional_district)
+    @politicians ||= Politician.from_congressional_district(congressional_district).in_office
   end
 
   def congressional_district
