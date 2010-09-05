@@ -8,6 +8,13 @@ class Report
       GuideScore.delete_all(:report_ids => report_id)
     end
 
+    def class_name(klass)
+      @class_names ||= {}
+      @class_names[klass] || begin
+        @class_names[klass] = klass.name.dup
+      end
+    end
+
     def perform
       require 'mongo_mapper'
 
@@ -24,7 +31,8 @@ class Report
         @bases = {}
         ActiveRecord::Base.transaction do
           report = Report.find(report_id)
-          evidences = []
+          evidences = {}
+
           ReportScore.destroy_all(:report_id => report.id)
           ReportSweeper.send(:new).on_rescore(report)
           report.score_criteria.inject({}) do |criterion_events, criterion|
@@ -41,18 +49,37 @@ class Report
             end
             criterion_events
           end.each_pair do |politician_id, criteria_events|
-            score = report.scores.create!(:politician_id => politician_id, :score => report_score(criteria_events))
-
+            score_evidences = []
+            evidence_counts = {}
             criteria_events.each_pair do |criterion, events|
-              evidences += events.map do |event|
-                [score.id, criterion.class.name, criterion.id, event.class.name, event.id]
+              score_evidences += events.map do |event|
+                evidence_type = class_name(event.class)
+                evidence_counts[evidence_type] ||= 0
+                evidence_counts[evidence_type] += 1
+
+                [class_name(criterion.class), criterion.id, evidence_type, event.id]
               end
             end
+
+            evidence_description = evidence_counts.keys.sort.map do |type|
+              count = evidence_counts.fetch(type)
+              "#{count} #{ReportScoreEvidence.type_name(type)}#{'s' if count > 1}"
+            end.to_sentence
+
+            score = report.scores.create!(:politician_id => politician_id, :score => report_score(criteria_events), :evidence_description => evidence_description)
+
+            evidences[score.id] = score_evidences
           end
           unless evidences.blank?
+            evidence_data = []
+            evidences.each_pair do |score_id, evidences|
+              evidence_data += evidences.map do |evidence|
+                evidence.unshift(score_id)
+              end
+            end
             ReportScoreEvidence.import_without_validations_or_callbacks(
               [:report_score_id, :criterion_type, :criterion_id, :evidence_type, :evidence_id],
-              evidences)
+              evidence_data)
           end
           if report.scores.empty? && report.can_unlist?
             report.unlist
