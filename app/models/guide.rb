@@ -22,7 +22,7 @@ class Guide < ActiveRecord::Base
     scores = ReportScore.all(:conditions => {:politician_id => politicians, :report_id => reports}).group_by(&:politician)
     scores.map do |(politician, scores)|
       GuideScore.first(:conditions => {:politician_id => politician.id, :report_ids.all => report_ids, :report_ids.size => report_ids.size}) \
-       || GuideScore.create!(:politician_id => politician.id, :report_ids => report_ids)
+       || GuideScore.create!(:politician_id => politician.id, :report_ids => report_ids, :scores => scores)
     end
   end
 
