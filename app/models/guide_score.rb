@@ -10,8 +10,9 @@ class GuideScore
   key :evidence_description, String
 
   def initialize(*args)
+    scores = args.first.delete(:scores)
     super
-    build_scores
+    build_scores(scores)
   end
 
   def politician
@@ -35,18 +36,17 @@ class GuideScore
 
   private
 
-  def build_evidence_description
-    evidence_by_type = evidence.group_by(&:evidence_type)
-    evidence_by_type.keys.sort.map do |type|
-      evidence = evidence_by_type.fetch(type)
-      pluralize(evidence.sum(&:public_evidence_count), ReportScoreEvidence.type_name(type))
-    end.to_sentence
+  def evidence_count
+    ReportScoreEvidence.count(:conditions => {:report_score_id => evidence_ids})
   end
 
-  def build_scores
+  def build_evidence_description
+    pluralize(evidence_count, ReportScoreEvidence.type_name('ReportScore'))
+  end
+
+  def build_scores(scores)
     return if self.score
-    scores = politician.report_scores.for_reports(reports)
-    self.score = scores.average(:score)
+    self.score = scores.sum {|s| s.score } / scores.size
     self.evidence_ids = scores.map(&:id)
     self.evidence_description = build_evidence_description
   end
