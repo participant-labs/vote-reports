@@ -10,6 +10,8 @@ namespace :laws_i_like do
   end
 
   task :unpack => :environment do
+    require 'facebooker'
+
     def facebook_user(fb_id)
       @facebook_users ||= begin
         Facebooker::Session.current = Facebooker::Session.create
