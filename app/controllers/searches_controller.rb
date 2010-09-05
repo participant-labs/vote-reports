@@ -4,7 +4,7 @@ class SearchesController < ApplicationController
   def show
     params[:in_office] = true
     term = params[:representing] = params[:term]
-    @results = Sunspot.search(Subject, Report, Politician) do
+    @results = Sunspot.search(Report, Politician) do
       fulltext term
       with(:autocompletable, true)
       paginate :per_page => 20
