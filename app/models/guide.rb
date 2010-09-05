@@ -43,7 +43,6 @@ class Guide < ActiveRecord::Base
   end
 
   attr_accessor :geoloc
-  delegate :representatives, :senators, :presidents, :to => :politicians
 
   private
 
