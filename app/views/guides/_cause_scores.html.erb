@@ -21,7 +21,7 @@
 </div>
 
 <dl class="span-19 last guide_scores">
-  <%- politicians = guide.politicians.group_by(&:current_office_type) -%>
+  <%- politicians = guide.politicians.for_display.group_by(&:current_office_type) -%>
 
   <dt>President of these United States of America</dt>
   <%= render 'politicians/scores', :scores => scores, :politicians => politicians['PresidentialTerm'] %>
