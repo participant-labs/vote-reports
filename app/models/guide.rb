@@ -19,11 +19,11 @@ class Guide < ActiveRecord::Base
   def immediate_scores
     return [] unless politicians.present? && reports.present?
     report_ids = reports.map(&:id)
-    politicians.map do |politician|
-      next unless reports.any? {|report| report.scores.for_politicians(politician).present? }
+    scores = ReportScore.all(:conditions => {:politician_id => politicians, :report_id => reports}).group_by(&:politician)
+    scores.map do |(politician, scores)|
       GuideScore.first(:conditions => {:politician_id => politician.id, :report_ids.all => report_ids, :report_ids.size => report_ids.size}) \
        || GuideScore.create!(:politician_id => politician.id, :report_ids => report_ids)
-    end.compact
+    end
   end
 
   def questions
