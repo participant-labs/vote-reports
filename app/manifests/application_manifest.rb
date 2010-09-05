@@ -56,8 +56,8 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     delayed_job_monit = <<-DJ
       check process delayed_job
         with pidfile /srv/vote-reports/shared/pids/delayed_job.pid
-        start program = "/usr/bin/env RAILS_ENV=production /srv/vote-reports/current/script/delayed_job start"
-        stop program = "/usr/bin/env RAILS_ENV=production /srv/vote-reports/current/script/delayed_job stop"
+        start program = "/usr/bin/env PATH=$PATH:/usr/bin RAILS_ENV=production /srv/vote-reports/current/script/delayed_job start"
+        stop program = "/usr/bin/env PATH=$PATH:/usr/bin RAILS_ENV=production /srv/vote-reports/current/script/delayed_job stop"
     DJ
 
     file '/etc/monit.d/delayed_job',
@@ -71,7 +71,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
       check process mongodb
         with pidfile /srv/vote-reports/shared/pids/mongodb.pid
         start program = "/opt/local/mongo-1.4.2/bin/mongod --dbpath /data/db run"
-        stop program = "pgrep mongod | xargs kill -15"
+        stop program = "/usr/bin/pgrep mongod | xargs kill -15"
     MONIT
 
     file '/etc/monit.d/mongodb',
