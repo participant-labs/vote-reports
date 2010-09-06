@@ -16,8 +16,6 @@
     $('.flash.success, .flash.notice, .flash.message').fadeOutSoon(3000);
     $('.flash.error, .flash.warning').fadeOutSoon(5000, 5000);
 
-    $('[title]').tipsy({fade: true, gravity: 'n'});
-
     $('.selectable').live('update_selected', function(event) {
       $(event.target).closest('.selectable').toggleClass('selected');
       return true;
@@ -53,6 +51,15 @@
       minLength: 2,
       select: function(event, ui) {
         window.location = ui.item.path;
+      }
+    });
+
+    $('[title]').live('mouseover', function() {
+      var self = $(this);
+      if (!self.data('tipsy-init')) {
+        self.data('tipsy-init', true);
+        self.tipsy({fade: true, gravity: 'n'});
+        self.mouseover();
       }
     });
 
