@@ -13,7 +13,7 @@ class SiteController < ApplicationController
           Politician.in_office
         end.scoped(:limit => 6)
       @sample_report = Report.with_scores_for(@politicians).published.random.for_display.first
-      @scores = @sample_report.scores.for_politicians(@politicians).scoped(:include => {:politician => [:state, :congressional_district]})
+      @scores = @sample_report.scores.for_politicians(@politicians).for_display
 
       respond_to do |format|
         format.html {

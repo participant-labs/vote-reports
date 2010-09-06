@@ -2,7 +2,7 @@ class InterestGroups::ScoresController < ApplicationController
   before_filter :load_interest_group
 
   def index
-    @scores = @report.scores.for_politicians(sought_politicians)
+    @scores = @report.scores.for_politicians(sought_politicians).for_display
 
     respond_to do |format|
       format.html
