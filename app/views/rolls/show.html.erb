@@ -32,7 +32,13 @@
       <%- @roll.votes.for_display.aye.zip(@roll.votes.for_display.nay, @roll.votes.for_display.not_voting, @roll.votes.for_display.present).each do |row| -%>
         <tr>
           <%- row.each do |vote| -%>
-            <td><%= render vote.politician if vote %></td>
+            <td>
+              <%- if vote -%>
+                <%- cache dom_id(vote.politician, :roll_portrait) do -%>
+                  <%= render vote.politician %>
+                <%- end -%>
+              <%- end -%>
+            </td>
           <%- end -%>
         </tr>
       <%- end -%>
