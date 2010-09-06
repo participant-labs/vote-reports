@@ -45,6 +45,9 @@ class InterestGroup < ActiveRecord::Base
       :conditions => {:'reports.interest_group_id' => self})
   end
 
+  named_scope :for_display, :include => [
+    :image, {:report => [:top_subject]}]
+
   named_scope :for_subjects, lambda {|subjects|
     if subjects.blank?
       {}
