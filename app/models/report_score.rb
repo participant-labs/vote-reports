@@ -24,7 +24,8 @@ class ReportScore < ActiveRecord::Base
     end
   end
 
-  named_scope :for_display, :include => {:politician => [:state, :congressional_district]}
+  named_scope :for_politician_display, :include => {:report => [:cause, :interest_group, :user, :top_subject]}
+  named_scope :for_report_display, :include => {:politician => [:state, :congressional_district]}
 
   named_scope :published, :joins => :report, :conditions => [
     "reports.state = ? OR reports.user_id IS NULL", 'published']
