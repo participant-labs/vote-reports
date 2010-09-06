@@ -147,15 +147,19 @@ class Politician < ActiveRecord::Base
   }
   named_scope :by_birth_date, :order => 'birthday DESC NULLS LAST'
   named_scope :from_congressional_district, lambda {|districts|
-    {:conditions => [
-        "senate_terms.us_state_id IN(?) OR representative_terms.congressional_district_id IN(?) OR presidential_terms.id IS NOT NULL",
-         Array(districts).map(&:us_state_id), districts
-      ], :joins => [
-        %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
-        %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
-        %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id},
-      ], :select => 'DISTINCT politicians.*'
-    }
+    if districts.present?
+      {:conditions => [
+          "senate_terms.us_state_id IN(?) OR representative_terms.congressional_district_id IN(?) OR presidential_terms.id IS NOT NULL",
+           Array(districts).map(&:us_state_id), districts
+        ], :joins => [
+          %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
+          %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
+          %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id},
+        ], :select => 'DISTINCT politicians.*'
+      }
+    else
+      {:conditions => '0 = 1'}
+    end
   }
   named_scope :with_in_office_terms, :conditions => [
       '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
