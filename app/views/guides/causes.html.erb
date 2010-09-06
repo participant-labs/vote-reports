@@ -9,7 +9,7 @@
         <ul id="guide_questions">
           <%- @questions.each do |question| -%>
             <li class="question<%= ' hide' if @under_consideration.object != question.object %>" id="<%= dom_id(question.object) %>">
-              <h1><%= question.question %></h1>
+              <h1><%= guide_question(question) %></h1>
               <ul class="clearfix cause_buttons">
                 <li><button class="cause_selection round-6 skip">Skip this question</button></li>
                 <%- question.options.each_pair do |cause, message| -%>
