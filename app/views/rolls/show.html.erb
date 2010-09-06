@@ -29,7 +29,7 @@
       </tr>
     </thead>
     <tbody>
-      <%- @roll.votes.aye.zip(@roll.votes.nay, @roll.votes.not_voting, @roll.votes.present).each do |row| -%>
+      <%- @roll.votes.for_display.aye.zip(@roll.votes.for_display.nay, @roll.votes.for_display.not_voting, @roll.votes.for_display.present).each do |row| -%>
         <tr>
           <%- row.each do |vote| -%>
             <td><%= render vote.politician if vote %></td>

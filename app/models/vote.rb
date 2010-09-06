@@ -16,6 +16,8 @@ class Vote < ActiveRecord::Base
 
   delegate :subject, :to => :roll
 
+  named_scope :for_display, :include => {:politician => [:state, :congressional_district]}
+
   def position
     {'+' => 'Aye',
      '-' => 'Nay',
