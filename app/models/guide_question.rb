@@ -1,5 +1,7 @@
 class GuideQuestion
   class << self
+    include ActionView::Helpers::UrlHelper
+
     def all
       (Issue.all(:include => :causes) + Cause.without_issue).map {|attrs|
         new(attrs)
@@ -8,7 +10,6 @@ class GuideQuestion
   end
 
   def initialize(object)
-    @question = "What's your view on #{object.name.downcase}?"
     @object = object
     @options =
       if object.is_a?(Cause)
@@ -18,10 +19,9 @@ class GuideQuestion
       end
   end
 
-  attr_accessor :options, :question, :object
+  attr_accessor :options, :object
 
   def answered_by?(reports)
     options.keys.map(&:report).any? {|r| reports.include?(r) }
   end
 end
-
