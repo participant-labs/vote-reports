@@ -102,8 +102,6 @@ class Politician < ActiveRecord::Base
   has_many :report_scores
   has_many :reports, :through => :report_scores
 
-  default_scope :include => [:state, :congressional_district]
-
   belongs_to :current_office, :polymorphic => true
   named_scope :in_office, :conditions => 'politicians.current_office_id IS NOT NULL'
   named_scope :in_office_normal_form, lambda {
