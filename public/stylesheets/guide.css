@@ -123,6 +123,10 @@
   margin-top: 40px;
 }
 
+#guide_questions p {
+  margin: 0;
+}
+
 .stances {
   border: solid 3px #E9E9E9;
   padding: 7px;
