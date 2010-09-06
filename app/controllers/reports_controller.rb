@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
       @reports = Report.paginated_search(params).results
     elsif params[:without_causes].present?
       @title = 'Reports without Causes'
-      @reports = Report.non_cause.published.without_associated_cause.by_name.paginate(:page => params[:page])
+      @reports = Report.non_cause.published.without_associated_cause.by_name.for_display.paginate(:page => params[:page])
     else
       @title = 'Reports'
       @reports = topical_reports.by_name.paginate(:page => params[:page])
@@ -31,6 +31,6 @@ class ReportsController < ApplicationController
   private
 
   def topical_reports
-    Report.published.with_subjects(params[:subjects])
+    Report.published.with_subjects(params[:subjects]).for_display
   end
 end
