@@ -38,7 +38,7 @@ class Politician < ActiveRecord::Base
 
   def continuous_terms
     cterms = ContinuousTerm.find_all_by_politician_id(id, :order => [['ended_on', 'desc']])
-    if terms.present? && cterms.empty?
+    if cterms.empty? && terms.present?
       ContinuousTerm.regenerate_for(self)
       cterms = ContinuousTerm.find_all_by_politician_id(id, :order => [['ended_on', 'desc']])
     end
