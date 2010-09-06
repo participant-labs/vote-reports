@@ -16,7 +16,7 @@ class GuidesController < ApplicationController
       session[:guide_causes] -= [params[:remove]]
     end
 
-    reports = session[:guide_causes].present? ? Cause.find(session[:guide_causes], :include => :report).map(&:report) : []
+    reports = session[:guide_causes].present? ? Cause.find_all_by_cached_slug(session[:guide_causes], :include => :report).map(&:report) : []
 
     @guide = Guide.new(:geoloc => current_geo_location, :reports => reports)
 
