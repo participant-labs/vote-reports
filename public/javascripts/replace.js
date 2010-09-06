@@ -85,16 +85,19 @@
 
       if (!source.hasClass('selected')) {
         var sibling = source.closest('ul').find('li:has(button.selected)')
-        var remove = null;
+        var params = {};
         if (sibling.length > 0) {
           var sibling_button = sibling.find('button.selected');
           sibling_button.removeClass('selected');
-          remove = sibling_button.attr('value');
+          params['remove'] = sibling_button.attr('value');
           sibling.find('input').remove();
+        }
+        if (source.is('[name=add]')) {
+          params['add'] = source.attr('value');
         }
 
         source.addClass('selected');
-        replaceWith(form.attr('rel'), form.attr('action') + '?' + form.serialize() + '&' + $.param({'add': source.attr('value'), 'remove': remove}));
+        replaceWith(form.attr('rel'), form.attr('action') + '?' + form.serialize() + '&' + $.param(params));
       }
 
       var next = form.find('li.question:not(:has(button.selected))');
