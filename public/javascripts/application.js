@@ -16,7 +16,7 @@
     $('.flash.success, .flash.notice, .flash.message').fadeOutSoon(3000);
     $('.flash.error, .flash.warning').fadeOutSoon(5000, 5000);
 
-    $('.act-tipsy').tipsy({fade: true, gravity: 'n'});
+    $('[title]').tipsy({fade: true, gravity: 'n'});
 
     $('.selectable').live('update_selected', function(event) {
       $(event.target).closest('.selectable').toggleClass('selected');
