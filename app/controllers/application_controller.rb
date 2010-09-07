@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   geocode_ip_address
 
-  helper_method :current_user_session, :current_user, :report_path_components, :report_path, :report_follows_path, :report_score_path, :report_bill_criteria_path, :new_report_amendment_criterion_path, :report_amendment_criteria_path, :report_embed_id
+  helper_method :current_user_session, :current_user, :report_path_components, :report_path, :report_follows_path, :report_score_path, :report_bill_criteria_path, :new_report_amendment_criterion_path, :report_amendment_criteria_path, :report_embed_id, :report_url
   filter_parameter_logging :password, :password_confirmation, :fb_sig_friends
 
   before_filter :basic_authenticate if Rails.env.staging?
@@ -55,6 +55,9 @@ class ApplicationController < ActionController::Base
 
   def report_path(report, params = {})
     polymorphic_path(report_path_components(report), params)
+  end
+  def report_url(report, params = {})
+    polymorphic_url(report_path_components(report), params)
   end
 
   def report_follows_path(report, params = {})
