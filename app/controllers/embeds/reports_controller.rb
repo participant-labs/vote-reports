@@ -1,5 +1,5 @@
 class Embeds::ReportsController < ApplicationController
-  layout 'widget'
+  layout nil
 
   def show
     @location = current_geo_location || Location.random.first
@@ -13,5 +13,10 @@ class Embeds::ReportsController < ApplicationController
       end
 
     @scores = @report.scores.for_politicians(@politicians).all
+
+    render :js => %{
+      document.getElementById("#{report_embed_id(@report)}").innerHTML =
+        #{js_render(:action => 'show', :css => 'widget')};
+    }
   end
 end
