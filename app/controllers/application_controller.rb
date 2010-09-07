@@ -100,7 +100,7 @@ class ApplicationController < ActionController::Base
       css_path = File.read(Rails.root.join("public/stylesheets/#{options[:css]}.css"))
       partial_html = TamTam.inline(:css => css_path, :body => partial_html)
     end
-    partial_html.to_json
+    partial_html.gsub(/class="(.*)"/, 'class="votereports_\1"').gsub(/id="(.*)"/, 'id="votereports_\1"').to_json
   end
 
   private
