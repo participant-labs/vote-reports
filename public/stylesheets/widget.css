@@ -4,7 +4,7 @@
   background-color: #E1E7E8;
   color: #9AA8A9;
 
-  font-family: 'Droid Sans', arial, serif;
+  font-family: arial, serif;
 
    -moz-border-radius: 6px;
   -webkit-border-radius:6px;
@@ -25,6 +25,7 @@
   background-color: #322129;
   color: white;
   font-size: 16px;
+  font-family: 'Droid Sans', arial, serif;
 }
 
 #embeded_report_scores {
@@ -44,7 +45,6 @@ img {
 .politician_name {
   padding-left: 5px;
   font-size: 12px;
-  font-family: arial, serif;
 }
 
 .politician_headshot, .politician_name {
@@ -66,6 +66,7 @@ dt {
   font-size: 12px;
   font-weight: normal;
   text-align: left;
+  font-family: 'Droid Sans', arial, serif;
 }
 
 dd {
