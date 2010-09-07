@@ -103,6 +103,7 @@ class Politician < ActiveRecord::Base
   has_many :reports, :through => :report_scores
 
   belongs_to :current_office, :polymorphic => true
+  named_scope :by_prominance, :order => 'prominence'
   named_scope :in_office, :conditions => 'politicians.current_office_id IS NOT NULL'
   named_scope :in_office_normal_form, lambda {
     {
@@ -121,6 +122,18 @@ class Politician < ActiveRecord::Base
   }
 
   class << self
+    def prominence_clause
+      %{
+        politicians.*,
+        CASE
+          WHEN politicians.current_office_type='PresidentialTerm' THEN 1
+          WHEN politicians.current_office_type='SenateTerm' THEN 2
+          WHEN politicians.current_office_type='RepresentativeTerm' THEN 3
+          ELSE 7
+        END AS prominence
+      }
+    end
+
     def update_current_office_status!
       Politician.transaction do
         Politician.update_all(:current_office_id => nil, :current_office_type => nil)
@@ -246,6 +259,19 @@ class Politician < ActiveRecord::Base
         results = from_location(Geokit::Geocoders::MultiGeocoder.geocode(representing)) if results.blank?
         results
       end
+    end
+  end
+
+  def prominence
+    case current_office_type
+    when 'PresidentialTerm'
+      1
+    when 'SenateTerm'
+      2
+    when 'RepresentativeTerm'
+      3
+    else
+      4
     end
   end
 

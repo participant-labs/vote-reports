@@ -3,7 +3,7 @@ class Embeds::ReportsController < ApplicationController
 
   def show
     @location = current_geo_location || Location.random.first
-    @politicians = Politician.from_location(@location).in_office_normal_form.all(:limit => 8)
+    @politicians = Politician.from_location(@location).in_office_normal_form.by_prominance.all(:limit => 8, :select => "DISTINCT politicians.*, #{Politician.prominence_clause}")
 
     @report =
       if params[:id] == 'random'
