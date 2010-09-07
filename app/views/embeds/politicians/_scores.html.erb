@@ -9,7 +9,7 @@
 
           <div class="report_score">
             <%- if score -%>
-              <%= link_to score, report_path(report), :class => "fancyboxy score #{score_class(score)}" %>
+              <%= link_to score, report_url(report), :class => "fancyboxy score #{score_class(score)}" %>
             <%- else -%>
               <span class="score blank">?</span>
             <% end %>
