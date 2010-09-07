@@ -91,7 +91,11 @@ class ApplicationController < ActionController::Base
   end
 
   def report_embed_id(report)
-    dom_id(report, :votereports_embed)
+    if report.is_a?(String)
+      "votereports_embed_report_#{report}"
+    else
+      dom_id(report, :votereports_embed)
+    end
   end
 
   def js_render(options = {})
