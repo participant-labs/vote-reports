@@ -34,6 +34,7 @@
 
 a {
   text-decoration: none;
+  border-bottom: none;
 }
 
 img {
