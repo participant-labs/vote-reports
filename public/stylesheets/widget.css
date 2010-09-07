@@ -64,6 +64,8 @@ dt {
   margin-left: 0;
   margin-top: 20px;
   font-size: 12px;
+  font-weight: normal;
+  text-align: left;
 }
 
 dd {
