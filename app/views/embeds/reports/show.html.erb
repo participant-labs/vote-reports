@@ -18,8 +18,13 @@
         <dt>Senators of <%= @location.state %></dt>
         <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.select {|p| p.current_office_type == 'SenateTerm'} %>
 
-        <dt>Reps of <%= geo_description(@location) %></dt>
-        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.select {|p| p.current_office_type == 'RepresentativeTerm'} %>
+        <%- reps = @politicians.select {|p| p.current_office_type == 'RepresentativeTerm'} -%>
+        <%- if reps.size == 1 -%>
+          <dt>Rep for <%= geo_description(@location) %></dt>
+        <%- else -%>
+          <dt>Reps of <%= geo_description(@location) %></dt>
+        <%- end -%>
+        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => reps %>
       </dl>
     </div>
 
