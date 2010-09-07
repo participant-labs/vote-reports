@@ -32,7 +32,7 @@
   padding-right: 10px;
 }
 
-a {
+a, a:hover {
   text-decoration: none;
   border-bottom: none;
 }
@@ -61,6 +61,7 @@ dl {
 }
 
 dt {
+  margin-left: 0;
   margin-top: 20px;
   font-size: 12px;
 }
