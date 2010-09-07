@@ -4,7 +4,7 @@
   <div class="embed">
     <% cache dom_id(@report, :embed_header) do %>
       <div class="header">
-        <%= link_to report_name(@report), report_path(@report), :class => 'report_title' %>
+        <%= link_to report_name(@report), report_url(@report), :class => 'report_title' %>
         <%- if @report.user -%>
           <span class="report_creator">by <%= render 'users/user', :user => @report.user %></span>
         <%- end -%>
@@ -30,7 +30,7 @@
 
     <% cache :embed_footer do %>
       <div class="footer">
-        Grades provided by <%= link_to 'VoteReports', root_path %>
+        Grades provided by <%= link_to 'VoteReports', root_url %>
       </div>
     <% end %>
   </div>
