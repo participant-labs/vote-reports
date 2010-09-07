@@ -32,7 +32,7 @@
   padding-right: 10px;
 }
 
-a, a:hover {
+a {
   text-decoration: none;
   border-bottom: none;
 }
