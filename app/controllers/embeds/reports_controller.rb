@@ -7,15 +7,17 @@ class Embeds::ReportsController < ApplicationController
 
     @report =
       if params[:id] == 'random'
+        target_id = report_embed_id('random')
         Report.published.with_scores_for(@politicians).random.first || Report.published.random.first
       else
+        target_id = report_embed_id(@report)
         Report.published.find(Integer(params[:id]))
       end
 
     @scores = @report.scores.for_politicians(@politicians).all
 
     render :js => %{
-      document.getElementById("#{report_embed_id(@report)}").innerHTML =
+      document.getElementById("#{target_id}").innerHTML =
         #{js_render(:action => 'show', :css => 'widget')};
     }
   end
