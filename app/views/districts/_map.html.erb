@@ -1,5 +1,6 @@
 <%- style ||= 'height: 300px; width: 425px;' -%>
 
+<%- cache dom_id(district, :map) do -%>
 <%- if (districts = district.district_geometries).present? -%>
   <div id="map_canvas" style="<%= style %>"></div>
 
@@ -59,4 +60,5 @@
   <div id="map_canvas" style="<%= style %>">
     <p>We don't have a map for this district, likely because this district is historical and does not exist for the current Congress.</p>
   </div>
+<%- end -%>
 <%- end -%>
