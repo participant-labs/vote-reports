@@ -282,10 +282,6 @@ h4, .report_title, .politician_name > .name, a.politician_location, span.politic
   margin-bottom: .5em;
 }
 
-.publicize h2 {
-  font-size: 1.3em;
-}
-
 #visibility ul {
   list-style-type: none;
   margin-top: 10px;
@@ -295,7 +291,7 @@ h4, .report_title, .politician_name > .name, a.politician_location, span.politic
   margin-top: 20px;
 }
 
-.publicize h2, .publicize p, #visibility h2, #visibility p {
+#visibility h2, #visibility p {
   margin-bottom: 5px;
 }
 
