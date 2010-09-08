@@ -17,7 +17,7 @@ class ReportSubject < ActiveRecord::Base
       subjects = report.bill_criteria_subjects.scoped(
         :select => "DISTINCT(subjects.id), COUNT(subjects.id) AS count",
         :group => 'subjects.id').inject({}) do |hash, subject|
-        hash[subject] = subject.count
+        hash[subject] = Integer(subject.count)
         hash
       end
 
@@ -47,8 +47,6 @@ class ReportSubject < ActiveRecord::Base
       if top_report_subject = report.report_subjects.by_count.first
         report.update_attribute(:top_subject_id, top_report_subject.subject_id)
       end
-    rescue => e
-      notify_hoptoad "Error generating subjects for report #{report.id}, #{subjects.inspect if defined?(subjects)}: #{e.inspect}, #{e.backtrace}"
     end
 
     def generate!
