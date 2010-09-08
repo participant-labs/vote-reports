@@ -41,13 +41,13 @@ class ReportScore < ActiveRecord::Base
     elsif subjects.first.is_a?(String)
       {
         :select => 'DISTINCT report_scores.*',
-        :joins => {:report => :subjects},
+        :joins => {:report => [:subjects]},
         :conditions => ["subjects.name IN(?) OR subjects.cached_slug IN(?)", subjects, subjects]
       }
     else
       {
         :select => 'DISTINCT report_scores.*',
-        :joins => {:report => :subjects},
+        :joins => {:report => [:subjects]},
         :conditions => ['subjects.id IN(?)', subjects]
       }
     end
