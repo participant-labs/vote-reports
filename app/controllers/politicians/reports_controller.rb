@@ -1,6 +1,6 @@
 class Politicians::ReportsController < ApplicationController
   def index
-    @politician = Politician.find(params[:politician_id], :include => {:report_scores => [:report, :evidence]})
+    @politician = Politician.find(params[:politician_id])
 
     params[:subjects] ||= []
     if params[:term].present?
@@ -17,7 +17,9 @@ class Politicians::ReportsController < ApplicationController
         render :layout => false
       }
       format.js {
-        render :partial => 'politicians/scores/table', :locals => {:scores => @scores, :replace => 'report_scores'}
+        render :partial => 'politicians/scores/table', :locals => {
+          :scores => @scores, :replace => 'report_scores'
+        }
       }
     end
   end
