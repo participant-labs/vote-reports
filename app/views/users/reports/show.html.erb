@@ -32,8 +32,12 @@
 
       <dl>
         <dt><%= pluralize_word(@subjects.size, 'Subject') %></dt>
-        <%- @subjects.each do |subject| -%>
-          <dd><%= render 'subjects/subject', :subject => subject, :subject_only => true %></dd>
+        <%- if @subjects.blank? -%>
+          <dd>None</dd>
+        <%- else -%>
+          <%- @subjects.each do |subject| -%>
+            <dd><%= render 'subjects/subject', :subject => subject, :subject_only => true %></dd>
+          <%- end -%>
         <%- end -%>
         <dt><%= pluralize_word(@causes.size, 'Cause') %></dt>
         <%- if @causes.blank? -%>
