@@ -20,7 +20,7 @@ class Guide < ActiveRecord::Base
     return [] unless politicians.present? && reports.present?
     report_ids = reports.map(&:id)
     politicians.map do |politician|
-      if ReportScore.scoped(:conditions => {:politician_id => politician_id, :report_id => report_ids}).exists?
+      if ReportScore.scoped(:conditions => {:politician_id => politician.id, :report_id => report_ids}).exists?
         GuideScore.first(:conditions => {:politician_id => politician.id, :report_ids.all => report_ids, :report_ids.size => report_ids.size}) \
          || GuideScore.create!(:politician_id => politician.id, :report_ids => report_ids)
       end
