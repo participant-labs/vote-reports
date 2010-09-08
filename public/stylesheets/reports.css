@@ -282,12 +282,6 @@ h4, .report_title, .politician_name > .name, a.politician_location, span.politic
   margin-bottom: .5em;
 }
 
-.publicize {
-  float: right;
-  margin: 0 15px;
-  width: 250px;
-}
-
 .publicize h2 {
   font-size: 1.3em;
 }
