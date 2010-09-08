@@ -2,7 +2,6 @@
 
 <%- if permitted_to?(:edit, report) && !report.published? -%>
   <div class="publicize">
-    <h2>Publicize Your Report!</h2>
     <%= report_next_step(report) %>
   </div>
 <%- end -%>

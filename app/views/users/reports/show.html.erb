@@ -30,13 +30,6 @@
         <%= link_to 'Edit Report', edit_user_report_path(@report.user, @report) %>
       <%- end -%>
 
-      <%- if permitted_to?(:edit, @report) && !@report.published? -%>
-        <div class="publicize">
-          <h2>Publicize Your Report!</h2>
-          <%= report_next_step(@report) %>
-        </div>
-      <%- end -%>
-
       <dl>
         <dt><%= pluralize_word(@subjects.size, 'Subject') %></dt>
         <%- @subjects.each do |subject| -%>
@@ -51,6 +44,12 @@
           <%- end -%>
         <%- end -%>
       </dl>
+
+      <%- if permitted_to?(:edit, @report) && !@report.published? -%>
+        <div class="publicize">
+          <%= report_next_step(@report) %>
+        </div>
+      <%- end -%>
 
       <%= render 'reports/embeds/button', :href => user_report_embed_path(@user, @report) %>
     </div>
