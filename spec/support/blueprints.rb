@@ -61,7 +61,8 @@ Fixjour :verify => false do
   define_builder(Cause) do |klass, overrides|
     klass.new(
       :name => Forgery(:basic).text,
-      :description => Forgery(:basic).text
+      :description => Forgery(:basic).text,
+      :report => new_report
     )
   end
 
