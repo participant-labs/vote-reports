@@ -4,7 +4,7 @@
   <%- unless @user.errors.present? -%>
   <div class="left">
     <h2>Sign up via...</h2>
-    <%= raw rpx_embed(:app_name => RPX_APP_NAME, :return_url => user_sessions_url) %><br />
+    <%= render 'user_sessions/rpx' %><br />
   </div>
   <%- end -%>
 
