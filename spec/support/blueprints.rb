@@ -94,6 +94,14 @@ Fixjour :verify => false do
     klass.new(:name => Forgery(:basic).text, :user => create_user)
   end
 
+  define_builder(ReportScore) do |klass, overrides|
+    klass.new(:score => rand(100), :politician => new_politician, :report => new_report)
+  end
+
+  define_builder(ReportScoreEvidence) do |klass, overrides|
+    klass.new(:score => new_report_score, :evidence => new_roll, :criterion => new_bill_criterion)
+  end
+
   define_builder(InterestGroup) do |klass, overrides|
     klass.new(
       :name => Forgery(:basic).text,
