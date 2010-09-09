@@ -24,7 +24,7 @@ class Guide < ActiveRecord::Base
         GuideScore.first(:conditions => {:politician_id => politician.id, :report_ids.all => report_ids, :report_ids.size => report_ids.size}) \
          || GuideScore.create!(:politician_id => politician.id, :report_ids => report_ids)
       end
-    end
+    end.compact
   end
 
   def questions
