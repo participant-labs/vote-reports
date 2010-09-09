@@ -53,7 +53,7 @@ describe LocationsHelper do
       end
 
       it "should be used when alone" do
-        mock(Politician).from(@geo) { Politician }
+        mock(Politician).from_location(@geo) { Politician }
         helper.sought_politicians
       end
     end
