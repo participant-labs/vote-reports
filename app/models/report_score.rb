@@ -24,6 +24,10 @@ class ReportScore < ActiveRecord::Base
     end
   end
 
+  has_many :dependent_report_score_evidences, :class_name => 'ReportScoreEvidence', :as => :evidence
+  has_many :dependent_report_scores, :class_name => 'ReportScore',
+    :through => :dependent_report_score_evidences, :source => :score
+
   named_scope :for_politician_display, :include => {:report => [:cause, {:interest_group => :image}, :user, :top_subject]}
   named_scope :for_report_display, :include => {:politician => [:state, :congressional_district]}
 
@@ -77,11 +81,22 @@ class ReportScore < ActiveRecord::Base
     end
   end
 
+  before_destroy :rescore_dependent_reports
+
   def to_s
     letter_grade
   end
 
   def event_date
     Date.today
+  end
+
+  private
+
+  def rescore_dependent_reports
+    dependent_report_scores.each do |dependent_score|
+      dependent_score.report.rescore!
+      dependent_score.destroy
+    end
   end
 end

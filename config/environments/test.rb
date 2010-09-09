@@ -32,5 +32,5 @@ config.gem "rspec-rails", :lib => false, :version => ">=1.2.9"
 config.gem 'fixjour'
 config.gem 'forgery', :source => 'http://gemcutter.org'
 config.gem 'fakeweb'
-config.gem 'rr'
+config.gem 'rr', :version => '>= 1.0.0'
 config.gem 'parallel'
