@@ -15,6 +15,8 @@ module NavigationHelpers
       cause_path(Cause.find_by_name($1))
     when /the cause reports page for "(.*)"/
       cause_reports_path(Cause.find_by_name($1))
+    when /the cause scores page for "(.*)"/
+      cause_report_scores_path(Cause.find_by_name($1))
     when /the issue page for "(.*)"/
       issue_path(Issue.find_by_title($1))
 
