@@ -161,7 +161,6 @@ Feature: Scoring Reports
       | Martin Sabo          | 75    |
       | Brad Carson          | 75    |
       | Thomas Allen         | 75    |
-      | Piyush Jindal        | 50    |
     And I should see "Next"
 
   Scenario: Bill Criteria report generate scores from passing roles only
