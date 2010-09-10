@@ -17,7 +17,6 @@ describe PoliticiansController do
     context "when there is a better id for this report" do
       before do
         @politician = create_politician
-        mock.instance_of(Report).has_better_id? { true }
       end
 
       it "should redirect" do
