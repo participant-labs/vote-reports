@@ -20,7 +20,6 @@ ActionController::Routing::Routes.draw do |map|
     report.resources :causes, :controller => 'users/reports/causes', :only => :index
     report.resources :subjects, :controller => 'reports/subjects', :only => :index
     report.resource :agenda, :controller => 'users/reports/agendas', :only => :show
-    report.resource :visibility, :controller => 'users/reports/visibilities', :only => :show
     report.resource :image, :as => 'thumbnail', :only => [:edit, :update, :create], :controller => 'users/reports/thumbnails'
     report.resources :bill_criteria, :only => [:index, :new, :create, :destroy], :controller => 'users/reports/bill_criteria'
     report.resources :amendment_criteria, :only => [:new, :create, :destroy, :index], :controller => 'users/reports/amendment_criteria'
