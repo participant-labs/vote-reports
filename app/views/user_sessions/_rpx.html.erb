@@ -1,1 +1,3 @@
-<%= raw rpx_embed(:app_name => RPX_APP_NAME, :return_url => user_sessions_url(params.slice(:return_to))) %>
+<%- unless Rails.env.test? || Rails.env.cucumber? -%>
+  <%= raw rpx_embed(:app_name => RPX_APP_NAME, :return_url => user_sessions_url(params.slice(:return_to))) %>
+<%- end -%>
