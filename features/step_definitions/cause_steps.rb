@@ -7,5 +7,7 @@ Given /^a cause named "([^"]*)"$/ do |cause_name|
 end
 
 Given /^(cause "[^"]*") includes (report "[^"]*")$/ do |cause, report|
-  cause.reports << report
+  lambda {
+    cause.reports << report
+  }.should change(cause.reports, :count).by(1)
 end

@@ -10,8 +10,7 @@ Feature: Managing Cause Reports
     When I log in as "Admin/password"
 
   Scenario: Add report to cause
-    When I go to the cause page for "Gun Control"
-    And I follow "Reports" within "#content"
+    When I go to the cause reports page for "Gun Control"
     And I follow "Add Reports"
     And I fill in "Search Reports" with "Brady"
     And I press "Search"
@@ -20,12 +19,11 @@ Feature: Managing Cause Reports
     And I press "Save"
     Then I should see "Successfully added reports to cause"
     And I should be on the cause page for "Gun Control"
-    When I follow "Reports" within "#content"
+    When I go to the cause reports page for "Gun Control"
     Then I should see "Brady Campaign to Prevent Gun Violence"
 
   Scenario: Add report to cause shouldn't reveal the Cause's report
-    When I go to the cause page for "Gun Control"
-    And I follow "Reports" within "#content"
+    When I go to the cause reports page for "Gun Control"
     And I follow "Add Reports"
     And I fill in "Search Reports" with "Control"
     And I press "Search"
@@ -34,10 +32,10 @@ Feature: Managing Cause Reports
 
   Scenario: Remove report from cause
     Given cause "Gun Control" includes report "Brady Campaign to Prevent Gun Violence"
-    When I go to the cause page for "Gun Control"
-    And I follow "Reports" within "#content"
+    When I go to the cause reports page for "Gun Control"
     Then I should see "Brady Campaign to Prevent Gun Violence"
     And I follow "Remove"
     Then I should see "Successfully removed report"
     And I should be on the cause page for "Gun Control"
+    When I go to the cause reports page for "Gun Control"
     And I should not see "Brady Campaign to Prevent Gun Violence"
