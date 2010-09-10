@@ -49,9 +49,15 @@
         <%- end -%>
       </dl>
 
-      <%- if permitted_to?(:edit, @report) && !@report.published? -%>
-        <div class="publicize">
-          <%= report_next_step(@report) %>
+      <%- permitted_to? :edit, @report do -%>
+        <div id="visibility" class="section report_status <%= @report.state %>">
+          <h2>Visibility: <%= @report.state.capitalize %></h2>
+          <%= content_tag :p, @report.status if @report.status.present? %>
+          <ul>
+            <%- @report.next_steps.each do |step| -%>
+              <li><%= report_step(@report, step) %></li>
+            <%- end -%>
+          </ul>
         </div>
       <%- end -%>
 
