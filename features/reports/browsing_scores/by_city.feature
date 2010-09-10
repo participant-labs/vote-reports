@@ -72,9 +72,9 @@ Feature: Browsing Report Scores by State
       | Michael Burgess      | 100   |
       | J. Kerrey            | 24    |
       | John Cornyn          | 76    |
-      | Neil Abercrombie     | 0     |
     But I should not see "Connie Mack"
     And I should not see "Kay Hutchison"
+    And I should not see "Neil Abercrombie"
 
   Examples:
     | address |

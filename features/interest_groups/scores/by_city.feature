@@ -1,7 +1,7 @@
-Feature: Browsing Report Scores by State
+Feature: Browsing Report Scores by City
   In order to find report scores for my representative
   As a user
-  I want to view a report's scores for reps of a given state
+  I want to view a report's scores for reps of a given city
 
   Background:
     Given an interest group named "Sierra Club"
@@ -69,9 +69,9 @@ Feature: Browsing Report Scores by State
       | Michael Burgess      | 42    |
       | J. Kerrey            | 30    |
       | John Cornyn          | 12    |
-      | Neil Abercrombie     | 100   |
     But I should not see "Connie Mack"
     And I should not see "Kay Hutchison"
+    And I should not see "Neil Abercrombie"
 
   Examples:
     | address |
