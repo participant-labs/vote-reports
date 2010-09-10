@@ -20,10 +20,6 @@ describe Users::Reports::BillCriteriaController do
     end
 
     context "when there is a better id for this report" do
-      before do
-        mock.instance_of(Report).has_better_id? { true }
-      end
-
       it "should redirect" do
         get :new, :user_id => current_user, :report_id => @report, :term => 'Smelly Roses'
         response.should redirect_to(new_user_report_bill_criterion_path(current_user, @report))

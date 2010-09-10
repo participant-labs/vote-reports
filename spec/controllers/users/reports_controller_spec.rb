@@ -19,7 +19,6 @@ describe Users::ReportsController do
     context "when there is a better id for this report" do
       before do
         @report = create_report(:user => current_user)
-        mock.instance_of(Report).has_better_id? { true }
       end
 
       it "should redirect" do
@@ -35,10 +34,6 @@ describe Users::ReportsController do
     end
 
     context "when there is a better id for this report" do
-      before do
-        mock.instance_of(Report).has_better_id? { true }
-      end
-
       it "should redirect" do
         get :edit, :user_id => current_user, :id => @report
         response.should redirect_to(edit_user_report_path(current_user, @report))
