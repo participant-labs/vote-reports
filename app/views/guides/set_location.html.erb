@@ -13,9 +13,11 @@
       <%- if @politicians -%>
       <%- @politicians = @politicians.group_by(&:current_office_type) -%>
       <dl class="span-4">
-        <dt>President</dt>
-        <%- @politicians['PresidentialTerm'].each do |politician| -%>
-          <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
+        <%- if presidents = @politicians['PresidentialTerm'] -%>
+          <dt>President</dt>
+          <%- presidents.each do |politician| -%>
+            <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
+          <%- end -%>
         <%- end -%>
       </dl>
       <dl class="span-4">
