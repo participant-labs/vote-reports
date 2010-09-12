@@ -41,14 +41,39 @@ Feature: Scoring Reports
     When I go to my report scores page for "Active Report"
     Then I should see "No scores yet, as this report has no criteria to judge representatives by."
 
-  Scenario: With Criteria on unvoted bills, I should see message noting that as the bills are unvoted, no scores exist
-    Given report "Active Report" has the following bill criteria:
+  @javascript
+  Scenario: With Criteria on unvoted bills, I should see scores based on sponsorships
+    Given bill "Bovine Security Act of 2009" is sponsored by politician "Spencer Bachus"
+    And bill "Bovine Security Act of 2009" is cosponsored by:
+      | politician      |
+      | Tammy Baldwin   |
+      | Roscoe Bartlett |
+      | Robert Aderholt |
+    And bill "USA PATRIOT Reauthorization Act of 2009" is sponsored by politician "Frank Ballance"
+    And bill "USA PATRIOT Reauthorization Act of 2009" is cosponsored by:
+      | politician     |
+      | Brad Carson    |
+      | Spencer Bachus |
+      | Julia Carson   |
+    And report "Active Report" has the following bill criteria:
       | bill                                    | support |
       | Bovine Security Act of 2009             | true    |
       | USA PATRIOT Reauthorization Act of 2009 | false   |
     And I wait for delayed job to finish
     When I go to my report scores page for "Active Report"
-    Then I should see "No scores yet, as the associated legislation has not been voted on."
+    Then I should see the following scores:
+      | politician           | score |
+      | Tammy Baldwin        | 100   |
+      | Roscoe Bartlett      | 100   |
+      | Robert Aderholt      | 100   |
+      | Spencer Bachus       | 50    |
+      | Frank Ballance       | 0     |
+      | Brad Carson          | 0     |
+      | Julia Carson         | 0     |
+    And I should not see "Connie Mack"
+
+    When I follow "1 cosponsorship"
+    And show me the page
 
   Scenario: With Criteria on bills without passage rolls, I should see message noting that as the bills are unvoted, no scores exist
     Given bill "Bovine Security Act of 2009" has the following rolls:

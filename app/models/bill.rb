@@ -76,9 +76,20 @@ class Bill < ActiveRecord::Base
 
   belongs_to :congress
 
-  belongs_to :sponsor, :class_name => 'Politician'
-  has_many :cosponsorships
-  has_many :cosponsors, :through => :cosponsorships, :source => :politician
+  belongs_to :sponsorship, :class_name => 'Cosponsorship'
+  has_one :sponsor, :through => :sponsorship, :source => :politician
+  has_many :sponsorships, :class_name => 'Cosponsorship'
+  has_many :sponsors, :through => :sponsorships, :source => :politician
+
+  def cosponsorships
+    sponsorships.scoped(:conditions => ['cosponsorships.id != ?', sponsorship_id])
+  end
+
+  def cosponsors
+    Politician.scoped(:joins => :sponsorships, :conditions =>
+      ["cosponsorships.bill_id = ? AND cosponsorships.id != ?", id, sponsorship_id]
+    )
+  end
 
   has_many :bill_subjects
   has_many :subjects, :through => :bill_subjects
@@ -91,10 +102,9 @@ class Bill < ActiveRecord::Base
   has_many :reports, :through => :bill_criteria
   has_many :amendments, :dependent => :destroy
   has_many :rolls, :as => :subject, :dependent => :destroy
-  has_many :passage_rolls, :as => :subject, :class_name => 'Roll', :conditions => [
-    "rolls.roll_type IN(?)", ROLL_PASSAGE_TYPES
-  ]
+  has_many :passage_rolls, :as => :subject, :class_name => 'Roll', :conditions => {:roll_type => ROLL_PASSAGE_TYPES}
   has_many :votes, :through => :rolls
+  has_many :passage_votes, :through => :passage_rolls, :source => :votes
   def politicians
     Politician.scoped(:select => 'DISTINCT politicians.*', :joins => {:votes => :roll}, :conditions => {
       :'rolls.subject_id' => self, :'rolls.subject_type' => 'Bill'

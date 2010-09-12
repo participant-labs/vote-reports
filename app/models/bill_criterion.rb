@@ -11,9 +11,14 @@ class BillCriterion < ActiveRecord::Base
 
   named_scope :by_introduced_on, :select => 'DISTINCT(bill_criteria.*), bills.introduced_on', :joins => :bill, :order => 'bills.introduced_on DESC'
 
+  # see also: Roll.on_bill_passage
   named_scope :active, :select => 'DISTINCT bill_criteria.*',
-    :joins => {:bill => :rolls},
-    :conditions => Roll.on_bill_passage.proxy_options[:conditions]
+    :joins => [
+      %{LEFT OUTER JOIN bills ON bill_criteria.bill_id = bills.id},
+      %{LEFT OUTER JOIN rolls ON rolls.subject_id = bills.id},
+      %{LEFT OUTER JOIN cosponsorships ON cosponsorships.bill_id = bills.id}
+    ],
+    :conditions => ["(rolls.roll_type IN(?) AND rolls.subject_type = ?) OR cosponsorships.id IS NOT NULL", Bill::ROLL_PASSAGE_TYPES, 'Bill']
 
   class << self
     def inactive
@@ -43,12 +48,16 @@ class BillCriterion < ActiveRecord::Base
     end
   end
 
-  def unvoted?
-    bill.passage_rolls.empty?
+  def inactive?
+    events.blank?
   end
 
   def events
-    bill.passage_rolls.all(:include => {:votes => [{:politician => :state}, :roll]}).map(&:votes).flatten
+    if bill.passage_votes.exists?
+      bill.passage_votes.scoped(:include => [{:politician => :state}, :roll])
+    else
+      bill.sponsorships
+    end
   end
 
   def event_score(vote)

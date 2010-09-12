@@ -7,11 +7,17 @@
             <dd class="report_evidence clearfix"><%= render 'reports/report', :report => subject %></dd>
         <%- end -%>
       <%- elsif subject.is_a?(Bill) -%>
-        <%- scores.each do |bill_score| -%>
-          <%- roll = bill_score.evidence.roll -%>
-          <dt><%= link_to "On #{roll.voted_at.to_date.to_s(:long)} voted #{bill_score.evidence.position}", roll %></dt>
+        <%- if scores.first.evidence.is_a?(Vote) -%>
+          <%- scores.each do |bill_score| -%>
+            <%- roll = bill_score.evidence.roll -%>
+            <dt><%= link_to "On #{roll.voted_at.to_date.to_s(:long)} voted #{bill_score.evidence.position}", roll %></dt>
+          <%- end -%>
+          <dd>On <%= render 'bills/bill', :bill => subject, :hide_year => true %> which this report <%= scores.first.criterion.position %>s</dd>
+        <%- elsif scores.first.evidence.is_a?(Cosponsorship) -%>
+          <%- sponsorship = scores.first.evidence -%>
+          <dt><%= link_to "On #{sponsorship.joined_on.to_s(:long)} #{sponsorship.verb}", bill_path(subject) %></dt>
+          <dd><%= render 'bills/bill', :bill => subject, :hide_year => true %> which this report <%= scores.first.criterion.position %>s</dd>
         <%- end -%>
-        <dd>On <%= render 'bills/bill', :bill => subject, :hide_year => true %> which this report <%= scores.first.criterion.position %>s</dd>
       <%- elsif subject.is_a?(Amendment) -%>
         <%- scores.each do |score| -%>
           <%- roll = score.evidence.roll -%>

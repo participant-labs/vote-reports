@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100912174734) do
+ActiveRecord::Schema.define(:version => 20100912180425) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -127,17 +127,17 @@ ActiveRecord::Schema.define(:version => 20100912174734) do
     t.integer  "bill_number",          :null => false
     t.string   "gov_track_id",         :null => false
     t.integer  "congress_id",          :null => false
-    t.integer  "sponsor_id"
     t.date     "introduced_on",        :null => false
     t.text     "summary"
     t.datetime "gov_track_updated_at"
+    t.integer  "sponsorship_id"
   end
 
   add_index "bills", ["congress_id", "bill_type", "bill_number"], :name => "index_bills_on_congress_id_and_bill_type_and_bill_number", :unique => true
   add_index "bills", ["congress_id"], :name => "index_bills_on_congress_id"
   add_index "bills", ["gov_track_id"], :name => "index_bills_on_gov_track_id", :unique => true
   add_index "bills", ["opencongress_id"], :name => "index_bills_on_opencongress_id", :unique => true
-  add_index "bills", ["sponsor_id"], :name => "index_bills_on_sponsor_id"
+  add_index "bills", ["sponsorship_id"], :name => "index_bills_on_sponsorship_id", :unique => true
 
   create_table "cause_reports", :force => true do |t|
     t.integer  "report_id",  :null => false
@@ -727,7 +727,7 @@ ActiveRecord::Schema.define(:version => 20100912174734) do
   add_foreign_key "bill_criteria", "bills", :name => "bill_criteria_bill_id_reference", :dependent => :delete
   add_foreign_key "bill_criteria", "reports", :name => "bill_criteria_report_id_reference", :dependent => :delete
 
-  add_foreign_key "bills", "politicians", :name => "bills_sponsor_id_fk", :column => "sponsor_id"
+  add_foreign_key "bills", "cosponsorships", :name => "bills_sponsorship_id_fk", :column => "sponsorship_id"
 
   add_foreign_key "cause_reports", "causes", :name => "cause_reports_cause_id_reference"
   add_foreign_key "cause_reports", "reports", :name => "cause_reports_report_id_reference"
