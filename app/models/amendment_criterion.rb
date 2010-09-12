@@ -19,7 +19,7 @@ class AmendmentCriterion < ActiveRecord::Base
     end
   end
 
-  def unvoted?
+  def inactive?
     amendment.passage_rolls.empty?
   end
 

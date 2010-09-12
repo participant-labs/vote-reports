@@ -56,3 +56,14 @@ end
 Given /^(bill "[^\"]*") has a title "([^\"]*)"$/ do |bill, title|
   create_bill_title(:bill => bill, :title => title)
 end
+
+Given /^(bill "[^"]*") is sponsored by (politician "[^"]*")$/ do |bill, politician|
+  bill.create_sponsorship(:joined_on => bill.introduced_on, :politician => politician, :bill => bill)
+end
+
+Given /^(bill "[^"]*") is cosponsored by:$/ do |bill, table|
+  table.map_column!('politician') {|name| Politician.with_name(name).first }
+  table.hashes.each do |hash|
+    create_cosponsorship(:bill => bill, :politician => hash['politician'])
+  end
+end

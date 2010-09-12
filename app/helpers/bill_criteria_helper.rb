@@ -15,8 +15,8 @@ module BillCriteriaHelper
   end
 
   def criterion_status(criterion)
-    if criterion.unvoted?
-      content_tag :span, criterion.subject.congress.current? ? "(no votes yet)" : "(no votes)", :class => 'info', :title => 'We have no record of roll call votes for this bill'
+    if criterion.inactive?
+      content_tag :span, criterion.subject.congress.current? ? "(no votes yet)" : "(no votes)", :class => 'info', :title => 'We have no record of roll call votes or sponsorships for this bill'
     end
   end
 end

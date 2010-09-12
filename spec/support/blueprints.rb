@@ -186,7 +186,6 @@ Fixjour :verify => false do
       :introduced_on => '12/13/2009',
       :bill_type => 'hr',
       :bill_number => bill_number,
-      :sponsor => new_politician,
       :congress => Congress.find_or_create_by_meeting(rand(200))
     )
   end
@@ -197,6 +196,10 @@ Fixjour :verify => false do
 
   define_builder(AmendmentCriterion) do |klass, overrides|
     klass.new(:report => new_report, :amendment => new_amendment, :support => true)
+  end
+
+  define_builder(Cosponsorship) do |klass, overrides|
+    klass.new(:bill => new_bill, :politician => new_politician, :joined_on => 1.month.ago)
   end
 
   define_builder(District) do |klass, overrides|

@@ -275,6 +275,9 @@ class Politician < ActiveRecord::Base
     end
   end
 
+  has_many :sponsorships, :class_name => 'Cosponsorship'
+  has_many :bills_sponsored, :through => :sponsorships, :source => :bill
+
   def full_name= full_name
     self.last_name, self.first_name = full_name.split(', ', 2)
   end
