@@ -123,10 +123,6 @@ class Bill < ActiveRecord::Base
     passage_rolls.present?
   end
 
-  def old_and_unvoted?
-    !congress.current? & !voted?
-  end
-
   def congress=(congress)
     if !new_record? && self.congress && congress != self.congress
       raise ActiveRecord::ReadOnlyRecord, "Can't change bill congress"
