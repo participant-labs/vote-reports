@@ -73,7 +73,8 @@ Feature: Scoring Reports
     And I should not see "Connie Mack"
 
     When I follow "1 cosponsorship"
-    And show me the page
+    Then I should see "cosponsored"
+    And I should see "which this report Supports"
 
   Scenario: With Criteria on bills without passage rolls, I should see message noting that as the bills are unvoted, no scores exist
     Given bill "Bovine Security Act of 2009" has the following rolls:
