@@ -42,17 +42,13 @@ class ReportScore < ActiveRecord::Base
     subjects = Array(subjects)
     if subjects.empty?
       {}
-    elsif subjects.first.is_a?(String)
-      {
-        :select => 'DISTINCT report_scores.*',
-        :joins => {:report => [:subjects]},
-        :conditions => ["subjects.name IN(?) OR subjects.cached_slug IN(?)", subjects, subjects]
-      }
     else
       {
         :select => 'DISTINCT report_scores.*',
-        :joins => {:report => [:subjects]},
-        :conditions => ['subjects.id IN(?)', subjects]
+        :joins => {:report => :subjects},
+        :conditions => (subjects.first.is_a?(String) \
+         ? ["subjects.name IN(?) OR subjects.cached_slug IN(?)", subjects, subjects] \
+         : ['subjects.id IN(?)', subjects])
       }
     end
   }

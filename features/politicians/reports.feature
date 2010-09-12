@@ -67,6 +67,28 @@ Feature: Browsing Politician Reports
       | 29    |
       | 33    |
 
+  Scenario: Navigating reports via related subjects
+    Given report "Active Report" has the following scores:
+      | politician    | score |
+      | Piyush Jindal | 99.3  |
+    And report "Other Report" has the following scores:
+      | politician    | score |
+      | Piyush Jindal | 97    |
+    And report "Active Report" has subject "Awesome"
+    And 12 published reports with subject "Awesome"
+    When I go to the politician reports page for "Piyush Jindal"
+    Then I should see the following report scores:
+      | name          | score |
+      | Other Report  | 97    |
+      | Active Report | 99    |
+
+    And I follow "browse by subject"
+    And I follow "Awesome"
+    Then I should see the following report scores:
+      | name          | score |
+      | Active Report | 99    |
+    But I should not see "Other Report"
+
   Scenario: Viewing related reports from the Politicians Page
     Given I have a published report named "Active Report"
     And an un-voted, current-congress bill named "Bovine Security Act of 2009"
