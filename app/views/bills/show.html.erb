@@ -30,6 +30,9 @@
     <%- if @bill.summary.present? -%>
       <li><a href="#bill_summary">Summary</a></li>
     <%- end -%>
+    <%- if @bill.cosponsorships.present? -%>
+      <li><a href="#bill_cosponsors">Cosponsors <span class="count"><%= @bill.cosponsorships.count %></span></a></li>
+    <%- end -%>
     <%- if @amendments_count > 0 -%>
       <li><% link_to bill_amendments_path(@bill) do %>
         <span>Amendments <span class="count"><%= @amendments_count %></span></span>
@@ -69,6 +72,19 @@
   <%- if @bill.summary.present? -%>
   <div id="bill_summary">
     <%= to_html(@bill.summary) %>
+  </div>
+  <%- end -%>
+
+  <%- if @bill.cosponsors.present? -%>
+  <div id="bill_cosponsors">
+    <dl>
+      <%- @bill.cosponsorships.group_by(&:joined_on).each_pair do |joined_on, cosponsorships| -%>
+        <dt>On <%= joined_on.to_s(:long) %></dt>
+        <%- cosponsorships.each do |cosponsorship| -%>
+          <dd><%= render 'politicians/politician', :politician => cosponsorship.politician %></dd>
+        <%- end -%>
+      <%- end -%>
+    </dl>
   </div>
   <%- end -%>
 

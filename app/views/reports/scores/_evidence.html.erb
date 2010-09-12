@@ -15,7 +15,7 @@
           <dd>On <%= render 'bills/bill', :bill => subject, :hide_year => true %> which this report <%= scores.first.criterion.position %>s</dd>
         <%- elsif scores.first.evidence.is_a?(Cosponsorship) -%>
           <%- sponsorship = scores.first.evidence -%>
-          <dt><%= link_to "On #{sponsorship.joined_on.to_s(:long)} #{sponsorship.verb}", bill_path(subject) %></dt>
+          <dt><%= link_to "On #{sponsorship.joined_on.to_s(:long)} #{sponsorship.verb}", bill_path(subject, :anchor => 'bill_cosponsors') %></dt>
           <dd><%= render 'bills/bill', :bill => subject, :hide_year => true %> which this report <%= scores.first.criterion.position %>s</dd>
         <%- end -%>
       <%- elsif subject.is_a?(Amendment) -%>
