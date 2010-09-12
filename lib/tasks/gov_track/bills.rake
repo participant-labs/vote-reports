@@ -103,7 +103,7 @@ namespace :gov_track do
               :bill_type => data['type'].to_s,
               :bill_number => data['number'].to_s,
               :gov_track_updated_at => data['updated'].to_s,
-              :introduced_on => introduced_on
+              :introduced_on => introduced_on,
               :summary => data.at('summary').inner_text.strip
             }
             if @update && bill = Bill.find_by_opencongress_id(opencongress_bill_id)
