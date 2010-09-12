@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100904073451) do
+ActiveRecord::Schema.define(:version => 20100912174734) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -726,6 +726,8 @@ ActiveRecord::Schema.define(:version => 20100904073451) do
 
   add_foreign_key "bill_criteria", "bills", :name => "bill_criteria_bill_id_reference", :dependent => :delete
   add_foreign_key "bill_criteria", "reports", :name => "bill_criteria_report_id_reference", :dependent => :delete
+
+  add_foreign_key "bills", "politicians", :name => "bills_sponsor_id_fk", :column => "sponsor_id"
 
   add_foreign_key "cause_reports", "causes", :name => "cause_reports_cause_id_reference"
   add_foreign_key "cause_reports", "reports", :name => "cause_reports_report_id_reference"
