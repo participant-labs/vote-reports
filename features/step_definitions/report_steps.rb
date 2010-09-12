@@ -26,6 +26,13 @@ Given /^the following (.*) reports?:$/ do |type, table|
   end
 end
 
+Given /^(\d+) published reports with (subject "[^"]*")$/ do |count, subject|
+  Integer(count).times do
+    report = create_published_report
+    create_report_subject(:report => report, :subject => subject)
+  end
+end
+
 # for use reading score lists from a report page
 Then /^I should see the following scores?:$/ do |table|
   table.map_column!('politician') {|name| Politician.with_name(name).first }

@@ -2,8 +2,12 @@ Transform /subject "([^\"]*)"/ do |subject|
   Subject.find_or_create_by_name(subject)
 end
 
-Given /^(bill "[^\"]*") has a (subject "[^\"]*")$/ do |bill, subject|
+Given /^(bill "[^\"]*") has (subject "[^\"]*")$/ do |bill, subject|
   bill.subjects << subject
+end
+
+Given /^(report "[^"]*") has (subject "[^"]*")$/ do |report, subject|
+  create_report_subject(:report => report, :subject => subject)
 end
 
 Given /^(\d+) subjects? with (\d+) bills? each$/ do |subject_count, bill_count|

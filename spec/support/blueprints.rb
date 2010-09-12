@@ -103,6 +103,10 @@ Fixjour :verify => false do
     klass.new(:score => new_report_score, :evidence => new_roll, :criterion => new_bill_criterion)
   end
 
+  define_builder(ReportSubject) do |klass, overrides|
+    klass.new(:report => new_report, :subject => new_subject, :count => rand(10))
+  end
+
   define_builder(InterestGroup) do |klass, overrides|
     klass.new(
       :name => Forgery(:basic).text,

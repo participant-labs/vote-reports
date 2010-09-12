@@ -55,6 +55,8 @@ module NavigationHelpers
       edit_user_path(User.find_by_username($1))
     when /the politician page for "(.+)"/
       politician_path(Politician.with_name($1).first)
+    when /the politician reports page for "(.+)"/
+      politician_reports_path(Politician.with_name($1).first)
     when /the roll page for "(.+)"/
       roll_path(Roll.find_by_question($1))
 

@@ -5,7 +5,7 @@ Feature: Subject viewing
 
   Background:
     Given a bill named "Bovine Security Act of 2009"
-    And bill "Bovine Security Act of 2009" has a subject "Cows"
+    And bill "Bovine Security Act of 2009" has subject "Cows"
 
   Scenario: Follow a report related through a bill criterion to its page
     Given a published report named "Active Report"
