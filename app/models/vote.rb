@@ -8,7 +8,6 @@ class Vote < ActiveRecord::Base
   validates_presence_of :politician, :roll
   validates_inclusion_of :vote, :in => POSSIBLE_VALUES
 
-  default_scope :include => :politician
   named_scope :aye, :conditions => {:vote => '+'}
   named_scope :nay, :conditions => {:vote => '-'}
   named_scope :present, :conditions => {:vote => 'P'}

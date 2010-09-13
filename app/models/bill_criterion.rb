@@ -14,11 +14,11 @@ class BillCriterion < ActiveRecord::Base
   # see also: Roll.on_bill_passage
   named_scope :active, :select => 'DISTINCT bill_criteria.*',
     :joins => [
-      %{LEFT OUTER JOIN bills ON bill_criteria.bill_id = bills.id},
-      %{LEFT OUTER JOIN rolls ON rolls.subject_id = bills.id},
-      %{LEFT OUTER JOIN cosponsorships ON cosponsorships.bill_id = bills.id}
+      %{LEFT OUTER JOIN "bills" active_bills ON bill_criteria.bill_id = active_bills.id},
+      %{LEFT OUTER JOIN "rolls" active_rolls ON active_rolls.subject_id = active_bills.id},
+      %{LEFT OUTER JOIN "cosponsorships" active_cosponsorships ON active_cosponsorships.bill_id = active_bills.id}
     ],
-    :conditions => ["(rolls.roll_type IN(?) AND rolls.subject_type = ?) OR cosponsorships.id IS NOT NULL", Bill::ROLL_PASSAGE_TYPES, 'Bill']
+    :conditions => ["(active_rolls.roll_type IN(?) AND active_rolls.subject_type = ?) OR active_cosponsorships.id IS NOT NULL", Bill::ROLL_PASSAGE_TYPES, 'Bill']
 
   class << self
     def inactive
