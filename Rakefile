@@ -9,12 +9,17 @@ require 'rake/rdoctask'
 
 require 'tasks/rails'
 
-require 'hoptoad_notifier'
-def rescue_and_reraise
-  yield
-rescue => e
-  HoptoadNotifier.notify(e)
-  raise
+begin
+  require 'hoptoad_notifier'
+
+  def rescue_and_reraise
+    yield
+  rescue => e
+    HoptoadNotifier.notify(e)
+    raise
+  end
+rescue LoadError
+  puts "hoptoad_notifier not available"
 end
 
 task :default => [:spec, :'cucumber:rerun']
