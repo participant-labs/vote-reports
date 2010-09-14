@@ -2,6 +2,9 @@ class Cosponsorship < ActiveRecord::Base
   belongs_to :politician
   belongs_to :bill
 
+  validates_presence_of :joined_on
+  before_validation_on_create :populate_joined_on_if_missing
+
   def verb
     if bill.sponsorship == self
       'introduced'
@@ -22,5 +25,11 @@ class Cosponsorship < ActiveRecord::Base
   end
   def subject
     bill
+  end
+
+  protected
+
+  def populate_joined_on_if_missing
+    joined_on ||= bill.introduced_on
   end
 end
