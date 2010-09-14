@@ -8,6 +8,6 @@ Feature: Browsing Interest Groups
 
   Scenario: Guest reads instructions on how to claim
     When I go to the interest group page for "Sierra Club"
-    And I follow "Claim this Page"
-    Then I should see "Claiming this Interest Group"
-    And I should see "To claim this page, just send us an email send us an email at"
+    And I follow "Claim this Group"
+    Then I should see "Claim this Interest Group"
+    And I should see "just send us an email send us an email at"
