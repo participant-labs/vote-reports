@@ -74,6 +74,7 @@ dd {
   margin-left: 0;
   padding: 5px;
   margin-top: 3px;
+  margin-bottom: 0;
 
    -moz-border-radius: 6px;
   -webkit-border-radius:6px;
@@ -101,7 +102,7 @@ dd, dd a, dd span, dd div {
   bottom: 0;
   font-size: 11px;
   text-align: center;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
   font-family: arial, serif;
