@@ -53,10 +53,12 @@ class BillCriterion < ActiveRecord::Base
   end
 
   def events
-    if bill.passage_votes.exists?
-      bill.passage_votes.scoped(:include => [{:politician => :state}, :roll])
+    votes = bill.passage_votes.scoped(:include => [{:politician => :state}, :roll])
+    sponsorships = bill.sponsorships
+    if votes.present?
+      votes + sponsorships.scoped(:conditions => ["politician_id NOT IN(?)", votes.map {|v| v.politician_id }])
     else
-      bill.sponsorships
+      sponsorships
     end
   end
 
