@@ -26,6 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :interest_groups do |interest_group|
     interest_group.resource :embed, :controller => 'reports/embeds', :only => :show
+    interest_group.resource :claim, :controller => 'interest_groups/claims', :only => :new
     interest_group.resources :report_scores, :as => :scores, :controller => 'interest_groups/scores', :only => [:index, :show]
     interest_group.resource :follows, :controller => 'interest_groups/follows', :only => [:show, :create, :destroy]
     interest_group.resources :causes, :controller => 'interest_groups/causes', :only => :index

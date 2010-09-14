@@ -9,6 +9,8 @@ class InterestGroup < ActiveRecord::Base
     image || build_image
   end
 
+  belongs_to :owner, :class_name => 'User'
+
   searchable do
     text :name, :description
     string :name
@@ -62,6 +64,15 @@ class InterestGroup < ActiveRecord::Base
       }
     end
   }
+
+  def domain
+    @domain ||=
+      if url.present?
+        URI.parse(url).host.split('.').reject {|s| s == 'www' }.join('.')
+      elsif email.present?
+        email.split('@').last
+      end
+  end
 
   def phone_numbers
     [phone1, phone2].compact

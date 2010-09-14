@@ -1,0 +1,18 @@
+<div class="section">
+  <h2>Claim this Interest Group</h2>
+
+  <p>Welcome! If you're a part of <%= @interest_group.name %>, you can take over this page and take charge of your legislative preferences and politician report card.</p>
+
+  <p>To claim this page, first signup with a user account you'll use to modify the group, then just send us an email send us an email at <%= mail_to 'interest_group_claims@votereports.org' %>:</p>
+
+  <ul>
+    <li>with the username you'd like us to link to this interest group</li>
+    <li>proof of your affiliation with the group
+      <%- if @interest_group.domain -%>
+        such as sending the email from an "@<%= @interest_group.domain %>" email address
+      <%- end -%>
+    </li>
+  </ul>
+
+  <p>We'll link you up shortly, at which point you'll be able to control your interest group's report card on VoteReports.  We're looking forward to your participation.</p>
+</div>
