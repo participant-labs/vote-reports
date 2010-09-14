@@ -26,7 +26,7 @@
     <%= link_to 'Set Location', location_path(:return_to => request.path), :class => 'fancyboxy location' %>
   <%- end -%>
   </h3>
-  <div id="score_examples" class="act-refresh">
+  <div id="score_examples">
     <%= render 'reports/report_and_scores', :report => @sample_report, :scores => @scores %>
   </div>
   <p>Customize an overview of your reps: <%= link_to "Get Started Now", new_guide_path %></p>
