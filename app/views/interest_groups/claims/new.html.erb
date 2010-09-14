@@ -3,7 +3,7 @@
 
   <p>Welcome! If you're a part of <%= @interest_group.name %>, you can take over this page and take charge of your legislative preferences and politician report card.</p>
 
-  <p>To claim this page, first signup with a user account you'll use to modify the group, then just send us an email send us an email at <%= mail_to 'interest_group_claims@votereports.org' %>:</p>
+  <p>To claim this page, first <%= link_to 'signup with a user account', new_user_path %> you'll use to manage the group, then just send us an email send us an email at <%= mail_to 'interest_group_claims@votereports.org' %>:</p>
 
   <ul>
     <li>with the username you'd like us to link to this interest group</li>
