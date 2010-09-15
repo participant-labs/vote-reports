@@ -1,5 +1,5 @@
 namespace :vote_smart do
   task :import => :environment do
-    VoteSmart::Importer.import!
+    VoteSmart::Importer.import_all
   end
 end
