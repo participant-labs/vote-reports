@@ -47,8 +47,13 @@ class InterestGroup < ActiveRecord::Base
       :conditions => {:'reports.interest_group_id' => self})
   end
 
+  named_scope :ratings_not_recently_updated, :conditions =>
+    ['interest_groups.ratings_updated_at IS NULL OR interest_groups.ratings_updated_at < ?', 1.month.ago]
+
   named_scope :for_display, :include => [
     :image, {:report => [:top_subject]}]
+
+  named_scope :vote_smart, :conditions => 'interest_groups.vote_smart_id is not null'
 
   named_scope :for_subjects, lambda {|subjects|
     if subjects.blank?

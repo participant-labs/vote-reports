@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100915171702) do
+ActiveRecord::Schema.define(:version => 20100916193721) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -373,7 +373,7 @@ ActiveRecord::Schema.define(:version => 20100915171702) do
   create_table "interest_groups", :force => true do |t|
     t.integer  "vote_smart_id"
     t.string   "ancestry"
-    t.string   "name",          :null => false
+    t.string   "name",               :null => false
     t.text     "description"
     t.string   "email"
     t.string   "url"
@@ -390,6 +390,7 @@ ActiveRecord::Schema.define(:version => 20100915171702) do
     t.string   "cached_slug"
     t.integer  "image_id"
     t.integer  "owner_id"
+    t.datetime "ratings_updated_at"
   end
 
   add_index "interest_groups", ["ancestry"], :name => "index_interest_groups_on_ancestry"
