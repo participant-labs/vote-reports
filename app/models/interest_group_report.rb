@@ -30,6 +30,38 @@ class InterestGroupReport < ActiveRecord::Base
     rating.numeric_rating
   end
 
+  PLUS_RATINGS = ["+1", "+10", "+11", "+12", "+2", "+3", "+4", "+5", "+6", "+7", "+8", "+9"]
+  ZERO_CENTERED_RATINGS = PLUS_RATINGS + ["-1", "-10", "-11", "-12", "-13", "-14", "-15", "-16", "-17", "-18", "-19", "-2", "-2(House)/-1(Senator)", "-20", "-21", "-22", "-23", "-25", "-3", "-30", "-4", "-5", "-6", "-7", "-8", "-9"]
+
+  class << self
+    def calibrate_zero_centered_ratings
+      InterestGroupReport.all(:select => 'DISTINCT interest_group_reports.*', :joins => :ratings,
+        :conditions => {:'interest_group_ratings.rating' => ZERO_CENTERED_RATINGS}).each do |report|
+        report.calibrate_zero_centered_ratings
+      end
+    end
+  end
+
+  def calibrate_zero_centered_ratings
+    rating_values = ratings.map {|r| r.rating.to_f }
+    if rating_values.max >= 100.0
+      # the negatives are just outliers, not a sign of a 0-centered range
+      if (ratings.map(&:rating) & PLUS_RATINGS).present?
+        raise "Unexpected + rating in #{vote_smart_id} which we assumed was a normal range"
+      end
+      ratings.update_all({:numeric_rating => 0.0}, {:rating => ZERO_CENTERED_RATINGS})
+    else
+      # this is a range centered around 0
+      max = [rating_values.max, -rating_values.min].max
+      step = 100 / ((max * 2) + 1)
+      $stdout.print 'R'
+      ratings.each do |rating|
+        r = (rating.rating == "-2(House)/-1(Senator)" ? -1.5 : rating.rating.to_f)
+        rating.update_attribute(:numeric_rating, (r + max) * step)
+      end
+    end
+  end
+
   private
 
   def season_midpoint(season)
