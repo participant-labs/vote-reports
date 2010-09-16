@@ -32,11 +32,12 @@ class InterestGroupReport < ActiveRecord::Base
 
   PLUS_RATINGS = ["+1", "+10", "+11", "+12", "+2", "+3", "+4", "+5", "+6", "+7", "+8", "+9"]
   ZERO_CENTERED_RATINGS = PLUS_RATINGS + ["-1", "-10", "-11", "-12", "-13", "-14", "-15", "-16", "-17", "-18", "-19", "-2", "-2(House)/-1(Senator)", "-20", "-21", "-22", "-23", "-25", "-3", "-30", "-4", "-5", "-6", "-7", "-8", "-9"]
+  named_scope :with_zero_centered_ratings, :select => 'DISTINCT interest_group_reports.*', :joins => :ratings,
+    :conditions => {:'interest_group_ratings.rating' => ZERO_CENTERED_RATINGS}
 
   class << self
     def calibrate_zero_centered_ratings
-      InterestGroupReport.all(:select => 'DISTINCT interest_group_reports.*', :joins => :ratings,
-        :conditions => {:'interest_group_ratings.rating' => ZERO_CENTERED_RATINGS}).each do |report|
+      InterestGroupReport.with_zero_centered_ratings.each do |report|
         report.calibrate_zero_centered_ratings
       end
     end
@@ -49,15 +50,17 @@ class InterestGroupReport < ActiveRecord::Base
       if (ratings.map(&:rating) & PLUS_RATINGS).present?
         raise "Unexpected + rating in #{vote_smart_id} which we assumed was a normal range"
       end
+      $stdout.print 'G'
       ratings.update_all({:numeric_rating => 0.0}, {:rating => ZERO_CENTERED_RATINGS})
     else
       # this is a range centered around 0
-      max = [rating_values.max, -rating_values.min].max
-      step = 100 / ((max * 2) + 1)
+      abs_min = -rating_values.min
+      max = [rating_values.max, abs_min].max
+      step = 100 / (max + abs_min)
       $stdout.print 'R'
       ratings.each do |rating|
         r = (rating.rating == "-2(House)/-1(Senator)" ? -1.5 : rating.rating.to_f)
-        rating.update_attribute(:numeric_rating, (r + max) * step)
+        rating.update_attribute(:numeric_rating, (r + abs_min) * step)
       end
     end
     interest_group.rescore!
