@@ -60,6 +60,7 @@ class InterestGroupReport < ActiveRecord::Base
         rating.update_attribute(:numeric_rating, (r + max) * step)
       end
     end
+    interest_group.rescore!
   end
 
   private
