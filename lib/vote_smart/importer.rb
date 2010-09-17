@@ -254,7 +254,7 @@ module VoteSmart
             end
             group.touch(:ratings_updated_at)
           end
-          group.rescore!
+          group.calibrate_ratings
           puts
         end
       end
