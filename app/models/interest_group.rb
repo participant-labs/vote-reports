@@ -43,8 +43,8 @@ class InterestGroup < ActiveRecord::Base
   def rated_politicians
     Politician.scoped(
       :select => 'DISTINCT politicians.*',
-      :joins => {:ratings => :reports},
-      :conditions => {:'reports.interest_group_id' => self})
+      :joins => :interest_group_reports,
+      :conditions => {:'interest_group_reports.interest_group_id' => self})
   end
 
   named_scope :ratings_not_recently_updated, :conditions =>
@@ -69,6 +69,12 @@ class InterestGroup < ActiveRecord::Base
       }
     end
   }
+
+  def calibrate_ratings
+    reports.each do |report|
+      report.calibrate_ratings
+    end
+  end
 
   def domain
     @domain ||=
