@@ -248,7 +248,15 @@ module VoteSmart
                     :rating => rating['rating'],
                     :description => rating['ratingText'])
                 if new_rating.rating != rating['rating']
-                  raise "Rating mismatch: #{new_rating.rating} vs. #{rating['rating']}, #{rating.inspect}"
+                  if rating['rating'].present?
+                    puts "Updating #{new_rating.rating} -> #{rating['rating']}, #{rating.inspect}"
+                    new_rating.update_attributes!(
+                      :politician => politician,
+                      :rating => rating['rating'],
+                      :description => rating['ratingText'])
+                  else
+                    raise "Rating mismatch #{new_rating.rating} vs #{rating['rating']}, #{rating.inspect}"
+                  end
                 end
               end
             end
