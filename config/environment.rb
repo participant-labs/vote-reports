@@ -53,7 +53,7 @@ Rails::Initializer.run do |config|
   config.gem 'polly-suppress_validations', :source => "http://gems.github.com", :lib => 'suppress_validations'
   config.gem 'tamtam'
   config.gem 'votesmart', :version => '>= 0.3.0'
-  config.gem 'will_paginate', :version => '>=2.3.14'
+  config.gem 'Empact-will_paginate', :lib => 'will_paginate', :version => '>=2.3.14'
   config.gem 'ym4r'
   config.gem 'httparty'
   config.gem 'parallel' # only needed because parallel_test is a plugin... lame
