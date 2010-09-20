@@ -83,6 +83,12 @@ class InterestGroupReport < ActiveRecord::Base
   named_scope :with_zero_centered_ratings, :select => 'DISTINCT interest_group_reports.*', :joins => :ratings,
     :conditions => {:'interest_group_ratings.rating' => ZERO_CENTERED_RATINGS}
 
+  class << self
+    def calibrate_ratings
+      first.calibrate_ratings
+    end
+  end
+
   def calibrate_ratings
     calibrate_unusual_ratings
     calibrate_zero_centered_ratings
