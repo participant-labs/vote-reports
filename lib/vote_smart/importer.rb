@@ -231,9 +231,7 @@ module VoteSmart
         InterestGroup.vote_smart.ratings_not_recently_updated.each do |group|
           ActiveRecord::Base.transaction do
             puts "InterestGroup: #{group.vote_smart_id} #{group.name}"
-            page = 1
-            while page
-              politicians = Politician.paginate(:page => page, :conditions => 'vote_smart_id IS NOT NULL')
+            Politician.each_page(:conditions => 'vote_smart_id IS NOT NULL') do |politicians|
               politicians.each do |politician|
                 VoteSmart::Rating.get_candidate_rating(politician.vote_smart_id, group.vote_smart_id) do |ratings|
                   print 'P'
@@ -266,7 +264,6 @@ module VoteSmart
                 end
               end
               VoteSmart::Rating.run
-              page = politicians.next_page
             end
             group.touch(:ratings_updated_at)
           end
