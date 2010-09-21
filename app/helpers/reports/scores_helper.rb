@@ -56,7 +56,7 @@ module Reports::ScoresHelper
 
     long_dates = dates.select {|d| d.include?('-') }
     while dates.join.size > goal_size && long_dates.present?
-      long_date = long_dates.delete(long_dates.random_element)
+      long_date = long_dates.delete(long_dates.sample)
       long_date_index = dates.index(long_date)
       dates[long_date_index] = long_date.split('-').last
     end

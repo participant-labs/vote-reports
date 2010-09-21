@@ -64,5 +64,5 @@
 - :name: httparty
 - :name: parallel
 - :name: auto_tagger
-- :version: 2.3.8
+- :version: 2.3.9
   :name: rails

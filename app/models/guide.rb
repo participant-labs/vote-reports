@@ -34,7 +34,7 @@ class Guide < ActiveRecord::Base
   def unanswered_question
     unanswered = nil
     begin
-      unanswered = questions.random_element
+      unanswered = questions.sample
     end while unanswered.answered_by?(reports)
     unanswered
   end
