@@ -134,11 +134,11 @@ Fixjour :verify => false do
     klass.new(
       :purpose => Forgery(:basic).text,
       :description => Forgery(:basic).text,
-      :sponsor => send("create_#{%w[politician committee_meeting].random_element}"),
+      :sponsor => send("create_#{%w[politician committee_meeting].sample}"),
       :bill => new_bill,
       :number => rand(1000),
       :offered_on => "12/13/2009",
-      :chamber => ['h', 's'].random_element,
+      :chamber => ['h', 's'].sample,
       :congress => new_congress)
   end
 
@@ -174,7 +174,7 @@ Fixjour :verify => false do
       :title => Forgery(:basic).text,
       :title_type => 'official',
       :as => BillTitleAs.find_by_as(["reported to senate", "agreed to by house and senate", "amended by house",
-        "passed senate", "amended by senate", "introduced", "enacted", "reported to house", "passed house", 'popular'].random_element),
+        "passed senate", "amended by senate", "introduced", "enacted", "reported to house", "passed house", 'popular'].sample),
       :bill => new_bill
     )
   end
@@ -228,7 +228,7 @@ Fixjour :verify => false do
     klass.new(
       :politician => new_politician,
       :roll => new_roll,
-      :vote => %w[+ - P 0].random_element
+      :vote => %w[+ - P 0].sample
     )
   end
 
@@ -244,7 +244,7 @@ Fixjour :verify => false do
       :subject => new_bill,
       :year => rand(200) + 1810,
       :number => rand(10000),
-      :where => ['house', 'senate'].random_element,
+      :where => ['house', 'senate'].sample,
       :result => Forgery(:basic).text,
       :required => Forgery(:basic).text,
       :question => Forgery(:basic).text,
@@ -269,7 +269,7 @@ Fixjour :verify => false do
   end
 
   define_builder(UsState) do |klass, overrides|
-    state = STATES.random_element
+    state = STATES.sample
     
     klass.new(
       :full_name => state.first,
@@ -334,7 +334,7 @@ Fixjour :verify => false do
     klass.new(
       :politician => new_politician,
       :party => new_party,
-      :senate_class => [1, 2, 3].random_element,
+      :senate_class => [1, 2, 3].sample,
       :state => new_us_state,
       :started_on => 3.years.ago,
       :ended_on => 3.years.from_now
@@ -389,7 +389,7 @@ Fixjour :verify => false do
     create_unscored_report(attrs).tap do |report|
       roll = create_roll(:subject => report.bill_criteria.first.bill, :roll_type => "On Passage")
       Politician.all.each do |p|
-        create_vote(:roll => roll, :politician => p, :vote => Vote::POSSIBLE_VALUES.random_element)
+        create_vote(:roll => roll, :politician => p, :vote => Vote::POSSIBLE_VALUES.sample)
       end
       report.rescore!
       Delayed::Worker.new(:quiet => true).work_off(5)
