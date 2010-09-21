@@ -59,7 +59,7 @@
 - :version: ">= 0.3.0"
   :name: votesmart
 - :version: ">= 2.3.14"
-  :name: will_paginate
+  :name: Empact-will_paginate
 - :name: ym4r
 - :name: httparty
 - :name: parallel
