@@ -135,9 +135,9 @@ class Politician < ActiveRecord::Base
     end
 
     def update_current_office_status!
-      Politician.transaction do
-        Politician.update_all(:current_office_id => nil, :current_office_type => nil)
-        Politician.in_office_normal_form.paginated_each do |politician|
+      transaction do
+        update_all(:current_office_id => nil, :current_office_type => nil)
+        in_office_normal_form.paginated_each do |politician|
           politician.update_attribute(:current_office, politician.latest_term)
         end
       end
