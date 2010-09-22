@@ -4,7 +4,7 @@
     <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Knowing is Half the Ballot - VoteReports</title>
+    <title>Vote Reports</title>
     <!--[if (!IE)|(gte IE 8)]><!-->
 <link href="http://assets0.votereports.org/assets/common-datauri.css?1284618644" media="all" rel="stylesheet" type="text/css" />
 
@@ -32,8 +32,73 @@
     <script src="http://assets0.votereports.org/javascripts/vendor/jquery-1.4.2.min.js?1284618357" type="text/javascript"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <link rel="shortcut icon" href="/images/favicon.ico?version=1" />
-
+	<script type="text/javascript" src="http://use.typekit.com/itv8ycm.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link rel="stylesheet" href="/stylesheets/vendor/blueprint/print.css" type="text/css" media="print">
+	<style type="text/css">
+		body {padding: 0px; margin: 0px;}
+		#hero {height: 520px; padding:0px; margin:0px; background-image:url('images/hero_background.jpg'); background-position: top; }
+		#centerbox {position: absolute; width:100%; top:110px; }
+		#calltoactionbox {background-color:white; align:center; margin-left:auto; margin-right:auto; padding:40px 25px 25px 25px; height:261px; width:276px;}
+		#copy {font-family:"Georgia", Times, serif; font-size:16px; line-height: 24px; letter-spacing:-0.2px; color: #000000; position: relative; top: 10px;}
+		#button {margin-top:20px;}
+		#logoarea {padding-top:20px; width:940px; align:center; margin-left:auto; margin-right:auto;}
+		#account {font-size: 11px; font-weight:500; letter-spacing:0.1px;}
+		
+		/* GENERAL LINK BEHAVIOUR */
+		a:link {color:#06bfe7; text-decoration: none;}
+		a:visited {color:#06bfe7; text-decoration: none;}
+		a:hover {color:#06bfe7; text-decoration: underline;}
+		
+		a.blue:link {color:#2ac9eb; text-decoration: none;}
+		a.blue:visited {color:#2ac9eb; text-decoration:none;}
+		a.blue:hover {text-decoration: underline;}
+		
+		a.white:link {color:#fff; text-decoration:none;}
+		a.white:visited {color:#fff; text-decoration:none;}
+		a.white:hover {text-decoration:underline;}
+		
+		/* POSITIONING FOR THE FADED CIRCLES BACKGROUND */
+		#circlebg {height: 180px; margin-bottom:-180px; background-image:url('images/bg_grades.png'); background-repeat:no-repeat; background-position: center top;}
+		
+		/* STUFF FOR THE TOP OF THE PAGE, REALLY UNIQUE TO THE HOMEPAGE */
+		#logindivider {margin: 2px 8px 0px 8px; vertical-align:text-top;}
+		#header {background-color: #322129; padding: 0px; margin-bottom:60px; border: 0px 5px 0px 5px; height:38px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px;}
+		#navlinks {font-size:14px; color:#fff; line-height:38px; }
+		#menu {position: relative; left:15px;}
+		#header_search {position:relative; right:10px;}
+		
+		/* HEADLINES AND BODY COPY */
+		#headline {font-size:32px; line-height: 34px; color: #ff5500; letter-spacing:-0.2px; font-weight:100;}
+		#bigsectiontext {font-family: Georgia; font-size: 20px; color:#333333; letter-spacing:-0.1px;}
+		#sectionheadline {font-size:22px; line-height: 40px; color: #ff5500; letter-spacing:-0.1px; font-weight:100;}
+		#sectiontext {font-family: Georgia; font-size: 14px; color:#322129; letter-spacing:-0.1px}
+		#tinytext {font-family: Georgia; font-size: 11px; color:#322129;}
+		
+		/* POSITIONING FOR CIRCLES */
+		img.circle1 {position:relative; left:-135px; z-index:-1;} 
+		img.circle2 {position:relative; left:-27px; z-index:-2;}
+		img.circle3 {position:relative;left:5px; z-index:-3; }
+		img.circle4 {position:relative; left:-80px; z-index:-4;}
+		img.preview {z-index:-5;}
+		
+		/* IS THERE CSS SOMEWHERE FOR THE LINKS? WITHOUT THIS, THE LINKS DON'T UNDERLINE WHEN ROLLED OVER */
+		#footer .sidebar-links a:link {color:#fff; text-decoration:none;}
+		#footer .sidebar-links a:visited {color:#fff; text-decoration:none;}
+		#footer .sidebar-links a:hover {text-decoration:underline;}
+		
+		#footer {background-color:#5d5b56; background-image:url('images/footer_bg.jpg'); background-position: bottom; background-repeat:no-repeat; height:244px; padding-top:20px;}
+		#quotecopy {width: 500px; font-family: Georgia; font-size: 22px; color:#fff; text-align: left;  line-height:32px;}
+		.sidebar-links {font-size: 11px; font-weight:500; letter-spacing:0.1px;}
+		
+		#footer .sidebar-links {
+		  float: right;
+		  margin-bottom: 0.5em;
+		}
+
+
+		
+	</style>
     <!--[if lt IE 8]>
       <link rel="stylesheet" href="/stylesheets/vendor/blueprint/ie.css" type="text/css" media="screen, projection">
     <![endif]-->
@@ -61,270 +126,168 @@
   </div>
   <![endif]-->
 
-    
+<div id="hero">
+	
+	<div id="logoarea">
+		<a href="/"><img src="images/votereports_logo.png"></a>
+		<div id="account">  				
+			<span style="color:#c8c8c8;font-weight:400;">Location: </span><a class="white" href="/location?return_to=%2F">Brooklyn, NY</a>
+			<img id="logindivider" src="images/homepage_register_divider.png" />
+			<a class="blue" href="/login"><span>Log in</span></a>
+			<img id="logindivider" src="images/homepage_register_divider.png" />
+			<a class="blue" href="/login"><span>Register</span></a>	
+		</div>
+	</div>
 
-    <div class="container">
-      <div id="header" class="span-24">
-        <a href="/" class="sprites navigation-header_logo" id="logo"><span>VoteReports: Knowing is Half the Ballot</span></a>
-        <div id="account">
-
-          <p class="location">
-    Brooklyn, NY
-  ( <a href="/location?return_to=%2F" class="fancyboxy">set location</a>
-)
-</p>
-
-            <a href="/login" class="fancyboxy sprites navigation-button_login"><span>Log in</span></a>
-        </div>
-
-        
-  <div class="span-24">
-
-    <ul id="menu" class="sidebar-links">
-      <li class="">
-        <a href="/politicians" class="sprites navigation-button_politicians"><span>Politicians</span></a>
-      </li>
-      <li class="">
-        <a href="/reports" class="sprites navigation-button_reports"><span>Reports</span></a>
-      </li>
-      <li class="">
-
-        <a href="/causes" class="sprites navigation-button_causes"><span>Causes</span></a>
-      </li>
-    </ul>
-<form action="/search" id="header_search" method="get">      <label for="term">Search</label>
-      <input class="fieldtag" id="nav_search" name="term" size="20" title="Politicians, Reports and Causes" type="text" value="" />
-</form>  </div>
-
-      </div>
-
-    </div>
-
-        <div id="hero" class="span-24">
-    <div class="container">
-      <h1><span class="sprites front_page-know_what_your_representatives_really_stand_for"><span>Know what your representatives really stand for</span></span></h1>
-      <div class="span-6">
-        <p>We're making it easy to know where they stand. Our users make sense of their votes so you don't have to:</p>
-
-        <a href="/guides/new" class="sprites front_page-get_started_now"><span>Get Started Now</span></a>
-
-        <p class="no_reg">No Registration Required</p>
-      </div>
-      <div class="span-18 last guide_explanation">
-        <a href="/guides/new" class="sprites front_page-guide_explanation"><span>Select Your Location → Choose Your Causes → See How Your Reps Rate</span></a>
-      </div>
-    </div>
-  </div>
-
-  
-  <div id="body" class="container">
-    <div id="content" class="span-24">
-      
-
-
-<div class="clearfix span-15" id="voters">
-  <h3>
-    Sample Grades for Reps in your area -
-    <a href="/location?return_to=%2F" class="fancyboxy location">Brooklyn, NY</a>
-  </h3>
-  <div id="score_examples">
-    
-
-
-<div class="report act-hover" id="report_257" rel="follow_report_257">    <img alt="International Brotherhood of Teamsters" class="report_image" height="35" src="http://assets0.votereports.org/system/thumbnails/244/tiny/union-strikes-against-no-2-car-hauler-over-wages.png?1272773495" title="International Brotherhood of Teamsters" width="27" />
-  
-
-<div class="follow_report hide" id="follow_report_257"></div>
-  <a href="/interest_groups/international-brotherhood-of-teamsters" class="report_title">International Brotherhood of Teamsters</a>
-    <blockquote class="report_excerpt"><p>Building Better Lives. Together. That's what the International Brotherhood of Teamsters is all about. To make life better for Teamsters members and...</p></blockquote>
-    <dl class="report_subject">
-      <dt>Subject</dt>
-      <dd>
-
-<div class="subject" id="subject_17155">  <a href="/subjects/labor">Labor</a>
-</div></dd>
-    </dl>
-</div>
-<ul class="report_scores clearfix">
-    <li class="clearfix left">
-
-  <div class="politician_score round-4 clearfix">
-    
-
-  <a href="http://www.votereports.org/politicians/edolphus-towns" class="politician_headshot"><img alt="Edolphus Towns" height="120" src="http://www.govtrack.us/data/photos/400409-100px.jpeg" title="Rep. Edolphus Towns (NY-10)" width="100" /></a>
-
-    
-
-<span class="politician_name">
-    <a href="http://www.votereports.org/politicians/edolphus-towns" class="name">Rep. Towns</a>
-  
-    <a href="/us/congressional_districts/NY-10" class="fancyboxy politician_location" title="10th Congressional District of New York">NY-10</a>
-
-</span>
-
-    
-
-    <div class="report_score">
-      <a href="/interest_groups/international-brotherhood-of-teamsters/scores/1226583" class="fancyboxy score a">A</a>
-        
-
-
-<div class="score_sources">
-  
-    <a href="/interest_groups/international-brotherhood-of-teamsters/scores/1226583" class="fancyboxy">3 ratings</a>
+	<div id="centerbox">
+		<div id="calltoactionbox">
+			<span id="headline" class="tk-header">Actions speak louder than words.</span>
+			<span id="copy">Identify like-minded U.S. political candidates based on their voting history on issues important to you.</span>
+			<a href=""><img id="button" src="images/call_to_action.png" /></a><br />
+			<span style="font-size:11px; color:#b0b0b0;">No registration required. Safety not guaranteed.</span>
+		</div>
+	</div>	
+	
 </div>
 
-    </div>
+<div id="circlebg"></div>
 
-  </div>
-</li>
-    <li class="clearfix right">
+<div class="container">
 
-  <div class="politician_score round-4 clearfix">
+	<div class="span-24 last">
+	    <div id="header">    
+	       <ul id="menu" class="sidebar-links">     
+           
+				<li class="">
+	                   <a href="/politicians" id="navlinks" class="tk-header"><span>politicians</span></a>
+	               </li>
+	               <li class="">
+					<a href="/reports" id="navlinks" class="tk-header"><span>reports</span></a>
+				</li>
 
-    
+				<li class="">
+					<a href="/causes" id="navlinks" class="tk-header"><span>causes</span></a>
+				</li>
+			</ul>
 
-  <a href="http://www.votereports.org/politicians/charles-schumer" class="politician_headshot"><img alt="Charles Schumer" height="120" src="http://www.govtrack.us/data/photos/300087-100px.jpeg" title="Sen. Charles Schumer (NY)" width="100" /></a>
+			<form action="/search" id="header_search" method="get">
+				<label for="term">Search</label>
+				<input class="fieldtag" id="nav_search" name="term" size="20" title="Politicians, Reports and Causes" type="text" value="" />
+			</form>  
+		</div>
+	</div>
 
-    
+	<div class="span-24 last">
+		<span class="tk-header" id="headline">How does Vote Reports work?</span>
+	</div>
 
-<span class="politician_name">
-    <a href="http://www.votereports.org/politicians/charles-schumer" class="name">Sen. Schumer</a>
-  
-    <a href="/us/states/NY" class="fancyboxy politician_location" title="The State of New York">NY</a>
+	<div class="span-24 last" style="margin-top:10px;">
+		<div class="span-9" style="position:relative;"><span id="bigsectiontext">At Vote Reports, we believe the most reliable way of gauging a politicians compatibility with a voter is by evaluating them on their legislative voting record.</span></div>
+			<div class="span-15 last">
+				<div class="span-9">
+					<img class="circle1" src="images/circle_1.png" />
+				</div>
+				<div class="span-6 last" style="position:relative; top:80px;">
+					<span id="sectionheadline" class="tk-header">Grades matter</span><br />
+					<span id="sectiontext">High grades mean the politician is graded well according to the issue they are being evaluated on (not used to rate a politicians performance).</span>
+				</div>
+			</div>	
+	</div>
 
-</span>
+	<div class="span-24 last" style="margin-top:-90px;">
+		<div class="span-8">
+			<img class="circle2" src="images/circle_2.png" />
+		</div>
+		<div class="span-8" style="position:relative; top: 120px;">
+			<span id="sectionheadline" class="tk-header">The source of the ratings</span><br />
+			<span id="sectiontext">Vote Reports does not rate politicians. Rather, every rating is pulled from two sources: interest groups (ACLU, NRA, etc.) and all registered members of the Vote Reports website.</span>		
+		</div>
+		<div class="span-8 last" style="position:relative; top: 120px;">
+			<div class="span-4">
+				<img src="images/grade_incomplete.png" />
+				<span id="tinytext">Ratings with a colored border are derived from limited sources or from candidates with no voting history.</span>		
+			</div>
+			<div class="span-4 last">
+				<img src="images/grade_unknown.png" />
+				<span id="tinytext">Ratings with a question mark mean that we have no records for the politician on this viewed issue.</span>
+			</div>
+		</div>
+	</div>
 
-    
+	<div class="span-24 last" style="margin-top:-90px;">
+		<div class="span-8" style="position:relative; top:60px;">	
+			<span id="sectionheadline" class="tk-header">Interest group ratings</span><br />
+			<span id="sectiontext">Interest groups individually have their own criteria of evaluating a politician. This usually includes voting records, interviews, survey results, and sources of funding. We also import interest group ratings from Project VoteSmart.</span>
+		</div>
 
-    <div class="report_score">
-      <a href="/interest_groups/international-brotherhood-of-teamsters/scores/1226595" class="fancyboxy score b">B</a>
+		<div class="span-8">
+			<img class="circle3" src="images/circle_3.png" />
+		</div>
 
-        
+		<div class="span-8 last" style="position:relative; top:60px;">
+				<span id="sectionheadline" class="tk-header">Member created reports</span><br />
+				<span id="sectiontext">Registered members can also create their own grades on politicians. Members create a report outlining which bills they support and are against. The system then automatically generates a score for all politicians.</span>
+		</div>
+	</div>
 
-<div class="score_sources">
-  
-    <a href="/interest_groups/international-brotherhood-of-teamsters/scores/1226595" class="fancyboxy">2 ratings</a>
+	<div class="span-24 last" style="margin-top:-20px;">
+		<div class="span-8">&nbsp;</div>
+		<div class="span-8">
+			<img class="circle4" src="images/circle_4.png" />
+		</div>
+		<div class="span-8 last" style="position:relative; top:70px;">
+			<span id="sectionheadline" class="tk-header">Believe in a Cause</span><br />
+			<span id="sectiontext">Since many interest groups and member generated reports overlap certain subjects, we combine them into Causes. In essence, it’s a stance on an issue. Collecting many scores helps average the grade and avoid one or more groups from polarizing a politicians grade.</span>
+		</div>
+	</div>
+
+	<div class="span-24 last" style="margin-top:-240px; margin-bottom:40px;">
+		<div class="span-8">
+			<img src="images/imac_preview.jpg" class="preview" style="position:relative; left:-200px;"/>
+		</div>
+		<div class="span-16 last" style="position:relative; top:275px;">
+			<span class="tk-header" id="headline">The VoterCard</span>
+			<p id="bigsectiontext" style="margin: 10px 0px 0px 0px;">These ratings and causes culminate into the comprehensive and easy-to-use Vote Reports VoterCard. vel ligula blandit sit amet sodales eros faucibus. Nulla facilisi.</p>
+			<a href=""><img id="button" src="images/call_to_action.png" /></a>
+		</div>
+	</div>
+		
 </div>
 
-    </div>
 
-  </div>
-</li>
-</ul>
+<div id="footer" >
 
-  </div>
+	<div class="container">
+	
+		<div class="span-24" >
+			<div class="span-5">
+				<a href="/"><img id="footerlogo" src="images/votereports_logo.png"></a> 
+ 			</div>
+			
+			<div class="span-8" style="text-align:left; font-size:11px; color:#fff; position:relative; top:8px;">
+			is a <a href="http://participantlabs.com/" class="white">Participant Labs</a> creation.
+			</div>	
+			
+			<div class="span-11 last">
+				<div class="sidebar-links" style="position:relative; top:8px;">
+					<a href="/about">About us</a><img id="logindivider" src="images/homepage_register_divider.png" />
+					<a href="http://blog.votereports.org/">Our Blog</a><img id="logindivider" src="images/homepage_register_divider.png" />
+					<a href="mailto:all_ears@votereports.org">Contact us</a><img id="logindivider" src="images/homepage_register_divider.png" />
+					<a href="http://getsatisfaction.com/votereports">Feedback</a><img id="logindivider" src="images/homepage_register_divider.png" />
+					<a href="/donate">Support Our Efforts</a>
+				</div>
+			</div>
+		</div>
 
-  <p>Customize an overview of your reps: <a href="/guides/new">Get Started Now</a></p>
+	</div>
+	<div class="container">
+		<div class="span-24" >
+			<div id="quotecopy" style="position:relative; left:275px; top:30px;">
+				There must be a beginning of any great matter, but the continuing unto the end until it be thoroughly finished yields the true glory.<br /><span style="font-family:Arial;font-size:11px;color:#c8c8c8;font-weight:400;text-align:left;">Francis Drake</span>
+			</div>	
+		</div>
+	</div>
 </div>
-
-<div class="section clearfix span-9 last" id="advocates">
-  <h3>Sample User-created Reports</h3>
-
-  
-<div id="reports">
-      <ul class="reports">
-          <li>
-
-<div class="report act-hover" id="report_1177" rel="follow_report_1177">  
-
-<div class="follow_report hide" id="follow_report_1177"></div>
-  <a href="/reports/james/save-the-internet" class="report_title">Save the Internet</a>
-    <span class="report_creator">by 
-
-<a href="/reports/james" class="user">
-
-<img alt="" height="14" src="http://gravatar.com/avatar/0b8db578bdb412396e8e37e9e49817d5.png?d=identicon&amp;r=PG&amp;s=14" width="14" />
-james
-</a>
-</span>
-    <blockquote class="report_excerpt"><p>The savetheinternet.com coalition is two million everyday people who have banded together with thousands of non-profit organizations, businesses an...</p></blockquote>
-
-    <dl class="report_subject">
-      <dt>Subject</dt>
-      <dd>
-
-<div class="subject" id="subject_17495">  <a href="/subjects/law">Law</a>
-</div></dd>
-    </dl>
-</div></li>
-          <li>
-
-<div class="report act-hover" id="report_319" rel="follow_report_319">  
-
-<div class="follow_report hide" id="follow_report_319"></div>
-  <a href="/reports/empact/end-patent-abuse" class="report_title">End Patent Abuse</a>
-    <span class="report_creator">by 
-
-<a href="/reports/empact" class="user">
-
-<img alt="" height="14" src="http://gravatar.com/avatar/b4493ae064e6e2841f376fd1dc12b7ba.png?d=identicon&amp;r=PG&amp;s=14" width="14" />
-Empact
-</a>
-</span>
-    <blockquote class="report_excerpt"><p>Overly-broad patents stifle innovation, and have lead to a whole host of so-called &quot;Patent Trolls,&quot; who acquire patents not to protect their creati...</p></blockquote>
-
-    <dl class="report_subject">
-      <dt>Subject</dt>
-      <dd>
-
-<div class="subject" id="subject_18014">  <a href="/subjects/intellectual-property">Intellectual property</a>
-</div></dd>
-    </dl>
-</div></li>
-          <li>
-
-<div class="report act-hover" id="report_43" rel="follow_report_43">  
-
-<div class="follow_report hide" id="follow_report_43"></div>
-  <a href="/reports/johnfactorial/marijuana-legalization" class="report_title">Marijuana Legalization</a>
-    <span class="report_creator">by 
-
-<a href="/reports/johnfactorial" class="user">
-
-<img alt="" height="14" src="http://gravatar.com/avatar/f019355c75ba0e00afdde54fee03976d.png?d=identicon&amp;r=PG&amp;s=14" width="14" />
-johnfactorial
-</a>
-</span>
-    <blockquote class="report_excerpt"><p>I believe marijuana should be 100% legalized federally and left up to the states to tax, regulate, or even recriminalize as they see fit. This repo...</p></blockquote>
-
-    <dl class="report_subject">
-      <dt>Subject</dt>
-      <dd>
-
-<div class="subject" id="subject_23505">  <a href="/subjects/drug-trafficking-and-controlled-substances">Drug trafficking and controlled substances</a>
-</div></dd>
-    </dl>
-</div></li>
-      </ul>
-
-</div>
-
-  <a href="/reports" class="sprites front_page-button_seeMore"><span>See more Reports</span></a>
-  <a href="/reports/new" class="sprites front_page-button_createreport"><span>Create your own</span></a>
-</div>
-
-    </div>
-  </div>
-
-
-    <div id="footer" class="footer">
-
-      <div class="container">
-        <div class="span-6">
-          <a href="/" class="sprites navigation-footer_logo"><span>VoteReports</span></a>
-          <a href="http://participantlabs.com/" id="copyright">© 2010 Participant Labs</a>
-        </div>
-        <ul class="sidebar-links">
-          <li><a href="/about">About us</a></li>
-
-          <li><a href="http://blog.votereports.org/">Our Blog</a></li>
-          <li><a href="mailto:all_ears@votereports.org">Contact us</a></li>
-          <li><a href="http://getsatisfaction.com/votereports" title="We welcome it">Feedback</a></li>
-          <li><a href="/donate" title="We've got plenty more to do, and we need your help to do it">Support Our Efforts</a></li>
-        </ul>
-      </div>
-    </div>
 
     <script type="text/javascript" charset="utf-8">
   var is_ssl = ("https:" == document.location.protocol);
