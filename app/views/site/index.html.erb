@@ -1,41 +1,131 @@
 <%- title 'Knowing is Half the Ballot' -%>
 
 <% content_for :above_content do %>
-  <div id="hero" class="span-24">
-    <div class="container">
-      <h1><span class="sprites front_page-know_what_your_representatives_really_stand_for"><span>Know what your representatives really stand for</span></span></h1>
-      <div class="span-6">
-        <p>We're making it easy to know where they stand. Our users make sense of their votes so you don't have to:</p>
+  <div id="hero">
 
-        <%= link_to content_tag(:span, 'Get Started Now'), new_guide_path, :class => 'sprites front_page-get_started_now' %>
-        <p class="no_reg">No Registration Required</p>
-      </div>
-      <div class="span-18 last guide_explanation">
-        <%= link_to content_tag(:span, 'Select Your Location → Choose Your Causes → See How Your Reps Rate'), new_guide_path, :class => 'sprites front_page-guide_explanation' %>
+    <div id="logoarea">
+      <a href="/"><img src="images/votereports_logo.png"></a>
+      <div id="account">
+        <span style="color:#c8c8c8;font-weight:400;">Location: </span><a class="white" href="/location?return_to=%2F">Brooklyn, NY</a>
+        <img id="logindivider" src="images/homepage_register_divider.png" />
+        <a class="blue" href="/login"><span>Log in</span></a>
+        <img id="logindivider" src="images/homepage_register_divider.png" />
+        <a class="blue" href="/login"><span>Register</span></a>
       </div>
     </div>
+
+    <div id="centerbox">
+      <div id="calltoactionbox">
+        <span id="headline" class="tk-header">Actions speak louder than words.</span>
+        <span id="copy">Identify like-minded U.S. political candidates based on their voting history on issues important to you.</span>
+        <a href=""><img id="button" src="images/call_to_action.png" /></a><br />
+        <span style="font-size:11px; color:#b0b0b0;">No registration required. Safety not guaranteed.</span>
+      </div>
+    </div>
+
   </div>
 <% end %>
 
-<div class="clearfix span-15" id="voters">
-  <h3><%- if requested_location -%>
-    Sample Grades for Reps in your area -
-    <%= link_to requested_location, location_path(:return_to => request.path), :class => 'fancyboxy location' %>
-  <%- else -%>
-    Sample Politician Grades -
-    <%= link_to 'Set Location', location_path(:return_to => request.path), :class => 'fancyboxy location' %>
-  <%- end -%>
-  </h3>
-  <div id="score_examples">
-    <%= render 'reports/report_and_scores', :report => @sample_report, :scores => @scores %>
+<div id="circlebg"></div>
+
+<div class="container">
+
+  <div class="span-24 last">
+      <div id="header">
+         <ul id="menu" class="sidebar-links">
+
+        <li class="">
+                     <a href="/politicians" id="navlinks" class="tk-header"><span>politicians</span></a>
+                 </li>
+                 <li class="">
+          <a href="/reports" id="navlinks" class="tk-header"><span>reports</span></a>
+        </li>
+
+        <li class="">
+          <a href="/causes" id="navlinks" class="tk-header"><span>causes</span></a>
+        </li>
+      </ul>
+
+      <form action="/search" id="header_search" method="get">
+        <label for="term">Search</label>
+        <input class="fieldtag" id="nav_search" name="term" size="20" title="Politicians, Reports and Causes" type="text" value="" />
+      </form>
+    </div>
   </div>
-  <p>Customize an overview of your reps: <%= link_to "Get Started Now", new_guide_path %></p>
-</div>
 
-<div class="section clearfix span-9 last" id="advocates">
-  <h3>Sample User-created Reports</h3>
+  <div class="span-24 last">
+    <span class="tk-header" id="headline">How does Vote Reports work?</span>
+  </div>
 
-  <%= render 'reports/list', :reports => @recent_reports %>
-  <%= link_to content_tag(:span, 'See more Reports'), reports_path, :class => 'sprites front_page-button_seeMore' %>
-  <%= link_to content_tag(:span, 'Create your own'), new_report_path, :class => 'sprites front_page-button_createreport' %>
+  <div class="span-24 last" style="margin-top:10px;">
+    <div class="span-9" style="position:relative;"><span id="bigsectiontext">At Vote Reports, we believe the most reliable way of gauging a politicians compatibility with a voter is by evaluating them on their legislative voting record.</span></div>
+      <div class="span-15 last">
+        <div class="span-9">
+          <img class="circle1" src="images/circle_1.png" />
+        </div>
+        <div class="span-6 last" style="position:relative; top:80px;">
+          <span id="sectionheadline" class="tk-header">Grades matter</span><br />
+          <span id="sectiontext">High grades mean the politician is graded well according to the issue they are being evaluated on (not used to rate a politicians performance).</span>
+        </div>
+      </div>
+  </div>
+
+  <div class="span-24 last" style="margin-top:-90px;">
+    <div class="span-8">
+      <img class="circle2" src="images/circle_2.png" />
+    </div>
+    <div class="span-8" style="position:relative; top: 120px;">
+      <span id="sectionheadline" class="tk-header">The source of the ratings</span><br />
+      <span id="sectiontext">Vote Reports does not rate politicians. Rather, every rating is pulled from two sources: interest groups (ACLU, NRA, etc.) and all registered members of the Vote Reports website.</span>
+    </div>
+    <div class="span-8 last" style="position:relative; top: 120px;">
+      <div class="span-4">
+        <img src="images/grade_incomplete.png" />
+        <span id="tinytext">Ratings with a colored border are derived from limited sources or from candidates with no voting history.</span>
+      </div>
+      <div class="span-4 last">
+        <img src="images/grade_unknown.png" />
+        <span id="tinytext">Ratings with a question mark mean that we have no records for the politician on this viewed issue.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="span-24 last" style="margin-top:-90px;">
+    <div class="span-8" style="position:relative; top:60px;">
+      <span id="sectionheadline" class="tk-header">Interest group ratings</span><br />
+      <span id="sectiontext">Interest groups individually have their own criteria of evaluating a politician. This usually includes voting records, interviews, survey results, and sources of funding. We also import interest group ratings from Project VoteSmart.</span>
+    </div>
+
+    <div class="span-8">
+      <img class="circle3" src="images/circle_3.png" />
+    </div>
+
+    <div class="span-8 last" style="position:relative; top:60px;">
+        <span id="sectionheadline" class="tk-header">Member created reports</span><br />
+        <span id="sectiontext">Registered members can also create their own grades on politicians. Members create a report outlining which bills they support and are against. The system then automatically generates a score for all politicians.</span>
+    </div>
+  </div>
+
+  <div class="span-24 last" style="margin-top:-20px;">
+    <div class="span-8">&nbsp;</div>
+    <div class="span-8">
+      <img class="circle4" src="images/circle_4.png" />
+    </div>
+    <div class="span-8 last" style="position:relative; top:70px;">
+      <span id="sectionheadline" class="tk-header">Believe in a Cause</span><br />
+      <span id="sectiontext">Since many interest groups and member generated reports overlap certain subjects, we combine them into Causes. In essence, it’s a stance on an issue. Collecting many scores helps average the grade and avoid one or more groups from polarizing a politicians grade.</span>
+    </div>
+  </div>
+
+  <div class="span-24 last" style="margin-top:-240px; margin-bottom:40px;">
+    <div class="span-8">
+      <img src="images/imac_preview.jpg" class="preview" style="position:relative; left:-200px;"/>
+    </div>
+    <div class="span-16 last" style="position:relative; top:275px;">
+      <span class="tk-header" id="headline">The VoterCard</span>
+      <p id="bigsectiontext" style="margin: 10px 0px 0px 0px;">These ratings and causes culminate into the comprehensive and easy-to-use Vote Reports VoterCard. vel ligula blandit sit amet sodales eros faucibus. Nulla facilisi.</p>
+      <a href=""><img id="button" src="images/call_to_action.png" /></a>
+    </div>
+  </div>
+
 </div>
