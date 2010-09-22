@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100916193721) do
+ActiveRecord::Schema.define(:version => 20100922022754) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -510,6 +510,8 @@ ActiveRecord::Schema.define(:version => 20100916193721) do
     t.integer  "congressional_district_id"
     t.integer  "current_office_id"
     t.string   "current_office_type"
+    t.integer  "current_candidacy_id"
+    t.string   "vote_smart_photo_url"
   end
 
   add_index "politicians", ["bioguide_id"], :name => "index_politicians_on_bioguide_id", :unique => true
@@ -839,6 +841,7 @@ ActiveRecord::Schema.define(:version => 20100916193721) do
 
   add_foreign_key "offices", "office_types", :name => "offices_office_type_id_fk"
 
+  add_foreign_key "politicians", "candidacies", :name => "politicians_current_candidacy_id_fk", :column => "current_candidacy_id", :dependent => :nullify
   add_foreign_key "politicians", "congressional_districts", :name => "politicians_district_id_reference"
 
   add_foreign_key "presidential_terms", "parties", :name => "presidential_terms_party_id_reference"

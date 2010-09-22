@@ -4,6 +4,15 @@ class Politician < ActiveRecord::Base
 
   has_friendly_id :full_name, :use_slug => true, :approximate_ascii => true
 
+  has_many :candidacies
+  has_many :races, :through => :candidacies
+  belongs_to :current_candidacy, :class_name => 'Candidacy'
+
+  def latest_candidacy
+    candidacies.valid.first(:joins => {:race => :election_stage}, :order => 'election_stages.voted_on DESC', :conditions => ['election_stages.voted_on > ?', Date.today]) \
+    || candidacies.valid.first(:joins => {:race => :election_stage}, :order => 'election_stages.voted_on DESC')
+  end
+
   has_many :representative_terms
   has_one :latest_representative_term, :class_name => 'RepresentativeTerm', :order => 'ended_on DESC'
 
@@ -121,6 +130,11 @@ class Politician < ActiveRecord::Base
     }
   }
 
+  named_scope :has_current_candidacy, :select => 'DISTINCT politicians.*', :joins => :candidacies, :conditions => ['candidacies.status NOT IN(?)', ["Deceased", "Withdrawn", "Removed"]]
+
+  named_scope :scoreworthy,
+    :conditions => 'politicians.current_office_id IS NOT NULL OR politicians.current_candidacy_id IS NOT NULL'
+
   class << self
     def prominence_clause
       %{
@@ -139,8 +153,21 @@ class Politician < ActiveRecord::Base
         update_all(:current_office_id => nil, :current_office_type => nil)
         in_office_normal_form.paginated_each do |politician|
           politician.update_attribute(:current_office, politician.latest_term)
+          print '.'
         end
       end
+      puts
+    end
+
+    def update_current_candidacy_status!
+      transaction do
+        update_all(:current_candidacy_id => nil)
+        has_current_candidacy.paginated_each do |politician|
+          politician.update_attribute(:current_candidacy, politician.latest_candidacy)
+          print '.'
+        end
+      end
+      puts
     end
   end
   def in_office?
