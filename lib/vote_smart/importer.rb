@@ -20,32 +20,35 @@ module VoteSmart
           import_elections
           import_offices
           import_races
+          Politician.update_current_candidacy_status!
         end
       end
-  
+
       def import_elections
-        puts "Elections"
-        fifty_states.each do |s|
-          Rails.logger.info "Importing Elections for #{s} ..."
-          if (e = valid_hash(VoteSmart::Election.get_election_by_year_state "2010", s))
-            Rails.logger.info "Okay state #{s} has some elections for 2010..."
-            elections = array_of_hashes(e['elections']['election'])
-            elections.each do |election_data|
-              Rails.logger.info "Now processing #{election_data['name']}\n"
-              election = ::Election.create!(:name => election_data['name'],
-                               :vote_smart_id => election_data['electionId'],
-                               :state_id => UsState.find_by_abbreviation(election_data['stateId']),
-                               :year => election_data['electionYear'],
-                               :special => object_to_boolean(election_data['special']),
-                               :office_type => election_data['officeTypeId'])
-              election_stages(election_data).each do |es|
-                raise "#{election_data['stateId']} != #{es['stateId']}" if election_data['stateId'] != es['stateId']
-                election.stages.create!(
-                  :vote_smart_id => es['stageId'],
-                  :name => es['name'],
-                  :voted_on => es['electionDate']
-                )
-                print '.'
+        ActiveRecord::Base.transaction do
+          puts "Elections"
+          fifty_states.each do |s|
+            Rails.logger.info "Importing Elections for #{s} ..."
+            if (e = valid_hash(VoteSmart::Election.get_election_by_year_state "2010", s))
+              Rails.logger.info "Okay state #{s} has some elections for 2010..."
+              elections = array_of_hashes(e['elections']['election'])
+              elections.each do |election_data|
+                Rails.logger.info "Now processing #{election_data['name']}\n"
+                election = ::Election.create!(:name => election_data['name'],
+                                 :vote_smart_id => election_data['electionId'],
+                                 :state_id => UsState.find_by_abbreviation(election_data['stateId']),
+                                 :year => election_data['electionYear'],
+                                 :special => object_to_boolean(election_data['special']),
+                                 :office_type => election_data['officeTypeId'])
+                election_stages(election_data).each do |es|
+                  raise "#{election_data['stateId']} != #{es['stateId']}" if election_data['stateId'] != es['stateId']
+                  election.stages.create!(
+                    :vote_smart_id => es['stageId'],
+                    :name => es['name'],
+                    :voted_on => es['electionDate']
+                  )
+                  print '.'
+                end
               end
             end
           end
@@ -70,42 +73,64 @@ module VoteSmart
         end
       end
 
-      def import_races
-        puts "Races"
-        ::Election.all.each do |election|
-          count = 0
-          election.stages.each do |stage|
-            candidate_hash = valid_hash(VoteSmart::Election.get_stage_candidates(election.vote_smart_id, stage.vote_smart_id))
-            if candidate_hash
-              array_of_hashes(candidate_hash['stageCandidates']['candidate']).each do |candidate|
-                office = ::Office.find_by_vote_smart_id(candidate['officeId'])
-
-                race_params = {
-                  :office_id => office.id,
-                  :district => nil_if_blank(candidate['district']),
-                }
-                race = stage.races.first(:conditions => race_params) || stage.races.create!(race_params)
-                politician = ::Politician.find_by_vote_smart_id(candidate['candidateId']) || ::Politician.create!(
-                  :first_name => candidate['firstName'],
-                  :middle_name => candidate['middle_name'],
-                  :last_name => candidate['lastName'],
-                  :nickname => candidate['nickName'],
-                  :name_suffix => candidate['suffix'],
-                  :vote_smart_id => candidate['candidateId']
-                )
-                ::Candidacy.find_or_create_by_race_id_and_politician_id(
-                  :race_id => race.id,
-                  :politician_id => politician.id,
-                  :party => candidate['party'],
-                  :status => candidate['status'],
-                  :vote_count => candidate['voteCount'],
-                  :vote_percent => candidate['votePercent']
-                )
-                print '.'
-              end
+      def import_candidate(candidate)
+        bio = valid_hash(VoteSmart::CandidateBio.get_bio(candidate['candidateId']))
+        bio_candidate = bio['bio']['candidate']
+        politician = ::Politician.find_by_vote_smart_id(candidate['candidateId']) \
+          || ::Politician.find_by_crp_id(bio_candidate['crpId']) || begin
+            if office = to_array(bio['bio']['office']).detect {|o| o['type'] == 'Congressional' }
+              politicians = Politician.find_all_by_first_name_and_last_name( bio_candidate['firstName'], bio['bio']['candidate']['lastName'])
+              raise office.inspect
+            elsif bio_candidate['political'].to_s.split("\n").detect {|p| p.include?("Representative, United States House of Representatives") || p.include?('Senator, United States Senate') }
+              raise bio_candidate['political'].to_s
+            else
+              ::Politician.create!(:vote_smart_id => candidate['candidateId'])
             end
           end
-          Rails.logger.info "Created #{count} races for #{election.name}\n"
+        politician.update_attributes!(
+          :first_name => candidate['firstName'],
+          :middle_name => candidate['middle_name'],
+          :last_name => candidate['lastName'],
+          :nickname => candidate['nickName'],
+          :name_suffix => candidate['suffix'],
+          :vote_smart_photo_url => bio_candidate['photo'],
+          :crp_id => bio_candidate['crp_id'],
+          :gender => bio_candidate['gender'].first
+        )
+        politician
+      end
+
+      def import_races  
+        puts "Races"
+        ActiveRecord::Base.transaction do
+          ::Election.all.each do |election|
+            count = 0
+            election.stages.each do |stage|
+              candidate_hash = valid_hash(VoteSmart::Election.get_stage_candidates(election.vote_smart_id, stage.vote_smart_id))
+              if candidate_hash
+                array_of_hashes(candidate_hash['stageCandidates']['candidate']).each do |candidate|
+                  office = ::Office.find_by_vote_smart_id(candidate['officeId'])
+
+                  race_params = {
+                    :office_id => office.id,
+                    :district => nil_if_blank(candidate['district']),
+                  }
+                  race = stage.races.first(:conditions => race_params) || stage.races.create!(race_params)
+                  politician = import_candidate(candidate)
+                  ::Candidacy.find_or_create_by_race_id_and_politician_id(
+                    :race_id => race.id,
+                    :politician_id => politician.id,
+                    :party => candidate['party'],
+                    :status => candidate['status'],
+                    :vote_count => candidate['voteCount'],
+                    :vote_percent => candidate['votePercent']
+                  )
+                  print '.'
+                end
+              end
+            end
+            Rails.logger.info "Created #{count} races for #{election.name}\n"
+          end
         end
         puts
       end

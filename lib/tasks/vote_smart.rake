@@ -3,6 +3,10 @@ namespace :vote_smart do
     VoteSmart::Importer.import_all
   end
 
+  task :import_races => :environment do
+    VoteSmart::Importer.import_races
+  end
+
   task :import_ratings => :environment do
     VoteSmart::Importer.import_ratings
   end
