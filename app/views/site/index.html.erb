@@ -1,12 +1,12 @@
 <%- title 'Knowing is Half the Ballot' -%>
 
-<% content_for :above_content do %>
+<% content_for :above_header do %>
   <div id="hero">
 
     <div id="logoarea">
       <a href="/"><img src="images/votereports_logo.png"></a>
       <div id="account">
-        <span style="color:#c8c8c8;font-weight:400;">Location: </span><a class="white" href="/location?return_to=%2F">Brooklyn, NY</a>
+        <%= render 'locations/location' %>
         <img id="logindivider" src="images/homepage_register_divider.png" />
         <a class="blue" href="/login"><span>Log in</span></a>
         <img id="logindivider" src="images/homepage_register_divider.png" />

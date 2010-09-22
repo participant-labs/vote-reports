@@ -78,7 +78,7 @@ a.sprites, span.sprites {
   float:right;
 }
 
-#account .location, #account .logout, #account .dashboard {
+#account .logout, #account .dashboard {
   vertical-align: 40%;
 }
 
