@@ -45,7 +45,6 @@ module LocationsHelper
   end
 
   def sought_politicians
-    @in_office = !params.has_key?(:in_office) || ['1', true].include?(params[:in_office])
     result =
       if params.has_key?(:representing)
         Politician.from(params[:representing])
@@ -57,7 +56,15 @@ module LocationsHelper
       else
         Politician
       end
-    result = result.in_office if @in_office
+    result =
+      if !params.has_key?(:in_office)
+        result.scoreworthy
+      elsif ['1', true].include?(params[:in_office])
+        @in_office = true
+        result.in_office
+      else
+        result
+      end
     result
   end
 
