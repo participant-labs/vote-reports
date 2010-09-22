@@ -13,6 +13,6 @@ public/assets
 spec/support/web_requests.marshal
 solr
 rerun.txt
-
+.DS_Store
 bin/
 vendor/bundler_gems/
