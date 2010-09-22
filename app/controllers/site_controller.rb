@@ -18,12 +18,7 @@ class SiteController < ApplicationController
       respond_to do |format|
         format.html {
           @recent_reports = Report.user_published.by_created_at.for_display.all(:limit => 3)
-        }
-        format.js {
-          render :partial => 'reports/report_and_scores', :locals => {
-            :report => @sample_report,
-            :scores => @scores
-          }
+          render :layout => 'minimal'
         }
       end
     end
