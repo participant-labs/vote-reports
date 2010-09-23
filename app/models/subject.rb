@@ -84,4 +84,8 @@ class Subject < ActiveRecord::Base
       result
     end
   }
+
+  def as_json(opts)
+    super(opts.reverse_merge(:only => [:name, :vote_smart_id, :name]))
+  end
 end

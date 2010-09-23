@@ -9,6 +9,9 @@ class CausesController < ApplicationController
       format.js {
         render :partial => 'causes/list', :locals => {:causes => @causes}
       }
+      format.json {
+        render :json => Cause.all
+      }
     end
   end
 
@@ -33,7 +36,20 @@ class CausesController < ApplicationController
     @subjects = @cause.subjects.for_tag_cloud.all(
       :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
       :limit => 3)
-    @related_causes = @cause.related_causes.all(:limit => 3)
+
+    respond_to do |format|
+      format.html {
+        @related_causes = @cause.related_causes.all(:limit => 3)
+      }
+      format.json {
+        cause_hash = @cause.as_json
+        cause_hash["cause"].merge!(
+          "subjects" => @subjects,
+          "related_causes" => @cause.related_causes
+        )
+        render :json => cause_hash
+      }
+    end
   end
 
   def edit
