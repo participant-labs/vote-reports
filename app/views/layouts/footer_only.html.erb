@@ -34,20 +34,20 @@
 
         <div class="span-24" >
           <div class="span-5">
-            <a href="/"><img id="footerlogo" src="images/votereports_logo.png"></a>
+            <%= link_to image_tag('votereports_logo.png', :id => 'footerlogo'), root_path %>
            </div>
 
           <div class="span-8" style="text-align:left; font-size:11px; color:#fff; position:relative; top:8px;">
-          is a <a href="http://participantlabs.com/" class="white">Participant Labs</a> creation.
+          is a <%= link_to 'Participant Labs', participant_labs_path, :class => 'white' %> creation.
           </div>
 
           <div class="span-11 last">
             <div class="sidebar-links" style="position:relative; top:8px;">
-              <a href="/about">About us</a><img id="logindivider" src="images/homepage_register_divider.png" />
-              <a href="http://blog.votereports.org/">Our Blog</a><img id="logindivider" src="images/homepage_register_divider.png" />
-              <a href="mailto:all_ears@votereports.org">Contact us</a><img id="logindivider" src="images/homepage_register_divider.png" />
-              <a href="http://getsatisfaction.com/votereports">Feedback</a><img id="logindivider" src="images/homepage_register_divider.png" />
-              <a href="/donate">Support Our Efforts</a>
+              <%= link_to 'About us', about_path %><%= divider %>
+              <%= link_to 'Our Blog', blog_path %><%= divider %>
+              <%= mail_to 'all_ears@votereports.org', 'Contact Us' %><%= divider %>
+              <%= link_to 'Feedback', get_satisfaction_path %><%= divider %>
+              <%= link_to 'Support Our Efforts', new_donation_path %>
             </div>
           </div>
         </div>

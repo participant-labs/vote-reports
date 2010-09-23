@@ -17,6 +17,10 @@ module ApplicationHelper
     "http://mapof.it/#{URI.escape(address.to_s)}"
   end
 
+  def divider
+    image_tag('homepage_register_divider.png', :class => 'logindivider')
+  end
+
   def page_title
     raise "Missing page title" if @page_title.blank?
     [@page_title, 'VoteReports'].compact.join(' - ')

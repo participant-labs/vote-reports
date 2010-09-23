@@ -196,7 +196,7 @@ a.white:hover {text-decoration:underline;}
 #circlebg {height: 180px; margin-bottom:-180px; background-image:url('../images/bg_grades.png'); background-repeat:no-repeat; background-position: center top;}
 
 /* STUFF FOR THE TOP OF THE PAGE, REALLY UNIQUE TO THE HOMEPAGE */
-#logindivider {margin: 2px 8px 0px 8px; vertical-align:text-top;}
+.logindivider {margin: 2px 8px 0px 8px; vertical-align:text-top;}
 #header {background-color: #322129; padding: 0px; margin-bottom:60px; border: 0px 5px 0px 5px; height:38px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px;}
 #navlinks {font-size:14px; color:#fff; line-height:38px; }
 #menu {position: relative; left:15px;}
