@@ -13,6 +13,9 @@ class ReportsController < ApplicationController
     elsif params[:without_causes].present?
       @title = 'Reports without Causes'
       @reports = Report.non_cause.published.without_associated_cause.by_name.for_display.paginate(:page => params[:page])
+    elsif params[:from_members]
+      @title = 'Member Reports'
+      @reports = topical_reports.user_published.by_name.paginate(:page => params[:page])
     else
       @title = 'Reports'
       @reports = topical_reports.by_name.paginate(:page => params[:page])
