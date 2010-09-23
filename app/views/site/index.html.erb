@@ -1,30 +1,28 @@
 <%- title 'Knowing is Half the Ballot' -%>
 
-<% content_for :above_header do %>
-  <div id="hero">
+<div id="hero">
 
-    <div id="logoarea">
-      <a href="/"><img src="images/votereports_logo.png"></a>
-      <div id="account">
-        <%= render 'locations/location' %>
-        <img id="logindivider" src="images/homepage_register_divider.png" />
-        <a class="blue" href="/login"><span>Log in</span></a>
-        <img id="logindivider" src="images/homepage_register_divider.png" />
-        <a class="blue" href="/login"><span>Register</span></a>
-      </div>
+  <div id="logoarea">
+    <a href="/"><img src="images/votereports_logo.png"></a>
+    <div id="account">
+      <%= render 'locations/location' %>
+      <img id="logindivider" src="images/homepage_register_divider.png" />
+      <a class="blue" href="/login"><span>Log in</span></a>
+      <img id="logindivider" src="images/homepage_register_divider.png" />
+      <a class="blue" href="/login"><span>Register</span></a>
     </div>
-
-    <div id="centerbox">
-      <div id="calltoactionbox">
-        <span id="headline" class="tk-header">Actions speak louder than words.</span>
-        <span id="copy">Identify like-minded U.S. political candidates based on their voting history on issues important to you.</span>
-        <a href=""><img id="button" src="images/call_to_action.png" /></a><br />
-        <span style="font-size:11px; color:#b0b0b0;">No registration required. Safety not guaranteed.</span>
-      </div>
-    </div>
-
   </div>
-<% end %>
+
+  <div id="centerbox">
+    <div id="calltoactionbox">
+      <span id="headline" class="tk-header">Actions speak louder than words.</span>
+      <span id="copy">Identify like-minded U.S. political candidates based on their voting history on issues important to you.</span>
+      <img id="button" src="images/call_to_action.png" /></a><br />
+      <span style="font-size:11px; color:#b0b0b0;">No registration required. Safety not guaranteed.</span>
+    </div>
+  </div>
+
+</div>
 
 <div id="circlebg"></div>
 

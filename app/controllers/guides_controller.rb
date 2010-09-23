@@ -1,5 +1,5 @@
 class GuidesController < ApplicationController
-  layout 'minimal'
+  layout 'footer_and_header'
 
   def new
     if params[:from] == 'location' && !session[:declared_geo_location]

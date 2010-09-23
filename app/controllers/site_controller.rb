@@ -18,7 +18,7 @@ class SiteController < ApplicationController
       respond_to do |format|
         format.html {
           @recent_reports = Report.user_published.by_created_at.for_display.all(:limit => 3)
-          render :layout => 'minimal'
+          render :layout => 'footer_only'
         }
       end
     end

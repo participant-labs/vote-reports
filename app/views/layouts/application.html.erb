@@ -20,7 +20,7 @@
   </div>
 <% end %>
 
-<% content_for :minimal_content do %>
+<% content_for :footer_and_header_content do %>
   <%= yield :above_content %>
   
   <div id="body" class="container">
@@ -29,4 +29,4 @@
     </div>
   </div>
 <% end %>
-<%= render :file => 'layouts/minimal' %> 
+<%= render :file => 'layouts/footer_and_header' %> 
