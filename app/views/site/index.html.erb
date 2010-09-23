@@ -37,7 +37,7 @@
   </div>
 
   <div class="span-24 last" style="margin-top:10px;">
-    <div class="span-9" style="position:relative;"><span id="bigsectiontext">At Vote Reports, we believe the most reliable way of gauging a politicians compatibility with a voter is by evaluating them on their legislative voting record.</span></div>
+    <div class="span-9" style="position:relative;"><span id="bigsectiontext">At Vote Reports, we believe the most reliable way of gauging a politician's compatibility is by evaluating their voting record. So we made it easy.</span></div>
       <div class="span-15 last">
         <div class="span-9">
           <img class="circle1" src="images/circle_1.png" />
@@ -55,7 +55,7 @@
     </div>
     <div class="span-8" style="position:relative; top: 120px;">
       <span id="sectionheadline" class="tk-header">The source of the ratings</span><br />
-      <span id="sectiontext">Vote Reports does not rate politicians. Rather, every rating is pulled from two sources: interest groups (ACLU, NRA, etc.) and all registered members of the Vote Reports website.</span>
+      <span id="sectiontext">Vote Reports does not rate politicians. Rather, every rating is generated from two sources: interest group ratings (e.g. ACLU, NRA) and legislative agendas from interest groups and  members of Vote Reports.</span>
     </div>
     <div class="span-8 last" style="position:relative; top: 120px;">
       <div class="span-4">
@@ -71,8 +71,8 @@
 
   <div class="span-24 last" style="margin-top:-90px;">
     <div class="span-8" style="position:relative; top:60px;">
-      <span id="sectionheadline" class="tk-header">Interest group ratings</span><br />
-      <span id="sectiontext">Interest groups individually have their own criteria of evaluating a politician. This usually includes voting records, interviews, survey results, and sources of funding. We also import interest group ratings from Project VoteSmart.</span>
+      <%= link_to 'Interest group ratings', interest_groups_path, :id => "sectionheadline", :class => "tk-header" %><br />
+      <span id="sectiontext">Interest groups individually have their own criteria of evaluating a politician. This usually includes voting records, interviews, survey results, and sources of funding. We also import interest group ratings from <a href="http://votesmart.org/">Project VoteSmart</a>.</span>
     </div>
 
     <div class="span-8">
@@ -80,7 +80,7 @@
     </div>
 
     <div class="span-8 last" style="position:relative; top:60px;">
-        <span id="sectionheadline" class="tk-header">Member created reports</span><br />
+        <%= link_to 'Member created reports', reports_path(:from_members => true), :id => "sectionheadline", :class => "tk-header" %></span><br />
         <span id="sectiontext">Registered members can also create their own grades on politicians. Members create a report outlining which bills they support and are against. The system then automatically generates a score for all politicians.</span>
     </div>
   </div>
@@ -91,7 +91,7 @@
       <img class="circle4" src="images/circle_4.png" />
     </div>
     <div class="span-8 last" style="position:relative; top:70px;">
-      <span id="sectionheadline" class="tk-header">Believe in a Cause</span><br />
+      <%= link_to 'Believe in a Cause', causes_path, :id => "sectionheadline", :class => "tk-header" %><br />
       <span id="sectiontext">Since many interest groups and member generated reports overlap certain subjects, we combine them into Causes. In essence, it’s a stance on an issue. Collecting many scores helps average the grade and avoid one or more groups from polarizing a politicians grade.</span>
     </div>
   </div>
