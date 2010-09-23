@@ -4,11 +4,7 @@
 
   <div id="logoarea">
     <a href="/"><img src="images/votereports_logo.png"></a>
-    <div id="account">
-      <%= render 'locations/location' %><%= divider %>
-      <%= link_to content_tag(:span, 'Log in'), login_path, :class => 'blue' %><%= divider %>
-      <%= link_to content_tag(:span, 'Register'), signup_path, :class => 'blue' %>
-    </div>
+    <%= render 'layouts/account_links' %>
   </div>
 
   <div id="centerbox">
@@ -27,11 +23,7 @@
 <div class="container">
   <div class="span-24 last">
     <div id="header">
-      <ul id="menu" class="sidebar-links">
-        <li class=""><a href="/politicians" id="navlinks" class="tk-header"><span>politicians</span></a></li>
-        <li class=""><a href="/reports" id="navlinks" class="tk-header"><span>reports</span></a></li>
-        <li class=""><a href="/causes" id="navlinks" class="tk-header"><span>causes</span></a></li>
-      </ul>
+      <%= render 'layouts/menu_links' %>
 
       <form action="/search" id="header_search" method="get">
         <label for="term">Search</label>

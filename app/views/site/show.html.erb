@@ -1,43 +1,125 @@
 <%- title "About us" -%>
-<div class="section" id="mission">
-  <h2>Our Mission</h2>
-  <p>Our mission is to bring on a new level of political accountability such that representatives are always and everywhere led by their constituents.</p>
-  <p>To inform. To promote truth. To combat political apathy. To enrich our political discussions by grounding them in the real actions of our representatives. We are united by our common desire to support honest representatives who stand for our interests.</p>
+<div class="span-24">
+    <div id="about-paragraph">
+  <p id="introtext">Our mission is to bring on a new level of political accountability such that representatives are always led by their constituents. We aim to inform, to promote truth and to combat political apathy, and are driven by a desire to support honest representatives who stand for our interests.<br /><br />The team is based in New York City.</p>
+  </div>
 </div>
 
-<div class="section" id="about_us">
-  <h2>About Us</h2>
-  <p>VoteReports is a national nonprofit, nonpartisan organization led by Benjamin Woosley and built on data provided by:</p>
+<div>
+  <div class="span-24"><div class="divider"></div></div>
 
-  <table id="data_sources">
-    <tr>
-      <td><%= link_to image_tag('gov_track_logo.png', :alt => 'GovTrack.us: a civic project to track Congress', :class => 'span-6'), 'http://www.govtrack.us/' %></td>
-      <td><%= link_to image_tag('vote_smart_logo.jpg', :alt => 'Project Vote Smart', :class => 'span-6'), 'http://votesmart.org/' %></td>
-      <td><%= link_to image_tag('mobile_commons_logo.png', :alt => 'Mobile Commons', :class => 'span-6'), 'http://mcommons.com/' %></td>
-      <td><%= link_to image_tag('sunlight_foundation_logo.gif', :alt => 'Sunlight Foundation', :class => 'span-6'), 'http://sunlightfoundation.com/' %></td>
-    </tr>
-    <tr>
-      <td>for <a href="http://www.govtrack.us/developers/data.xpd">Bill, Vote &amp; Politician Data, and Politician Photos</a></td>
-      <td>for <a href="http://votesmart.org/issue_rating_category_about.php">Interest Group Ratings</a></td>
-      <td>for <a href="http://congress.mcommons.com/">State &amp; Federal District Maps</a></td>
-      <td>for <a href="http://services.sunlightlabs.com/docs/Sunlight_Congress_API/">Politician Contact Info</a></td>
-    </tr>
-  </table>
+  <div class="span-3"><div class="sectionheader"><div>team</div></div></div>
 
-  <p>The site was launched in November 2009 at a startup weekend event in New York City, thanks to the efforts of James Croft, Alex Fradkin, Richard Renzulli, Gilbert Reimschussel, David A. Sampayo, Benjamin Woosley and Ricardo Zulueta, Jr.</p>
+  <div class="span-21 last" id="content-container">
+
+    <div class="span-5"><img class="padded-image" src="images/about_woosley.jpg" /></div>
+    <div class="span-16 last" style="padding-bottom:50px;">
+      <div class="team-info">
+        <div class="foundername">Ben Woosley</div>
+        <div class="jobtitle">Tech Lead and Founder</div>
+        <div class="link"><a href="http://www.participantlabs.com/">participantlabs.com</a></div>
+        <div class="team-copy"><p class="medium-text">Nam auctor auctor congue. Etiam pulvinar rutrum lectus id porttitor. Integer enim sapien, placerat vel viverra vehicula, bibendum nec sapien. Nam mauris ligula, tincidunt vel suscipit tincidunt, varius at erat. Nullam luctus, nisl nec consequat vulputate, nulla mauris luctus est, et viverra sem arcu id nisl. Sed eget odio et velit faucibus convallis.</p></div>
+      </div>
+    </div>
+
+    <div class="span-5"><img class="padded-image" src="images/about_james.jpg" /></div>
+    <div class="span-16 last" style="padding-bottom:50px;">
+      <div class="team-info">
+        <div class="foundername">James Teow</div>
+        <div class="jobtitle">Creative Lead and Partner</div>
+        <div class="link"><a href="http://www.jaems.info/">james.info</a></div>
+        <div class="team-copy"><p class="medium-text">James moved to Brooklyn in order to work alongside some of the top creative designers and developers in the world. His design passion has always been converting complicated streams of data into something accessible to the masses. His hope is that design and politics will mesh together in order to empower citizens with valuable and usable information.</p></div>
+      </div>
+    </div>
+
+    <%- if false -%>
+
+    <div class="span-5"><img class="padded-image" src="images/about_alex.jpg" /></div>
+    <div class="span-16 last">
+      <div class="team-info">
+        <div class="foundername">Alex Fradkin</div>
+        <div class="jobtitle">Front End Developer</div>
+        <div class="link"><a href="http://www.participantlabs.com/">participantlabs.com</a></div>
+        <div class="team-copy"><p class="medium-text">Nam auctor auctor congue. Etiam pulvinar rutrum lectus id porttitor. Integer enim sapien, placerat vel viverra vehicula, bibendum nec sapien. Nam mauris ligula, tincidunt vel suscipit tincidunt, varius at erat. Nullam luctus, nisl nec consequat vulputate, nulla mauris luctus est, et viverra sem arcu id nisl. Sed eget odio et velit faucibus convallis.</p></div>
+      </div>
+    </div>
+
+    <%- end -%>
+
+  </div>
+
 </div>
 
-<div class="section" id="acknowledgements">
-  <h2>Acknowledgements</h2>
-  <p>VoteReports has been a labor of love which has involved many hands, known and unknown in its making, who together represent a symbol of the charity and abundance available to those interested in moving the world forward.</p>
+<div>
+  <div class="span-24"><div class="divider"></div></div>
 
-  <p>The site exists in large part thanks to the encouragement of Jon Berger, who helped bring the original team together in November 2009 at a startup weekend event in New York City.  Since the Jon and his wife Pamela, both of <a href="http://shop.marketpublique.com/">Market Publique</a>, have provided excellent guidance on design and user experience, which have helped to make the site more hospitable.</p>
+  <%- if false -%>
 
-  <p>Likewise, that initial startup weekend team, of James Croft, Alex Fradkin, Richard Renzulli, Gilbert Reimschussel, David A. Sampayo, Benjamin Woosley and Ricardo Zulueta, Jr, enabled the site to transition from being simply an articulated concept to a functioning site.</p>
+  <div class="span-3"><div class="sectionheader" style="background-color:#322129;"><div>advisors</div></div></div>
 
-  <p>VoteReports wouldn't be possible without the vast body of open exchange which has occurred in the open source movement.  The site includes and benefits from some dozens of open source projects borne from the Ruby, Rails and jQuery communities.</p>
+  <div class="span-21 last" id="content-container">
 
-  <p>In New York, both <a href="http://pivotallabs.com/">Pivotal Labs</a> and <a href="http://openplans.org/">The Open Planning Project</a> have graciously hosted efforts on VoteReports.  Aside from helping out VoteReports, they're excellent institutions doing their own good work.</p>
+    <div class="span-10">
+      <div class="span-3"><img class="advisor-image" src="images/about_cindy.jpg" /></div>
+      <div class="span-7 last">
+        <div class="advisor-info">
+          <div class="advisor-name">Cindy Gallop</div>
+          <div class="jobtitle">Brand Advisor</div>
+          <div class="link"><a href="http://www.ifwerantheworld.com/">ifwerantheworld.com</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="span-11 last">
+      <div class="span-3"><img class="advisor-image" src="images/about_stevie.jpg" /></div>
+      <div class="span-8 last">
+        <div class="advisor-info">
+          <div class="advisor-name">Stevie Clifton</div>
+          <div class="jobtitle">Advisor</div>
+          <div class="link"><a href="http://www.animoto.com/">animoto.com</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="span-10">
+      <div class="span-3"><img class="advisor-image" style="margin-bottom: 0px" src="images/about_cindy.jpg" /></div>
+      <div class="span-7 last">
+        <div class="advisor-info">
+          <div class="advisor-name">David Myers</div>
+          <div class="jobtitle">Advisor</div>
+          <div class="link"><a href="http://www.ifwerantheworld.com/">ifwerantheworld.com</a></div>
+        </div>
+      </div>
+    </div>
 
-  <p>And even with all these mentioned, I'm sure there are many more who go unnamed.  We at VoteReports are thankful to each and every one of them.</p>
+  </div>
+
+  <%- end -%>
+</div>
+
+<div>
+  <div class="span-24"><div class="divider"></div></div>
+
+  <div class="span-3"><div class="sectionheader" style="background-color:#e6692b;"><div>many thanks</div></div></div>
+
+  <div class="span-21 last" id="content-container">
+    <div id="many-thanks">
+      <p class="large-text">The site exists in large part thanks to the encouragement of Jon Berger, who helped bring the original team together in November 2009 at a startup weekend event in New York City. Since then Jon and his wife Pamela, both of <a href="http://shop.marketpublique.com/">Market Publique</a>, have provided excellent guidance on design and user experience, which have helped to make the site more hospitable.  Also of great help has been Keith Gould, who introduced James and Ben, and has otherwise been a great supporter.</p><br /><br />
+
+      <p class="large-text">Since then, Vote Reports has been aided and supported by many. We at Vote Reports are thankful to each and every one of them.</p>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="span-24"><div class="divider"></div></div>
+
+  <div class="span-3"><div class="sectionheader" style="background-color:#ffea00;"><div style="color:#000;">powered</div></div></div>
+
+  <div class="span-21 last" id="powered-images-margin">
+    <div id="powered-images-container">
+      <div id="first"><a href="http://www.govtrack.org"><img src = "images/powered_govtrack.jpg"></a><p class="small-text">Bill, Vote, and Politician Data, and Politician Photos</p></div>
+      <div><a href="http://www.votesmart.org"><img src = "images/powered_votesmart.jpg"></a><p class="small-text">Interest Group Ratings</p></div>
+      <div><a href="http://www.mobilecommons.com"><img src = "images/powered_commons.jpg"></a><p class="small-text">State and Federal District Maps</p></div>
+      <div><a href="http://www.sunlightfoundation.com"><img src = "images/powered_sunlight.jpg"></a><p class="small-text">Politician Contact Info</p></div>
+    </div>
+  </div>
 </div>

@@ -1,21 +1,16 @@
 <%- content_for :footer_only_content do -%>
   <%= yield(:above_header) %>
 
-  <div class="container">
-    <div id="header" class="span-24">
-      <%= link_to content_tag(:span, 'VoteReports: Knowing is Half the Ballot'), root_path, :id => 'logo', :class => 'sprites navigation-header_logo' %>
-      <div id="account">
-        <%= render 'locations/location' %>
-        <%- if current_user -%>
-          <%= link_to "Dashboard", user_path(current_user), :class => 'dashboard' %>
-          <%= link_to "Log out", logout_path, :class => 'logout' %>
-        <%- else -%>
-          <%= link_to content_tag(:span, "Log in"), request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy sprites navigation-button_login' %>
-        <%- end -%>
+  <div style="width:100%; height:33px; background-color:#311d27; border-bottom: 1px solid #1b1216; border-top: 1px solid #4b333e;">
+    <div class="container">
+      <div class="span-4"><%= link_to image_tag('logo_small.png', :style => 'margin-top:10px;'), root_path %></div>
+      <div class="span-20 last" style="font-face: Arial; color:#fff; font-size: 11px; text-align: right; margin-top:6px;">
+        <%= render 'layouts/account_links' %>
       </div>
-
-      <%= yield(:header_content) %>
     </div>
+  </div>
+  
+  <%= yield(:header_content) %>
   </div>
 
   <%= yield(:footer_and_header_content) || yield %>
