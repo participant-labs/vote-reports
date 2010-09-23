@@ -192,6 +192,95 @@ a.white:link {color:#fff; text-decoration:none;}
 a.white:visited {color:#fff; text-decoration:none;}
 a.white:hover {text-decoration:underline;}
 
+
+
+
+/* GENERAL TYPOGRAPHY */
+.section-title {font-size:22px; line-height: 40px; color: #ff5500; letter-spacing:-0.1px; font-weight:100;}
+.large-text {font-family: Georgia; font-size: 18px; color:#322129; letter-spacing:-0.3px}
+.medium-text {font-family: Georgia; font-size: 14px; color:#322129; letter-spacing:-0.1px}
+.small-text {font-family: Georgia; font-size: 11px; line-height: 16px; color:#322129;}
+
+/* FOOTER */
+#footer .sidebar-links a:link {color:#fff; text-decoration:none;}
+#footer .sidebar-links a:visited {color:#fff; text-decoration:none;}
+#footer .sidebar-links a:hover {text-decoration:underline;}
+
+#footer {background-color:#5d5b56; background-image:url('images/footer_bg.jpg'); background-position: bottom; background-repeat:no-repeat; height:244px; padding-top:20px;}
+#quotecopy {width: 500px; font-family: Georgia; font-size: 22px; color:#fff; text-align: left;  line-height:32px;}
+.sidebar-links {font-size: 11px; font-weight:500; letter-spacing:0.1px;}
+
+#footer .sidebar-links {
+  float: right;
+  margin-bottom: 0.5em;
+}
+
+/* ABOUT PAGE TYPOGRAPHY */
+#introtext {font-family: Georgia, serif; font-size:30px; line-height: 42px; color:#999; letter-spacing:-0.3px;}
+.foundername {font-family: "museo-sans-1","museo-sans-2", sans-serif; font-size: 30px; color:#2fae11; padding:0px; margin-top:-10px;}
+.advisor-name {font-family: "museo-sans-1","museo-sans-2", sans-serif; font-size: 24px; color:#322129; padding:0px; margin-top: -6px;}
+.jobtitle {font-family:Arial; font-size:10px; text-transform: uppercase; font-weight: bold; margin-top:0px; color:#666; margin-top:-3px;}
+.sectionheader {position:relative; height:110px; width:70px; margin-left:22px; background-color:#2fae11;}
+.sectionheader div {font-family: "museo-sans-1","museo-sans-2", sans-serif; font-size:14px; text-align:center; color:#fff; font-weight: 700; line-height:16px; width:70px; position:absolute; bottom:8px;}
+
+/* POSITIONING AND PADDING */
+#link {font-family:Arial; font-size:11px;}
+#about-paragraph {height:250px; margin: 30px 0px 70px;}
+#content-container {margin: 40px 0px 60px;}
+.team-copy {position: absolute; bottom:-13px;}
+
+div.team-info {padding-left:10px; position:relative; height:180px;}
+div.advisor-info {padding-left:10px;}
+
+#many-thanks {padding-left:10px;}
+
+#powered-images-container {width:100%; padding-top: 40px;}
+#powered-images-container div {float:left; width:180px; margin-left: 33px;}
+#powered-images-container div#first {float:left; width:180px; margin-left: 10px;}
+#powered-images-margin {margin-bottom: 60px;}
+
+/* UNIQUE ELEMENTS*/
+.divider {height:1px; background-color:#e2e2e2;}
+img.advisor-image {margin: 0px 0px 30px 10px;}
+img.padded-image {margin-left:10px;}
+
+
+.menu > li {
+  margin-top: 18px;
+  float: left;
+}
+
+
+
+div.custom {
+  background:url('images/search_box.png') no-repeat;
+    padding:0px 0px 4px 35px;
+}
+div.custom input {
+    background-color: #311d27;
+    border:none;
+  font-family: Arial;
+    font-size:12px;
+  color: #fff;
+  width: 160px;
+}
+
+
+
+ul.menu {
+list-style-type: none;
+height: 80px;
+margin: 0px;
+padding:0px;
+}
+
+ul.menu a {font-family: "museo-sans-1","museo-sans-2", sans-serif; font-size: 14px; color: #fff; padding-right:35px; letter-spacing:0.1px; text-decoration:none; text-shadow: 0px 2px 0px #000;}
+
+
+
+
+
+
 /* POSITIONING FOR THE FADED CIRCLES BACKGROUND */
 #circlebg {height: 180px; margin-bottom:-180px; background-image:url('../images/bg_grades.png'); background-repeat:no-repeat; background-position: center top;}
 
@@ -249,7 +338,7 @@ h2 > form {
 
 .guide_map + #footer {
   position: absolute;
-  bottom: 0;
+  bottom: -200px;
   width: 100%;
 }
 
