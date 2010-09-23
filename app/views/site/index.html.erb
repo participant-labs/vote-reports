@@ -101,8 +101,8 @@
       <img src="images/imac_preview.jpg" class="preview" style="position:relative; left:-200px;"/>
     </div>
     <div class="span-16 last" style="position:relative; top:275px;">
-      <span class="tk-header" id="headline">The VoterCard</span>
-      <p id="bigsectiontext" style="margin: 10px 0px 0px 0px;">These ratings and causes culminate into the comprehensive and easy-to-use Vote Reports VoterCard. vel ligula blandit sit amet sodales eros faucibus. Nulla facilisi.</p>
+      <%= link_to 'The VoterCard', new_guide_path, :class => 'tk-header', :id => 'headline' %>
+      <p id="bigsectiontext" style="margin: 10px 0px 0px 0px;">These ratings and causes culminate into the comprehensive and easy-to-use Vote Reports VoterCard. Just answer a few easy questions to get your own personal ratings for the candidates.</p>
       <%= link_to image_tag('call_to_action.png', :id => 'button'), new_guide_path %>
     </div>
   </div>
