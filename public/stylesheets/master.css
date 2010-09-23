@@ -226,7 +226,7 @@ a.white:hover {text-decoration:underline;}
 /* POSITIONING AND PADDING */
 #link {font-family:Arial; font-size:11px;}
 #about-paragraph {height:250px; margin: 30px 0px 70px;}
-#content-container {margin: 40px 0px 60px;}
+#content-container {margin: 40px 0px 40px;}
 .team-copy {position: absolute; bottom:-13px;}
 
 div.team-info {padding-left:10px; position:relative; height:180px;}
