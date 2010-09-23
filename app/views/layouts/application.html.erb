@@ -10,7 +10,13 @@
       </ul>
     </div>
     <div class="span-9 last">
-      <div style="margin: 15px 0px 0px 121px"><div class="custom"><form><input class="custom" type="text" name="firstname"  value="Search" /></form></div></div>
+      <div style="margin: 15px 0px 0px 121px"><div class="custom">
+        <% form_tag search_path, :method => :get, :id => 'header_search' do %>
+          <%= text_field_tag :term, '', :class => 'fieldtag', :id => 'nav_search',
+            :title => 'Search',
+            :size => 20 %>
+        <% end %>
+      </div></div>
     </div>
   </div>
 </div>
