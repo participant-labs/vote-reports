@@ -11,6 +11,9 @@ class InterestGroups::ScoresController < ApplicationController
           :report => @report, :scores => @scores, :target_path => interest_group_report_scores_path(@interest_group)
         }
       }
+      format.json {
+        render :json => @report.scores
+      }
     end
   end
 

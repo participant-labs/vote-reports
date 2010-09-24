@@ -12,6 +12,9 @@ class Users::Reports::ScoresController < ApplicationController
           :report => @report, :scores => @scores, :target_path => user_report_report_scores_path(@user, @report)
         }
       }
+      format.json {
+        render :json => @report.scores
+      }
     end
   end
 
