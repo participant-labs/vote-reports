@@ -19,6 +19,9 @@ class Causes::ScoresController < ApplicationController
           :report => @report, :scores => @scores, :replace => 'scores', :target_path => cause_report_scores_path(@cause)
         }
       }
+      format.json {
+        render :json => @report.scores
+      }
     end
   end
 

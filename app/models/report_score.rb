@@ -87,6 +87,10 @@ class ReportScore < ActiveRecord::Base
     Date.today
   end
 
+  def as_json(opts = {})
+    super(opts.reverse_merge(:only => [:evidence_description, :gov_track_id, :vote_smart_id, :score, :name, :id], :include => [:politician, :report]))
+  end
+
   private
 
   def rescore_dependent_reports
