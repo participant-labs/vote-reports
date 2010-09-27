@@ -29,16 +29,16 @@ class CausesController < ApplicationController
   end
 
   def show
-    if !@cause.friendly_id_status.best?
-      redirect_to cause_path(@cause), :status => 301
-      return
-    end
     @subjects = @cause.subjects.for_tag_cloud.all(
       :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
       :limit => 3)
 
     respond_to do |format|
       format.html {
+        if !@cause.friendly_id_status.best?
+          redirect_to cause_path(@cause), :status => 301
+          return
+        end
         @related_causes = @cause.related_causes.all(:limit => 3)
       }
       format.json {

@@ -3,15 +3,15 @@ class Causes::ScoresController < ApplicationController
   before_filter :load_cause
 
   def index
-    if !@cause.friendly_id_status.best?
-      redirect_to cause_report_scores_path(@cause), :status => 301
-      return
-    end
-
     @report = @cause.report
     @scores = @report.scores.for_politicians(sought_politicians)
     respond_to do |format|
       format.html {
+        if !@cause.friendly_id_status.best?
+          redirect_to cause_report_scores_path(@cause), :status => 301
+          return
+        end
+
         render :layout => false
       }
       format.js {
