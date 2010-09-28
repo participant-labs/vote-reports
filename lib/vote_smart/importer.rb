@@ -49,23 +49,6 @@ module VoteSmart
         puts
       end
 
-      def import_election_dates
-        fifty_states.each do |state|
-          Rails.logger.info "Importing Elections for #{s} ..."
-          if (e = valid_hash(VoteSmart::Election.get_election_by_year_state "2010", state))
-            Rails.logger.info "Okay state #{s} has some elections for 2010..."
-            elections = array_of_hashes(e['elections']['election'])
-            elections.each do |election|
-              Rails.logger.info "Now processing #{election}"
-              election_stages(election).each do |es|
-                Rails.logger.info "#{es['name']}\n"
-                ::Election.first(:conditions => {:vote_smart_id => es['electionId'], :stage => es['stageName']}).update_attribute(:date, es['electionDate'])
-              end
-            end
-          end
-        end
-      end
-
       def import_candidate(candidate)
         bio = valid_hash(VoteSmart::CandidateBio.get_bio(candidate['candidateId']))
         bio_candidate = bio['bio']['candidate']
@@ -141,48 +124,6 @@ module VoteSmart
           end
         end
         puts
-      end
-
-      def import_measures
-        dates = elections = []
-        pp = []
-        Constants::STATE_NAMES.each_key do |state|
-          puts "Getting measures for state #{s} ...\n"
-          vs = VoteSmart::Measure.get_measures_by_year_state "2010", state
-          puts vs
-          if valid_hash(vs)
-            array_of_hashes(vs['measures']['measure']).each do |m|
-              puts m
-              p = (VoteSmart::Measure.get_measure m['measureId'])['measure']
-              unless dates.include?(p['electionDate'])
-                dates << m['electionDate']
-                elections << e = ::Election.create!({:date => p['electionDate'].to_date,
-                                     :state_id => state,
-                                     :name => "#{p['electionDate']} #{Constants::STATE_NAMES[s]} Propositions"})
-              else
-                e = elections.detect { |a| a.date == m['electionDate'].to_date }
-              end
-              pp << ::Proposition.create!({
-                 :name => "#{p['measureCode']}: #{p['title']}",
-                 :description => p['summary'],
-                 :ballot_text => p['measureText'],
-                 :proposition_title => p['title'],
-                 :proposition_symbol => p['measureCode'],
-                 :state_id => state,
-                 :election_id => e.id,
-                 :outcome => p['outcome'],
-                 :summary_url => p['summaryUrl'],
-                 :no => p['no'],
-                 :con_url => p['conUrl'],
-                 :pro_url => p['proUrl'],
-                 :yes => p['yes'],
-                 :url => p['url'],
-                 :vote_smart_id => p['measureId'],
-                 :text_url => p['textUrl']
-               })
-            end
-          end
-        end   
       end
 
       def import_interest_groups
