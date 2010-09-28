@@ -8,13 +8,6 @@ module VoteSmart
         @fifty_states ||= VoteSmart::State.all.map(&:id)
       end
   
-      def election_stages(election)
-        Rails.logger.info "Yo dawgz, I'm about to extract some stages dawgggg ..."
-        stages = array_of_hashes(election['stage'])
-        Rails.logger.info "Election #{election['name']} has #{stages.size} stages: #{stages}"
-        stages
-      end
-  
       def import_all
         ActiveRecord::Base.transaction do
           import_elections
@@ -40,7 +33,7 @@ module VoteSmart
                                  :year => election_data['electionYear'],
                                  :special => object_to_boolean(election_data['special']),
                                  :office_type => election_data['officeTypeId'])
-                election_stages(election_data).each do |es|
+                array_of_hashes(election_data['stage']).each do |es|
                   raise "#{election_data['stateId']} != #{es['stateId']}" if election_data['stateId'] != es['stateId']
                   election.stages.create!(
                     :vote_smart_id => es['stageId'],
