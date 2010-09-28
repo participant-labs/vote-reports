@@ -36,6 +36,6 @@ class Cause < ActiveRecord::Base
   end
 
   def as_json(opts = {})
-    super opts.reverse_merge(:only => [:name, :description, :id])
+    super opts.reverse_merge(:only => [:name, :description, :id], :methods => :to_param)
   end
 end

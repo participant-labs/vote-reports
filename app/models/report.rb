@@ -345,6 +345,10 @@ class Report < ActiveRecord::Base
     self[:interest_group_id] = ig.id
   end
 
+  def as_json(opts = {})
+    super opts.reverse_merge(:only => [:name, :description, :id], :include => [:top_subject, :interest_group, :user, :cause], :methods => :to_param)
+  end
+
 private
 
   def add_creator_to_followers
