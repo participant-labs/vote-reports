@@ -64,10 +64,6 @@ a.sprites, span.sprites {
   float:right;
 }
 
-#account .logout, #account .dashboard {
-  vertical-align: 40%;
-}
-
 #account p {
   display: inline;
 }
