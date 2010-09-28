@@ -3,17 +3,31 @@ class Users::ReportsController < ApplicationController
 
   def index
     @reports = @user.reports.published
+
+    respond_to do |format|
+      format.html
+      format.json {
+        render :json => @reports
+      }
+    end
   end
 
   def show
-    if params[:id] != @report.to_param
-      redirect_to user_report_path(@user, @report), :status => 301
-      return
+    respond_to do |format|
+      format.html {
+        if params[:id] != @report.to_param
+          redirect_to user_report_path(@user, @report), :status => 301
+          return
+        end
+        @causes = @report.causes.all(:limit => 3)
+        @subjects = @report.subjects.for_tag_cloud.all(
+          :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
+          :limit => 3)
+      }
+      format.json {
+        render :json => @report.as_json(:include => :causes)
+      }
     end
-    @subjects = @report.subjects.for_tag_cloud.all(
-      :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
-      :limit => 3)
-    @causes = @report.causes.all(:limit => 3)
   end
 
   def edit
