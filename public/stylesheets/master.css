@@ -253,7 +253,7 @@ img.padded-image {margin-left:10px;}
 
 
 div.custom {
-  background:url('images/search_box.png') no-repeat;
+  background:url('../images/search_box.png') no-repeat;
     padding:0px 0px 4px 35px;
 }
 div.custom input {

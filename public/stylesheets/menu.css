@@ -49,6 +49,7 @@ a.sprites, span.sprites {
 #menu {
   float:left;
   padding-left: 0;
+  text-transform: lowercase;
 }
 
 #menu li:first-of-type {
