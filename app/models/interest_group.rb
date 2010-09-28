@@ -89,4 +89,8 @@ class InterestGroup < ActiveRecord::Base
   def full_address
     "#{address}, #{city}, #{state} #{zip}"
   end
+
+  def as_json(opts = {})
+    super opts.reverse_merge(:only => [:name, :description, :id, :vote_smart_id, :url, :email, :address, :state, :zip, :phone1, :phone2, :fax])
+  end
 end
