@@ -28,6 +28,9 @@ class ReportsController < ApplicationController
       format.js {
         render :layout => false
       }
+      format.json {
+        render :json => @reports
+      }
     end
   end
 
