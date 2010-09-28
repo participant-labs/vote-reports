@@ -1,5 +1,6 @@
-<ul id="menu" class="sidebar-links">
-  <li class=""><a href="/politicians" id="navlinks" class="tk-header"><span>Politicians</span></a></li>
-  <li class=""><a href="/reports" id="navlinks" class="tk-header"><span>Reports</span></a></li>
-  <li class=""><a href="/causes" id="navlinks" class="tk-header"><span>Causes</span></a></li>
+<ul class="menu">
+  <li class=""><%= link_to content_tag(:span, 'Reports'), reports_path %></li>
+  <li class=""><%= link_to content_tag(:span, 'Causes'), causes_path %></li>
+  <li class=""><%= link_to content_tag(:span, 'Politicians'), politicians_path %></li>
+  <li class=""><%= link_to content_tag(:span, 'Create a Guide'), new_guide_path %></li>
 </ul>

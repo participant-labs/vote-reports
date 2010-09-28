@@ -33,20 +33,21 @@
       <div class="container">
 
         <div class="span-24" >
-          <div class="span-5">
-            <%= link_to image_tag('votereports_logo.png', :id => 'footerlogo'), root_path %>
+
+          <div class="span-2">
+            <%= link_to image_tag('global/logo_small.png'), root_path %>
            </div>
 
-          <div class="span-8" style="text-align:left; font-size:11px; color:#fff; position:relative; top:8px;">
-          is a <%= link_to 'Participant Labs', participant_labs_path, :class => 'white' %> creation.
-          </div>
+          <div class="span-11">
+            <p id="credits">is a <%= link_to 'Participant Labs', participant_labs_path %> creation.</p>
+          </div>  
 
           <div class="span-11 last">
-            <div class="sidebar-links" style="position:relative; top:8px;">
-              <%= link_to 'About us', about_path %><%= divider %>
-              <%= link_to 'Our Blog', blog_path %><%= divider %>
-              <%= mail_to 'all_ears@votereports.org', 'Contact Us' %><%= divider %>
-              <%= link_to 'Feedback', get_satisfaction_path, :onclick => 'if(GSFN) feedback_widget.show(); return false' %><%= divider %>
+            <div class="sidebar-links" style="position:relative; top:-3px;">
+              <%= link_to 'About us', about_path %><%= footer_divider %>
+              <%= link_to 'Our Blog', blog_path %><%= footer_divider %>
+              <%= mail_to 'all_ears@votereports.org', 'Contact Us' %><%= footer_divider %>
+              <%= link_to 'Feedback', get_satisfaction_path, :onclick => 'if(GSFN) feedback_widget.show(); return false' %><%= footer_divider %>
               <%= link_to 'Support Our Efforts', new_donation_path %>
             </div>
           </div>
@@ -55,9 +56,9 @@
       </div>
       <div class="container">
         <div class="span-24" >
-          <div id="quotecopy" style="position:relative; left:275px; top:30px;">
+          <div id="quotecopy">
             There must be a beginning of any great matter, but the continuing unto the end until it be thoroughly finished yields the true glory.<br /><span style="font-family:Arial;font-size:11px;color:#c8c8c8;font-weight:400;text-align:left;">Francis Drake</span>
-          </div>
+          </div>  
         </div>
       </div>
     </div>

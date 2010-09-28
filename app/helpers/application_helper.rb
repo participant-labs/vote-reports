@@ -18,7 +18,11 @@ module ApplicationHelper
   end
 
   def divider
-    image_tag('homepage_register_divider.png', :class => 'logindivider')
+    image_tag('homepage/homepage_register_divider.png', :class => 'login-divider')
+  end
+
+  def footer_divider
+    image_tag('footer/footer_divider.png', :class => 'login-divider')
   end
 
   def page_title

@@ -1,10 +1,10 @@
 <%- content_for :footer_only_content do -%>
   <%= yield(:above_header) %>
 
-  <div style="width:100%; height:33px; background-color:#311d27; border-bottom: 1px solid #1b1216; border-top: 1px solid #4b333e;">
+  <div class="global-account-row">
     <div class="container">
-      <div class="span-4"><%= link_to image_tag('logo_small.png', :style => 'margin-top:10px;'), root_path %></div>
-      <div class="span-20 last" style="font-face: Arial; color:#fff; font-size: 11px; text-align: right; margin-top:6px;">
+      <div class="span-4"><%= link_to image_tag('global/logo_small.png', :id => 'small-logo'), root_path %></div>
+      <div class="span-20 last" id="account-position">
         <%= render 'layouts/account_links' %>
       </div>
     </div>

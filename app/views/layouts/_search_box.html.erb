@@ -1,0 +1,7 @@
+<div class="search-container"><div class="custom-search">
+  <% form_tag search_path, :method => :get do %>
+    <%= text_field_tag :term, '', :class => 'fieldtag custom-search',
+      :title => 'Search',
+      :size => 20 %>
+  <% end %>
+</div></div>
