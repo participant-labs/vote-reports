@@ -58,6 +58,7 @@ module VoteSmart
           end || begin
             if bio['bio']['office'] && office = to_array(bio['bio']['office']).detect {|o| o['type'] == 'Congressional' }
               politicians = Politician.find_all_by_first_name_and_last_name( bio_candidate['firstName'], bio_candidate['lastName'])
+              politicians = Politician.find_all_by_last_name(bio_candidate['lastName']) if politicians.empty?
               if politicians.size > 1
                 p bio_candidate['homeState']
                 require 'ruby-debug'
@@ -77,6 +78,7 @@ module VoteSmart
           end || begin
             if bio_candidate['political'].to_s.split("\n").detect {|p| p.include?("Representative, United States House of Representatives") || p.include?('Senator, United States Senate') }
               politicians = Politician.find_all_by_first_name_and_last_name( bio_candidate['firstName'], bio_candidate['lastName'])
+              politicians = Politician.find_all_by_last_name(bio_candidate['lastName']) if politicians.empty?
               if politicians.size > 1
                 p bio_candidate['homeState']
                 require 'ruby-debug'
