@@ -64,7 +64,7 @@
 
   <div class="span-24 last" id="diagram-row-three">
     <div class="span-8" id="groups-explained">
-      <%= link_to 'Interest group ratings', interest_groups_path, :class => "section-header" %><br />
+      <%= link_to content_tag(:span, 'Interest group ratings', :class => "section-header"), interest_groups_path %><br />
       <p class="medium-text">Interest groups individually have their own criteria of evaluating a politician. This usually includes voting records, interviews, survey results, and sources of funding. We also import interest group ratings from <a href="http://www.projectvotesmart.com/">Project VoteSmart</a>.</p>
     </div>
 
@@ -73,7 +73,7 @@
     </div>
 
     <div class="span-8 last" id="groups-explained">
-      <%= link_to 'Member created reports', reports_path(:from_members => true), :class => 'section-header' %><br />
+      <%= link_to content_tag(:span, 'Member created reports', :class => "section-header"), reports_path(:from_members => true) %><br />
       <p class="medium-text">Registered members can also create their own grades on politicians. Members create a report outlining which bills they support and are against. The system then automatically generates a score for all politicians.</p>
     </div>
   </div>
@@ -84,7 +84,7 @@
       <img id="circle4" src="images/homepage/circle_4.png" />
     </div>
     <div class="span-8 last" id="believe-in-a-cause">
-      <%= link_to 'Believe in a Cause', causes_path, :class => "section-header" %><br />
+      <%= link_to content_tag(:span, 'Believe in a Cause', :class => "section-header"), causes_path %><br />
       <p class="medium-text">Since many interest groups and member generated reports overlap certain subjects, we combine them into Causes. In essence, it’s a stance on an issue. Collecting many scores helps average the grade and avoid one or more groups from polarizing a politicians grade.</p>
     </div>
   </div>
