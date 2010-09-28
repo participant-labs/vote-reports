@@ -1,4 +1,4 @@
-<span class="location">Location:</span>
+<span id="location-text">Location:</span>
 <%- if current_geo_location -%>
   <%= link_to current_location, location_path(:return_to => request.path), :class => 'fancyboxy white' %>
   <%- if declared_geo_location -%>

@@ -1,18 +1,19 @@
 <%- title 'Knowing is Half the Ballot' -%>
 
+
 <div id="hero">
 
   <div id="logoarea">
-    <a href="/"><img src="images/votereports_logo.png"></a>
+    <a href="/"><img src="images/global/votereports_logo.png"></a>
     <%= render 'layouts/account_links' %>
   </div>
 
-  <div id="centerbox">
-    <div id="calltoactionbox">
-      <span id="headline" class="tk-header">Actions speak louder than words.</span>
-      <span id="copy">Identify like-minded U.S. political candidates based on their voting history on issues important to you.</span>
-      <%= link_to image_tag('call_to_action.png', :id => 'button'), new_guide_path %><br />
-      <span style="font-size:11px; color:#b0b0b0;">No registration required.</span>
+  <div id="center-box">
+    <div id="action-box">
+      <span class="large-section-header">Actions speak louder than words.</span>
+      <p id="hero-copy">Identify like-minded U.S. political candidates based on their voting history on issues important to you.</p>
+      <div><%= link_to "Let's get started!", new_guide_path, :id => 'call-to-action' %></div>
+      <span id="disclaimer-copy">No registration required. <a href="#how_it_works">Learn how it works.</a></span>
     </div>
   </div>
 
@@ -20,90 +21,82 @@
 
 <div id="circlebg"></div>
 
-<div class="container">
-  <div class="span-24 last">
-    <div id="header">
-      <%= render 'layouts/menu_links' %>
+<%= render 'layouts/menu_row' %>
 
-      <form action="/search" id="header_search" method="get">
-        <label for="term">Search</label>
-        <input class="fieldtag" id="nav_search" name="term" size="20" title="Politicians, Reports and Causes" type="text" value="" />
-      </form>
-    </div>
-  </div>
+<div class="container" id="instruct-container">
 
   <div class="span-24 last">
-    <span class="tk-header" id="headline">How does Vote Reports work?</span>
+    <span class="large-section-header" id="how_it_works">How does Vote Reports work?</span>
   </div>
 
-  <div class="span-24 last" style="margin-top:10px;">
-    <div class="span-9" style="position:relative;"><span id="bigsectiontext">At Vote Reports, we believe the most reliable way of gauging a politician's compatibility is by evaluating their voting record. So we made it easy.</span></div>
-      <div class="span-15 last">
-        <div class="span-9">
-          <img class="circle1" src="images/circle_1.png" />
-        </div>
-        <div class="span-6 last" style="position:relative; top:80px;">
-          <span id="sectionheadline" class="tk-header">Grades matter</span><br />
-          <span id="sectiontext">High grades mean the politician is graded well according to the issue they are being evaluated on.  Just click on any grade to see the facts that went into it.</span>
-        </div>
+  <div class="span-24 last" id="diagram-row-one">
+    <div class="span-9"><p class="large-hp-text">At Vote Reports, we believe the most reliable way of gauging a politician's compatibility is by evaluating their voting record. So we made it easy.</p></div>
+    <div class="span-15 last">
+      <div class="span-9">
+        <img id="circle1" src="images/homepage/circle_1.png" />
       </div>
+      <div class="span-6 last" id="grades-matter">
+        <span class="section-header">Grades matter</span><br />
+        <p class="medium-text">High grades mean the politician is graded well according to the issue they are being evaluated on. Just click on any grade to see the facts that went into it.</p>
+      </div>
+    </div>
   </div>
 
-  <div class="span-24 last" style="margin-top:-90px;">
+  <div class="span-24 last" id="diagram-row-two">
     <div class="span-8">
-      <img class="circle2" src="images/circle_2.png" />
+      <img id="circle2" src="images/homepage/circle_2.png" />
     </div>
-    <div class="span-8" style="position:relative; top: 120px;">
-      <span id="sectionheadline" class="tk-header">The source of the ratings</span><br />
-      <span id="sectiontext">Vote Reports does not rate politicians. Rather, every rating is generated from two sources: interest group ratings (e.g. ACLU, NRA) and legislative agendas from interest groups and  members of Vote Reports.</span>
+    <div class="span-8" id="source-of-ratings">
+      <span class="section-header">The source of the ratings</span><br />
+      <p class="medium-text">Vote Reports does not rate politicians. Rather, every rating is generated from two sources: interest group ratings (e.g. ACLU, NRA) and legislative agendas from interest groups and members of Vote Reports.</p>
     </div>
-    <div class="span-8 last" style="position:relative; top: 120px;">
+    <div class="span-8 last" id="other-grades">
       <div class="span-4">
-        <img src="images/grade_incomplete.png" />
-        <span id="tinytext">Ratings with a colored border are derived from limited sources or from candidates with no voting history.</span>
+        <img src="images/homepage/grade_incomplete.png" />
+        <p class="small-text">Ratings with a colored border are derived from limited sources or from candidates with no voting history.</p>
       </div>
       <div class="span-4 last">
-        <img src="images/grade_unknown.png" />
-        <span id="tinytext">Ratings with a question mark mean that we have no records for the politician on this viewed issue.</span>
+        <img src="images/homepage/grade_unknown.png"/>
+        <p class="small-text">Ratings with a question mark mean that we have no records for the politician on this viewed issue.</p>
       </div>
     </div>
   </div>
 
-  <div class="span-24 last" style="margin-top:-90px;">
-    <div class="span-8" style="position:relative; top:60px;">
-      <%= link_to 'Interest group ratings', interest_groups_path, :id => "sectionheadline", :class => "tk-header" %><br />
-      <span id="sectiontext">Interest groups individually have their own criteria of evaluating a politician. This usually includes voting records, interviews, survey results, and sources of funding. We also import interest group ratings from <a href="http://votesmart.org/">Project VoteSmart</a>.</span>
+  <div class="span-24 last" id="diagram-row-three">
+    <div class="span-8" id="groups-explained">
+      <%= link_to 'Interest group ratings', interest_groups_path, :class => "section-header" %><br />
+      <p class="medium-text">Interest groups individually have their own criteria of evaluating a politician. This usually includes voting records, interviews, survey results, and sources of funding. We also import interest group ratings from <a href="http://www.projectvotesmart.com/">Project VoteSmart</a>.</p>
     </div>
 
     <div class="span-8">
-      <img class="circle3" src="images/circle_3.png" />
+      <img id="circle3" src="images/homepage/circle_3.png" />
     </div>
 
-    <div class="span-8 last" style="position:relative; top:60px;">
-        <%= link_to 'Member created reports', reports_path(:from_members => true), :id => "sectionheadline", :class => "tk-header" %></span><br />
-        <span id="sectiontext">Registered members can also create their own grades on politicians. Members create a report outlining which bills they support and are against. The system then automatically generates a score for all politicians.</span>
+    <div class="span-8 last" id="groups-explained">
+      <%= link_to 'Member created reports', reports_path(:from_members => true), :class => 'section-header' %><br />
+      <p class="medium-text">Registered members can also create their own grades on politicians. Members create a report outlining which bills they support and are against. The system then automatically generates a score for all politicians.</p>
     </div>
   </div>
 
-  <div class="span-24 last" style="margin-top:-20px;">
+  <div class="span-24 last" id="diagram-row-four">
     <div class="span-8">&nbsp;</div>
     <div class="span-8">
-      <img class="circle4" src="images/circle_4.png" />
+      <img id="circle4" src="images/homepage/circle_4.png" />
     </div>
-    <div class="span-8 last" style="position:relative; top:70px;">
-      <%= link_to 'Believe in a Cause', causes_path, :id => "sectionheadline", :class => "tk-header" %><br />
-      <span id="sectiontext">Since many interest groups and member generated reports overlap certain subjects, we combine them into Causes. In essence, it’s a stance on an issue. Collecting many scores helps average the grade and avoid one or more groups from polarizing a politicians grade.</span>
+    <div class="span-8 last" id="believe-in-a-cause">
+      <%= link_to 'Believe in a Cause', causes_path, :class => "section-header" %><br />
+      <p class="medium-text">Since many interest groups and member generated reports overlap certain subjects, we combine them into Causes. In essence, it’s a stance on an issue. Collecting many scores helps average the grade and avoid one or more groups from polarizing a politicians grade.</p>
     </div>
   </div>
 
-  <div class="span-24 last" style="margin-top:-240px; margin-bottom:40px;">
+  <div class="span-24 last" id="diagram-row-five">
     <div class="span-8">
-      <img src="images/imac_preview.jpg" class="preview" style="position:relative; left:-200px;"/>
+      <img src="images/homepage/imac_preview.jpg" id="preview"/>
     </div>
-    <div class="span-16 last" style="position:relative; top:275px;">
-      <%= link_to 'The VoterCard', new_guide_path, :class => 'tk-header', :id => 'headline' %>
-      <p id="bigsectiontext" style="margin: 10px 0px 0px 0px;">These ratings and causes culminate into the comprehensive and easy-to-use Vote Reports VoterCard. Just answer a few easy questions to get your own personal ratings for the candidates.</p>
-      <%= link_to image_tag('call_to_action.png', :id => 'button'), new_guide_path %>
+    <div class="span-16 last" id="the-votercard">
+      <%= link_to 'The VoterCard', new_guide_path, :class => 'large-section-header' %>
+      <p class="large-hp-text" id="diagram-copy">These ratings and causes culminate into the comprehensive and easy-to-use Vote Reports VoterCard. Just answer a few easy questions to get your own personal ratings for the candidates.</p>
+      <%= link_to "Let's get started!", new_guide_path, :id => 'call-to-action' %>
     </div>
   </div>
 

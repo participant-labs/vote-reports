@@ -1,25 +1,5 @@
 <% content_for :header_content do %>
-<div style="width:100%; height:60px; background-color:#3a232e; border-top: 1px solid #4b333e; border-bottom: 2px solid #311d27;">
-  <div class="container">
-    <div class="span-15">
-      <ul class="menu">
-        <li><%= link_to 'Home', root_path %></li>
-        <li><%= link_to 'Reports', reports_path %></li>
-        <li><%= link_to 'Causes', causes_path %></li>
-        <li><%= link_to 'Politicians', politicians_path %></li>
-      </ul>
-    </div>
-    <div class="span-9 last">
-      <div style="margin: 15px 0px 0px 121px"><div class="custom">
-        <% form_tag search_path, :method => :get, :id => 'header_search' do %>
-          <%= text_field_tag :term, '', :class => 'fieldtag', :id => 'nav_search',
-            :title => 'Search',
-            :size => 20 %>
-        <% end %>
-      </div></div>
-    </div>
-  </div>
-</div>
+  <%= render 'layouts/menu_row' %>
 <% end %>
 
 <% content_for :footer_and_header_content do %>
