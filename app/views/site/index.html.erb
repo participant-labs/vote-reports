@@ -94,7 +94,7 @@
       <img src="images/homepage/imac_preview.jpg" id="preview"/>
     </div>
     <div class="span-16 last" id="the-votercard">
-      <%= link_to 'The VoterCard', new_guide_path, :class => 'large-section-header' %>
+      <%= link_to content_tag(:span, 'The VoterCard', :class => 'large-section-header'), new_guide_path %>
       <p class="large-hp-text" id="diagram-copy">These ratings and causes culminate into the comprehensive and easy-to-use Vote Reports VoterCard. Just answer a few easy questions to get your own personal ratings for the candidates.</p>
       <%= link_to "Let's get started!", new_guide_path, :id => 'call-to-action' %>
     </div>
