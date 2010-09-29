@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100922022754) do
+ActiveRecord::Schema.define(:version => 20100929061633) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -485,7 +485,6 @@ ActiveRecord::Schema.define(:version => 20100922022754) do
     t.string   "bioguide_id"
     t.string   "congress_office"
     t.string   "congresspedia_url"
-    t.string   "crp_id"
     t.string   "email"
     t.string   "eventful_id"
     t.string   "fax"
@@ -518,7 +517,6 @@ ActiveRecord::Schema.define(:version => 20100922022754) do
   add_index "politicians", ["cached_slug"], :name => "index_politicians_on_cached_slug"
   add_index "politicians", ["congressional_district_id"], :name => "index_politicians_on_district_id"
   add_index "politicians", ["congresspedia_url"], :name => "index_politicians_on_congresspedia_url", :unique => true
-  add_index "politicians", ["crp_id"], :name => "index_politicians_on_crp_id", :unique => true
   add_index "politicians", ["email"], :name => "index_politicians_on_email", :unique => true
   add_index "politicians", ["eventful_id"], :name => "index_politicians_on_eventful_id", :unique => true
   add_index "politicians", ["fec_id"], :name => "index_politicians_on_fec_id", :unique => true

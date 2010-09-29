@@ -94,7 +94,7 @@ class Politician < ActiveRecord::Base
 
   IDENTITY_STRING_FIELDS = [
     :vote_smart_id, :bioguide_id, :eventful_id, :twitter_id, :email, :metavid_id,
-    :congresspedia_url, :open_secrets_id, :crp_id, :fec_id, :phone, :website, :youtube_url
+    :congresspedia_url, :open_secrets_id, :fec_id, :phone, :website, :youtube_url
   ].freeze
   IDENTITY_INTEGER_FIELDS = [:gov_track_id].freeze
   IDENTITY_FIELDS = (IDENTITY_STRING_FIELDS | IDENTITY_INTEGER_FIELDS).freeze

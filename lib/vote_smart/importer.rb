@@ -50,7 +50,7 @@ module VoteSmart
         bio = valid_hash(VoteSmart::CandidateBio.get_bio(candidate['candidateId']))
         bio_candidate = bio['bio']['candidate']
         politician = ::Politician.find_by_vote_smart_id(candidate['candidateId']) \
-          || ::Politician.find_by_crp_id(bio_candidate['crpId']) || begin
+          || ::Politician.find_by_open_secrets_id(bio_candidate['crpId']) || begin
             case bio_candidate['crpId']
             when 'N00008957'
               Politician.find_by_bioguide_id('S000606')
@@ -104,7 +104,7 @@ module VoteSmart
               :nickname => candidate['nickName'],
               :name_suffix => candidate['suffix'],
               :vote_smart_photo_url => bio_candidate['photo'],
-              :crp_id => bio_candidate['crp_id'],
+              :open_secrets_id => bio_candidate['crp_id'],
               :gender => bio_candidate['gender'].first)
 
         politician.update_attributes!(
@@ -114,7 +114,7 @@ module VoteSmart
           :nickname => candidate['nickName'],
           :name_suffix => candidate['suffix'],
           :vote_smart_photo_url => bio_candidate['photo'],
-          :crp_id => bio_candidate['crp_id'],
+          :open_secrets_id => bio_candidate['crp_id'],
           :gender => bio_candidate['gender'].first
         )
         politician
