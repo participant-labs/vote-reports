@@ -328,7 +328,7 @@ div.report_score .score.blank {
   line-height: 66px;
 }
 
-.full_width .report_score .score_sources {
+.full_width .report_score .score_sources, #fancybox-inner .report_score .score_sources {
   max-width: 100px;
 }
 
