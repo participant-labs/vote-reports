@@ -54,6 +54,21 @@ module VoteSmart
             case bio_candidate['crpId']
             when 'N00008957'
               Politician.find_by_bioguide_id('S000606')
+            when 'N00027229'
+              Politician.find_by_bioguide_id('F000451')
+            when 'N00029461'
+              # PVS falsely says he is Representative, United States House of Representatives, 2008-present
+              # he lost this race by a small margin: http://en.wikipedia.org/wiki/Jay_Love
+              ::Politician.create!(
+                  :vote_smart_id => candidate['candidateId'],
+                  :first_name => candidate['firstName'],
+                  :middle_name => candidate['middle_name'],
+                  :last_name => candidate['lastName'],
+                  :nickname => candidate['nickName'],
+                  :name_suffix => candidate['suffix'],
+                  :vote_smart_photo_url => bio_candidate['photo'],
+                  :open_secrets_id => bio_candidate['crp_id'],
+                  :gender => bio_candidate['gender'].first)
             end
           end || begin
             if bio['bio']['office'] && office = to_array(bio['bio']['office']).detect {|o| o['type'] == 'Congressional' }
