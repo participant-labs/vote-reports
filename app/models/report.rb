@@ -345,8 +345,20 @@ class Report < ActiveRecord::Base
     self[:interest_group_id] = ig.id
   end
 
+  include ActionController::UrlWriter
+  include ActionController::PolymorphicRoutes
+  def url
+    path_components =
+      if user
+        [user, self]
+      else
+        owner || raise("No owner for report: #{inspect}")
+      end
+    polymorphic_url(path_components, :host => 'votereports.org')
+  end
+
   def as_json(opts = {})
-    super opts.reverse_merge(:only => [:name, :description, :id], :include => [:top_subject, :interest_group, :user, :cause], :methods => :to_param)
+    super opts.reverse_merge(:only => [:name, :description, :id], :include => [:top_subject, :interest_group, :user, :cause], :methods => [:to_param, :url])
   end
 
 private
