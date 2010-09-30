@@ -15,7 +15,7 @@ class GuideQuestion
       if object.is_a?(Cause)
         {object => 'Support'}
       else
-        object.causes.inject({}) {|accum, cause| accum[cause] = cause.name; accum }
+        Hash[object.causes.map {|cause| [cause, cause.name] }]
       end
   end
 

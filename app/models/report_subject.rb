@@ -14,12 +14,11 @@ class ReportSubject < ActiveRecord::Base
       require 'ar-extensions/import/postgresql'
 
       ReportSubject.delete_all(:report_id => report.id)
-      subjects = report.bill_criteria_subjects.scoped(
+      subjects = Hash[report.bill_criteria_subjects.scoped(
         :select => "DISTINCT(subjects.id), COUNT(subjects.id) AS count",
-        :group => 'subjects.id').inject({}) do |hash, subject|
-        hash[subject] = Integer(subject.count)
-        hash
-      end
+        :group => 'subjects.id').map do |subject|
+        [subject, Integer(subject.count)]
+      end]
 
       if report.interest_group
         count = report.interest_group.reports.count
