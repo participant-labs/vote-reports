@@ -30,11 +30,9 @@ class Politician < ActiveRecord::Base
       end
 
       def styles
-        TYPE_TO_WIDTH.inject({}) do |all, (size, dimensions)|
-          dimensions ||= TYPE_TO_WIDTH[:large]
-          all[size] = {:geometry => dimensions}
-          all
-        end
+        Hash[TYPE_TO_WIDTH.map do |(size, dimensions)|
+          [size, {:geometry => (dimensions || TYPE_TO_WIDTH[:large])}]
+        end]
       end
 
       def size(style = nil)
