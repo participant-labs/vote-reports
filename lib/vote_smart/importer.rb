@@ -249,44 +249,43 @@ module VoteSmart
 
       def import_ratings
         puts "Ratings"
+        require 'typhoeus'
         VoteSmart::Rating.parallelize!
-        InterestGroup.vote_smart.ratings_not_recently_updated.each do |group|
+        InterestGroup.vote_smart.ratings_not_recently_updated.first.tap do |group|
           ActiveRecord::Base.transaction do
             puts "InterestGroup: #{group.vote_smart_id} #{group.name}"
-            Politician.each_page(:conditions => 'vote_smart_id IS NOT NULL') do |politicians|
-              politicians.each do |politician|
-                VoteSmart::Rating.get_candidate_rating(politician.vote_smart_id, group.vote_smart_id) do |ratings|
-                  print 'P'
-                  if ratings.has_key?('error')
-                    next if ratings['error']['errorMessage'] == 'No Ratings fit this criteria.'
-                    raise ratings.inspect
-                  end
-                  to_array(ratings['candidateRating']['rating']).each do |rating|
-                    print '.'
-                    report = group.reports.find_by_vote_smart_id(rating['ratingId']) || group.reports.create!(
-                      :vote_smart_id => rating['ratingId'],
-                      :timespan => rating['timespan'])
-                    new_rating = report.ratings.find_by_politician_id(politician) \
-                      || report.ratings.create(
+            Politician.paginated_each(:conditions => 'vote_smart_id IS NOT NULL') do |politician|
+              VoteSmart::Rating.get_candidate_rating(politician.vote_smart_id, group.vote_smart_id) do |ratings|
+                print 'P'
+                if ratings.has_key?('error')
+                  next if ratings['error']['errorMessage'] == 'No Ratings fit this criteria.'
+                  raise ratings.inspect
+                end
+                to_array(ratings['candidateRating']['rating']).each do |rating|
+                  print '.'
+                  report = group.reports.find_by_vote_smart_id(rating['ratingId']) || group.reports.create!(
+                    :vote_smart_id => rating['ratingId'],
+                    :timespan => rating['timespan'])
+                  new_rating = report.ratings.find_by_politician_id(politician) \
+                    || report.ratings.create(
+                      :politician => politician,
+                      :rating => rating['rating'],
+                      :description => rating['ratingText'])
+                  if new_rating.rating != rating['rating']
+                    if rating['rating'].present?
+                      puts "Updating #{new_rating.rating} -> #{rating['rating']}, #{rating.inspect}"
+                      new_rating.update_attributes!(
                         :politician => politician,
                         :rating => rating['rating'],
                         :description => rating['ratingText'])
-                    if new_rating.rating != rating['rating']
-                      if rating['rating'].present?
-                        puts "Updating #{new_rating.rating} -> #{rating['rating']}, #{rating.inspect}"
-                        new_rating.update_attributes!(
-                          :politician => politician,
-                          :rating => rating['rating'],
-                          :description => rating['ratingText'])
-                      else
-                        raise "Rating mismatch #{new_rating.rating} vs #{rating['rating']}, #{rating.inspect}"
-                      end
+                    else
+                      raise "Rating mismatch #{new_rating.rating} vs #{rating['rating']}, #{rating.inspect}"
                     end
                   end
                 end
               end
-              VoteSmart::Rating.run
             end
+            VoteSmart::Rating.run
             group.touch(:ratings_updated_at)
           end
           puts
