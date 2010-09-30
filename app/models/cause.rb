@@ -35,7 +35,12 @@ class Cause < ActiveRecord::Base
     end
   end
 
+  include ActionController::UrlWriter
+  def url
+    cause_url(self, :host => 'votereports.org')
+  end
+
   def as_json(opts = {})
-    super opts.reverse_merge(:only => [:name, :description, :id], :methods => :to_param)
+    super opts.reverse_merge(:only => [:name, :description, :id], :methods => [:to_param, :url], :include => :reports)
   end
 end
