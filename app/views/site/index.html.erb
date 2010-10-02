@@ -12,7 +12,7 @@
     <div id="action-box">
       <span class="large-section-header">Actions speak louder than words.</span>
       <p id="hero-copy">Identify like-minded U.S. political candidates based on their voting history on issues important to you.</p>
-      <div><%= link_to "Let's get started!", new_guide_path, :id => 'call-to-action' %></div>
+      <div><%= link_to content_tag(:span, "Let's get started!"), new_guide_path, :class => 'call-to-action' %></div>
       <span id="disclaimer-copy">No registration required. <a href="#how_it_works">Learn how it works.</a></span>
     </div>
   </div>
@@ -96,7 +96,7 @@
     <div class="span-16 last" id="the-votercard">
       <%= link_to content_tag(:span, 'The VoterCard', :class => 'large-section-header'), new_guide_path %>
       <p class="large-hp-text" id="diagram-copy">These ratings and causes culminate into the comprehensive and easy-to-use Vote Reports VoterCard. Just answer a few easy questions to get your own personal ratings for the candidates.</p>
-      <%= link_to "Let's get started!", new_guide_path, :id => 'call-to-action' %>
+      <%= link_to content_tag(:span, "Let's get started!"), new_guide_path, :class => 'call-to-action' %>
     </div>
   </div>
 

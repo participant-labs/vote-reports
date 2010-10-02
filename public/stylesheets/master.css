@@ -341,19 +341,21 @@ img#preview {position:relative; left:-200px;z-index:-5;}
 #diagram-copy {margin: 10px 0px 0px 0px;}
 
 /* SPRITES */
-a#call-to-action {
+a.call-to-action {
 	display:block;
 	background: url('../images/homepage/sprite_button.png') 0px 0px;
 	width: 235px;
 	height: 55px;
 }
-a#call-to-action:hover {
+a.call-to-action:hover {
 	 background-position: 0px -55px;
 }
-a#call-to-action:active {
+a.call-to-action:active {
 	background-position: 0px -110px;
 }
-
+a.call-to-action > span {
+  display: none;
+}
 
 .menu > li {
   margin-top: 18px;
