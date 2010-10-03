@@ -90,7 +90,6 @@
           var sibling_button = sibling.find('button.selected');
           sibling_button.removeClass('selected');
           params['remove'] = sibling_button.attr('value');
-          sibling.find('input').remove();
         }
         if (source.is('[name=add]')) {
           params['add'] = source.attr('value');
