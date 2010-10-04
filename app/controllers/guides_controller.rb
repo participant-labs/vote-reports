@@ -70,7 +70,7 @@ class GuidesController < ApplicationController
       @scores =
         if params[:selected]
           @selected = Report.find(params[:selected])
-          @selected.scores.for_politicians(sought_politicians)
+          @selected.scores.for_politicians(@guide.politicians)
         else
           @guide.immediate_scores
         end
