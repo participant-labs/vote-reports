@@ -162,10 +162,8 @@
 .stances .selected a, .stances .selected a:hover {
   color: white;
 }
-.stances dd {
+.stances dt, .stances dd {
   margin-left: 0;
-}
-.stances dd + dd {
   margin-top: 3px;
 }
 .stances dd:hover {

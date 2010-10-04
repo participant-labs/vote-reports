@@ -12,17 +12,11 @@
       </dt>
       <dt>Supported</dt>
       <% guide.reports_supported.each do |report| %>
-        <dd class="round-4 act-hover<%= ' selected' if selected == report %>" rel="<%= dom_id(report, :remove) %>">
-          <%= link_to report.name, new_guide_path(:selected => report), :class => 'act-replace', :rel => 'instant_scores' %>
-          <%= link_to 'x', new_guide_path(:remove => report.to_param, :from => 'causes'), :class => 'act-replace remove_stance hide', :rel => 'instant_scores', :id => dom_id(report, :remove) %>
-        </dd>
+        <%= render 'guides/stance', :report => report, :selected => selected %>
       <% end %>
       <dt>Opposed</dt>
       <% guide.reports_opposed.each do |report| %>
-        <dd class="round-4 act-hover<%= ' selected' if selected == report %>" rel="<%= dom_id(report, :remove) %>">
-          <%= link_to report.name, new_guide_path(:selected => report), :class => 'act-replace', :rel => 'instant_scores' %>
-          <%= link_to 'x', new_guide_path(:remove => report.to_param, :from => 'causes'), :class => 'act-replace remove_stance hide', :rel => 'instant_scores', :id => dom_id(report, :remove) %>
-        </dd>
+        <%= render 'guides/stance', :report => report, :selected => selected %>
       <% end %>
     </ul>
   </div>
