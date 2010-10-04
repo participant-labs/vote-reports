@@ -3,8 +3,8 @@
     <%- (score.evidence.respond_to?(:not_interest_group_ratings) ? score.evidence.not_interest_group_ratings :  score.evidence).group_by(&:subject).each_pair do |subject, scores| -%>
       <%- if subject.is_a?(Report) -%>
         <%- scores.each do |report_score| -%>
-            <dt class="report_evidence"><%= render 'reports/scores/score', :score => report_score.evidence, :report => subject %></dt>
-            <dd class="report_evidence clearfix"><%= render 'reports/report', :report => subject %></dd>
+          <dt class="report_evidence<%= " opposed" if report_score.is_a?(Opposed) %>"><%= render 'reports/scores/score', :score => report_score.evidence, :report => subject %></dt>
+          <dd class="report_evidence<%= " opposed" if report_score.is_a?(Opposed) %> clearfix"><%= render 'reports/report', :report => subject %></dd>
         <%- end -%>
       <%- elsif subject.is_a?(Bill) -%>
         <%- if scores.first.evidence.is_a?(Vote) -%>

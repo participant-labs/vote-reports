@@ -16,4 +16,5 @@
       <%- end -%>
     </div>
   <% end %>
+  <%= content_tag(:div, "opposition: #{score.opposition_letter_grade}", :style => 'text-align: center;') if score.is_a?(Opposed) %>
 <%- end -%>

@@ -80,6 +80,7 @@ class ApplicationController < ActionController::Base
     if score.is_a?(GuideScore)
       guide_score_path(score.to_param)
     else
+      score = score.object if score.is_a?(Opposed)
       polymorphic_path([report_path_components(report || score.report), score].flatten)
     end
   end

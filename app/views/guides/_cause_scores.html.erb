@@ -8,7 +8,7 @@
     <h2>Your Stance</h2>
     <dl>
       <dt class="<%= 'selected ' if !selected %>round-4">
-        <%= link_to 'Overall Score', new_guide_path(:causes => guide.reports), :class => 'act-replace', :rel => 'instant_scores' %>
+        <%= link_to 'Overall Score', new_guide_path(:from => 'location'), :class => 'act-replace', :rel => 'instant_scores' %>
       </dt>
       <dt>Supported</dt>
       <% guide.reports_supported.each do |report| %>
