@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101004213821) do
+ActiveRecord::Schema.define(:version => 20101004225628) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -287,11 +287,11 @@ ActiveRecord::Schema.define(:version => 20101004213821) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "vote_smart_id", :null => false
-    t.integer  "state_id",      :null => false
+    t.integer  "vote_smart_id",  :null => false
+    t.integer  "state_id",       :null => false
     t.integer  "year"
     t.boolean  "special"
-    t.string   "office_type"
+    t.integer  "office_type_id", :null => false
   end
 
   add_index "elections", ["vote_smart_id"], :name => "index_elections_on_vote_smart_id", :unique => true
@@ -809,6 +809,7 @@ ActiveRecord::Schema.define(:version => 20101004213821) do
 
   add_foreign_key "election_stages", "elections", :name => "election_stages_election_id_fk"
 
+  add_foreign_key "elections", "office_types", :name => "elections_office_type_id_fk"
   add_foreign_key "elections", "us_states", :name => "elections_state_id_fk", :column => "state_id"
 
   add_foreign_key "guide_reports", "guides", :name => "guide_reports_guide_id_reference"
