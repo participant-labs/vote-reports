@@ -12,14 +12,8 @@
               <h1><%= guide_question(question) %></h1>
               <ul class="clearfix cause_buttons">
                 <li><button class="cause_selection round-6 skip">Skip this question</button></li>
-                <%- question.options.each_pair do |cause, message| -%>
-                  <li>
-                    <%- if @guide.reports.include?(cause.report) -%>
-                      <button name="remove" value="<%= cause.to_param %>" class="cause_selection round-6 selected" title="<%= cause.description %>"><%= message %></button>
-                    <%- else -%>
-                      <button name="add" value="<%= cause.to_param %>" class="cause_selection round-6" title="<%= cause.description %>"><%= message %></button>
-                    <%- end -%>
-                  </li>
+                <%- question.options.each_pair do |message, position| -%>
+                  <li><button name="<%= position.position %>" value="<%= position.cause.to_param %>" class="cause_selection round-6" title="<%= position.cause.description %>"><%= message %></button></li>
                 <%- end -%>
               </ul>
             </li>

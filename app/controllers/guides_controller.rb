@@ -9,16 +9,21 @@ class GuidesController < ApplicationController
     end
 
     session[:guide_causes] ||= []
+    session[:guide_causes_opposed] ||= []
 
-    if params[:add]
-      session[:guide_causes] << params[:add]
+    if params[:support]
+      session[:guide_causes] << params[:support]
+    elsif params[:oppose]
+      session[:guide_causes_opposed] << params[:oppose]
     elsif params[:remove]
-      session[:guide_causes] -= [params[:remove]]
+      session[:guide_causes] -= params[:remove]
+      session[:guide_causes_opposed] -= params[:remove]
     end
 
-    reports = session[:guide_causes].present? ? Cause.find_all_by_cached_slug(session[:guide_causes], :include => :report).map(&:report) : []
+    supported = fetch_reports_for(session[:guide_causes])
+    opposed = fetch_reports_for(session[:guide_causes_opposed])
 
-    @guide = Guide.new(:geoloc => current_geo_location, :reports => reports)
+    @guide = Guide.new(:geoloc => current_geo_location, :reports_supported => supported, :reports_opposed => opposed)
 
     respond_to do |format|
       format.html {
@@ -54,6 +59,10 @@ class GuidesController < ApplicationController
   end
 
   private
+
+  def fetch_reports_for(slugs)
+    slugs.present? ? Cause.find_all_by_cached_slug(slugs, :include => :report).map(&:report) : []
+  end
 
   def next_step
     if params[:from] == 'causes'

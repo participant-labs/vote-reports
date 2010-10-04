@@ -6,15 +6,23 @@
 <div class="span-5">
   <div class="stances round-4">
     <h2>Your Stance</h2>
-    <ul>
-      <li class="<%= 'selected ' if !selected %>round-4">
+    <dl>
+      <dt class="<%= 'selected ' if !selected %>round-4">
         <%= link_to 'Overall Score', new_guide_path(:causes => guide.reports), :class => 'act-replace', :rel => 'instant_scores' %>
-      </li>
-      <% guide.reports.each do |report| %>
-        <li class="round-4 act-hover<%= ' selected' if selected == report %>" rel="<%= dom_id(report, :remove) %>">
+      </dt>
+      <dt>Supported</dt>
+      <% guide.reports_supported.each do |report| %>
+        <dd class="round-4 act-hover<%= ' selected' if selected == report %>" rel="<%= dom_id(report, :remove) %>">
           <%= link_to report.name, new_guide_path(:selected => report), :class => 'act-replace', :rel => 'instant_scores' %>
           <%= link_to 'x', new_guide_path(:remove => report.to_param, :from => 'causes'), :class => 'act-replace remove_stance hide', :rel => 'instant_scores', :id => dom_id(report, :remove) %>
-        </li>
+        </dd>
+      <% end %>
+      <dt>Opposed</dt>
+      <% guide.reports_opposed.each do |report| %>
+        <dd class="round-4 act-hover<%= ' selected' if selected == report %>" rel="<%= dom_id(report, :remove) %>">
+          <%= link_to report.name, new_guide_path(:selected => report), :class => 'act-replace', :rel => 'instant_scores' %>
+          <%= link_to 'x', new_guide_path(:remove => report.to_param, :from => 'causes'), :class => 'act-replace remove_stance hide', :rel => 'instant_scores', :id => dom_id(report, :remove) %>
+        </dd>
       <% end %>
     </ul>
   </div>
