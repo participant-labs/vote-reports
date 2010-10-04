@@ -16,8 +16,8 @@ class GuidesController < ApplicationController
     elsif params[:oppose]
       session[:guide_causes_opposed] << params[:oppose]
     elsif params[:remove]
-      session[:guide_causes] -= params[:remove]
-      session[:guide_causes_opposed] -= params[:remove]
+      session[:guide_causes] -= [params[:remove]]
+      session[:guide_causes_opposed] -= [params[:remove]]
     end
 
     supported = fetch_reports_for(session[:guide_causes])

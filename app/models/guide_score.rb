@@ -4,7 +4,8 @@ class GuideScore
   include Score
 
   key :politician_id, Integer, :required => true, :numeric => true
-  key :report_ids, Array, :required => true
+  key :supported_report_ids, Array, :required => true
+  key :opposed_report_ids, Array, :required => true
   key :score, Float, :required => true
   key :evidence_ids, Array, :required => true
   key :evidence_description, String
@@ -24,7 +25,12 @@ class GuideScore
 
   def evidence
     evidence_ids.map do |report_score_id|
-      GuideScore::Evidence.find_or_create_by_politician_id_and_report_score_id(politician_id, report_score_id)
+      evidence = GuideScore::Evidence.find_or_create_by_politician_id_and_report_score_id(politician_id, report_score_id)
+      if supported_report_ids.include?(ReportScore.find(report_score_id).report_id)
+        evidence
+      else
+        Opposed.new(evidence)
+      end
     end
   end
 
@@ -45,9 +51,11 @@ class GuideScore
 
   def build_scores
     return if self.score
-    scores = ReportScore.scoped(:conditions => {:politician_id => politician_id, :report_id => report_ids})
-    self.score = scores.average(:score)
-    self.evidence_ids = scores.all(:select => :id).map(&:id)
+    supported_scores = ReportScore.scoped(:conditions => {:politician_id => politician_id, :report_id => supported_report_ids})
+    opposed_scores = ReportScore.scoped(:conditions => {:politician_id => politician_id, :report_id => opposed_report_ids})
+    scores = supported_scores.map(&:score) + opposed_scores.map(&:opposition_score)
+    self.score = scores.sum.to_f / scores.size
+    self.evidence_ids = (supported_scores + opposed_scores).map(&:id)
     self.evidence_description = build_evidence_description
   end
 

@@ -5,14 +5,6 @@ class Guide < ActiveRecord::Base
   has_friendly_id :secure_token
 
   has_many :guide_reports
-  has_many :reports, :through => :guide_reports do
-    def supported
-      scoped(:conditions => {:guide_reports => {:position => 'support'}})
-    end
-    def opposed
-      scoped(:conditions => {:guide_reports => {:position => 'oppose'}})
-    end
-  end
   has_many :reports_supported, :through => :guide_reports, :conditions => {:guide_reports => {:position => 'support'}}, :source => :report
   has_many :reports_opposed, :through => :guide_reports, :conditions => {:guide_reports => {:position => 'oppose'}}, :source => :report
 
@@ -26,12 +18,14 @@ class Guide < ActiveRecord::Base
   alias_method :score_criteria, :guide_reports
 
   def immediate_scores
-    return [] unless politicians.present? && reports.present?
-    report_ids = reports.map(&:id)
+    return [] unless politicians.present? && (reports_supported.present? || reports_opposed.present?)
+    supported_report_ids = reports_supported.map(&:id)
+    opposed_report_ids = reports_opposed.map(&:id)
+    report_ids = supported_report_ids + opposed_report_ids
     politicians.map do |politician|
       if ReportScore.scoped(:conditions => {:politician_id => politician.id, :report_id => report_ids}).exists?
-        GuideScore.first(:conditions => {:politician_id => politician.id, :report_ids.all => report_ids, :report_ids.size => report_ids.size}) \
-         || GuideScore.create!(:politician_id => politician.id, :report_ids => report_ids)
+        GuideScore.first(:conditions => {:politician_id => politician.id, :supported_report_ids.all => supported_report_ids, :supported_report_ids.size => supported_report_ids.size, :opposed_report_ids.all => opposed_report_ids, :opposed_report_ids.size => opposed_report_ids.size}) \
+         || GuideScore.create!(:politician_id => politician.id, :supported_report_ids => supported_report_ids, :opposed_report_ids => opposed_report_ids)
       end
     end.compact
   end
@@ -41,6 +35,7 @@ class Guide < ActiveRecord::Base
   end
 
   def unanswered_question
+    reports = reports_supported + reports_opposed
     unanswered = nil
     begin
       unanswered = questions.sample
