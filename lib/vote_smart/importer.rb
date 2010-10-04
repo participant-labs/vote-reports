@@ -30,11 +30,12 @@ module VoteSmart
                 state = UsState.find_by_abbreviation(election_data['stateId'])
                 election = ::Election.find_by_vote_smart_id(election_data['electionId']) \
                  || ::Election.create!(:vote_smart_id => election_data['electionId'], :state => state)
-                election.update_attributes!(:name => election_data['name'],
-                                 :state => state,
-                                 :year => election_data['electionYear'],
-                                 :special => object_to_boolean(election_data['special']),
-                                 :office_type => election_data['officeTypeId'])
+                election.update_attributes!(
+                  :name => election_data['name'],
+                  :state => state,
+                  :year => election_data['electionYear'],
+                  :special => object_to_boolean(election_data['special']),
+                  :office_type => OfficeType.find_by_vote_smart_id(election_data['officeTypeId']))
                 array_of_hashes(election_data['stage']).each do |es|
                   raise "#{election_data['stateId']} != #{es['stateId']}" if election_data['stateId'] != es['stateId']
                   election.stages.find_or_create_by_vote_smart_id_and_name_and_voted_on(es['stageId'], es['name'], es['electionDate'])
