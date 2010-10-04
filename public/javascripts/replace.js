@@ -91,8 +91,10 @@
           sibling_button.removeClass('selected');
           params['remove'] = sibling_button.attr('value');
         }
-        if (source.is('[name=add]')) {
-          params['add'] = source.attr('value');
+        if (source.is('[name=support]')) {
+          params['support'] = source.attr('value');
+        } else if (source.is('[name=oppose]')) {
+          params['oppose'] = source.attr('value');
         }
 
         source.addClass('selected');

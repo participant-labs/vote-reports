@@ -138,32 +138,37 @@
   margin-bottom: 0;
 }
 
-.stances ul {
-  list-style-type: none;
+.stances dl {
   margin: 0;
   padding: 0;
 }
 
-.stances li {
+.stances dt:after {
+  content: ':';
+}
+
+.stances dt, .stances dd {
   padding: 7px;
   background-color: #f5f5f5;
 }
-.stances li a {
+.stances a {
   color: #49b6f5;
   text-decoration: none;
   font-weight: bold;
 }
-.stances li.selected, .stances li.selected:hover {
+.stances .selected, .stances .selected:hover {
   background-color: black;
 }
-.stances li.selected a, .stances li.selected a:hover {
+.stances .selected a, .stances .selected a:hover {
   color: white;
 }
-
-.stances li + li {
+.stances dd {
+  margin-left: 0;
+}
+.stances dd + dd {
   margin-top: 3px;
 }
-.stances li:hover {
+.stances dd:hover {
   background-color: #d6eefc;
 }
 

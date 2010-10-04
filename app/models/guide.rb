@@ -5,7 +5,16 @@ class Guide < ActiveRecord::Base
   has_friendly_id :secure_token
 
   has_many :guide_reports
-  has_many :reports, :through => :guide_reports
+  has_many :reports, :through => :guide_reports do
+    def supported
+      scoped(:conditions => {:guide_reports => {:position => 'support'}})
+    end
+    def opposed
+      scoped(:conditions => {:guide_reports => {:position => 'oppose'}})
+    end
+  end
+  has_many :reports_supported, :through => :guide_reports, :conditions => {:guide_reports => {:position => 'support'}}, :source => :report
+  has_many :reports_opposed, :through => :guide_reports, :conditions => {:guide_reports => {:position => 'oppose'}}, :source => :report
 
   before_validation_on_create :initialize_report
   delegate :scores, :to => :report

@@ -13,15 +13,20 @@ class GuideQuestion
     @object = object
     @options =
       if object.is_a?(Cause)
-        {object => 'Support'}
+        ActiveSupport::OrderedHash[[
+          ['Oppose', CausePosition.new(object, :oppose)],
+          ['Support', CausePosition.new(object, :support)]
+        ]]
       else
-        Hash[object.causes.map {|cause| [cause, cause.name] }]
+        Hash[object.causes.map {|cause|
+          [cause.name, CausePosition.new(cause, :support)]
+        }]
       end
   end
 
   attr_accessor :options, :object
 
   def answered_by?(reports)
-    options.keys.map(&:report).any? {|r| reports.include?(r) }
+    options.values.map {|position| position.cause.report }.any? {|r| reports.include?(r) }
   end
 end
