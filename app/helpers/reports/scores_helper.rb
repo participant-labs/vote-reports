@@ -43,8 +43,7 @@ module Reports::ScoresHelper
       notify_hoptoad("Multiple interest group ratings #{scores.inspect}") if scores.size > 1
       rating = scores.first.evidence
       tooltip = content_tag(:b, "In #{subject.timespan}: #{rating.numeric_rating.round}%") + '<br/>'.html_safe \
-         + content_tag(:p, rating.description)
-      end
+         + content_tag(:p, rating.description.scan(/.{1,80}(?:\s+|$)/).join('<br/>').html_safe)
       {:x => subject.timespan.to_s, :y => rating.numeric_rating, :tooltip => tooltip, :vote_smart_url => subject.vote_smart_url}
     end.sort_by {|p| p[:x] }
   end
