@@ -68,6 +68,8 @@ class UsState < ActiveRecord::Base
 
   has_friendly_id :abbreviation
 
+  has_many :elections, :foreign_key => 'state_id'
+
   has_many :congressional_districts
   has_many :representative_terms, :through => :congressional_districts
   def representatives

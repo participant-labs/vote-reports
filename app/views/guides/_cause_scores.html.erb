@@ -23,6 +23,18 @@
 </div>
 
 <dl class="span-19 last guide_scores">
+  <%- guide.elections.each do |election| -%>
+    <%- stage = election.stages.future.by_voted_on.first -%>
+    <%- if races = stage.races.for_districts(guide.districts) -%>
+      <dt><%= stage.voted_on.to_s(:long) %> - <%= election.name %> - <%= stage.name %></dt>
+      <%=h election.inspect  %>
+      <%- races.each do |race| -%>
+        <%=h race.inspect %>
+        <%=h race.office.inspect %>
+      <%- end -%>
+    <%- end -%>
+  <%- end -%>
+
   <%- politicians = guide.politicians.for_display.group_by(&:current_office_type) -%>
 
   <dt>President of these United States of America</dt>

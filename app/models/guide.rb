@@ -47,8 +47,16 @@ class Guide < ActiveRecord::Base
     @politicians ||= Politician.from_congressional_district(congressional_district).in_office_normal_form
   end
 
+  def districts
+    @districts ||= District.lookup(geoloc)
+  end
+
   def congressional_district
-    @congressional_district ||= District.lookup(geoloc).detect(&:federal?).congressional_district
+    @congressional_district ||= districts.detect(&:federal?).congressional_district
+  end
+
+  def elections
+    districts.first.state.elections(:include => :stages)
   end
 
   attr_accessor :geoloc
