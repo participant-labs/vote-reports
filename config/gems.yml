@@ -56,7 +56,8 @@
 - :source: http://gems.github.com
   :name: polly-suppress_validations
 - :name: tamtam
-- :version: ">= 0.3.0"
+- :name: typhoeus
+- :version: ">= 0.3.2"
   :name: votesmart
 - :version: ">= 2.3.14"
   :name: Empact-will_paginate
