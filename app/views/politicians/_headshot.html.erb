@@ -1,8 +1,11 @@
 <%-
   style ||= :medium
   size ||= nil
+  spacer ||= false
 -%>
 
 <%- if politician.headshot.try(:url, style) -%>
   <%= link_to_unless_current sized_image_tag(politician.headshot, politician_title(politician), :style => style, :size => size || politician.headshot.size(style), :alt => politician.full_name), politician_url(politician), :class => 'politician_headshot' %>
+<%- elsif spacer -%>
+  <div class="politician_headshot" style="width: <%= Politician::Headshot::TYPE_TO_WIDTH[style] %>">&nbsp;</div>
 <%- end -%>
