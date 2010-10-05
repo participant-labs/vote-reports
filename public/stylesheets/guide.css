@@ -187,6 +187,34 @@
   -khtml-border-radius: 8px;
 }
 
-dl.guide_scores > dd, dl.guide_scores > dt {
-  margin-left: 20px;
+.guide_scores {
+  font-size: 16px;
+  border-collapse: collapse;
+}
+
+.guide_scores .politician_name {
+  line-height: 30px;
+}
+.guide_scores .politician_name > .name {
+  font-size: 1em;
+}
+
+.guide_scores tr td, .guide_scores tr td .name {
+  color: #666;
+}
+
+.guide_scores tr.odd td {
+  background-color: #F5F5F5;
+}
+.guide_scores tr.even td {
+  background-color: white;
+}
+
+.guide_scores tr + tr {
+  border-top: 1px solid #DCDCDC;
+  padding-top: 1px;
+}
+
+.guide_scores .politician_name a {
+  font-weight: normal;
 }
