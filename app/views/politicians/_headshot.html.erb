@@ -3,6 +3,6 @@
   size ||= nil
 -%>
 
-<%- if politician.headshot.url(style) -%>
+<%- if politician.headshot.try(:url, style) -%>
   <%= link_to_unless_current sized_image_tag(politician.headshot, politician_title(politician), :style => style, :size => size || politician.headshot.size(style), :alt => politician.full_name), politician_url(politician), :class => 'politician_headshot' %>
 <%- end -%>

@@ -43,7 +43,8 @@
         <tbody>
           <%- race.candidacies.each do |candidacy| -%>
             <tr>
-              <td><%#= candidacy.politician.headshot %> <%= link_to candidacy.politician.full_name, candidacy.politician %></td>
+              <%- headshot = candidacy.politician.headshot -%>
+              <td><%= render 'politicians/politician', :politician => candidacy.politician, :headshot_style => :tiny, :name_only => true %></td>
               <td></td>
               <td></td>
               <td><%= candidacy.party %></td>
