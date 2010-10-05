@@ -27,7 +27,7 @@
 <%= general_stage.voted_on.to_s(:long) %>, <%= general_stage.name %>
 <%- guide.elections.each do |election| -%>
   <%- stage = election.stages.future.by_voted_on.first -%>
-  <%- if races = stage.races.for_districts(guide.districts) -%>
+  <%- if (races = stage.races.for_districts(guide.districts)).present? -%>
     <h2><%= election.name %></h2>
     <%- races.each do |race| -%>
       <table class="guide_scores">
