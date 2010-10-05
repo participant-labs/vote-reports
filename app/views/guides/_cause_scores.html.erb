@@ -22,19 +22,40 @@
   </div>
 </div>
 
-<dl class="span-19 last guide_scores">
-  <%- guide.elections.each do |election| -%>
-    <%- stage = election.stages.future.by_voted_on.first -%>
-    <%- if races = stage.races.for_districts(guide.districts) -%>
-      <dt><%= stage.voted_on.to_s(:long) %> - <%= election.name %> - <%= stage.name %></dt>
-      <%=h election.inspect  %>
-      <%- races.each do |race| -%>
-        <%=h race.inspect %>
-        <%=h race.office.inspect %>
-      <%- end -%>
+<div class="span-19 last">
+<%- general_stage = guide.elections.first.stages.future.by_voted_on.first -%>
+<%= general_stage.voted_on.to_s(:long) %>, <%= general_stage.name %>
+<%- guide.elections.each do |election| -%>
+  <%- stage = election.stages.future.by_voted_on.first -%>
+  <%- if races = stage.races.for_districts(guide.districts) -%>
+    <h2><%= election.name %></h2>
+    <%- races.each do |race| -%>
+      <table class="guide_scores">
+        <thead>
+          <tr>
+            <th><%= race.office.name %><%= ", #{election.state.abbreviation}-#{race.district}" if race.district %></th>
+            <th>Grade</th>
+            <th># of reports</th>
+            <th>Party</th>
+            <th>Choice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%- race.candidacies.each do |candidacy| -%>
+            <tr>
+              <td><%#= candidacy.politician.headshot %> <%= link_to candidacy.politician.full_name, candidacy.politician %></td>
+              <td></td>
+              <td></td>
+              <td><%= candidacy.party %></td>
+            </tr>
+          <%- end -%>
+        </tbody>
+      </table>
     <%- end -%>
   <%- end -%>
+<%- end -%>
 
+<dl class="span-19 last guide_scores">
   <%- politicians = guide.politicians.for_display.group_by(&:current_office_type) -%>
 
   <dt>President of these United States of America</dt>
@@ -54,3 +75,4 @@
     <%= render 'politicians/scores', :scores => scores, :politicians => reps %>
   <%- end -%>
 </dl>
+</div>
