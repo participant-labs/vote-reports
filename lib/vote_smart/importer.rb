@@ -251,7 +251,7 @@ module VoteSmart
         puts "Ratings"
         require 'typhoeus'
         VoteSmart::Rating.parallelize!
-        InterestGroup.vote_smart.ratings_not_recently_updated.first.tap do |group|
+        InterestGroup.vote_smart.ratings_not_recently_updated.paginated_each do |group|
           ActiveRecord::Base.transaction do
             puts "InterestGroup: #{group.vote_smart_id} #{group.name}"
             Politician.paginated_each(:conditions => 'vote_smart_id IS NOT NULL') do |politician|
