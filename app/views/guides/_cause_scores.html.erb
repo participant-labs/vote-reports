@@ -47,6 +47,7 @@
               <%-
                 headshot = candidacy.politician.headshot
                 score = score_for(scores, candidacy.politician)
+                politicians.delete(candidacy.politician)
               -%>
               <td><%= render 'politicians/politician', :politician => candidacy.politician, :headshot_style => :tiny, :name_only => true, :headshot_spacer => true %></td>
               <td><%= render 'reports/scores/score', :score => score, :hide_evidence => true %></td>
