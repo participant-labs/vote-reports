@@ -50,7 +50,13 @@
               -%>
               <td><%= render 'politicians/politician', :politician => candidacy.politician, :headshot_style => :tiny, :name_only => true, :headshot_spacer => true %></td>
               <td><%= render 'reports/scores/score', :score => score, :hide_evidence => true %></td>
-              <td><%= render 'reports/scores/evidence_summary', :score => score, :prefix => '' %></td>
+              <td><div class="score_sources">
+                <%- if score -%>
+                  <%= link_to score.evidence_description.to_i, report_score_path(score), :class => 'fancyboxy' %>
+                <%- else -%>
+                  0
+                <%- end -%>
+              </div></td>
               <td><%= candidacy.party %></td>
               <td></td>
             </tr>
