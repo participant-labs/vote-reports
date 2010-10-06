@@ -251,10 +251,11 @@ module VoteSmart
         puts "Ratings"
         require 'typhoeus'
         VoteSmart::Rating.parallelize!
+        politicians = Politician.all(:select => 'id, vote_smart_id', :conditions => 'vote_smart_id IS NOT NULL')
         InterestGroup.vote_smart.ratings_not_recently_updated.paginated_each do |group|
           ActiveRecord::Base.transaction do
             puts "InterestGroup: #{group.vote_smart_id} #{group.name}"
-            Politician.paginated_each(:select => 'id, vote_smart_id', :conditions => 'vote_smart_id IS NOT NULL') do |politician|
+            politicians.each do |politician|
               VoteSmart::Rating.get_candidate_rating(politician.vote_smart_id, group.vote_smart_id) do |ratings|
                 print 'P'
                 if ratings.has_key?('error')
