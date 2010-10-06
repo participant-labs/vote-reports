@@ -218,3 +218,31 @@
 .guide_scores .politician_name a {
   font-weight: normal;
 }
+
+.guide_scores div.report_score .score {
+  font-size: 20px;
+  color: white;
+  font-family: arial, serif;
+  font-weight: bold;
+
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+
+  margin-top: 0;
+
+   -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -khtml-border-radius: 20px;
+}
+
+.guide_scores div.report_score .score.blank {
+  color: gray;
+  border: gray solid 3px;
+
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+}
+
