@@ -5,7 +5,11 @@
 
 <div class="score_sources">
   <%= prefix %>
-  <% cache(dom_id(score, 'evidence_summary')) do %>
-    <%= link_to_unless_current score.evidence_description || '', report_score_path(score, report), :class => 'fancyboxy' %>
-  <% end %>
+  <%- if score -%>
+    <% cache(dom_id(score, 'evidence_summary')) do %>
+      <%= link_to_unless_current score.evidence_description || '', report_score_path(score, report), :class => 'fancyboxy' %>
+    <% end %>
+  <%- else -%>
+    0
+  <%- end -%>
 </div>

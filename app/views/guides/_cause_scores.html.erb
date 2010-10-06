@@ -22,6 +22,7 @@
   </div>
 </div>
 
+<%- politicians = guide.politicians -%>
 <div class="span-19 last">
 <%- general_stage = guide.elections.first.stages.future.by_voted_on.first -%>
 <%= general_stage.voted_on.to_s(:long) %>, <%= general_stage.name %>
@@ -43,10 +44,13 @@
         <tbody>
           <%- race.candidacies.each do |candidacy| -%>
             <tr class="<%= cycle('even', 'odd') %>">
-              <%- headshot = candidacy.politician.headshot -%>
+              <%-
+                headshot = candidacy.politician.headshot
+                score = score_for(scores, candidacy.politician)
+              -%>
               <td><%= render 'politicians/politician', :politician => candidacy.politician, :headshot_style => :tiny, :name_only => true, :headshot_spacer => true %></td>
-              <td></td>
-              <td></td>
+              <td><%= render 'reports/scores/score', :score => score, :hide_evidence => true %></td>
+              <td><%= render 'reports/scores/evidence_summary', :score => score, :prefix => '' %></td>
               <td><%= candidacy.party %></td>
               <td></td>
             </tr>
@@ -58,17 +62,17 @@
 <%- end -%>
 
 <dl class="span-19 last guide_scores">
-  <%- politicians = guide.politicians.for_display.group_by(&:current_office_type) -%>
+  <%- grouped_politicians = politicians.group_by(&:current_office_type) -%>
 
   <dt>President of these United States of America</dt>
-  <%= render 'politicians/scores', :scores => scores, :politicians => politicians['PresidentialTerm'] %>
+  <%= render 'politicians/scores', :scores => scores, :politicians => grouped_politicians['PresidentialTerm'] %>
 
-  <%- if senators = politicians['SenateTerm'] -%>
+  <%- if senators = grouped_politicians['SenateTerm'] -%>
     <dt>Senators for the <%= state_full_name(guide.congressional_district.state) %></dt>
     <%= render 'politicians/scores', :scores => scores, :politicians => senators %>
   <%- end -%>
 
-  <%- if reps = politicians['RepresentativeTerm'] -%>
+  <%- if reps = grouped_politicians['RepresentativeTerm'] -%>
     <dt>Representative
       <%- if guide.congressional_district -%>
         for the <%= district_full_title_name(guide.congressional_district) %>

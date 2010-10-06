@@ -44,11 +44,16 @@ class Guide < ActiveRecord::Base
   end
 
   def politicians
-    @politicians ||= Politician.from_congressional_district(congressional_district).in_office_normal_form
+    @politicians ||= Politician.from_congressional_district(congressional_district).in_office_normal_form.for_display \
+      | Politician.scoped(:select => 'distinct politicians.*', :joins => :candidacies, :conditions => {:candidacies => {:id => candidacies}}).for_display
   end
 
   def districts
     @districts ||= District.lookup(geoloc)
+  end
+
+  def state
+    @state ||= districts.first.state
   end
 
   def congressional_district
@@ -56,7 +61,15 @@ class Guide < ActiveRecord::Base
   end
 
   def elections
-    districts.first.state.elections(:include => :stages)
+    @elections ||= state.elections(:include => :stages)
+  end
+
+  def races
+    @races ||= Race.for_districts(districts)
+  end
+
+  def candidacies
+    @candidacies ||= Candidacy.for_districts(districts)
   end
 
   attr_accessor :geoloc

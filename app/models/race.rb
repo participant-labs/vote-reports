@@ -5,12 +5,15 @@ class Race < ActiveRecord::Base
 
   named_scope :for_districts, lambda {|districts|
     {
-      :joins => :office,
+      :joins => [:office, {:election_stage => :election}],
       :conditions => [
-        %{(offices.id = ? AND races.district = ?) OR
-          (offices.id = ? AND races.district = ?) OR
-          (offices.id IN(?) AND races.district = ?) OR
-          (offices.id NOT IN(?))},
+        %{elections.state_id = ? AND (
+            (offices.id = ? AND races.district = ?) OR
+            (offices.id = ? AND races.district = ?) OR
+            (offices.id IN(?) AND races.district = ?) OR
+            (offices.id NOT IN(?))
+        )},
+        districts.first.state.id,
         Office.us_house,     districts.level('federal').first.name,
         Office.state_senate, districts.level('state_upper').first.name.to_i.to_s,
         Office.state_lower,  districts.level('state_lower').first.name.to_i.to_s,
