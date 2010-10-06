@@ -65,11 +65,11 @@ class Guide < ActiveRecord::Base
   end
 
   def races
-    @races ||= Race.for_districts(districts)
+    @races ||= Race.for_districts(districts).upcoming
   end
 
   def candidacies
-    @candidacies ||= Candidacy.for_districts(districts)
+    @candidacies ||= Candidacy.upcoming_for_districts(districts).valid
   end
 
   attr_accessor :geoloc
