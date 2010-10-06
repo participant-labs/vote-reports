@@ -8,8 +8,8 @@ class Candidacy < ActiveRecord::Base
   }
 
   class << self
-    def for_districts(districts)
-      for_races(Race.for_districts(districts))
+    def upcoming_for_districts(districts)
+      for_races(Race.for_districts(districts).upcoming)
     end
   end
 end

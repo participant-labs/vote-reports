@@ -3,6 +3,8 @@ class Race < ActiveRecord::Base
   belongs_to :election_stage
   belongs_to :office
 
+  named_scope :upcoming, :joins => :election_stage, :conditions => ['election_stages.voted_on > ?', Date.today]
+
   named_scope :for_districts, lambda {|districts|
     {
       :joins => [:office, {:election_stage => :election}],
