@@ -22,7 +22,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   # for details. To customize, remove this recipe and specify the components you want.
   recipe :default_stack
 
-  mongo_version = '1.6.3'
+  MONGO_VERSION = '1.6.3'
 
   # Add your application's custom requirements here
   def application_packages
@@ -72,7 +72,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     mongo_monit = <<-MONIT
       check process mongodb
         with pidfile /srv/vote-reports/shared/pids/mongodb.pid
-        start program = "/opt/local/mongo-#{mongo_version}/bin/mongod --dbpath /data/db run"
+        start program = "/opt/local/mongo-#{MONGO_VERSION}/bin/mongod --dbpath /data/db run"
         stop program = "/usr/bin/pgrep mongod | xargs kill -15"
     MONIT
 
@@ -144,6 +144,6 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   end
   recipe :monit
 
-  configure(:mongodb => {:version => mongo_version})
+  configure(:mongodb => {:version => MONGO_VERSION})
   recipe :mongodb
 end
