@@ -20,7 +20,7 @@ class Causes::ScoresController < ApplicationController
         }
       }
       format.json {
-        render :json => @report.scores
+        render :json => @report.as_json.merge(:scores => @report.scores.as_json)
       }
     end
   end

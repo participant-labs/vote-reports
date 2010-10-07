@@ -93,7 +93,7 @@ class ReportScore < ActiveRecord::Base
   end
 
   def as_json(opts = {})
-    super(opts.reverse_merge(:only => [:evidence_description, :gov_track_id, :vote_smart_id, :score, :name, :id], :include => [:politician, :report]))
+    super(opts.reverse_merge(:only => [:evidence_description, :gov_track_id, :vote_smart_id, :score, :name], :include => [:politician]))
   end
 
   private
