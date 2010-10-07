@@ -38,6 +38,7 @@ Rails::Initializer.run do |config|
   config.gem 'bson_ext', :version => '>= 1.0.4', :lib => false
   config.gem 'bson', :version => '>= 1.0.4'
   config.gem 'mongo', :version => '>= 1.0.6'
+  config.gem 'plucky' # apparently required for mongos
   config.gem 'mongo_mapper', :version => '>= 0.8.2'
   config.gem 'Empact-mongo_session_store', :lib => 'mongo_session_store'
   config.gem 'newrelic_rpm', :version => '>= 2.12.3'
