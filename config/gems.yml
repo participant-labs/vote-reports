@@ -14,7 +14,7 @@
   :name: erubis
 - :name: excelsior
 - :name: fastercsv
-- :name: matthuhiggins-foreigner
+- :name: foreigner
 - :version: ">= 3.0.6"
   :name: friendly_id
 - :name: geokit
@@ -64,6 +64,7 @@
 - :name: ym4r
 - :name: httparty
 - :name: parallel
-- :name: auto_tagger
+- :name: scout
+- :name: request-log-analyzer
 - :version: 2.3.9
   :name: rails
