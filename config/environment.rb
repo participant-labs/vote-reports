@@ -34,7 +34,7 @@ Rails::Initializer.run do |config|
   config.gem 'json', :version => '>= 1.4.3'
   config.gem 'loofah'
   config.gem 'puppet', :version => '>= 2.6.0'
-  config.gem 'shadow_puppet', :version => '>= 0.3.3'
+  config.gem 'shadow_puppet', :version => '>= 0.4.0'
   config.gem 'bson_ext', :version => '>= 1.0.4', :lib => false
   config.gem 'bson', :version => '>= 1.0.4'
   config.gem 'mongo', :version => '>= 1.0.6'
