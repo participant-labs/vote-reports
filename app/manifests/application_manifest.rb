@@ -143,7 +143,5 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     recipe :ssh
   end
   recipe :monit
-
-  configure(:mongodb => {:version => MONGO_VERSION})
   recipe :mongodb
 end
