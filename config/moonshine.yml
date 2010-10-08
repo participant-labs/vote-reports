@@ -84,9 +84,3 @@
 
 :scout:
   :agent_key: 53a8a406-6297-4ab9-8763-21f8266b9968
-
-:ssh:
-  :port: 7111
-  :allow_users:
-    - root
-    - deploy

@@ -141,6 +141,14 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     '-A INPUT -p udp -m udp --dport 8000:10000 -j ACCEPT'
   ]})
   recipe :iptables
+
+  configure(:ssh => {
+    :port => 7111,
+    :allow_users => [
+      'root',
+      'deploy'
+    ]
+  })
   recipe :ssh
 
   recipe :monit
