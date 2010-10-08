@@ -1,32 +1,30 @@
-<table class="guide_scores">
-  <thead>
-    <tr>
-      <th><%= office %></th>
-      <th>Grade</th>
-      <th># of reports</th>
-      <th>Party</th>
-      <th>Election</th>
+<thead>
+  <tr>
+    <th><%= office %></th>
+    <th>Grade</th>
+    <th># of reports</th>
+    <th>Party</th>
+    <th>Election</th>
+  </tr>
+</thead>
+<tbody>
+  <%- politicians.each do |politician| -%>
+    <tr class="<%= cycle('even', 'odd') %>">
+      <%-
+        headshot = politician.headshot
+        score = score_for(scores, politician)
+      -%>
+      <td><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true, :headshot_spacer => true %></td>
+      <td><%= render 'reports/scores/score', :score => score, :hide_evidence => true %></td>
+      <td class="score_sources">
+        <%- if score -%>
+          <%= link_to score.evidence_description.to_i, report_score_path(score), :class => 'fancyboxy' %>
+        <%- else -%>
+          0
+        <%- end -%>
+      </td>
+      <td><%= politician.current_office.party %></td>
+      <td></td>
     </tr>
-  </thead>
-  <tbody>
-    <%- politicians.each do |politician| -%>
-      <tr class="<%= cycle('even', 'odd') %>">
-        <%-
-          headshot = politician.headshot
-          score = score_for(scores, politician)
-        -%>
-        <td><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true, :headshot_spacer => true %></td>
-        <td><%= render 'reports/scores/score', :score => score, :hide_evidence => true %></td>
-        <td class="score_sources">
-          <%- if score -%>
-            <%= link_to score.evidence_description.to_i, report_score_path(score), :class => 'fancyboxy' %>
-          <%- else -%>
-            0
-          <%- end -%>
-        </td>
-        <td><%= politician.current_office.party %></td>
-        <td></td>
-      </tr>
-    <%- end -%>
-  </tbody>
-</table>
+  <%- end -%>
+</tbody>
