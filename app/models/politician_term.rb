@@ -17,6 +17,14 @@ module PoliticianTerm
         end
       end
 
+      def reelection_year
+        if ended_on.month > 2
+          ended_on.year
+        else
+          ended_on.year - 1
+        end
+      end
+
       private
 
       unless Rails.env.development? || Rails.env.production?
