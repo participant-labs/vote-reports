@@ -24,14 +24,13 @@
 
 <%- politicians = guide.politicians -%>
 <div class="span-19 last">
-<%- general_stage = guide.elections.first.stages.future.by_voted_on.first -%>
-<%= general_stage.voted_on.to_s(:long) %>, <%= general_stage.name %>
-<%- guide.elections.each do |election| -%>
-  <%- stage = election.stages.future.by_voted_on.first -%>
-  <%- if (races = stage.races.for_districts(guide.districts)).present? -%>
-    <h2><%= election.name %></h2>
-    <%- races.each do |race| -%>
-      <table class="guide_scores">
+<table class="guide_scores">
+  <%- general_stage = guide.elections.first.stages.future.by_voted_on.first -%>
+  <%= general_stage.voted_on.to_s(:long) %>, <%= general_stage.name %>
+  <%- guide.elections.each do |election| -%>
+    <%- stage = election.stages.future.by_voted_on.first -%>
+    <%- if (races = stage.races.for_districts(guide.districts)).present? -%>
+      <%- races.each do |race| -%>
         <thead>
           <tr>
             <th><%= race.office.name %><%= ", #{election.state.abbreviation}-#{race.district}" if race.district %></th>
@@ -63,27 +62,26 @@
             </tr>
           <%- end -%>
         </tbody>
-      </table>
+      <%- end -%>
     <%- end -%>
   <%- end -%>
-<%- end -%>
 
-<%- grouped_politicians = politicians.group_by(&:current_office_type) -%>
+  <%- grouped_politicians = politicians.group_by(&:current_office_type) -%>
 
-<h2>Not up for Reelection</h2>
-<%- if (presidents = grouped_politicians['PresidentialTerm']).present? -%>
-  <%= render 'guides/incumbent_scores', :office => 'President', :politicians => presidents, :scores => scores %>
-  <%- politicians -= presidents -%>
-<%- end -%>
+  <%- if (presidents = grouped_politicians['PresidentialTerm']).present? -%>
+    <%= render 'guides/incumbent_scores', :office => 'President', :politicians => presidents, :scores => scores %>
+    <%- politicians -= presidents -%>
+  <%- end -%>
 
-<%- if (senators = grouped_politicians['SenateTerm']).present? -%>
-  <%= render 'guides/incumbent_scores', :office => "Senators for #{ state_name(guide.congressional_district.state) }", :politicians => senators, :scores => scores %>
-  <%- politicians -= senators -%>
-<%- end -%>
+  <%- if (senators = grouped_politicians['SenateTerm']).present? -%>
+    <%= render 'guides/incumbent_scores', :office => "Senators for #{ state_name(guide.congressional_district.state) }", :politicians => senators, :scores => scores %>
+    <%- politicians -= senators -%>
+  <%- end -%>
 
-<%- if (representatives = grouped_politicians['RepresentativeTerm']).present? -%>
-  <%= render 'guides/incumbent_scores', :office => "Representative #{ "for the #{district_full_title_name(guide.congressional_district) }" if guide.congressional_district }", :politicians => representatives, :scores => scores %>
-  <%- politicians -= representatives -%>
-<%- end -%>
+  <%- if (representatives = grouped_politicians['RepresentativeTerm']).present? -%>
+    <%= render 'guides/incumbent_scores', :office => "Representative #{ "for the #{district_full_title_name(guide.congressional_district) }" if guide.congressional_district }", :politicians => representatives, :scores => scores %>
+    <%- politicians -= representatives -%>
+  <%- end -%>
+</table>
 
 </div>
