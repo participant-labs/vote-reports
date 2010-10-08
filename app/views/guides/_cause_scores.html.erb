@@ -33,7 +33,7 @@
       <%- races.each do |race| -%>
         <thead>
           <tr>
-            <th><%= race.office.name %><%= ", #{election.state.abbreviation}-#{race.district}" if race.district %></th>
+            <th>Candidates for <%= race.office.name %> of <%= race.where %></th>
             <th>Grade</th>
             <th># of reports</th>
             <th>Party</th>
