@@ -23,4 +23,15 @@ class Race < ActiveRecord::Base
       ]
     }
   }
+
+  delegate :election, :to => :election_stage
+  delegate :state, :to => :election
+
+  def where
+    if district
+      "the #{Integer(district).ordinalize rescue district} District of #{state.full_name}"
+    else
+      state.full_name
+    end
+  end
 end
