@@ -203,6 +203,10 @@
   margin-left: 6px;
 }
 
+.guide_scores thead:first-child tr th {
+  padding-top: 0;
+}
+
 .guide_scores tr th {
   background-color: white;
   font-size: 12px;
