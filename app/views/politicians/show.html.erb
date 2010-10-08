@@ -56,11 +56,14 @@
 
   <div class="section" style="float:left; width: 320px; margin-left: 10px">
     <h3>Terms in Office</h3>
-    <%- if @terms.present? -%>
+    <%- if @terms.present? || @politician.current_candidacy -%>
     <ul>
-      <% @terms.each do |term|  %>
+      <%- if @politician.current_candidacy -%>
+        <li><%= render 'politicians/candidacies/candidacy', :candidacy => @politician.current_candidacy %></li>
+      <%- end -%>
+      <%- @terms.each do |term|  -%>
         <li><%= render 'politicians/terms/term', :term => term %></li>
-      <% end %>
+      <%- end -%>
     </ul>
     <%- else -%>
       <p>We have no record of elections for this politician</p>
