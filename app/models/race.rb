@@ -24,6 +24,10 @@ class Race < ActiveRecord::Base
     }
   }
 
+  named_scope :with_scores_from, lambda {|scores|
+    {:joins => :candidacies, :conditions => {:candidacies => {:politician_id => scores.map(&:politician_id)}}}
+  }
+
   delegate :election, :to => :election_stage
   delegate :state, :to => :election
 
