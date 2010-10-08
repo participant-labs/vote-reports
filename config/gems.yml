@@ -28,7 +28,7 @@
 - :name: loofah
 - :version: ">= 2.6.0"
   :name: puppet
-- :version: ">= 0.4.0"
+- :version: ">= 0.3.3"
   :name: shadow_puppet
 - :version: ">= 1.0.4"
   :name: bson_ext
