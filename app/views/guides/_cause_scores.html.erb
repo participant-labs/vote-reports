@@ -24,9 +24,8 @@
 
 <%- politicians = guide.politicians -%>
 <div class="span-19 last">
+<%- general_stage = guide.elections.first.stages.future.by_voted_on.first -%>
 <table class="guide_scores">
-  <%- general_stage = guide.elections.first.stages.future.by_voted_on.first -%>
-  <%= general_stage.voted_on.to_s(:long) %>, <%= general_stage.name %>
   <%- guide.elections.each do |election| -%>
     <%- stage = election.stages.future.by_voted_on.first -%>
     <%- if (races = stage.races.for_districts(guide.districts)).present? -%>
