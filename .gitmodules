@@ -22,3 +22,6 @@
 [submodule "vendor/plugins/paperclip_autosizer"]
 	path = vendor/plugins/paperclip_autosizer
 	url = git://github.com/Empact/Paperclip-Autosizer.git
+[submodule "vendor/plugins/moonshine_iptables"]
+	path = vendor/plugins/moonshine_iptables
+	url = http://github.com/railsmachine/moonshine_iptables.git
