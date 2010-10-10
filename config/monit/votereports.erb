@@ -1,0 +1,106 @@
+# Defaults for monit initscript
+# sourced by /etc/init.d/monit
+# installed at /etc/default/monit by maintainer scripts
+# Fredrik Steen <stone@debian.org>
+
+# You must set this variable to for monit to start
+startup=1
+
+# To change the intervals which monit should run uncomment
+# and change this variable.
+# CHECK_INTERVALS=180
+
+###############################################################################
+## Monit control file
+###############################################################################
+##
+## Comments begin with a '#' and extend through the end of the line. Keywords
+## are case insensitive. All path's MUST BE FULLY QUALIFIED, starting with '/'.
+##
+## Below you will find examples of some frequently used statements. For
+## information about the control file, a complete list of statements and
+## options please have a look in the monit manual.
+##
+##
+###############################################################################
+## Global section
+###############################################################################
+##
+## Start monit in the background (run as a daemon) and check services at
+## 2-minute intervals.
+#
+set daemon <%= options[:interval] || 120 %>
+#
+#
+## Set syslog logging with the 'daemon' facility. If the FACILITY option is
+## omitted, monit will use 'user' facility by default. If you want to log to
+## a stand alone log file instead, specify the path to a log file
+#
+# set logfile syslog facility log_daemon
+#
+#
+## Set the list of mail servers for alert delivery. Multiple servers may be
+## specified using comma separator. By default monit uses port 25 - this
+## is possible to override with the PORT option.
+set mailserver <%= options[:mailserver] || 'localhost' %>
+#
+## By default monit will drop alert events if no mail servers are available.
+## If you want to keep the alerts for a later delivery retry, you can use the
+## EVENTQUEUE statement. The base directory where undelivered alerts will be
+## stored is specified by the BASEDIR option. You can limit the maximal queue
+## size using the SLOTS option (if omitted, the queue is limited by space
+## available in the back end filesystem).
+#
+# set eventqueue
+# basedir /var/monit # set the base directory where events will be stored
+# slots 100 # optionaly limit the queue size
+#
+#
+## Monit by default uses the following alert mail format:
+##
+## --8<--
+## From: monit@$HOST # sender
+## Subject: monit alert -- $EVENT $SERVICE # subject
+##
+## $EVENT Service $SERVICE #
+## #
+## Date: $DATE #
+## Action: $ACTION #
+## Host: $HOST # body
+## Description: $DESCRIPTION #
+## #
+## Your faithful employee, #
+## monit #
+## --8<--
+##
+## You can override this message format or parts of it, such as subject
+## or sender using the MAIL-FORMAT statement. Macros such as $DATE, etc.
+## are expanded at runtime. For example, to override the sender:
+#
+set mail-format { from: monit@<%= configuration[:domain] || (Facter.to_hash["hostname"] + '.' + Facter.to_hash["domain"]) %> }
+
+## You can set alert recipients here whom will receive alerts if/when a
+## service defined in this file has errors. Alerts may be restricted on
+## events by using a filter as in the second example below.
+#
+<% if options[:alerts] %>
+<% if options[:alerts][:alert_email] %>
+set alert <%= options[:alerts][:alert_email] %> # receive all alerts
+<% end %>
+<% if options[:alerts][:timeout_email] %>
+set alert <%= options[:alerts][:timeout_email] %> only on { timeout } # receive just service-
+                                                                      # timeout alert
+<% end %>
+<% end %>
+## Monit has an embedded web server which can be used to view status of
+## services monitored, the current configuration, actual services parameters
+## and manage services from a web interface.
+#
+# User and password are required to access the monit gui
+<% if options[:gui] && options[:gui][:user] && options[:gui][:password] %>
+set httpd port <%= options[:gui][:port] || 9001 %> and
+    allow "<%= options[:gui][:user] %>":<%= options[:gui][:password] %>
+<% end %>
+
+include /etc/monit.d/*
+
