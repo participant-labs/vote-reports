@@ -62,11 +62,11 @@ class ApplicationManifest < Moonshine::Manifest::Rails
         stop program = "/usr/bin/env PATH=$PATH:/usr/bin RAILS_ENV=production /srv/vote-reports/current/script/delayed_job stop"
     DJ
 
-    file '/etc/monit.d/delayed_job',
+    file '/etc/monit/conf.d/delayed_job.conf',
       :mode => '700',
       :owner => configuration[:user],
       :group => configuration[:group] || configuration[:user],
-      :require => file('/etc/monit.d'),
+      :require => file('/etc/monit/conf.d'),
       :content => delayed_job_monit
 
     mongo_monit = <<-MONIT
@@ -76,11 +76,11 @@ class ApplicationManifest < Moonshine::Manifest::Rails
         stop program = "/usr/bin/pgrep mongod | xargs kill -15"
     MONIT
 
-    file '/etc/monit.d/mongodb',
+    file '/etc/monit/conf.d/mongodb.conf',
       :mode => '700',
       :owner => configuration[:user],
       :group => configuration[:group] || configuration[:user],
-      :require => file('/etc/monit.d'),
+      :require => file('/etc/monit/conf.d'),
       :content => mongo_monit
 
     exec 'update-rc.d monit defaults'
