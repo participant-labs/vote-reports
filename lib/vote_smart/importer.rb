@@ -32,11 +32,11 @@ module VoteSmart
                 election = ::Election.find_by_vote_smart_id(election_data['electionId']) \
                  || ::Election.create!(
                   :vote_smart_id => election_data['electionId'],
-                  :state => state,
+                  :state_id => state.id,
                   :office_type_id => office_type.id)
                 election.update_attributes!(
                   :name => election_data['name'],
-                  :state => state,
+                  :state_id => state.id,
                   :year => election_data['electionYear'],
                   :special => object_to_boolean(election_data['special']),
                   :office_type_id => office_type.id)
