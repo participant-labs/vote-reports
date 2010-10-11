@@ -30,7 +30,7 @@ module VoteSmart
                 state = UsState.find_by_abbreviation(election_data['stateId'])
                 election = ::Election.find_by_vote_smart_id(election_data['electionId']) \
                  || ::Election.create!(:vote_smart_id => election_data['electionId'], :state => state)
-                office_type = OfficeType.find_by_vote_smart_id(election_data['officeTypeId']) || raise "Office type #{election_data['officeTypeId']} not found"
+                office_type = OfficeType.find_by_vote_smart_id(election_data['officeTypeId']) || raise("Office type #{election_data['officeTypeId']} not found")
                 election.update_attributes!(
                   :name => election_data['name'],
                   :state => state,
