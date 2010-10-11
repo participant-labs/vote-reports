@@ -36,7 +36,7 @@ module VoteSmart
                   :state => state,
                   :year => election_data['electionYear'],
                   :special => object_to_boolean(election_data['special']),
-                  :office_type => office_type)
+                  :office_type_id => office_type.id)
                 array_of_hashes(election_data['stage']).each do |es|
                   raise "#{election_data['stateId']} != #{es['stateId']}" if election_data['stateId'] != es['stateId']
                   election.stages.find_or_create_by_vote_smart_id_and_name_and_voted_on(es['stageId'], es['name'], es['electionDate'])
