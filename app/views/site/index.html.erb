@@ -1,12 +1,13 @@
 <%- title 'Knowing is Half the Ballot' -%>
 
-
 <div id="hero">
 
   <div id="logoarea">
     <a href="/"><img src="images/global/votereports_logo.png"></a>
     <%= render 'layouts/account_links' %>
   </div>
+
+<%- cache do -%>
 
   <div id="center-box">
     <div id="action-box">
@@ -99,5 +100,6 @@
       <%= link_to content_tag(:span, "Let's get started!"), new_guide_path, :class => 'call-to-action' %>
     </div>
   </div>
-
 </div>
+
+<%- end -%>
