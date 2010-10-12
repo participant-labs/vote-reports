@@ -2,6 +2,9 @@ class Race < ActiveRecord::Base
   has_many :candidacies
   belongs_to :election_stage
   belongs_to :office
+  belongs_to :district
+
+  before_create :populate_race_reference
 
   named_scope :upcoming, :joins => :election_stage, :conditions => ['election_stages.voted_on > ?', Date.today]
 
@@ -31,11 +34,13 @@ class Race < ActiveRecord::Base
   delegate :election, :to => :election_stage
   delegate :state, :to => :election
 
-  def district_name
-    self[:district]
+  def congressional_district
+    if office.name == 'U.S. House'
+      state.congressional_districts.find_by_district(district_name)
+    end
   end
 
-  def district
+  def populate_race_reference
     level =
       case office.name
       when 'U.S. House'
@@ -47,12 +52,7 @@ class Race < ActiveRecord::Base
       else
         return
       end
-    state.districts.send(level).with_name(district_name).first
-  end
-
-  def congressional_district
-    if office.name == 'U.S. House'
-      state.congressional_districts.find_by_district(district_name)
-    end
+    district = state.districts.send(level).with_name(district_name).first
+    self.district_id = district.id if district
   end
 end

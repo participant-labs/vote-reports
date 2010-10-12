@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101004225628) do
+ActiveRecord::Schema.define(:version => 20101012193012) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -544,9 +544,10 @@ ActiveRecord::Schema.define(:version => 20101004225628) do
   add_index "presidential_terms", ["politician_id"], :name => "index_presidential_terms_on_politician_id"
 
   create_table "races", :force => true do |t|
-    t.string  "district"
+    t.string  "district_name"
     t.integer "election_stage_id", :null => false
     t.integer "office_id",         :null => false
+    t.integer "district_id"
   end
 
   create_table "report_delayed_jobs", :force => true do |t|
@@ -846,6 +847,7 @@ ActiveRecord::Schema.define(:version => 20101004225628) do
   add_foreign_key "presidential_terms", "parties", :name => "presidential_terms_party_id_reference"
   add_foreign_key "presidential_terms", "politicians", :name => "presidential_terms_politician_id_reference"
 
+  add_foreign_key "races", "districts", :name => "races_district_id_fk"
   add_foreign_key "races", "election_stages", :name => "races_election_stage_id_fk"
   add_foreign_key "races", "offices", :name => "races_office_id_fk"
 

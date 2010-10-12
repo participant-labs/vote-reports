@@ -154,7 +154,7 @@ module VoteSmart
 
                   race_params = {
                     :office_id => office.id,
-                    :district => nil_if_blank(candidate['district']),
+                    :district_name => nil_if_blank(candidate['district']),
                   }
                   race = stage.races.first(:conditions => race_params) || stage.races.create!(race_params)
                   politician = import_candidate(candidate)
