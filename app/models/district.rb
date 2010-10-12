@@ -37,6 +37,14 @@ class District < ActiveRecord::Base
     def geocode(loc)
       lookup(Geokit::Geocoders::MultiGeocoder.geocode(loc))
     end
+
+    def ordinal_name(name)
+      if name =~ /^\d+$/
+        name.to_i.ordinalize
+      else
+        name
+      end
+    end
   end
 
   def level=(level)
@@ -47,11 +55,14 @@ class District < ActiveRecord::Base
     name
   end
 
+  def ordinal_name
+    District.ordinal_name(name)
+  end
+
   def title
     if federal?
       congressional_district.title
     else
-      number = Integer(name) && name.to_i.ordinalize rescue name
       position =
         case level.level
         when 'state_upper'
@@ -59,7 +70,7 @@ class District < ActiveRecord::Base
         when 'state_lower'
           'State Assembly'
         end
-      "#{number} #{position}  District"
+      "#{ordinal_name} #{position}  District"
     end
   end
 

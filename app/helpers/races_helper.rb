@@ -7,13 +7,7 @@ module RacesHelper
         if district = race.district
           district_name(district)
         else
-          district =
-            begin
-              Integer(race.district_name).ordinalize
-            rescue
-              race.district_name
-            end
-          "#{district} #{race.office.name} District"
+          "#{race.district_ordinal_name} #{race.office.name} District"
         end
       "the #{district_description} of #{state_name(race.state)}".html_safe
     else
