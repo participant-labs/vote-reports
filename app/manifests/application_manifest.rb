@@ -54,36 +54,6 @@ class ApplicationManifest < Moonshine::Manifest::Rails
 
     nightly_update = "/usr/bin/rake -f #{configuration[:deploy_to]}/current/Rakefile update RAILS_ENV=#{ENV['RAILS_ENV']}"
     cron 'nightly update', :command => nightly_update, :user => configuration[:user], :minute => 0, :hour => 2
-
-    delayed_job_monit = <<-DJ
-      check process delayed_job
-        with pidfile /srv/vote-reports/shared/pids/delayed_job.pid
-        start program = "/usr/bin/env PATH=$PATH:/usr/bin RAILS_ENV=production /srv/vote-reports/current/script/delayed_job start"
-        stop program = "/usr/bin/env PATH=$PATH:/usr/bin RAILS_ENV=production /srv/vote-reports/current/script/delayed_job stop"
-    DJ
-
-    file '/etc/monit/conf.d/delayed_job.conf',
-      :mode => '700',
-      :owner => configuration[:user],
-      :group => configuration[:group] || configuration[:user],
-      :require => file('/etc/monit/conf.d'),
-      :content => delayed_job_monit
-
-    mongo_monit = <<-MONIT
-      check process mongodb
-        with pidfile /srv/vote-reports/shared/pids/mongodb.pid
-        start program = "/opt/local/mongo-#{MONGO_VERSION}/bin/mongod --dbpath /data/db run"
-        stop program = "/usr/bin/pgrep mongod | xargs kill -15"
-    MONIT
-
-    file '/etc/monit/conf.d/mongodb.conf',
-      :mode => '700',
-      :owner => configuration[:user],
-      :group => configuration[:group] || configuration[:user],
-      :require => file('/etc/monit/conf.d'),
-      :content => mongo_monit
-
-    exec 'update-rc.d monit defaults'
   end
 
   # The following line includes the 'application_packages' recipe defined above

@@ -95,5 +95,5 @@ check process mongodb
 
 check process delayed_job
   with pidfile /srv/vote-reports/shared/pids/delayed_job.pid
-  start program = "/usr/bin/env RAILS_ENV=production /srv/vote-reports/current/script/delayed_job start"
-  stop program = "/usr/bin/env RAILS_ENV=production /srv/vote-reports/current/script/delayed_job stop"
+  start program = "/usr/bin/env PATH=$PATH:/usr/bin RAILS_ENV=production /srv/vote-reports/current/script/delayed_job start"
+  stop program = "/usr/bin/env PATH=$PATH:/usr/bin RAILS_ENV=production /srv/vote-reports/current/script/delayed_job stop"
