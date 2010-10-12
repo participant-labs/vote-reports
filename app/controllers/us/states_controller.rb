@@ -9,7 +9,7 @@ class Us::StatesController < ApplicationController
         @representatives = @state.representatives_in_office.sort_by {|r| r.current_office.congressional_district.district }
       }
       format.js {
-        render :partial => 'us/states/maps/map', :locals => {:state => @state}
+        render :partial => 'us/states/map', :locals => {:state => @state}
       }
     end
   end
