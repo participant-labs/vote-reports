@@ -31,9 +31,28 @@ class Race < ActiveRecord::Base
   delegate :election, :to => :election_stage
   delegate :state, :to => :election
 
+  def district_name
+    self[:district]
+  end
+
+  def district
+    level =
+      case office.name
+      when 'U.S. House'
+        'federal'
+      when 'State House', 'State Assembly'
+        'state_lower'
+      when 'State Senate'
+        'state_upper'
+      else
+        return
+      end
+    state.districts.send(level).with_name(district_name).first
+  end
+
   def congressional_district
     if office.name == 'U.S. House'
-      state.congressional_districts.find_by_district(Integer(district))
+      state.congressional_districts.find_by_district(district_name)
     end
   end
 end
