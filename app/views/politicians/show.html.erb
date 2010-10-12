@@ -42,7 +42,9 @@
     <%- end -%>
   </div>
 
-  <%= image_tag @politician.headshot.url(:large), :size => '200x245', :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' if @politician.headshot.url(:large) %>
+  <%- if headshot_url = @politician.headshot.try(:url, :large) -%>
+    <%= image_tag @politician.headshot.url(:large), :size => '200x245', :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' %>
+  <%- end -%>
 
   <%- if location = @politician.location -%>
     <%- if location.is_a?(CongressionalDistrict) -%>
