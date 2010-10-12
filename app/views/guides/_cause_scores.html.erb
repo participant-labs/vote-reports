@@ -39,7 +39,7 @@
           </tr>
         </thead>
         <tbody>
-          <%- race.candidacies.each do |candidacy| -%>
+          <%- race.candidacies.valid.each do |candidacy| -%>
             <tr class="<%= cycle('even', 'odd') %>">
               <%-
                 headshot = candidacy.politician.headshot
