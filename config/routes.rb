@@ -57,8 +57,10 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :guide_scores, :only => :show
 
-  map.resources :us_states, :as => 'us/states', :controller => 'us/states', :only => 'show'
   map.resources :congressional_districts, :as => 'us/congressional_districts', :controller => 'us/congressional_districts', :only => 'show'
+  map.resources :us_states, :as => 'us', :controller => 'us/states', :only => 'show'
+  map.resources :state_upper_districts, :as => 'us/:state_id/upper', :controller => 'us/states/upper_districts', :only => 'show'
+  map.resources :state_lower_districts, :as => 'us/:state_id/lower', :controller => 'us/states/lower_districts', :only => 'show'
 
   map.resources :users do |user|
     user.resources :rpx_identities, :only => [:create, :destroy], :controller => 'users/rpx_identities'

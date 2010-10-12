@@ -1,21 +1,23 @@
 module RacesHelper
   def race_location_link(race)
-    if race.district
-      state = link_to race.state.full_name, race.state
-      begin
-        district = Integer(race.district)
-        district_name =
-          if congressional_district = race.congressional_district
-            link_to "#{district.ordinalize} Congressional District", congressional_district
-          else
-            "#{district.ordinalize} #{race.office.name} District"
-          end
-        "the #{district_name} of #{state}".html_safe
-      rescue
-        "the #{race.district} #{race.office.name} District of #{state}".html_safe
-      end
+    if congressional_district = race.congressional_district
+      congressional_district_name(congressional_district)
+    elsif race.district_name
+      district_description =
+        if district = race.district
+          district_name(district)
+        else
+          district =
+            begin
+              Integer(race.district_name).ordinalize
+            rescue
+              race.district_name
+            end
+          "#{district} #{race.office.name} District"
+        end
+      "the #{district_description} of #{state_name(race.state)}".html_safe
     else
-      link_to race.state.full_name, race.state
+      state_name(race.state)
     end
   end
 end

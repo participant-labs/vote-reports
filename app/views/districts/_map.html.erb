@@ -1,7 +1,8 @@
 <%- style ||= 'height: 300px; width: 425px;' -%>
 
 <%- cache dom_id(district, :map) do -%>
-<%- if (districts = district.district_geometries).present? -%>
+<%- districts = district.respond_to?(:district_geometries) ? district.district_geometries : [district] -%>
+<%- if districts.present? -%>
   <div id="map_canvas" style="<%= style %>"></div>
 
   <% javascript_tag do %>

@@ -19,6 +19,11 @@ class District < ActiveRecord::Base
     {:joins => :state, :conditions => {'us_states.abbreviation' => abbr}}
   }
 
+  named_scope :with_name, lambda {|district_name|
+    name = Integer(district_name).to_s.rjust(3, '0') rescue district_name
+    {:conditions => {:name => name }}
+  }
+
   District::Level.levels.each do |level|
     named_scope level, :conditions => {:level => level}
     define_method :"#{level}?" do
@@ -36,6 +41,30 @@ class District < ActiveRecord::Base
 
   def level=(level)
     self[:level] = level
+  end
+
+  def to_param
+    name
+  end
+
+  def description
+    number = Integer(name) && name.to_i.ordinalize rescue name
+    position =
+      case level.level
+      when 'state_upper'
+        'State Senate'
+      when 'state_lower'
+        'State Assembly'
+      end
+    "#{number} #{position}"
+  end
+
+  def title
+    if federal?
+      congressional_district.title
+    else
+      "#{description} District"
+    end
   end
 
   def display_name
