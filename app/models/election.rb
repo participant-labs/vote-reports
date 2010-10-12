@@ -4,4 +4,8 @@ class Election < ActiveRecord::Base
 
   has_many :stages, :class_name => 'ElectionStage'
   has_many :races, :through => :stages
+
+  def to_s
+    name
+  end
 end
