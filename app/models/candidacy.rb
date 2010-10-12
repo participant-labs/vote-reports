@@ -12,4 +12,7 @@ class Candidacy < ActiveRecord::Base
       for_races(Race.for_districts(districts).upcoming)
     end
   end
+
+  delegate :election_stage, :office, :to => :race
+  delegate :election, :voted_on, :to => :election_stage
 end
