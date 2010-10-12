@@ -30,4 +30,10 @@ class Race < ActiveRecord::Base
 
   delegate :election, :to => :election_stage
   delegate :state, :to => :election
+
+  def congressional_district
+    if office.name == 'U.S. House'
+      state.congressional_districts.find_by_district(Integer(district))
+    end
+  end
 end
