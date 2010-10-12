@@ -5,8 +5,8 @@ module RacesHelper
       begin
         district = Integer(race.district)
         district_name =
-          if race.office.name == 'U.S. House'
-            link_to "#{district.ordinalize} Congressional District", race.state.congressional_districts.find_by_district(district)
+          if congressional_district = race.congressional_district
+            link_to "#{district.ordinalize} Congressional District", congressional_district
           else
             "#{district.ordinalize} #{race.office.name} District"
           end
