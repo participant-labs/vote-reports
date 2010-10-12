@@ -90,7 +90,7 @@ set httpd port 2812
 
 check process mongodb
   with pidfile /srv/vote-reports/shared/pids/mongodb.pid
-  start program = "/opt/local/mongo-1.6.3/bin/mongod --dbpath /data/db run"
+  start program = "/opt/local/mongo-1.6.3/bin/mongod --dbpath /data/db run --pidfilepath /srv/vote-reports/shared/pids/mongodb.pid"
   stop program = "/usr/bin/pgrep mongod | xargs kill -15"
 
 check process delayed_job
