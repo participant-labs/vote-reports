@@ -47,37 +47,32 @@ class District < ActiveRecord::Base
     name
   end
 
-  def description
-    number = Integer(name) && name.to_i.ordinalize rescue name
-    position =
-      case level.level
-      when 'state_upper'
-        'State Senate'
-      when 'state_lower'
-        'State Assembly'
-      end
-    "#{number} #{position}"
-  end
-
   def title
     if federal?
       congressional_district.title
     else
-      "#{description} District"
-    end
-  end
-
-  def display_name
-    if federal?
-      "#{state.abbreviation}-#{name}"
-    elsif /^\d*$/ =~ name
-      "#{state.abbreviation} #{name.to_i.ordinalize}"
-    else
-      "#{state.abbreviation} #{name}"
+      number = Integer(name) && name.to_i.ordinalize rescue name
+      position =
+        case level.level
+        when 'state_upper'
+          'State Senate'
+        when 'state_lower'
+          'State Assembly'
+        end
+      "#{number} #{position}  District"
     end
   end
 
   def full_name
+    display_name =
+      if federal?
+        "#{state.abbreviation}-#{name}"
+      elsif /^\d*$/ =~ name
+        "#{state.abbreviation} #{name.to_i.ordinalize}"
+      else
+        "#{state.abbreviation} #{name}"
+      end
+
     "#{display_name} #{level.description}"
   end
 
