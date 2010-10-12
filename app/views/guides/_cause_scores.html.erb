@@ -77,7 +77,7 @@
   <%- end -%>
 
   <%- if (representatives = grouped_politicians['RepresentativeTerm']).present? -%>
-    <%= render 'guides/incumbent_scores', :office => "Representative #{ "for the #{district_full_title_name(guide.congressional_district) }" if guide.congressional_district }", :politicians => representatives, :scores => scores %>
+    <%= render 'guides/incumbent_scores', :office => "Representative #{ "for the #{district_full_name(guide.congressional_district) }" if guide.congressional_district }", :politicians => representatives, :scores => scores %>
     <%- politicians -= representatives -%>
   <%- end -%>
 </table>
