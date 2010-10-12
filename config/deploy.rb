@@ -31,25 +31,25 @@ end
 
 namespace :monit do
   task :reload do
-    run "monit reload"
+    sudo "monit reload"
   end
 end
 
 namespace :delayed_job do
   task :start, :roles => :app do
-    run "monit start delayed_job"
+    sudo "monit start delayed_job"
   end
   before "delayed_job:start", 'monit:reload'
   after "deploy:start", "delayed_job:start"
 
   task :stop, :roles => :app do
-    run "monit stop delayed_job"
+    sudo "monit stop delayed_job"
   end
   before "delayed_job:stop", 'monit:reload'
   after "deploy:stop", "delayed_job:stop"
 
   task :restart, :roles => :app do
-    run "monit restart delayed_job"
+    sudo "monit restart delayed_job"
   end
   before "delayed_job:restart", 'monit:reload'
   after "deploy:restart", "delayed_job:restart"
