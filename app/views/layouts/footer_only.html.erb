@@ -27,6 +27,7 @@
 
     <%= yield(:footer_only_content) || yield %>
 
+    <%- cache :footer do -%>
     <div id="footer" >
 
       <div class="container">
@@ -61,8 +62,9 @@
         </div>
       </div>
     </div>
-
     <%= render 'layouts/get_satisfaction' %>
+
+    <%- end -%>
 
     <%= raw include_javascripts(:common) %>
     <%= yield :javascript_area %>
