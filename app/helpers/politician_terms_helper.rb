@@ -11,7 +11,7 @@ module PoliticianTermsHelper
     when PresidentialTerm
       "of these United States"
     when RepresentativeTerm
-      "for #{district_full_name(term.congressional_district)}"
+      "for #{congressional_district_name(term.congressional_district)}"
     when SenateTerm
       "for #{state_name(term.state)}"
     else
