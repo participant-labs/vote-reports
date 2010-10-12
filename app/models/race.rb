@@ -13,9 +13,9 @@ class Race < ActiveRecord::Base
       :joins => [:office, {:election_stage => :election}],
       :conditions => [
         %{elections.state_id = ? AND (
-            (offices.id = ? AND races.district = ?) OR
-            (offices.id = ? AND races.district = ?) OR
-            (offices.id IN(?) AND races.district = ?) OR
+            (offices.id = ? AND races.district_name = ?) OR
+            (offices.id = ? AND races.district_name = ?) OR
+            (offices.id IN(?) AND races.district_name = ?) OR
             (offices.id NOT IN(?))
         )},
         districts.first.state.id,
