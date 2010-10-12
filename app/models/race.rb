@@ -34,6 +34,10 @@ class Race < ActiveRecord::Base
   delegate :election, :to => :election_stage
   delegate :state, :to => :election
 
+  def district_ordinal_name
+    District.ordinal_name(district_name)
+  end
+
   def congressional_district
     if office.name == 'U.S. House'
       state.congressional_districts.find_by_district(district_name)
