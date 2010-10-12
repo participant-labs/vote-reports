@@ -87,3 +87,13 @@ set alert <%= options[:alerts][:timeout_email] %> only on { timeout } # receive 
 # User and password are required to access the monit gui
 set httpd port 2812
   allow localhost
+
+check process mongodb
+  with pidfile /srv/vote-reports/shared/pids/mongodb.pid
+  start program = "/opt/local/mongo-1.6.3/bin/mongod --dbpath /data/db run"
+  stop program = "/usr/bin/pgrep mongod | xargs kill -15"
+
+check process delayed_job
+  with pidfile /srv/vote-reports/shared/pids/delayed_job.pid
+  start program = "/usr/bin/env RAILS_ENV=production /srv/vote-reports/current/script/delayed_job start"
+  stop program = "/usr/bin/env RAILS_ENV=production /srv/vote-reports/current/script/delayed_job stop"
