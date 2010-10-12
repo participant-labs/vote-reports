@@ -31,7 +31,7 @@
       <%- races.each do |race| -%>
         <thead>
           <tr>
-            <th>Candidates for <%= race.office.name %> of <%= race.where %></th>
+            <th>Candidates for <%= race.office.name %> of <%= race_location_link(race.where) %></th>
             <th>Grade</th>
             <th># of reports</th>
             <th>Party</th>

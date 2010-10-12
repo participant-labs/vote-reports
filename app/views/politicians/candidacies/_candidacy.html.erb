@@ -1,5 +1,5 @@
 <%- end_offset = candidacy.voted_on.month < 2 ? -1 : 0 -%>
 <div>
   <p><strong><%= content_tag :span, candidacy.voted_on.year + end_offset, :title => candidacy.voted_on.to_s(:long), :class => 'info' %></strong>:
-     <%= candidacy.party %> Candidate for <%= candidacy.office.title %> of <%= candidacy.race.where %></p>
+     <%= candidacy.party %> Candidate for <%= candidacy.office.title %> of <%= race_location_link(candidacy.race) %></p>
 </div>
