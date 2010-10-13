@@ -27,7 +27,7 @@
 <table class="guide_scores">
   <%- guide.elections.each do |election| -%>
     <%- stage = election.stages.future.by_voted_on.first -%>
-    <%- if (races = stage.races.for_districts(guide.districts)).present? && (scores.blank? || races.with_scores_from(scores).present?)-%>
+    <%- if stage && (races = stage.races.for_districts(guide.districts)).present? && (scores.blank? || races.with_scores_from(scores).present?)-%>
       <%- races.each do |race| -%>
         <thead>
           <tr>
