@@ -97,7 +97,7 @@ class CongressionalDistrict < ActiveRecord::Base
     elsif at_large?
       'At-large'
     else
-      district.ordinalize
+      self[:district].ordinalize
     end
   end
 end
