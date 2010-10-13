@@ -22,7 +22,8 @@
   :name: gravtastic
 - :version: ">= 2.3.2"
   :name: hoptoad_notifier
-- :name: jammit
+- :version: ">= 0.5.3"
+  :name: jammit
 - :version: ">= 1.4.3"
   :name: json
 - :name: loofah
@@ -36,6 +37,7 @@
   :name: bson
 - :version: ">= 1.0.6"
   :name: mongo
+- :name: plucky
 - :version: ">= 0.8.2"
   :name: mongo_mapper
 - :name: Empact-mongo_session_store
@@ -64,7 +66,6 @@
 - :name: ym4r
 - :name: httparty
 - :name: parallel
-- :name: scout
-- :name: request-log-analyzer
+- :name: auto_tagger
 - :version: 2.3.9
   :name: rails
