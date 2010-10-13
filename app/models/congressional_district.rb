@@ -2,6 +2,7 @@ class CongressionalDistrict < ActiveRecord::Base
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
   has_many :congressional_district_zip_codes
   has_many :zip_codes, :through => :congressional_district_zip_codes
+  belongs_to :district
 
   has_many :representative_terms
   has_many :representatives, :through => :representative_terms, :source => :politician, :uniq => true do

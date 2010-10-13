@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101012193012) do
+ActiveRecord::Schema.define(:version => 20101013002606) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -228,6 +228,7 @@ ActiveRecord::Schema.define(:version => 20101012193012) do
     t.integer  "district"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "district_id"
   end
 
   add_index "congressional_districts", ["us_state_id", "district"], :name => "districts_us_state_id_district_unique", :unique => true
@@ -804,6 +805,7 @@ ActiveRecord::Schema.define(:version => 20101012193012) do
   add_foreign_key "congressional_district_zip_codes", "congressional_districts", :name => "district_zip_codes_district_id_reference"
   add_foreign_key "congressional_district_zip_codes", "zip_codes", :name => "district_zip_codes_zip_code_id_reference"
 
+  add_foreign_key "congressional_districts", "districts", :name => "congressional_districts_district_id_fk"
   add_foreign_key "congressional_districts", "us_states", :name => "congressional_districts_us_state_id_fk"
 
   add_foreign_key "districts", "us_states", :name => "districts_us_state_id_fk"

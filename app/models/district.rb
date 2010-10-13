@@ -2,6 +2,7 @@ class District < ActiveRecord::Base
   composed_of :level, :mapping => %w(level level), :class_name => 'District::Level'
 
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
+  has_one :congressional_district
 
   named_scope :random, :order => 'random()'
   named_scope :lookup, lambda {|geoloc|
@@ -23,6 +24,8 @@ class District < ActiveRecord::Base
     name = Integer(district_name).to_s.rjust(3, '0') rescue district_name
     {:conditions => {:name => name }}
   }
+
+  validates_presence_of :congressional_district, :if => :federal?
 
   District::Level.levels.each do |level|
     named_scope level, :conditions => {:level => level}
@@ -85,18 +88,5 @@ class District < ActiveRecord::Base
       end
 
     "#{display_name} #{level.description}"
-  end
-
-  def congressional_district
-    if federal?
-      district =
-        case name
-        when 'At large', '98'
-          0
-        else
-          name
-        end
-      state.congressional_districts.find_by_district(district) || raise("Congressional district not found for #{name}, #{state.abbreviation}")
-    end
   end
 end
