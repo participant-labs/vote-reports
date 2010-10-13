@@ -3,6 +3,8 @@ class District < ActiveRecord::Base
 
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
   has_one :congressional_district
+  has_many :races
+  has_many :offices, :through => :races
 
   named_scope :random, :order => 'random()'
   named_scope :lookup, lambda {|geoloc|
@@ -60,21 +62,6 @@ class District < ActiveRecord::Base
 
   def ordinal_name
     District.ordinal_name(name)
-  end
-
-  def title
-    if federal?
-      congressional_district.title
-    else
-      position =
-        case level.level
-        when 'state_upper'
-          'State Senate'
-        when 'state_lower'
-          'State Assembly'
-        end
-      "#{ordinal_name} #{position}  District"
-    end
   end
 
   def full_name

@@ -269,6 +269,7 @@ ActiveRecord::Schema.define(:version => 20101013002606) do
     t.string        "level"
     t.string        "census_geo_id"
     t.integer       "us_state_id",                  :null => false
+    t.string        "title"
   end
 
   add_index "districts", ["the_geom"], :name => "index_districts_on_the_geom", :spatial => true
