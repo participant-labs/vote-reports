@@ -54,7 +54,7 @@ class CongressionalDistrict < ActiveRecord::Base
     def find_by_name(name)
       state, district = name.split('-')
       district = 0 if district == 'At_large'
-      first(:conditions => {'congressional_districts.district' => district, 'us_states.abbreviation' => state}, :joins => :state)
+      first(:conditions => {'congressional_districts.district_number' => district, 'us_states.abbreviation' => state}, :joins => :state)
     end
   end
 
@@ -73,7 +73,7 @@ class CongressionalDistrict < ActiveRecord::Base
   end
 
   def district_abbreviation
-    at_large? || unidentified? ? 'At large' : self[:district].to_s
+    (at_large? || unidentified?) ? 'At large' : district_number.to_s
   end
 
   def abbreviation
@@ -85,11 +85,11 @@ class CongressionalDistrict < ActiveRecord::Base
   end
 
   def unidentified?
-    self[:district] == nil
+    district_number == nil
   end
 
   def at_large?
-    self[:district] == 0
+    district_number == 0
   end
 
   def which
@@ -98,7 +98,7 @@ class CongressionalDistrict < ActiveRecord::Base
     elsif at_large?
       'At-large'
     else
-      self[:district].ordinalize
+      district_number.ordinalize
     end
   end
 end

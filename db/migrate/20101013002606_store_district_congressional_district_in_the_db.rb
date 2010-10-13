@@ -12,7 +12,7 @@ class StoreDistrictCongressionalDistrictInTheDb < ActiveRecord::Migration
           else
             district.name
           end
-        district.state.congressional_districts.find_by_district(name).update_attributes(:district_id => district.id)
+        district.state.congressional_districts.find_by_district_number(name).update_attributes(:district_id => district.id)
         print '.'
       end
       puts
