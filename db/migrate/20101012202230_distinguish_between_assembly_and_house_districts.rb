@@ -7,7 +7,6 @@ class DistinguishBetweenAssemblyAndHouseDistricts < ActiveRecord::Migration
         if district.federal?
           district.update_attribute(:title, district.congressional_district.title)
         else
-          number = District.ordinal_name(name)
           race = district.state.races.send(district.level.level).first
           office_name =
             if race
@@ -23,7 +22,7 @@ class DistinguishBetweenAssemblyAndHouseDistricts < ActiveRecord::Migration
               nil
             end
           next unless office_name
-          district.update_attribute(:title, "#{number} #{office_name} District")
+          district.update_attribute(:title, "#{district.ordinal_name} #{office_name} District")
         end
         print '.'
       end
