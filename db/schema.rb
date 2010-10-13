@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101013002606) do
+ActiveRecord::Schema.define(:version => 20101013233256) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -224,14 +224,14 @@ ActiveRecord::Schema.define(:version => 20101013002606) do
   add_index "congressional_district_zip_codes", ["zip_code_id"], :name => "index_district_zip_codes_on_zip_code"
 
   create_table "congressional_districts", :force => true do |t|
-    t.integer  "us_state_id", :null => false
-    t.integer  "district"
+    t.integer  "us_state_id",     :null => false
+    t.integer  "district_number"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "district_id"
   end
 
-  add_index "congressional_districts", ["us_state_id", "district"], :name => "districts_us_state_id_district_unique", :unique => true
+  add_index "congressional_districts", ["us_state_id", "district_number"], :name => "districts_us_state_id_district_unique", :unique => true
 
   create_table "cosponsorships", :force => true do |t|
     t.integer  "bill_id",       :null => false
