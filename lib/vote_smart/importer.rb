@@ -27,7 +27,7 @@ module VoteSmart
               elections = array_of_hashes(e['elections']['election'])
               elections.each do |election_data|
                 Rails.logger.info "Now processing #{election_data['name']}\n"
-                state = UsState.find_by_abbreviation(election_data['stateId'])
+                state = UsState.find_by_abbreviation(election_data['stateId']) || raise("Missing state #{election_data['stateId']}")
                 office_type = OfficeType.find_by_vote_smart_id(election_data['officeTypeId']) || raise("Office type #{election_data['officeTypeId']} not found")
                 election = ::Election.find_by_vote_smart_id(election_data['electionId']) \
                  || ::Election.create!(

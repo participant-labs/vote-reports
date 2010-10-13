@@ -31,6 +31,10 @@ class Race < ActiveRecord::Base
     {:joins => :candidacies, :conditions => {:candidacies => {:politician_id => scores.map(&:politician_id)}}}
   }
 
+  named_scope :state_lower, :joins => :office, :conditions => {:offices => {:name => ['State House', 'State Assembly']}}
+  named_scope :state_upper, :joins => :office, :conditions => {:offices => {:name => 'State Senate'}}
+  named_scope :federal, :joins => :office, :conditions => {:offices => {:name => 'U.S. House'}}
+
   delegate :election, :to => :election_stage
   delegate :state, :to => :election
 

@@ -71,6 +71,10 @@ class UsState < ActiveRecord::Base
   has_many :districts
   has_many :elections, :foreign_key => 'state_id'
 
+  def races
+    Race.scoped(:conditions => {:elections => {:state_id => self}}, :joins => {:election_stage => :election})
+  end
+
   has_many :congressional_districts
   has_many :representative_terms, :through => :congressional_districts
   def representatives
