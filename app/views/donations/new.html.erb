@@ -7,8 +7,8 @@
   <p>But we need help too. While we're hard at work helping you, we're not taking cushy corporate jobs or the like. Your donation helps us pay the bills, and better yet, bring on more great people to build tools like this to empower you.</p>
 
 <div class="notice clearfix">
-  <div style="float:left;width:20em;">
-    <form action="https://authorize.payments.amazon.com/pba/paypipeline" method="post">
+  <div style="float:left;width:23em;">
+    <form action="https://authorize.payments.amazon.com/pba/paypipeline" method="post" style="padding-bottom: 0">
       <input type="hidden" name="immediateReturn" value="1" >
       <input type="hidden" name="collectShippingAddress" value="0" >
       <input type="hidden" name="signatureVersion" value="2" >
@@ -23,7 +23,7 @@
       <input type="hidden" name="processImmediate" value="1" >
       <input type="hidden" name="cobrandingStyle" value="logo" >
       <input type="hidden" name="abandonUrl" value="http://votereports.org/" >
-      <table class="table" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <table class="table" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 0">
         <tr>
           <td style="vertical-align:top;">$&nbsp;<input type="text" name="amount" size="8" value=""></td>
           <td><input type="image" src="http://g-ecx.images-amazon.com/images/G/01/asp/beige_medium_donate_withlogo_lightbg.gif" border="0"></td>
@@ -31,7 +31,7 @@
       </table>
     </form>
   </div>
-  <p>Donations to VoteReports are not currently tax-deductible.<br />  Please <%= mail_to 'donations@votereports.org', "let us know" %> if this is discouraging you from contributing, or if you have any questions about supporting our project.</p>
+  <p style="margin-bottom: 0">Donations to VoteReports are not currently tax-deductible.<br />  Please <%= mail_to 'donations@votereports.org', "let us know" %> if this is discouraging you from contributing, or if you have any questions about supporting our project.</p>
 </div>
 
   <p>Think about it: what is empowerment worth?  What is it worth to make politicians accountable, to bring the government back in touch with the people?  To end the mistakes of the past, or to bring on new progress toward a brighter future?</p>
