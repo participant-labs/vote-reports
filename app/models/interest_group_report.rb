@@ -85,7 +85,7 @@ class InterestGroupReport < ActiveRecord::Base
 
   class << self
     def calibrate_ratings
-      first.calibrate_ratings
+      paginated_each {|ig_report| ig_report.calibrate_ratings }
     end
   end
 
