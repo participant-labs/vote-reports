@@ -9,12 +9,12 @@ namespace :gov_track do
     end
 
     def district(state, district)
-      @districts ||= CongressionalDistrict.all(:select => 'id,us_state_id,district').index_by {|d| [d.us_state_id, d.district] }
+      @districts ||= CongressionalDistrict.all(:select => 'id,us_state_id,district_number').index_by {|d| [d.us_state_id, d.district_number] }
       state = us_state(state)
       district = district.to_i
       district = nil if district == -1
       @districts.fetch([state.id, district]) do
-        @districts[[state.id, district]] = CongressionalDistrict.create!(:state => state, :district => district)
+        @districts[[state.id, district]] = CongressionalDistrict.create!(:state => state, :district_number => district)
       end
     end
 
