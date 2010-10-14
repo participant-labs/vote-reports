@@ -44,7 +44,7 @@ class Race < ActiveRecord::Base
 
   def congressional_district
     if office.name == 'U.S. House'
-      state.congressional_districts.find_by_district_number(district_name)
+      state.congressional_districts.find_by_district_number(district_name.to_i)
     end
   end
 
