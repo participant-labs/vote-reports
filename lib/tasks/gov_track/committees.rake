@@ -8,7 +8,8 @@ namespace :gov_track do
           :display_name => node['displayname'].to_s
         )
         if meeting_name = node['thomasname']
-          committee.meetings.find_or_create_by_congress_id(:name => meeting_name.to_s, :congress_id => @congress.id)
+          committee.meetings.find_by_congress_id(@congress.id) \
+           || committee.meetings.create!(:name => meeting_name.to_s, :congress_id => @congress.id)
         end
         node.xpath('thomas-names/name').each do |name_node|
           committee.meetings.find_or_create_by_congress_id(
