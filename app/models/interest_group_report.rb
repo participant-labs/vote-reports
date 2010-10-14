@@ -30,10 +30,10 @@ class InterestGroupReport < ActiveRecord::Base
     rating.numeric_rating
   end
 
-  NON_RATINGS = ['', 'N/A', 'n/a', 'S', 'Inc.', '24970']
+  NON_RATINGS = ['', 'NA', 'N/A', 'n/a', 'S', 'Inc.', '24970']
 
   PLUS_RATINGS = ["+1", "+10", "+11", "+12", "+2", "+3", "+4", "+5", "+6", "+7", "+8", "+9"]
-  ZERO_CENTERED_RATINGS = PLUS_RATINGS + ["-1", "-10", "-11", "-12", "-13", "-14", "-15", "-16", "-17", "-18", "-19", "-2", "-2(House)/-1(Senator)", "-20", "-21", "-22", "-23", "-25", "-3", "-30", "-4", "-5", "-6", "-7", "-8", "-9"]
+  ZERO_CENTERED_RATINGS = PLUS_RATINGS + ["-1", "-10", "-11", "-12", "-13", "-14", "-15", "-16", "-17", "-18", "-19", "-2", "-2(House)/-1(Senator)", "-20", "-21", "-22", "-23", "-24", "-25", "-26", "-28", "-3", "-30", "-31", "-33", "-34", "-35", "-36", "-38", "-4", "-40", "-41", "-42", "-43", "-44", "-45", "-48", "-49", "-5", "-52", "-53", "-54", "-55", "-57", "-59", "-6", "-60", "-62", "-64", "-66", "-67", "-68", "-7", "-71", "-72", "-74", "-76", "-8", "-81", "-86", "-9"]
 
   UNUSUAL_RATINGS_MAP = {
     '00' => 0.0,
@@ -44,6 +44,12 @@ class InterestGroupReport < ActiveRecord::Base
     "014" => 14.0,
     "029" => 29.0,
     '033' => 33.0,
+    '014' => 14.0,
+    '029' => 29.0,
+    '033' => 33.0,
+
+    '71`' => 71.0,
+    '87+' => 87.0,
     '100+' => 100.0,
     '100.' => 100.0,
     '100`' => 100.0,
@@ -102,6 +108,8 @@ class InterestGroupReport < ActiveRecord::Base
   end
 
   def calibrate_zero_centered_ratings
+    return unless ratings.exists?(:rating => ZERO_CENTERED_RATINGS)
+
     rating_values = ratings.map {|r| r.rating.to_f }
     if rating_values.max >= 100.0
       # the negatives are just outliers, not a sign of a 0-centered range
@@ -125,10 +133,7 @@ class InterestGroupReport < ActiveRecord::Base
   end
 
   def calibrate_normal_ratings
-    ratings.all(
-      :select => 'DISTINCT rating',
-      :conditions => ['numeric_rating IS NULL AND rating NOT IN(?)', NON_RATINGS]
-    ).map(&:rating).each do |rating|
+    ratings.all(:conditions => ['numeric_rating IS NULL AND rating NOT IN(?)', NON_RATINGS]).map(&:rating).each do |rating|
       numeric_rating = 
         begin
           if rating.match(/^[+-]+$/)
