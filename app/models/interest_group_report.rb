@@ -133,7 +133,7 @@ class InterestGroupReport < ActiveRecord::Base
   end
 
   def calibrate_normal_ratings
-    ratings.all(:conditions => ['numeric_rating IS NULL AND rating NOT IN(?)', NON_RATINGS]).map(&:rating).each do |rating|
+    ratings.all(:select => 'distinct rating', :conditions => ['numeric_rating IS NULL AND rating NOT IN(?)', NON_RATINGS]).map(&:rating).each do |rating|
       numeric_rating = 
         begin
           if rating.match(/^[+-]+$/)
@@ -150,8 +150,8 @@ class InterestGroupReport < ActiveRecord::Base
           raise
         end
 
-      InterestGroupRating.update_all(
-        {:numeric_rating => numeric_rating}, {:rating => rating})
+      ratings.update_all(
+        {:numeric_rating => numeric_rating}, {:rating => rating, :numeric_rating => nil})
       $stdout.print '.'
     end
   end
