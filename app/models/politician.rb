@@ -336,6 +336,29 @@ class Politician < ActiveRecord::Base
     end
   end
 
+  def merge!(politician)
+    transaction do
+      politician.candidacies.update_all(:politician_id => id)
+      politician.representative_terms.update_all(:politician_id => id)
+      politician.senate_terms.update_all(:politician_id => id)
+      politician.presidential_terms.update_all(:politician_id => id)
+      politician.interest_group_ratings.update_all(:politician_id => id)
+      politician.votes.update_all(:politician_id => id)
+      politician.report_scores.update_all(:politician_id => id)
+      politician.committee_memberships.update_all(:politician_id => id)
+      politician.slugs.update_all(:sluggable_id => id, :created_at => 1.year.ago)
+      attributes.each do |attribute, value|
+        merge_value = politician.attributes[attribute]
+        if attribute == 'cached_slug' && value.match(/--\d/) && !merge_value.match(/--\d/)
+          value = politician.attributes[attribute]
+        end
+        send(:"#{attribute}=", value || merge_value)
+      end
+      politician.delete
+      save!
+    end
+  end
+
   private
 
   def name_shouldnt_contain_nickname
