@@ -13,6 +13,9 @@ class Politician < ActiveRecord::Base
     || candidacies.valid.first(:joins => {:race => :election_stage}, :order => 'election_stages.voted_on DESC')
   end
 
+  has_many :committee_memberships
+  has_many :committee_meetings, :through => :committee_memberships
+
   has_many :representative_terms
   has_one :latest_representative_term, :class_name => 'RepresentativeTerm', :order => 'ended_on DESC'
 
