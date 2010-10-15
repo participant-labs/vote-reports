@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101013233256) do
+ActiveRecord::Schema.define(:version => 20101015003803) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -597,6 +597,7 @@ ActiveRecord::Schema.define(:version => 20101013233256) do
     t.string   "evidence_description"
   end
 
+  add_index "report_scores", ["politician_id", "report_id"], :name => "index_report_scores_on_politician_id_and_report_id", :unique => true
   add_index "report_scores", ["politician_id"], :name => "index_report_scores_on_politician_id"
   add_index "report_scores", ["report_id"], :name => "index_report_scores_on_report_id"
 
