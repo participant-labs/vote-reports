@@ -349,6 +349,9 @@ class Politician < ActiveRecord::Base
       politician.slugs.update_all(:sluggable_id => id, :created_at => 1.year.ago)
       attributes.each do |attribute, value|
         merge_value = politician.attributes[attribute]
+        if IDENTITY_FIELDS.include?(attribute.to_sym) && value && merge_value && value != merge_value
+          raise "Unmatched ids for #{attribute}: #{value}, #{merge_value}"
+        end
         if attribute == 'cached_slug' && value.match(/--\d/) && !merge_value.match(/--\d/)
           value = politician.attributes[attribute]
         end
