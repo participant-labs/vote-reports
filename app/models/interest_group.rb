@@ -4,11 +4,6 @@ class InterestGroup < ActiveRecord::Base
   has_ancestry
   has_friendly_id :name, :use_slug => true
 
-  belongs_to :image
-  def thumbnail
-    image || build_image
-  end
-
   belongs_to :owner, :class_name => 'User'
 
   searchable do
