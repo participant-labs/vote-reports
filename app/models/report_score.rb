@@ -28,7 +28,7 @@ class ReportScore < ActiveRecord::Base
   has_many :dependent_report_scores, :class_name => 'ReportScore',
     :through => :dependent_report_score_evidences, :source => :score
 
-  named_scope :for_politician_display, :include => {:report => [:cause, {:interest_group => :image}, :user, :top_subject]}
+  named_scope :for_politician_display, :include => {:report => [:cause, :image, :interest_group, :user, :top_subject]}
   named_scope :for_report_display, :include => {:politician => [:state, :congressional_district]}
 
   named_scope :published, :joins => :report, :conditions => [
