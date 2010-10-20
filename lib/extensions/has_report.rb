@@ -2,7 +2,7 @@ module HasReport
   def self.included(base)
     base.class_eval do
       has_one :report, :dependent => :destroy
-      delegate :causes, :bill_criteria, :amendment_criteria, :rescore!, :has_criteria?, :subjects, :to => :report
+      delegate :causes, :bill_criteria, :amendment_criteria, :rescore!, :has_criteria?, :subjects, :current_image, :thumbnail, :build_image, :image, :to => :report
 
       before_validation_on_create :initialize_report
       after_update :update_report

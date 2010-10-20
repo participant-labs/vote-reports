@@ -10,7 +10,7 @@ authorization do
     includes :all
     has_permission_on :reports_bill_criteria, :to => :autofetch
     has_permission_on :interest_groups, :interest_groups_bill_criteria, :interest_groups_amendment_criteria, :issues, :causes, :causes_reports, :to => [:index, :new, :create, :edit, :update, :destroy]
-    has_permission_on :interest_groups_images, :to => [:edit, :create, :update]
+    has_permission_on :interest_groups_images, :causes_images, :to => [:edit, :create, :update]
   end
 
   role :user do
