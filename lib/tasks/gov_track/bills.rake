@@ -1,7 +1,11 @@
 namespace :gov_track do
   namespace :bills do
+    def update?
+      !ENV['FRESH']
+    end
+
     def import(model, columns, new_instances)
-      if @update
+      if update?
         new_instances.map {|i| Hash[columns.zip(i)] }.each do |new_instance|
           model.exists?(new_instance) || model.create!(new_instance)
         end
@@ -60,14 +64,13 @@ namespace :gov_track do
         
       end
     end
-    
+
     task :unpack => [:'gov_track:support', :'gov_track:politicians'] do
       rescue_and_reraise do
         require 'ar-extensions'
         require 'ar-extensions/import/postgresql'
 
         @subjects = Subject.all.index_by(&:name)
-        @update = !ENV['FRESH'].present?
 
         if ENV['MEETING'] == 'ALL'
           ENV['MEETING'] = ''
@@ -106,7 +109,7 @@ namespace :gov_track do
               :introduced_on => introduced_on,
               :summary => data.at('summary').inner_text.strip
             }
-            if @update && bill = Bill.find_by_opencongress_id(opencongress_bill_id)
+            if update? && bill = Bill.find_by_opencongress_id(opencongress_bill_id)
               bill.update_attributes!(attrs)
             else
               bill = Bill.create!(attrs)
