@@ -107,6 +107,6 @@ class InterestGroup < ActiveRecord::Base
   end
 
   def as_json(opts = {})
-    super opts.reverse_merge(:only => [:name, :description, :id, :vote_smart_id, :url, :email, :address, :state, :zip, :phone1, :phone2, :fax], :methods => [:to_param, :url])
+    super opts.reverse_merge(:only => [:name, :description, :id, :vote_smart_id, :website_url, :email, :address, :state, :zip, :phone1, :phone2, :fax], :methods => [:to_param, :url])
   end
 end
