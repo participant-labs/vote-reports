@@ -21,6 +21,6 @@ class CauseReport < ActiveRecord::Base
   private
 
   def rescore_report
-    cause.rescore!
+    cause.report && cause.rescore!
   end
 end

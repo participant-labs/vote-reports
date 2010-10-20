@@ -69,4 +69,10 @@ class CausesController < ApplicationController
       render :action => :edit
     end
   end
+
+  def destroy
+    @cause = Cause.find(params[:id])
+    @cause.destroy
+    redirect_to causes_path
+  end
 end

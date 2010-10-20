@@ -25,6 +25,10 @@
       <%- permitted_to? :edit, @cause do -%>
         <%= link_to 'Edit Cause', edit_cause_path(@cause) %>
       <%- end -%>
+      <%- permitted_to? :destroy, @cause do -%>
+        <%= button_to 'Destroy Cause', cause_path(@cause), :method => :delete,
+                      :confirm => 'Are you sure you want to destroy this cause?' %>
+      <%- end -%>
 
       <dl>
         <dt><%= pluralize_word(@subjects.size, 'Subject') %></dt>

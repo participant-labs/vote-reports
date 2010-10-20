@@ -1,14 +1,14 @@
 class Cause < ActiveRecord::Base
   include HasReport
 
-  has_many :cause_reports
+  has_many :cause_reports, :dependent => :destroy
   has_many :reports, :through => :cause_reports do
     def report_subjects
       ReportSubject.scoped(:conditions => {:report_id => self})
     end
   end
 
-  has_many :issue_causes
+  has_many :issue_causes, :dependent => :destroy
   has_many :issues, :through => :issue_causes
 
   named_scope :without_issue,
