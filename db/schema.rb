@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101020000541) do
+ActiveRecord::Schema.define(:version => 20101020065422) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -390,7 +390,6 @@ ActiveRecord::Schema.define(:version => 20101020000541) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cached_slug"
-    t.integer  "image_id"
     t.integer  "owner_id"
     t.datetime "ratings_updated_at"
   end
@@ -832,7 +831,6 @@ ActiveRecord::Schema.define(:version => 20101020000541) do
   add_foreign_key "interest_group_subjects", "interest_groups", :name => "interest_group_subjects_interest_group_id_reference"
   add_foreign_key "interest_group_subjects", "subjects", :name => "interest_group_subjects_subject_id_reference"
 
-  add_foreign_key "interest_groups", "images", :name => "interest_groups_image_id_reference"
   add_foreign_key "interest_groups", "users", :name => "interest_groups_owner_id_fk", :column => "owner_id"
 
   add_foreign_key "issue_causes", "causes", :name => "issue_causes_cause_id_reference"
