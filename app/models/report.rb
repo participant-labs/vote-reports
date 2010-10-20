@@ -10,9 +10,7 @@ class Report < ActiveRecord::Base
   belongs_to :image
   # this is a hack, to be fixed by separating out UserReports
   def current_image
-    image || begin
-        owner.present? && owner.respond_to?(:image) && owner.image
-      end || (laws_i_like? && Image.laws_i_like)
+    image || (owner && owner.respond_to?(:image) && owner.image) || (laws_i_like? && Image.laws_i_like)
   end
   def thumbnail
     current_image || build_image
