@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
     cause.resources :report_scores, :as => :scores, :controller => 'causes/scores', :only => [:index, :show]
     cause.resource :follows, :controller => 'causes/follows', :only => [:show, :create, :destroy]
     cause.resources :reports, :controller => 'causes/reports', :only => [:new, :create, :index, :destroy]
+    cause.resource :image, :controller => 'causes/images', :only => [:edit, :create, :update]
   end
   map.resources :reports, :only => [:index, :new] do |report|
     report.resources :bill_criteria, :only => [], :collection => {:autofetch => :get}, :controller => 'reports/bill_criteria'

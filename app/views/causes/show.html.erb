@@ -20,14 +20,13 @@
 
   <div class="sidebar span-6 last">
     <div class="spacer">
+      <%- if @cause.thumbnail.exists? -%>
+      <div class="logo span-6 last"><%= sized_image_tag @cause.thumbnail, @cause.name, :style => :header, :class => 'image_large' %></div>
+      <%- end -%>
       <div class="name"><%= @cause.name %></div>
 
       <%- permitted_to? :edit, @cause do -%>
         <%= link_to 'Edit Cause', edit_cause_path(@cause) %>
-      <%- end -%>
-      <%- permitted_to? :destroy, @cause do -%>
-        <%= button_to 'Destroy Cause', cause_path(@cause), :method => :delete,
-                      :confirm => 'Are you sure you want to destroy this cause?' %>
       <%- end -%>
 
       <dl>
