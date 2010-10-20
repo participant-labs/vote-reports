@@ -23,7 +23,7 @@ class District < ActiveRecord::Base
   }
 
   named_scope :with_name, lambda {|district_name|
-    name = Integer(district_name).to_s.rjust(3, '0') rescue district_name
+    name = ((district_name =~ /^\d+$/) ? district_name.to_i.to_s.rjust(3, '0') : district_name)
     {:conditions => {:name => name }}
   }
 
