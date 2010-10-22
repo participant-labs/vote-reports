@@ -67,23 +67,6 @@ class InterestGroupReport < ActiveRecord::Base
     'Anti Hemp' => 0.0,
     'Fence Sitter' => 50.0,
     'Pro Hemp' => 100.0, 
-
-    'F--' => 0.0,
-    'F-' => 6.6667,
-    'F' => 13.3333,
-    'F+' => 20.0,
-    'D-' => 26.6667,
-    'D' => 33.3333,
-    'D+' => 40.0,
-    'C-' => 46.6667,
-    'C' => 53.3333,
-    'C+' => 60.0,
-    'B-' => 66.6667,
-    'B' => 73.3333,
-    'B+' => 80.0,
-    'A-' => 86.6667,
-    'A' => 93.3333,
-    'A+' => 100.0
   }
 
   named_scope :with_zero_centered_ratings, :select => 'DISTINCT interest_group_reports.*', :joins => :ratings,
@@ -96,14 +79,40 @@ class InterestGroupReport < ActiveRecord::Base
   end
 
   def calibrate_ratings
+    ratings.update_all(:numeric_rating => nil)
     calibrate_unusual_ratings
     calibrate_zero_centered_ratings
+    calibrate_letter_ratings
     calibrate_normal_ratings
   end
 
   def calibrate_unusual_ratings
     UNUSUAL_RATINGS_MAP.each_pair do |rating, numeric_rating|
       ratings.update_all({:numeric_rating => numeric_rating}, {:rating => rating})
+    end
+  end
+
+  def calibrate_letter_ratings
+    if ratings.exists?(:rating => LETTER_GRADES)
+      rating_values = ratings.all(:conditions => {:rating => LETTER_GRADES}).map(&:rating).uniq.sort.reverse
+      options =
+        if rating_values.join.include?('-') || rating_values.join.include?('+')
+          case rating_values.first
+          when 'F-'
+            ['F-', 'F', 'F+', 'D-', 'D', 'D+', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+']
+          when 'F--'
+            ['F--', 'F-', 'F', 'F+', 'D-', 'D', 'D+', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+']
+          else
+            ['F', 'D-', 'D', 'D+', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+']
+          end
+        else
+          ["F", "D", "C", "B", "A"]
+        end
+
+      step = 100.0 / (options.size - 1)
+      options.each_with_index do |letter, index|
+        ratings.update_all({:numeric_rating => index * step}, {:rating => letter})
+      end
     end
   end
 
