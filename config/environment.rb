@@ -28,7 +28,7 @@ Rails::Initializer.run do |config|
   config.gem "foreigner"
   config.gem 'friendly_id', :version => '>= 3.0.6'
   config.gem 'geokit'
-  config.gem 'gravtastic', :version => '>= 2.1.0'
+  config.gem 'gravtastic', :version => '= 2.1.0'
   config.gem 'hoptoad_notifier', :version => '>= 2.3.2'
   config.gem 'jammit', :version => '>= 0.5.3'
   config.gem 'json', :version => '>= 1.4.3'
