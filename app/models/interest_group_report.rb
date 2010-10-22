@@ -69,6 +69,25 @@ class InterestGroupReport < ActiveRecord::Base
     'Pro Hemp' => 100.0, 
   }
 
+  ALL_LETTER_GRADES = [
+    'F--',
+    'F-',
+    'F',
+    'F+',
+    'D-',
+    'D',
+    'D+',
+    'C-',
+    'C',
+    'C+',
+    'B-',
+    'B',
+    'B+',
+    'A-',
+    'A',
+    'A+'
+  ]
+
   named_scope :with_zero_centered_ratings, :select => 'DISTINCT interest_group_reports.*', :joins => :ratings,
     :conditions => {:'interest_group_ratings.rating' => ZERO_CENTERED_RATINGS}
 
@@ -98,15 +117,15 @@ class InterestGroupReport < ActiveRecord::Base
   end
 
   def calibrate_letter_ratings
-    if ratings.exists?(:rating => LETTER_GRADES)
-      rating_values = ratings.all(:conditions => {:rating => LETTER_GRADES}).map(&:rating).uniq.sort.reverse
+    if ratings.exists?(:rating => ALL_LETTER_GRADES)
+      rating_values = ratings.all(:conditions => {:rating => ALL_LETTER_GRADES}).map(&:rating).uniq.sort.reverse
       options =
         if rating_values.join.include?('-') || rating_values.join.include?('+')
           case rating_values.first
           when 'F-'
             ['F-', 'F', 'F+', 'D-', 'D', 'D+', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+']
           when 'F--'
-            ['F--', 'F-', 'F', 'F+', 'D-', 'D', 'D+', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+']
+            ALL_LETTER_GRADES
           else
             ['F', 'D-', 'D', 'D+', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+']
           end
