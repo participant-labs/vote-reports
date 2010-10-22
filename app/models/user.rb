@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  is_gravtastic!
+  include Gravtastic
+  gravtastic
   has_friendly_id :username, :use_slug => true
   alias_attribute :to_s, :username
 
