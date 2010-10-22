@@ -80,11 +80,16 @@ class InterestGroupReport < ActiveRecord::Base
 
   def calibrate_ratings
     ratings.update_all(:numeric_rating => nil)
+
     calibrate_unusual_ratings
     calibrate_zero_centered_ratings
     calibrate_letter_ratings
     calibrate_normal_ratings
+
+    interest_group.rescore!
   end
+
+  private
 
   def calibrate_unusual_ratings
     UNUSUAL_RATINGS_MAP.each_pair do |rating, numeric_rating|
@@ -138,7 +143,6 @@ class InterestGroupReport < ActiveRecord::Base
         rating.update_attribute(:numeric_rating, (r + abs_min) * step)
       end
     end
-    interest_group.rescore!
   end
 
   def calibrate_normal_ratings
@@ -164,8 +168,6 @@ class InterestGroupReport < ActiveRecord::Base
       $stdout.print '.'
     end
   end
-
-  private
 
   def season_midpoint(season)
     case season
