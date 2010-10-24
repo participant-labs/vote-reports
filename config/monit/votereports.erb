@@ -112,8 +112,8 @@ check process apache with pidfile /var/run/apache2.pid
     group server
 
 check process mongodb
-  with pidfile /var/run/MongoDB.pid
-  start program = "/opt/local/mongo-1.6.3/bin/mongod --fork --dbpath /data/db run --logpath /srv/vote-reports/shared/log/mongodb.log"
+  with pidfile /srv/vote-reports/shared/pids/mongodb.pid
+  start program = "/opt/local/mongo-1.6.3/bin/mongod --fork --dbpath /data/db run --pidfilepath /srv/vote-reports/shared/pids/mongodb.pid --logpath /srv/vote-reports/shared/log/mongodb.log"
   stop program = "/usr/bin/pgrep mongod | xargs kill -15"
 
 check process delayed_job
