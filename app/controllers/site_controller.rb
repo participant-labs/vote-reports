@@ -8,6 +8,10 @@ class SiteController < ApplicationController
     end
   end
 
+  def alive
+    render :text => 'Site is alive!'
+  end
+
   def about
   end
 

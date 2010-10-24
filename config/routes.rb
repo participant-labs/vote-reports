@@ -80,6 +80,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :donations
 
   map.about "about", :controller => "site", :action => "show"
+  map.alive "alive", :controller => "site", :action => "alive"
   map.root :controller => "site", :action => 'index'
 
   if Rails.env.development?
