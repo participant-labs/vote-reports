@@ -88,6 +88,29 @@ set alert <%= options[:alerts][:timeout_email] %> only on { timeout } # receive 
 set httpd port 2812
   allow localhost
 
+check system localhost
+    if loadavg (1min) > 8 then alert
+    if loadavg (5min) > 4 then alert
+    if memory usage > 75% then alert
+    if cpu usage (user) > 70% for 8 cycles then alert
+    if cpu usage (system) > 30% for 8 cycles then alert
+    if cpu usage (wait) > 20% for 8 cycles then alert
+
+check process apache with pidfile /var/run/apache2.pid
+    start program = "/etc/init.d/apache2 start"
+    stop program  = "/etc/init.d/apache2 stop"
+    if cpu > 60% for 2 cycles then alert
+    if cpu > 80% for 5 cycles then restart
+    if totalmem > 200.0 MB for 5 cycles then restart
+    if children > 250 then restart
+    if loadavg(5min) greater than 20 for 8 cycles then alert
+    if failed url
+       http://votereports.org/alive
+       and content == 'Site is alive!'
+       for 2 cycles
+       then restart
+    group server
+
 check process mongodb
   with pidfile /srv/vote-reports/shared/pids/mongodb.pid
   start program = "/opt/local/mongo-1.6.3/bin/mongod --fork --dbpath /data/db run --pidfilepath /srv/vote-reports/shared/pids/mongodb.pid --logpath /srv/vote-reports/shared/log/mongodb.log"
