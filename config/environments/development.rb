@@ -19,5 +19,4 @@ config.action_mailer.raise_delivery_errors = false
 #ActionController::Base.cache_store = :mem_cache_store, "127.0.0.1"
 config.gem 'auto_tagger'
 config.gem 'capistrano'
-config.gem 'capistrano-ext'
 config.gem 'capistrano_colors'
