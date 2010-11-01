@@ -57,7 +57,11 @@ Raphael.fn.radarchart = function (x, y, radius, sides, scores, labels, label_bre
     }
 
     // Regularises scores
-    for( var i = 0; i < scores.length; i++){ scores[i] /= max}
+    for( var i = 0; i < scores.length; i++){
+      if (scores[i]) {
+        scores[i] /= max;
+      }
+    }
 
     var st = this.set(); // A set to compose elements of a frame
 
@@ -65,7 +69,8 @@ Raphael.fn.radarchart = function (x, y, radius, sides, scores, labels, label_bre
     for( var i = 0; i < points.length; i++){
       var x = points[i][0];
       var y = points[i][1];
-      st.push( this.path("M " + cx + " " + cy + " L " + x + " " + y).attr("stroke", "#777"));
+      var stroke_color = scores[i] === null ? "#EEE" : "#777";
+      st.push( this.path("M " + cx + " " + cy + " L " + x + " " + y).attr("stroke", stroke_color));
     }
 
     // Draws chart
