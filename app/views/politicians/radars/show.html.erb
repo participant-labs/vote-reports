@@ -1,0 +1,13 @@
+<%- title "#{@politician.full_name}'s Cause Radar" -%>
+
+<script src="/javascripts/vendor/raphael-1.5.2.js" type="text/javascript" charset="utf-8"></script> 
+<script src="/javascripts/vendor/raphael-radar.js" type="text/javascript" charset="utf-8"></script> 
+
+<% div_for @politician, :radar_chart do %>
+<% end %>
+
+<script type="text/javascript">
+  scores = <%= @cause_scores.map(&:last).to_json.html_safe %>;
+  labels = <%= @cause_scores.map(&:first).to_json.html_safe %>;
+  radar('<%= dom_id(@politician, :radar_chart) %>', 700, 700, scores, labels, null, 100, {label_break: 0});
+</script>
