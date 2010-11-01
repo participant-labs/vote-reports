@@ -4,7 +4,7 @@
   <%- end -%>
   <div class="politician_name"><%= politician_name(politician) %>
     <%- if politician.location -%>
-      <span class="politician_location act-district" rel="<%= polymorphic_path([politician.location, :map]) %>" title="<%= location_title(politician.location) %>"><%= politician.location.abbreviation %></span>
+      <span class="politician_location" title="<%= location_title(politician.location) %>"><%= politician.location.abbreviation %></span>
     <%- end -%>
   </div>
 </div>
