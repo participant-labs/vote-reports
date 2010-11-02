@@ -6,7 +6,7 @@ class Race < ActiveRecord::Base
 
   before_create :populate_race_reference
 
-  named_scope :upcoming, :joins => :election_stage, :conditions => ['election_stages.voted_on > ?', Date.today]
+  named_scope :upcoming, :joins => :election_stage, :conditions => ['election_stages.voted_on >= ?', Date.today]
 
   named_scope :for_districts, lambda {|districts|
     {
