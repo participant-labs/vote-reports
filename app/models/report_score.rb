@@ -5,7 +5,7 @@ class ReportScore < ActiveRecord::Base
   belongs_to :politician
   has_many :evidence, :class_name => 'ReportScoreEvidence', :dependent => :destroy
 
-  default_scope :order => 'score DESC'
+  # default_scope :order => 'score DESC'
   named_scope :bottom, :order => :score
 
   alias_method :subject, :report # for the score evidence pop-up
