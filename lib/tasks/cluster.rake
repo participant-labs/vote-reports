@@ -27,7 +27,7 @@ namespace :cluster do
   task :politicians => :environment do
     require 'hierclust'
 
-    scored_pols = ReportScore.for_causes.all(:select => 'distinct politician_id').map(&:politician)
+    scored_pols = ReportScore.for_causes.all(:select => 'distinct politician_id', :joins => :politician, :conditions => 'politicians.current_office_id is not null').map(&:politician)
 
     puts "Senators"
     puts "=============="
