@@ -13,6 +13,8 @@
 - :version: ">= 2.6.6"
   :name: erubis
 - :name: excelsior
+- :version: ">= 0.3.0"
+  :name: Empact-hierclust
 - :name: fastercsv
 - :name: foreigner
 - :version: ">= 3.0.6"
