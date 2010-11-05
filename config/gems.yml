@@ -64,8 +64,8 @@
 - :name: typhoeus
 - :version: ">= 0.3.3"
   :name: votesmart
-- :version: ">= 2.3.14"
-  :name: Empact-will_paginate
+- :version: ">= 2.3.15"
+  :name: will_paginate
 - :name: ym4r
 - :name: httparty
 - :name: parallel
