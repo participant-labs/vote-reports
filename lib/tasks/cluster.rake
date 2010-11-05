@@ -20,7 +20,7 @@ namespace :cluster do
       Hierclust::Point.new(scores, :politician => politician)
     end
 
-    clusterer = Hierclust::Clusterer.new(points, :nils => 50.0)
+    clusterer = Hierclust::Clusterer.new(points, :nils => 50.0, :resolution => 9.0)
     puts to_newick(unpack_clusters(clusterer.clusters.first))
   end
 
