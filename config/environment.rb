@@ -24,7 +24,6 @@ Rails::Initializer.run do |config|
   config.gem 'delayed_job', :version => '>= 2.0.3'
   config.gem 'erubis', :version => '>= 2.6.6'
   config.gem 'excelsior'
-  config.gem 'Empact-hierclust', :version => ">= 0.3.0", :lib => false
   config.gem 'fastercsv'
   config.gem "foreigner"
   config.gem 'friendly_id', :version => '>= 3.0.6'
