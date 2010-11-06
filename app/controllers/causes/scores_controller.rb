@@ -4,7 +4,7 @@ class Causes::ScoresController < ApplicationController
 
   def index
     @report = @cause.report
-    @scores = @report.scores.for_politicians(sought_politicians)
+    @scores = @report.scores.for_politicians(sought_politicians).by_score
     respond_to do |format|
       format.html {
         if !@cause.friendly_id_status.best?
