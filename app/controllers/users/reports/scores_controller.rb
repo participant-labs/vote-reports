@@ -2,7 +2,7 @@ class Users::Reports::ScoresController < ApplicationController
   before_filter :load_report
 
   def index
-    @scores = @report.scores.for_politicians(sought_politicians)
+    @scores = @report.scores.for_politicians(sought_politicians).by_score
     respond_to do |format|
       format.html {
         render :layout => false
