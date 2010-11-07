@@ -23,10 +23,11 @@ namespace :cluster do
     data_frame = r.as_data_frame(:x => values, :row_names => names)
 
     dist = r.dist(:x => data_frame)
+    p dist
     result = r.hclust(:d => dist)
     p result
-    r.plot(result)
-    r.pvrect(result, :alpha => 0.95)
+    # r.plot(result)
+    # r.pvrect(result, :alpha => 0.95)
 
     # puts "Representatives"
     # output_csv_for_pols(Rails.root.join('tmp/rep_cause_ratings.csv'), scored_pols.select {|p| p.current_office_type == "RepresentativeTerm"})
