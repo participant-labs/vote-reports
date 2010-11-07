@@ -3,7 +3,7 @@ namespace :cluster do
     causes = Cause.all(:order => 'id')
 
     data = Hash[pols.map do |pol|
-      scores = causes.map {|cause|  cause.report.scores.for_politicians(pol).first.try(:score) || 50.0 }
+      scores = causes.map {|cause|  cause.report.scores.for_politicians(pol).first.try(:score) || (0.0 / 0.0) }
       ["#{pol.to_param}-#{pol.location_abbreviation}-#{pol.current_office.party.name rescue nil}", scores]
     end]
     [causes.map(&:name), data]
@@ -13,7 +13,6 @@ namespace :cluster do
     require 'rsruby'
     require 'rsruby/dataframe'
     r = RSRuby.instance
-    r.library('pvclust')
     r.class_table['data.frame'] = lambda{|x| DataFrame.new(x)}
     RSRuby.set_default_mode(RSRuby::CLASS_CONVERSION)
 
@@ -21,11 +20,12 @@ namespace :cluster do
 
     puts "Senators"
     names, values = data_for_pols(scored_pols.select {|p| p.current_office_type == "SenateTerm"})
-    data_frame = r.as_data_frame(values, :row_names => names)
+    data_frame = r.as_data_frame(:x => values, :row_names => names)
 
-    result = r.pvclust(data_frame, :method_dist => "cor", :method_hclust => "average", :nboot => 1000)
+    dist = r.dist(:x => data_frame)
+    result = r.hclust(:d => dist)
     p result
-    # r.plot(result)
+    r.plot(result)
     r.pvrect(result, :alpha => 0.95)
 
     # puts "Representatives"
