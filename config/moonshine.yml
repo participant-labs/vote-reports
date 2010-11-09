@@ -68,8 +68,8 @@
  :patron:
    - libcurl3
    - libcurl3-dev
-  :rsruby:
-    - r-base
+ :rsruby:
+   - r-base
 
 # Passenger-specific options. Refer to the following templates for details
 # about what values are used:
