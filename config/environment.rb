@@ -46,6 +46,7 @@ Rails::Initializer.run do |config|
   config.gem 'paperclip', :version => '>= 2.3.3'
   config.gem 'pg'
   config.gem 'rpx_now', :version => '>= 0.6.12'
+  config.gem 'rsruby', :lib => false
   config.gem 'sexy_pg_constraints'
   config.gem 'state_machine'
   config.gem 'spatial_adapter'

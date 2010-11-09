@@ -50,6 +50,7 @@
 - :name: pg
 - :version: ">= 0.6.12"
   :name: rpx_now
+- :name: rsruby
 - :name: state_machine
 - :name: spatial_adapter
 - :version: = 1.1.0
