@@ -24,4 +24,4 @@
 	url = git://github.com/Empact/Paperclip-Autosizer.git
 [submodule "vendor/plugins/moonshine_iptables"]
 	path = vendor/plugins/moonshine_iptables
-	url = http://github.com/railsmachine/moonshine_iptables.git
+	url = git://github.com/railsmachine/moonshine_iptables.git

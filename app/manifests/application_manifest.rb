@@ -113,13 +113,25 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   )
 
   if deploy_stage == 'production'
+    plugin :astrails_safe
     recipe :astrails_safe
+
+    plugin :denyhosts
     recipe :denyhosts
+
+    plugin :scout
     recipe :scout
   end
 
+  plugin :iptables
   recipe :iptables
+
+  plugin :ssh
   recipe :ssh
+
+  plugin :monit
   recipe :monit
+
+  plugin :mongodb
   recipe :mongodb
 end
