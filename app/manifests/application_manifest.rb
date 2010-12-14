@@ -59,6 +59,59 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   # The following line includes the 'application_packages' recipe defined above
   recipe :application_packages
 
+  configure(
+    :astrails_safe => {
+      :local => {
+        :path => '/srv/vote-reports/shared/data/backup/safe'
+      },
+      :keep => {
+        :local => 3,
+        :s3 => 100
+      },
+      :gpg => {
+        :key => 'ben@votereports.org'
+      },
+      :s3 => {
+        :key => '0YN0K8DPG0D52XG7WW82',
+        :secret => 'azbToHx43247//SuoK//XMX7cMf1HGzYkgWphSPO',
+        :bucket => 'vote-reports-production-backups',
+      },
+      :archives => [{
+          :name => 'vote-reports',
+          :files =>  '/srv/vote-reports',
+          :exclude => [
+            '/srv/vote-reports/shared/log',
+            '/srv/vote-reports/shared/solr',
+            '/srv/vote-reports/shared/cached-copy',
+            '/srv/vote-reports/shared/data',
+            '/srv/vote-reports/shared/pids'
+          ]
+        }
+      ]
+    },
+    :denyhosts => {
+      :admin_email => 'ben@votereports.org, root@localhost'
+    },
+    :iptables => { :rules => [
+      '-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT',
+      '-A INPUT -p icmp -j ACCEPT',
+      '-A INPUT -p tcp -m tcp --dport 25 -j ACCEPT',
+      '-A INPUT -p tcp -m tcp --dport 7111 -j ACCEPT',
+      '-A INPUT -p tcp -m tcp --dport 80 -j ACCEPT',
+      '-A INPUT -p tcp -m tcp --dport 443 -j ACCEPT',
+      '-A INPUT -s 127.0.0.1 -j ACCEPT',
+      '-A INPUT -p tcp -m tcp --dport 8000:10000 -j ACCEPT',
+      '-A INPUT -p udp -m udp --dport 8000:10000 -j ACCEPT'
+    ]},
+    :ssh => {
+      :port => 7111,
+      :allow_users => [
+        'root',
+        'deploy'
+      ]
+    }
+  )
+
   if deploy_stage == 'production'
     recipe :astrails_safe
     recipe :denyhosts
