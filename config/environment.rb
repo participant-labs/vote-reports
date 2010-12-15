@@ -14,6 +14,8 @@ Rails::Initializer.run do |config|
   # Add additional load paths for your own custom dirs
   config.autoload_paths += [Rails.root.join('lib/extensions').to_s]
 
+  config.plugins = [:all]
+
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
   config.gem 'ancestry', :version => '>=1.2.0'
