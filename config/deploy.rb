@@ -1,4 +1,5 @@
 require 'auto_tagger/recipes'
+set :application, 'vote-reports'
 set :stages, [:staging, :production]
 set :autotagger_stages, stages
 require 'capistrano/ext/multistage'
