@@ -1,4 +1,4 @@
-<% div_for(interest_group, :class => 'clearfix') do %>
+<%= div_for(interest_group, :class => 'clearfix') do %>
   <%- description = truncate(md_to_text(interest_group.description), :length => 140 - interest_group.name.length) -%>
   <%= link_to h(interest_group.name), interest_group_path(interest_group), :class => 'report_title' %>
   <%- if description.blank? || interest_group.name.size > 60 -%>

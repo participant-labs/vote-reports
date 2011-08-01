@@ -2,7 +2,7 @@ class CausesController < ApplicationController
   filter_resource_access
 
   def index
-    @causes = Cause.paginate :page => params[:page], :order => :name
+    @causes = Cause.order(:name).page(params[:page])
 
     respond_to do |format|
       format.html

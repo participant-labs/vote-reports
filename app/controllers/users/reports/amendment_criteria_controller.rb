@@ -9,7 +9,7 @@ class Users::Reports::AmendmentCriteriaController < ApplicationController
       return
     end
     @bill = Bill.find(params[:bill_id])
-    @amendments = @bill.amendments.paginate :page => params[:page], :order => 'chamber, number'
+    @amendments = @bill.amendments.order('chamber, number').page(params[:page])
 
     render :partial => 'reports/amendment_criteria/table', :locals => {
       :report => @report, :bill => @bill, :amendments => @amendments
@@ -42,7 +42,7 @@ class Users::Reports::AmendmentCriteriaController < ApplicationController
   end
 
   def find_report
-    @report = @user.reports.find(params[:report_id], :scope => @user)
+    @report = @user.reports.find(params[:report_id])
   end
 
   def permission_denied_path

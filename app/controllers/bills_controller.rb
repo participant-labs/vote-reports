@@ -5,7 +5,7 @@ class BillsController < ApplicationController
       @bills = Bill.paginated_search(params).results
     else
       @title = 'Recent Bills'
-      @bills = Bill.by_introduced_on.paginate :page => (params[:bills_page] || params[:page]), :include => :titles
+      @bills = Bill.by_introduced_on.includes(:titles).page(params[:bills_page] || params[:page])
     end
     respond_to do |format|
       format.html

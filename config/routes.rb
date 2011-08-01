@@ -18,16 +18,18 @@ VoteReports::Application.routes.draw do
     end
   end
 
-  resources :reports do
-    resources :report_scores, :only => [:index, :show]
-    resource :embed, :only => :show
-    resource :follows, :only => [:show, :create, :destroy]
-    resources :causes, :only => :index
-    resources :subjects, :only => :index
-    resource :agenda, :only => :show
-    resource :image, :only => [:edit, :update, :create]
-    resources :bill_criteria, :only => [:index, :new, :create, :destroy]
-    resources :amendment_criteria, :only => [:new, :create, :destroy, :index]
+  resources :users, only: [], path: 'reports' do
+    resources :reports, path: '', controller: 'users/reports' do
+      resources :report_scores, :only => [:index, :show], controller: 'users/reports/scores'
+      resource :embed, :only => :show, controller: 'users/reports/embed'
+      resource :follows, :only => [:show, :create, :destroy], controller: 'users/reports/follows'
+      resources :causes, :only => :index, controller: 'users/reports/causes'
+      resources :subjects, :only => :index, controller: 'users/reports/subjects'
+      resource :agenda, :only => :show, controller: 'users/reports/agendas'
+      resource :image, :only => [:edit, :update, :create], controller: 'users/reports/thumbnails'
+      resources :bill_criteria, :only => [:index, :new, :create, :destroy], controller: 'users/reports/bill_criteria'
+      resources :amendment_criteria, :only => [:new, :create, :destroy, :index], controller: 'users/reports/amendment_criteria'
+    end
   end
 
   resources :interest_groups do

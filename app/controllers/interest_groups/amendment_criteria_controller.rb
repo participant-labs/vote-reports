@@ -8,7 +8,7 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
       return
     end
     @bill = Bill.find(params[:bill_id])
-    @amendments = @bill.amendments.paginate :page => params[:page], :order => 'chamber, number'
+    @amendments = @bill.amendments.order('chamber, number').page(params[:page])
 
     render :partial => 'reports/amendment_criteria/table', :locals => {
       :report => @report, :bill => @bill, :amendments => @amendments

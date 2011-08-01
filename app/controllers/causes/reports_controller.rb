@@ -8,7 +8,7 @@ class Causes::ReportsController < ApplicationController
       if params[:term].present?
         Report.paginated_search(params.merge(:except => @cause.report)).results
       else
-        topical_reports.paginate :page => params[:page], :order => :name
+        topical_reports.order(:name).page(params[:page])
       end
 
     respond_to do |format|

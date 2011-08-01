@@ -5,7 +5,7 @@ class Users::Reports::BillCriteriaController < ApplicationController
 
   def new
     @new_report = true if params[:new_report]
-    @report = @user.reports.find(params[:report_id], :scope => @user)
+    @report = @user.reports.find(params[:report_id])
     if !@report.friendly_id_status.best?
       redirect_to new_user_report_bill_criterion_path(@user, @report), :status => 301
       return
@@ -28,7 +28,7 @@ class Users::Reports::BillCriteriaController < ApplicationController
   end
 
   def create
-    @report = @user.reports.find(params[:report_id], :scope => @user)
+    @report = @user.reports.find(params[:report_id])
     if @report.update_attributes(params[:report].slice(:bill_criteria_attributes))
       flash[:notice] = "Successfully updated report bills."
       redirect_to edit_user_report_path(@user, @report, :anchor => 'Add_Bills')
@@ -54,7 +54,7 @@ class Users::Reports::BillCriteriaController < ApplicationController
   end
 
   def find_report
-    @report = @user.reports.find(params[:report_id], :scope => @user)
+    @report = @user.reports.find(params[:report_id])
   end
 
   def permission_denied_path

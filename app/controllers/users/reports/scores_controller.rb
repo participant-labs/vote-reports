@@ -32,6 +32,6 @@ class Users::Reports::ScoresController < ApplicationController
 
   def load_report
     @user = User.find(params[:user_id])
-    @report = @user.reports.find(params[:report_id], :scope => @user)
+    @report = @user.reports.find(params[:report_id])
   end
 end

@@ -20,9 +20,7 @@ class Users::ReportsController < ApplicationController
           return
         end
         @causes = @report.causes.all(:limit => 3)
-        @subjects = @report.subjects.for_tag_cloud.all(
-          :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
-          :limit => 3)
+        @subjects = @report.subjects.for_tag_cloud.except(:select).select("DISTINCT(subjects.*), SUM(report_subjects.count) AS count").limit(3).all
       }
       format.json {
         render :json => @report.as_json(:include => :causes)
@@ -81,6 +79,6 @@ class Users::ReportsController < ApplicationController
   end
 
   def load_report
-    @report = @user.reports.except_personal.find(params[:id], :scope => @user)
+    @report = @user.reports.except_personal.find(params[:id])
   end
 end

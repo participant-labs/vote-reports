@@ -3,7 +3,7 @@
   cause_only ||= false
 -%>
 
-<% div_for report, :class => 'act-hover', :rel => dom_id(report, :follow) do %>
+<%= div_for report, :class => 'act-hover', :rel => dom_id(report, :follow) do %>
   <%- if report.current_image -%>
     <%= sized_image_tag report.current_image, report.name, :style => :tiny, :class => 'report_image' %>
   <%- end -%>
