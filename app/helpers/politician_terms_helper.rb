@@ -1,9 +1,8 @@
 module PoliticianTermsHelper
   def term_description(term)
     party = "; #{term.party}" if term.party
-    "#{term.title} #{term_place(term)}#{party}"
+    "#{term.title} #{term_place(term)}#{party}".html_safe
   end
-  safe_helper :term_description
 
   def term_place(term)
     term = term.representative_term if term.is_a?(ContinuousTerm)
@@ -17,7 +16,6 @@ module PoliticianTermsHelper
     else
       notify_hoptoad("Unrecognized term #{term.inspect}")
       ''
-    end
+    end.html_safe
   end
-  safe_helper :term_place
 end

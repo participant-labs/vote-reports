@@ -70,28 +70,33 @@ module ApplicationHelper
   end
 
   def md_to_text(md)
-    strip_tags(md_to_html(md)).gsub('&amp;', '&').html_safe
+    strip_tags(md_to_html(md)).gsub('&amp;', '&')
   end
+  safe_helper :md_to_text
 
   def md_to_html(md)
-    BlueCloth::new(md).to_html.html_safe
+    BlueCloth::new(md).to_html
   end
+  safe_helper :md_to_html
 
   def format_newlines(text)
-    text.to_s.gsub(/(?:\n\r?|\r\n?)/, '<br />').html_safe
+    text.to_s.gsub(/(?:\n\r?|\r\n?)/, '<br />')
   end
+  safe_helper :format_newlines
 
   def to_html(text)
     text.to_s.split("\n").map {|paragraph|
       content_tag :p, paragraph
-    }.join.html_safe
+    }.join
   end
+  safe_helper :to_html
 
   def flash_helper
     flash.map do |(level, message)|
       content_tag(:div, message, :class => [level, " flash"]) if message.present?
-    end.join
+    end
   end
+  safe_helper :flash_helper
 
   def tag_cloud(tags, classes)
     return [] if tags.empty?
