@@ -8,7 +8,7 @@ class InterestGroupsController < ApplicationController
       if params[:term].present?
         InterestGroup.paginated_search(params).results
       else
-        InterestGroup.for_subjects(params[:subjects]).paginate(:order => 'name', :page => params[:page])
+        InterestGroup.for_subjects(params[:subjects]).order('name').page(params[:page])
       end
     @subjects = Subject.tag_cloud_for_interest_groups_matching(params[:term]).all(:limit => 25)
 

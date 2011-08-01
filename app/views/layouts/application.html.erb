@@ -7,7 +7,7 @@
   
   <div id="body" class="container">
     <div id="content" class="span-24">
-      <%= yield(:content) || yield %>
+      <%= content_for?(:content) ? yield(:content) : yield %>
     </div>
   </div>
 <% end %>

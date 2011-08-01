@@ -1,5 +1,5 @@
 <%- subject_only ||= false -%>
 
-<% div_for subject do %>
+<%= div_for subject do %>
   <%= link_to_unless_current subject_only ? subject.name : %{#{subject.name} (Subject)}, subject_path(subject) %>
 <% end %>

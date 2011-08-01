@@ -13,7 +13,7 @@ class Reports::SubjectsController < ApplicationController
   def load_report
     if params[:user_id]
       @user = User.find(params[:user_id])
-      @report = @user.reports.find(params[:report_id], :scope => @user)
+      @report = @user.reports.find(params[:report_id])
     else
       @interest_group = InterestGroup.find(params[:interest_group_id], :include => :report)
       @report = @interest_group.report

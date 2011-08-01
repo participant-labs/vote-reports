@@ -34,7 +34,7 @@
           <%- end -%>
         </tr>
       <%- end -%>
-      <%- scores = ReportScore.for_reports(reports).for_politicians(politicians).with_evidence.scoped(:include => :report) -%>
+      <%- scores = ReportScore.for_reports(reports).for_politicians(politicians).with_evidence.includes(:report) -%>
       <%- reports.each do |report| -%>
         <tr>
           <th><%= render 'reports/report', :report => report, :float_description => true %></th>

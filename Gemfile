@@ -33,14 +33,16 @@ gem 'rpx_now', '>= 0.6.12'
 gem 'Empact-sexy_pg_constraints', require: 'sexy_pg_constraints'
 gem 'state_machine'
 gem 'spatial_adapter'
-gem 'sunspot', '= 1.1.0', :require => 'sunspot'
-gem 'sunspot_rails', '= 1.1.0', :require => 'sunspot/rails'
-source 'http://gems.github.com'
+gem 'sunspot_rails'
 gem 'polly-suppress_validations', :require => 'suppress_validations'
 gem 'tamtam'
 gem 'typhoeus'
 gem 'votesmart', '>= 0.3.3'
-gem 'will_paginate', '>=2.3.15'
+gem 'kaminari'
 gem 'ym4r'
 gem 'httparty'
 gem 'parallel'
+
+group :test, :development do
+  gem "rspec-rails"
+end

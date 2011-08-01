@@ -2,7 +2,7 @@
 <%- attrs ||= {} -%>
 <%- classes = subjects.size > 40 ? %w(tag1 tag2 tag3 tag4 tag5 tag6) : %w(tag1 tag2 tag3 tag4) -%>
 
-<% content_tag :ol, attrs.reverse_merge(:class => 'tag_cloud') do %>
+<%= content_tag :ol, attrs.reverse_merge(:class => 'tag_cloud') do %>
   <% tag_cloud(subjects, classes) do |subject, css_class| %>
   <%-
     if params[:subjects]

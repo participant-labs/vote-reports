@@ -32,33 +32,33 @@
       <%= label_tag :votes_how_neutral, "Neutral (#{scores.neutral.count})", :class => "span-6 last round-4 #{'selected' if votes_how == :neutral}" %></li>
     </ul>
   <% end %>
-  <%- scores = scores.with_evidence.votes_how(votes_how).paginate(:page => params[:page]) -%>
+  <%- scores = scores.with_evidence.votes_how(votes_how).page(params[:page]) -%>
   <ul class="clearfix">
     <%- scores.each do |score| -%>
       <li class="<%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score, :report => report %></li>
     <%- end -%>
   </ul>
-  <%= will_paginate scores,
+  <%= paginate scores,
         :class => 'act-replace score-pagination round-4',
         :rel => replace %>
 <%- elsif score_count > 8 -%>
-  <%- scores = scores.with_evidence.paginate(:page => params[:page]) -%>
+  <%- scores = scores.with_evidence.page(params[:page]) -%>
   <ul class="clearfix">
     <%- scores.each do |score| -%>
       <li class="<%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score, :report => report %></li>
     <%- end -%>
   </ul>
-  <%= will_paginate scores,
+  <%= paginate scores,
         :class => 'act-replace score-pagination round-4',
         :rel => replace %>
 <%- elsif score_count > 1 -%>
-  <%- scores = scores.with_evidence.paginate(:page => params[:page]) -%>
+  <%- scores = scores.with_evidence.page(params[:page]) -%>
   <ul>
     <%- scores.each do |score| -%>
       <li class="full_width"><%= render 'politicians/score', :score => score, :report => report %></li>
     <%- end -%>
   </ul>
-  <%= will_paginate scores,
+  <%= paginate scores,
         :class => 'act-replace score-pagination round-4',
         :rel => replace %>
 <%- elsif report.delayed_jobs.present? -%>

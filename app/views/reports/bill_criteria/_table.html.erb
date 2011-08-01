@@ -41,7 +41,7 @@
         </tbody>
       </table>
       <% if bills.respond_to?(:total_pages) %>
-        <%= will_paginate bills, :class => 'act-replace', :rel => 'report_bills_results_table' %>
+        <%= paginate bills, :class => 'act-replace', :rel => 'report_bills_results_table' %>
       <% end %>
       <p><%= f.submit 'Save Bills to Report' %></p>
     <% end %>

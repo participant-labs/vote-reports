@@ -7,7 +7,7 @@ class Politicians::ReportsController < ApplicationController
       @reports = Report.paginated_search(params).results
       @scores = @reports.replace(topical_scores.for_reports(@reports).all)
     else
-      @scores = topical_scores.paginate(:page => params[:page])
+      @scores = topical_scores.page(params[:page])
     end
 
     @subjects = Subject.for_report(@scores.map(&:report)).for_tag_cloud.all(:limit => 20)

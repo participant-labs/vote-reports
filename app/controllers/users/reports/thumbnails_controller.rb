@@ -30,6 +30,6 @@ class Users::Reports::ThumbnailsController < ApplicationController
 
   def find_user_and_report
     @user = User.find(params[:user_id])
-    @report = @user.reports.find(params[:report_id], :scope => @user)
+    @report = @user.reports.find(params[:report_id])
   end
 end

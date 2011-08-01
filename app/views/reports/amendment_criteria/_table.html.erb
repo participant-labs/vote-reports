@@ -32,7 +32,7 @@
           <%- end -%>
         </tbody>
       </table>
-      <%= will_paginate amendments, :class => 'act-replace', :rel => 'report_amendments_results_table' %>
+      <%= paginate amendments, :class => 'act-replace', :rel => 'report_amendments_results_table' %>
       <p><%= f.submit 'Save Amendments' %></p>
     <% end %>
   <%- else -%>

@@ -2,12 +2,12 @@ class IssuesController < ApplicationController
   filter_resource_access
 
   def index
-    @issues = Issue.paginate :page => params[:page]
+    @issues = Issue.page(params[:page])
   end
 
   def show
     @issue = Issue.find(params[:id])
-    @causes = @issue.causes.paginate :page => params[:page]
+    @causes = @issue.causes.page(params[:page])
   end
 
   def new

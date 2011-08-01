@@ -1,5 +1,5 @@
 <%- attrs ||= {} -%>
-<% content_tag :dl, attrs do %>
+<%= content_tag :dl, attrs do %>
   <%- bill.titles.group_by {|t| t.as }.each_pair do |as, as_titles| -%>
   <dt><%= as %></dt>
   <dd><dl>
