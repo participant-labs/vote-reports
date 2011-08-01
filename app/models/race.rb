@@ -6,34 +6,31 @@ class Race < ActiveRecord::Base
 
   before_create :populate_race_reference
 
-  named_scope :upcoming, :joins => :election_stage, :conditions => ['election_stages.voted_on >= ?', Date.today]
+  scope :upcoming, joins(:election_stage).where(['election_stages.voted_on >= ?', Date.today])
 
-  named_scope :for_districts, lambda {|districts|
-    {
-      :joins => [:office, {:election_stage => :election}],
-      :conditions => [
-        %{elections.state_id = ? AND (
-            (offices.id IN(?) AND races.district_name IN(?)) OR
-            (offices.id IN(?) AND races.district_name IN(?)) OR
-            (offices.id IN(?) AND races.district_name IN(?)) OR
-            (offices.id NOT IN(?))
-        )},
-        districts.first.state.id,
-        Office.us_house,     districts.level('federal').map {|d| d.name =~ /^\d*$/ ? d.name.to_i.to_s : d.name },
-        Office.state_senate, districts.level('state_upper').map {|d| d.name =~ /^\d*$/ ? d.name.to_i.to_s : d.name },
-        Office.state_lower,  districts.level('state_lower').map {|d| d.name =~ /^\d*$/ ? d.name.to_i.to_s : d.name },
-        Office.districted
-      ]
-    }
+  scope :for_districts, lambda {|districts|
+    joins([:office, {:election_stage => :election}]).where([
+      %{elections.state_id = ? AND (
+          (offices.id IN(?) AND races.district_name IN(?)) OR
+          (offices.id IN(?) AND races.district_name IN(?)) OR
+          (offices.id IN(?) AND races.district_name IN(?)) OR
+          (offices.id NOT IN(?))
+      )},
+      districts.first.state.id,
+      Office.us_house,     districts.level('federal').map {|d| d.name =~ /^\d*$/ ? d.name.to_i.to_s : d.name },
+      Office.state_senate, districts.level('state_upper').map {|d| d.name =~ /^\d*$/ ? d.name.to_i.to_s : d.name },
+      Office.state_lower,  districts.level('state_lower').map {|d| d.name =~ /^\d*$/ ? d.name.to_i.to_s : d.name },
+      Office.districted
+    ])
   }
 
-  named_scope :with_scores_from, lambda {|scores|
-    {:joins => :candidacies, :conditions => {:candidacies => {:politician_id => scores.map(&:politician_id)}}}
+  scope :with_scores_from, lambda {|scores|
+    joins(:candidacies).where(:candidacies => {:politician_id => scores.map(&:politician_id)})
   }
 
-  named_scope :state_lower, :joins => :office, :conditions => {:offices => {:name => ['State House', 'State Assembly']}}
-  named_scope :state_upper, :joins => :office, :conditions => {:offices => {:name => 'State Senate'}}
-  named_scope :federal, :joins => :office, :conditions => {:offices => {:name => 'U.S. House'}}
+  scope :state_lower, joins(:office).where(:offices => {:name => ['State House', 'State Assembly']})
+  scope :state_upper, joins(:office).where(:offices => {:name => 'State Senate'})
+  scope :federal, joins(:office).where(:offices => {:name => 'U.S. House'})
 
   delegate :election, :to => :election_stage
   delegate :state, :to => :election

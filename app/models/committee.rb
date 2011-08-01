@@ -12,10 +12,6 @@ class Committee < ActiveRecord::Base
 
   alias_method :subcommittees, :children
   def subcommittee_meetings
-    CommitteeMeeting.scoped(
-      :conditions => {
-        :committee_id => subcommittees,
-      }
-    )
+    CommitteeMeeting.where(:committee_id => subcommittees)
   end
 end

@@ -9,9 +9,9 @@ class AmendmentCriterion < ActiveRecord::Base
 
   accepts_nested_attributes_for :amendment
 
-  named_scope :by_offered_on, :select => 'DISTINCT(amendment_criteria.*), amendments.offered_on', :joins => :amendment, :order => 'amendments.offered_on DESC'
-  named_scope :with_votes, :select => 'DISTINCT amendment_criteria.*', :joins => {:amendment => :rolls}
-  named_scope :active, :select => 'DISTINCT amendment_criteria.*', :joins => {:amendment => :rolls}, :conditions => ['rolls.roll_type IN(?)', Amendment::ROLL_PASSAGE_TYPES]
+  scope :by_offered_on, select('DISTINCT(amendment_criteria.*), amendments.offered_on').joins(:amendment).order('amendments.offered_on DESC')
+  scope :with_votes, select('DISTINCT amendment_criteria.*').joins(:amendment => :rolls)
+  scope :active, with_votes.where(['rolls.roll_type IN(?)', Amendment::ROLL_PASSAGE_TYPES])
 
   class << self
     def inactive

@@ -36,32 +36,25 @@ class InterestGroup < ActiveRecord::Base
 
   has_many :ratings, :through => :reports
   def rated_politicians
-    Politician.scoped(
-      :select => 'DISTINCT politicians.*',
-      :joins => :interest_group_reports,
-      :conditions => {:'interest_group_reports.interest_group_id' => self})
+    Politician.select('DISTINCT politicians.*').joins(:interest_group_reports).where(:'interest_group_reports.interest_group_id' => self)
   end
 
-  named_scope :ratings_not_recently_updated, :conditions =>
-    ['interest_groups.ratings_updated_at IS NULL OR interest_groups.ratings_updated_at < ?', 1.month.ago]
+  scope :ratings_not_recently_updated, where(
+    ['interest_groups.ratings_updated_at IS NULL OR interest_groups.ratings_updated_at < ?', 1.month.ago])
 
-  named_scope :for_display, :include => [
-    :image, {:report => [:top_subject]}]
+  scope :for_display, includes([:image, {:report => [:top_subject]}])
 
-  named_scope :vote_smart, :conditions => 'interest_groups.vote_smart_id is not null'
+  scope :vote_smart, where('interest_groups.vote_smart_id is not null')
 
-  named_scope :for_subjects, lambda {|subjects|
+  scope :for_subjects, lambda {|subjects|
     if subjects.blank?
       {}
     else
       if subjects.first.is_a?(String)
         subjects = Subject.find(subjects)
       end
-      {
-        :select => 'DISTINCT interest_groups.*',
-        :joins => :interest_group_subjects,
-        :conditions => ['interest_group_subjects.subject_id IN(?)', subjects]
-      }
+      select('DISTINCT interest_groups.*').joins(:interest_group_subjects)\
+        .where(['interest_group_subjects.subject_id IN(?)', subjects])
     end
   }
 

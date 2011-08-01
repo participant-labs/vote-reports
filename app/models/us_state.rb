@@ -72,7 +72,7 @@ class UsState < ActiveRecord::Base
   has_many :elections, :foreign_key => 'state_id'
 
   def races
-    Race.scoped(:conditions => {:elections => {:state_id => self}}, :joins => {:election_stage => :election})
+    Race.where(:elections => {:state_id => self}).joins(:election_stage => :election)
   end
 
   has_many :congressional_districts
@@ -82,13 +82,13 @@ class UsState < ActiveRecord::Base
   end
 
   def representatives_in_office
-    representatives.scoped(:conditions => ['politicians.current_office_type = ?', 'RepresentativeTerm'])
+    representatives.where(['politicians.current_office_type = ?', 'RepresentativeTerm'])
   end
 
   has_many :senate_terms
   has_many :senators, :through => :senate_terms, :source => :politician, :uniq => true do
     def in_office
-      scoped(:conditions => ['politicians.current_office_type = ?', 'SenateTerm'])
+      where(['politicians.current_office_type = ?', 'SenateTerm'])
     end
   end
 

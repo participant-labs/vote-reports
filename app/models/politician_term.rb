@@ -5,7 +5,7 @@ module PoliticianTerm
       belongs_to :party
       validates_presence_of :politician
 
-      named_scope :by_ended_on, :order => "ended_on DESC"
+      scope :by_ended_on, order("ended_on DESC")
 
       unless Rails.env.development? || Rails.env.production?
         after_create :update_politician_state_and_title

@@ -6,31 +6,31 @@ class District < ActiveRecord::Base
   has_many :races
   has_many :offices, :through => :races
 
-  named_scope :random, :order => 'random()'
-  named_scope :lookup, lambda {|geoloc|
-    {:conditions => ["ST_Contains(the_geom, GeometryFromText('POINT(? ?)', -1))",
-      geoloc.lng, geoloc.lat]}
+  scope :random, order('random()')
+  scope :lookup, lambda {|geoloc|
+    where(["ST_Contains(the_geom, GeometryFromText('POINT(? ?)', -1))",
+      geoloc.lng, geoloc.lat])
   }
-  named_scope :level, lambda {|level|
+  scope :level, lambda {|level|
     if level.present?
-      {:conditions => {:level => level}}
+      where(:level => level)
     else
       {}
     end
   }
-  named_scope :state, lambda {|abbr|
-    {:joins => :state, :conditions => {'us_states.abbreviation' => abbr}}
+  scope :state, lambda {|abbr|
+    joins(:state).where('us_states.abbreviation' => abbr)
   }
 
-  named_scope :with_name, lambda {|district_name|
+  scope :with_name, lambda {|district_name|
     name = ((district_name =~ /^\d+$/) ? district_name.to_i.to_s.rjust(3, '0') : district_name)
-    {:conditions => {:name => name }}
+    where(:name => name)
   }
 
   validates_presence_of :congressional_district, :if => :federal?
 
   District::Level.levels.each do |level|
-    named_scope level, :conditions => {:level => level}
+    scope level, where(:level => level)
     define_method :"#{level}?" do
       self.level.to_s == level
     end

@@ -7,11 +7,9 @@ class CommitteeMeeting < ActiveRecord::Base
   end
 
   def subcommittees
-    CommitteeMeeting.scoped(
-      :conditions => {
-        :committee_id => committee.subcommittees,
-        :congress_id => congress_id
-      }
+    CommitteeMeeting.where(
+      :committee_id => committee.subcommittees,
+      :congress_id => congress_id
     )
   end
 

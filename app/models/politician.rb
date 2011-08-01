@@ -28,10 +28,8 @@ class Politician < ActiveRecord::Base
   has_many :interest_group_ratings
   has_many :interest_group_reports, :through => :interest_group_ratings
   def rating_interest_groups
-    InterestGroup.scoped(
-      :select => 'DISTINCT interest_groups.*',
-      :joins => {:reports => :ratings},
-      :conditions => {:'interest_group_ratings.politician_id' => self})
+    InterestGroup.select('DISTINCT interest_groups.*').joins(:reports => :ratings)\
+      .where(:'interest_group_ratings.politician_id' => self)
   end
 
   def latest_term
@@ -115,28 +113,27 @@ class Politician < ActiveRecord::Base
   has_many :reports, :through => :report_scores
 
   belongs_to :current_office, :polymorphic => true
-  named_scope :by_prominance, :order => 'prominence'
-  named_scope :in_office, :conditions => 'politicians.current_office_id IS NOT NULL'
-  named_scope :in_office_normal_form, lambda {
+  scope :by_prominance, order('prominence')
+  scope :in_office, where('politicians.current_office_id IS NOT NULL')
+  scope :in_office_normal_form, lambda {
     {
-      :select => 'DISTINCT politicians.*',
-      :joins => [
+      select('DISTINCT politicians.*')\
+      .joins([
         %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
         %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
-        %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id}],
-      :conditions => [
+        %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id}])\
+      .where([
         '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
         '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
         '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
         {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
-      ]
+      ])
     }
   }
 
-  named_scope :has_current_candidacy, :select => 'DISTINCT politicians.*', :joins => :candidacies, :conditions => ['candidacies.status NOT IN(?)', ["Deceased", "Withdrawn", "Removed"]]
+  scope :has_current_candidacy, select('DISTINCT politicians.*').joins(:candidacies).where(['candidacies.status NOT IN(?)', ["Deceased", "Withdrawn", "Removed"]])
 
-  named_scope :scoreworthy,
-    :conditions => 'politicians.current_office_id IS NOT NULL OR politicians.current_candidacy_id IS NOT NULL'
+  scope :scoreworthy, where('politicians.current_office_id IS NOT NULL OR politicians.current_candidacy_id IS NOT NULL')
 
   class << self
     def prominence_clause
@@ -177,65 +174,62 @@ class Politician < ActiveRecord::Base
     !current_office_id.nil?
   end
 
-  named_scope :senators, :conditions => {:current_office_type => 'SenateTerm'}
-  named_scope :representatives, :conditions => {:current_office_type => 'RepresentativeTerm'}
-  named_scope :presidents, :conditions => {:current_office_type => 'PresidentialTerm'}
+  scope :senators, where(:current_office_type => 'SenateTerm')
+  scope :representatives, where(:current_office_type => 'RepresentativeTerm')
+  scope :presidents, where(:current_office_type => 'PresidentialTerm')
 
-  named_scope :none, :conditions => '0 = 1'
-  named_scope :for_display, :include => [:state, :congressional_district]
+  scope :none, where('0 = 1')
+  scope :for_display, includes([:state, :congressional_district])
 
-  named_scope :with_name, lambda {|name|
+  scope :with_name, lambda {|name|
     first, last = name.split(' ', 2)
-    {:conditions => {:first_name => first, :last_name => last}}
+    where(:first_name => first, :last_name => last)
   }
-  named_scope :by_birth_date, :order => 'birthday DESC NULLS LAST'
-  named_scope :from_congressional_district, lambda {|districts|
+  scope :by_birth_date, order('birthday DESC NULLS LAST')
+  scope :from_congressional_district, lambda {|districts|
     if districts.present?
-      {:conditions => [
+      where([
           "senate_terms.us_state_id IN(?) OR representative_terms.congressional_district_id IN(?) OR presidential_terms.id IS NOT NULL",
            Array(districts).map(&:us_state_id), districts
-        ], :joins => [
+        ]).joins([
           %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
           %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
           %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id},
-        ], :select => 'DISTINCT politicians.*'
+        ]).select('DISTINCT politicians.*')
       }
     else
-      {:conditions => '0 = 1'}
+      where('0 = 1')
     end
   }
-  named_scope :with_in_office_terms, :conditions => [
+  scope :with_in_office_terms, where([
       '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
       '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
       '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
       {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
-  ]
+  ])
 
-  named_scope :from_state, lambda {|state|
+  scope :from_state, lambda {|state|
     state = UsState.first(:conditions => ["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]) if state.is_a?(String)
     if state
-      {:select => 'DISTINCT politicians.*', :conditions => [
+      select('DISTINCT politicians.*').where([
         'senate_terms.us_state_id = ? OR congressional_districts.us_state_id = ? OR presidential_terms.id IS NOT NULL', state, state
-      ], :joins => [
+      ]).joins([
         %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
         %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
         %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id},
         %{LEFT OUTER JOIN "congressional_districts" ON representative_terms.congressional_district_id = congressional_districts.id},
-      ]}
+      ])
     else
-      {:conditions => '0 = 1'}
+      where('0 = 1')
     end
   }
-  named_scope :representatives_from_state, lambda {|state|
-    state = UsState.first(:conditions => ["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]) if state.is_a?(String)
+  scope :representatives_from_state, lambda {|state|
+    state = UsState.where(["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]).first if state.is_a?(String)
     if state
-      {
-        :select => 'DISTINCT politicians.*',
-        :conditions => ['congressional_districts.us_state_id = ?', state],
-        :joins => {:representative_terms => :congressional_district}
-      }
+      select('DISTINCT politicians.*').where(['congressional_districts.us_state_id = ?', state])\
+        .joins(:representative_terms => :congressional_district)
     else
-      {:conditions => '0 = 1'}
+      where('0 = 1')
     end
   }
 
