@@ -25,7 +25,7 @@
 
     <%= flash_helper %>
 
-    <%= yield(:footer_only_content) || yield %>
+    <%= content_for?(:footer_only_content) ? yield(:footer_only_content) : yield %>
 
     <%- cache :footer do -%>
     <div id="footer" >

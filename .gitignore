@@ -16,3 +16,4 @@ rerun.txt
 .DS_Store
 bin/
 vendor/bundler_gems/
+.bundle
