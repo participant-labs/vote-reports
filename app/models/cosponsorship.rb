@@ -3,7 +3,7 @@ class Cosponsorship < ActiveRecord::Base
   belongs_to :bill
 
   validates_presence_of :politician, :bill, :joined_on
-  before_validation_on_create :populate_joined_on_if_missing
+  before_validation :populate_joined_on_if_missing, on: :create
 
   def verb
     if bill.sponsorship == self
