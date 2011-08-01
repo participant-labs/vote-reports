@@ -10,7 +10,7 @@ class Amendment < ActiveRecord::Base
   has_many :rolls, :as => :subject, :dependent => :destroy
 
   has_friendly_id :short_name, :scope => :bill
-  before_validation_on_create :set_short_name
+  before_validation :set_short_name, on: :create
 
   scope :by_offered_on, order('offered_on DESC')
   scope :with_votes, joins(:rolls).select('DISTINCT amendments.*')

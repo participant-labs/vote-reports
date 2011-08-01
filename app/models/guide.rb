@@ -8,7 +8,7 @@ class Guide < ActiveRecord::Base
   has_many :reports_supported, :through => :guide_reports, :conditions => {:guide_reports => {:position => 'support'}}, :source => :report
   has_many :reports_opposed, :through => :guide_reports, :conditions => {:guide_reports => {:position => 'oppose'}}, :source => :report
 
-  before_validation_on_create :initialize_report
+  before_validation :initialize_report, on: :create
   delegate :scores, :to => :report
 
   validates_presence_of :secure_token, :report

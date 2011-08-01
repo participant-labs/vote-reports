@@ -226,7 +226,7 @@ class Report < ActiveRecord::Base
 
   validates_presence_of :name
   validate :ensure_only_one_owner
-  before_validation_on_create :add_creator_to_followers
+  before_validation :add_creator_to_followers, on: :create
 
   before_create :ensure_state_is_set
 
