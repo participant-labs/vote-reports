@@ -89,11 +89,6 @@ class InterestGroup < ActiveRecord::Base
     "#{address}, #{city}, #{state} #{zip}"
   end
 
-  include ActionController::UrlWriter
-  def url
-    interest_group_url(self, :host => 'votereports.org')
-  end
-
   def as_json(opts = {})
     super opts.reverse_merge(:only => [:name, :description, :id, :vote_smart_id, :website_url, :email, :address, :state, :zip, :phone1, :phone2, :fax], :methods => [:to_param, :url])
   end

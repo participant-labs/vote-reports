@@ -5,8 +5,8 @@
   <h1><%= interest_group.name %></h1>
   <%= render 'reports/follows/button', :report => @interest_group.report %>
   <ul class="details">
-  <%- if @interest_group.url.present? -%>
-    <li><%= link_to 'Website', @interest_group.url %></li>
+  <%- if url = polymorphic_url(@interest_group).present? -%>
+    <li><%= link_to 'Website', url %></li>
   <%- end -%>
   <%- if @interest_group.email.present? -%>
     <li><%= mail_to @interest_group.email, 'Email' %></li>
