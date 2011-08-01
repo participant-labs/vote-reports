@@ -1,8 +1,8 @@
 class Bill < ActiveRecord::Base
   default_scope :include => {:titles => :as}
-  named_scope :by_introduced_on, :order => 'introduced_on DESC'
-  named_scope :with_title, lambda {|title|
-    {:select => 'DISTINCT bills.*', :joins => :titles, :conditions => {:'bill_titles.title' => title}}
+  scope :by_introduced_on, :order => 'introduced_on DESC'
+  scope :with_title, lambda {|title|
+    select('DISTINCT bills.*').joins(:titles).where(:'bill_titles.title' => title)
   }
 
   ROLL_PASSAGE_TYPES = [
@@ -82,11 +82,11 @@ class Bill < ActiveRecord::Base
   has_many :sponsors, :through => :sponsorships, :source => :politician
 
   def cosponsorships
-    sponsorships.scoped(:conditions => ['cosponsorships.id != ?', sponsorship_id])
+    sponsorships.where(['cosponsorships.id != ?', sponsorship_id])
   end
 
   def cosponsors
-    Politician.scoped(:joins => :sponsorships, :conditions =>
+    Politician.joins(:sponsorships).where(
       ["cosponsorships.bill_id = ? AND cosponsorships.id != ?", id, sponsorship_id]
     )
   end
@@ -106,9 +106,9 @@ class Bill < ActiveRecord::Base
   has_many :votes, :through => :rolls
   has_many :passage_votes, :through => :passage_rolls, :source => :votes
   def politicians
-    Politician.scoped(:select => 'DISTINCT politicians.*', :joins => {:votes => :roll}, :conditions => {
+    Politician.select('DISTINCT politicians.*').joins(:votes => :roll).where(
       :'rolls.subject_id' => self, :'rolls.subject_type' => 'Bill'
-    }).extend(Vote::Support)
+    ).extend(Vote::Support)
   end
 
   composed_of :bill_type

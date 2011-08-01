@@ -21,15 +21,15 @@ class Report < ActiveRecord::Base
   has_many :report_delayed_jobs
   has_many :delayed_jobs, :through => :report_delayed_jobs do
     def failing
-      scoped(:conditions => 'delayed_jobs.last_error IS NOT NULL')
+      where('delayed_jobs.last_error IS NOT NULL')
     end
 
     def passing
-      scoped(:conditions => {:last_error => nil})
+      where(last_error: nil)
     end
 
     def unlocked
-      scoped(:conditions => {:locked_at => nil})
+      where(locked_at: nil)
     end
   end
 
@@ -37,7 +37,7 @@ class Report < ActiveRecord::Base
   has_many :subjects, :through => :report_subjects
   belongs_to :top_subject, :class_name => 'Subject'
 
-  named_scope :for_display, :include => [:top_subject, :image, :cause, :user, :interest_group]
+  scope :for_display, includes([:top_subject, :image, :cause, :user, :interest_group])
 
   def bill_criteria_subjects
     Subject.for_bill_criteria_on_report(self)
@@ -230,59 +230,50 @@ class Report < ActiveRecord::Base
 
   before_create :ensure_state_is_set
 
-  named_scope :random, :order => 'random()'
+  scope :random, order('random()')
 
-  named_scope :laws_i_like, :conditions => {:source => 'laws_i_like'}
-  named_scope :user_published, :conditions => {:state => 'published'}, :include => :user
-  named_scope :for_causes, :conditions => 'reports.cause_id IS NOT NULL'
-  named_scope :non_cause, :conditions => 'reports.cause_id IS NULL'
-  named_scope :without_associated_cause, :joins => 'LEFT OUTER JOIN cause_reports ON cause_reports.report_id = reports.id', :conditions => 'cause_reports.cause_id IS NULL'
-  named_scope :published,
-    :conditions => ["reports.state = ? OR reports.user_id IS NULL", 'published'],
-    :include => [:user, :interest_group]
+  scope :laws_i_like, where(:source => 'laws_i_like')
+  scope :user_published, where(:state => 'published').includes(:user)
+  scope :for_causes, where('reports.cause_id IS NOT NULL')
+  scope :non_cause, where('reports.cause_id IS NULL')
+  scope :without_associated_cause, joins('LEFT OUTER JOIN cause_reports ON cause_reports.report_id = reports.id').where('cause_reports.cause_id IS NULL')
+  scope :published, where(["reports.state = ? OR reports.user_id IS NULL", 'published'])\
+    .includes([:user, :interest_group])
+
   class << self
     def qualified_column_names
       column_names.collect {|c| "reports.#{c}"}.join(",")
     end
   end
 
-  named_scope :unpublished, :conditions => ["reports.state IN(?)", %w[unlisted private]]
-  named_scope :except_personal, :conditions => ["reports.state != ?", 'personal']
-  named_scope :with_criteria, :select => 'DISTINCT reports.*', :joins => :bill_criteria
-  named_scope :scored, :select => 'DISTINCT reports.*', :joins => {:bill_criteria => {:bill => :passage_rolls}}
-  named_scope :by_updated_at, :order => 'updated_at DESC'
-  named_scope :by_created_at, :order => 'created_at DESC'
-  named_scope :by_name, :order => 'name'
+  scope :unpublished, where(["reports.state IN(?)", %w[unlisted private]])
+  scope :except_personal, where(["reports.state != ?", 'personal'])
+  scope :with_criteria, select('DISTINCT reports.*').joins(:bill_criteria)
+  scope :scored, select('DISTINCT reports.*').joins(:bill_criteria => {:bill => :passage_rolls})
+  scope :by_updated_at, order('updated_at DESC')
+  scope :by_created_at, order('created_at DESC')
+  scope :by_name, order('name')
 
-  named_scope :with_subjects, lambda {|subjects|
+  scope :with_subjects, lambda {|subjects|
     subjects = Array(subjects)
     if subjects.empty?
       {}
     elsif subjects.first.is_a?(String)
-      {
-        :select => 'DISTINCT reports.*',
-        :joins => :subjects,
-        :conditions => ["subjects.name IN(:subjects) OR subjects.cached_slug IN(:subjects)",
-          {:subjects => subjects}]
-      }
+      select('DISTINCT reports.*').joins(:subjects).where([
+        "subjects.name IN(:subjects) OR subjects.cached_slug IN(:subjects)",
+        {:subjects => subjects}
+      ])
     else
-      {
-        :select => 'DISTINCT reports.*',
-        :joins => :report_subjects,
-        :conditions => ['report_subjects.subject_id IN(?)', subjects]
-      }
+      select('DISTINCT reports.*').joins(:report_subjects).where(['report_subjects.subject_id IN(?)', subjects])
     end
   }
 
-  named_scope :with_scores_for, lambda {|politicians|
+  scope :with_scores_for, lambda {|politicians|
     if politicians.blank?
       {}
     else
-      {
-        :joins => :scores,
-        :conditions => {:'report_scores.politician_id' => politicians},
-        :group => qualified_column_names,
-        :having => 'COUNT(report_scores.id) > 0'
+      joins(:scores).where(:'report_scores.politician_id' => politicians)\
+        .group(qualified_column_names).having('COUNT(report_scores.id) > 0')
       }
     end
   }
@@ -342,17 +333,17 @@ class Report < ActiveRecord::Base
     self[:interest_group_id] = ig.id
   end
 
-  include ActionController::UrlWriter
-  include ActionController::PolymorphicRoutes
-  def url
-    path_components =
-      if user
-        [user, self]
-      else
-        owner || raise("No owner for report: #{inspect}")
-      end
-    polymorphic_url(path_components, :host => 'votereports.org')
-  end
+  # include ActionController::UrlWriter
+  # include ActionController::PolymorphicRoutes
+  # def url
+  #   path_components =
+  #     if user
+  #       [user, self]
+  #     else
+  #       owner || raise("No owner for report: #{inspect}")
+  #     end
+  #   polymorphic_url(path_components, :host => 'votereports.org')
+  # end
 
   def as_json(opts = {})
     super opts.reverse_merge(:only => [:name, :description, :id], :include => [:top_subject, :interest_group, :user, :cause], :methods => [:to_param, :url])

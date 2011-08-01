@@ -12,10 +12,10 @@ class Amendment < ActiveRecord::Base
   has_friendly_id :short_name, :scope => :bill
   before_validation_on_create :set_short_name
 
-  named_scope :by_offered_on, :order => 'offered_on DESC'
-  named_scope :with_votes, :select => 'DISTINCT amendments.*', :joins => :rolls
-  named_scope :with_title, lambda {|title|
-    {:conditions => ['amendments.purpose = ? OR amendments.description = ?', title, title]}
+  scope :by_offered_on, order('offered_on DESC')
+  scope :with_votes, joins(:rolls).select('DISTINCT amendments.*')
+  scope :with_title, lambda {|title|
+    where(['amendments.purpose = ? OR amendments.description = ?', title, title])
   }
 
   has_many :passage_rolls, :as => :subject, :class_name => 'Roll', :conditions => [

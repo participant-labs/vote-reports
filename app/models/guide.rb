@@ -23,8 +23,8 @@ class Guide < ActiveRecord::Base
     opposed_report_ids = reports_opposed.map(&:id)
     report_ids = supported_report_ids + opposed_report_ids
     politicians.map do |politician|
-      if ReportScore.scoped(:conditions => {:politician_id => politician.id, :report_id => report_ids}).exists?
-        GuideScore.first(:conditions => {:politician_id => politician.id, :supported_report_ids.all => supported_report_ids, :supported_report_ids.size => supported_report_ids.size, :opposed_report_ids.all => opposed_report_ids, :opposed_report_ids.size => opposed_report_ids.size}) \
+      if ReportScore.where(:politician_id => politician.id, :report_id => report_ids).exists?
+        GuideScore.where(:politician_id => politician.id, :supported_report_ids.all => supported_report_ids, :supported_report_ids.size => supported_report_ids.size, :opposed_report_ids.all => opposed_report_ids, :opposed_report_ids.size => opposed_report_ids.size).first \
          || GuideScore.create!(:politician_id => politician.id, :supported_report_ids => supported_report_ids, :opposed_report_ids => opposed_report_ids)
       end
     end.compact
@@ -45,7 +45,7 @@ class Guide < ActiveRecord::Base
 
   def politicians
     @politicians ||= Politician.from_congressional_district(congressional_district).in_office_normal_form.for_display \
-      | Politician.scoped(:select => 'distinct politicians.*', :joins => :candidacies, :conditions => {:candidacies => {:id => candidacies}}).for_display
+      | Politician.select('distinct politicians.*').joins(:candidacies).where(:candidacies => {:id => candidacies}).for_display
   end
 
   def districts

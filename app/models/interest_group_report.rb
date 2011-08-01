@@ -21,9 +21,7 @@ class InterestGroupReport < ActiveRecord::Base
   end
 
   def events
-    ratings.numeric.scoped(
-      :select => 'numeric_rating, id, politician_id, interest_group_report_id',
-      :include => :interest_group_report)
+    ratings.numeric.select('numeric_rating, id, politician_id, interest_group_report_id').includes(:interest_group_report)
   end
 
   def event_score(rating)
@@ -88,8 +86,8 @@ class InterestGroupReport < ActiveRecord::Base
     'A+'
   ]
 
-  named_scope :with_zero_centered_ratings, :select => 'DISTINCT interest_group_reports.*', :joins => :ratings,
-    :conditions => {:'interest_group_ratings.rating' => ZERO_CENTERED_RATINGS}
+  scope :with_zero_centered_ratings, select('DISTINCT interest_group_reports.*').joins(:ratings)\
+    .where(:'interest_group_ratings.rating' => ZERO_CENTERED_RATINGS)
 
   class << self
     def calibrate_ratings

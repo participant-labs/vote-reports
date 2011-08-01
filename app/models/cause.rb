@@ -4,21 +4,20 @@ class Cause < ActiveRecord::Base
   has_many :cause_reports, :dependent => :destroy
   has_many :reports, :through => :cause_reports do
     def report_subjects
-      ReportSubject.scoped(:conditions => {:report_id => self})
+      ReportSubject.where(:report_id => self)
     end
   end
 
   has_many :issue_causes, :dependent => :destroy
   has_many :issues, :through => :issue_causes
 
-  named_scope :without_issue,
-    :joins => 'LEFT OUTER JOIN issue_causes ON issue_causes.cause_id = causes.id',
-    :conditions => {:'issue_causes.issue_id' => nil}
+  scope :without_issue,
+    joins('LEFT OUTER JOIN issue_causes ON issue_causes.cause_id = causes.id').where(:'issue_causes.issue_id' => nil)
 
-  named_scope :random, :order => 'random()'
+  scope :random, order('random()')
 
   def related_causes
-    Cause.scoped(:joins => :issue_causes, :conditions => ['causes.id NOT IN(?) AND issue_causes.issue_id IN(?)', self, issues])
+    Cause.joins(:issue_causes).where(['causes.id NOT IN(?) AND issue_causes.issue_id IN(?)', self, issues])
   end
 
   accepts_nested_attributes_for :cause_reports, :reject_if => proc {|attributes| attributes['support'] == '0' }

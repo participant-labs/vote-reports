@@ -2,7 +2,7 @@ class ReportSubject < ActiveRecord::Base
   belongs_to :report
   belongs_to :subject
 
-  named_scope :by_count, :order => 'count DESC'
+  scope :by_count, order('count DESC')
 
   # constraints on db:
   # report, subject presence
@@ -14,9 +14,8 @@ class ReportSubject < ActiveRecord::Base
       require 'ar-extensions/import/postgresql'
 
       ReportSubject.delete_all(:report_id => report.id)
-      subjects = Hash[report.bill_criteria_subjects.scoped(
-        :select => "DISTINCT(subjects.id), COUNT(subjects.id) AS count",
-        :group => 'subjects.id').map do |subject|
+      subjects = Hash[report.bill_criteria_subjects.select("DISTINCT(subjects.id), COUNT(subjects.id) AS count")\
+        .group('subjects.id').map do |subject|
         [subject, Integer(subject.count)]
       end]
 

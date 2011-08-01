@@ -22,14 +22,14 @@ class Roll < ActiveRecord::Base
 
   has_friendly_id :display_name
 
-  named_scope :by_voted_at, :order => "voted_at DESC"
-  named_scope :not_on_bill_passage, :conditions => [
-    "rolls.roll_type NOT IN(?) AND rolls.subject_type = ?", Bill::ROLL_PASSAGE_TYPES, 'Bill']
-  named_scope :on_bill_passage, :conditions => [
-    "rolls.roll_type IN(?) AND rolls.subject_type = ?", Bill::ROLL_PASSAGE_TYPES, 'Bill']
+  scope :by_voted_at, order("voted_at DESC")
+  scope :not_on_bill_passage, where([
+    "rolls.roll_type NOT IN(?) AND rolls.subject_type = ?", Bill::ROLL_PASSAGE_TYPES, 'Bill'])
+  scope :on_bill_passage, where([
+    "rolls.roll_type IN(?) AND rolls.subject_type = ?", Bill::ROLL_PASSAGE_TYPES, 'Bill'])
 
-  named_scope :house, :conditions => {:where => 'house'}
-  named_scope :senate, :conditions => {:where => 'senate'}
+  scope :house, where(:where => 'house')
+  scope :senate, where(:where => 'senate')
 
   before_validation :set_display_name
 

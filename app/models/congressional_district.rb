@@ -7,46 +7,44 @@ class CongressionalDistrict < ActiveRecord::Base
   has_many :representative_terms
   has_many :representatives, :through => :representative_terms, :source => :politician, :uniq => true do
     def in_office
-      scoped(:conditions => ['politicians.current_office_type = ? AND politicians.current_office_id IN(?)', 'RepresentativeTerm', proxy_owner.representative_terms])
+      where(['politicians.current_office_type = ? AND politicians.current_office_id IN(?)', 'RepresentativeTerm', proxy_owner.representative_terms])
     end
   end
 
   delegate :senators, :presidents, :to => :state
 
-  named_scope :with_zip, lambda {|zip_code|
+  scope :with_zip, lambda {|zip_code|
     zip_code, plus_4 = ZipCode.sections_of(zip_code)
     if zip_code.blank?
-      {:conditions => '0 = 1'}
+      where('0 = 1')
     elsif plus_4.blank?
-      {:joins => :zip_codes, :conditions => {:'zip_codes.zip_code' => zip_code}}
-    elsif CongressionalDistrictZipCode.scoped(:joins => :zip_code, :conditions => {
+      joins(:zip_codes).where(:'zip_codes.zip_code' => zip_code)
+    elsif CongressionalDistrictZipCode.joins(:zip_code).where(
         :'zip_codes.zip_code' => zip_code, :'congressional_district_zip_codes.plus_4' => plus_4
-      }).exists?
-      {:joins => :zip_codes, :conditions => {
+      ).exists?
+      joins(:zip_codes).where(
         :'zip_codes.zip_code' => zip_code, :'congressional_district_zip_codes.plus_4' => plus_4
-      }}
+      )
     else
-      {:joins => :zip_codes, :conditions => [
+      joins(:zip_codes).where([
         "zip_codes.zip_code = ? AND (congressional_district_zip_codes.plus_4 = ? OR congressional_district_zip_codes.plus_4 IS NULL)", zip_code, plus_4
-      ]}
+      ])
     end
   }
 
-  named_scope :for_city, lambda {|address|
+  scope :for_city, lambda {|address|
     city, state = address.upcase.split(', ', 2)
     if city.blank?
-      {:conditions => '0 = 1'}
+      where('0 = 1')
     elsif state.blank?
-      {:select => 'DISTINCT congressional_districts.*',
-      :joins => {:zip_codes => :locations},
-      :conditions => {:'locations.city' => city}}
+      select('DISTINCT congressional_districts.*').joins(:zip_codes => :locations).where(
+        :'locations.city' => city
+      )
     else
-      {:select => 'DISTINCT congressional_districts.*',
-      :joins => [{:zip_codes => :locations}, :state],
-      :conditions => {
+      select('DISTINCT congressional_districts.*').joins([{:zip_codes => :locations}, :state]).where(
         :'locations.city' => city, :'locations.state' => state,
         :'us_states.abbreviation' => state
-      }}
+      )
     end
   }
 
@@ -68,8 +66,8 @@ class CongressionalDistrict < ActiveRecord::Base
   alias_method :full_name, :title
 
   def district_geometries
-    @district_geometry ||= District.federal.scoped(:conditions => {
-      :us_state_id => us_state_id, :name => district_abbreviation})
+    @district_geometry ||= District.federal.where(
+      :us_state_id => us_state_id, :name => district_abbreviation)
   end
 
   def district_abbreviation

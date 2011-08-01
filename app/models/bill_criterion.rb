@@ -9,16 +9,14 @@ class BillCriterion < ActiveRecord::Base
 
   accepts_nested_attributes_for :bill
 
-  named_scope :by_introduced_on, :select => 'DISTINCT(bill_criteria.*), bills.introduced_on', :joins => :bill, :order => 'bills.introduced_on DESC'
+  scope :by_introduced_on, select('DISTINCT(bill_criteria.*), bills.introduced_on').joins(:bill).order('bills.introduced_on DESC')
 
   # see also: Roll.on_bill_passage
-  named_scope :active, :select => 'DISTINCT bill_criteria.*',
-    :joins => [
+  scope :active, joins([
       %{LEFT OUTER JOIN "bills" active_bills ON bill_criteria.bill_id = active_bills.id},
       %{LEFT OUTER JOIN "rolls" active_rolls ON active_rolls.subject_id = active_bills.id},
       %{LEFT OUTER JOIN "cosponsorships" active_cosponsorships ON active_cosponsorships.bill_id = active_bills.id}
-    ],
-    :conditions => ["(active_rolls.roll_type IN(?) AND active_rolls.subject_type = ?) OR active_cosponsorships.id IS NOT NULL", Bill::ROLL_PASSAGE_TYPES, 'Bill']
+    ]).where(["(active_rolls.roll_type IN(?) AND active_rolls.subject_type = ?) OR active_cosponsorships.id IS NOT NULL", Bill::ROLL_PASSAGE_TYPES, 'Bill'])
 
   class << self
     def inactive
@@ -53,10 +51,10 @@ class BillCriterion < ActiveRecord::Base
   end
 
   def events
-    votes = bill.passage_votes.scoped(:include => [{:politician => :state}, :roll])
+    votes = bill.passage_votes.includes([{:politician => :state}, :roll])
     sponsorships = bill.sponsorships
     if votes.present?
-      votes + sponsorships.scoped(:conditions => ["politician_id NOT IN(?)", votes.map {|v| v.politician_id }])
+      votes + sponsorships.where(["politician_id NOT IN(?)", votes.map {|v| v.politician_id }])
     else
       sponsorships
     end
