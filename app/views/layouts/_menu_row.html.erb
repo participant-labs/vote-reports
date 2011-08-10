@@ -1,14 +1,15 @@
 <div class="global-menu-row">
   <div class="container">
-    <div class="span-15">
+    <div class="span-17">
       <ul class="menu">
         <li class=""><%= link_to content_tag(:span, 'Reports'), reports_path %></li>
         <li class=""><%= link_to content_tag(:span, 'Causes'), causes_path %></li>
         <li class=""><%= link_to content_tag(:span, 'Politicians'), politicians_path %></li>
-        <li class=""><%= link_to content_tag(:span, 'Create a Guide'), new_guide_path %></li>
+        <li class=""><%= link_to content_tag(:span, 'Create a Voter Guide'), new_guide_path %></li>
+        <li class=""><%= link_to content_tag(:span, 'Create an Issue Report'), new_report_path %></li>
       </ul>
     </div>
-    <div class="span-9 last">
+    <div class="span-7 last">
       <%= render 'layouts/search_box' %>
     </div>
   </div>

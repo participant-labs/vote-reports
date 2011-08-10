@@ -187,7 +187,7 @@ ul.menu a {font-family: "museo-sans-1","museo-sans-2", sans-serif; font-size: 14
 ul.menu a:visited {text-decoration:none;}
 ul.menu a:hover {position:relative; top:1px; text-shadow: none;}
 
-div.search-container {margin: 15px 0px 0px 121px;}
+div.search-container {margin: 15px 0px 0px 35px;}
 div.custom-search {background:url('../images/global/search_box.png') no-repeat;padding:0px 0px 4px 35px;}
 div.custom-search input {
     background-color: #3b242e;
