@@ -43,5 +43,6 @@ gem 'httparty'
 gem 'parallel'
 
 group :test, :development do
+  gem 'thin'
   gem "rspec-rails"
 end
