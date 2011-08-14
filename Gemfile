@@ -2,10 +2,10 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.1.0.rc5'
 
 gem 'ancestry', '>=1.2.0'
-gem 'Empact-authlogic', '>=2.1.5', :require => 'authlogic'
+gem 'Empact-authlogic', '>=3.0.3', :require => 'authlogic'
 gem 'Empact-authlogic_rpx', '>= 1.1.8', :require => 'authlogic_rpx'
 gem 'bluecloth', '>=2.0.5'
 gem 'declarative_authorization'
@@ -19,9 +19,7 @@ gem 'geokit'
 gem 'gravtastic', '= 3.1.0'
 gem 'hoptoad_notifier', '>= 2.3.2'
 gem 'jammit', '>= 0.5.3'
-gem 'json', '>= 1.4.3'
 gem 'loofah'
-gem 'puppet', '>= 2.6.0'
 gem 'bson_ext'
 gem 'mongo_mapper'
 gem 'mongo_session_store'
@@ -41,8 +39,15 @@ gem 'kaminari'
 gem 'ym4r'
 gem 'httparty'
 gem 'parallel'
+gem 'shadow_puppet', git: 'git://github.com/railsmachine/shadow_puppet.git', branch: '1.9'
 
 group :test, :development do
   gem 'thin'
   gem "rspec-rails"
+  gem 'fixjour'
+  gem 'fakeweb'
+  gem 'forgery'
+  gem 'rr'
+  gem 'parallel'
+  gem 'ruby-debug19', require: 'ruby-debug'
 end

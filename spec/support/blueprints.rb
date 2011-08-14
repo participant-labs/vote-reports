@@ -183,7 +183,7 @@ Fixjour :verify => false do
     klass.new(
       :opencongress_id => opencongress_id,
       :gov_track_id => gov_track_id,
-      :introduced_on => '12/13/2009',
+      :introduced_on => 2.years.ago.to_date,
       :bill_type => 'hr',
       :bill_number => bill_number,
       :congress => Congress.find_or_create_by_meeting(rand(200))
@@ -281,7 +281,7 @@ Fixjour :verify => false do
   define_builder(CongressionalDistrict) do |klass, overrides|
     klass.new(
       :state => new_us_state,
-      :district => rand(53)
+      :district => new_district
     )
   end
 
@@ -413,4 +413,8 @@ Fixjour :verify => false do
       raise report.errors.full_messages.inspect unless report.published?
     end
   end
+end
+
+RSpec.configure do |config|
+  config.include(Fixjour)
 end
