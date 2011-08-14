@@ -116,19 +116,17 @@ class Politician < ActiveRecord::Base
   scope :by_prominance, order('prominence')
   scope :in_office, where('politicians.current_office_id IS NOT NULL')
   scope :in_office_normal_form, lambda {
-    {
-      select('DISTINCT politicians.*')\
-      .joins([
-        %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
-        %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
-        %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id}])\
-      .where([
-        '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
-        '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
-        '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
-        {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
-      ])
-    }
+    select('DISTINCT politicians.*')\
+    .joins([
+      %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
+      %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
+      %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id}])\
+    .where([
+      '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
+      '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
+      '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
+      {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
+    ])
   }
 
   scope :has_current_candidacy, select('DISTINCT politicians.*').joins(:candidacies).where(['candidacies.status NOT IN(?)', ["Deceased", "Withdrawn", "Removed"]])
@@ -189,14 +187,13 @@ class Politician < ActiveRecord::Base
   scope :from_congressional_district, lambda {|districts|
     if districts.present?
       where([
-          "senate_terms.us_state_id IN(?) OR representative_terms.congressional_district_id IN(?) OR presidential_terms.id IS NOT NULL",
-           Array(districts).map(&:us_state_id), districts
-        ]).joins([
-          %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
-          %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
-          %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id},
-        ]).select('DISTINCT politicians.*')
-      }
+        "senate_terms.us_state_id IN(?) OR representative_terms.congressional_district_id IN(?) OR presidential_terms.id IS NOT NULL",
+         Array(districts).map(&:us_state_id), districts
+      ]).joins([
+        %{LEFT OUTER JOIN "representative_terms" ON representative_terms.politician_id = politicians.id},
+        %{LEFT OUTER JOIN "senate_terms" ON senate_terms.politician_id = politicians.id},
+        %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id},
+      ]).select('DISTINCT politicians.*')
     else
       where('0 = 1')
     end
