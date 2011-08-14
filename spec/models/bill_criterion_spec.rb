@@ -20,10 +20,10 @@ describe BillCriterion do
   describe "#years_between" do
     it "should calculate years" do
       delta = 0.009
-      1.year.ago.to_date.years_until(Date.today).should be_close(1.0, delta)
-      5.years.ago.to_date.years_until(Date.today).should be_close(5.0, delta)
-      (5.years + 3.months).ago.to_date.years_until(Date.today).should be_close(5.25, delta)
-      (5.years + 3.months + (36.5).days).ago.to_date.years_until(Date.today).should be_close(5.35, delta)
+      1.year.ago.to_date.years_until(Date.today).should be_within(delta).of(1.0)
+      5.years.ago.to_date.years_until(Date.today).should be_within(delta).of(5.0)
+      (5.years + 3.months).ago.to_date.years_until(Date.today).should be_within(delta).of(5.25)
+      (5.years + 3.months + (36.5).days).ago.to_date.years_until(Date.today).should be_within(delta).of(5.35)
     end
   end
 
