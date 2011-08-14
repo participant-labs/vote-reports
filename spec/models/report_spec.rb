@@ -7,7 +7,7 @@ describe Report do
         @report = Report.new(:name => nil)
         @report.save
       end.should_not change(Report,:count)
-      @report.errors.on(:name).should include("can't be blank")
+      @report.errors[:name].should include("can't be blank")
     end
   end
 
