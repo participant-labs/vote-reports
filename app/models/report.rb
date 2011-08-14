@@ -19,7 +19,7 @@ class Report < ActiveRecord::Base
   has_friendly_id :name, :use_slug => true, :scope => :user
 
   has_many :report_delayed_jobs
-  has_many :delayed_jobs, :through => :report_delayed_jobs do
+  has_many :delayed_jobs, through: :report_delayed_jobs do
     def failing
       where('delayed_jobs.last_error IS NOT NULL')
     end
@@ -311,7 +311,7 @@ class Report < ActiveRecord::Base
 
   def rescore!
     unless delayed_jobs.unlocked.present? || (scores.blank? && score_criteria.blank?)
-      delayed_jobs << Delayed::Job.enqueue(Report::Scorer.new(id))
+      delayed_jobs << ::Delayed::Job.enqueue(Report::Scorer.new(id))
     end
   end
 
