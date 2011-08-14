@@ -17,7 +17,7 @@ describe User do
       @user = User.new(:username => 'foo')
       @user.save
     end.should_not change(User, :count)
-    @user.errors.on(:username).should include("has already been taken")
+    @user.errors[:username].should include("has already been taken")
   end
 
   describe "#reports" do
