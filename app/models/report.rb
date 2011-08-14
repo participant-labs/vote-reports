@@ -274,7 +274,6 @@ class Report < ActiveRecord::Base
     else
       joins(:scores).where(:'report_scores.politician_id' => politicians)\
         .group(qualified_column_names).having('COUNT(report_scores.id) > 0')
-      }
     end
   }
 
