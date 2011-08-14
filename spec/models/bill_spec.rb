@@ -2,7 +2,12 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Bill do
   describe ".search" do
-    integrate_sunspot
+    include SolrSpecHelper
+
+    after(:all) do
+      Bill.remove_all_from_index!
+    end
+
     before do
       bill = create_bill
       create_bill_title(:bill => bill, :title => "USA PATRIOT Reauthorization Act of 2009")

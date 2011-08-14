@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
  
 describe Politicians::ReportsController do
-  integrate_views
+  render_views
 
   before do
     @politician = create_politician
