@@ -36,7 +36,7 @@ class Bill < ActiveRecord::Base
   end
 
   class << self
-    def reindex(opts = {})
+    def solr_reindex(opts = {})
       super(opts.reverse_merge(:include => [:titles, :rolls, :congress, :subjects]))
     end
 

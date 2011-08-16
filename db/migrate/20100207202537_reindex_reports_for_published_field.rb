@@ -1,6 +1,6 @@
 class ReindexReportsForPublishedField < ActiveRecord::Migration
   def self.up
-    Report.reindex
+    Report.solr_reindex
   end
 
   def self.down

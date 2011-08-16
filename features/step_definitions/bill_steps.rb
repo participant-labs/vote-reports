@@ -44,7 +44,7 @@ Given /^an? (.*)bill named "([^\"]*)"$/ do |attrs, title|
   if create_pass_bill_roll
     create_roll(:subject => title.bill, :roll_type => 'On Passage')
   end
-  Bill.reindex
+  Bill.solr_reindex
 end
 
 Given /^(\d+) recent bills$/ do |count|
