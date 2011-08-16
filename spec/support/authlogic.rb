@@ -21,3 +21,7 @@ module Authlogic::Test
     @current_user = nil
   end
 end
+
+RSpec.configure do |config|
+  config.include(Authlogic::Test)
+end
