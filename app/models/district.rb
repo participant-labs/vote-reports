@@ -8,8 +8,12 @@ class District < ActiveRecord::Base
 
   scope :random, order('random()')
   scope :lookup, lambda {|geoloc|
-    where(["ST_Contains(the_geom, GeometryFromText('POINT(? ?)', -1))",
-      geoloc.lng, geoloc.lat])
+    if geoloc.success?
+      where(["ST_Contains(the_geom, GeometryFromText('POINT(? ?)', -1))",
+        geoloc.lng, geoloc.lat])
+    else
+      where('0 = 1')
+    end
   }
   scope :level, lambda {|level|
     if level.present?
