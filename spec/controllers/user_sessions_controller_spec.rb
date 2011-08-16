@@ -6,10 +6,10 @@ describe UserSessionsController do
   describe "route recognition" do
     
     it "should route the login route correctly" do
-      params_from(:get, '/login').should == {:controller => 'user_sessions', :action => 'new'}
+      {:get => '/login'}.should route_to(:controller => 'user_sessions', :action => 'new')
     end
     it "should route the logout route correctly" do
-      params_from(:get, '/logout').should == {:controller => 'user_sessions', :action => 'destroy'}
+      {:get => '/logout'}.should route_to(:controller => 'user_sessions', :action => 'destroy')
     end
 
   end
