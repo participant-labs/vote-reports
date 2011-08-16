@@ -13,8 +13,8 @@ describe CongressionalDistrict do
 
     context "when a city is supplied" do
       it "should return districts for any such city, regardless of state" do
-        CongressionalDistrict.for_city('san francisco').should =~ [@nm_district, @ca_district]
-        CongressionalDistrict.for_city('San francisco').should =~ [@nm_district, @ca_district]
+        CongressionalDistrict.for_city('san francisco').to_a.should =~ [@nm_district, @ca_district]
+        CongressionalDistrict.for_city('San francisco').to_a.should =~ [@nm_district, @ca_district]
       end
     end
 

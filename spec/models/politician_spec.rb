@@ -46,13 +46,13 @@ describe Politician do
 
     describe "#supported" do
       it "returns all politicians with supporting votes" do
-        @politician.rolls.supported.should =~ [@supported]
+        @politician.rolls.supported.should == [@supported]
       end
     end
 
     describe "#opposed" do
       it "returns all politicians with supporting votes" do
-        @politician.rolls.opposed.should =~ [@opposed]
+        @politician.rolls.opposed.should == [@opposed]
       end
     end
   end
