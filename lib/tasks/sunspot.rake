@@ -16,19 +16,19 @@ namespace :sunspot do
 
   namespace :bills do
     task :reindex => :environment do
-      Bill.reindex
+      Bill.solr_reindex
     end
   end
 
   namespace :reports do
     task :reindex => :environment do
-      Report.reindex
+      Report.solr_reindex
     end
   end
 
   namespace :subjects do
     task :reindex => :environment do
-      Subject.reindex
+      Subject.solr_reindex
     end
   end
 end

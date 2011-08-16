@@ -11,7 +11,7 @@ describe Bill do
     before do
       bill = create_bill
       create_bill_title(:bill => bill, :title => "USA PATRIOT Reauthorization Act of 2009")
-      Bill.reindex
+      Bill.solr_reindex
     end
 
     context "when there are no matches" do
@@ -29,7 +29,7 @@ describe Bill do
 
     it "should match on bill number" do
       bill = create_bill(:bill_number => 4472)
-      Bill.reindex
+      Bill.solr_reindex
       Bill.search { fulltext "4472" }.results.should == [bill]
     end
   end
