@@ -36,7 +36,7 @@ describe Report do
     it  "should include private and unlisted reports" do
       unlisted = create_unlisted_report
       private_report = create_private_report
-      Report.unpublished.should =~ [unlisted, private_report]
+      Report.unpublished.to_a.should =~ [unlisted, private_report]
     end
 
     it "should not include personal reports" do

@@ -125,18 +125,18 @@ describe Bill do
     end
 
     it "returns all politicians with connecting votes" do
-      @bill.politicians.should =~ [@supporting, @opposing]
+      @bill.politicians.to_a.should =~ [@supporting, @opposing]
     end
 
     describe "#supporting" do
       it "returns all politicians with supporting votes" do
-        @bill.politicians.supporting.should =~ [@supporting]
+        @bill.politicians.supporting.should == [@supporting]
       end
     end
 
     describe "#opposing" do
       it "returns all politicians with supporting votes" do
-        @bill.politicians.opposing.should =~ [@opposing]
+        @bill.politicians.opposing.should == [@opposing]
       end
     end
   end
