@@ -3,15 +3,15 @@ VoteReports::Application.routes.draw do
   resources :issues
   resources :embed_reports, :only => :show
   resources :causes do
-    resource :embed, :only => :show
-    resources :report_scores, :only => [:index, :show]
-    resource :follows, :only => [:show, :create, :destroy]
-    resources :reports, :only => [:new, :create, :index, :destroy]
-    resource :image, :only => [:edit, :create, :update]
+    resource :embed, :only => :show, controller: 'causes/embeds'
+    resources :report_scores, :only => [:index, :show], controller: 'causes/report_scores'
+    resource :follows, :only => [:show, :create, :destroy], controller: 'causes/follows'
+    resources :reports, :only => [:new, :create, :index, :destroy], controller: 'causes/reports'
+    resource :image, :only => [:edit, :create, :update], controller: 'causes/images'
   end
 
   resources :reports, :only => [:index, :new] do
-    resources :bill_criteria, :only => [] do
+    resources :bill_criteria, :only => [], controller: 'reports/bill_criteria' do
       collection do
         get :autofetch
       end
@@ -33,39 +33,39 @@ VoteReports::Application.routes.draw do
   end
 
   resources :interest_groups do
-    resource :embed, :only => :show
-    resource :claim, :only => :new
-    resources :report_scores, :only => [:index, :show]
-    resource :follows, :only => [:show, :create, :destroy]
-    resources :causes, :only => :index
-    resources :subjects, :only => :index
-    resource :agenda, :only => :show
-    resource :image, :only => [:edit, :create, :update]
-    resources :bill_criteria, :only => [:index, :new, :create, :destroy]
-    resources :amendment_criteria, :only => [:new, :create, :destroy, :index]
+    resource :embed, :only => :show, controller: 'interest_groups/embeds'
+    resource :claim, :only => :new, controller: 'interest_groups/claims'
+    resources :report_scores, :only => [:index, :show], controller: 'interest_groups/report_scores'
+    resource :follows, :only => [:show, :create, :destroy], controller: 'interest_groups/follows'
+    resources :causes, :only => :index, controller: 'interest_groups/causes'
+    resources :subjects, :only => :index, controller: 'interest_groups/subjects'
+    resource :agenda, :only => :show, controller: 'interest_groups/agendas'
+    resource :image, :only => [:edit, :create, :update], controller: 'interest_groups/images'
+    resources :bill_criteria, :only => [:index, :new, :create, :destroy], controller: 'interest_groups/bill_criteria'
+    resources :amendment_criteria, :only => [:new, :create, :destroy, :index], controller: 'interest_groups/amendment_criteria'
   end
 
   resources :politicians, :only => [:index, :show] do
-    resources :causes, :only => :index
-    resources :reports, :only => :index
-    resource :radar, :only => :show
+    resources :causes, :only => :index, controller: 'politicians/causes'
+    resources :reports, :only => :index, controller: 'politicians/reports'
+    resource :radar, :only => :show, controller: 'politicians/radar'
   end
 
   resources :subjects, :only => [:index, :show] do
-    resources :causes, :only => :index
-    resources :reports, :only => :index
-    resources :bills, :only => :index
+    resources :causes, :only => :index, controller: 'subjects/causes'
+    resources :reports, :only => :index, controller: 'subjects/reports'
+    resources :bills, :only => :index, controller: 'subjects/bills'
   end
 
   resources :bills, :only => [:index, :show] do
-    resource :titles, :only => :show
-    resources :amendments, :only => [:index, :show]
+    resource :titles, :only => :show, controller: 'bills/titles'
+    resources :amendments, :only => [:index, :show], controller: 'bills/amendments'
   end
 
   resources :rolls, :only => [:show]
   resource :location
   resources :guides, :only => [:new, :create, :show] do
-    resources :report_scores, :only => :show
+    resources :report_scores, :only => :show, controller: 'guides/report_scores'
   end
 
   resources :guide_scores, :only => :show
@@ -74,10 +74,10 @@ VoteReports::Application.routes.draw do
   resources :state_upper_districts, :only => "show"
   resources :state_lower_districts, :only => "show"
   resources :users do
-    resources :rpx_identities, :only => [:create, :destroy]
-    resource :adminship, :only => [:create, :destroy]
-    resource :moderatorship, :only => [:create, :destroy]
-    resources :report_scores, :only => :index
+    resources :rpx_identities, :only => [:create, :destroy], controller: 'users/rpx_identities'
+    resource :adminship, :only => [:create, :destroy], controller: 'users/adminships'
+    resource :moderatorship, :only => [:create, :destroy], controller: 'users/moderatorships'
+    resources :report_scores, :only => :index, controller: 'users/report_scores'
   end
 
   resources :user_sessions
