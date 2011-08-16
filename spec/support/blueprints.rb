@@ -202,8 +202,10 @@ Fixjour :verify => false do
     klass.new(:bill => new_bill, :politician => new_politician, :joined_on => 1.month.ago)
   end
 
+  DISTRICT_GEOM = MultiPolygon.from_polygons([Polygon.from_coordinates([[[12.4,-45.3],[45.4,41.6],[4.456,1.0698],[12.4,-45.3]],[[2.4,5.3],[5.4,1.4263],[14.46,1.06],[2.4,5.3]]],256),Polygon.from_coordinates([[[0,0],[4,0],[4,4],[0,4],[0,0]],[[1,1],[3,1],[3,3],[1,3],[1,1]]],256)], -1)
+
   define_builder(District) do |klass, overrides|
-    klass.new(:level => 'state_lower', :state => new_us_state)
+    klass.new(:level => 'state_lower', :state => new_us_state, the_geom: DISTRICT_GEOM)
   end
 
   define_builder(Politician) do |klass, overrides|
