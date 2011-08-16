@@ -37,7 +37,7 @@ describe ReportScore do
     end
 
     it "should rescore dependent scores' reports" do
-      new_instance_of(Report) do |r|
+      any_instance_of(Report) do |r|
         mock(r).rescore!
       end
       @score.destroy
