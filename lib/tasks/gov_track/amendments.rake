@@ -14,9 +14,6 @@ namespace :gov_track do
         :purpose
       ]
 
-      require 'ar-extensions'
-      require 'ar-extensions/import/postgresql'
-
       meetings do |meeting|
         puts "Fetching Amendments for Meeting #{meeting}"
         existing_amendments = @congress.amendments.index_by {|a| "#{meeting}-#{a.chamber}#{a.number}" }

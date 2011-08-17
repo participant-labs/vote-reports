@@ -1,8 +1,5 @@
 class PopulateBillOppositionAndSupport < ActiveRecord::Migration
   def self.up
-    require 'ar-extensions'
-    require 'ar-extensions/import/postgresql'
-
     transaction do
       Politician.all(:select => 'id').each do |politician|
         supported = politician.rolls.on_bill_passage.supported.all(:select => 'DISTINCT subject_id').map do |roll|

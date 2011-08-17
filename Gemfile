@@ -40,6 +40,7 @@ gem 'ym4r'
 gem 'httparty'
 gem 'parallel'
 gem 'shadow_puppet', git: 'git://github.com/railsmachine/shadow_puppet.git', branch: '1.9'
+gem 'Empact-activerecord-import', '>= 0.3.4', require: 'activerecord-import'
 
 group :test, :development do
   gem 'thin'

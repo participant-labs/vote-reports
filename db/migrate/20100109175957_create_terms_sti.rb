@@ -1,9 +1,6 @@
 class CreateTermsSti < ActiveRecord::Migration
   def self.up
     transaction do
-      require 'ar-extensions'
-      require 'ar-extensions/import/postgresql'
-
       initial_rep_count = RepresentativeTerm.count
       add_column :representative_terms, :created_at, :datetime
       add_column :representative_terms, :updated_at, :datetime

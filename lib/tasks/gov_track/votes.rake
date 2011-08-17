@@ -3,9 +3,6 @@ namespace :gov_track do
 
     desc "Process Votes"
     task :unpack => [:support, :politicians] do
-      require 'ar-extensions'
-      require 'ar-extensions/import/postgresql'
-
       meetings do |meeting|
         existing_rolls = @congress.rolls.index_by {|r| "#{r.where.first}#{r.year}-#{r.number}"}
         puts "Meeting #{meeting}"
