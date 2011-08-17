@@ -10,8 +10,8 @@ Given /^my (location is "[^"]*")$/ do |address|
 end
 
 Given /^my location is assured(?: to "([^"]*)")?$/ do |congressional_district|
-  Fixtures.reset_cache
-  Fixtures.create_fixtures(Rails.root.join('spec/fixtures'), ['districts'])
+  ActiveRecord::Fixtures.reset_cache
+  ActiveRecord::Fixtures.create_fixtures(Rails.root.join('spec/fixtures'), ['districts'])
   stub(District).lookup(anything) { District.all }
 
   if congressional_district
