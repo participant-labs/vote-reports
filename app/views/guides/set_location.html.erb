@@ -4,7 +4,7 @@
   <div class="container">
     <p class="span-24 message">Enter your location to narrow down the list of politicians:</p>
 
-    <% form_tag location_path do %>
+    <%= form_tag location_path do %>
       <%= hidden_field_tag :return_to, new_guide_path(:from => :set_location) %>
       <dl class="<%= @politicians ? 'span-8' : 'span-20' %>">
         <dt><%= label_tag :location, 'Your Location' %></dt>
@@ -45,7 +45,7 @@
 
     <%- if @politicians -%>
       <div class="span-4 last">
-        <% form_tag new_guide_path, :method => :get do %>
+        <%= form_tag new_guide_path, :method => :get do %>
           <%= hidden_field_tag :from, :location %>
           <button class="continue round-6">Continue</button>
         <% end %>

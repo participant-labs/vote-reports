@@ -1,4 +1,4 @@
-<% form_tag url, :method => :get, :class => "act-replace politician-search round-4", :rel => replace do %>
+<%= form_tag url, :method => :get, :class => "act-replace politician-search round-4", :rel => replace do %>
   <%= label_tag :representing, 'Reps from', :class => 'reps-from' %>
   <%= text_field_tag :representing, requested_location, :title => %{e.g. "TX", "98101", "San Francisco"}, :size => 23, :class => 'fieldtag reps-from' %>
   <%= submit_tag 'Show Reps' %>

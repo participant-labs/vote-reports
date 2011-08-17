@@ -3,7 +3,7 @@
 <div class="section">
   <h2>Bill Search</h2>
 
-  <% form_tag bills_path, :method => :get do %>
+  <%= form_tag bills_path, :method => :get do %>
     <%= label_tag :term, 'Search' %>
     <%= text_field_tag :term, params[:term] %>
     <%= submit_tag 'Search' %>

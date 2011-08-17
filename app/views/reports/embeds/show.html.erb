@@ -3,7 +3,7 @@
   <p>Your viewers will see politicians in their area with scores from this report.</p>
   <%- embed_code = report_embed_code(@report) -%>
   <div style="width: 200px"><%= embed_code %></div>
-  <% form_tag do %>
+  <%= form_tag do %>
     <%= text_area_tag :code, embed_code, :onclick => 'this.focus(); this.select();', :style => 'width: 200px' %>
     <div style="width: 200px"><%= clippy(embed_code) %></div>
   <% end %>

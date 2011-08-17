@@ -1,7 +1,7 @@
 <%- title 'Guide' -%>
 
 <div class="section">
-  <% form_tag new_guide_path, :method => :get, :class => 'act-replace', :rel => 'content' do %>
+  <%= form_tag new_guide_path, :method => :get, :class => 'act-replace', :rel => 'content' do %>
     <dl>
       <dt><%= label_tag :representing, '1) Enter your zip code' %></dt>
       <dd>

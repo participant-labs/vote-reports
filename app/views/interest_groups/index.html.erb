@@ -3,7 +3,7 @@
 <div class="section" id="interest_groups_index">
   <h2>Interest Groups</h2>
   <div id="search" class="<%= 'hide' if params[:subjects].present? %>">
-    <% form_tag interest_groups_path, :method => :get, :class => 'act-replace', :rel => 'interest_groups_index' do %>
+    <%= form_tag interest_groups_path, :method => :get, :class => 'act-replace', :rel => 'interest_groups_index' do %>
       <h3><%= label_tag :term, 'Search' %></h3>
       <%= text_field_tag :term, params[:term] %>
       <%= submit_tag 'Search' %>
@@ -12,7 +12,7 @@
   </div>
 
   <div id="browse_by_subject" class="<%= 'hide' unless params[:subjects].present? %>">
-    <% form_tag interest_groups_path, :method => :get, :class => 'act-replace', :rel => 'interest_groups_index' do %>
+    <%= form_tag interest_groups_path, :method => :get, :class => 'act-replace', :rel => 'interest_groups_index' do %>
       <h3>Browse by Subject</h3>
       <%= render 'subjects/cloud', :subjects => @subjects, :target => lambda {|subjects|
         [interest_groups_path(:subjects => subjects), {:class => 'act-replace', :rel => 'interest_groups_index'}]

@@ -12,7 +12,7 @@
   <div class="section" id="Edit_Cause">
     <h1>Edit Cause: <%= @cause.name %></h1>
 
-    <% form_for @cause do |f| %>
+    <%= form_for @cause do |f| %>
       <%= render 'causes/fields', :f => f %>
       <p><%= f.submit 'Update Cause' %></p>
     <% end %>

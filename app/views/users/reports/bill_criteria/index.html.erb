@@ -3,7 +3,7 @@
 <div class="section">
   <h2>Edit Legislative Agenda</h2>
   <%- if @report.has_criteria? -%>
-    <% form_for [@report.user, @report] do |f| %>
+    <%= form_for [@report.user, @report] do |f| %>
       <table>
         <thead>
           <th>Bill</th>
