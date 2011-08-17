@@ -42,14 +42,24 @@ gem 'shadow_puppet', git: 'git://github.com/railsmachine/shadow_puppet.git', bra
 gem 'Empact-activerecord-import', '>= 0.3.4', require: 'activerecord-import'
 
 group :test, :development do
+  # Dev
   gem 'thin'
-  gem "rspec-rails"
-  gem 'fixjour'
-  gem 'fakeweb'
-  gem 'forgery'
-  gem 'rr'
-  gem 'parallel'
   gem 'ruby-debug19', require: 'ruby-debug'
 
+  # Test
+  gem "rspec-rails"
+  gem 'fakeweb'
+  gem 'rr'
+  gem 'parallel'
+
+  # Cucumber
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'launchy'
+
+  # Fixtures
+  gem 'fixjour'
+  gem 'forgery'
   gem 'georuby', require: 'geo_ruby'
 end
