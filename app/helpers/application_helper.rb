@@ -90,7 +90,7 @@ module ApplicationHelper
   def flash_helper
     flash.map do |(level, message)|
       content_tag(:div, message, :class => [level, " flash"]) if message.present?
-    end.join
+    end.join.html_safe
   end
 
   def tag_cloud(tags, classes)
