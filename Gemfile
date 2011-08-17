@@ -30,7 +30,7 @@ gem 'pg'
 gem 'rpx_now', '>= 0.6.12'
 gem 'Empact-sexy_pg_constraints', require: 'sexy_pg_constraints'
 gem 'state_machine'
-gem 'spatial_adapter'
+gem 'spatial_adapter', git: 'git://github.com/Empact/spatial_adapter.git'
 gem 'sunspot_rails'
 gem 'tamtam'
 gem 'typhoeus'
@@ -51,4 +51,6 @@ group :test, :development do
   gem 'rr'
   gem 'parallel'
   gem 'ruby-debug19', require: 'ruby-debug'
+
+  gem 'georuby', require: 'geo_ruby'
 end
