@@ -4,13 +4,13 @@
 -%>
 <div id="bills">
   <%- if bills.present? -%>
-    <% paginated_section bills, :param_name => param_name, :class => "act-replace", :rel => replace do %>
-      <ul>
-        <%- bills.each do |bill| -%>
-          <li><%= render 'bills/bill', :bill => bill %></li>
-        <%- end -%>
-      </ul>
-    <% end %>
+    <div class="act-replace" rel="<%= replace %>"><%= paginate bills, :param_name => param_name %></div>
+    <ul>
+      <%- bills.each do |bill| -%>
+        <li><%= render 'bills/bill', :bill => bill %></li>
+      <%- end -%>
+    </ul>
+    <div class="act-replace" rel="<%= replace %>"><%= paginate bills, :param_name => param_name %></div>
   <%- else -%>
     <p>No bills found...</p>
   <%- end -%>
