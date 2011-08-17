@@ -4,14 +4,14 @@ describe Congress do
   describe ".current_meeting" do
     it "should return the proper meeting based on the current date" do
       {
-        "1/9/2009" => 111,
-        "1/9/2010" => 111,
-        "1/2/1993" => 102,
-        "1/3/1993" => 103,
-        "1/4/1993" => 103,
-        "1/3/1994" => 103,
-        "1/2/1997" => 104,
-        "1/3/1997" => 105
+        "9/1/2009" => 111,
+        "9/1/2010" => 111,
+        "2/1/1993" => 102,
+        "3/1/1993" => 103,
+        "4/1/1993" => 103,
+        "3/1/1994" => 103,
+        "2/1/1997" => 104,
+        "3/1/1997" => 105
       }.each do |date, meeting|
         date = Date.parse(date)
         stub(Date).today { date }
