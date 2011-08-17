@@ -14,7 +14,7 @@
         </thead>
         <tbody>
           <%- (criteria || build_criteria_for(report, bills)).each do |criterion| -%>
-            <%- f.fields_for :bill_criteria, criterion do |bill_criteria_fields| -%>
+            <%= f.fields_for :bill_criteria, criterion do |bill_criteria_fields| -%>
               <tr>
                 <td>
                   <%= render 'bills/bill', :bill => criterion.bill %>
