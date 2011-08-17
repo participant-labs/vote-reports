@@ -136,8 +136,6 @@ GEM
       activemodel (~> 3.0)
       activesupport (~> 3.0)
       plucky (~> 0.3.8)
-    mongo_session_store (2.0.0)
-      actionpack (~> 3.0)
     multi_json (1.0.3)
     newrelic_rpm (3.1.1)
     nokogiri (1.5.0)
@@ -273,7 +271,6 @@ DEPENDENCIES
   kaminari
   loofah
   mongo_mapper
-  mongo_session_store
   newrelic_rpm (>= 2.12.3)
   nokogiri
   paperclip (>= 2.3.3)
