@@ -8,98 +8,95 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /the home\s?page/
+    when /^the home\s?page$/
       '/'
 
-    when /the cause page for "(.*)"/
+    when /^the cause page for "(.*)"$/
       cause_path(Cause.find_by_name($1))
-    when /the cause reports page for "(.*)"/
+    when /^the cause reports page for "(.*)"$/
       cause_reports_path(Cause.find_by_name($1))
-    when /the cause scores page for "(.*)"/
+    when /^the cause scores page for "(.*)"$/
       cause_report_scores_path(Cause.find_by_name($1))
-    when /the issue page for "(.*)"/
+    when /^the issue page for "(.*)"$/
       issue_path(Issue.find_by_title($1))
 
-    when /user "(.*)"'s page for report "(.*)"/
+    when /^user "(.*)"'s page for report "(.*)"$/
       user = User.find_by_username($1)
       user_report_path(user, user.reports.find_by_name($2))
-    when /my report page for "(.+)"/i
+    when /^my report page for "(.+)"$/i
       user_report_path(current_user, current_user.reports.find_by_name($1))
-    when /my report agenda page for "(.+)"/i
+    when /^my report agenda page for "(.+)"$/i
       user_report_agenda_path(current_user, current_user.reports.find_by_name($1))
-    when /my report scores page for "(.+)"/i
+    when /^my report scores page for "(.+)"$/i
       user_report_report_scores_path(current_user, current_user.reports.find_by_name($1))
-    when /the edit page for my report "(.+)"/i
+    when /^the edit page for my report "(.+)"$/i
       edit_user_report_path(current_user, current_user.reports.find_by_name($1))
-    when /the new bills page for my report "(.+)"/
+    when /^the new bills page for my report "(.+)"$/
       new_user_report_bill_criterion_path(current_user, Report.find_by_name($1))
-    when /the edit bills page for my report "(.+)"/
+    when /^the edit bills page for my report "(.+)"$/
       user_report_bill_criteria_path(current_user, Report.find_by_name($1))
-    when /the new bills page for the report "(.+)"/
+    when /^the new bills page for the report "(.+)"$/
       new_user_report_bill_criterion_path(Report.find_by_name($1).user, Report.find_by_name($1))
-    when /the edit bills page for the report "(.+)"/
+    when /^the edit bills page for the report "(.+)"$/
       user_report_bill_criteria_path(Report.find_by_name($1).user, Report.find_by_name($1))
-    when /the edit image page for the report "(.+)"/
+    when /^the edit image page for the report "(.+)"$/
       edit_user_report_image_path(Report.find_by_name($1).user, Report.find_by_name($1), :format => :html)
 
-    when /my reports page/i
+    when /^my reports page/i
       user_reports_path(current_user)
-    when /the reports page for "(.*)"/i
+    when /^the reports page for "(.*)"$/i
       user_reports_path(User.find_by_username($1))
-    when /my profile page/i
+    when /^my profile page/i
       user_path(current_user)
 
-    when /the user page for "(.+)"/i
+    when /^the user page for "(.+)"$/i
       user_path(User.find_by_username($1))
-    when /the edit user page for "(.+)"/i
+    when /^the edit user page for "(.+)"$/i
       edit_user_path(User.find_by_username($1))
-    when /the politician page for "(.+)"/
+    when /^the politician page for "(.+)"$/
       politician_path(Politician.with_name($1).first)
-    when /the politician reports page for "(.+)"/
+    when /^the politician reports page for "(.+)"$/
       politician_reports_path(Politician.with_name($1).first)
-    when /the roll page for "(.+)"/
+    when /^the roll page for "(.+)"$/
       roll_path(Roll.find_by_question($1))
 
-    when /the report page for "(.+)"/
+    when /^the report page for "(.+)"$/
       report = Report.find_by_name($1)
       user_report_path(report.user, report)
 
-    when /the bill page for "(.+)"/
+    when /^the bill page for "(.+)"$/
       bill_path(BillTitle.find_by_title($1).bill)
-    when /the subject page for "(.+)"/
+    when /^the subject page for "(.+)"$/
       subject_path(Subject.find_by_name($1))
 
-    when /the interest group page for "(.+)"/
+    when /^the interest group page for "(.+)"$/
       interest_group_path(InterestGroup.find_by_name($1))
-    when /the interest group agenda page for "(.+)"/
+    when /^the interest group agenda page for "(.+)"$/
       interest_group_agenda_path(InterestGroup.find_by_name($1))
-    when /the interest group scores page for "(.+)"/
+    when /^the interest group scores page for "(.+)"$/
       interest_group_report_scores_path(InterestGroup.find_by_name($1))
-    when /the edit interest group page for "(.+)"/
+    when /^the edit interest group page for "(.+)"$/
       edit_interest_group_path(InterestGroup.find_by_name($1))
-    when /the edit interest group image page for "(.+)"/
+    when /^the edit interest group image page for "(.+)"$/
       edit_interest_group_image_path(InterestGroup.find_by_name($1), :format => :html)
 
-    when /the interest group new bills page for "(.+)"/
+    when /^the interest group new bills page for "(.+)"$/
       new_interest_group_bill_criterion_path(InterestGroup.find_by_name($1))
-    when /the interest group edit bills page for "(.+)"/
+    when /^the interest group edit bills page for "(.+)"$/
       interest_group_bill_criteria_path(InterestGroup.find_by_name($1))
-
-    when /^the (.+) page$/i
-      send("#{$1.gsub(' ', '_')}_path")
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
-    #   when /^(.*)'s profile page$/i
+    #   when /^^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
 
     else
       begin
-        page_name =~ /the (.*) page/
+        page_name =~ /^the (.*) page$/
         path_components = $1.split(/\s+/)
         self.send(path_components.push('path').join('_').to_sym)
-      rescue Object => e
+      rescue NoMethodError, ArgumentError
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
           "Now, go and add a mapping in #{__FILE__}"
       end
