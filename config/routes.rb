@@ -77,7 +77,7 @@ VoteReports::Application.routes.draw do
     resources :rpx_identities, :only => [:create, :destroy], controller: 'users/rpx_identities'
     resource :adminship, :only => [:create, :destroy], controller: 'users/adminships'
     resource :moderatorship, :only => [:create, :destroy], controller: 'users/moderatorships'
-    resources :report_scores, :only => :index, controller: 'users/report_scores'
+    resources :report_scores, :only => :index, controller: 'users/scores'
   end
 
   resources :user_sessions
