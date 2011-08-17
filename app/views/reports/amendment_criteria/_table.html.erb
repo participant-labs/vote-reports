@@ -9,7 +9,7 @@
         </thead>
         <tbody>
           <%- build_criteria_for(report, amendments).each do |criterion| -%>
-            <%- f.fields_for :amendment_criteria, criterion do |amendment_criteria_fields| -%>
+            <%= f.fields_for :amendment_criteria, criterion do |amendment_criteria_fields| -%>
               <tr>
                 <td>
                   <%= render 'amendments/amendment', :amendment => criterion.amendment %>

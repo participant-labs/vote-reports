@@ -12,7 +12,7 @@
           <td></td>
         </thead>
         <tbody>
-          <%- f.fields_for :bill_criteria do |bill_criteria_fields| -%>
+          <%= f.fields_for :bill_criteria do |bill_criteria_fields| -%>
             <%- criterion = bill_criteria_fields.object -%>
             <tr>
               <td>
@@ -38,7 +38,7 @@
               </td>
             </tr>
           <%- end -%>
-          <%- f.fields_for :amendment_criteria do |amendment_criteria_fields| -%>
+          <%= f.fields_for :amendment_criteria do |amendment_criteria_fields| -%>
             <%- criterion = amendment_criteria_fields.object -%>
             <tr>
               <td>

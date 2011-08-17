@@ -13,7 +13,7 @@
         </thead>
         <tbody>
           <%- @report.bill_criteria.each do |criterion| -%>
-            <%- f.fields_for :bill_criteria, criterion do |bill_criteria_fields| -%>
+            <%= f.fields_for :bill_criteria, criterion do |bill_criteria_fields| -%>
               <tr>
                 <td>
                   <%= render 'bills/bill', :bill => criterion.bill %>
@@ -40,7 +40,7 @@
             <%- end -%>
           <%- end -%>
           <%- @report.amendment_criteria.each do |criterion| -%>
-            <%- f.fields_for :amendment_criteria, criterion do |amendment_criteria_fields| -%>
+            <%= f.fields_for :amendment_criteria, criterion do |amendment_criteria_fields| -%>
               <tr>
                 <td>
                   <%= render 'amendments/amendment', :amendment => criterion.amendment %>

@@ -5,7 +5,7 @@
       <table>
         <tbody>
           <%- build_cause_reports_for(cause, reports).each do |cause_report| -%>
-            <%- f.fields_for :cause_reports, cause_report do |cause_report_fields| -%>
+            <%= f.fields_for :cause_reports, cause_report do |cause_report_fields| -%>
               <tr>
                 <td>
                   <%= render 'reports/report', :report => cause_report.report %>
