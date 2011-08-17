@@ -38,9 +38,7 @@
       <li class="<%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score, :report => report %></li>
     <%- end -%>
   </ul>
-  <%= paginate scores,
-        :class => 'act-replace score-pagination round-4',
-        :rel => replace %>
+  <div class="act-replace score-pagination round-4" rel="<%= replace %>"><%= paginate scores %></div>
 <%- elsif score_count > 8 -%>
   <%- scores = scores.with_evidence.page(params[:page]) -%>
   <ul class="clearfix">
@@ -48,9 +46,7 @@
       <li class="<%= cycle('left', 'right') %>"><%= render 'politicians/score', :score => score, :report => report %></li>
     <%- end -%>
   </ul>
-  <%= paginate scores,
-        :class => 'act-replace score-pagination round-4',
-        :rel => replace %>
+  <div class="act-replace score-pagination round-4" rel="<%= replace %>"><%= paginate scores %></div>
 <%- elsif score_count > 1 -%>
   <%- scores = scores.with_evidence.page(params[:page]) -%>
   <ul>
@@ -58,9 +54,7 @@
       <li class="full_width"><%= render 'politicians/score', :score => score, :report => report %></li>
     <%- end -%>
   </ul>
-  <%= paginate scores,
-        :class => 'act-replace score-pagination round-4',
-        :rel => replace %>
+  <div class="act-replace score-pagination round-4" rel="<%= replace %>"><%= paginate scores %></div>
 <%- elsif report.delayed_jobs.present? -%>
   <p>Scores are being generated. Please try again in a moment.</p>
 <%- elsif report.scores.present? && params[:representing].present? -%>
