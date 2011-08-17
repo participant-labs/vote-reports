@@ -13,24 +13,24 @@
   </p>
 <%- else -%>
 <div id="<%= id %>" class="politician_scores">
-  <%- paginated_section scores, :class => 'act-replace', :rel => replace, :params => {:format => :js} do -%>
-    <table>
-      <thead>
+  <div class="act-replace" rel="<%= replace %>"><%= paginate scores, :params => {:format => :js} %></div>
+  <table>
+    <thead>
+      <tr>
+        <th>Score</th>
+        <th><%= source %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- scores.each do |report_score| -%>
+        <%- report = report_score.report -%>
         <tr>
-          <th>Score</th>
-          <th><%= source %></th>
+          <td><%= render 'reports/scores/score', :score => report_score, :report => report %></td>
+          <td><%= render 'reports/report', :report => report, :cause_only => (source == 'Cause') %></td>
         </tr>
-      </thead>
-      <tbody>
-        <%- scores.each do |report_score| -%>
-          <%- report = report_score.report -%>
-          <tr>
-            <td><%= render 'reports/scores/score', :score => report_score, :report => report %></td>
-            <td><%= render 'reports/report', :report => report, :cause_only => (source == 'Cause') %></td>
-          </tr>
-        <%- end -%>
-      </tbody>
-    </table>
-  <%- end -%>
+      <%- end -%>
+    </tbody>
+  </table>
+  <div class="act-replace" rel="<%= replace %>"><%= paginate scores, :params => {:format => :js} %></div>
 </div>
 <%- end -%>
