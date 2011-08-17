@@ -22,6 +22,8 @@ module Authlogic::Test
   end
 end
 
-RSpec.configure do |config|
-  config.include(Authlogic::Test)
+if RSpec.respond_to?(:configure)
+  RSpec.configure do |config|
+    config.include(Authlogic::Test)
+  end
 end

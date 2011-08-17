@@ -417,6 +417,8 @@ Fixjour :verify => false do
   end
 end
 
-RSpec.configure do |config|
-  config.include(Fixjour)
+if RSpec.respond_to?(:configure)
+  RSpec.configure do |config|
+    config.include(Fixjour)
+  end
 end
