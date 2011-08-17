@@ -34,7 +34,7 @@
       <li><a href="#bill_cosponsors">Cosponsors <span class="count"><%= @bill.cosponsorships.count %></span></a></li>
     <%- end -%>
     <%- if @amendments_count > 0 -%>
-      <li><% link_to bill_amendments_path(@bill) do %>
+      <li><%= link_to bill_amendments_path(@bill) do %>
         <span>Amendments <span class="count"><%= @amendments_count %></span></span>
       <% end %></li>
     <% end %>
