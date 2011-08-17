@@ -189,13 +189,13 @@ class InterestGroupReport < ActiveRecord::Base
   def season_midpoint(season)
     case season
     when 'Spring'
-      "3/20"
+      "20/3"
     when 'Summer'
-      "6/21"
+      "21/6"
     when 'Fall'
-      "9/23"
+      "23/9"
     when 'Winter'
-      "12/21"
+      "21/12"
     else
       raise "Unknown season: #{season.inspect}"
     end
