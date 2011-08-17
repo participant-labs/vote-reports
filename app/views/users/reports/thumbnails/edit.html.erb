@@ -4,7 +4,7 @@
 
 <div class="section">
   <h2>Replace Thumbnail</h2>
-  <% form_for @image, :url => user_report_image_path(@report.user, @report), :html => { :multipart => true } do |f| %>
+  <%= form_for @image, :url => user_report_image_path(@report.user, @report), :html => { :multipart => true } do |f| %>
     <p>
       <%= f.label :thumbnail_file_name, 'Thumbnail' %><br />
       <%= f.file_field :thumbnail %><br />
@@ -24,7 +24,7 @@
     <dd style="width:<%= thumb_width %>px;height:<%= thumb_height %>px;overflow:hidden"><%= image_tag @image.thumbnail.url(:original), :id => 'preview' %></dd>
   </dl>
 
-  <% form_for @image, :url => user_report_image_path(@report.user, @report) do |f| %>
+  <%= form_for @image, :url => user_report_image_path(@report.user, @report) do |f| %>
     <p>
       <%= f.hidden_field :crop_x, :id => 'crop_x' %>
       <%= f.hidden_field :crop_y, :id => 'crop_y' %>

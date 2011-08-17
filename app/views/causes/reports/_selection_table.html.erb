@@ -1,7 +1,7 @@
 <div id="<%= id %>">
   <%- if reports.present? -%>
     <div class="act-replace" rel="<%= id %>"><%= paginate reports %></div>
-    <% form_for cause, :url => cause_reports_path(cause), :html => {:id => id, :method => :post} do |f| %>
+    <%= form_for cause, :url => cause_reports_path(cause), :html => {:id => id, :method => :post} do |f| %>
       <table>
         <tbody>
           <%- build_cause_reports_for(cause, reports).each do |cause_report| -%>

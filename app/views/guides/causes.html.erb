@@ -5,7 +5,7 @@
     <p class="span-24 message">Answer questions to see how your views align with those of your representatives</p>
 
     <div class="guide">
-      <% form_for @guide, :url => new_guide_path, :html => {:id => 'guide_causes', :rel => 'instant_scores'} do |f| %>
+      <%= form_for @guide, :url => new_guide_path, :html => {:id => 'guide_causes', :rel => 'instant_scores'} do |f| %>
         <ul id="guide_questions">
           <%- @questions.each do |question| -%>
             <li class="question<%= ' hide' if @under_consideration.object != question.object %>" id="<%= dom_id(question.object) %>">

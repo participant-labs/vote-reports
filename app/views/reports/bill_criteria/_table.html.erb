@@ -5,7 +5,7 @@
 
 <div id="report_bills_results_table">
   <%- if bills.present? || criteria.present? -%>
-    <% form_for report, :url => report_bill_criteria_path(report), :html => {:method => :post} do |f| %>
+    <%= form_for report, :url => report_bill_criteria_path(report), :html => {:method => :post} do |f| %>
       <table>
         <thead>
           <th>Bill</th>

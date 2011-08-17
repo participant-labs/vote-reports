@@ -20,7 +20,7 @@
   <div class="section" id="Edit_Interest_Group">
     <h2>Edit Interest Group</h2>
 
-    <% form_for @interest_group do |f| %>
+    <%= form_for @interest_group do |f| %>
       <%= render 'interest_groups/fields', :f => f %>
       <%= f.submit 'Update Interest Group' %>
     <% end %>

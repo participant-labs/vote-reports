@@ -1,7 +1,7 @@
 <%- title 'New Issue' -%>
 <h1>New Issue</h1>
 
-<% form_for @issue do |f| %>
+<%= form_for @issue do |f| %>
   <p>
     <%= f.label :title %>
     <%= f.text_field :title, :class => 'title' %>

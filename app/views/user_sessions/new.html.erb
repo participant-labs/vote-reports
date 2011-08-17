@@ -8,7 +8,7 @@
 
   <div class="right">
     <h2>Log in via Email</h2>
-    <% form_for @user_session do |f| %>
+    <%= form_for @user_session do |f| %>
       <%= errors_for f, :base %>
       <p>
         <%= f.label :username, 'Username/Email' %><br />

@@ -19,7 +19,7 @@
 <%- if score_count > 36 -%>
   <%- votes_how = params[:votes_how].present? ? params[:votes_how].to_sym : :with -%>
 
-  <% form_tag target_path, :class => 'act-replace-via-inputs', :rel => replace do %>
+  <%= form_tag target_path, :class => 'act-replace-via-inputs', :rel => replace do %>
     <%- params.each_pair do |key, value| -%>
       <%= hidden_field_tag key, value %>
     <%- end -%>
