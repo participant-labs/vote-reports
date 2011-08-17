@@ -13,8 +13,6 @@ namespace :watchdog do
 
     desc "Process Politicians"
     task :unpack => :environment do
-      require 'ar-extensions'
-      require 'ar-extensions/import/postgresql'
       ActiveRecord::Base.transaction do
         us_states = UsState.all.index_by(&:abbreviation)
         zips = []

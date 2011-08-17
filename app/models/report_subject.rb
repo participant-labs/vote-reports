@@ -10,9 +10,6 @@ class ReportSubject < ActiveRecord::Base
 
   class << self
     def generate_for(report)
-      require 'ar-extensions'
-      require 'ar-extensions/import/postgresql'
-
       ReportSubject.delete_all(:report_id => report.id)
       subjects = Hash[report.bill_criteria_subjects.select("DISTINCT(subjects.id), COUNT(subjects.id) AS count")\
         .group('subjects.id').map do |subject|

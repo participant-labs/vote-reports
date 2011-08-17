@@ -10,8 +10,6 @@ namespace :zip_codes do
   end
 
   task :import => :environment do
-    require 'ar-extensions'
-    require 'ar-extensions/import/postgresql'
     require 'open-uri'
     require 'excelsior'
 

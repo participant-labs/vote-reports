@@ -32,9 +32,6 @@ namespace :gov_track do
 
     namespace :titles do
       task :unpack => :'gov_track:support' do
-        require 'ar-extensions'
-        require 'ar-extensions/import/postgresql'
-
         ActiveRecord::Base.transaction do
           BillTitle.delete_all
           meetings do |meeting|
@@ -67,9 +64,6 @@ namespace :gov_track do
 
     task :unpack => [:'gov_track:support', :'gov_track:politicians'] do
       rescue_and_reraise do
-        require 'ar-extensions'
-        require 'ar-extensions/import/postgresql'
-
         @subjects = Subject.all.index_by(&:name)
 
         if ENV['MEETING'] == 'ALL'

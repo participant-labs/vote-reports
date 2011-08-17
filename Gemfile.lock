@@ -14,6 +14,9 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    Empact-activerecord-import (0.3.4)
+      activerecord (>= 3.0.0)
+      activerecord (>= 3.0.0)
     Empact-authlogic (3.0.3)
       activerecord (>= 3.0.7)
       activerecord (>= 3.0.7)
@@ -238,6 +241,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  Empact-activerecord-import (>= 0.3.4)
   Empact-authlogic (>= 3.0.3)
   Empact-authlogic_rpx (>= 1.1.8)
   Empact-sexy_pg_constraints

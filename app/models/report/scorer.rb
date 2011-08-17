@@ -26,8 +26,6 @@ class Report
       MongoMapper.database = config[Rails.env]['database']
 
       rescue_and_reraise do
-        require 'ar-extensions'
-        require 'ar-extensions/import/postgresql'
         @bases = {}
         ActiveRecord::Base.transaction do
           report = Report.find(report_id)
