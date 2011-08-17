@@ -4,6 +4,7 @@
 -%>
 
 <%= form_for user, :url => url do |f| %>
+  <%= f.error_messages %>
   <%= errors_for f, :base %>
   <p>
     <%= f.label :username %><br />

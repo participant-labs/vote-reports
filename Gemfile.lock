@@ -110,6 +110,7 @@ GEM
       activesupport (~> 3.0)
       daemons
     diff-lcs (1.1.2)
+    dynamic_form (1.1.4)
     erubis (2.7.0)
     escape (0.0.4)
     eventmachine (0.12.10)
@@ -293,6 +294,7 @@ DEPENDENCIES
   database_cleaner
   declarative_authorization
   delayed_job (>= 2.0.3)
+  dynamic_form
   erubis (>= 2.6.6)
   excelsior
   fakeweb
