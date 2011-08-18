@@ -170,11 +170,9 @@ class Report < ActiveRecord::Base
     end
   end
 
-  class << self
-    def per_page
-      10
-    end
+  paginates_per 10
 
+  class << self
     def paginated_search(params)
       search do
         fulltext params[:term]
@@ -182,7 +180,7 @@ class Report < ActiveRecord::Base
         if params[:except].present?
           without(params[:except])
         end
-        paginate :page => params[:page], :per_page => Report.per_page
+        paginate :page => params[:page], :per_page => Report.default_per_page
       end
     end
   end
