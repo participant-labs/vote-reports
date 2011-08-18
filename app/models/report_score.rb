@@ -70,11 +70,7 @@ class ReportScore < ActiveRecord::Base
     end
   }
 
-  class << self
-    def per_page
-      12
-    end
-  end
+  paginates_per 12
 
   before_destroy :rescore_dependent_reports
 

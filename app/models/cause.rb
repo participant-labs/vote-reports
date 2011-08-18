@@ -28,11 +28,7 @@ class Cause < ActiveRecord::Base
 
   alias_method :score_criteria, :cause_reports
 
-  class << self
-    def per_page
-      20
-    end
-  end
+  paginates_per 20
 
   def as_json(opts = {})
     super opts.reverse_merge(:only => [:name, :description, :id], :methods => [:to_param, :url], :include => :reports)
