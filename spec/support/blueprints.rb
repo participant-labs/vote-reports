@@ -137,7 +137,7 @@ Fixjour :verify => false do
       :sponsor => send("create_#{%w[politician committee_meeting].sample}"),
       :bill => new_bill,
       :number => rand(1000),
-      :offered_on => "12/13/2009",
+      :offered_on => "13/12/2009",
       :chamber => ['h', 's'].sample,
       :congress => new_congress)
   end
