@@ -4,7 +4,7 @@ VoteReports::Application.routes.draw do
   resources :embed_reports, :only => :show
   resources :causes do
     resource :embed, :only => :show, controller: 'causes/embeds'
-    resources :report_scores, :only => [:index, :show], controller: 'causes/report_scores'
+    resources :report_scores, :only => [:index, :show], controller: 'causes/scores'
     resource :follows, :only => [:show, :create, :destroy], controller: 'causes/follows'
     resources :reports, :only => [:new, :create, :index, :destroy], controller: 'causes/reports'
     resource :image, :only => [:edit, :create, :update], controller: 'causes/images'
@@ -35,7 +35,7 @@ VoteReports::Application.routes.draw do
   resources :interest_groups do
     resource :embed, :only => :show, controller: 'interest_groups/embeds'
     resource :claim, :only => :new, controller: 'interest_groups/claims'
-    resources :report_scores, :only => [:index, :show], controller: 'interest_groups/report_scores'
+    resources :report_scores, :only => [:index, :show], controller: 'interest_groups/scores'
     resource :follows, :only => [:show, :create, :destroy], controller: 'interest_groups/follows'
     resources :causes, :only => :index, controller: 'interest_groups/causes'
     resources :subjects, :only => :index, controller: 'interest_groups/subjects'
@@ -65,7 +65,7 @@ VoteReports::Application.routes.draw do
   resources :rolls, :only => [:show]
   resource :location
   resources :guides, :only => [:new, :create, :show] do
-    resources :report_scores, :only => :show, controller: 'guides/report_scores'
+    resources :report_scores, :only => :show, controller: 'guides/scores'
   end
 
   resources :guide_scores, :only => :show
