@@ -18,7 +18,7 @@ Feature: Creating Interest Groups
      | Name         | My favorite interest group                     |
      | Description  | Why do I like it so much? It boggles the mind. |
      | Email        | tops@place.org                                 |
-     | Url          | http://place.org                               |
+     | Website url  | http://place.org                               |
      | Contact name | Mr. Tops                                       |
     And I press "Create Interest Group"
     Then I should see "Successfully created interest group"
