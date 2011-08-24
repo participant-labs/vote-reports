@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe PoliticiansController do
+  setup :activate_authlogic
 
   describe "routes" do
     route_matches("/politicians",   :get,   :controller => 'politicians', :action => 'index')
