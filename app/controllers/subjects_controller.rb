@@ -20,7 +20,7 @@ class SubjectsController < ApplicationController
 
   def show
     @subject = Subject.find(params[:id])
-    if !@subject.friendly_id_status.best?
+    if request.path != subject_path(@subject)
       redirect_to subject_path(@subject), :status => 301
       return
     end

@@ -29,7 +29,7 @@ class InterestGroupsController < ApplicationController
       :limit => 3)
     respond_to do |format|
       format.html {
-        if !@interest_group.friendly_id_status.best?
+        if request.path != interest_group_path(@interest_group)
           redirect_to interest_group_path(@interest_group), :status => 301
           return
         end

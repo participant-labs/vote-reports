@@ -4,7 +4,7 @@ class Users::Reports::AmendmentCriteriaController < ApplicationController
   before_filter :find_report, :only => [:index, :destroy]
 
   def new
-    if !@user.friendly_id_status.best?
+    if request.path != new_user_report_amendment_criterion_path(@user, @report)
       redirect_to new_user_report_amendment_criterion_path(@user, @report), :status => 301
       return
     end

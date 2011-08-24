@@ -35,7 +35,7 @@ class CausesController < ApplicationController
 
     respond_to do |format|
       format.html {
-        if !@cause.friendly_id_status.best?
+        if request.path != cause_path(@cause)
           redirect_to cause_path(@cause), :status => 301
           return
         end
@@ -53,7 +53,7 @@ class CausesController < ApplicationController
   end
 
   def edit
-    if !@cause.friendly_id_status.best?
+    if request.path != edit_cause_path(@cause)
       redirect_to edit_cause_path(@cause), :status => 301
       return
     end

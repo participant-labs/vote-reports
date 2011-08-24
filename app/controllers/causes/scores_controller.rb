@@ -7,7 +7,7 @@ class Causes::ScoresController < ApplicationController
     @scores = @report.scores.for_politicians(sought_politicians).by_score
     respond_to do |format|
       format.html {
-        if !@cause.friendly_id_status.best?
+        if request.path != cause_report_scores_path(@cause)
           redirect_to cause_report_scores_path(@cause), :status => 301
           return
         end
