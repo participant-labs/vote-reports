@@ -66,8 +66,8 @@ class InterestGroup < ActiveRecord::Base
 
   def domain
     @domain ||=
-      if url.present?
-        URI.parse(url).host.split('.').reject {|s| s == 'www' }.join('.')
+      if website_url.present?
+        URI.parse(website_url).host.split('.').reject {|s| s == 'www' }.join('.')
       elsif email.present?
         email.split('@').last
       end
