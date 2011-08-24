@@ -8,7 +8,7 @@ class Reports::FollowsController < ApplicationController
     elsif params[:method] == 'destroy'
       destroy
     else
-      raise ActiveResource::InvalidRequestError
+      raise ArgumentError, "Invalid method #{params[:method]}"
     end
   end
 
