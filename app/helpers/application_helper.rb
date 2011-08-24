@@ -38,6 +38,10 @@ module ApplicationHelper
     count == 0 || count > 1 ? word.pluralize : word
   end
 
+  def paginated_results(paginated)
+    paginated.respond_to?(:results) ? paginated.results : paginated
+  end
+
   def clippy(text, bgcolor='#FFFFFF')
     content_tag :object, :classid => "clsid:d27cdb6e-ae6d-11cf-96b8-444553540000",
       :width => '110', :height => '14', :id => 'clippy' do

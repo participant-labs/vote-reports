@@ -2,7 +2,7 @@ class SubjectsController < ApplicationController
   def index
     if params[:term].present?
       @title = 'Matching Subjects'
-      @subjects = Subject.paginated_search(params).results
+      @subjects = Subject.paginated_search(params)
     else
       @title = 'Popular Subjects'
       @subjects = Subject.on_published_reports.for_tag_cloud.all(:limit => 80)

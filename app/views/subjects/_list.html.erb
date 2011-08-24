@@ -3,7 +3,7 @@
   <h3><%= title %></h3>
   <%- if subjects.present? -%>
     <ul>
-      <%- subjects.each do |subject| -%>
+      <%- paginated_results(subjects).each do |subject| -%>
         <li><%= link_to subject.name, subject %></li>
       <%- end -%>
     </ul>

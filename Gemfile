@@ -30,16 +30,19 @@ gem 'rpx_now', '>= 0.6.12'
 gem 'Empact-sexy_pg_constraints', require: 'sexy_pg_constraints'
 gem 'state_machine'
 gem 'spatial_adapter', git: 'git://github.com/Empact/spatial_adapter.git'
-gem 'sunspot_rails'
 gem 'tamtam'
 gem 'typhoeus'
 gem 'votesmart', '>= 0.3.3'
-gem 'kaminari'
 gem 'ym4r'
 gem 'httparty'
 gem 'parallel'
 gem 'shadow_puppet', git: 'git://github.com/railsmachine/shadow_puppet.git', branch: '1.9'
 gem 'Empact-activerecord-import', '>= 0.3.4', require: 'activerecord-import'
+
+# Models
+gem 'kaminari'
+gem 'sunspot_rails'
+gem 'sunspot_with_kaminari'
 
 # Views
 gem 'dynamic_form'
