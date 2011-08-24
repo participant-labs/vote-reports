@@ -24,7 +24,8 @@ describe Users::ReportsController do
       end
 
       it "should redirect" do
-        get :show, :user_id => current_user, :id => @report
+        @report.to_param.should_not == @report.id.to_s
+        get :show, :user_id => current_user, :id => @report.id
         response.should redirect_to(user_report_path(current_user, @report))
       end
     end

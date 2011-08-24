@@ -28,6 +28,7 @@ describe Politicians::ReportsController do
       end
 
       it "should return reports with those subjects" do
+        @report_subject.subject.to_param.should_not == @report_subject.subject_id.to_s
         get :index, :politician_id => @politician, :subjects => [@report_subject.subject.to_param]
 
         response.should be_success
