@@ -149,7 +149,7 @@ class Politician < ActiveRecord::Base
     def update_current_office_status!
       transaction do
         update_all(:current_office_id => nil, :current_office_type => nil)
-        in_office_normal_form.paginated_each do |politician|
+        in_office_normal_form.find_each do |politician|
           politician.update_attribute(:current_office, politician.latest_term)
           print '.'
         end
@@ -160,7 +160,7 @@ class Politician < ActiveRecord::Base
     def update_current_candidacy_status!
       transaction do
         update_all(:current_candidacy_id => nil)
-        has_current_candidacy.paginated_each do |politician|
+        has_current_candidacy.find_each do |politician|
           politician.update_attribute(:current_candidacy, politician.latest_candidacy)
           print '.'
         end
@@ -310,7 +310,7 @@ class Politician < ActiveRecord::Base
 
   class << self
     def update_titles!
-      paginated_each do |politician|
+      find_each do |politician|
         title = politician.latest_term.try(:title)
         if politician.title != title
           politician.update_attribute(:title, title)

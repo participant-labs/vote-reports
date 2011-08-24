@@ -46,10 +46,10 @@ class ReportSubject < ActiveRecord::Base
 
     def generate!
       transaction do
-        Report.non_cause.paginated_each do |report|
+        Report.non_cause.find_each do |report|
           generate_for(report)
         end
-        Report.for_causes.paginated_each do |report|
+        Report.for_causes.find_each do |report|
           generate_for(report)
         end
       end
