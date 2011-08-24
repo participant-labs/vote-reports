@@ -302,7 +302,7 @@ Fixjour :verify => false do
 
   define_builder(CongressionalDistrictZipCode) do |klass, overrides|
     overrides.process(:congressional_district) do |district|
-      overrides[:congressional_district] = CongressionalDistrict.find_or_create_by_us_state_id_and_district(us_state(overrides.send(:delete, :state)).id, district)
+      overrides[:congressional_district] = CongressionalDistrict.find_or_create_by_us_state_id_and_district_number(us_state(overrides.send(:delete, :state)).id, district)
     end
     overrides.process(:zip_code) do |zip_code|
       overrides[:zip_code] = ZipCode.find_or_create_by_zip_code(zip_code)
@@ -318,7 +318,7 @@ Fixjour :verify => false do
     politician_term_overrides(overrides, 2)
 
     overrides.process(:state) do |state|
-      overrides[:congressional_district] = CongressionalDistrict.find_or_create_by_us_state_id_and_district(state.id, overrides[:congressional_district].present? ? overrides[:congressional_district].to_i : rand(53))
+      overrides[:congressional_district] = CongressionalDistrict.find_or_create_by_us_state_id_and_district_number(state.id, overrides[:congressional_district].present? ? overrides[:congressional_district].to_i : rand(53))
     end
 
     klass.new(

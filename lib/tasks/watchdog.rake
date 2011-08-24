@@ -21,7 +21,7 @@ namespace :watchdog do
           districts.split(' ').each do |district|
             district = 'NE-02' if district == 'NE-99'
             state, district = district.split('-')
-            district = CongressionalDistrict.find_or_create_by_us_state_id_and_district(us_states.fetch(state).id, district || 0)
+            district = CongressionalDistrict.find_or_create_by_us_state_id_and_district_number(us_states.fetch(state).id, district || 0)
             zips << [district.id, zip.to_i]
           end
           $stdout.print('.')
@@ -33,7 +33,7 @@ namespace :watchdog do
         open(DATA_PATH.join('zip_per_dist.tsv')).each_line do |line|
           zip, plus_4, district = line.split("\t")
           state, district = district.split('-')
-          district = CongressionalDistrict.find_or_create_by_us_state_id_and_district(us_states.fetch(state).id, district || 0)
+          district = CongressionalDistrict.find_or_create_by_us_state_id_and_district_number(us_states.fetch(state).id, district || 0)
           zips << [district.id, zip.to_i, plus_4.to_i]
           $stdout.print('.')
           $stdout.flush
