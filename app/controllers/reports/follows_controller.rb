@@ -3,9 +3,10 @@ class Reports::FollowsController < ApplicationController
   before_filter :load_report
 
   def show
-    if params[:method] == 'post'
+    case params[:method].downcase
+    when 'post'
       create
-    elsif params[:method] == 'destroy'
+    when 'destroy'
       destroy
     else
       raise ArgumentError, "Invalid method #{params[:method]}"
