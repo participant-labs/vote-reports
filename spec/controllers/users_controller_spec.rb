@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
  
 describe UsersController do
+  setup :activate_authlogic
 
   describe "route recognition" do
     it "should route the signup route correctly" do

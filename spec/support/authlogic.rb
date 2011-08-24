@@ -24,6 +24,7 @@ end
 
 if RSpec.respond_to?(:configure)
   RSpec.configure do |config|
+    config.include(Authlogic::TestCase)
     config.include(Authlogic::Test)
   end
 end

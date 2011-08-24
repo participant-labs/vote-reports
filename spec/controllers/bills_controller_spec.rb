@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe BillsController do
+  setup :activate_authlogic
 
   describe "routes" do
     route_matches("/bills",   :get,   :controller => 'bills', :action => 'index')

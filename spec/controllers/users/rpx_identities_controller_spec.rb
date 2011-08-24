@@ -1,6 +1,8 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe Users::RpxIdentitiesController do
+  setup :activate_authlogic
+
   describe "POST #create" do
     describe "on adding a registration to an existing user" do
       def create_post(user)

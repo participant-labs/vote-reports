@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
  
 describe Politicians::ReportsController do
+  setup :activate_authlogic
   render_views
 
   before do
