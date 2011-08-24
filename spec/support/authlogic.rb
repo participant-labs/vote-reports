@@ -3,10 +3,10 @@ require "authlogic/test_case"
 module Authlogic::Test
   def current_user(opts = {})
     if opts.empty?
-      @current_user ||= create_user
+      @current_user ||= create_user.reload
     else
       logout
-      @current_user = create_user(opts)
+      @current_user = create_user(opts).reload
     end
   end
  
