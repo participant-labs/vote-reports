@@ -1,6 +1,8 @@
 class InterestGroups::AmendmentCriteriaController < ApplicationController
-  filter_resource_access :nested_in => :interest_groups
+  before_filter :load_interest_group
   before_filter :find_report
+  filter_access_to :all, attribute_check: true, require: :edit, context: :interest_groups
+  layout nil
 
   def new
     if request.path != new_interest_group_amendment_criterion_path(@interest_group)
@@ -9,10 +11,6 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
     end
     @bill = Bill.find(params[:bill_id])
     @amendments = @bill.amendments.order('chamber, number').page(params[:page])
-
-    render :partial => 'reports/amendment_criteria/table', :locals => {
-      :report => @report, :bill => @bill, :amendments => @amendments
-    }
   end
 
   def create
@@ -20,12 +18,11 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
       flash[:notice] = "Successfully updated interest group amendments."
       redirect_to edit_interest_group_path(@interest_group, :anchor => 'Add_Bills')
     else
-      render :action => 'new', :layout => false
+      render :action => 'new'
     end
   end
 
   def index
-    render :layout => false
   end
 
   def destroy
@@ -35,6 +32,10 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
   end
 
   private
+
+  def load_interest_group
+    @interest_group = InterestGroup.find(params[:interest_group_id])
+  end
 
   def find_report
     @report = @interest_group.report
