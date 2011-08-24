@@ -13,7 +13,7 @@
           <th></th>
         </thead>
         <tbody>
-          <%- (criteria || build_criteria_for(report, bills)).each do |criterion| -%>
+          <%- (criteria || build_criteria_for(report, paginated_results(bills))).each do |criterion| -%>
             <%= f.fields_for :bill_criteria, criterion do |bill_criteria_fields| -%>
               <tr>
                 <td>
@@ -40,7 +40,7 @@
           <%- end -%>
         </tbody>
       </table>
-      <% if bills.respond_to?(:total_pages) %>
+      <% if bills.respond_to?(:num_pages) %>
         <div class="act-replace" rel="report_bills_results_table"><%= paginate bills %></div>
       <% end %>
       <p><%= f.submit 'Save Bills to Report' %></p>

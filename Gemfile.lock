@@ -254,6 +254,9 @@ GEM
     sunspot_rails (1.2.1)
       nokogiri
       sunspot (= 1.2.1)
+    sunspot_with_kaminari (0.1.0)
+      kaminari
+      sunspot_rails
     tamtam (0.0.3)
       hpricot
     term-ansicolor (1.0.6)
@@ -327,6 +330,7 @@ DEPENDENCIES
   spatial_adapter!
   state_machine
   sunspot_rails
+  sunspot_with_kaminari
   tamtam
   thin
   typhoeus

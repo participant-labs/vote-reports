@@ -9,7 +9,7 @@ class ReportsController < ApplicationController
     params[:subjects] ||= []
     if params[:term].present?
       @title = 'Matching Reports'
-      @reports = Report.paginated_search(params).results
+      @reports = Report.paginated_search(params)
     elsif params[:without_causes].present?
       @title = 'Reports without Causes'
       @reports = Report.non_cause.published.without_associated_cause.by_name.for_display.page(params[:page])

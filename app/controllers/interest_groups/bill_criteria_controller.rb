@@ -9,7 +9,7 @@ class InterestGroups::BillCriteriaController < ApplicationController
       redirect_to new_interest_group_bill_criterion_path(@interest_group), :status => 301
       return
     end
-    @bills = Bill.paginated_search(params).results
+    @bills = Bill.paginated_search(params)
 
     @current = params[:current]
     @voted = params[:voted]

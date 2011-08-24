@@ -22,7 +22,7 @@
       </tr>
     </thead>
     <tbody>
-      <%- scores.each do |report_score| -%>
+      <%- paginated_results(scores).each do |report_score| -%>
         <%- report = report_score.report -%>
         <tr>
           <td><%= render 'reports/scores/score', :score => report_score, :report => report %></td>

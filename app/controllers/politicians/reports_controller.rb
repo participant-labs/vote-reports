@@ -4,8 +4,8 @@ class Politicians::ReportsController < ApplicationController
 
     params[:subjects] ||= []
     if params[:term].present?
-      @reports = Report.paginated_search(params).results
-      @scores = @reports.replace(topical_scores.for_reports(@reports).all)
+      @reports = Report.paginated_search(params)
+      @scores = @reports.instance_variable_set(:@results, topical_scores.for_reports(@reports.results).all)
     else
       @scores = topical_scores.page(params[:page])
     end

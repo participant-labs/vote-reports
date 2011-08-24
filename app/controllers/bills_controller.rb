@@ -2,7 +2,7 @@ class BillsController < ApplicationController
   def index
     if params[:term].present?
       @title = 'Matching Bills'
-      @bills = Bill.paginated_search(params).results
+      @bills = Bill.paginated_search(params)
     else
       @title = 'Recent Bills'
       @bills = Bill.by_introduced_on.includes(:titles).page(params[:bills_page] || params[:page])

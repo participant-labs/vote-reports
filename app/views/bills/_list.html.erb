@@ -6,7 +6,7 @@
   <%- if bills.present? -%>
     <div class="act-replace" rel="<%= replace %>"><%= paginate bills, :param_name => param_name %></div>
     <ul>
-      <%- bills.each do |bill| -%>
+      <%- paginated_results(bills).each do |bill| -%>
         <li><%= render 'bills/bill', :bill => bill %></li>
       <%- end -%>
     </ul>

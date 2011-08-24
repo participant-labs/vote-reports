@@ -5,10 +5,10 @@
 -%>
 <div id="reports">
   <%- if reports.present? -%>
-    <%- if reports.respond_to?(:total_pages) -%>
+    <%- if reports.respond_to?(:num_pages) -%>
       <div class="act-replace" rel="<%= replace %>"><%= paginate reports, :param_name => param_name %></div>
       <ul class="reports">
-        <%- reports.each do |report| -%>
+        <%- paginated_results(reports).each do |report| -%>
           <li><%= render 'reports/report', :report => report, :cause_only => cause_only %></li>
         <%- end -%>
       </ul>

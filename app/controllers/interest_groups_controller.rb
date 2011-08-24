@@ -6,7 +6,7 @@ class InterestGroupsController < ApplicationController
     params[:subjects] ||= []
     @interest_groups =
       if params[:term].present?
-        InterestGroup.paginated_search(params).results
+        InterestGroup.paginated_search(params)
       else
         InterestGroup.for_subjects(params[:subjects]).order('name').page(params[:page])
       end
