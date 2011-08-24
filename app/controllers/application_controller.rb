@@ -28,7 +28,8 @@ class ApplicationController < ActionController::Base
     else
       flash[:notice] = "You must be logged in to access this page"
       new_params = {}
-      if request.request_method && request.request_method != :get
+      method = request.request_method && request.request_method.to_s.downcase.to_sym
+      if method != :get
         new_params.merge!(:method => request.request_method)
       end
       if params[:return_to]
