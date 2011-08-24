@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
       new_params = {}
       method = request.request_method && request.request_method.to_s.downcase.to_sym
       if method != :get
-        new_params.merge!(:method => request.request_method)
+        new_params.merge!(:method => method)
       end
       if params[:return_to]
         new_params.merge!(:return_to => params[:return_to])
