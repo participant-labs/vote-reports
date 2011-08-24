@@ -6,5 +6,5 @@ Given /^the following (representative|senate|presidential) terms for (politician
   table.hashes.each do |row|
     send(:"create_#{type}_term", row.symbolize_keys.merge(:politician => politician))
   end
-  Politician.update_current_office_status!
+  Politician.update_current_office_status!(quiet: true)
 end
