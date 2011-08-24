@@ -22,9 +22,7 @@ Given /^my location is assured(?: to "([^"]*)")?$/ do |congressional_district|
     end
   else
     state = create_us_state
-    District.all.each do |district|
-      district.update_attributes!(:state => state)
-    end
+    District.update_all(us_state_id: state.id)
   end
 end
 
