@@ -169,16 +169,16 @@ Feature: Scoring Reports
     Then I should be on the politician page for "Piyush Jindal"
 
   Scenario: Bill Criteria report doesn't generates scores over 100
-    Given bill "Bovine Security Act of 2009" has the following passage votes on "12/24/2009":
+    Given bill "Bovine Security Act of 2009" has the following passage votes on "24/12/2009":
       | politician     | vote |
       | Piyush Jindal  | +    |
-    And bill "Bovine Security Act of 2009" has the following passage votes on "12/23/2009":
+    And bill "Bovine Security Act of 2009" has the following passage votes on "23/12/2009":
       | politician     | vote |
       | Piyush Jindal  | +    |
-    And bill "Bovine Security Act of 2009" has the following passage votes on "11/23/2009":
+    And bill "Bovine Security Act of 2009" has the following passage votes on "23/11/2009":
       | politician     | vote |
       | Piyush Jindal  | +    |
-    And bill "USA PATRIOT Reauthorization Act of 2009" has the following passage votes on "3/25/2010":
+    And bill "USA PATRIOT Reauthorization Act of 2009" has the following passage votes on "25/3/2010":
       | politician     | vote |
       | Piyush Jindal  | +    |
     And report "Active Report" has the following bill criterion:
