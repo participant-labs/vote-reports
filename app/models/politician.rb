@@ -146,15 +146,15 @@ class Politician < ActiveRecord::Base
       }
     end
 
-    def update_current_office_status!
+    def update_current_office_status!(opts = {})
       transaction do
         update_all(:current_office_id => nil, :current_office_type => nil)
         in_office_normal_form.find_each do |politician|
           politician.update_attribute(:current_office, politician.latest_term)
-          print '.'
+          print '.' unless opts[:quiet]
         end
       end
-      puts
+      puts unless opts[:quiet]
     end
 
     def update_current_candidacy_status!
