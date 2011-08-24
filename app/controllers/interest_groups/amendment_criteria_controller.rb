@@ -3,7 +3,7 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
   before_filter :find_report
 
   def new
-    if !@interest_group.friendly_id_status.best?
+    if request.path != new_interest_group_amendment_criterion_path(@interest_group)
       redirect_to new_interest_group_amendment_criterion_path(@interest_group), :status => 301
       return
     end

@@ -5,7 +5,7 @@ class InterestGroups::BillCriteriaController < ApplicationController
 
   def new
     @new_report = true if params[:new_report]
-    if !@interest_group.friendly_id_status.best?
+    if request.path != new_interest_group_bill_criterion_path(@interest_group)
       redirect_to new_interest_group_bill_criterion_path(@interest_group), :status => 301
       return
     end
