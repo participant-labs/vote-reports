@@ -315,10 +315,10 @@ class Report < ActiveRecord::Base
 
   class << self
     def rescore!
-      non_cause.paginated_each do |report|
+      non_cause.find_each do |report|
         report.rescore!
       end
-      for_causes.paginated_each do |report|
+      for_causes.find_each do |report|
         report.rescore!
       end
     end

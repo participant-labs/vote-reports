@@ -50,7 +50,7 @@ class ContinuousTerm
 
     def regenerate!
       delete_all
-      Politician.paginated_each do |politician|
+      Politician.find_each do |politician|
         regenerate_for(politician)
       end
     end
