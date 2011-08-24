@@ -31,7 +31,7 @@
                 <%= bill_criteria_fields.text_field :explanatory_url, :size => '20' %>
               </td>
               <td>
-                <%= link_to('Remove', interest_group_bill_criterion_path(@report.user, @report, criterion),
+                <%= link_to('Remove', interest_group_bill_criterion_path(@report.interest_group, criterion),
                           :method => :delete,
                           :title => "Delete criterion for '#{criterion.bill.titles.first}'",
                           :confirm => "Are you sure you want to delete the criterion for '#{criterion.bill.titles.first}'?") -%>
