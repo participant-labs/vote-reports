@@ -1,7 +1,7 @@
 class Users::Reports::AmendmentCriteriaController < ApplicationController
-  filter_resource_access :nested_in => :reports
   before_filter :load_user
-  before_filter :find_report, :only => [:index, :destroy]
+  before_filter :find_report
+  filter_access_to :all, attribute_check: true, require: :edit, context: :reports
 
   def new
     if request.path != new_user_report_amendment_criterion_path(@user, @report)
