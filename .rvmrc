@@ -1,3 +1,1 @@
-export rvm_trust_rvmrcs_flag=1
-
 rvm 1.9.2@votereports
