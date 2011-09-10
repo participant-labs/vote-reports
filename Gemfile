@@ -47,6 +47,11 @@ gem 'sunspot_with_kaminari'
 # Views
 gem 'dynamic_form'
 
+# Deployment
+gem 'capistrano'
+gem 'capistrano-ext'
+gem 'capistrano_colors'
+gem 'auto_tagger'
 
 group :test, :development do
   # Dev

@@ -1,3 +1,3 @@
-set :domain, 'votereports.org'
+set :domain, 'votereports-app'
 
 server domain, :app, :web, :db, :primary => true

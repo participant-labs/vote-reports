@@ -1,8 +1,21 @@
 require 'auto_tagger/recipes'
+require "bundler/capistrano"
+
+set :domain, 'votereports-app'
+
+server domain, :app, :web, :db, :primary => true
+
 set :application, 'vote-reports'
 set :stages, [:staging, :production]
-set :autotagger_stages, stages
+set :auto_tagger_stages, stages
 require 'capistrano/ext/multistage'
+
+$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
+set :rvm_type, :user
+require "rvm/capistrano"                  # Load RVM's capistrano plugin.
+set :rvm_ruby_string, '1.9.2@votereports'        # Or whatever env you want it to run in.
+
+set :branch, 'rails31'
 
 before "deploy:update_code", "release_tagger:set_branch"
 after  "deploy", "release_tagger:create_tag"
@@ -15,20 +28,6 @@ set :deploy_via, :remote_cache
 set :copy_cache, true
 set :copy_exclude, [".git"]
 set :use_sudo, false
-
-namespace :deploy do
-  desc 'Bundle and minify the JS and CSS files'
-  task :precache_assets, :roles => :app do
-    root_path = File.expand_path(File.dirname(__FILE__) + '/..')
-    run_locally "jammit"
-    top.upload "#{root_path}/public/assets", "#{current_release}/public", :via => :scp, :recursive => true
-  end
-  after 'deploy:symlink', 'deploy:precache_assets'
-
-  task :optimize_pngs, :roles => :app do
-    run %{find #{current_release}/public/images/ #{current_release}/public/system/ -name "*.png" | xargs optipng -quiet }
-  end
-end
 
 namespace :monit do
   task :reload do
