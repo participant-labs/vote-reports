@@ -20,7 +20,7 @@ ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 set :scm, "git"
 set :repository, 'git@github.com:Empact/vote-reports.git'
-set :branch, 'rails31'
+set :branch, 'master'
 
 set :deploy_to, '/srv/vote-reports/'
 
