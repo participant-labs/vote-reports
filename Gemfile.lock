@@ -27,6 +27,7 @@ GEM
     POpen4 (0.1.4)
       Platform (>= 0.4.0)
       open4
+    Paperclip-Autosizer (0.0.1)
     Platform (0.4.0)
     actionmailer (3.1.0.rc5)
       actionpack (= 3.1.0.rc5)
@@ -291,6 +292,7 @@ DEPENDENCIES
   Empact-authlogic (>= 3.0.3)
   Empact-authlogic_rpx (>= 1.1.8)
   Empact-sexy_pg_constraints
+  Paperclip-Autosizer
   ancestry (>= 1.2.0)
   auto_tagger
   bluecloth (>= 2.0.5)
