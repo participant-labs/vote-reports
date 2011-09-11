@@ -42,6 +42,7 @@ gem 'Empact-activerecord-import', '>= 0.3.4', require: 'activerecord-import'
 gem 'kaminari'
 gem 'sunspot_rails'
 gem 'sunspot_with_kaminari'
+gem 'Paperclip-Autosizer'
 
 # Views
 gem 'dynamic_form'
