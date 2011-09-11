@@ -4,8 +4,8 @@ class GuideScore
   include Score
 
   key :politician_id, Integer, :required => true, :numeric => true
-  key :supported_report_ids, Array, :required => true
-  key :opposed_report_ids, Array, :required => true
+  key :supported_report_ids, Array
+  key :opposed_report_ids, Array
   key :score, Float, :required => true
   key :evidence_ids, Array, :required => true
   key :evidence_description, String

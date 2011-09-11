@@ -24,7 +24,7 @@ class Guide < ActiveRecord::Base
     report_ids = supported_report_ids + opposed_report_ids
     politicians.map do |politician|
       if ReportScore.where(:politician_id => politician.id, :report_id => report_ids).exists?
-        GuideScore.where(:politician_id => politician.id, :supported_report_ids.all => supported_report_ids, :supported_report_ids.size => supported_report_ids.size, :opposed_report_ids.all => opposed_report_ids, :opposed_report_ids.size => opposed_report_ids.size).first \
+        GuideScore.where(:politician_id => politician.id, :supported_report_ids => {"$all" => supported_report_ids, "$size" => supported_report_ids.size}, :opposed_report_ids => {"$all" => opposed_report_ids, "$size" => opposed_report_ids.size}).first \
          || GuideScore.create!(:politician_id => politician.id, :supported_report_ids => supported_report_ids, :opposed_report_ids => opposed_report_ids)
       end
     end.compact
