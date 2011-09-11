@@ -44,13 +44,13 @@ after "deploy:update_code", "rvm:trust_rvmrc"
 
 namespace :deploy do
   desc "Symlinks the database.yml"
-  task :symlink, :roles => :app do
+  task :symlink_configs, :roles => :app do
     %w[database.yml mongo.yml facebooker.yml secure_variables.rb].each do |file|
       run "ln -nfs #{deploy_to}/shared/config/#{file} #{release_path}/config/#{file}"
     end
   end
 end
-after 'deploy:update_code', 'deploy:symlink'
+after 'deploy:update_code', 'deploy:symlink_configs'
 
 # namespace :monit do
 #   task :reload do
