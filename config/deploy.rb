@@ -44,8 +44,8 @@ after "deploy:update_code", "rvm:trust_rvmrc"
 
 namespace :deploy do
   desc "Symlinks the database.yml"
-  task :symlink_db, :roles => :app do
-    %w[database.yml mongo.yml secure_variables.rb].each do |file|
+  task :symlink, :roles => :app do
+    %w[database.yml mongo.yml facebooker.yml secure_variables.rb].each do |file|
       run "ln -nfs #{deploy_to}/shared/config/#{file} #{release_path}/config/#{file}"
     end
   end
