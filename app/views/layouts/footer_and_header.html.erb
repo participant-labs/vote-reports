@@ -13,7 +13,7 @@
   <%= yield(:header_content) %>
   </div>
 
-  <%= yield(:footer_and_header_content) || yield %>
+  <%= content_for?(:footer_and_header_content) ? yield(:footer_and_header_content) : yield %>
 <%- end -%>
 
 <%= render :file => 'layouts/footer_only' %>
