@@ -50,7 +50,7 @@ namespace :deploy do
     end
   end
 end
-after 'deploy:update_code', 'deploy:symlink_db'
+after 'deploy:update_code', 'deploy:symlink'
 
 # namespace :monit do
 #   task :reload do
