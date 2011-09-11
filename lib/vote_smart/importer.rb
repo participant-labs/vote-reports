@@ -81,9 +81,6 @@ module VoteSmart
               politicians = Politician.find_all_by_first_name_and_last_name( bio_candidate['firstName'], bio_candidate['lastName'])
               politicians = Politician.find_all_by_last_name(bio_candidate['lastName']) if politicians.empty?
               if politicians.size > 1
-                p bio_candidate['homeState']
-                require 'ruby-debug'
-                debugger
                 politicians =
                   if office['name'].first == 'U.S. House'
                     politicians.select {|politician| politician.representative_terms.any? {|term| term.state.abbreviation == bio_candidate['homeState'] } }
@@ -101,9 +98,6 @@ module VoteSmart
               politicians = Politician.find_all_by_first_name_and_last_name( bio_candidate['firstName'], bio_candidate['lastName'])
               politicians = Politician.find_all_by_last_name(bio_candidate['lastName']) if politicians.empty?
               if politicians.size > 1
-                p bio_candidate['homeState']
-                require 'ruby-debug'
-                debugger
                 politicians =
                   if bio_candidate['political'].to_s.split("\n").detect {|p| p.include?("Representative, United States House of Representatives") }
                     politicians.select {|politician| politician.representative_terms.any? {|term| term.state.abbreviation == bio_candidate['homeState'] } }
