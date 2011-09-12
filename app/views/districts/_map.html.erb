@@ -5,7 +5,7 @@
 <%- if districts.present? -%>
   <div id="map_canvas" style="<%= style %>"></div>
 
-  <% javascript_tag do %>
+  <%= javascript_tag do %>
   <%- if @js -%>
     function init_map() {
   <%- else -%>
