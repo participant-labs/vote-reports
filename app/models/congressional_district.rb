@@ -3,6 +3,7 @@ class CongressionalDistrict < ActiveRecord::Base
   has_many :congressional_district_zip_codes
   has_many :zip_codes, :through => :congressional_district_zip_codes
   belongs_to :district
+  delegate :level, to: :district
 
   has_many :representative_terms
   has_many :representatives, :through => :representative_terms, :source => :politician, :uniq => true do
