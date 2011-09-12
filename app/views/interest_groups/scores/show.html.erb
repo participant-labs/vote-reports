@@ -5,7 +5,7 @@
   <%- end -%>
 
   <%- if @score.evidence.interest_group_ratings.present? -%>
-    <% javascript_tag do %>
+    <%= javascript_tag do %>
     <%- unless @js -%>
       $(function () {
     <%- end -%>
