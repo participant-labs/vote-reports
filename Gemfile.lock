@@ -15,7 +15,7 @@ GEM
     Empact-authlogic (3.0.3)
       activerecord (>= 3.0.7)
       activerecord (>= 3.0.7)
-    Empact-authlogic_rpx (1.1.8)
+    Empact-authlogic_rpx (2.0.0)
       Empact-authlogic (>= 2.1.3)
       Empact-rpx_now (>= 0.6.12)
     Empact-rpx_now (0.7.0)
@@ -291,7 +291,7 @@ PLATFORMS
 DEPENDENCIES
   Empact-activerecord-import (>= 0.3.4)
   Empact-authlogic (>= 3.0.3)
-  Empact-authlogic_rpx (>= 1.1.8)
+  Empact-authlogic_rpx (>= 2.0.0)
   Empact-sexy_pg_constraints
   Paperclip-Autosizer
   ancestry (>= 1.2.0)
