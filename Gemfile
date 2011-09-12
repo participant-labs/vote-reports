@@ -6,7 +6,7 @@ gem 'rails', '3.1.0'
 
 gem 'ancestry', '>=1.2.0'
 gem 'Empact-authlogic', '>=3.0.3', :require => 'authlogic'
-gem 'Empact-authlogic_rpx', '>= 1.1.8', :require => 'authlogic_rpx'
+gem 'Empact-authlogic_rpx', '>= 1.1.8', :require => false # This doesn't support rails 3 initialization as of yet
 gem 'bluecloth', '>=2.0.5'
 gem 'declarative_authorization'
 gem 'delayed_job', '>= 2.0.3'

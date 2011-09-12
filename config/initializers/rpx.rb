@@ -1,3 +1,5 @@
+require 'authlogic_rpx' # This doesn't support rails 3 initialization as of yet, so require it here
+
 begin
   require Rails.root.join('config/secure_variables')
 rescue LoadError
