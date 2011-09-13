@@ -52,31 +52,31 @@ namespace :deploy do
 end
 after 'deploy:update_code', 'deploy:symlink_configs'
 
-# namespace :monit do
-#   task :reload do
-#     sudo "monit reload"
-#   end
-# end
-# 
-# namespace :delayed_job do
-#   task :start, :roles => :app do
-#     sudo "monit start delayed_job"
-#   end
-#   before "delayed_job:start", 'monit:reload'
-#   after "deploy:start", "delayed_job:start"
-# 
-#   task :stop, :roles => :app do
-#     sudo "monit stop delayed_job"
-#   end
-#   before "delayed_job:stop", 'monit:reload'
-#   after "deploy:stop", "delayed_job:stop"
-# 
-#   task :restart, :roles => :app do
-#     sudo "monit restart delayed_job"
-#   end
-#   before "delayed_job:restart", 'monit:reload'
-#   after "deploy:restart", "delayed_job:restart"
-# end
+namespace :monit do
+  task :reload do
+    sudo "monit reload"
+  end
+end
+
+namespace :delayed_job do
+  task :start, :roles => :app do
+    sudo "monit start delayed_job"
+  end
+  before "delayed_job:start", 'monit:reload'
+  after "deploy:start", "delayed_job:start"
+
+  task :stop, :roles => :app do
+    sudo "monit stop delayed_job"
+  end
+  before "delayed_job:stop", 'monit:reload'
+  after "deploy:stop", "delayed_job:stop"
+
+  task :restart, :roles => :app do
+    sudo "monit restart delayed_job"
+  end
+  before "delayed_job:restart", 'monit:reload'
+  after "deploy:restart", "delayed_job:restart"
+end
 
 Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
   $: << File.join(vendored_notifier, 'lib')

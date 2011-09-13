@@ -228,9 +228,9 @@ div.advisor-info {padding-left:30px;}
 
 #many-thanks {padding-left:30px;}
 
-#powered-images-container {width:100%; padding-top: 60px; padding-left:30px;}
-#powered-images-container div {float:left; width:180px; margin-left: 27px;}
-#powered-images-container div#first {float:left; width:180px; margin-left: 0px;}		
+#powered {width:100%; padding-top: 60px; padding-left:30px;}
+#powered div {float:left; width:180px; margin-left: 27px;}
+#powered div#first {float:left; width:180px; margin-left: 0px;}		
 #powered-images-margin {margin-bottom: 60px;}
 
 /* ABOUT PAGE: UNIQUE ELEMENTS */
