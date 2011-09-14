@@ -17,9 +17,6 @@ javascripts:
     - public/javascripts/application.js
 
 stylesheets:
-  widget:
-    - public/stylesheets/widget.css
-
   common:
     - public/stylesheets/vendor/smoothness/jquery-ui-1.8.2.custom.css
     - public/stylesheets/vendor/jquery.Jcrop.css
