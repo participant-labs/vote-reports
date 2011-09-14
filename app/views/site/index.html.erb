@@ -3,7 +3,7 @@
 <div id="hero">
 
   <div id="logoarea">
-    <a href="/"><img src="images/global/votereports_logo.png"></a>
+    <a href="/"><%= image_tag 'global/votereports_logo.png' %></a>
     <%= render 'layouts/account_links' %>
   </div>
 
@@ -33,9 +33,7 @@
   <div class="span-24 last" id="diagram-row-one">
     <div class="span-9"><p class="large-hp-text">At Vote Reports, we believe the most reliable way of gauging a politician's compatibility is by evaluating their voting record. So we made it easy.</p></div>
     <div class="span-15 last">
-      <div class="span-9">
-        <img id="circle1" src="images/homepage/circle_1.png" />
-      </div>
+      <div class="span-9"><%= image_tag 'homepage/circle_1.png', id: 'circle1' %></div>
       <div class="span-6 last" id="grades-matter">
         <span class="section-header">Grades matter</span><br />
         <p class="medium-text">High grades mean the politician is graded well according to the issue they are being evaluated on. Just click on any grade to see the facts that went into it.</p>
@@ -44,20 +42,18 @@
   </div>
 
   <div class="span-24 last" id="diagram-row-two">
-    <div class="span-8">
-      <img id="circle2" src="images/homepage/circle_2.png" />
-    </div>
+    <div class="span-8"><%= image_tag 'homepage/circle_2.png', id: 'circle2' %></div>
     <div class="span-8" id="source-of-ratings">
       <span class="section-header">The source of the ratings</span><br />
       <p class="medium-text">Vote Reports does not rate politicians. Rather, every rating is generated from two sources: interest group ratings (e.g. ACLU, NRA) and legislative agendas from interest groups and members of Vote Reports.</p>
     </div>
     <div class="span-8 last" id="other-grades">
       <div class="span-4">
-        <img src="images/homepage/grade_incomplete.png" />
+        <%= image_tag 'homepage/grade_incomplete.png' %>
         <p class="small-text">Ratings with a colored border are derived from limited sources or from candidates with no voting history.</p>
       </div>
       <div class="span-4 last">
-        <img src="images/homepage/grade_unknown.png"/>
+        <%= image_tag 'homepage/grade_unknown.png' %>
         <p class="small-text">Ratings with a question mark mean that we have no records for the politician on this viewed issue.</p>
       </div>
     </div>
@@ -69,9 +65,7 @@
       <p class="medium-text">Interest groups individually have their own criteria of evaluating a politician. This usually includes voting records, interviews, survey results, and sources of funding. We also import interest group ratings from <a href="http://votesmart.org/">Project VoteSmart</a>.</p>
     </div>
 
-    <div class="span-8">
-      <img id="circle3" src="images/homepage/circle_3.png" />
-    </div>
+    <div class="span-8"><%= image_tag 'homepage/circle_3.png', id: 'circle3' %></div>
 
     <div class="span-8 last" id="groups-explained">
       <%= link_to content_tag(:span, 'Member created reports', :class => "section-header"), reports_path(:from_members => true) %><br />
@@ -81,9 +75,7 @@
 
   <div class="span-24 last" id="diagram-row-four">
     <div class="span-8">&nbsp;</div>
-    <div class="span-8">
-      <img id="circle4" src="images/homepage/circle_4.png" />
-    </div>
+    <div class="span-8"><%= image_tag 'homepage/circle_4.png', id: 'circle4' %></div>
     <div class="span-8 last" id="believe-in-a-cause">
       <%= link_to content_tag(:span, 'Believe in a Cause', :class => "section-header"), causes_path %><br />
       <p class="medium-text">Since many interest groups and member generated reports overlap certain subjects, we combine them into Causes. In essence, it’s a stance on an issue. Collecting many scores helps average the grade and avoid one or more groups from polarizing a politicians grade.</p>
@@ -92,7 +84,7 @@
 
   <div class="span-24 last" id="diagram-row-five">
     <div class="span-8">
-      <img src="images/homepage/imac_preview.jpg" id="preview"/>
+      <%= image_tag 'homepage/imac_preview.jpg', id: 'preview' %>
     </div>
     <div class="span-16 last" id="the-votercard">
       <%= link_to content_tag(:span, 'The VoterCard', :class => 'large-section-header'), new_guide_path %>

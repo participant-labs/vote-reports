@@ -17,7 +17,7 @@
       <div class="foundername">Ben Woosley</div>
       <div class="arial-subtitle">Tech Lead and Founder</div>
       <div class="link"><a href="http://www.participantlabs.com/">participantlabs.com</a></div>
-      <img class="team-image" src="images/about/about_ben.jpg" />
+      <%= image_tag 'about/about_ben.jpg', class: 'team-image' %>
       <p class="medium-text">Ben has been fascinated by politics and its role in society since his first substantive encounter in the 12th grade. Meanwhile his professional inclinations have drawn him to bringing order and light to large disordered sets of data. His personal goal is to use information to decentralize political power.</p>
     </div>
   </div>
@@ -29,7 +29,7 @@
       <div class="foundername">James Teow</div>
       <div class="arial-subtitle">Creative Lead and Partner</div>
       <div class="link"><a href="http://www.jaems.info/">jaems.info</a></div>
-      <img class="team-image" src="images/about/about_james.jpg" />
+      <%= image_tag 'about/about_james.jpg', class: 'team-image' %>
       <p class="medium-text">James moved to Brooklyn in order to work alongside some of the top creative designers and developers in the world. His design passion has been converting complicated streams of data into something accessible to the masses. His hope is that design and politics will mesh together in order to empower citizens with valuable information.</p>
     </div>
   </div>
@@ -46,7 +46,7 @@
   <div class="span-21 last" id="content-container">
 
     <div class="span-10">
-      <div class="span-3"><img class="advisor-image" src="images/about/about_cindy.jpg" /></div>
+      <div class="span-3"><%= image_tag 'about/about_cindy.jpg', class: 'advisor-image' %></div>
       <div class="span-7 last">
         <div class="advisor-info">
           <div class="advisor-name">Cindy Gallop</div>
@@ -59,7 +59,7 @@
     <div class="span-1">&nbsp;</div>
 
     <div class="span-10 last" style="margin-left:-10px;">
-      <div class="span-3"><img class="advisor-image" src="images/about/about_stevie.jpg" /></div>
+      <div class="span-3"><%= image_atg 'about/about_stevie.jpg', class: 'advisor-image' %></div>
       <div class="span-7 last">
         <div class="advisor-info">
           <div class="advisor-name">Stevie Clifton</div>
@@ -94,10 +94,10 @@
 
   <div class="span-21 last" id="powered-images-margin">
     <div id="powered">
-      <div id="first"><a href="http://www.govtrack.org"><img src="images/about/powered_govtrack.jpg"></a><p class="small-text"><a href="http://www.govtrack.us/developers/data.xpd">Bill, Vote and Politician Data, and Politician Photos</a></p></div>
-      <div><a href="http://www.votesmart.org"><img src="images/about/powered_votesmart.jpg"></a><p class="small-text"><a href="http://votesmart.org/services_api.php">Interest Group Ratings, Election and Candidacy Data, Politician Photos</a></p></div>
-      <div><a href="http://www.mobilecommons.com"><img src="images/about/powered_commons.jpg"></a><p class="small-text"><a href="http://congress.mcommons.com/">Maps of State and Federal Districts</a></p></div>
-      <div><a href="http://www.sunlightfoundation.com"><img src="images/about/powered_sunlight.jpg"></a><p class="small-text"><a href="http://services.sunlightlabs.com/docs/Sunlight_Congress_API/">Politician Contact Info</a></p></div>
+      <div id="first"><a href="http://www.govtrack.org"><%= image_tag 'about/powered_govtrack.jpg' %></a><p class="small-text"><a href="http://www.govtrack.us/developers/data.xpd">Bill, Vote and Politician Data, and Politician Photos</a></p></div>
+      <div><a href="http://www.votesmart.org"><%= image_tag 'about/powered_votesmart.jpg' %></a><p class="small-text"><a href="http://votesmart.org/services_api.php">Interest Group Ratings, Election and Candidacy Data, Politician Photos</a></p></div>
+      <div><a href="http://www.mobilecommons.com"><%= image_tag 'about/powered_commons.jpg' %></a><p class="small-text"><a href="http://congress.mcommons.com/">Maps of State and Federal Districts</a></p></div>
+      <div><a href="http://www.sunlightfoundation.com"><%= image_tag 'about/powered_sunlight.jpg' %></a><p class="small-text"><a href="http://services.sunlightlabs.com/docs/Sunlight_Congress_API/">Politician Contact Info</a></p></div>
     </div>
 </div>
 
