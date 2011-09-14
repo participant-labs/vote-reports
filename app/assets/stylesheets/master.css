@@ -188,7 +188,7 @@ ul.menu a:visited {text-decoration:none;}
 ul.menu a:hover {position:relative; top:1px; text-shadow: none;}
 
 div.search-container {margin: 15px 0px 0px 35px;}
-div.custom-search {background:url('../images/global/search_box.png') no-repeat;padding:0px 0px 4px 35px;}
+div.custom-search {background:url('global/search_box.png') no-repeat;padding:0px 0px 4px 35px;}
 div.custom-search input {
     background-color: #3b242e;
     border:none;
@@ -277,7 +277,7 @@ div.global-menu-row {width:100%; height:60px; background-color:#442a36; border-t
 p span.emphasize {color:#ff5500;} /* Orange highlights for any paragraph */
 
 /* FOOTER */
-#footer {background-color:#5d5b56; background-image:url('../images/footer/footer_bg.jpg'); background-position: bottom; background-repeat:no-repeat; height:244px; padding-top:20px;}
+#footer {background-color:#5d5b56; background-image:url('footer/footer_bg.jpg'); background-position: bottom; background-repeat:no-repeat; height:244px; padding-top:20px;}
 
 
 #footer .sidebar-links {font-size: 11px; font-weight:500; letter-spacing:0.1px; float: right; margin-bottom: 0.5em;}
@@ -296,7 +296,7 @@ p span.emphasize {color:#ff5500;} /* Orange highlights for any paragraph */
 
 /* HERO PLACEMENT AND BACKGROUND */
 #logoarea {padding-top:20px; width:940px; align:center; margin-left:auto; margin-right:auto;}
-#hero {height: 520px; padding:0px; margin:0px; background-image:url('../images/homepage/hero_background.jpg'); background-position: top; }
+#hero {height: 520px; padding:0px; margin:0px; background-image:url('homepage/hero_background.jpg'); background-position: top; }
 #center-box {position: absolute; width:100%; top:110px; }
 #action-box {background-color:white; align:center; margin-left:auto; margin-right:auto; padding:40px 25px 25px 25px; height:261px; width:276px;}
 #hero-copy {font-family:"Georgia", Times, serif; font-size:16px; line-height: 24px; letter-spacing:-0.2px; color: #000000; position: relative; top: 10px; margin-bottom:20px;}
@@ -309,7 +309,7 @@ p span.emphasize {color:#ff5500;} /* Orange highlights for any paragraph */
 
 
 /* POSITIONING FOR INSTRUCTIONS BELOW HERO */
-#circlebg {height: 205px; margin-bottom:-205px; background-image:url('../images/homepage/bg_grades.png'); background-repeat:no-repeat; background-position: center top;}
+#circlebg {height: 205px; margin-bottom:-205px; background-image:url('homepage/bg_grades.png'); background-repeat:no-repeat; background-position: center top;}
 
 div#instruct-container {margin-top:50px;} 
 
@@ -343,7 +343,7 @@ img#preview {position:relative; left:-200px;z-index:-5;}
 /* SPRITES */
 a.call-to-action {
 	display:block;
-	background: url('../images/homepage/sprite_button.png') 0px 0px;
+	background: url('homepage/sprite_button.png') 0px 0px;
 	width: 235px;
 	height: 55px;
 }

@@ -24,7 +24,7 @@ ul.details li h2 {
 
 ul.details li.act-hover h2 {
   padding-right: 1em;
-  background: transparent url(../images/bullet_arrow_down.png) center right no-repeat;
+  background: transparent url(bullet_arrow_down.png) center right no-repeat;
 }
 
 ul.details li h2 {

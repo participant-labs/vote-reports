@@ -8,7 +8,7 @@
       <%= hidden_field_tag :return_to, new_guide_path(:from => :set_location) %>
       <dl class="<%= @politicians ? 'span-8' : 'span-20' %>">
         <dt><%= label_tag :location, 'Your Location' %></dt>
-        <dd><%= text_field_tag :location, session[:declared_location], :class => 'title fieldtag round-4', :title => 'Address or zip code' %></dd>
+        <dd><%= text_field_tag :location, session[:declared_location], :class => 'title round-4', :placeholder => 'Address or zip code' %></dd>
       </dl>
       <%- if @politicians -%>
       <%- @politicians = @politicians.group_by(&:current_office_type) -%>

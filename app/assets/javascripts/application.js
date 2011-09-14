@@ -1,3 +1,17 @@
+//= require jquery-1.4.3.min
+//= require jquery-ui-1.8.2.custom.min
+//= require jquery.enumerable
+//= require jquery.blockUI
+//= require jquery.hoverIntent
+//= require jquery.defaultvalue
+//= require jquery.Jcrop
+//= require jquery.cookie
+//= require jquery.tipsy
+//= require highcharts/highcharts.src
+//= require fancybox/jquery.fancybox-1.3.1
+//= require replace
+//= require geolocation
+
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 //
@@ -43,8 +57,8 @@
       }
     });
 
-    $('.fieldtag').fieldtag();
-    $('label.fieldtag').hide();
+    $('[placeholder]').defaultValue();
+    $('label.placeholder').hide();
 
     $("#nav_search").autocomplete({
       source: "/search",
