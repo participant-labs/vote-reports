@@ -37,7 +37,7 @@
       <%- end -%>
       <%- if active_amendments.opposed.present? -%>
       <ul>
-        <%- active_amendments.opposed.each do |criterion| -%>
+        <%- active_amendments.opposed.except(:select).select('DISTINCT(amendment_criteria.*), amendments.offered_on').each do |criterion| -%>
           <li class="amendment_criterion"><span><%= render 'amendment_criteria/amendment_criterion', :amendment_criterion => criterion, :show_year => true %></span></li>
         <%- end -%>
       </ul>
