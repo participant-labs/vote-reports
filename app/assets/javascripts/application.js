@@ -1,4 +1,3 @@
-//= require jquery-1.4.3.min
 //= require jquery-ui-1.8.2.custom.min
 //= require jquery.enumerable
 //= require jquery.blockUI
