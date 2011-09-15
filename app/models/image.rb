@@ -1,12 +1,12 @@
 class Image < PaperclipAutosizer
   has_attached_file :thumbnail,
-        :styles => {
-          :large => ["200x200", :png],
-          :header =>  ["120x120", :png],
-          :normal => ["100x100", :png],
-          :tiny => ['35x35', :png]
+        styles: {
+          large: ["200x200", :png],
+          header:  ["120x120", :png],
+          normal: ["100x100", :png],
+          tiny: ['35x35', :png]
         },
-        :processors => [:autosize, :jcropper],
+        processors: [:autosize, :jcropper],
         :default_style => :normal
 
   after_post_process :autosize_attached_files
@@ -14,15 +14,15 @@ class Image < PaperclipAutosizer
   validates_attachment_presence :thumbnail
   validates_attachment_content_type :thumbnail, :content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-png']
 
-  delegate :url, :to => :thumbnail
+  delegate :url, to: :thumbnail
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
-  after_update :reprocess_thumbnail, :if => :cropping?
+  after_update :reprocess_thumbnail, if: :cropping?
 
   class << self
     def laws_i_like
-      first(:conditions => {:thumbnail_file_name => 'lawsilike.png'})
+      first(conditions: {:thumbnail_file_name => 'lawsilike.png'})
     end
   end
 

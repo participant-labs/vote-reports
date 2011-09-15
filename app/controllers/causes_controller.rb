@@ -7,10 +7,10 @@ class CausesController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :partial => 'causes/list', :locals => {:causes => @causes}
+        render partial: 'causes/list', locals: {causes: @causes}
       }
       format.json {
-        render :json => Cause.all
+        render json: Cause.all
       }
     end
   end
@@ -24,22 +24,22 @@ class CausesController < ApplicationController
       redirect_to @cause
     else
       flash[:error] = "Unable to create Cause"
-      render :action => :new
+      render action: :new
     end
   end
 
   def show
     @subjects = @cause.subjects.for_tag_cloud.all(
-      :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
-      :limit => 3)
+      select: "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
+      limit: 3)
 
     respond_to do |format|
       format.html {
         if request.path != cause_path(@cause)
-          redirect_to cause_path(@cause), :status => 301
+          redirect_to cause_path(@cause), status: 301
           return
         end
-        @related_causes = @cause.related_causes.all(:limit => 3)
+        @related_causes = @cause.related_causes.all(limit: 3)
       }
       format.json {
         cause_hash = @cause.as_json
@@ -47,14 +47,14 @@ class CausesController < ApplicationController
           "subjects" => @subjects,
           "related_causes" => @cause.related_causes
         )
-        render :json => cause_hash
+        render json: cause_hash
       }
     end
   end
 
   def edit
     if request.path != edit_cause_path(@cause)
-      redirect_to edit_cause_path(@cause), :status => 301
+      redirect_to edit_cause_path(@cause), status: 301
       return
     end
   end
@@ -66,7 +66,7 @@ class CausesController < ApplicationController
       redirect_to @cause
     else
       flash[:error] = "Unable to update Cause"
-      render :action => :edit
+      render action: :edit
     end
   end
 

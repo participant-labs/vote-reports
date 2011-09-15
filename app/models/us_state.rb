@@ -72,11 +72,11 @@ class UsState < ActiveRecord::Base
   has_many :elections, :foreign_key => 'state_id'
 
   def races
-    Race.where(:elections => {:state_id => self}).joins(:election_stage => :election)
+    Race.where(elections: {:state_id => self}).joins(:election_stage => :election)
   end
 
   has_many :congressional_districts
-  has_many :representative_terms, :through => :congressional_districts
+  has_many :representative_terms, through: :congressional_districts
   def representatives
     Politician.representatives_from_state(self)
   end
@@ -86,7 +86,7 @@ class UsState < ActiveRecord::Base
   end
 
   has_many :senate_terms
-  has_many :senators, :through => :senate_terms, :source => :politician, :uniq => true do
+  has_many :senators, through: :senate_terms, source: :politician, uniq: true do
     def in_office
       where(['politicians.current_office_type = ?', 'SenateTerm'])
     end

@@ -14,11 +14,11 @@
         headshot = politician.headshot
         score = score_for(scores, politician)
       -%>
-      <td><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true, :headshot_spacer => true %></td>
-      <td><%= render 'reports/scores/score', :score => score, :hide_evidence => true %></td>
+      <td><%= render 'politicians/politician', politician: politician, :headshot_style => :tiny, :name_only => true, :headshot_spacer => true %></td>
+      <td><%= render 'reports/scores/score', score: score, :hide_evidence => true %></td>
       <td class="score_sources">
         <%- if score -%>
-          <%= link_to score.evidence_description.to_i, report_score_path(score), :class => 'fancyboxy' %>
+          <%= link_to score.evidence_description.to_i, report_score_path(score), class: 'fancyboxy' %>
         <%- else -%>
           0
         <%- end -%>

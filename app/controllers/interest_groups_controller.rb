@@ -1,6 +1,6 @@
 class InterestGroupsController < ApplicationController
   filter_resource_access
-  cache_sweeper :interest_group_sweeper, :only => [:create, :update]
+  cache_sweeper :interest_group_sweeper, only: [:create, :update]
 
   def index
     params[:subjects] ||= []
@@ -10,33 +10,33 @@ class InterestGroupsController < ApplicationController
       else
         InterestGroup.for_subjects(params[:subjects]).order('name').page(params[:page])
       end
-    @subjects = Subject.tag_cloud_for_interest_groups_matching(params[:term]).all(:limit => 25)
+    @subjects = Subject.tag_cloud_for_interest_groups_matching(params[:term]).all(limit: 25)
 
     respond_to do |format|
       format.html
       format.js {
-        render 'interest_groups/index', :layout => false
+        render 'interest_groups/index', layout: false
       }
       format.json {
-        render :json => @interest_groups
+        render json: @interest_groups
       }
     end
   end
 
   def show
     @subjects = @interest_group.subjects.for_tag_cloud.all(
-      :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
-      :limit => 3)
+      select: "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
+      limit: 3)
     respond_to do |format|
       format.html {
         if request.path != interest_group_path(@interest_group)
-          redirect_to interest_group_path(@interest_group), :status => 301
+          redirect_to interest_group_path(@interest_group), status: 301
           return
         end
-        @causes = @interest_group.causes.all(:limit => 3)
+        @causes = @interest_group.causes.all(limit: 3)
       }
       format.json {
-        render :json => @interest_group.as_json.merge(:subject => @subjects, :causes => @interest_group.causes)
+        render json: @interest_group.as_json.merge(subject: @subjects, causes: @interest_group.causes)
       }
     end
   end
@@ -50,7 +50,7 @@ class InterestGroupsController < ApplicationController
       redirect_to @interest_group
     else
       flash[:error] = "Unable to create interest group"
-      render :action => :new
+      render action: :new
     end
   end
 
@@ -69,7 +69,7 @@ class InterestGroupsController < ApplicationController
       redirect_to @interest_group
     else
       flash[:error] = "Unable to update interest group"
-      render :action => :edit
+      render action: :edit
     end
   end
 

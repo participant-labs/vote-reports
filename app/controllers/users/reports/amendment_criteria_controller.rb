@@ -5,34 +5,34 @@ class Users::Reports::AmendmentCriteriaController < ApplicationController
 
   def new
     if request.path != new_user_report_amendment_criterion_path(@user, @report)
-      redirect_to new_user_report_amendment_criterion_path(@user, @report), :status => 301
+      redirect_to new_user_report_amendment_criterion_path(@user, @report), status: 301
       return
     end
     @bill = Bill.find(params[:bill_id])
     @amendments = @bill.amendments.order('chamber, number').page(params[:page])
 
-    render :partial => 'reports/amendment_criteria/table', :locals => {
-      :report => @report, :bill => @bill, :amendments => @amendments
+    render partial: 'reports/amendment_criteria/table', locals: {
+      report: @report, bill: @bill, amendments: @amendments
     }
   end
 
   def create
     if @report.update_attributes(params[:report].slice(:amendment_criteria_attributes))
       flash[:notice] = "Successfully updated report amendments."
-      redirect_to edit_user_report_path(@user, @report, :anchor => 'Add_Bills')
+      redirect_to edit_user_report_path(@user, @report, anchor: 'Add_Bills')
     else
-      render :action => 'new', :layout => false
+      render action: 'new', layout: false
     end
   end
 
   def index
-    render :layout => false
+    render layout: false
   end
 
   def destroy
     @report.amendment_criteria.find(params[:id]).destroy
     flash[:notice] = "Successfully deleted amendment from report agenda"
-    redirect_to edit_user_report_path(@user, @report, :anchor => 'Edit_Agenda')
+    redirect_to edit_user_report_path(@user, @report, anchor: 'Edit_Agenda')
   end
 
   private

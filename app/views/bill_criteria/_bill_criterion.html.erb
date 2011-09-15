@@ -1,9 +1,9 @@
 <%- with_support ||= false -%>
 
 <%- if with_support -%>
-  <%= render 'bills/bill', :bill => bill_criterion.bill %> - <%= support_or_oppose(bill_criterion) %> <%= criterion_status(bill_criterion) %>
+  <%= render 'bills/bill', bill: bill_criterion.bill %> - <%= support_or_oppose(bill_criterion) %> <%= criterion_status(bill_criterion) %>
 <%- else -%>
   <%- evidence = criterion_evidence(bill_criterion) -%>
 
-  <%= render 'bills/bill', :bill => bill_criterion.bill %> <%= criterion_status(bill_criterion) %> <%=  raw "- #{evidence}" if evidence %>
+  <%= render 'bills/bill', bill: bill_criterion.bill %> <%= criterion_status(bill_criterion) %> <%=  raw "- #{evidence}" if evidence %>
 <%- end -%>

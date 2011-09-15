@@ -1,7 +1,7 @@
 <%- title "#{@user.username}'s Published Reports" -%>
 
 <div class="section">
-  <h2><%= render 'users/user', :user => @user, :thumbnail_size => 50, :no_links => true %>'s Published Reports</h2>
+  <h2><%= render 'users/user', user: @user, :thumbnail_size => 50, :no_links => true %>'s Published Reports</h2>
 
   <%- if @reports.empty? -%>
     <%- if @user == current_user -%>
@@ -12,7 +12,7 @@
   <%- else -%>
     <ul>
     <% @reports.each do |report| %>
-      <li><%= render 'reports/report', :report => report %></li>
+      <li><%= render 'reports/report', report: report %></li>
     <% end %>
     </ul>
   <%- end -%>

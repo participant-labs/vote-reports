@@ -5,8 +5,8 @@ class Reports::BillCriteriaController < ApplicationController
     @report = Report.find(params[:report_id])
     @criteria = @report.bill_criteria.autofetch_from!(params[:source])
 
-    render :partial => 'reports/bill_criteria/table', :locals => {
-      :report => @report, :criteria => @criteria
+    render partial: 'reports/bill_criteria/table', locals: {
+      report: @report, criteria: @criteria
     }
   end
 end

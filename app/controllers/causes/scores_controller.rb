@@ -8,19 +8,19 @@ class Causes::ScoresController < ApplicationController
     respond_to do |format|
       format.html {
         if request.path != cause_report_scores_path(@cause)
-          redirect_to cause_report_scores_path(@cause), :status => 301
+          redirect_to cause_report_scores_path(@cause), status: 301
           return
         end
 
-        render :layout => false
+        render layout: false
       }
       format.js {
-        render :partial => 'reports/scores/table', :locals => {
-          :report => @report, :scores => @scores, :replace => 'scores', :target_path => cause_report_scores_path(@cause)
+        render partial: 'reports/scores/table', locals: {
+          report: @report, scores: @scores, replace: 'scores', :target_path => cause_report_scores_path(@cause)
         }
       }
       format.json {
-        render :json => @report.as_json.merge(:scores => @report.scores.as_json)
+        render json: @report.as_json.merge(scores: @report.scores.as_json)
       }
     end
   end
@@ -31,7 +31,7 @@ class Causes::ScoresController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :layout => false
+        render layout: false
       }
     end
   end

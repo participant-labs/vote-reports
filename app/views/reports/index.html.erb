@@ -5,16 +5,16 @@
 
   <p>Our politician report cards are created by people like you to condense all the complexity of politics to simple letter grades.  And if you can't find your cause represented below, you can always <%= link_to 'create your own', new_report_path %>.</p>
 
-  <%= render 'reports/navigate', :replace => 'content', :path => reports_path, :subjects => @subjects %>
+  <%= render 'reports/navigate', replace: 'content', path: reports_path, subjects: @subjects %>
 </div>
 
 <div class="section">
   <%- if @reports.present? -%>
     <h3><%= @title %></h3>
-    <%= render 'reports/list', :reports => @reports, :replace => 'content' %>
+    <%= render 'reports/list', reports: @reports, replace: 'content' %>
   <%- else -%>
     <h3>No Reports Found - Try again?</h3>
     <p>Unfortunately, we couldn't find any reports for "<%= params[:term] %>," but that doesn't mean we don't have what you're looking for.  Try another search, or select a subject from the list below:</p>
-    <%= render 'subjects/cloud', :subjects => @subjects %>
+    <%= render 'subjects/cloud', subjects: @subjects %>
   <%- end -%>
 </div>

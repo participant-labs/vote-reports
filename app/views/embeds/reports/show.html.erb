@@ -4,19 +4,19 @@
   <div class="embed">
     <% cache dom_id(@report, :embed_header) do %>
       <div class="header">
-        <%= link_to report_name(@report), report_url(@report), :class => 'report_title' %>
+        <%= link_to report_name(@report), report_url(@report), class: 'report_title' %>
         <%- if @report.user -%>
-          <span class="report_creator">by <%= render 'users/user', :user => @report.user %></span>
+          <span class="report_creator">by <%= render 'users/user', user: @report.user %></span>
         <%- end -%>
       </div>
     <% end %>
 
     <div id="embeded_report_scores">
       <dl class="report_scores">
-        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.select {|p| p.current_office_type == 'PresidentialTerm'} %>
+        <%= render 'embeds/politicians/scores', scores: @scores, politicians: @politicians.select {|p| p.current_office_type == 'PresidentialTerm'} %>
 
         <dt>Senators of <%= @location.state %></dt>
-        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => @politicians.select {|p| p.current_office_type == 'SenateTerm'} %>
+        <%= render 'embeds/politicians/scores', scores: @scores, politicians: @politicians.select {|p| p.current_office_type == 'SenateTerm'} %>
 
         <%- reps = @politicians.select {|p| p.current_office_type == 'RepresentativeTerm'} -%>
         <%- if reps.size == 1 -%>
@@ -24,7 +24,7 @@
         <%- else -%>
           <dt>Reps of <%= geo_description(@location) %></dt>
         <%- end -%>
-        <%= render 'embeds/politicians/scores', :scores => @scores, :politicians => reps %>
+        <%= render 'embeds/politicians/scores', scores: @scores, politicians: reps %>
       </dl>
     </div>
 

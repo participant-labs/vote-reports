@@ -5,6 +5,6 @@
   <h4><%= follower_count(report) || content_tag(:p, "Like this Report?") %></h4>
   <p>Following gives you access to special features and updates.</p>
   <div class="clearfix">
-    <%= link_to('Follow this Report', report_follows_path(report), :method => :post, :class => 'button') %>
+    <%= link_to('Follow this Report', report_follows_path(report), method: :post, class: 'button') %>
   </div>
 <%- end -%>

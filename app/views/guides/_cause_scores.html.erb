@@ -8,15 +8,15 @@
     <h2>Your Stance</h2>
     <dl>
       <dt class="<%= 'selected ' if !selected %>round-4">
-        <%= link_to 'Overall Score', new_guide_path(:from => 'location'), :class => 'act-replace', :rel => 'instant_scores' %>
+        <%= link_to 'Overall Score', new_guide_path(from: 'location'), class: 'act-replace', rel: 'instant_scores' %>
       </dt>
       <dt>Supported</dt>
       <% guide.reports_supported.each do |report| %>
-        <%= render 'guides/stance', :report => report, :selected => selected %>
+        <%= render 'guides/stance', report: report, selected: selected %>
       <% end %>
       <dt>Opposed</dt>
       <% guide.reports_opposed.each do |report| %>
-        <%= render 'guides/stance', :report => report, :selected => selected %>
+        <%= render 'guides/stance', report: report, selected: selected %>
       <% end %>
     </ul>
   </div>
@@ -46,11 +46,11 @@
                 score = score_for(scores, candidacy.politician)
                 politicians.delete(candidacy.politician)
               -%>
-              <td><%= render 'politicians/politician', :politician => candidacy.politician, :headshot_style => :tiny, :name_only => true, :headshot_spacer => true %></td>
-              <td><%= render 'reports/scores/score', :score => score, :hide_evidence => true %></td>
+              <td><%= render 'politicians/politician', politician: candidacy.politician, :headshot_style => :tiny, :name_only => true, :headshot_spacer => true %></td>
+              <td><%= render 'reports/scores/score', score: score, :hide_evidence => true %></td>
               <td><div class="score_sources">
                 <%- if score -%>
-                  <%= link_to score.evidence_description.to_i, report_score_path(score), :class => 'fancyboxy' %>
+                  <%= link_to score.evidence_description.to_i, report_score_path(score), class: 'fancyboxy' %>
                 <%- else -%>
                   0
                 <%- end -%>
@@ -67,17 +67,17 @@
   <%- grouped_politicians = politicians.group_by(&:current_office_type) -%>
 
   <%- if (presidents = grouped_politicians['PresidentialTerm']).present? -%>
-    <%= render 'guides/incumbent_scores', :office => 'President', :politicians => presidents, :scores => scores %>
+    <%= render 'guides/incumbent_scores', office: 'President', politicians: presidents, scores: scores %>
     <%- politicians -= presidents -%>
   <%- end -%>
 
   <%- if (senators = grouped_politicians['SenateTerm']).present? -%>
-    <%= render 'guides/incumbent_scores', :office => "Senators for #{ state_name(guide.congressional_district.state) }".html_safe, :politicians => senators, :scores => scores %>
+    <%= render 'guides/incumbent_scores', office: "Senators for #{ state_name(guide.congressional_district.state) }".html_safe, politicians: senators, scores: scores %>
     <%- politicians -= senators -%>
   <%- end -%>
 
   <%- if (representatives = grouped_politicians['RepresentativeTerm']).present? -%>
-    <%= render 'guides/incumbent_scores', :office => "Representative #{ "for the #{congressional_district_name(guide.congressional_district) }" if guide.congressional_district }".html_safe, :politicians => representatives, :scores => scores %>
+    <%= render 'guides/incumbent_scores', office: "Representative #{ "for the #{congressional_district_name(guide.congressional_district) }" if guide.congressional_district }".html_safe, politicians: representatives, scores: scores %>
     <%- politicians -= representatives -%>
   <%- end -%>
 </table>

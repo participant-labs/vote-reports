@@ -1,7 +1,7 @@
 <%- title "#{h(@user.username)} - Users" -%>
 
 <div class="section">
-  <h2><%= render 'users/user', :user => @user, :thumbnail_size => 100 %></h2>
+  <h2><%= render 'users/user', user: @user, :thumbnail_size => 100 %></h2>
 
   <p><%= link_to 'Edit Profile', edit_user_path(@user) %></p>
 </div>
@@ -9,13 +9,13 @@
 <div class="section">
   <div class="ui-tabs" id="<%= dom_id(@user, :tabs) %>">
     <ul>
-      <li><%= link_to '#Your_Reports', :title => 'Your Reports' do %>
+      <li><%= link_to '#Your_Reports', title: 'Your Reports' do %>
         <span>Your Reports <span class="count"><%= @user.reports.except_personal.count %></span></span>
       <% end %></li>
-      <li><%= link_to '#Followed_Reports', :title => 'Followed Reports' do %>
+      <li><%= link_to '#Followed_Reports', title: 'Followed Reports' do %>
         <span>Reports you Follow <span class="count"><%= @user.report_follows.count %></span></span>
       <% end %></li>
-      <li><%= link_to content_tag(:span, 'Personalized Report'), user_report_scores_path(@user, :format => :html), :title => 'Personalized Report' %></li>
+      <li><%= link_to content_tag(:span, 'Personalized Report'), user_report_scores_path(@user, format: :html), title: 'Personalized Report' %></li>
     </ul>
 
     <div id="Your_Reports" class="reports">
@@ -23,8 +23,8 @@
       <%- if @reports.empty? -%>
         <p>You haven't created a report yet - <%= link_to "try it out!", new_user_report_path(@user) %></p>
       <%- else -%>
-        <%= render 'users/reports/list', :reports => @reports.published, :title => 'Published Reports' %>
-        <%= render 'users/reports/list', :reports => @reports.unpublished, :title => 'Personal Reports' %>
+        <%= render 'users/reports/list', reports: @reports.published, title: 'Published Reports' %>
+        <%= render 'users/reports/list', reports: @reports.unpublished, title: 'Personal Reports' %>
       <%- end -%>
       <p><%= link_to "Create a Report", new_user_report_path(@user) %></p>
     </div>
@@ -33,7 +33,7 @@
       <h2>Reports you Follow</h2>
       <ul class="reports">
       <% @user.followed_reports.each do |report| %>
-        <li><%= render 'reports/report', :report => report %></li>
+        <li><%= render 'reports/report', report: report %></li>
       <% end %>
       </ul>
     </div>

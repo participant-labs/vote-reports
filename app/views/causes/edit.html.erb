@@ -3,7 +3,7 @@
 <div class="ui-tabs" id="<%= dom_id(@cause, :edit_tabs) %>">
   <ul>
     <li><a href="#Edit_Cause" title="Edit Cause">Edit Cause</a></li>
-    <li><%= link_to content_tag(:span, 'Edit Thumbnail'), edit_cause_image_path(@cause, :format => :html), :title => 'Edit Thumbnail' %></li>
+    <li><%= link_to content_tag(:span, 'Edit Thumbnail'), edit_cause_image_path(@cause, format: :html), title: 'Edit Thumbnail' %></li>
     <%- permitted_to? :destroy, @cause do -%>
       <li><%= link_to 'Delete Cause', '#delete_cause' %></li>
     <%- end -%>
@@ -13,7 +13,7 @@
     <h1>Edit Cause: <%= @cause.name %></h1>
 
     <%= form_for @cause do |f| %>
-      <%= render 'causes/fields', :f => f %>
+      <%= render 'causes/fields', f: f %>
       <p><%= f.submit 'Update Cause' %></p>
     <% end %>
   </div>
@@ -21,8 +21,8 @@
   <%- permitted_to? :destroy, @cause do -%>
     <div id="delete_cause">
       <h2>Delete Cause</h2>
-      <%= button_to 'Delete Cause', cause_path(@cause), :method => :delete,
-                    :confirm => 'Are you sure you want to destroy this cause?' %>
+      <%= button_to 'Delete Cause', cause_path(@cause), method: :delete,
+                    confirm: 'Are you sure you want to destroy this cause?' %>
     </div>
   <%- end -%>
 </div>

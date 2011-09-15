@@ -1,7 +1,7 @@
 <%- show_year ||= false -%>
 
 <span class="amendment">
-  <%= link_to bill_amendment_path(amendment.bill, amendment), :class => 'fancyboxy title' do %>
+  <%= link_to bill_amendment_path(amendment.bill, amendment), class: 'fancyboxy title' do %>
     <%= amendment.display_name %><%= " (#{amendment.offered_on.year})" if show_year %>: <%= amendment.title %>
   <% end %>
 </span>

@@ -1,19 +1,19 @@
 <%- title 'Guide' -%>
 
 <div class="section">
-  <%= form_tag new_guide_path, :method => :get, :class => 'act-replace', :rel => 'content' do %>
+  <%= form_tag new_guide_path, method: :get, class: 'act-replace', rel: 'content' do %>
     <dl>
       <dt><%= label_tag :representing, '1) Enter your zip code' %></dt>
       <dd>
-        <%= text_field_tag :representing, requested_location, :tabindex => 1, :size => 10 %>
+        <%= text_field_tag :representing, requested_location, tabindex: 1, size: 10 %>
         <%= submit_tag 'Show Reps' %>
       </dd>
       <dt>2) Pick your causes</dt>
-      <dd><%= render 'causes/selector', :causes => @causes, :target => lambda {|causes|
-        [new_guide_path(:causes => causes, :representing => params[:representing]),
-        {:class => 'act-replace', :rel => 'content'}] } %></dd>
+      <dd><%= render 'causes/selector', causes: @causes, target: lambda {|causes|
+        [new_guide_path(causes: causes, representing: params[:representing]),
+        {class: 'act-replace', rel: 'content'}] } %></dd>
       <dt>3) See your reps' report cards</dt>
-      <dd><%= render 'scores/table', :politicians => @politicians, :reports => @topical_reports %></dd>
+      <dd><%= render 'scores/table', politicians: @politicians, reports: @topical_reports %></dd>
     </dl>
   <% end %>
 </div>

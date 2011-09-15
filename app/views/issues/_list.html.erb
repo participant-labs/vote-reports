@@ -1,7 +1,7 @@
 <%= paginate issues %>
 <ul>
   <%- issues.each do |issue| -%>
-    <li><%= render 'issues/issue', :issue => issue %></li>
+    <li><%= render 'issues/issue', issue: issue %></li>
   <%- end -%>
 </ul>
 <%= paginate issues %>

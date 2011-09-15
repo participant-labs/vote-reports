@@ -3,7 +3,7 @@
 
   <div class="global-account-row">
     <div class="container">
-      <div class="span-4"><%= link_to image_tag('global/logo_small.png', :id => 'small-logo'), root_path %></div>
+      <div class="span-4"><%= link_to image_tag('global/logo_small.png', id: 'small-logo'), root_path %></div>
       <div class="span-20 last" id="account-position">
         <%= render 'layouts/account_links' %>
       </div>
@@ -16,4 +16,4 @@
   <%= content_for?(:footer_and_header_content) ? yield(:footer_and_header_content) : yield %>
 <%- end -%>
 
-<%= render :file => 'layouts/footer_only' %>
+<%= render file: 'layouts/footer_only' %>

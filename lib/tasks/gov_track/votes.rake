@@ -2,7 +2,7 @@ namespace :gov_track do
   namespace :votes do
 
     desc "Process Votes"
-    task :unpack => [:support, :politicians] do
+    task unpack: [:support, :politicians] do
       meetings do |meeting|
         existing_rolls = @congress.rolls.index_by {|r| "#{r.where.first}#{r.year}-#{r.number}"}
         puts "Meeting #{meeting}"
@@ -37,21 +37,21 @@ namespace :gov_track do
             end
           next if subject.nil?
           roll = Roll.create(
-            :year => year,
-            :number => number,
-            :subject => subject,
-            :congress => @congress,
-            :where => data['where'].to_s,
+            year: year,
+            number: number,
+            subject: subject,
+            congress: @congress,
+            where: data['where'].to_s,
             :voted_at => data['datetime'].to_s,
-            :aye => data['aye'].to_s,
-            :nay => data['nay'].to_s,
+            aye: data['aye'].to_s,
+            nay: data['nay'].to_s,
             :not_voting => data['nv'].to_s,
-            :present => data['present'].to_s,
-            :result => data.at('result').inner_text,
-            :required => data.at('required').inner_text,
-            :question => data.at('question').inner_text,
+            present: data['present'].to_s,
+            result: data.at('result').inner_text,
+            required: data.at('required').inner_text,
+            question: data.at('question').inner_text,
             :roll_type => data.at('type').inner_text,
-            :congress => @congress
+            congress: @congress
           )
           inserts = data.xpath('voter').map { |vote|
             voter = @politicians[vote['id'].to_i]

@@ -2,14 +2,14 @@ namespace :gov_track do
   namespace :committees do
 
     desc "Process Committess"
-    task :unpack => [:support, :politicians] do
+    task unpack: [:support, :politicians] do
       def import_committee(committee, node)
         committee.update_attributes!(
           :display_name => node['displayname'].to_s
         )
         if meeting_name = node['thomasname']
           committee.meetings.find_by_congress_id(@congress.id) \
-           || committee.meetings.create!(:name => meeting_name.to_s, :congress_id => @congress.id)
+           || committee.meetings.create!(name: meeting_name.to_s, :congress_id => @congress.id)
         end
         node.xpath('thomas-names/name').each do |name_node|
           committee.meetings.find_or_create_by_congress_id(
@@ -28,12 +28,12 @@ namespace :gov_track do
       end
 
       def import_committee_node(committee_node)
-        committee = Committee.find_by_code(committee_node['code'].to_s) || Committee.new(:code => committee_node['code'].to_s)
+        committee = Committee.find_by_code(committee_node['code'].to_s) || Committee.new(code: committee_node['code'].to_s)
         import_committee(committee, committee_node)
         $stdout.print "C"
         $stdout.flush
         committee_node.xpath('subcommittee').each do |subcommittee_node|
-          subcommittee = committee.children.find_by_code(subcommittee_node['code'].to_s) || Committee.new(:parent => committee, :code => subcommittee_node['code'].to_s)
+          subcommittee = committee.children.find_by_code(subcommittee_node['code'].to_s) || Committee.new(parent: committee, code: subcommittee_node['code'].to_s)
           import_committee(subcommittee, subcommittee_node)
           subcommittee_node.xpath('subcommittee').each do |subsubcommittee_node|
             raise "Subsub #{subsubcommittee_node}"

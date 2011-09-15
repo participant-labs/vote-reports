@@ -22,11 +22,11 @@ describe Politician do
       state = create_us_state
       @politician.state.should_not == state
       proc {
-        create_representative_term(:congressional_district => create_congressional_district(:state => state), :politician => @politician, :ended_on => 1.year.ago)
+        create_representative_term(:congressional_district => create_congressional_district(state: state), politician: @politician, :ended_on => 1.year.ago)
       }.should change(@politician, :state).to(state)
       new_state = create_us_state
       proc {
-        create_senate_term(:state => new_state, :politician => @politician, :ended_on => 1.year.from_now)
+        create_senate_term(state: new_state, politician: @politician, :ended_on => 1.year.from_now)
       }.should change(@politician, :state).to(new_state)
     end
   end
@@ -36,8 +36,8 @@ describe Politician do
       @supported = create_roll
       @opposed = create_roll
       @unconnected = create_roll
-      create_vote(:politician => @politician, :roll => @supported, :vote => '+')
-      create_vote(:politician => @politician, :roll => @opposed, :vote => '-')
+      create_vote(politician: @politician, roll: @supported, vote: '+')
+      create_vote(politician: @politician, roll: @opposed, vote: '-')
     end
 
     it "returns all politicians with connecting votes" do
@@ -70,7 +70,7 @@ describe Politician do
 
     context "with size argument" do
       it "should return an equivalent url" do
-        {:large => 200, :medium => 100, :small => 50}.each_pair do |arg, width|
+        {large: 200, medium: 100, small: 50}.each_pair do |arg, width|
           @politician.headshot.url(arg).should =~ gov_track_url("photos/#{@politician.gov_track_id}-#{width}px.jpeg")
         end
       end
@@ -79,7 +79,7 @@ describe Politician do
 
   describe "#firstname=" do
     it "should set first_name" do
-      Politician.new(:firstname => 'Bill').first_name.should == 'Bill'
+      Politician.new(firstname: 'Bill').first_name.should == 'Bill'
     end
   end
 end

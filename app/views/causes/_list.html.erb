@@ -3,14 +3,14 @@
     <div class="act-replace" rel="causes"><%= paginate causes %></div>
     <ul>
       <%- paginated_results(causes).each do |cause| -%>
-        <li><%= render 'reports/report', :report => cause.report, :cause_only => true %></li>
+        <li><%= render 'reports/report', report: cause.report, :cause_only => true %></li>
       <%- end -%>
     </ul>
     <div class="act-replace" rel="causes"><%= paginate causes %></div>
   <%- else -%>
     <ul>
       <%- causes.each do |cause| -%>
-        <li><%= render 'reports/report', :report => cause.report, :cause_only => true %></li>
+        <li><%= render 'reports/report', report: cause.report, :cause_only => true %></li>
       <%- end -%>
     </ul>
   <%- end -%>

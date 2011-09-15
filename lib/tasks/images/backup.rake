@@ -1,5 +1,5 @@
 namespace :images do
-  task :backup => :environment do
+  task backup: :environment do
     rescue_and_reraise do
       require 'date'
       dest = Rails.root.join('data/backup/system')

@@ -4,14 +4,14 @@
   <h2><%= render @bill, :hide_year => true %></h2>
   <p>Introduced on <%= @bill.introduced_on.to_s(:long_ordinal) %>
   <%- if @bill.sponsor -%>
-    by <%= render 'politicians/politician', :politician => @bill.sponsor, :headshot_style => :small %>
+    by <%= render 'politicians/politician', politician: @bill.sponsor, :headshot_style => :small %>
   <%- end -%>
   </p>
 </div>
 
 <%- if @bill.opencongress_url -%>
 <div class="clearfix">
-<%= link_to 'View on OpenCongress', @bill.opencongress_url, :class => 'button' %>
+<%= link_to 'View on OpenCongress', @bill.opencongress_url, class: 'button' %>
 </div>
 <%- end -%>
 
@@ -49,7 +49,7 @@
     <p>This bill appears in <%= pluralize(@bill.reports.published.count, 'published report') %>:</p>
     <ul>
       <%- @bill.reports.published.each do |report| -%>
-        <li><%= render 'reports/report', :report => report %></li>
+        <li><%= render 'reports/report', report: report %></li>
       <%- end -%>
     </ul>
   </div>
@@ -59,13 +59,13 @@
   <div id="bill_subjects" class="section bill_subjects">
     <h2>Subjects</h2>
     <p>Follow the links below to find bills &amp; reports on related subjects.</p>
-    <%= render 'subjects/cloud', :subjects => @bill.subjects %>
+    <%= render 'subjects/cloud', subjects: @bill.subjects %>
   </div>
   <%- end -%>
 
   <%- if @bill.titles.present? -%>
   <div id="bill_titles">
-    <%= render 'bills/titles', :bill => @bill %>
+    <%= render 'bills/titles', bill: @bill %>
   </div>
   <%- end -%>
 
@@ -81,7 +81,7 @@
       <%- @bill.cosponsorships.group_by(&:joined_on).each_pair do |joined_on, cosponsorships| -%>
         <dt>On <%= joined_on.to_s(:long) %></dt>
         <%- cosponsorships.each do |cosponsorship| -%>
-          <dd><%= render 'politicians/politician', :politician => cosponsorship.politician %></dd>
+          <dd><%= render 'politicians/politician', politician: cosponsorship.politician %></dd>
         <%- end -%>
       <%- end -%>
     </dl>

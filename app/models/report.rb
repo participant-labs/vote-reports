@@ -16,7 +16,7 @@ class Report < ActiveRecord::Base
     current_image || build_image
   end
 
-  has_friendly_id :name, :use_slug => true, :scope => :user
+  has_friendly_id :name, :use_slug => true, scope: :user
 
   has_many :report_delayed_jobs
   has_many :delayed_jobs, through: :report_delayed_jobs do
@@ -34,7 +34,7 @@ class Report < ActiveRecord::Base
   end
 
   has_many :report_subjects
-  has_many :subjects, :through => :report_subjects
+  has_many :subjects, through: :report_subjects
   belongs_to :top_subject, :class_name => 'Subject'
 
   scope :for_display, includes([:top_subject, :image, :cause, :user, :interest_group])
@@ -50,42 +50,42 @@ class Report < ActiveRecord::Base
       "None of this report's bills have roll call votes associated. You'll need to add a voted bill to publish this report."
     else
       {
-        :text => 'Publish this Report',
-        :why => "Publishing this report will include it in lists and searches on the site",
+        text: 'Publish this Report',
+        why: "Publishing this report will include it in lists and searches on the site",
         :state_event => 'publish',
-        :confirm => 'Publish this Report?  It will then show up in lists and searches on this site.'
+        confirm: 'Publish this Report?  It will then show up in lists and searches on this site.'
       }
     end
   end
 
   def share_step
     {
-      :text => 'Share this Report',
-      :why => "Sharing this report will allow others to access it from this url.",
+      text: 'Share this Report',
+      why: "Sharing this report will allow others to access it from this url.",
       :state_event => 'share',
-      :confirm => 'Share this Report?  It will accessible to others via this url.'
+      confirm: 'Share this Report?  It will accessible to others via this url.'
     }
   end
 
   def unshare_step
     {
-      :text => 'Unshare this Report',
-      :why => "Unsharing this report will make it accessible only to you.",
+      text: 'Unshare this Report',
+      why: "Unsharing this report will make it accessible only to you.",
       :state_event => 'unshare',
-      :confirm => 'Unshare this Report? It will only be accesible to you.'
+      confirm: 'Unshare this Report? It will only be accesible to you.'
     }
   end
 
   def unlist_step
     {
-      :text => 'Unlist this Report',
-      :why => "Unlisting this report will remove it from lists & searches on the site.",
+      text: 'Unlist this Report',
+      why: "Unlisting this report will remove it from lists & searches on the site.",
       :state_event => 'unlist',
-      :confirm => 'Unlist this Report? It will no longer show up in lists and searches on this site.'
+      confirm: 'Unlist this Report? It will no longer show up in lists and searches on this site.'
     }
   end
 
-  state_machine :initial => :private do
+  state_machine initial: :private do
     event :publish do
       transition [:private, :unlisted] => :published
     end
@@ -99,7 +99,7 @@ class Report < ActiveRecord::Base
     end
 
     event :unlist do
-      transition :published => :unlisted
+      transition published: :unlisted
     end
 
     state :personal
@@ -180,42 +180,42 @@ class Report < ActiveRecord::Base
         if params[:except].present?
           without(params[:except])
         end
-        paginate :page => params[:page], :per_page => Report.default_per_page
+        paginate page: params[:page], :per_page => Report.default_per_page
       end
     end
   end
 
-  has_many :cause_reports, :dependent => :destroy
-  has_many :causes, :through => :cause_reports
+  has_many :cause_reports, dependent: :destroy
+  has_many :causes, through: :cause_reports
 
-  has_many :bill_criteria, :dependent => :destroy do
+  has_many :bill_criteria, dependent: :destroy do
     def active_count
       # due to an apparent bug in rails, the joins are not distincting, so this is necessary
-      active.count(:distinct => true, :select => 'bill_criteria.*')
+      active.count(distinct: true, select: 'bill_criteria.*')
     end
 
     def autofetch_from!(url)
       BillCriterion.autofetch_from(url).map do |(bill_title, attrs)|
         if bill = Bill.guess(bill_title)
-          find_by_bill_id(bill) || build(attrs.merge(:bill => bill))
+          find_by_bill_id(bill) || build(attrs.merge(bill: bill))
         elsif Rails.env.production?
           notify_hoptoad("No bill found for autofetch #{bill_title} from #{url}")
         end
       end.compact.index_by(&:bill).values
     end
   end
-  has_many :bills, :through => :bill_criteria
+  has_many :bills, through: :bill_criteria
 
-  has_many :amendment_criteria, :dependent => :destroy
+  has_many :amendment_criteria, dependent: :destroy
 
   def has_criteria?
     bill_criteria.present? || amendment_criteria.present?
   end
 
-  has_many :follows, :class_name => 'ReportFollow', :dependent => :destroy
-  has_many :followers, :through => :follows, :source => :user
+  has_many :follows, :class_name => 'ReportFollow', dependent: :destroy
+  has_many :followers, through: :follows, source: :user
 
-  has_many :scores, :class_name => 'ReportScore', :dependent => :destroy
+  has_many :scores, :class_name => 'ReportScore', dependent: :destroy
 
   validate :name_not_reserved
 
@@ -230,8 +230,8 @@ class Report < ActiveRecord::Base
 
   scope :random, order('random()')
 
-  scope :laws_i_like, where(:source => 'laws_i_like')
-  scope :user_published, where(:state => 'published').includes(:user)
+  scope :laws_i_like, where(source: 'laws_i_like')
+  scope :user_published, where(state: 'published').includes(:user)
   scope :for_causes, where('reports.cause_id IS NOT NULL')
   scope :non_cause, where('reports.cause_id IS NULL')
   scope :without_associated_cause, joins('LEFT OUTER JOIN cause_reports ON cause_reports.report_id = reports.id').where('cause_reports.cause_id IS NULL')
@@ -247,7 +247,7 @@ class Report < ActiveRecord::Base
   scope :unpublished, where(["reports.state IN(?)", %w[unlisted private]])
   scope :except_personal, where(["reports.state != ?", 'personal'])
   scope :with_criteria, select('DISTINCT reports.*').joins(:bill_criteria)
-  scope :scored, select('DISTINCT reports.*').joins(:bill_criteria => {:bill => :passage_rolls})
+  scope :scored, select('DISTINCT reports.*').joins(:bill_criteria => {bill: :passage_rolls})
   scope :by_updated_at, order('updated_at DESC')
   scope :by_created_at, order('created_at DESC')
   scope :by_name, order('name')
@@ -259,7 +259,7 @@ class Report < ActiveRecord::Base
     elsif subjects.first.is_a?(String)
       select('DISTINCT reports.*').joins(:subjects).where([
         "subjects.name IN(:subjects) OR subjects.cached_slug IN(:subjects)",
-        {:subjects => subjects}
+        {subjects: subjects}
       ])
     else
       select('DISTINCT reports.*').joins(:report_subjects).where(['report_subjects.subject_id IN(?)', subjects])
@@ -339,11 +339,11 @@ class Report < ActiveRecord::Base
   #     else
   #       owner || raise("No owner for report: #{inspect}")
   #     end
-  #   polymorphic_url(path_components, :host => 'votereports.org')
+  #   polymorphic_url(path_components, host: 'votereports.org')
   # end
 
   def as_json(opts = {})
-    super opts.reverse_merge(:only => [:name, :description, :id], :include => [:top_subject, :interest_group, :user, :cause], :methods => [:to_param, :url])
+    super opts.reverse_merge(only: [:name, :description, :id], include: [:top_subject, :interest_group, :user, :cause], methods: [:to_param, :url])
   end
 
 private

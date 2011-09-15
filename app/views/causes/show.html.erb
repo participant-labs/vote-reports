@@ -4,14 +4,14 @@
   <div class="body span-18">
     <h1><%= @cause.name %></h1>
 
-    <%= render 'reports/follows/button', :report => @cause.report %>
+    <%= render 'reports/follows/button', report: @cause.report %>
     <div class="description"><%= md_to_html(@cause.description) %></div>
 
 
     <div id="report_scores_section" class="section report_scores">
-      <%= render 'politicians/search', :in_office => true, :replace => 'report_scores',
-        :url => cause_report_scores_path(@cause),
-        :reset_path => cause_report_scores_path(@cause, :representing => '') %>
+      <%= render 'politicians/search', :in_office => true, replace: 'report_scores',
+        url: cause_report_scores_path(@cause),
+        :reset_path => cause_report_scores_path(@cause, representing: '') %>
       <div class="act-fill"
         rel="<%= cause_report_scores_path(@cause) %>"
          id="scores"></div>
@@ -21,7 +21,7 @@
   <div class="sidebar span-6 last">
     <div class="spacer">
       <%- if @cause.thumbnail.exists? -%>
-      <div class="logo span-6 last"><%= sized_image_tag @cause.thumbnail, @cause.name, :style => :header, :class => 'image_large' %></div>
+      <div class="logo span-6 last"><%= sized_image_tag @cause.thumbnail, @cause.name, style: :header, class: 'image_large' %></div>
       <%- end -%>
       <div class="name"><%= @cause.name %></div>
 
@@ -32,23 +32,23 @@
       <dl>
         <dt><%= pluralize_word(@subjects.size, 'Subject') %></dt>
         <%- @subjects.each do |subject| -%>
-          <dd><%= render 'subjects/subject', :subject => subject, :subject_only => true %></dd>
+          <dd><%= render 'subjects/subject', subject: subject, :subject_only => true %></dd>
         <%- end -%>
         <dt><%= pluralize_word(@related_causes.size, 'Related Cause') %></dt>
         <%- if @related_causes.empty? -%>
           <dd>None</dd>
         <%- else -%>
           <%- @related_causes.each do |cause| -%>
-            <dd><%= render 'causes/cause', :cause => cause %></dd>
+            <dd><%= render 'causes/cause', cause: cause %></dd>
           <%- end -%>
         <%- end -%>
       </dl>
 
-      <%= render 'reports/embeds/button', :href => cause_embed_path(@cause) %>
+      <%= render 'reports/embeds/button', href: cause_embed_path(@cause) %>
     </div>
   </div>
 </div>
 
 <div class="span-24 last act-fill"
-  rel="<%= cause_reports_path(@cause, :format => :html) %>"
+  rel="<%= cause_reports_path(@cause, format: :html) %>"
   id="<%= dom_id(@cause, :agenda) %>"></div>

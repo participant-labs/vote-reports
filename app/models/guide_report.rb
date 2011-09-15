@@ -6,7 +6,7 @@ class GuideReport < ActiveRecord::Base
   after_save :rescore_report
   after_destroy :rescore_report
 
-  delegate :scores, :to => :report
+  delegate :scores, to: :report
 
   alias_method :events, :scores
   def event_score(event)

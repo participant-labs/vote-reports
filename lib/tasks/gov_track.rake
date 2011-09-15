@@ -1,5 +1,5 @@
 namespace :gov_track do
-  task :support => :environment do
+  task support: :environment do
     require 'open-uri'
     require 'nokogiri'
 
@@ -18,7 +18,7 @@ namespace :gov_track do
       end
 
       @committee_meetings[name] || begin
-        congress_meeting = CommitteeMeeting.first(:conditions => {:name => name}) || begin
+        congress_meeting = CommitteeMeeting.first(conditions: {name: name}) || begin
             committee = Committee.find_by_display_name(name)
             committee && committee.meetings.for_congress(@congress)
           end
@@ -65,7 +65,7 @@ namespace :gov_track do
             corresponding_subcommittee_meeting = corresponding_subcommittee_meetings.first
             puts node
             puts("Selected #{corresponding_subcommittee_meeting.name} for #{subcommittee_name}")
-            existing_meeting = corresponding_subcommittee_meeting.committee.meetings.first(:conditions => {:congress_id => @congress.id})
+            existing_meeting = corresponding_subcommittee_meeting.committee.meetings.first(conditions: {:congress_id => @congress.id})
             if existing_meeting
               puts "but it already had #{existing_meeting.name}"
               committee_meeting.committee.subcommittees.create!.meetings.for_congress(@congress, subcommittee_name)
@@ -102,13 +102,13 @@ namespace :gov_track do
     end
   end
 
-  task :politicians => :environment do
+  task politicians: :environment do
     def politician(gov_track_id)
       @politicians.fetch(gov_track_id.to_i) do
         raise "Couldn't find politician: #{gov_track_id}"
       end
     end
-    @politicians = Politician.all(:select => "id, gov_track_id, us_state_id").index_by {|p| p.gov_track_id }
+    @politicians = Politician.all(select: "id, gov_track_id, us_state_id").index_by {|p| p.gov_track_id }
   end
 
   task :download_all => :support do

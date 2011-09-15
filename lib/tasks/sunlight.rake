@@ -12,13 +12,13 @@ namespace :sunlight do
     end
 
     desc "Process Politicians"
-    task :unpack => :environment do
+    task unpack: :environment do
       rescue_and_reraise do
         require 'fastercsv'
         require 'open-uri'
 
         ActiveRecord::Base.transaction do
-          FasterCSV.new(open(SUNLIGHT_POLITICIAN_DATA_PATH), :headers => true, :skip_blanks => true).each do |row|
+          FasterCSV.new(open(SUNLIGHT_POLITICIAN_DATA_PATH), headers: true, :skip_blanks => true).each do |row|
             row = row.to_hash.except('senate_class', 'state', 'in_office', 'district', 'party')
             row.delete_if {|k, v| v.blank? }
             begin

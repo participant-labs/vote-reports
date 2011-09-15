@@ -4,8 +4,8 @@ When /^I log in as "(.*)"$/ do |credentials|
 end
 
 When /^I enter my credentials "(.*)\/(.*)"/ do |email, password|
-  fill_in "Username/Email", :with => email
-  fill_in "Password", :with => password
+  fill_in "Username/Email", with: email
+  fill_in "Password", with: password
   click_button "Log in"
 end
 
@@ -15,6 +15,6 @@ Given /^I am signed in( as an Admin)?$/ do |admin|
 end
 
 Given /^I am signed in as "([^"]*)"$/ do |name|
-  user = current_user(:username => name)
+  user = current_user(username: name)
   When %{I log in as "#{user.email}/#{user.password}"}
 end

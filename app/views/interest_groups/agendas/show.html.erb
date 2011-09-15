@@ -20,6 +20,6 @@
   <%- end -%>
 
   <%- if @report.has_criteria? -%>
-    <%= render 'reports/bill_criteria/legislative_agenda', :report => @report, :class_names => 'span-18 last' %>
+    <%= render 'reports/bill_criteria/legislative_agenda', report: @report, :class_names => 'span-18 last' %>
   <%- end -%>
 </div>

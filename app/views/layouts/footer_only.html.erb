@@ -63,7 +63,7 @@
               <%= link_to 'About us', about_path %><%= footer_divider %>
               <%= link_to 'Our Blog', blog_path %><%= footer_divider %>
               <%= mail_to 'all_ears@votereports.org', 'Contact Us' %><%= footer_divider %>
-              <%= link_to 'Feedback', get_satisfaction_path, :onclick => 'if(GSFN) feedback_widget.show(); return false' %><%= footer_divider %>
+              <%= link_to 'Feedback', get_satisfaction_path, onclick: 'if(GSFN) feedback_widget.show(); return false' %><%= footer_divider %>
               <%= link_to 'Support Our Efforts', new_donation_path %>
             </div>
           </div>

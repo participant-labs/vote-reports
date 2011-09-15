@@ -3,7 +3,7 @@ class GuideQuestion
     include ActionView::Helpers::UrlHelper
 
     def all
-      (Issue.all(:include => :causes) + Cause.without_issue).map {|attrs|
+      (Issue.all(include: :causes) + Cause.without_issue).map {|attrs|
         new(attrs)
       }
     end

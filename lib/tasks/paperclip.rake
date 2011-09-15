@@ -17,7 +17,7 @@ end
 def for_all_attachments
   klass = obtain_class
   names = obtain_attachments
-  ids   = klass.connection.select_values(klass.send(:construct_finder_sql, :select => 'id'))
+  ids   = klass.connection.select_values(klass.send(:construct_finder_sql, select: 'id'))
 
   ids.each do |id|
     instance = klass.find(id)
@@ -35,11 +35,11 @@ end
 
 namespace :paperclip do
   desc "Refreshes both metadata and thumbnails."
-  task :refresh => ["paperclip:refresh:metadata", "paperclip:refresh:thumbnails"]
+  task refresh: ["paperclip:refresh:metadata", "paperclip:refresh:thumbnails"]
 
   namespace :refresh do
     desc "Regenerates thumbnails for a given CLASS (and optional ATTACHMENT)."
-    task :thumbnails => :environment do
+    task thumbnails: :environment do
       errors = []
       for_all_attachments do |instance, name|
         result = instance.send(name).reprocess!
@@ -50,7 +50,7 @@ namespace :paperclip do
     end
 
     desc "Regenerates content_type/size metadata for a given CLASS (and optional ATTACHMENT)."
-    task :metadata => :environment do
+    task metadata: :environment do
       for_all_attachments do |instance, name|
         if file = instance.send(name).to_file
           instance.send("#{name}_file_name=", instance.send("#{name}_file_name").strip)
@@ -65,7 +65,7 @@ namespace :paperclip do
   end
 
   desc "Cleans out invalid attachments. Useful after you've added new validations."
-  task :clean => :environment do
+  task clean: :environment do
     for_all_attachments do |instance, name|
       instance.send(name).send(:validate)
       if instance.send(name).valid?

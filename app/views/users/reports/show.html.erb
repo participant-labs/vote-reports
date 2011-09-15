@@ -3,15 +3,15 @@
 <div class="report-show">
   <div class="body span-18">
     <h1><%= @report.name %></h1>
-    <p>by <%= render 'users/user', :user => @report.user %></p>
+    <p>by <%= render 'users/user', user: @report.user %></p>
 
-    <%= render 'reports/follows/button', :report => @report %>
+    <%= render 'reports/follows/button', report: @report %>
     <div class="description"><%= md_to_html(@report.description) %></div>
 
     <div id="report_scores_section" class="section report_scores">
-      <%= render 'politicians/search', :in_office => true, :replace => 'report_scores',
-        :url => user_report_report_scores_path(@report.user, @report),
-        :reset_path => user_report_report_scores_path(@report.user, @report, :representing => '') %>
+      <%= render 'politicians/search', :in_office => true, replace: 'report_scores',
+        url: user_report_report_scores_path(@report.user, @report),
+        :reset_path => user_report_report_scores_path(@report.user, @report, representing: '') %>
       <div class="act-fill"
         rel="<%= user_report_report_scores_path(@report.user, @report) %>"
          id="scores"></div>
@@ -21,10 +21,10 @@
   <div class="sidebar span-6 last">
     <div class="spacer">
       <%- if @report.thumbnail.exists? -%>
-      <div class="logo span-6 last"><%= sized_image_tag @report.thumbnail, @report.name, :style => :header, :class => 'image_large' %></div>
+      <div class="logo span-6 last"><%= sized_image_tag @report.thumbnail, @report.name, style: :header, class: 'image_large' %></div>
       <%- end -%>
       <div class="name"><%= @report.name %></div>
-      <p>by <%= render 'users/user', :user => @report.user %></p>
+      <p>by <%= render 'users/user', user: @report.user %></p>
 
       <%- permitted_to? :edit, @report do -%>
         <%= link_to 'Edit Report', edit_user_report_path(@report.user, @report) %>
@@ -36,7 +36,7 @@
           <dd>None</dd>
         <%- else -%>
           <%- @subjects.each do |subject| -%>
-            <dd><%= render 'subjects/subject', :subject => subject, :subject_only => true %></dd>
+            <dd><%= render 'subjects/subject', subject: subject, :subject_only => true %></dd>
           <%- end -%>
         <%- end -%>
         <dt><%= pluralize_word(@causes.size, 'Cause') %></dt>
@@ -44,7 +44,7 @@
           <dd>None</dd>
         <%- else -%>
           <%- @causes.each do |cause| -%>
-            <dd><%= render 'causes/cause', :cause => cause %></dd>
+            <dd><%= render 'causes/cause', cause: cause %></dd>
           <%- end -%>
         <%- end -%>
       </dl>
@@ -61,11 +61,11 @@
         </div>
       <%- end -%>
 
-      <%= render 'reports/embeds/button', :href => user_report_embed_path(@user, @report) %>
+      <%= render 'reports/embeds/button', href: user_report_embed_path(@user, @report) %>
     </div>
   </div>
 </div>
 
 <div class="span-24 last act-fill"
-  rel="<%= user_report_agenda_path(@report.user, @report, :format => :html) %>"
+  rel="<%= user_report_agenda_path(@report.user, @report, format: :html) %>"
   id="<%= dom_id(@report, :agenda) %>"></div>

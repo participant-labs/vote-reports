@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :layout => false
+        render layout: false
       }
     end
   end
@@ -30,7 +30,7 @@ class UserSessionsController < ApplicationController
       end
     else
       flash[:error] = "Failed to login or register."
-      render :action => 'new'
+      render action: 'new'
     end
   end
 

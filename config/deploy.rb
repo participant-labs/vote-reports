@@ -3,7 +3,7 @@ require "bundler/capistrano"
 
 set :domain, 'votereports-app'
 
-server domain, :app, :web, :db, :primary => true
+server domain, :app, :web, :db, primary: true
 
 set :use_sudo, false
 set :application, 'vote-reports'
@@ -44,7 +44,7 @@ after "deploy:update_code", "rvm:trust_rvmrc"
 
 namespace :deploy do
   desc "Symlinks the database.yml"
-  task :symlink_configs, :roles => :app do
+  task :symlink_configs, roles: :app do
     %w[database.yml mongo.yml facebooker.yml secure_variables.rb].each do |file|
       run "ln -nfs #{deploy_to}/shared/config/#{file} #{release_path}/config/#{file}"
     end
@@ -59,19 +59,19 @@ namespace :monit do
 end
 
 namespace :delayed_job do
-  task :start, :roles => :app do
+  task :start, roles: :app do
     sudo "monit start delayed_job"
   end
   before "delayed_job:start", 'monit:reload'
   after "deploy:start", "delayed_job:start"
 
-  task :stop, :roles => :app do
+  task :stop, roles: :app do
     sudo "monit stop delayed_job"
   end
   before "delayed_job:stop", 'monit:reload'
   after "deploy:stop", "delayed_job:stop"
 
-  task :restart, :roles => :app do
+  task :restart, roles: :app do
     sudo "monit restart delayed_job"
   end
   before "delayed_job:restart", 'monit:reload'

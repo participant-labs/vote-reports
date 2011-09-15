@@ -4,7 +4,7 @@ class BillTitle < ActiveRecord::Base
 
   validates_presence_of :bill, :title, :title_type
 
-  default_scope :joins => :as, :order => "bill_title_as.sort_order, bill_titles.title_type DESC"
+  default_scope joins: :as, order: "bill_title_as.sort_order, bill_titles.title_type DESC"
 
   def to_s
     title

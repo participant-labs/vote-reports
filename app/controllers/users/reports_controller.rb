@@ -7,7 +7,7 @@ class Users::ReportsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        render :json => @reports
+        render json: @reports
       }
     end
   end
@@ -16,21 +16,21 @@ class Users::ReportsController < ApplicationController
     respond_to do |format|
       format.html {
         if params[:id] != @report.to_param
-          redirect_to user_report_path(@user, @report), :status => 301
+          redirect_to user_report_path(@user, @report), status: 301
           return
         end
-        @causes = @report.causes.all(:limit => 3)
+        @causes = @report.causes.all(limit: 3)
         @subjects = @report.subjects.for_tag_cloud.except(:select).select("DISTINCT(subjects.*), SUM(report_subjects.count) AS count").limit(3).all
       }
       format.json {
-        render :json => @report.as_json(:include => :causes)
+        render json: @report.as_json(include: :causes)
       }
     end
   end
 
   def edit
     if request.path != edit_user_report_path(@user, @report)
-      redirect_to edit_user_report_path(@user, @report), :status => 301
+      redirect_to edit_user_report_path(@user, @report), status: 301
       return
     end
   end
@@ -40,7 +40,7 @@ class Users::ReportsController < ApplicationController
       flash[:notice] = "Successfully updated report."
       redirect_to [@user, @report]
     else
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 
@@ -52,9 +52,9 @@ class Users::ReportsController < ApplicationController
     @report = @user.reports.build(params[:report])
     if @report.save
       flash[:notice] = "Successfully created report."
-      redirect_to edit_user_report_path(@user, @report, :new_report => true, :anchor => 'Add_Bills')
+      redirect_to edit_user_report_path(@user, @report, :new_report => true, anchor: 'Add_Bills')
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -67,7 +67,7 @@ class Users::ReportsController < ApplicationController
   protected
 
   def permission_denied_path
-    if permitted_to?(:show, @report, :context => :users_reports)
+    if permitted_to?(:show, @report, context: :users_reports)
       user_report_path(params[:user_id], params[:id])
     else
       user_reports_path(params[:user_id])

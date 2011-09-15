@@ -5,30 +5,30 @@ class Politician < ActiveRecord::Base
   has_friendly_id :full_name, :use_slug => true, :approximate_ascii => true
 
   has_many :candidacies
-  has_many :races, :through => :candidacies
+  has_many :races, through: :candidacies
   belongs_to :current_candidacy, :class_name => 'Candidacy'
 
   def latest_candidacy
-    candidacies.valid.first(:joins => {:race => :election_stage}, :order => 'election_stages.voted_on DESC', :conditions => ['election_stages.voted_on > ?', Date.today]) \
-    || candidacies.valid.first(:joins => {:race => :election_stage}, :order => 'election_stages.voted_on DESC')
+    candidacies.valid.first(joins: {race: :election_stage}, order: 'election_stages.voted_on DESC', conditions: ['election_stages.voted_on > ?', Date.today]) \
+    || candidacies.valid.first(joins: {race: :election_stage}, order: 'election_stages.voted_on DESC')
   end
 
   has_many :committee_memberships
-  has_many :committee_meetings, :through => :committee_memberships
+  has_many :committee_meetings, through: :committee_memberships
 
   has_many :representative_terms
-  has_one :latest_representative_term, :class_name => 'RepresentativeTerm', :order => 'ended_on DESC'
+  has_one :latest_representative_term, :class_name => 'RepresentativeTerm', order: 'ended_on DESC'
 
   has_many :senate_terms
-  has_one :latest_senate_term, :class_name => 'SenateTerm', :order => 'ended_on DESC'
+  has_one :latest_senate_term, :class_name => 'SenateTerm', order: 'ended_on DESC'
 
   has_many :presidential_terms
-  has_one :latest_presidential_term, :class_name => 'PresidentialTerm', :order => 'ended_on DESC'
+  has_one :latest_presidential_term, :class_name => 'PresidentialTerm', order: 'ended_on DESC'
 
   has_many :interest_group_ratings
-  has_many :interest_group_reports, :through => :interest_group_ratings
+  has_many :interest_group_reports, through: :interest_group_ratings
   def rating_interest_groups
-    InterestGroup.select('DISTINCT interest_groups.*').joins(:reports => :ratings)\
+    InterestGroup.select('DISTINCT interest_groups.*').joins(reports: :ratings)\
       .where(:'interest_group_ratings.politician_id' => self)
   end
 
@@ -40,17 +40,17 @@ class Politician < ActiveRecord::Base
 
   def terms
     (
-      representative_terms.all(:include => [:party, :congressional_district])  +
-      senate_terms.all(:include => [:party, :state]) +
-      presidential_terms.all(:include => :party)
+      representative_terms.all(include: [:party, :congressional_district])  +
+      senate_terms.all(include: [:party, :state]) +
+      presidential_terms.all(include: :party)
     ).sort_by(&:ended_on).reverse
   end
 
   def continuous_terms
-    cterms = ContinuousTerm.find_all_by_politician_id(id, :order => [['ended_on', 'desc']])
+    cterms = ContinuousTerm.find_all_by_politician_id(id, order: [['ended_on', 'desc']])
     if cterms.empty? && terms.present?
       ContinuousTerm.regenerate_for(self)
-      cterms = ContinuousTerm.find_all_by_politician_id(id, :order => [['ended_on', 'desc']])
+      cterms = ContinuousTerm.find_all_by_politician_id(id, order: [['ended_on', 'desc']])
     end
     cterms
   end
@@ -88,7 +88,7 @@ class Politician < ActiveRecord::Base
         if params[:except].present?
           without(params[:except])
         end
-        paginate :page => params[:page]
+        paginate page: params[:page]
       end
     end
   end
@@ -100,19 +100,19 @@ class Politician < ActiveRecord::Base
   IDENTITY_INTEGER_FIELDS = [:gov_track_id].freeze
   IDENTITY_FIELDS = (IDENTITY_STRING_FIELDS | IDENTITY_INTEGER_FIELDS).freeze
 
-  validates_length_of IDENTITY_STRING_FIELDS, :minimum => 1, :allow_nil => true
+  validates_length_of IDENTITY_STRING_FIELDS, minimum: 1, :allow_nil => true
   validates_uniqueness_of IDENTITY_FIELDS, :allow_nil => true
 
   validate :name_shouldnt_contain_nickname
   before_validation :extract_nickname_from_first_name_if_present
 
   has_many :votes
-  has_many :rolls, :through => :votes, :extend => Vote::Support
+  has_many :rolls, through: :votes, extend: Vote::Support
 
   has_many :report_scores
-  has_many :reports, :through => :report_scores
+  has_many :reports, through: :report_scores
 
-  belongs_to :current_office, :polymorphic => true
+  belongs_to :current_office, polymorphic: true
   scope :by_prominance, order('prominence')
   scope :in_office, where('politicians.current_office_id IS NOT NULL')
   scope :in_office_normal_form, lambda {
@@ -125,7 +125,7 @@ class Politician < ActiveRecord::Base
       '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
       '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
       '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
-      {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
+      {yesterday: Date.yesterday, tomorrow: Date.tomorrow}
     ])
   }
 
@@ -202,11 +202,11 @@ class Politician < ActiveRecord::Base
       '(((representative_terms.started_on, representative_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
       '((senate_terms.started_on, senate_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))) OR ' \
       '((presidential_terms.started_on, presidential_terms.ended_on) OVERLAPS (DATE(:yesterday), DATE(:tomorrow))))',
-      {:yesterday => Date.yesterday, :tomorrow => Date.tomorrow}
+      {yesterday: Date.yesterday, tomorrow: Date.tomorrow}
   ])
 
   scope :from_state, lambda {|state|
-    state = UsState.first(:conditions => ["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]) if state.is_a?(String)
+    state = UsState.first(conditions: ["abbreviation = :state OR UPPER(full_name) = :state", {state: state.upcase}]) if state.is_a?(String)
     if state
       select('DISTINCT politicians.*').where([
         'senate_terms.us_state_id = ? OR congressional_districts.us_state_id = ? OR presidential_terms.id IS NOT NULL', state, state
@@ -221,7 +221,7 @@ class Politician < ActiveRecord::Base
     end
   }
   scope :representatives_from_state, lambda {|state|
-    state = UsState.where(["abbreviation = :state OR UPPER(full_name) = :state", {:state => state.upcase}]).first if state.is_a?(String)
+    state = UsState.where(["abbreviation = :state OR UPPER(full_name) = :state", {state: state.upcase}]).first if state.is_a?(String)
     if state
       select('DISTINCT politicians.*').where(['congressional_districts.us_state_id = ?', state])\
         .joins(:representative_terms => :congressional_district)
@@ -297,7 +297,7 @@ class Politician < ActiveRecord::Base
   end
 
   has_many :sponsorships, :class_name => 'Cosponsorship'
-  has_many :bills_sponsored, :through => :sponsorships, :source => :bill
+  has_many :bills_sponsored, through: :sponsorships, source: :bill
 
   def full_name= full_name
     self.last_name, self.first_name = full_name.split(', ', 2)

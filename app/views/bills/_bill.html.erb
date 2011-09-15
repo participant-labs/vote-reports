@@ -1,5 +1,5 @@
 <%- hide_year ||= false -%>
 
 <span class="bill">
-  <%= link_to_unless_current "#{bill.bill_type.to_s} #{bill.bill_number}#{" (#{bill.introduced_on.year})" unless hide_year }: #{bill.titles.first}", bill, :class => 'title' %>
+  <%= link_to_unless_current "#{bill.bill_type.to_s} #{bill.bill_number}#{" (#{bill.introduced_on.year})" unless hide_year }: #{bill.titles.first}", bill, class: 'title' %>
 </span>

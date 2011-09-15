@@ -1,15 +1,15 @@
 class Cause < ActiveRecord::Base
   include HasReport
 
-  has_many :cause_reports, :dependent => :destroy
-  has_many :reports, :through => :cause_reports do
+  has_many :cause_reports, dependent: :destroy
+  has_many :reports, through: :cause_reports do
     def report_subjects
       ReportSubject.where(:report_id => self)
     end
   end
 
-  has_many :issue_causes, :dependent => :destroy
-  has_many :issues, :through => :issue_causes
+  has_many :issue_causes, dependent: :destroy
+  has_many :issues, through: :issue_causes
 
   scope :without_issue,
     joins('LEFT OUTER JOIN issue_causes ON issue_causes.cause_id = causes.id').where(:'issue_causes.issue_id' => nil)
@@ -31,6 +31,6 @@ class Cause < ActiveRecord::Base
   paginates_per 20
 
   def as_json(opts = {})
-    super opts.reverse_merge(:only => [:name, :description, :id], :methods => [:to_param, :url], :include => :reports)
+    super opts.reverse_merge(only: [:name, :description, :id], methods: [:to_param, :url], include: :reports)
   end
 end

@@ -5,23 +5,23 @@ class User < ActiveRecord::Base
   alias_attribute :to_s, :username
 
   acts_as_authentic do |c|
-    c.merge_validates_format_of_login_field_options :with => /\A\w[\w\.+\-_@ ']+$/
+    c.merge_validates_format_of_login_field_options with: /\A\w[\w\.+\-_@ ']+$/
   end
 
   has_one :adminship
   has_one :moderatorship
   has_many :reports
-  has_one :personal_report, :class_name => 'Report', :conditions => {:state => 'personal'}
+  has_one :personal_report, :class_name => 'Report', conditions: {state: 'personal'}
 
   has_many :report_follows
-  has_many :followed_reports, :through => :report_follows, :source => :report
+  has_many :followed_reports, through: :report_follows, source: :report
 
   validates_uniqueness_of :username, :email, :case_sensitive => false
   validate :username_not_reserved
 
-  state_machine :initial => :active do
+  state_machine initial: :active do
     event :disable do
-      transition :active => :disabled
+      transition active: :disabled
     end
   end
 
@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
       raise "Bad facebook id: #{identifier.identifier}" unless identifier.identifier.starts_with?(prefix)
       "http://graph.facebook.com/#{identifier.identifier.sub(prefix, '')}/picture?type=#{type}"
     else
-      gravatar_url(:size => size, :default => "identicon")
+      gravatar_url(size: size, default: "identicon")
     end
   end
 
@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   end
 
   def rescore_personal_report
-    (personal_report || build_personal_report(:name => 'Personal Report', :state => 'personal')).tap(&:save!).rescore!
+    (personal_report || build_personal_report(name: 'Personal Report', state: 'personal')).tap(&:save!).rescore!
   end
 
   def fake_email?

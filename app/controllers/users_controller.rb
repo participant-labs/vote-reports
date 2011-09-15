@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :layout => false
+        render layout: false
       }
     end
   end
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Thanks for signing up. Welcome to VoteReports."
       redirect_to @user
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Successfully updated user."
       redirect_to @user
     else
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 

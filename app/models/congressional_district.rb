@@ -1,18 +1,18 @@
 class CongressionalDistrict < ActiveRecord::Base
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
   has_many :congressional_district_zip_codes
-  has_many :zip_codes, :through => :congressional_district_zip_codes
+  has_many :zip_codes, through: :congressional_district_zip_codes
   belongs_to :district
   delegate :level, to: :district
 
   has_many :representative_terms
-  has_many :representatives, :through => :representative_terms, :source => :politician, :uniq => true do
+  has_many :representatives, through: :representative_terms, source: :politician, uniq: true do
     def in_office
       where(['politicians.current_office_type = ? AND politicians.current_office_id IN(?)', 'RepresentativeTerm', proxy_owner.representative_terms])
     end
   end
 
-  delegate :senators, :presidents, :to => :state
+  delegate :senators, :presidents, to: :state
 
   scope :with_zip, lambda {|zip_code|
     zip_code, plus_4 = ZipCode.sections_of(zip_code)
@@ -53,7 +53,7 @@ class CongressionalDistrict < ActiveRecord::Base
     def find_by_name(name)
       state, district = name.split('-')
       district = 0 if district == 'At_large'
-      first(:conditions => {'congressional_districts.district_number' => district, 'us_states.abbreviation' => state}, :joins => :state)
+      first(conditions: {'congressional_districts.district_number' => district, 'us_states.abbreviation' => state}, joins: :state)
     end
   end
 
@@ -68,7 +68,7 @@ class CongressionalDistrict < ActiveRecord::Base
 
   def district_geometries
     @district_geometry ||= District.federal.where(
-      :us_state_id => us_state_id, :name => district_abbreviation)
+      :us_state_id => us_state_id, name: district_abbreviation)
   end
 
   def district_abbreviation

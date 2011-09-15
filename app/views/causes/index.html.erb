@@ -4,7 +4,7 @@
 
   <p>Causes are specially curated by VoteReports to give you a high-level perspective on an issue. We pick a few highly reputable reports to combine to represent a given cause. If you'd like to suggest more, please <%= mail_to 'causes@votereports.org', 'let us know' %>.</p>
 
-  <%= render 'causes/list', :causes => @causes %>
+  <%= render 'causes/list', causes: @causes %>
 
   <%- permitted_to? :create, :causes do -%>
     <%= link_to "Create a new Cause", new_cause_path %>

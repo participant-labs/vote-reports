@@ -2,13 +2,13 @@ module Criterion
   def self.included(base)
     base.class_eval do
       belongs_to :report
-      has_many :evidence, :class_name => 'ReportScoreEvidence', :dependent => :destroy, :as => :criterion
+      has_many :evidence, :class_name => 'ReportScoreEvidence', dependent: :destroy, as: :criterion
 
-      scope :supported, where(:support => true)
-      scope :opposed, where(:support => false)
+      scope :supported, where(support: true)
+      scope :opposed, where(support: false)
 
       after_save :rescore_report
-      delegate :user_id, :to => :report
+      delegate :user_id, to: :report
     end
   end
 

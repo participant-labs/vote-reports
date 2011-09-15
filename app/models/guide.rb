@@ -5,15 +5,15 @@ class Guide < ActiveRecord::Base
   has_friendly_id :secure_token
 
   has_many :guide_reports
-  has_many :reports_supported, :through => :guide_reports, :conditions => {:guide_reports => {:position => 'support'}}, :source => :report
-  has_many :reports_opposed, :through => :guide_reports, :conditions => {:guide_reports => {:position => 'oppose'}}, :source => :report
+  has_many :reports_supported, through: :guide_reports, conditions: {:guide_reports => {position: 'support'}}, source: :report
+  has_many :reports_opposed, through: :guide_reports, conditions: {:guide_reports => {position: 'oppose'}}, source: :report
 
   before_validation :initialize_report, on: :create
-  delegate :scores, :to => :report
+  delegate :scores, to: :report
 
   validates_presence_of :secure_token, :report
 
-  delegate :scores, :rescore!, :to => :report
+  delegate :scores, :rescore!, to: :report
 
   alias_method :score_criteria, :guide_reports
 
@@ -45,7 +45,7 @@ class Guide < ActiveRecord::Base
 
   def politicians
     @politicians ||= Politician.from_congressional_district(congressional_district).in_office_normal_form.for_display \
-      | Politician.select('distinct politicians.*').joins(:candidacies).where(:candidacies => {:id => candidacies}).for_display
+      | Politician.select('distinct politicians.*').joins(:candidacies).where(candidacies: {id: candidacies}).for_display
   end
 
   def districts
@@ -61,7 +61,7 @@ class Guide < ActiveRecord::Base
   end
 
   def elections
-    @elections ||= state.elections(:include => :stages)
+    @elections ||= state.elections(include: :stages)
   end
 
   def races
@@ -78,6 +78,6 @@ class Guide < ActiveRecord::Base
 
   def initialize_report
     self.secure_token = ActiveSupport::SecureRandom.hex(10)
-    build_report(:name => secure_token, :guide => self).save!
+    build_report(name: secure_token, guide: self).save!
   end
 end

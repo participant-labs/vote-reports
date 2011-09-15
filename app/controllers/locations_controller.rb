@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :layout => false
+        render layout: false
       }
     end
   end
@@ -19,13 +19,13 @@ class LocationsController < ApplicationController
 
     action =
       if !session[:geo_location_declared]
-        message = {:error => %Q{Sorry, we were unable to understand this location. Could you clarify it?}}
+        message = {error: %Q{Sorry, we were unable to understand this location. Could you clarify it?}}
         'new'
       elsif !@geoloc.is_us?
-        message = {:error => %Q{Sorry, we currently only handle representatives for the United States of America.}}
+        message = {error: %Q{Sorry, we currently only handle representatives for the United States of America.}}
         'new'
       else
-        message = {:success => "Successfully set location"}
+        message = {success: "Successfully set location"}
 
         load_location_show_support(@geoloc)
 
@@ -41,13 +41,13 @@ class LocationsController < ApplicationController
         if params[:return_to]
           redirect_to params[:return_to]
         else
-          render :action => action
+          render action: action
         end
       }
       format.js {
         @js = true
         flash.now[message.first.first] = message.first.last
-        render :action => action, :layout => false
+        render action: action, layout: false
       }
     end
   end
@@ -60,11 +60,11 @@ class LocationsController < ApplicationController
     unless @geoloc = current_geo_location
       respond_to do |format|
         format.html {
-          render :action => :new
+          render action: :new
         }
         format.js {
           @js = true
-          render :action => :new, :layout => false
+          render action: :new, layout: false
         }
       end
       return
@@ -76,7 +76,7 @@ class LocationsController < ApplicationController
       format.html
       format.js {
         @js = true
-        render :layout => false
+        render layout: false
       }
     end
   end

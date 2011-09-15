@@ -14,7 +14,7 @@ class Users::Reports::ThumbnailsController < ApplicationController
 
   def edit
     @image = @report.thumbnail
-    render :layout => false
+    render layout: false
   end
 
   def update

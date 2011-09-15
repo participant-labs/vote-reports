@@ -2,7 +2,7 @@
 
 <div class="section clearfix">
   <div class="span-24">
-    <h2 class="span-20"><%= render 'politicians/name', :politician => @politician, :full => true, :no_fancybox => true %></h2>
+    <h2 class="span-20"><%= render 'politicians/name', politician: @politician, full: true, :no_fancybox => true %></h2>
 
     <%- if @politician.in_office? || @politician.congresspedia_url -%>
     <ul class="details span-4 last">
@@ -43,12 +43,12 @@
   </div>
 
   <%- if headshot_url = @politician.headshot.try(:url, :large) -%>
-    <%= image_tag @politician.headshot.url(:large), :size => '200x245', :alt => @politician.full_name, :style => 'padding-right: 1em; float: left;' %>
+    <%= image_tag @politician.headshot.url(:large), size: '200x245', alt: @politician.full_name, style: 'padding-right: 1em; float: left;' %>
   <%- end -%>
 
   <%- if location = @politician.location -%>
     <%- if location.is_a?(CongressionalDistrict) -%>
-      <%= render 'districts/map', :district => location, :style => 'float: left; width: 400px; height: 245px; margin-bottom: 20px;' %>
+      <%= render 'districts/map', district: location, style: 'float: left; width: 400px; height: 245px; margin-bottom: 20px;' %>
     <%- else -%>
       <iframe width="400" height="272" frameborder="0"
        scrolling="no" marginheight="0" marginwidth="0"
@@ -61,10 +61,10 @@
     <%- if @terms.present? || @politician.current_candidacy -%>
     <ul>
       <%- if @politician.current_candidacy -%>
-        <li><%= render 'politicians/candidacies/candidacy', :candidacy => @politician.current_candidacy %></li>
+        <li><%= render 'politicians/candidacies/candidacy', candidacy: @politician.current_candidacy %></li>
       <%- end -%>
       <%- @terms.each do |term|  -%>
-        <li><%= render 'politicians/terms/term', :term => term %></li>
+        <li><%= render 'politicians/terms/term', term: term %></li>
       <%- end -%>
     </ul>
     <%- else -%>
@@ -75,10 +75,10 @@
 
 <div class="ui-tabs" id="<%= dom_id(@politician, :tabs) %>">
   <ul>
-    <li><%= link_to politician_causes_path(@politician, :format => :html), :title => 'Causes' do %>
+    <li><%= link_to politician_causes_path(@politician, format: :html), title: 'Causes' do %>
       <span>Causes <span class="count"><%= @politician.report_scores.for_causes.count %></span></span>
     <% end %></li>
-    <li><%= link_to politician_reports_path(@politician, :format => :html), :title => 'Reports' do %>
+    <li><%= link_to politician_reports_path(@politician, format: :html), title: 'Reports' do %>
       <span>Reports <span class="count"><%= @politician.report_scores.for_published_reports.count %></span></span>
     <% end %></li>
   </ul>

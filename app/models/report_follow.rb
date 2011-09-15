@@ -6,9 +6,9 @@ class ReportFollow < ActiveRecord::Base
   after_destroy :rescore_personal_report
 
   validates_presence_of :report, :user
-  validates_uniqueness_of :report_id, :scope => :user_id
+  validates_uniqueness_of :report_id, scope: :user_id
 
-  delegate :scores, :to => :report
+  delegate :scores, to: :report
 
   alias_method :events, :scores
   def event_score(event)
@@ -17,5 +17,5 @@ class ReportFollow < ActiveRecord::Base
 
   private
 
-  delegate :rescore_personal_report, :to => :user
+  delegate :rescore_personal_report, to: :user
 end

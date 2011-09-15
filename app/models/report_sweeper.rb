@@ -26,7 +26,7 @@ class ReportSweeper < ActionController::Caching::Sweeper
   private
 
   def expire_cache_for(report)
-    expire_fragment(:controller => 'site', :action => 'index')
+    expire_fragment(controller: 'site', action: 'index')
     expire_fragment(dom_id(@report, :embed_header))
     expire_fragment(/#{dom_id(@report, :embed)}:.*/)
   end

@@ -8,12 +8,12 @@
   <%- if source == 'Report' -%>  
     Maybe you can <%= link_to 'make the first', new_report_path %>?
   <%- elsif source == 'Cause' -%>
-    <%= mail_to 'causes@votereports.org', 'Let us know' %> if one of <%= link_to 'their report scores', '#Reports', :class => 'act-tab-select', :rel => 'Reports' %> should be included in a cause.
+    <%= mail_to 'causes@votereports.org', 'Let us know' %> if one of <%= link_to 'their report scores', '#Reports', class: 'act-tab-select', rel: 'Reports' %> should be included in a cause.
   <%- end -%>
   </p>
 <%- else -%>
 <div id="<%= id %>" class="politician_scores">
-  <div class="act-replace" rel="<%= replace %>"><%= paginate scores, :params => {:format => :js} %></div>
+  <div class="act-replace" rel="<%= replace %>"><%= paginate scores, params: {format: :js} %></div>
   <table>
     <thead>
       <tr>
@@ -25,12 +25,12 @@
       <%- paginated_results(scores).each do |report_score| -%>
         <%- report = report_score.report -%>
         <tr>
-          <td><%= render 'reports/scores/score', :score => report_score, :report => report %></td>
-          <td><%= render 'reports/report', :report => report, :cause_only => (source == 'Cause') %></td>
+          <td><%= render 'reports/scores/score', score: report_score, report: report %></td>
+          <td><%= render 'reports/report', report: report, :cause_only => (source == 'Cause') %></td>
         </tr>
       <%- end -%>
     </tbody>
   </table>
-  <div class="act-replace" rel="<%= replace %>"><%= paginate scores, :params => {:format => :js} %></div>
+  <div class="act-replace" rel="<%= replace %>"><%= paginate scores, params: {format: :js} %></div>
 </div>
 <%- end -%>

@@ -1,6 +1,6 @@
 module ReportsHelper
   def report_embed_code(report)
-    content_tag(:div, '', :style => 'width: 200px', :id => report_embed_id(report)) \
+    content_tag(:div, '', style: 'width: 200px', id: report_embed_id(report)) \
      + javascript_include_tag(embed_report_url(report.id))
   end
 
@@ -40,9 +40,9 @@ module ReportsHelper
       content_tag :p, step
     else
       step.assert_valid_keys(:text, :why, :state_event, :confirm)
-      content_tag :div, :class => 'clearfix' do
+      content_tag :div, class: 'clearfix' do
         content_tag(:p, step.fetch(:why))
-        link_to(step.fetch(:text), user_report_path(report.user, report, :report => {:state_event => step.fetch(:state_event)}), :confirm => step.fetch(:confirm), :method => :put, :class => 'button')
+        link_to(step.fetch(:text), user_report_path(report.user, report, report: {:state_event => step.fetch(:state_event)}), confirm: step.fetch(:confirm), method: :put, class: 'button')
       end
     end
   end

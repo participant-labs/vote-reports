@@ -1,13 +1,13 @@
 <%- title @district.title -%>
 
-<%= div_for @district, :class => "section clearfix" do %>
+<%= div_for @district, class: "section clearfix" do %>
   <h2 class="span-24 last">The <%= full_district_name(@district) %></h2>
 
   <div class="span-12">
     <h3>President</h3>
     <ul>
       <%- @presidents.each do |president| -%>
-        <%= render 'politicians/politician', :politician => president, :full_name => true, :tag => :li %>
+        <%= render 'politicians/politician', politician: president, :full_name => true, tag: :li %>
       <%- end -%>
     </ul>
 
@@ -15,13 +15,13 @@
       <h3>Senators</h3>
       <ul>
         <%- @senators.each do |senator| -%>
-          <%= render 'politicians/politician', :politician => senator, :full_name => true, :tag => :li %>
+          <%= render 'politicians/politician', politician: senator, :full_name => true, tag: :li %>
         <%- end -%>
       </ul>
     <%- end -%>
   </div>
 
   <div class="span-12 last">
-    <%= render 'districts/map', :district => @district %>
+    <%= render 'districts/map', district: @district %>
   </div>
 <% end %>

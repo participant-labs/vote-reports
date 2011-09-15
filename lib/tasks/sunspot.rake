@@ -12,22 +12,22 @@ namespace :sunspot do
     `rake sunspot:solr:start RAILS_ENV=production`
   end
 
-  task :reindex => [:'bills:reindex', :'reports:reindex', :'subjects:reindex']
+  task reindex: [:'bills:reindex', :'reports:reindex', :'subjects:reindex']
 
   namespace :bills do
-    task :reindex => :environment do
+    task reindex: :environment do
       Bill.solr_reindex
     end
   end
 
   namespace :reports do
-    task :reindex => :environment do
+    task reindex: :environment do
       Report.solr_reindex
     end
   end
 
   namespace :subjects do
-    task :reindex => :environment do
+    task reindex: :environment do
       Subject.solr_reindex
     end
   end

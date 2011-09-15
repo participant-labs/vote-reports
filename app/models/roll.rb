@@ -16,8 +16,8 @@ class Roll < ActiveRecord::Base
     "On the Motion to Table the Motion to Reconsider" => ["Table Motion to Reconsider"]
   }
 
-  has_many :votes, :dependent => :destroy
-  belongs_to :subject, :polymorphic => true
+  has_many :votes, dependent: :destroy
+  belongs_to :subject, polymorphic: true
   belongs_to :congress
 
   has_friendly_id :display_name
@@ -28,8 +28,8 @@ class Roll < ActiveRecord::Base
   scope :on_bill_passage, where([
     "rolls.roll_type IN(?) AND rolls.subject_type = ?", Bill::ROLL_PASSAGE_TYPES, 'Bill'])
 
-  scope :house, where(:where => 'house')
-  scope :senate, where(:where => 'senate')
+  scope :house, where(where: 'house')
+  scope :senate, where(where: 'senate')
 
   before_validation :set_display_name
 

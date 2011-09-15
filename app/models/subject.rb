@@ -1,12 +1,12 @@
 class Subject < ActiveRecord::Base
   has_many :bill_subjects
-  has_many :bills, :through => :bill_subjects
+  has_many :bills, through: :bill_subjects
 
   has_many :interest_group_subjects
-  has_many :interest_groups, :through => :interest_group_subjects
+  has_many :interest_groups, through: :interest_group_subjects
 
   has_many :report_subjects
-  has_many :reports, :through => :report_subjects
+  has_many :reports, through: :report_subjects
 
   has_friendly_id :name, :use_slug => true
 
@@ -24,7 +24,7 @@ class Subject < ActiveRecord::Base
     def paginated_search(params)
       search do
         fulltext params[:term]
-        paginate :page => params[:subject_page]
+        paginate page: params[:subject_page]
       end
     end
 
@@ -38,7 +38,7 @@ class Subject < ActiveRecord::Base
   end
 
   scope :for_bill_criteria_on_report, lambda {|reports|
-    joins(:bills => :bill_criteria).where(['bill_criteria.report_id IN(?)', reports])
+    joins(bills: :bill_criteria).where(['bill_criteria.report_id IN(?)', reports])
   }
 
   scope :for_report, lambda {|reports|
@@ -77,6 +77,6 @@ class Subject < ActiveRecord::Base
   }
 
   def as_json(opts)
-    super(opts.reverse_merge(:only => [:name, :vote_smart_id, :name], :methods => :to_param))
+    super(opts.reverse_merge(only: [:name, :vote_smart_id, :name], methods: :to_param))
   end
 end

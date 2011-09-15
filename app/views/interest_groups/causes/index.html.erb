@@ -2,7 +2,7 @@
   <h2>Causes</h2>
   <%- if @causes.present? -%>
     <p>This interest group's scores are included in the following causes. If you'd like to suggest more, please <%= mail_to 'causes@votereports.org', 'let us know' %>.</p>
-    <%= render 'causes/list', :causes => @causes %>
+    <%= render 'causes/list', causes: @causes %>
   <%- else -%>
     <p>This interest group doesn't have any associated causes.  If you'd like to suggest one, please <%= mail_to 'causes@votereports.org', 'let us know' %>.</p>
   <%- end -%>

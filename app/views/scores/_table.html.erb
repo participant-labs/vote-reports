@@ -37,9 +37,9 @@
       <%- scores = ReportScore.for_reports(reports).for_politicians(politicians).with_evidence.includes(:report) -%>
       <%- reports.each do |report| -%>
         <tr>
-          <th><%= render 'reports/report', :report => report, :float_description => true %></th>
+          <th><%= render 'reports/report', report: report, :float_description => true %></th>
           <%- politicians.each do |politician| -%>
-            <td><%= render 'reports/scores/score', :score => scores.detect {|s| s.politician_id == politician.id && s.report_id == report.id }, :report => report %></td>
+            <td><%= render 'reports/scores/score', score: scores.detect {|s| s.politician_id == politician.id && s.report_id == report.id }, report: report %></td>
           <%- end -%>
         </tr>
       <%- end -%>

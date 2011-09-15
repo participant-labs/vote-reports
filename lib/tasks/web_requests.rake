@@ -10,7 +10,7 @@ namespace :web_requests do
       ]
 
       responses = URLS.map do |url|
-        [:get, url, {:body => open(url).read}]
+        [:get, url, {body: open(url).read}]
       end
 
       Marshal.dump(responses, open(Rails.root.join('spec/support/web_requests.marshal'), 'w'))

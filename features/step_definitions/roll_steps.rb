@@ -1,5 +1,5 @@
 Given /^(bill "[^\"]*") has a roll on the question "([^\"]*)"$/ do |bill, question|
-  create_roll(:subject => bill, :question => question)
+  create_roll(subject: bill, question: question)
 end
 
 Given /^((?:bill|amendment) "[^\"]*") has the following rolls?:$/ do |bill_or_amendment, table|
@@ -7,6 +7,6 @@ Given /^((?:bill|amendment) "[^\"]*") has the following rolls?:$/ do |bill_or_am
     if hash['voted_at'].to_s.include?('.')
       hash['voted_at'] = eval(hash['voted_at'])
     end
-    create_roll(hash.merge(:subject => bill_or_amendment))
+    create_roll(hash.merge(subject: bill_or_amendment))
   end
 end

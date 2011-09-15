@@ -6,8 +6,8 @@ class PoliticiansController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :partial => 'politicians/list', :locals => {
-          :politicians => @politicians
+        render partial: 'politicians/list', locals: {
+          politicians: @politicians
         }
       }
     end
@@ -16,7 +16,7 @@ class PoliticiansController < ApplicationController
   def show
     @politician = Politician.for_display.find(params[:id])
     if request.path != politician_path(@politician)
-      redirect_to politician_path(@politician), :status => 301
+      redirect_to politician_path(@politician), status: 301
       return
     end
     @terms = @politician.continuous_terms

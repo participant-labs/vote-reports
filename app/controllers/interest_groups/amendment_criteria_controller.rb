@@ -6,7 +6,7 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
 
   def new
     if request.path != new_interest_group_amendment_criterion_path(@interest_group)
-      redirect_to new_interest_group_amendment_criterion_path(@interest_group), :status => 301
+      redirect_to new_interest_group_amendment_criterion_path(@interest_group), status: 301
       return
     end
     @bill = Bill.find(params[:bill_id])
@@ -16,9 +16,9 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
   def create
     if @report.update_attributes(params[:report].slice(:amendment_criteria_attributes))
       flash[:notice] = "Successfully updated interest group amendments."
-      redirect_to edit_interest_group_path(@interest_group, :anchor => 'Add_Bills')
+      redirect_to edit_interest_group_path(@interest_group, anchor: 'Add_Bills')
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -28,7 +28,7 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
   def destroy
     @report.amendment_criteria.find(params[:id]).destroy
     flash[:notice] = "Successfully deleted amendment from agenda"
-    redirect_to edit_interest_group_path(@interest_group, :anchor => 'Edit_Agenda')
+    redirect_to edit_interest_group_path(@interest_group, anchor: 'Edit_Agenda')
   end
 
   private

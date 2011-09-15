@@ -25,15 +25,15 @@ class Race < ActiveRecord::Base
   }
 
   scope :with_scores_from, lambda {|scores|
-    joins(:candidacies).where(:candidacies => {:politician_id => scores.map(&:politician_id)})
+    joins(:candidacies).where(candidacies: {:politician_id => scores.map(&:politician_id)})
   }
 
-  scope :state_lower, joins(:office).where(:offices => {:name => ['State House', 'State Assembly']})
-  scope :state_upper, joins(:office).where(:offices => {:name => 'State Senate'})
-  scope :federal, joins(:office).where(:offices => {:name => 'U.S. House'})
+  scope :state_lower, joins(:office).where(offices: {name: ['State House', 'State Assembly']})
+  scope :state_upper, joins(:office).where(offices: {name: 'State Senate'})
+  scope :federal, joins(:office).where(offices: {name: 'U.S. House'})
 
-  delegate :election, :to => :election_stage
-  delegate :state, :to => :election
+  delegate :election, to: :election_stage
+  delegate :state, to: :election
 
   def district_ordinal_name
     District.ordinal_name(district_name)

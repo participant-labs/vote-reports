@@ -16,7 +16,7 @@
             <%- criterion = bill_criteria_fields.object -%>
             <tr>
               <td>
-                <%= render 'bills/bill', :bill => criterion.bill %>
+                <%= render 'bills/bill', bill: criterion.bill %>
                 <%= bill_criteria_fields.hidden_field :bill_id %>
                 <%= bill_criteria_fields.hidden_field :id %>
               </td>
@@ -27,14 +27,14 @@
                 <%= bill_criteria_fields.radio_button :support, false %>
               </td>
               <td>
-                <%= bill_criteria_fields.label :explanatory_url, 'Explanatory Link', :class => 'hide' %>
-                <%= bill_criteria_fields.text_field :explanatory_url, :size => '20' %>
+                <%= bill_criteria_fields.label :explanatory_url, 'Explanatory Link', class: 'hide' %>
+                <%= bill_criteria_fields.text_field :explanatory_url, size: '20' %>
               </td>
               <td>
                 <%= link_to('Remove', interest_group_bill_criterion_path(@report.interest_group, criterion),
-                          :method => :delete,
-                          :title => "Delete criterion for '#{criterion.bill.titles.first}'",
-                          :confirm => "Are you sure you want to delete the criterion for '#{criterion.bill.titles.first}'?") -%>
+                          method: :delete,
+                          title: "Delete criterion for '#{criterion.bill.titles.first}'",
+                          confirm: "Are you sure you want to delete the criterion for '#{criterion.bill.titles.first}'?") -%>
               </td>
             </tr>
           <%- end -%>
@@ -42,7 +42,7 @@
             <%- criterion = amendment_criteria_fields.object -%>
             <tr>
               <td>
-                <%= render 'amendments/amendment', :amendment => criterion.amendment %>
+                <%= render 'amendments/amendment', amendment: criterion.amendment %>
                 <%= amendment_criteria_fields.hidden_field :amendment_id %>
                 <%= amendment_criteria_fields.hidden_field :id %>
               </td>
@@ -53,14 +53,14 @@
                 <%= amendment_criteria_fields.radio_button :support, false %>
               </td>
               <td>
-                <%= amendment_criteria_fields.label :explanatory_url, 'Explanatory Link', :class => 'hide' %>
-                <%= amendment_criteria_fields.text_field :explanatory_url, :size => '20' %>
+                <%= amendment_criteria_fields.label :explanatory_url, 'Explanatory Link', class: 'hide' %>
+                <%= amendment_criteria_fields.text_field :explanatory_url, size: '20' %>
               </td>
               <td>
                 <%= link_to('Remove', interest_group_amendment_criterion_path(@report.user, @report, criterion),
-                          :method => :delete,
-                          :title => "Delete criterion for '#{criterion.amendment.title}'",
-                          :confirm => "Are you sure you want to delete the criterion for '#{criterion.amendment.title}'?") -%>
+                          method: :delete,
+                          title: "Delete criterion for '#{criterion.amendment.title}'",
+                          confirm: "Are you sure you want to delete the criterion for '#{criterion.amendment.title}'?") -%>
               </td>
             </tr>
           <%- end -%>

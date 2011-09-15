@@ -1,6 +1,6 @@
 namespace :gov_track do
   namespace :amendments do
-    task :unpack => [:'gov_track:support', :'gov_track:politicians'] do
+    task unpack: [:'gov_track:support', :'gov_track:politicians'] do
       amendment_columns = [
         :bill_id,
         :congress_id,

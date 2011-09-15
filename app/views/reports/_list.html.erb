@@ -9,7 +9,7 @@
       <div class="act-replace" rel="<%= replace %>"><%= paginate reports, :param_name => param_name %></div>
       <ul class="reports">
         <%- paginated_results(reports).each do |report| -%>
-          <li><%= render 'reports/report', :report => report, :cause_only => cause_only %></li>
+          <li><%= render 'reports/report', report: report, :cause_only => cause_only %></li>
         <%- end -%>
       </ul>
       <div class="act-replace" rel="<%= replace %>"><%= paginate reports, :param_name => param_name %></div>

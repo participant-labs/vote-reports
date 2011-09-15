@@ -3,8 +3,8 @@
   replace ||= 'fancybox-inner location_setter content' unless no_ajax
 -%>
 
-<%= form_tag location_path, replace ? {:class => "act-replace", :rel => replace} : {} do %>
-  <%= label_tag :location, 'Your Location', :class => 'your_location' %>
+<%= form_tag location_path, replace ? {class: "act-replace", rel: replace} : {} do %>
+  <%= label_tag :location, 'Your Location', class: 'your_location' %>
   <%= text_field_tag :location, session[:declared_location] %>
   <%- if params[:return_to].present? -%>
     <%= hidden_field_tag :return_to, params[:return_to] %>

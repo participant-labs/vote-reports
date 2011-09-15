@@ -2,7 +2,7 @@
   <h2>Politicians<%= %Q{ from "#{params[:representing]}"} if params[:representing].present? %></h2>
   <ul>
     <% politicians.each do |politician| %>
-      <li><%= render 'politicians/politician', :politician => politician %></li>
+      <li><%= render 'politicians/politician', politician: politician %></li>
     <% end %>
   </ul>
   <%= paginate politicians %>

@@ -15,7 +15,7 @@ class Causes::ImagesController < ApplicationController
 
   def edit
     @image = @cause.thumbnail
-    render :layout => false
+    render layout: false
   end
 
   def update

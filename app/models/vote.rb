@@ -4,18 +4,18 @@ class Vote < ActiveRecord::Base
   belongs_to :politician
   belongs_to :roll
 
-  validates_uniqueness_of :roll_id, :scope => :politician_id
+  validates_uniqueness_of :roll_id, scope: :politician_id
   validates_presence_of :politician, :roll
-  validates_inclusion_of :vote, :in => POSSIBLE_VALUES
+  validates_inclusion_of :vote, in: POSSIBLE_VALUES
 
-  scope :aye, where(:vote => '+')
-  scope :nay, where(:vote => '-')
-  scope :present, where(:vote => 'P')
-  scope :not_voting, where(:vote => '0')
+  scope :aye, where(vote: '+')
+  scope :nay, where(vote: '-')
+  scope :present, where(vote: 'P')
+  scope :not_voting, where(vote: '0')
 
-  delegate :subject, :to => :roll
+  delegate :subject, to: :roll
 
-  scope :for_display, includes(:politician => [:state, :congressional_district])
+  scope :for_display, includes(politician: [:state, :congressional_district])
 
   def position
     {'+' => 'Aye',

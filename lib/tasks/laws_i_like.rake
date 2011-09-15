@@ -9,7 +9,7 @@ namespace :laws_i_like do
     puts "#{users.keys.size} users"
   end
 
-  task :unpack => :environment do
+  task unpack: :environment do
     require 'facebooker'
 
     def facebook_user(fb_id)
@@ -40,7 +40,7 @@ namespace :laws_i_like do
       RPXIdentifier.find_by_identifier_and_provider_name(
         identifier, "Facebook") \
       || RPXIdentifier.new(
-        :identifier => identifier,
+        identifier: identifier,
         :provider_name => "Facebook")
     end
 
@@ -49,7 +49,7 @@ namespace :laws_i_like do
     count = 0
     
     class Report < ActiveRecord::Base
-      has_many :bill_criteria, :dependent => :destroy
+      has_many :bill_criteria, dependent: :destroy
       def rescore!
         # overwrite for now so as not to slow things down
       end
@@ -78,17 +78,17 @@ namespace :laws_i_like do
               identifier.user_id = User.first.id
               identifier.save!
               User.create!(
-                :username => name,
-                :email => "#{name.gsub(' ', '_')}+facebook@votereports.org",
+                username: name,
+                email: "#{name.gsub(' ', '_')}+facebook@votereports.org",
                 :rpx_identifiers => [identifier]
               )
             end
           identifier.update_attribute(:user_id, user.id)
           report = user.reports.find_or_create_by_name(
-            :name => 'Laws I Like',
-            :source => 'laws_i_like',
-            :state => 'private',
-            :description => 'These scores are based on the bills I voted on with the [Laws I Like](http://apps.facebook.com/lawsilike/) Facebook App'
+            name: 'Laws I Like',
+            source: 'laws_i_like',
+            state: 'private',
+            description: 'These scores are based on the bills I voted on with the [Laws I Like](http://apps.facebook.com/lawsilike/) Facebook App'
           )
 
           bill_type = begin
@@ -117,7 +117,7 @@ namespace :laws_i_like do
           bill = Bill.find_by_opencongress_id(bill_id) || raise("Bill not found: #{bill_id}")
           report.bill_criteria.find_by_bill_id(bill.id) || report.bill_criteria.create!(
             :bill_id => bill.id,
-            :support => support == '1',
+            support: support == '1',
             :created_at => liked_on.to_date
           )
           count += 1

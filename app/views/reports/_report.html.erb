@@ -3,23 +3,23 @@
   cause_only ||= false
 -%>
 
-<%= div_for report, :class => 'act-hover', :rel => dom_id(report, :follow) do %>
+<%= div_for report, class: 'act-hover', rel: dom_id(report, :follow) do %>
   <%- if report.current_image -%>
-    <%= sized_image_tag report.current_image, report.name, :style => :tiny, :class => 'report_image' %>
+    <%= sized_image_tag report.current_image, report.name, style: :tiny, class: 'report_image' %>
   <%- end -%>
-  <%= render 'reports/follows/button', :report => report, :hide => true, :unfollow_only => true %>
-  <%- attrs = float_description ? {:title => md_to_text(report.description)} : {}  -%>
-  <%= link_to report_name(report, :cause_only => cause_only), report_path(report), attrs.merge(:class => 'report_title') %>
+  <%= render 'reports/follows/button', report: report, hide: true, :unfollow_only => true %>
+  <%- attrs = float_description ? {title: md_to_text(report.description)} : {}  -%>
+  <%= link_to report_name(report, :cause_only => cause_only), report_path(report), attrs.merge(class: 'report_title') %>
   <%- if report.user_id -%>
-    <span class="report_creator">by <%= render 'users/user', :user => report.user %></span>
+    <span class="report_creator">by <%= render 'users/user', user: report.user %></span>
   <%- end -%>
   <%- unless report.description.blank? || float_description || report.name.size > 60 -%>
-    <blockquote class="report_excerpt"><p><%= truncate(md_to_text(report.description), :length => 150) %></p></blockquote>
+    <blockquote class="report_excerpt"><p><%= truncate(md_to_text(report.description), length: 150) %></p></blockquote>
   <%- end -%>
   <%- if top_subject = report.top_subject -%>
     <dl class="report_subject">
       <dt>Subject</dt>
-      <dd><%= render 'subjects/subject', :subject => top_subject, :subject_only => true %></dd>
+      <dd><%= render 'subjects/subject', subject: top_subject, :subject_only => true %></dd>
     </dl>
   <%- end -%>
 <% end %>

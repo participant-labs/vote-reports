@@ -1,9 +1,9 @@
 class ContinuousTerm
   include MongoMapper::Document
 
-  key :politician_id, Integer, :required => true
-  key :started_on, Date, :required => true
-  key :ended_on, Date, :required => true
+  key :politician_id, Integer, required: true
+  key :started_on, Date, required: true
+  key :ended_on, Date, required: true
   key :url, String
   key :party, String
   key :location_type, String
@@ -23,12 +23,12 @@ class ContinuousTerm
         :politician_id => politician.id,
         :started_on => terms.first.started_on.to_time,
         :ended_on => terms.last.ended_on.to_time,
-        :party => terms.last.party.try(:name),
-        :url => terms.last.url,
+        party: terms.last.party.try(:name),
+        url: terms.last.url,
         :location_type => terms.last.location.class.name,
         :location_id => terms.last.location.try(:id),
-        :title => terms.last.title,
-        :terms => terms.map {|t| {:type => t.class.name, :id => t.id} }
+        title: terms.last.title,
+        terms: terms.map {|t| {type: t.class.name, id: t.id} }
       )
     end
 

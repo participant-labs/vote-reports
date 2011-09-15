@@ -110,13 +110,13 @@ class InterestGroupReport < ActiveRecord::Base
 
   def calibrate_unusual_ratings
     UNUSUAL_RATINGS_MAP.each_pair do |rating, numeric_rating|
-      ratings.update_all({:numeric_rating => numeric_rating}, {:rating => rating})
+      ratings.update_all({:numeric_rating => numeric_rating}, {rating: rating})
     end
   end
 
   def calibrate_letter_ratings
-    if ratings.exists?(:rating => ALL_LETTER_GRADES)
-      rating_values = ratings.all(:conditions => {:rating => ALL_LETTER_GRADES}).map(&:rating).uniq.sort.reverse
+    if ratings.exists?(rating: ALL_LETTER_GRADES)
+      rating_values = ratings.all(conditions: {rating: ALL_LETTER_GRADES}).map(&:rating).uniq.sort.reverse
       options =
         if rating_values.join.include?('-') || rating_values.join.include?('+')
           case rating_values.first
@@ -133,13 +133,13 @@ class InterestGroupReport < ActiveRecord::Base
 
       step = 100.0 / (options.size - 1)
       options.each_with_index do |letter, index|
-        ratings.update_all({:numeric_rating => index * step}, {:rating => letter})
+        ratings.update_all({:numeric_rating => index * step}, {rating: letter})
       end
     end
   end
 
   def calibrate_zero_centered_ratings
-    return unless ratings.exists?(:rating => ZERO_CENTERED_RATINGS)
+    return unless ratings.exists?(rating: ZERO_CENTERED_RATINGS)
 
     rating_values = ratings.map {|r| r.rating.to_f }
     if rating_values.max >= 100.0
@@ -148,7 +148,7 @@ class InterestGroupReport < ActiveRecord::Base
         raise "Unexpected + rating in #{vote_smart_id} which we assumed was a normal range"
       end
       $stdout.print 'G'
-      ratings.update_all({:numeric_rating => 0.0}, {:rating => ZERO_CENTERED_RATINGS})
+      ratings.update_all({:numeric_rating => 0.0}, {rating: ZERO_CENTERED_RATINGS})
     else
       # this is a range centered around 0
       abs_min = -rating_values.min
@@ -163,7 +163,7 @@ class InterestGroupReport < ActiveRecord::Base
   end
 
   def calibrate_normal_ratings
-    ratings.all(:select => 'distinct rating', :conditions => ['numeric_rating IS NULL AND rating NOT IN(?)', NON_RATINGS]).map(&:rating).each do |rating|
+    ratings.all(select: 'distinct rating', conditions: ['numeric_rating IS NULL AND rating NOT IN(?)', NON_RATINGS]).map(&:rating).each do |rating|
       numeric_rating = 
         begin
           if rating.match(/^[+-]+$/)
@@ -181,7 +181,7 @@ class InterestGroupReport < ActiveRecord::Base
         end
 
       ratings.update_all(
-        {:numeric_rating => numeric_rating}, {:rating => rating, :numeric_rating => nil})
+        {:numeric_rating => numeric_rating}, {rating: rating, :numeric_rating => nil})
       $stdout.print '.'
     end
   end

@@ -1,13 +1,13 @@
 class Users::Reports::BillCriteriaController < ApplicationController
   filter_resource_access :nested_in => :reports
   before_filter :load_user
-  before_filter :find_report, :only => [:index, :destroy]
+  before_filter :find_report, only: [:index, :destroy]
 
   def new
     @new_report = true if params[:new_report]
     @report = @user.reports.find(params[:report_id])
     if request.path != new_user_report_bill_criterion_path(@user, @report)
-      redirect_to new_user_report_bill_criterion_path(@user, @report), :status => 301
+      redirect_to new_user_report_bill_criterion_path(@user, @report), status: 301
       return
     end
     @bills = Bill.paginated_search(params)
@@ -17,11 +17,11 @@ class Users::Reports::BillCriteriaController < ApplicationController
 
     respond_to do |format|
       format.html {
-        render :layout => false
+        render layout: false
       }
       format.js {
-        render :partial => 'reports/bill_criteria/table', :locals => {
-          :report => @report, :bills => @bills
+        render partial: 'reports/bill_criteria/table', locals: {
+          report: @report, bills: @bills
         }
       }
     end
@@ -31,20 +31,20 @@ class Users::Reports::BillCriteriaController < ApplicationController
     @report = @user.reports.find(params[:report_id])
     if @report.update_attributes(params[:report].slice(:bill_criteria_attributes))
       flash[:notice] = "Successfully updated report bills."
-      redirect_to edit_user_report_path(@user, @report, :anchor => 'Add_Bills')
+      redirect_to edit_user_report_path(@user, @report, anchor: 'Add_Bills')
     else
-      render :action => 'new', :layout => false
+      render action: 'new', layout: false
     end
   end
 
   def index
-    render :layout => false
+    render layout: false
   end
 
   def destroy
     @report.bill_criteria.find(params[:id]).destroy
     flash[:notice] = "Successfully deleted report criterion"
-    redirect_to edit_user_report_path(@user, @report, :anchor => 'Edit_Agenda')
+    redirect_to edit_user_report_path(@user, @report, anchor: 'Edit_Agenda')
   end
 
   private

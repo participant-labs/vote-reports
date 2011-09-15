@@ -9,9 +9,9 @@
 <div class="ui-tabs" id="<%= dom_id(@interest_group, :edit_tabs) %>">
   <ul>
     <li><a href="#Edit_Interest_Group" title="Edit Interest Group">Edit Report</a></li>
-    <li><%= link_to content_tag(:span, 'Edit Thumbnail'), edit_interest_group_image_path(@interest_group, :format => :html), :title => 'Edit Thumbnail' %></li>
-    <li><%= link_to content_tag(:span, 'Add Bills to Agenda'), new_interest_group_bill_criterion_path(@interest_group, :format => :html), :title => 'Add Bills' %></li>
-    <li><%= link_to content_tag(:span, 'Edit Agenda'), interest_group_bill_criteria_path(@interest_group, :format => :html), :title => 'Edit Agenda' %></li>
+    <li><%= link_to content_tag(:span, 'Edit Thumbnail'), edit_interest_group_image_path(@interest_group, format: :html), title: 'Edit Thumbnail' %></li>
+    <li><%= link_to content_tag(:span, 'Add Bills to Agenda'), new_interest_group_bill_criterion_path(@interest_group, format: :html), title: 'Add Bills' %></li>
+    <li><%= link_to content_tag(:span, 'Edit Agenda'), interest_group_bill_criteria_path(@interest_group, format: :html), title: 'Edit Agenda' %></li>
     <%- permitted_to? :destroy, @interest_group do -%>
       <li><%= link_to 'Delete Report', '#delete_report' %></li>
     <%- end -%>
@@ -21,7 +21,7 @@
     <h2>Edit Interest Group</h2>
 
     <%= form_for @interest_group do |f| %>
-      <%= render 'interest_groups/fields', :f => f %>
+      <%= render 'interest_groups/fields', f: f %>
       <%= f.submit 'Update Interest Group' %>
     <% end %>
   </div>
@@ -29,7 +29,7 @@
   <%- permitted_to? :destroy, @interest_group do -%>
     <div id="delete_report">
       <h2>Delete Report</h2>
-      <%= raw button_to("Delete Interest Group", @interest_group, :confirm => 'Are you sure you want to delete this interest group?', :method => :delete) %>
+      <%= raw button_to("Delete Interest Group", @interest_group, confirm: 'Are you sure you want to delete this interest group?', method: :delete) %>
     </div>
   <%- end -%>
 </div>

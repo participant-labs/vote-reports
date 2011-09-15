@@ -11,7 +11,7 @@ class CauseReport < ActiveRecord::Base
     !new_record? # if this is saved, then support is declared
   end
 
-  delegate :scores, :to => :report
+  delegate :scores, to: :report
 
   alias_method :events, :scores
   def event_score(event)

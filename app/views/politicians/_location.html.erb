@@ -6,8 +6,8 @@
     title = location_title(location)
   -%>
   <%- if current_page?(path) -%>
-    <%= content_tag :span, location.abbreviation, :class => 'politician_location', :title => title %>
+    <%= content_tag :span, location.abbreviation, class: 'politician_location', title: title %>
   <%- else -%>
-    <%= link_to location.abbreviation, path, :class => classes, :title => title %>
+    <%= link_to location.abbreviation, path, class: classes, title: title %>
   <%- end -%>
 <%- end -%>

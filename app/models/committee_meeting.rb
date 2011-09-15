@@ -14,7 +14,7 @@ class CommitteeMeeting < ActiveRecord::Base
   end
 
   has_many :memberships, :class_name => 'CommitteeMembership'
-  has_many :members, :through => :memberships, :source => :politician
+  has_many :members, through: :memberships, source: :politician
 
   validates_presence_of :committee, :congress
 end

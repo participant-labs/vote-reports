@@ -1,14 +1,14 @@
 <div id="<%= id %>">
   <%- if reports.present? -%>
     <div class="act-replace" rel="<%= id %>"><%= paginate reports %></div>
-    <%= form_for cause, :url => cause_reports_path(cause), :html => {:id => id, :method => :post} do |f| %>
+    <%= form_for cause, url: cause_reports_path(cause), html: {id: id, method: :post} do |f| %>
       <table>
         <tbody>
           <%- build_cause_reports_for(cause, paginated_results(reports)).each do |cause_report| -%>
             <%= f.fields_for :cause_reports, cause_report do |cause_report_fields| -%>
               <tr>
                 <td>
-                  <%= render 'reports/report', :report => cause_report.report %>
+                  <%= render 'reports/report', report: cause_report.report %>
                   <%= cause_report_fields.hidden_field :report_id %>
                 </td>
                 <td><%= cause_report_fields.check_box :support %> <%= cause_report_fields.label :support %></td>

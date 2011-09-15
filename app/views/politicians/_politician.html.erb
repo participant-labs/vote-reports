@@ -6,7 +6,7 @@
   name_only ||= false
 -%>
 
-<%= content_tag_for tag, politician, :class => 'clearfix' do %>
-  <%= render 'politicians/headshot', :politician => politician, :style => headshot_style, :spacer => headshot_spacer %>
-  <%= render 'politicians/name', :politician => politician, :full => full_name, :name_only => name_only %>
+<%= content_tag_for tag, politician, class: 'clearfix' do %>
+  <%= render 'politicians/headshot', politician: politician, style: headshot_style, spacer: headshot_spacer %>
+  <%= render 'politicians/name', politician: politician, full: full_name, :name_only => name_only %>
 <% end %>

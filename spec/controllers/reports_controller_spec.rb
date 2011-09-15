@@ -6,8 +6,8 @@ describe ReportsController do
   requires_login_for :get,    :new
 
   describe "routes" do
-    route_matches("/reports",        :get,   :controller => 'reports', :action => 'index')
-    route_matches("/reports/new",    :get,   :controller => 'reports', :action => 'new')    
+    route_matches("/reports",        :get,   controller: 'reports', action: 'index')
+    route_matches("/reports/new",    :get,   controller: 'reports', action: 'new')    
   end
 
 end

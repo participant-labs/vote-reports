@@ -1,9 +1,9 @@
 <div class="clearfix report_description section">
   <%- if interest_group.thumbnail.exists? -%>
-  <div class="image image_large"><%= sized_image_tag interest_group.thumbnail, interest_group.name, :style => :header %></div>
+  <div class="image image_large"><%= sized_image_tag interest_group.thumbnail, interest_group.name, style: :header %></div>
   <%- end -%>
   <h1><%= interest_group.name %></h1>
-  <%= render 'reports/follows/button', :report => @interest_group.report %>
+  <%= render 'reports/follows/button', report: @interest_group.report %>
   <ul class="details">
   <%- if url = polymorphic_url(@interest_group).presence -%>
     <li><%= link_to 'Website', url %></li>
@@ -29,7 +29,7 @@
         <dd><%= @interest_group.fax %></dd>
       <%- end -%>
         <dt>Address</dt>
-        <dd><%= render 'addresses/address', :address => @interest_group %></dd>
+        <dd><%= render 'addresses/address', address: @interest_group %></dd>
     </dl>
   </li>
   </ul>

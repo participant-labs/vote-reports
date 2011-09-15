@@ -1,14 +1,14 @@
 <%- label ||= 'Search' -%>
 
-<% report && permitted_to?(:autofetch, report, :context => :reports_bill_criteria) do %>
-  <%= form_tag autofetch_report_bill_criteria_path(report.id), :class => 'act-replace', :rel => 'report_bills_results_table' do %>
+<% report && permitted_to?(:autofetch, report, context: :reports_bill_criteria) do %>
+  <%= form_tag autofetch_report_bill_criteria_path(report.id), class: 'act-replace', rel: 'report_bills_results_table' do %>
     <%= label_tag :source, 'CapWiz source' %>
     <%= text_field_tag :source %>
     <%= submit_tag 'Autofetch' %>
   <% end %>
 <% end %>
 
-<%= form_tag url, :method => :get, :class => 'act-replace', :rel => 'report_bills_results_table' do %>
+<%= form_tag url, method: :get, class: 'act-replace', rel: 'report_bills_results_table' do %>
   <%= label_tag :term, label %>
   <%= text_field_tag :term, params[:term] %>
   <%= check_box_tag :voted, @voted %>

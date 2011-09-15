@@ -7,11 +7,11 @@ class Users::ScoresController < ApplicationController
 
     respond_to do |format|
       format.html {
-        render :layout => false
+        render layout: false
       }
       format.js {
-        render :partial => 'reports/scores/table', :locals => {
-          :report => @report, :scores => @scores, :replace => 'report_scores' }
+        render partial: 'reports/scores/table', locals: {
+          report: @report, scores: @scores, replace: 'report_scores' }
       }
     end
   end

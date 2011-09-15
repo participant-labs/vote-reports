@@ -18,11 +18,11 @@ module ApplicationHelper
   end
 
   def divider
-    image_tag('homepage/homepage_register_divider.png', :class => 'login-divider')
+    image_tag('homepage/homepage_register_divider.png', class: 'login-divider')
   end
 
   def footer_divider
-    image_tag('footer/footer_divider.png', :class => 'login-divider')
+    image_tag('footer/footer_divider.png', class: 'login-divider')
   end
 
   def page_title
@@ -43,19 +43,19 @@ module ApplicationHelper
   end
 
   def clippy(text, bgcolor='#FFFFFF')
-    content_tag :object, :classid => "clsid:d27cdb6e-ae6d-11cf-96b8-444553540000",
-      :width => '110', :height => '14', :id => 'clippy' do
-      content_tag :param, '', :name => 'movie', :value => '/flash/clippy.swf'
-      content_tag :param, '', :name => 'allowScriptAccess', :value => 'always'
-      content_tag :param, '', :name => 'quality', :value => 'high'
-      content_tag :param, '', :name => 'scale', :value => 'noscale'
-      content_tag :param, '', :name => 'FlashVars', :value => "text=#{text}"
-      content_tag :param, '', :name => 'bgcolor', :value => bgcolor
-      content_tag :embed, '', :src => '/flash/clippy.swf',
-        :width => '110', :height => '14', :name => 'clippy',
-        :quality => 'high', :allowScriptAccess => 'always', :type => "application/x-shockwave-flash",
-        :pluginspage => "http://www.macromedia.com/go/getflashplayer",
-        :FlashVars => "text=#{text}", :bgcolor => bgcolor
+    content_tag :object, classid: "clsid:d27cdb6e-ae6d-11cf-96b8-444553540000",
+      width: '110', height: '14', id: 'clippy' do
+      content_tag :param, '', name: 'movie', value: '/flash/clippy.swf'
+      content_tag :param, '', name: 'allowScriptAccess', value: 'always'
+      content_tag :param, '', name: 'quality', value: 'high'
+      content_tag :param, '', name: 'scale', value: 'noscale'
+      content_tag :param, '', name: 'FlashVars', value: "text=#{text}"
+      content_tag :param, '', name: 'bgcolor', value: bgcolor
+      content_tag :embed, '', src: '/flash/clippy.swf',
+        width: '110', height: '14', name: 'clippy',
+        quality: 'high', allowScriptAccess: 'always', type: "application/x-shockwave-flash",
+        pluginspage: "http://www.macromedia.com/go/getflashplayer",
+        FlashVars: "text=#{text}", bgcolor: bgcolor
     end
   end
 
@@ -63,11 +63,11 @@ module ApplicationHelper
     fields.map do |field|
       if field == :base
         Array.wrap(form.object.errors[:base]).uniq.map do |error|
-          content_tag :p, error, :class => 'error'
+          content_tag :p, error, class: 'error'
         end
       else
         Array.wrap(form.object.errors[field]).uniq.map do |error|
-          content_tag :p, error, :class => 'error'
+          content_tag :p, error, class: 'error'
         end
       end
     end.flatten.join.html_safe
@@ -93,7 +93,7 @@ module ApplicationHelper
 
   def flash_helper
     flash.map do |(level, message)|
-      content_tag(:div, message, :class => [level, " flash"]) if message.present?
+      content_tag(:div, message, class: [level, " flash"]) if message.present?
     end.join.html_safe
   end
 

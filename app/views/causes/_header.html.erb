@@ -1,7 +1,7 @@
 <%= div_for cause do %>
   <div class="cause_header clearfix">
     <h1><%= link_to_unless_current cause.name, cause %></h1>
-    <%= render 'reports/follows/button', :report => cause.report %>
+    <%= render 'reports/follows/button', report: cause.report %>
     <blockquote>
       <%= md_to_html(cause.description) %>
     </blockquote>

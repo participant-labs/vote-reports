@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Party do
   before(:each) do
     @valid_attributes = {
-      :name => "value for name"
+      name: "value for name"
     }
   end
 

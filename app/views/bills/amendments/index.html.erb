@@ -9,19 +9,19 @@
     </tr>
     <% @amendments.each do |amendment|  %>
       <tr>
-        <th><%= link_to amendment.display_name, bill_amendment_path(@bill, amendment), :class => 'fancyboxy' %></th>
+        <th><%= link_to amendment.display_name, bill_amendment_path(@bill, amendment), class: 'fancyboxy' %></th>
         <td><%= amendment.offered_on.to_s(:rfc822) %>
           <%- if sponsor = amendment.sponsoring_politician -%>
-            by <%= render 'politicians/politician', :politician => sponsor, :headshot_style => :small %>
+            by <%= render 'politicians/politician', politician: sponsor, :headshot_style => :small %>
           <%- end -%>
         </td>
         <td><%= amendment.title %></td>
         <td>
           <%- if amendment.rolls.count > 1 -%>
-            <%= link_to pluralize(amendment.rolls.count, 'vote'), bill_amendment_path(@bill, amendment), :class => 'fancyboxy' %>
+            <%= link_to pluralize(amendment.rolls.count, 'vote'), bill_amendment_path(@bill, amendment), class: 'fancyboxy' %>
           <%- elsif amendment.rolls.count == 1 -%>
             <%- roll = amendment.rolls.first -%>
-            <%= link_to roll.result, roll_path(roll), :title => roll.question %>
+            <%= link_to roll.result, roll_path(roll), title: roll.question %>
           <%- end -%>
         </td>
       </tr>

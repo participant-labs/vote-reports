@@ -1,7 +1,7 @@
 namespace :db do
   namespace :sanity_check do
     desc "Check politicians"
-    task :politicians => :environment do
+    task politicians: :environment do
       invalid_politicians = Politician.all.reject(&:valid?)
       invalid_politicians.each do |politician|
         puts "#{politician.id} #{politician.full_name} is invalid:"
@@ -13,7 +13,7 @@ namespace :db do
     end
 
     desc "Check bills"
-    task :bills => :environment do
+    task bills: :environment do
       invalid_bills = Bill.all.reject(&:valid?)
       invalid_bills.each do |bill|
         puts "#{bill.id} #{bill.title} is invalid:"
@@ -25,7 +25,7 @@ namespace :db do
     end
 
     desc "Check Amendments"
-    task :amendments => :environment do
+    task amendments: :environment do
       invalid_amendments = Amendment.all.reject(&:valid?)
       invalid_amendments.each do |amendment|
         puts "#{amendment.id} #{amendment.title} is invalid:"

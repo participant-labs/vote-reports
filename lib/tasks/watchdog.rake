@@ -12,7 +12,7 @@ namespace :watchdog do
     end
 
     desc "Process Politicians"
-    task :unpack => :environment do
+    task unpack: :environment do
       ActiveRecord::Base.transaction do
         us_states = UsState.all.index_by(&:abbreviation)
         zips = []

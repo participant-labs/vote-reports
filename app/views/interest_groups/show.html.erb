@@ -3,13 +3,13 @@
 <div class="report-show">
   <div class="body span-18">
     <h1><%= @interest_group.name %></h1>
-    <%= render 'reports/follows/button', :report => @interest_group.report %>
+    <%= render 'reports/follows/button', report: @interest_group.report %>
     <div class="description"><%= md_to_html(@interest_group.description) %></div>
 
     <div id="report_scores_section" class="section report_scores">
-      <%= render 'politicians/search', :in_office => true, :replace => 'report_scores',
-        :url => interest_group_report_scores_path(@interest_group),
-        :reset_path => interest_group_report_scores_path(@interest_group, :representing => '') %>
+      <%= render 'politicians/search', :in_office => true, replace: 'report_scores',
+        url: interest_group_report_scores_path(@interest_group),
+        :reset_path => interest_group_report_scores_path(@interest_group, representing: '') %>
       <div class="act-fill"
         rel="<%= interest_group_report_scores_path(@interest_group) %>"
          id="scores"></div>
@@ -19,7 +19,7 @@
   <div class="sidebar span-6 last">
     <div class="spacer">
       <%- if @interest_group.thumbnail.exists? -%>
-      <div class="logo span-6 last"><%= sized_image_tag @interest_group.thumbnail, @interest_group.name, :style => :header, :class => 'image_large' %></div>
+      <div class="logo span-6 last"><%= sized_image_tag @interest_group.thumbnail, @interest_group.name, style: :header, class: 'image_large' %></div>
       <%- end -%>
       <div class="name"><%= @interest_group.name %></div>
 
@@ -30,14 +30,14 @@
       <dl>
         <dt><%= pluralize_word(@subjects.size, 'Subject') %></dt>
         <%- @subjects.each do |subject| -%>
-          <dd><%= render 'subjects/subject', :subject => subject, :subject_only => true %></dd>
+          <dd><%= render 'subjects/subject', subject: subject, :subject_only => true %></dd>
         <%- end -%>
         <dt><%= pluralize_word(@causes.size, 'Cause') %></dt>
         <%- if @causes.blank? -%>
           <dd>None</dd>
         <%- else -%>
           <%- @causes.each do |cause| -%>
-            <dd><%= render 'causes/cause', :cause => cause %></dd>
+            <dd><%= render 'causes/cause', cause: cause %></dd>
           <%- end -%>
         <%- end -%>
       </dl>
@@ -65,20 +65,20 @@
           <dd><%= @interest_group.fax %></dd>
         <%- end -%>
           <dt>Address</dt>
-          <dd><%= render 'addresses/address', :address => @interest_group %></dd>
+          <dd><%= render 'addresses/address', address: @interest_group %></dd>
       </dl>
 
       <%- unless @interest_group.owner -%>
         <div id="claim">
-          <h3><%= link_to content_tag(:span, "Claim this Group"), new_interest_group_claim_path(@interest_group), :class => 'fancyboxy button' %></h3>
+          <h3><%= link_to content_tag(:span, "Claim this Group"), new_interest_group_claim_path(@interest_group), class: 'fancyboxy button' %></h3>
         </div>
       <%- end -%>
 
-      <%= render 'reports/embeds/button', :href => interest_group_embed_path(@interest_group) %>
+      <%= render 'reports/embeds/button', href: interest_group_embed_path(@interest_group) %>
     </div>
   </div>
 </div>
 
 <div class="span-24 last act-fill"
-  rel="<%= interest_group_agenda_path(@interest_group, :format => :html) %>"
+  rel="<%= interest_group_agenda_path(@interest_group, format: :html) %>"
   id="<%= dom_id(@interest_group, :agenda) %>"></div>

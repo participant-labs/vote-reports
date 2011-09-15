@@ -4,7 +4,7 @@ describe Report do
   describe "creation" do
     it "should be validate presence of name" do
       lambda do
-        @report = Report.new(:name => nil)
+        @report = Report.new(name: nil)
         @report.save
       end.should_not change(Report,:count)
       @report.errors[:name].should include("can't be blank")
@@ -26,7 +26,7 @@ describe Report do
     it "should return reports with bill_criteria" do
       create_report
       published_report = create_report
-      create_bill_criterion(:report => published_report)
+      create_bill_criterion(report: published_report)
 
       Report.with_criteria.should == [published_report]
     end
@@ -55,21 +55,21 @@ describe Report do
     before do
       create_report
       published_report = create_report
-      create_bill_criterion(:report => published_report)
+      create_bill_criterion(report: published_report)
       @report = create_report
       @bill = create_bill
-      create_bill_criterion(:report => @report, :bill => @bill)
+      create_bill_criterion(report: @report, bill: @bill)
     end
 
     it "should not return reports with non-passage votes" do
-      roll = create_roll(:subject => @bill)
+      roll = create_roll(subject: @bill)
       Bill::ROLL_PASSAGE_TYPES.should_not include(roll.roll_type)
 
       Report.scored.should == []
     end
 
     it "should return reports with voted bill_criteria" do
-      create_roll(:subject => @bill, :roll_type => Bill::ROLL_PASSAGE_TYPES.sample)
+      create_roll(subject: @bill, :roll_type => Bill::ROLL_PASSAGE_TYPES.sample)
 
       Report.scored.should == [@report]
     end
@@ -88,8 +88,8 @@ describe Report do
 
     context "when the report has a score criteria" do
       before do
-        create_bill_criterion(:report => @report)
-        roll = create_roll(:subject => @report.reload.bill_criteria.first.bill, :roll_type => "On Passage")
+        create_bill_criterion(report: @report)
+        roll = create_roll(subject: @report.reload.bill_criteria.first.bill, :roll_type => "On Passage")
       end
 
       it "should create a delayed job accessible via #delayed_jobs" do
@@ -100,13 +100,13 @@ describe Report do
 
       context "when a rescore is active" do
         before do
-          Delayed::Worker.new(:quiet => true).work_off(10)
+          Delayed::Worker.new(quiet: true).work_off(10)
           @report.rescore!
         end
 
         it "completing the rescore should remove it from the active jobs" do
           lambda {
-            Delayed::Worker.new(:quiet => true).work_off(1)
+            Delayed::Worker.new(quiet: true).work_off(1)
           }.should change(@report.delayed_jobs, :count).by(-1)
         end
 

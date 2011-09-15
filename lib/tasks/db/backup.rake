@@ -1,6 +1,6 @@
 namespace :db do
   namespace :backup do
-    task :full => :environment do
+    task full: :environment do
       rescue_and_reraise do
         require 'date'
         dest = Rails.root.join('data/backup/db/full', Rails.env)

@@ -7,12 +7,12 @@ class InterestGroups::ScoresController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :partial => 'reports/scores/table', :locals => {
-          :report => @report, :scores => @scores, :target_path => interest_group_report_scores_path(@interest_group)
+        render partial: 'reports/scores/table', locals: {
+          report: @report, scores: @scores, :target_path => interest_group_report_scores_path(@interest_group)
         }
       }
       format.json {
-        render :json => @report.as_json.merge(:scores => @report.scores.as_json)
+        render json: @report.as_json.merge(scores: @report.scores.as_json)
       }
     end
   end
@@ -23,7 +23,7 @@ class InterestGroups::ScoresController < ApplicationController
       format.html
       format.js {
         @js = true
-        render :layout => false
+        render layout: false
       }
     end
   end
@@ -31,7 +31,7 @@ class InterestGroups::ScoresController < ApplicationController
   private
 
   def load_interest_group
-    @interest_group = InterestGroup.find(params[:interest_group_id], :include => :report)
+    @interest_group = InterestGroup.find(params[:interest_group_id], include: :report)
     @report = @interest_group.report
   end
 end

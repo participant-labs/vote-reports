@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
       new_params = {}
       method = request.request_method && request.request_method.to_s.downcase.to_sym
       if method != :get
-        new_params.merge!(:method => method)
+        new_params.merge!(method: method)
       end
       if params[:return_to]
         new_params.merge!(:return_to => params[:return_to])
@@ -106,7 +106,7 @@ class ApplicationController < ActionController::Base
     partial_html = render_to_string(options.except(:css))
     if options[:css]
       css_path = File.read(Rails.root.join("public/stylesheets/#{options[:css]}.css"))
-      partial_html = TamTam.inline(:css => css_path, :body => partial_html)
+      partial_html = TamTam.inline(css: css_path, body: partial_html)
     end
     partial_html.gsub(/class="(.*)"/, 'class="votereports_\1"').gsub(/id="(.*)"/, 'id="votereports_\1"').to_json
   end

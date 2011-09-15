@@ -3,7 +3,7 @@ Transform /interest group "(.*)"/ do |name|
 end
 
 Given /an interest group named "(.*)"/ do |name|
-  create_interest_group(:name => name)
+  create_interest_group(name: name)
 end
 
 Given /^(interest group "[^"]*") has the following ratings:$/ do |interest_group, table|
@@ -11,7 +11,7 @@ Given /^(interest group "[^"]*") has the following ratings:$/ do |interest_group
   table.map_column!('report') {|timespan|
     interest_group.reports.find_by_timespan(timespan) \
       || create_interest_group_report(
-          :interest_group => interest_group, :timespan => timespan)
+          :interest_group => interest_group, timespan: timespan)
   }
   table.hashes.each do |hash|
     create_interest_group_rating(
@@ -23,5 +23,5 @@ end
 
 Given /^the scores for (interest group "[^"]*") are calculated$/ do |interest_group|
   interest_group.rescore!
-  Delayed::Worker.new(:quiet => true).work_off(1).should == [1, 0]
+  Delayed::Worker.new(quiet: true).work_off(1).should == [1, 0]
 end

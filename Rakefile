@@ -20,7 +20,7 @@ rescue LoadError
   puts "hoptoad_notifier not available"
 end
 
-task :default => [:spec, :'cucumber:rerun']
+task default: [:spec, :'cucumber:rerun']
 
 task :update do
   Rake::Task['gov_track:download_all'].invoke

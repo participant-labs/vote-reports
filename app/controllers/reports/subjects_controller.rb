@@ -3,9 +3,9 @@ class Reports::SubjectsController < ApplicationController
 
   def index
     @subjects = @report.subjects.for_tag_cloud.all(
-      :select => "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
-      :limit => 30)
-    render :layout => false
+      select: "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
+      limit: 30)
+    render layout: false
   end
 
   private
@@ -15,7 +15,7 @@ class Reports::SubjectsController < ApplicationController
       @user = User.find(params[:user_id])
       @report = @user.reports.find(params[:report_id])
     else
-      @interest_group = InterestGroup.find(params[:interest_group_id], :include => :report)
+      @interest_group = InterestGroup.find(params[:interest_group_id], include: :report)
       @report = @interest_group.report
     end
   end

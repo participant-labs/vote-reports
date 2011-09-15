@@ -23,25 +23,25 @@ class GuidesController < ApplicationController
     supported = fetch_reports_for(session[:guide_causes])
     opposed = fetch_reports_for(session[:guide_causes_opposed])
 
-    @guide = Guide.new(:geoloc => current_geo_location, :reports_supported => supported, :reports_opposed => opposed)
+    @guide = Guide.new(geoloc: current_geo_location, :reports_supported => supported, :reports_opposed => opposed)
 
     respond_to do |format|
       format.html {
-        render :action => next_step
+        render action: next_step
       }
       format.js {
         @js = true
-        render :action => next_step, :layout => false
+        render action: next_step, layout: false
       }
     end
   end
 
   def create
-    @guide = Guide.new(params[:guide].merge(:reports => Cause.find(params[:causes], :include => :report).map(&:report)))
+    @guide = Guide.new(params[:guide].merge(reports: Cause.find(params[:causes], include: :report).map(&:report)))
     if @guide.save
       redirect_to guide_path(@guide)
     else
-      render :action => next_step
+      render action: next_step
     end
   end
 
@@ -53,7 +53,7 @@ class GuidesController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :partial => 'reports/scores/table', :locals => {:report => @report, :scores => @scores}
+        render partial: 'reports/scores/table', locals: {report: @report, scores: @scores}
       }
     end
   end
@@ -61,7 +61,7 @@ class GuidesController < ApplicationController
   private
 
   def fetch_reports_for(slugs)
-    slugs.present? ? Cause.find_all_by_cached_slug(slugs, :include => :report).map(&:report) : []
+    slugs.present? ? Cause.find_all_by_cached_slug(slugs, include: :report).map(&:report) : []
   end
 
   def next_step

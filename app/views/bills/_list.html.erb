@@ -7,7 +7,7 @@
     <div class="act-replace" rel="<%= replace %>"><%= paginate bills, :param_name => param_name %></div>
     <ul>
       <%- paginated_results(bills).each do |bill| -%>
-        <li><%= render 'bills/bill', :bill => bill %></li>
+        <li><%= render 'bills/bill', bill: bill %></li>
       <%- end -%>
     </ul>
     <div class="act-replace" rel="<%= replace %>"><%= paginate bills, :param_name => param_name %></div>

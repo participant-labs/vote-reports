@@ -1,5 +1,5 @@
 <div class="section" id="reports_section">
   <h2>Reports</h2>
-  <%= render 'reports/navigate', :replace => 'report_scores', :path => politician_reports_path(@politician), :subjects => @subjects %>
-  <%= render 'politicians/scores/table', :scores => @scores, :replace => 'report_scores' %>
+  <%= render 'reports/navigate', replace: 'report_scores', path: politician_reports_path(@politician), subjects: @subjects %>
+  <%= render 'politicians/scores/table', scores: @scores, replace: 'report_scores' %>
 </div>

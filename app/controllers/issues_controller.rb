@@ -18,7 +18,7 @@ class IssuesController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :partial => 'causes/list', :locals => {:causes => @issue.causes}
+        render partial: 'causes/list', locals: {causes: @issue.causes}
       }
     end
   end
@@ -32,7 +32,7 @@ class IssuesController < ApplicationController
     else
       flash[:notice] = "We had a problem"
       @causes = Cause.all
-      render :action => :new
+      render action: :new
     end
   end
 
@@ -40,6 +40,6 @@ class IssuesController < ApplicationController
     @issue = Issue.find(params[:id])
     @issue.destroy
     flash[:notice] = "Issue destroyed"
-    redirect_to :action => :index
+    redirect_to action: :index
   end
 end

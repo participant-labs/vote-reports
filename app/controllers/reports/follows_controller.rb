@@ -14,7 +14,7 @@ class Reports::FollowsController < ApplicationController
   end
 
   def create
-    @follow = @report.follows.new(:user => current_user)
+    @follow = @report.follows.new(user: current_user)
     if @follow.save
       flash[:success] = "You are now following '#{@report.name}'"
     else

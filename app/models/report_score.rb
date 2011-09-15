@@ -3,16 +3,16 @@ class ReportScore < ActiveRecord::Base
 
   belongs_to :report
   belongs_to :politician
-  has_many :evidence, :class_name => 'ReportScoreEvidence', :dependent => :destroy
+  has_many :evidence, :class_name => 'ReportScoreEvidence', dependent: :destroy
 
-  # default_scope :order => 'score DESC'
+  # default_scope order: 'score DESC'
   scope :bottom, order(:score)
 
   alias_method :subject, :report # for the score evidence pop-up
 
   scope :by_score, order('report_scores.score DESC')
   scope :with_evidence, includes([
-    {:politician => :state},
+    {politician: :state},
     :evidence
   ])
 
@@ -25,12 +25,12 @@ class ReportScore < ActiveRecord::Base
     end
   end
 
-  has_many :dependent_report_score_evidences, :class_name => 'ReportScoreEvidence', :as => :evidence
+  has_many :dependent_report_score_evidences, :class_name => 'ReportScoreEvidence', as: :evidence
   has_many :dependent_report_scores, :class_name => 'ReportScore',
-    :through => :dependent_report_score_evidences, :source => :score
+    through: :dependent_report_score_evidences, source: :score
 
-  scope :for_politician_display, includes(:report => [:cause, :image, :interest_group, :user, :top_subject]).order('report_scores.score DESC')
-  scope :for_report_display, includes(:politician => [:state, :congressional_district]).order('report_scores.score DESC')
+  scope :for_politician_display, includes(report: [:cause, :image, :interest_group, :user, :top_subject]).order('report_scores.score DESC')
+  scope :for_report_display, includes(politician: [:state, :congressional_district]).order('report_scores.score DESC')
 
   scope :published, joins(:report).where([
     "reports.state = ? OR reports.user_id IS NULL", 'published'])
@@ -45,7 +45,7 @@ class ReportScore < ActiveRecord::Base
       {}
     else
       select('DISTINCT report_scores.*')\
-      .joins(:report => :subjects)\
+      .joins(report: :subjects)\
       .where((subjects.first.is_a?(String) \
        ? ["subjects.name IN(?) OR subjects.cached_slug IN(?)", subjects, subjects] \
        : ['subjects.id IN(?)', subjects]))
@@ -88,7 +88,7 @@ class ReportScore < ActiveRecord::Base
   end
 
   def as_json(opts = {})
-    super(opts.reverse_merge(:only => [:evidence_description, :gov_track_id, :vote_smart_id, :score, :name], :include => [:politician]))
+    super(opts.reverse_merge(only: [:evidence_description, :gov_track_id, :vote_smart_id, :score, :name], include: [:politician]))
   end
 
   private

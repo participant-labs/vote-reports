@@ -3,11 +3,11 @@ class GuideScore
   include MongoMapper::Document
   include Score
 
-  key :politician_id, Integer, :required => true, :numeric => true
+  key :politician_id, Integer, required: true, numeric: true
   key :supported_report_ids, Array
   key :opposed_report_ids, Array
-  key :score, Float, :required => true
-  key :evidence_ids, Array, :required => true
+  key :score, Float, required: true
+  key :evidence_ids, Array, required: true
   key :evidence_description, String
 
   def initialize(*args)
@@ -42,7 +42,7 @@ class GuideScore
   private
 
   def evidence_count
-    ReportScoreEvidence.count(:conditions => {:report_score_id => evidence_ids})
+    ReportScoreEvidence.count(conditions: {:report_score_id => evidence_ids})
   end
 
   def build_evidence_description

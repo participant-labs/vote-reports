@@ -3,7 +3,7 @@ class Bills::AmendmentsController < ApplicationController
 
   def index
     @amendments = @bill.amendments.with_votes.by_offered_on
-    render :layout => false
+    render layout: false
   end
 
   def show
@@ -13,7 +13,7 @@ class Bills::AmendmentsController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :layout => false
+        render layout: false
       }
     end
   end

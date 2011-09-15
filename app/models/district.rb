@@ -1,10 +1,10 @@
 class District < ActiveRecord::Base
-  composed_of :level, :mapping => %w(level level), :class_name => 'District::Level'
+  composed_of :level, mapping: %w(level level), :class_name => 'District::Level'
 
   belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
   has_one :congressional_district
   has_many :races
-  has_many :offices, :through => :races
+  has_many :offices, through: :races
 
   scope :random, order('random()')
   scope :lookup, lambda {|geoloc|
@@ -17,7 +17,7 @@ class District < ActiveRecord::Base
   }
   scope :level, lambda {|level|
     if level.present?
-      where(:level => level)
+      where(level: level)
     else
       {}
     end
@@ -28,19 +28,19 @@ class District < ActiveRecord::Base
 
   scope :with_name, lambda {|district_name|
     name = ((district_name =~ /^\d+$/) ? district_name.to_i.to_s.rjust(3, '0') : district_name)
-    where(:name => name)
+    where(name: name)
   }
 
-  validates_presence_of :congressional_district, :if => :federal?
+  validates_presence_of :congressional_district, if: :federal?
 
   District::Level.levels.each do |level|
-    scope level, where(:level => level)
+    scope level, where(level: level)
     define_method :"#{level}?" do
       self.level.to_s == level
     end
   end
 
-  delegate :envelope, :to => :the_geom
+  delegate :envelope, to: :the_geom
 
   class << self
     def geocode(loc)

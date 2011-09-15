@@ -5,13 +5,13 @@
 
   <div class="ui-tabs" id="<%= dom_id(@subject, :tabs) %>">
     <ul>
-      <li><%= link_to subject_reports_path(@subject, :format => :html), :title => 'Reports' do %>
+      <li><%= link_to subject_reports_path(@subject, format: :html), title: 'Reports' do %>
         <span>Reports <span class="count"><%= @subject.reports.published.non_cause.count %></span></span>
       <% end %></li>
-      <li><%= link_to subject_causes_path(@subject, :format => :html), :title => 'Causes' do %>
+      <li><%= link_to subject_causes_path(@subject, format: :html), title: 'Causes' do %>
         <span>Causes <span class="count"><%= @subject.reports.published.for_causes.count %></span></span>
       <% end %></li>
-      <li><%= link_to subject_bills_path(@subject, :format => :html), :title => 'Bills' do %>
+      <li><%= link_to subject_bills_path(@subject, format: :html), title: 'Bills' do %>
         <span>Bills <span class="count"><%= @subject.bills.count %></span></span>
       <% end %></li>
     </ul>

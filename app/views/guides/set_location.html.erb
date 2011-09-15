@@ -5,10 +5,10 @@
     <p class="span-24 message">Enter your location to narrow down the list of politicians:</p>
 
     <%= form_tag location_path do %>
-      <%= hidden_field_tag :return_to, new_guide_path(:from => :set_location) %>
+      <%= hidden_field_tag :return_to, new_guide_path(from: :set_location) %>
       <dl class="<%= @politicians ? 'span-8' : 'span-20' %>">
         <dt><%= label_tag :location, 'Your Location' %></dt>
-        <dd><%= text_field_tag :location, session[:declared_location], :class => 'title round-4', :placeholder => 'Address or zip code' %></dd>
+        <dd><%= text_field_tag :location, session[:declared_location], class: 'title round-4', placeholder: 'Address or zip code' %></dd>
       </dl>
       <%- if @politicians -%>
       <%- @politicians = @politicians.group_by(&:current_office_type) -%>
@@ -16,7 +16,7 @@
         <%- if presidents = @politicians['PresidentialTerm'] -%>
           <dt>President</dt>
           <%- presidents.each do |politician| -%>
-            <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
+            <dd><%= render 'politicians/politician', politician: politician, :headshot_style => :tiny, :name_only => true %></dd>
           <%- end -%>
         <%- end -%>
       </dl>
@@ -24,7 +24,7 @@
         <%- if senators = @politicians['SenateTerm'] -%>
           <dt>Senators for <%= @federal.state.abbreviation %></dt>
           <%- senators.each do |politician| -%>
-            <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
+            <dd><%= render 'politicians/politician', politician: politician, :headshot_style => :tiny, :name_only => true %></dd>
           <%- end -%>
         <%- end -%>
       </dl>
@@ -32,7 +32,7 @@
         <%- if representatives = @politicians['RepresentativeTerm'] -%>
           <dt>Rep for <%= @federal.congressional_district.abbreviation %></dt>
           <%- representatives.each do |politician| -%>
-            <dd><%= render 'politicians/politician', :politician => politician, :headshot_style => :tiny, :name_only => true %></dd>
+            <dd><%= render 'politicians/politician', politician: politician, :headshot_style => :tiny, :name_only => true %></dd>
           <%- end -%>
         <%- end -%>
       </dl>
@@ -45,7 +45,7 @@
 
     <%- if @politicians -%>
       <div class="span-4 last">
-        <%= form_tag new_guide_path, :method => :get do %>
+        <%= form_tag new_guide_path, method: :get do %>
           <%= hidden_field_tag :from, :location %>
           <button class="continue round-6">Continue</button>
         <% end %>

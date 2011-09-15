@@ -1,6 +1,6 @@
 class Bill < ActiveRecord::Base
-  default_scope :include => {:titles => :as}
-  scope :by_introduced_on, :order => 'introduced_on DESC'
+  default_scope include: {titles: :as}
+  scope :by_introduced_on, order: 'introduced_on DESC'
   scope :with_title, lambda {|title|
     select('DISTINCT bills.*').joins(:titles).where(:'bill_titles.title' => title)
   }
@@ -37,13 +37,13 @@ class Bill < ActiveRecord::Base
 
   class << self
     def solr_reindex(opts = {})
-      super(opts.reverse_merge(:include => [:titles, :rolls, :congress, :subjects]))
+      super(opts.reverse_merge(include: [:titles, :rolls, :congress, :subjects]))
     end
 
     def paginated_search(params)
       search do
         fulltext params[:term]
-        paginate :page => params[:page], :per_page => Bill.default_per_page
+        paginate page: params[:page], :per_page => Bill.default_per_page
         if params[:voted]
           without :voted, false
         end
@@ -59,17 +59,17 @@ class Bill < ActiveRecord::Base
     def guess(info)
       number, name = info.split(' - ')
       house, bill_number = number.split(' ')
-      paginated_search(:term => "#{house} #{name}", :bill_number => bill_number).results.first || begin
+      paginated_search(term: "#{house} #{name}", :bill_number => bill_number).results.first || begin
         words = name.split(' ')
         count = words.size / 2
         while count > 1
           comb = words.first(count).join(' ')
-          if result = paginated_search(:term => "#{house} #{comb}", :bill_number => bill_number, :current => true).results.first
+          if result = paginated_search(term: "#{house} #{comb}", :bill_number => bill_number, current: true).results.first
             return result
           end
           count /= 2
         end
-        paginated_search(:term => house, :bill_number => bill_number, :current => true).results.first
+        paginated_search(term: house, :bill_number => bill_number, current: true).results.first
       end
     end
   end
@@ -77,9 +77,9 @@ class Bill < ActiveRecord::Base
   belongs_to :congress
 
   belongs_to :sponsorship, :class_name => 'Cosponsorship'
-  has_one :sponsor, :through => :sponsorship, :source => :politician
+  has_one :sponsor, through: :sponsorship, source: :politician
   has_many :sponsorships, :class_name => 'Cosponsorship'
-  has_many :sponsors, :through => :sponsorships, :source => :politician
+  has_many :sponsors, through: :sponsorships, source: :politician
 
   def cosponsorships
     sponsorships.where(['cosponsorships.id != ?', sponsorship_id])
@@ -92,29 +92,29 @@ class Bill < ActiveRecord::Base
   end
 
   has_many :bill_subjects
-  has_many :subjects, :through => :bill_subjects
+  has_many :subjects, through: :bill_subjects
 
   has_many :committee_actions, :class_name => 'BillCommitteeActions'
-  has_many :committees, :through => :committee_actions
+  has_many :committees, through: :committee_actions
 
   has_many :titles, :class_name => 'BillTitle'
-  has_many :bill_criteria, :dependent => :destroy
-  has_many :reports, :through => :bill_criteria
-  has_many :amendments, :dependent => :destroy
-  has_many :rolls, :as => :subject, :dependent => :destroy
-  has_many :passage_rolls, :as => :subject, :class_name => 'Roll', :conditions => {:roll_type => ROLL_PASSAGE_TYPES}
-  has_many :votes, :through => :rolls
-  has_many :passage_votes, :through => :passage_rolls, :source => :votes
+  has_many :bill_criteria, dependent: :destroy
+  has_many :reports, through: :bill_criteria
+  has_many :amendments, dependent: :destroy
+  has_many :rolls, as: :subject, dependent: :destroy
+  has_many :passage_rolls, as: :subject, :class_name => 'Roll', conditions: {:roll_type => ROLL_PASSAGE_TYPES}
+  has_many :votes, through: :rolls
+  has_many :passage_votes, through: :passage_rolls, source: :votes
   def politicians
-    Politician.select('DISTINCT politicians.*').joins(:votes => :roll).where(
+    Politician.select('DISTINCT politicians.*').joins(votes: :roll).where(
       :'rolls.subject_id' => self, :'rolls.subject_type' => 'Bill'
     ).extend(Vote::Support)
   end
 
   composed_of :bill_type
 
-  validates_format_of :gov_track_id, :with => /[a-z]+\d\d\d-\d+/
-  validates_format_of :opencongress_id, :with => /\d\d\d-[a-z]+\d+/
+  validates_format_of :gov_track_id, with: /[a-z]+\d\d\d-\d+/
+  validates_format_of :opencongress_id, with: /\d\d\d-[a-z]+\d+/
 
   def opencongress_url
     # As of the 111th, OpenCongress only maintains pages for bills for the current meeting

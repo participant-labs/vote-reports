@@ -5,10 +5,10 @@ class AmendmentCriterion < ActiveRecord::Base
   alias_method :subject, :amendment
 
   validates_presence_of :amendment, :report
-  validates_uniqueness_of :amendment_id, :scope => "report_id"
+  validates_uniqueness_of :amendment_id, scope: "report_id"
 
   scope :by_offered_on, select('DISTINCT(amendment_criteria.*), amendments.offered_on').joins(:amendment).order('amendments.offered_on DESC')
-  scope :with_votes, select('DISTINCT amendment_criteria.*').joins(:amendment => :rolls)
+  scope :with_votes, select('DISTINCT amendment_criteria.*').joins(amendment: :rolls)
   scope :active, with_votes.where(['rolls.roll_type IN(?)', Amendment::ROLL_PASSAGE_TYPES])
 
   class << self
@@ -22,7 +22,7 @@ class AmendmentCriterion < ActiveRecord::Base
   end
 
   def events
-    amendment.passage_rolls.all(:include => {:votes => [{:politician => :state}, :roll]}).map(&:votes).flatten
+    amendment.passage_rolls.all(include: {votes: [{politician: :state}, :roll]}).map(&:votes).flatten
   end
 
   def event_score(vote)

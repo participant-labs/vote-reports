@@ -1,6 +1,6 @@
 class Congress < ActiveRecord::Base
-  has_many :bills, :dependent => :destroy
-  has_many :amendments, :through => :bills
+  has_many :bills, dependent: :destroy
+  has_many :amendments, through: :bills
   has_many :rolls
   has_many :committee_meetings
 
@@ -15,7 +15,7 @@ class Congress < ActiveRecord::Base
     end
 
     def current
-      first(:conditions => {:meeting => current_meeting})
+      first(conditions: {meeting: current_meeting})
     end
   end
 

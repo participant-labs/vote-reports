@@ -32,10 +32,10 @@ module PoliticianTerm
           latest = politician.latest_term
           return if latest.nil?
           state = (
-            politician.representative_terms.all(:joins => :congressional_district) +
-            politician.senate_terms.all(:joins => :state)
+            politician.representative_terms.all(joins: :congressional_district) +
+            politician.senate_terms.all(joins: :state)
           ).sort_by(&:ended_on).reverse.detect(&:state).try(:state)
-          politician.update_attributes!(:state => state, :title => latest.title)
+          politician.update_attributes!(state: state, title: latest.title)
         end
       end
     end

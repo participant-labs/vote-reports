@@ -10,15 +10,15 @@ class Politicians::ReportsController < ApplicationController
       @scores = topical_scores.page(params[:page])
     end
 
-    @subjects = Subject.for_report(@scores.map(&:report)).for_tag_cloud.all(:limit => 20)
+    @subjects = Subject.for_report(@scores.map(&:report)).for_tag_cloud.all(limit: 20)
 
     respond_to do |format|
       format.html {
-        render :layout => false
+        render layout: false
       }
       format.js {
-        render :partial => 'politicians/scores/table', :locals => {
-          :scores => @scores, :replace => 'report_scores'
+        render partial: 'politicians/scores/table', locals: {
+          scores: @scores, replace: 'report_scores'
         }
       }
     end

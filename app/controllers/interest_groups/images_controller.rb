@@ -14,7 +14,7 @@ class InterestGroups::ImagesController < ApplicationController
 
   def edit
     @image = @interest_group.thumbnail
-    render :layout => false
+    render layout: false
   end
 
   def update

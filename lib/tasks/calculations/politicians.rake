@@ -2,9 +2,9 @@ namespace :calculations do
   namespace :politicians do
     task :latest_term_results do
       # alternative calculation for state:
-      # UsState.first(:joins => [:senate_terms, :representative_terms],
-      # :conditions => ["politician_terms.politician_id = ? OR representative_terms_us_states.politician_id = ?", self, self],
-      # :order => 'COALESCE(politician_terms.ended_on, representative_terms_us_states.ended_on) DESC NULLS LAST')
+      # UsState.first(joins: [:senate_terms, :representative_terms],
+      # conditions: ["politician_terms.politician_id = ? OR representative_terms_us_states.politician_id = ?", self, self],
+      # order: 'COALESCE(politician_terms.ended_on, representative_terms_us_states.ended_on) DESC NULLS LAST')
 
       ActiveRecord::Base.transaction do
         Politician.all.each do |politician|
@@ -12,8 +12,8 @@ namespace :calculations do
           $stdout.flush
           latest = politician.terms.latest
           next if latest.nil?
-          state = politician.terms.latest(:joins => :state).try(:state)
-          politician.update_attributes!(:state => state, :title => latest.title)
+          state = politician.terms.latest(joins: :state).try(:state)
+          politician.update_attributes!(state: state, title: latest.title)
         end
       end
     end

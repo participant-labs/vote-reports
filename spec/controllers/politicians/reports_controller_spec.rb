@@ -24,12 +24,12 @@ describe Politicians::ReportsController do
     context "when narrowed by subject" do
       before do
         @score = @report_scores.first
-        @report_subject = create_report_subject(:report => @score.report)
+        @report_subject = create_report_subject(report: @score.report)
       end
 
       it "should return reports with those subjects" do
         @report_subject.subject.to_param.should_not == @report_subject.subject_id.to_s
-        get :index, :politician_id => @politician, :subjects => [@report_subject.subject.to_param]
+        get :index, :politician_id => @politician, subjects: [@report_subject.subject.to_param]
 
         response.should be_success
 

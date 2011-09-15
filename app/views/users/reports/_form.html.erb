@@ -2,9 +2,9 @@
   <%= f.error_messages %>
   <p>
     <%= f.label :name %>
-    <%= f.text_field :name, :tabindex => 1, :class => 'title' %><br />
+    <%= f.text_field :name, tabindex: 1, class: 'title' %><br />
     <%= f.label :description %> <span class="small">(you can use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>)</span><br />
-    <%= f.text_area :description, :tabindex => 2 %><br />
+    <%= f.text_area :description, tabindex: 2 %><br />
 
     <%= f.submit report.new_record? ? "Create Report" : "Update Report" %> |
     <%= link_to 'cancel', back_to %>

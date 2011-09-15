@@ -1,7 +1,7 @@
 <div class="search-container"><div class="custom-search">
-  <%= form_tag search_path, :method => :get do %>
-    <%= text_field_tag :term, '', :class => 'custom-search', :id => 'nav_search',
-      :placeholder => 'Search',
-      :size => 20 %>
+  <%= form_tag search_path, method: :get do %>
+    <%= text_field_tag :term, '', class: 'custom-search', id: 'nav_search',
+      placeholder: 'Search',
+      size: 20 %>
   <% end %>
 </div></div>

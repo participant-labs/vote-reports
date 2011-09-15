@@ -1,12 +1,12 @@
-<%= form_tag url, :method => :get, :class => "act-replace politician-search round-4", :rel => replace do %>
-  <%= label_tag :representing, 'Reps from', :class => 'reps-from' %>
-  <%= text_field_tag :representing, requested_location, :placeholder => %{e.g. "TX", "98101", "San Francisco"}, :size => 23, :class => 'reps-from' %>
+<%= form_tag url, method: :get, class: "act-replace politician-search round-4", rel: replace do %>
+  <%= label_tag :representing, 'Reps from', class: 'reps-from' %>
+  <%= text_field_tag :representing, requested_location, placeholder: %{e.g. "TX", "98101", "San Francisco"}, size: 23, class: 'reps-from' %>
   <%= submit_tag 'Show Reps' %>
-  <%= link_to 'show all reps', reset_path, :class => 'act-replace show_all', :rel => replace %>
+  <%= link_to 'show all reps', reset_path, class: 'act-replace show_all', rel: replace %>
 
   <span class="in-office">
-    <%= hidden_field_tag :in_office, '0', :id => 'in_office_false' %>
-    <%= check_box_tag :in_office, '1', in_office, :id => 'in_office_true' %>
+    <%= hidden_field_tag :in_office, '0', id: 'in_office_false' %>
+    <%= check_box_tag :in_office, '1', in_office, id: 'in_office_true' %>
     <%= label_tag :in_office_true, 'In Office' %>
   </span>
 <% end %>

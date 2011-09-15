@@ -2,7 +2,7 @@
 <h1>New Interest Group</h1>
 
 <%= form_for @interest_group do |f| %>
-  <%= render 'interest_groups/fields', :f => f %>
+  <%= render 'interest_groups/fields', f: f %>
 
   <p><%= f.submit 'Create Interest Group' %></p>
 <% end %>

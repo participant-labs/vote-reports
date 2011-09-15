@@ -34,7 +34,7 @@ describe BillCriterion do
 
     context "on create" do
       it "should be called" do
-        criterion = new_bill_criterion(:report => @report)
+        criterion = new_bill_criterion(report: @report)
         mock(@report).rescore!
         criterion.save!
       end
@@ -42,13 +42,13 @@ describe BillCriterion do
 
     context "on update" do
       it "should be called if support is changed" do
-        criterion = create_bill_criterion(:report => @report, :support => true)
+        criterion = create_bill_criterion(report: @report, support: true)
         mock(@report).rescore!
-        criterion.update_attributes(:support => false)
+        criterion.update_attributes(support: false)
       end
 
       it "should not be called if support is not changed" do
-        criterion = create_bill_criterion(:report => @report)
+        criterion = create_bill_criterion(report: @report)
         dont_allow(@report).rescore!
         criterion.update_attributes(:explanatory_url => 'http://google.com')
       end
@@ -59,7 +59,7 @@ describe BillCriterion do
     context "when there are no support or oppose images" do
       it "should assume support for the the entries" do
         BillCriterion.autofetch_from(Rails.root.join('spec/fixtures/files/capwiz/thearc.html')).should include({
-          "S. 3304 - Equal Access to 21st Century Communications Act  of  2010" => {:support => true, :explanatory_url => 'http://capwiz.com/thearc/issues/bills/?bill=15116426'}
+          "S. 3304 - Equal Access to 21st Century Communications Act  of  2010" => {support: true, :explanatory_url => 'http://capwiz.com/thearc/issues/bills/?bill=15116426'}
         })
       end
     end
@@ -67,13 +67,13 @@ describe BillCriterion do
     context "from a customized html source" do
       it "should extract supported/opposed bill names and positions" do
         BillCriterion.autofetch_from(Rails.root.join('spec/fixtures/files/capwiz/consumer_action.html')).should include({
-          "S. 1799 - FAIR Overdraft Coverage Act" => {:support => true, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=14361426'},
-          "S. 202 - Passenger Vehicle Loss Disclosure Act" => {:support => false, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=13009046'},
-          "H.R. 5381 - Motor Vehicle Safety Act of 2010" => {:support => true, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=16046886'},
-          "S. 399 - Credit Card Holder's Bill of Rights" => {:support => true, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=12896581'},
-          "S. 392 - Credit card consumer protections" => {:support => true, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=12896561'},
-          "S. 165 - Student credit card protections" => {:support => true, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=12896391'},
-          "S. 131 - Credit card mimimum payment notice" => {:support => true, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=12896616'}
+          "S. 1799 - FAIR Overdraft Coverage Act" => {support: true, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=14361426'},
+          "S. 202 - Passenger Vehicle Loss Disclosure Act" => {support: false, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=13009046'},
+          "H.R. 5381 - Motor Vehicle Safety Act of 2010" => {support: true, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=16046886'},
+          "S. 399 - Credit Card Holder's Bill of Rights" => {support: true, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=12896581'},
+          "S. 392 - Credit card consumer protections" => {support: true, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=12896561'},
+          "S. 165 - Student credit card protections" => {support: true, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=12896391'},
+          "S. 131 - Credit card mimimum payment notice" => {support: true, :explanatory_url => 'http://capwiz.com/consumeraction/issues/bills/?bill=12896616'}
         })
       end
 
@@ -91,8 +91,8 @@ describe BillCriterion do
     context "from a standard source" do
       it "should extract supported/opposed bill names and positions" do
         BillCriterion.autofetch_from(Rails.root.join('spec/fixtures/files/capwiz/adc.html')).should include({
-          "S. 416 - 'A bill to limit the use of cluster munitions. '" => {:support => true, :explanatory_url => 'http://capwiz.com/adc/issues/bills/?bill=12956486'},
-          "H.R. 1206 - 'To strengthen sanctions against the Government of Syria, to enhance multilateral commitment to address the Government of Syria''s threatening policies, to establish a program to support a transition to a democratically-elected government in Syria, and for other purposes. '" => {:support => false, :explanatory_url => 'http://capwiz.com/adc/issues/bills/?bill=12943491'}
+          "S. 416 - 'A bill to limit the use of cluster munitions. '" => {support: true, :explanatory_url => 'http://capwiz.com/adc/issues/bills/?bill=12956486'},
+          "H.R. 1206 - 'To strengthen sanctions against the Government of Syria, to enhance multilateral commitment to address the Government of Syria''s threatening policies, to establish a program to support a transition to a democratically-elected government in Syria, and for other purposes. '" => {support: false, :explanatory_url => 'http://capwiz.com/adc/issues/bills/?bill=12943491'}
         })
       end
     end

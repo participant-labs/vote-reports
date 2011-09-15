@@ -4,10 +4,10 @@
 <%= form_for @issue do |f| %>
   <p>
     <%= f.label :title %>
-    <%= f.text_field :title, :class => 'title' %>
+    <%= f.text_field :title, class: 'title' %>
   </p>
   
-  <%= render 'causes/selection', :from => @causes, :selected => @issue.causes %>
+  <%= render 'causes/selection', from: @causes, selected: @issue.causes %>
 
   <p><%= f.submit 'Create Issue' %></p>
 <% end %>

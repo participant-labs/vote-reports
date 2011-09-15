@@ -13,6 +13,6 @@ class Candidacy < ActiveRecord::Base
     end
   end
 
-  delegate :election_stage, :office, :to => :race
-  delegate :election, :voted_on, :to => :election_stage
+  delegate :election_stage, :office, to: :race
+  delegate :election, :voted_on, to: :election_stage
 end

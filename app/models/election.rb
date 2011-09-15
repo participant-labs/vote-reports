@@ -3,7 +3,7 @@ class Election < ActiveRecord::Base
   belongs_to :office_type
 
   has_many :stages, :class_name => 'ElectionStage'
-  has_many :races, :through => :stages
+  has_many :races, through: :stages
 
   def to_s
     name

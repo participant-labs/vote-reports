@@ -1,6 +1,6 @@
 <%- title "Edit #{@report.name} - Reports" -%>
 
-<%= render 'reports/header', :report => @report %>
+<%= render 'reports/header', report: @report %>
 
 <%- permitted_to? :show, @report do -%>
   <%= link_to 'View this Report', user_report_path(@report.user, @report) %>
@@ -9,9 +9,9 @@
 <div class="ui-tabs" id="<%= dom_id(@report, :edit_tabs) %>">
   <ul>
     <li><a href="#Edit_Report" title="Edit Report">Edit Report</a></li>
-    <li><%= link_to content_tag(:span, 'Edit Thumbnail'), edit_user_report_image_path(@report.user, @report, :format => :html), :title => 'Edit Thumbnail' %></li>
-    <li><%= link_to content_tag(:span, 'Add Bills to Agenda'), new_user_report_bill_criterion_path(@report.user, @report, :format => :html), :title => 'Add Bills' %></li>
-    <li><%= link_to content_tag(:span, 'Edit Agenda'), user_report_bill_criteria_path(@report.user, @report, :format => :html), :title => 'Edit Agenda' %></li>
+    <li><%= link_to content_tag(:span, 'Edit Thumbnail'), edit_user_report_image_path(@report.user, @report, format: :html), title: 'Edit Thumbnail' %></li>
+    <li><%= link_to content_tag(:span, 'Add Bills to Agenda'), new_user_report_bill_criterion_path(@report.user, @report, format: :html), title: 'Add Bills' %></li>
+    <li><%= link_to content_tag(:span, 'Edit Agenda'), user_report_bill_criteria_path(@report.user, @report, format: :html), title: 'Edit Agenda' %></li>
     <%- permitted_to? :destroy, @report do -%>
       <li><%= link_to 'Delete Report', '#delete_report' %></li>
     <%- end -%>
@@ -20,13 +20,13 @@
   <div class="section" id="Edit_Report">
     <h2>Edit Report</h2>
 
-    <%= render 'users/reports/form', :report => @report, :back_to => user_report_path(@report.user, @report) %>
+    <%= render 'users/reports/form', report: @report, :back_to => user_report_path(@report.user, @report) %>
   </div>
 
   <%- permitted_to? :destroy, @report do -%>
     <div id="delete_report">
       <h2>Delete Report</h2>
-      <%= raw button_to("Delete Report", [@report.user, @report], :confirm => 'Are you sure you want to delete this report?', :method => :delete) %>
+      <%= raw button_to("Delete Report", [@report.user, @report], confirm: 'Are you sure you want to delete this report?', method: :delete) %>
     </div>
   <%- end -%>
 </div>

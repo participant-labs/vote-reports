@@ -1,8 +1,8 @@
 class GuideScore::Evidence
   include MongoMapper::Document
 
-  key :politician_id, Integer, :required => true
-  key :report_score_id, Integer, :required => true
+  key :politician_id, Integer, required: true
+  key :report_score_id, Integer, required: true
 
   def evidence_type
     'ReportScore'
@@ -13,7 +13,7 @@ class GuideScore::Evidence
   end
 
   def public_evidence_count
-    ReportScoreEvidence.count(:conditions => {:report_score_id => report_score_id})
+    ReportScoreEvidence.count(conditions: {:report_score_id => report_score_id})
   end
 
   def report

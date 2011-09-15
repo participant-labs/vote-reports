@@ -1,4 +1,4 @@
 <%- thumbnail_size ||= 14 -%>
 
-<%= image_tag(user.avatar_url(thumbnail_size), :size => "#{thumbnail_size}x#{thumbnail_size}", :alt => '') %>
+<%= image_tag(user.avatar_url(thumbnail_size), size: "#{thumbnail_size}x#{thumbnail_size}", alt: '') %>
 <%= user.username %>

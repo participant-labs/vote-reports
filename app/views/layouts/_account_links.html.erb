@@ -1,10 +1,10 @@
 <div id="account">
   <%= render 'locations/location' %><%= divider %>
   <%- if current_user -%>
-    <%= link_to "Dashboard", user_path(current_user), :class => 'blue' %><%= divider %>
-    <%= link_to "Log out", logout_path, :class => 'blue' %>
+    <%= link_to "Dashboard", user_path(current_user), class: 'blue' %><%= divider %>
+    <%= link_to "Log out", logout_path, class: 'blue' %>
   <%- else -%>
-    <%= link_to content_tag(:span, "Log in"), request.path == root_path ? login_path : login_path(:return_to => request.path), :class => 'fancyboxy blue' %><%= divider %>
-    <%= link_to content_tag(:span, "Register"), new_user_path, :class => 'fancyboxy blue' %>
+    <%= link_to content_tag(:span, "Log in"), request.path == root_path ? login_path : login_path(:return_to => request.path), class: 'fancyboxy blue' %><%= divider %>
+    <%= link_to content_tag(:span, "Register"), new_user_path, class: 'fancyboxy blue' %>
   <%- end -%>
 </div>

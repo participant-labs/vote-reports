@@ -21,7 +21,7 @@ class Report
       config = YAML.load_file(Rails.root.join('config', 'mongo.yml'))
       MongoMapper.setup(config, Rails.env, {
         :logger    => Rails.logger,
-        :passenger => true,
+        passenger: true,
       })
       MongoMapper.database = config[Rails.env]['database']
 
@@ -64,7 +64,7 @@ class Report
               "#{count} #{ReportScoreEvidence.type_name(type)}#{'s' if count > 1}"
             end.to_sentence
 
-            score = report.scores.create!(:politician_id => politician_id, :score => report_score(criteria_events), :evidence_description => evidence_description)
+            score = report.scores.create!(:politician_id => politician_id, score: report_score(criteria_events), :evidence_description => evidence_description)
 
             evidences[score.id] = score_evidences
           end
@@ -94,13 +94,13 @@ class Report
     def report_score(criteria_events)
       # Calculate scores for each criteria event (e.g. bill, ig report)
       criteria_scores = criteria_events.map do |(criterion, events)|
-        {:score => criterion_score(criterion, events), :base => average_base_for(events)}
+        {score: criterion_score(criterion, events), base: average_base_for(events)}
       end
       consolidate_score(criteria_scores)
     end
 
     def criterion_score(criterion, events)
-      consolidate_score(events.map {|e| {:score => criterion.event_score(e), :base => base_for(e) } })
+      consolidate_score(events.map {|e| {score: criterion.event_score(e), base: base_for(e) } })
     end
 
     def consolidate_score(scores_and_bases)

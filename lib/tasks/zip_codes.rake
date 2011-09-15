@@ -9,7 +9,7 @@ namespace :zip_codes do
     end
   end
 
-  task :import => :environment do
+  task import: :environment do
     require 'open-uri'
     require 'excelsior'
 

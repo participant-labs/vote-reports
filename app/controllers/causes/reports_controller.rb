@@ -6,7 +6,7 @@ class Causes::ReportsController < ApplicationController
     params[:subjects] ||= []
     @reports =
       if params[:term].present?
-        Report.paginated_search(params.merge(:except => @cause.report))
+        Report.paginated_search(params.merge(except: @cause.report))
       else
         topical_reports.order(:name).page(params[:page])
       end
@@ -14,8 +14,8 @@ class Causes::ReportsController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        render :partial => 'causes/reports/selection_table',
-          :locals => {:cause => @cause, :reports => @reports, :id => 'cause_reports'}
+        render partial: 'causes/reports/selection_table',
+          locals: {cause: @cause, reports: @reports, id: 'cause_reports'}
       }
     end
   end
@@ -26,7 +26,7 @@ class Causes::ReportsController < ApplicationController
       redirect_to @cause
     else
       flash[:warning] = "Unable to add reports to cause"
-      render :action => :new
+      render action: :new
     end
   end
 
@@ -34,7 +34,7 @@ class Causes::ReportsController < ApplicationController
     @cause_reports = @cause.cause_reports
     respond_to do |format|
       format.html {
-        render :layout => false
+        render layout: false
       }
     end
   end

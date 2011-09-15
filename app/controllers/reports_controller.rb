@@ -21,15 +21,15 @@ class ReportsController < ApplicationController
       @reports = topical_reports.by_name.page(params[:page])
     end
 
-    @subjects = Subject.for_report(topical_reports).for_tag_cloud.all(:limit => 20)
+    @subjects = Subject.for_report(topical_reports).for_tag_cloud.all(limit: 20)
 
     respond_to do |format|
       format.html
       format.js {
-        render :layout => false
+        render layout: false
       }
       format.json {
-        render :json => @reports
+        render json: @reports
       }
     end
   end

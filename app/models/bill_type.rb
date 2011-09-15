@@ -1,14 +1,14 @@
 class BillType < String
   TYPES = {
-    'h' => {:long => 'House Bill', :short => 'H.R.'},
-    'hr' => {:long => 'House Resolution', :short => 'H.Res.'},
-    'hj' => {:long => 'House Joint Resolution', :short => 'H.J.Res.'},
-    'hc' => {:long => 'House Concurrent Resolution', :short => 'H.Con.Res.'},
+    'h' => {long: 'House Bill', short: 'H.R.'},
+    'hr' => {long: 'House Resolution', short: 'H.Res.'},
+    'hj' => {long: 'House Joint Resolution', short: 'H.J.Res.'},
+    'hc' => {long: 'House Concurrent Resolution', short: 'H.Con.Res.'},
 
-    's' => {:long => 'Senate Bill', :short => 'S.'},
-    'sr' => {:long => 'Senate Resolution', :short => 'S.Res.'},
-    'sj' => {:long => 'Senate Joint Resolution', :short => 'S.J.Res.'},
-    'sc' => {:long => 'Senate Concurrent Resolution', :short => 'S.Con.Res.'}
+    's' => {long: 'Senate Bill', short: 'S.'},
+    'sr' => {long: 'Senate Resolution', short: 'S.Res.'},
+    'sj' => {long: 'Senate Joint Resolution', short: 'S.J.Res.'},
+    'sc' => {long: 'Senate Concurrent Resolution', short: 'S.Con.Res.'}
   }.freeze
 
   class << self

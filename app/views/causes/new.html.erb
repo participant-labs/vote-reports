@@ -2,6 +2,6 @@
 <h1>New Cause</h1>
 
 <%= form_for @cause do |f| %>
-  <%= render 'causes/fields', :f => f %>
+  <%= render 'causes/fields', f: f %>
   <p><%= f.submit 'Create Cause' %></p>
 <% end %>

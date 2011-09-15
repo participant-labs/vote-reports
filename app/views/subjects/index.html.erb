@@ -3,16 +3,16 @@
 <div class="section">
   <h2>Find subjects you care about</h2>
 
-  <%= render 'subjects/search', :replace => 'subjects', :term => params[:term] %>
+  <%= render 'subjects/search', replace: 'subjects', term: params[:term] %>
 </div>
 
 <div class="section">
   <%- if params[:term] -%>
-    <%= render 'subjects/list', :subjects => @subjects, :title => @title %>
+    <%= render 'subjects/list', subjects: @subjects, title: @title %>
   <%- else -%>
     <div id="subjects">
       <h3><%= @title %></h3>
-      <%= render 'subjects/cloud', :subjects => @subjects %>
+      <%= render 'subjects/cloud', subjects: @subjects %>
     </div>
   <%- end -%>
 </div>

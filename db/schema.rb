@@ -1,10 +1,12 @@
-# This file is auto-generated from the current state of the database. Instead of editing this file, 
-# please use the migrations feature of Active Record to incrementally modify your database, and
-# then regenerate this schema definition.
+# encoding: UTF-8
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your database schema. If you need
-# to create the application database on another system, you should be using db:schema:load, not running
-# all the migrations from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
@@ -260,20 +262,8 @@ ActiveRecord::Schema.define(:version => 20101022230124) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "index_delayed_jobs_on_priority_and_run_at"
 
-  create_table "districts", :force => true do |t|
-    t.string        "cd",            :limit => 3
-    t.string        "lsad",          :limit => 2
-    t.string        "name",          :limit => 90
-    t.string        "lsad_trans",    :limit => 50
-    t.multi_polygon "the_geom",      :limit => nil, :null => false
-    t.string        "level"
-    t.string        "census_geo_id"
-    t.integer       "us_state_id",                  :null => false
-    t.string        "title"
-  end
-
-  add_index "districts", ["the_geom"], :name => "index_districts_on_the_geom", :spatial => true
-  add_index "districts", ["us_state_id"], :name => "index_districts_on_us_state_id"
+# Could not dump table "districts" because of following StandardError
+#   Unknown type 'geometry' for column 'the_geom'
 
   create_table "election_stages", :force => true do |t|
     t.string  "name",          :null => false
@@ -786,98 +776,5 @@ ActiveRecord::Schema.define(:version => 20101022230124) do
   end
 
   add_index "zip_codes", ["zip_code"], :name => "index_zip_codes_on_zip_code", :unique => true
-
-  add_foreign_key "adminships", "users", :name => "adminships_created_by_id_reference", :column => "created_by_id"
-  add_foreign_key "adminships", "users", :name => "adminships_user_id_reference"
-
-  add_foreign_key "amendment_criteria", "amendments", :name => "amendment_criteria_amendment_id_fk"
-
-  add_foreign_key "bill_criteria", "bills", :name => "bill_criteria_bill_id_reference", :dependent => :delete
-  add_foreign_key "bill_criteria", "reports", :name => "bill_criteria_report_id_reference", :dependent => :delete
-
-  add_foreign_key "bills", "cosponsorships", :name => "bills_sponsorship_id_fk", :column => "sponsorship_id"
-
-  add_foreign_key "candidacies", "politicians", :name => "candidacies_politician_id_fk"
-  add_foreign_key "candidacies", "races", :name => "candidacies_race_id_fk"
-
-  add_foreign_key "cause_reports", "causes", :name => "cause_reports_cause_id_reference"
-  add_foreign_key "cause_reports", "reports", :name => "cause_reports_report_id_reference"
-
-  add_foreign_key "congressional_district_zip_codes", "congressional_districts", :name => "district_zip_codes_district_id_reference"
-  add_foreign_key "congressional_district_zip_codes", "zip_codes", :name => "district_zip_codes_zip_code_id_reference"
-
-  add_foreign_key "congressional_districts", "districts", :name => "congressional_districts_district_id_fk"
-  add_foreign_key "congressional_districts", "us_states", :name => "congressional_districts_us_state_id_fk"
-
-  add_foreign_key "districts", "us_states", :name => "districts_us_state_id_fk"
-
-  add_foreign_key "election_stages", "elections", :name => "election_stages_election_id_fk"
-
-  add_foreign_key "elections", "office_types", :name => "elections_office_type_id_fk"
-  add_foreign_key "elections", "us_states", :name => "elections_state_id_fk", :column => "state_id"
-
-  add_foreign_key "guide_reports", "guides", :name => "guide_reports_guide_id_reference"
-  add_foreign_key "guide_reports", "reports", :name => "guide_reports_report_id_reference"
-
-  add_foreign_key "guides", "reports", :name => "guides_report_id_reference"
-  add_foreign_key "guides", "users", :name => "guides_user_id_reference"
-  add_foreign_key "guides", "zip_codes", :name => "guides_zip_code_id_reference"
-
-  add_foreign_key "interest_group_ratings", "interest_group_reports", :name => "interest_group_ratings_interest_group_report_id_reference"
-  add_foreign_key "interest_group_ratings", "politicians", :name => "interest_group_ratings_politician_id_reference"
-
-  add_foreign_key "interest_group_reports", "interest_groups", :name => "interest_group_reports_interest_group_id_reference"
-
-  add_foreign_key "interest_group_subjects", "interest_groups", :name => "interest_group_subjects_interest_group_id_reference"
-  add_foreign_key "interest_group_subjects", "subjects", :name => "interest_group_subjects_subject_id_reference"
-
-  add_foreign_key "interest_groups", "users", :name => "interest_groups_owner_id_fk", :column => "owner_id"
-
-  add_foreign_key "issue_causes", "causes", :name => "issue_causes_cause_id_reference"
-  add_foreign_key "issue_causes", "issues", :name => "issue_causes_issue_id_reference"
-
-  add_foreign_key "locations", "zip_codes", :name => "location_zip_codes_zip_code_id_reference"
-
-  add_foreign_key "moderatorships", "users", :name => "moderatorships_created_by_id_reference", :column => "created_by_id"
-  add_foreign_key "moderatorships", "users", :name => "moderatorships_user_id_reference"
-
-  add_foreign_key "offices", "office_types", :name => "offices_office_type_id_fk"
-
-  add_foreign_key "politicians", "candidacies", :name => "politicians_current_candidacy_id_fk", :column => "current_candidacy_id", :dependent => :nullify
-  add_foreign_key "politicians", "congressional_districts", :name => "politicians_district_id_reference"
-
-  add_foreign_key "presidential_terms", "parties", :name => "presidential_terms_party_id_reference"
-  add_foreign_key "presidential_terms", "politicians", :name => "presidential_terms_politician_id_reference"
-
-  add_foreign_key "races", "districts", :name => "races_district_id_fk"
-  add_foreign_key "races", "election_stages", :name => "races_election_stage_id_fk"
-  add_foreign_key "races", "offices", :name => "races_office_id_fk"
-
-  add_foreign_key "report_delayed_jobs", "delayed_jobs", :name => "report_delayed_jobs_delayed_job_id_reference", :dependent => :delete
-  add_foreign_key "report_delayed_jobs", "reports", :name => "report_delayed_jobs_report_id_reference", :dependent => :delete
-
-  add_foreign_key "report_follows", "reports", :name => "report_follows_report_id_reference"
-  add_foreign_key "report_follows", "users", :name => "report_follows_user_id_reference"
-
-  add_foreign_key "report_score_evidences", "report_scores", :name => "report_score_evidences_report_score_id_fk"
-
-  add_foreign_key "report_subjects", "reports", :name => "report_subjects_report_id_reference", :dependent => :delete
-  add_foreign_key "report_subjects", "subjects", :name => "report_subjects_subject_id_reference", :dependent => :delete
-
-  add_foreign_key "reports", "causes", :name => "reports_cause_id_reference"
-  add_foreign_key "reports", "images", :name => "reports_thumbnail_id_reference"
-  add_foreign_key "reports", "interest_groups", :name => "reports_interest_group_id_reference"
-  add_foreign_key "reports", "subjects", :name => "reports_top_subject_id_fk", :column => "top_subject_id", :dependent => :nullify
-  add_foreign_key "reports", "users", :name => "reports_user_id_fk"
-
-  add_foreign_key "representative_terms", "congressional_districts", :name => "representative_terms_district_id_reference"
-  add_foreign_key "representative_terms", "parties", :name => "representative_terms_party_id_reference"
-  add_foreign_key "representative_terms", "politicians", :name => "representative_terms_politician_id_reference"
-
-  add_foreign_key "rpx_identifiers", "users", :name => "rpx_identifiers_user_id_reference", :dependent => :delete
-
-  add_foreign_key "senate_terms", "parties", :name => "senate_terms_party_id_reference"
-  add_foreign_key "senate_terms", "politicians", :name => "senate_terms_politician_id_reference"
-  add_foreign_key "senate_terms", "us_states", :name => "senate_terms_us_state_id_reference"
 
 end

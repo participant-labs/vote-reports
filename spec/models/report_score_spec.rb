@@ -5,7 +5,7 @@ describe ReportScore do
     @valid_attributes = {
       :politician_id => 1,
       :report_id => 1,
-      :score => 1.5
+      score: 1.5
     }
   end
 
@@ -17,7 +17,7 @@ describe ReportScore do
     before do
       @score_evidence = create_report_score_evidence
       @score = @score_evidence.score
-      @dependent_score_evidence = create_report_score_evidence(:evidence => @score)
+      @dependent_score_evidence = create_report_score_evidence(evidence: @score)
       @dependent_score = @dependent_score_evidence.score
     end
 

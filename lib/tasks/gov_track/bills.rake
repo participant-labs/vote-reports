@@ -19,7 +19,7 @@ namespace :gov_track do
     end
 
     def title_attrs(bill, title_node)
-      @bill_title_as ||= BillTitleAs.all(:select => 'bill_title_as.as, id').index_by(&:as)
+      @bill_title_as ||= BillTitleAs.all(select: 'bill_title_as.as, id').index_by(&:as)
       as = title_node['as'].to_s
       type = title_node['type'].to_s
       if type == 'popular'
@@ -31,7 +31,7 @@ namespace :gov_track do
     end
 
     namespace :titles do
-      task :unpack => :'gov_track:support' do
+      task unpack: :'gov_track:support' do
         ActiveRecord::Base.transaction do
           BillTitle.delete_all
           meetings do |meeting|
@@ -62,7 +62,7 @@ namespace :gov_track do
       end
     end
 
-    task :unpack => [:'gov_track:support', :'gov_track:politicians'] do
+    task unpack: [:'gov_track:support', :'gov_track:politicians'] do
       rescue_and_reraise do
         @subjects = Subject.all.index_by(&:name)
 
@@ -101,7 +101,7 @@ namespace :gov_track do
               :bill_number => data['number'].to_s,
               :gov_track_updated_at => data['updated'].to_s,
               :introduced_on => introduced_on,
-              :summary => data.at('summary').inner_text.strip
+              summary: data.at('summary').inner_text.strip
             }
             if update? && bill = Bill.find_by_opencongress_id(opencongress_bill_id)
               bill.update_attributes!(attrs)
@@ -117,7 +117,7 @@ namespace :gov_track do
             data.xpath('subjects/term').map do |term_node|
               name = term_node['name'].to_s
               subject = @subjects.fetch(name) do
-                @subjects[name] = Subject.create(:name => name)
+                @subjects[name] = Subject.create(name: name)
               end
               [subject.id, bill.id]
             end)
@@ -128,7 +128,7 @@ namespace :gov_track do
               committee_meeting_id = find_committee(committee_name, "Bill #{opencongress_bill_id}", committee_node)
               if (subcommittee_name = committee_node['subcommittee']).present?
                 subcommittee_id = (committee_meeting_id && CommitteeMeeting.first(
-                  :joins => :committee, :conditions => {:'committee_meetings.name' => subcommittee_name, :'committees.ancestry' => CommitteeMeeting.find(committee_meeting_id).committee_id.to_s}
+                  joins: :committee, conditions: {:'committee_meetings.name' => subcommittee_name, :'committees.ancestry' => CommitteeMeeting.find(committee_meeting_id).committee_id.to_s}
                 ).try(:id)) || find_subcommittee(committee_name, subcommittee_name, "Bill #{opencongress_bill_id}", committee_node)
                 committee_meeting_id = subcommittee_id if subcommittee_id
               end
@@ -149,7 +149,7 @@ namespace :gov_track do
               [@politicians.fetch(cosponsor_node['id'].to_s.to_i).id, joined, bill.id]
             end)
             if sponsor
-              sponsorship = Cosponsorship.create!(:bill => bill, :politician => sponsor, :joined_on => introduced_on)
+              sponsorship = Cosponsorship.create!(bill: bill, politician: sponsor, :joined_on => introduced_on)
               bill.update_attribute(:sponsorship_id, sponsorship.id)
             end
 

@@ -10,7 +10,7 @@ describe Bill do
 
     before do
       bill = create_bill
-      create_bill_title(:bill => bill, :title => "USA PATRIOT Reauthorization Act of 2009")
+      create_bill_title(bill: bill, title: "USA PATRIOT Reauthorization Act of 2009")
       Bill.solr_reindex
     end
 
@@ -50,14 +50,14 @@ describe Bill do
       context "with a new value" do
         it "should blow up" do
           proc {
-            @bill.update_attributes(:congress => Congress.find_or_create_by_meeting(@bill.congress.meeting + 1))
+            @bill.update_attributes(congress: Congress.find_or_create_by_meeting(@bill.congress.meeting + 1))
           }.should raise_error(ActiveRecord::ReadOnlyRecord)
         end
       end
       context "with the same value" do
         it "should do nothing" do
           proc {
-            @bill.update_attributes(:congress => @bill.congress)
+            @bill.update_attributes(congress: @bill.congress)
           }.should_not raise_error
         end
       end
@@ -119,9 +119,9 @@ describe Bill do
       @opposing = create_politician
       @unconnected = create_politician
       @bill = create_bill
-      @roll = create_roll(:subject => @bill)
-      create_vote(:politician => @supporting, :roll => @roll, :vote => '+')
-      create_vote(:politician => @opposing, :roll => @roll, :vote => '-')
+      @roll = create_roll(subject: @bill)
+      create_vote(politician: @supporting, roll: @roll, vote: '+')
+      create_vote(politician: @opposing, roll: @roll, vote: '-')
     end
 
     it "returns all politicians with connecting votes" do

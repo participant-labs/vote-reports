@@ -40,7 +40,7 @@ module NavigationHelpers
     when /^the edit bills page for the report "(.+)"$/
       user_report_bill_criteria_path(Report.find_by_name($1).user, Report.find_by_name($1))
     when /^the edit image page for the report "(.+)"$/
-      edit_user_report_image_path(Report.find_by_name($1).user, Report.find_by_name($1), :format => :html)
+      edit_user_report_image_path(Report.find_by_name($1).user, Report.find_by_name($1), format: :html)
 
     when /^my reports page/i
       user_reports_path(current_user)
@@ -78,7 +78,7 @@ module NavigationHelpers
     when /^the edit interest group page for "(.+)"$/
       edit_interest_group_path(InterestGroup.find_by_name($1))
     when /^the edit interest group image page for "(.+)"$/
-      edit_interest_group_image_path(InterestGroup.find_by_name($1), :format => :html)
+      edit_interest_group_image_path(InterestGroup.find_by_name($1), format: :html)
 
     when /^the interest group new bills page for "(.+)"$/
       new_interest_group_bill_criterion_path(InterestGroup.find_by_name($1))
