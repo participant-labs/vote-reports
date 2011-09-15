@@ -7,7 +7,7 @@
 //= require jquery.cookie
 //= require jquery.tipsy
 //= require highcharts/highcharts.src
-//= require fancybox/jquery.fancybox-1.3.1
+//= require faceboxy
 //= require rails
 //= require replace
 //= require geolocation
@@ -73,22 +73,6 @@
       if (!self.data('tipsy-init')) {
         self.data('tipsy-init', true);
         self.tipsy({fade: true, gravity: 'n'});
-        self.mouseover();
-      }
-    });
-
-    $('a.fancyboxy').live('mouseover', function() {
-      var self = $(this);
-      if (!self.data('fancybox-init')) {
-        self.data('fancybox-init', true);
-        self.fancybox({
-          hideOnContentClick: false,
-          onComplete: function () {
-            if (typeof(init_map) != 'undefined' && $.isFunction(init_map)) {
-              init_map();
-            }
-          }
-        });
         self.mouseover();
       }
     });

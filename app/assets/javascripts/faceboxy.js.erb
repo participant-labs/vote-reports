@@ -1,0 +1,36 @@
+//= require facebox
+
+$.facebox.settings.closeImage = '<%= asset_path 'facebox/closelabel.png' %>'
+$.facebox.settings.loadingImage = '<%= asset_path 'facebox/loading.gif' %>'
+
+$.facebox.fillFromAjax = function(href, klass, options) {
+  $.ajax(href, {
+    dataType: 'html',
+    success: function(data) {
+      $.facebox.reveal(data, klass);
+    },
+    complete: function() {
+      $('#facebox').trigger('end.facebox')
+    },
+    error: function() {
+      window.location = href;
+    }
+  });
+}
+
+$(function() {
+  $('a.fancyboxy').live('mouseover', function() {
+    var self = $(this);
+    if (!self.data('fancybox-init')) {
+      self.data('fancybox-init', true);
+      self.facebox({ajax: self.attr('href')});
+      self.mouseover();
+    }
+  });
+
+  $(document).bind('reveal.facebox', function () {
+    if (typeof(init_map) != 'undefined' && $.isFunction(init_map)) {
+      init_map();
+    }
+  });
+})

@@ -1,6 +1,6 @@
 <%-
   no_ajax ||= false
-  replace ||= 'fancybox-inner location_setter content' unless no_ajax
+  replace ||= 'fancyboxy-content location_setter content' unless no_ajax
 -%>
 
 <%= form_tag location_path, replace ? {class: "act-replace", rel: replace} : {} do %>
