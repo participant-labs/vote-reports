@@ -8,6 +8,7 @@
 //= require jquery.tipsy
 //= require highcharts/highcharts.src
 //= require fancybox/jquery.fancybox-1.3.1
+//= require rails
 //= require replace
 //= require geolocation
 
