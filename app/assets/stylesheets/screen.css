@@ -13,7 +13,3 @@
 //= require interest_groups
 //= require tag_cloud
 //= require guide
-
-#facebox .content {
-  width: 800px;
-}
