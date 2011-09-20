@@ -23,7 +23,7 @@ class UserSessionsController < ApplicationController
     elsif @user_session.save
       if @user_session.new_registration?
         flash[:notice] = "That does it! As a new user, please review your registration details before continuing.."
-        redirect_to edit_user_path(@user_session.record, :new_user => true)
+        redirect_to edit_user_path(@user_session.record, new_user: true)
       else
         flash[:notice] = "Logged in successfully"
         redirect_to (params[:return_to].present? ? params[:return_to] : root_path)

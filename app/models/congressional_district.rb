@@ -1,5 +1,5 @@
 class CongressionalDistrict < ActiveRecord::Base
-  belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
+  belongs_to :state, class_name: 'UsState', foreign_key: :us_state_id
   has_many :congressional_district_zip_codes
   has_many :zip_codes, through: :congressional_district_zip_codes
   belongs_to :district
@@ -38,11 +38,11 @@ class CongressionalDistrict < ActiveRecord::Base
     if city.blank?
       where('0 = 1')
     elsif state.blank?
-      select('DISTINCT congressional_districts.*').joins(:zip_codes => :locations).where(
+      select('DISTINCT congressional_districts.*').joins(zip_codes: :locations).where(
         :'locations.city' => city
       )
     else
-      select('DISTINCT congressional_districts.*').joins([{:zip_codes => :locations}, :state]).where(
+      select('DISTINCT congressional_districts.*').joins([{zip_codes: :locations}, :state]).where(
         :'locations.city' => city, :'locations.state' => state,
         :'us_states.abbreviation' => state
       )
@@ -68,7 +68,7 @@ class CongressionalDistrict < ActiveRecord::Base
 
   def district_geometries
     @district_geometry ||= District.federal.where(
-      :us_state_id => us_state_id, name: district_abbreviation)
+      us_state_id: us_state_id, name: district_abbreviation)
   end
 
   def district_abbreviation

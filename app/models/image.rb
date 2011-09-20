@@ -7,12 +7,12 @@ class Image < PaperclipAutosizer
           tiny: ['35x35', :png]
         },
         processors: [:autosize, :jcropper],
-        :default_style => :normal
+        default_style: :normal
 
   after_post_process :autosize_attached_files
 
   validates_attachment_presence :thumbnail
-  validates_attachment_content_type :thumbnail, :content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-png']
+  validates_attachment_content_type :thumbnail, content_type: ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-png']
 
   delegate :url, to: :thumbnail
 
@@ -22,7 +22,7 @@ class Image < PaperclipAutosizer
 
   class << self
     def laws_i_like
-      first(conditions: {:thumbnail_file_name => 'lawsilike.png'})
+      first(conditions: {thumbnail_file_name: 'lawsilike.png'})
     end
   end
 

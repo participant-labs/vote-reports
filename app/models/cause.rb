@@ -4,7 +4,7 @@ class Cause < ActiveRecord::Base
   has_many :cause_reports, dependent: :destroy
   has_many :reports, through: :cause_reports do
     def report_subjects
-      ReportSubject.where(:report_id => self)
+      ReportSubject.where(report_id: self)
     end
   end
 
@@ -20,9 +20,9 @@ class Cause < ActiveRecord::Base
     Cause.joins(:issue_causes).where(['causes.id NOT IN(?) AND issue_causes.issue_id IN(?)', self, issues])
   end
 
-  accepts_nested_attributes_for :cause_reports, :reject_if => proc {|attributes| attributes['support'] == '0' }
+  accepts_nested_attributes_for :cause_reports, reject_if: proc {|attributes| attributes['support'] == '0' }
 
-  has_friendly_id :name, :use_slug => true
+  has_friendly_id :name, use_slug: true
 
   validates_presence_of :description
 

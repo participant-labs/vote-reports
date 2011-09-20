@@ -5,7 +5,7 @@ class Users::AdminshipsController < ApplicationController
   def create
     if @user.adminship
       flash[:error] = "User is already an Admin"
-    elsif @user.create_adminship(:created_by => current_user)
+    elsif @user.create_adminship(created_by: current_user)
       flash[:notice] = "Successfully promoted to Admin"
     else
       flash[:error] = "Failed to grant Admin status"

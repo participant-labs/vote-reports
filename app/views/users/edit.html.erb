@@ -1,7 +1,7 @@
 <%- title "Edit #{h(@user.username)} - Users" -%>
 
 <div class="section">
-  <h2><%= render 'users/user', user: @user, :thumbnail_size => 50 %></h2>
+  <h2><%= render 'users/user', user: @user, thumbnail_size: 50 %></h2>
   <p><a href="http://en.gravatar.com/">Change your Avatar at gravatar.com</a></p>
 
   <%= render 'users/form', user: @user %>
@@ -22,7 +22,7 @@
     <%- end -%>
 
     <p>
-      <%= raw rpx_popup(:link_text => "Add a login to this account", :app_name => RPX_APP_NAME, :return_url => user_rpx_identities_url(current_user), :add_rpx => true, unobtrusive: false) %>
+      <%= raw rpx_popup(link_text: "Add a login to this account", app_name: RPX_APP_NAME, return_url: user_rpx_identities_url(current_user), add_rpx: true, unobtrusive: false) %>
     </p>
   <%- end -%>
 

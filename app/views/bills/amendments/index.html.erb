@@ -12,7 +12,7 @@
         <th><%= link_to amendment.display_name, bill_amendment_path(@bill, amendment), class: 'fancyboxy' %></th>
         <td><%= amendment.offered_on.to_s(:rfc822) %>
           <%- if sponsor = amendment.sponsoring_politician -%>
-            by <%= render 'politicians/politician', politician: sponsor, :headshot_style => :small %>
+            by <%= render 'politicians/politician', politician: sponsor, headshot_style: :small %>
           <%- end -%>
         </td>
         <td><%= amendment.title %></td>

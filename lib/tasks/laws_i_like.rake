@@ -41,7 +41,7 @@ namespace :laws_i_like do
         identifier, "Facebook") \
       || RPXIdentifier.new(
         identifier: identifier,
-        :provider_name => "Facebook")
+        provider_name: "Facebook")
     end
 
     require 'excelsior'
@@ -80,7 +80,7 @@ namespace :laws_i_like do
               User.create!(
                 username: name,
                 email: "#{name.gsub(' ', '_')}+facebook@votereports.org",
-                :rpx_identifiers => [identifier]
+                rpx_identifiers: [identifier]
               )
             end
           identifier.update_attribute(:user_id, user.id)
@@ -116,9 +116,9 @@ namespace :laws_i_like do
           bill_id = "#{bill_meeting}-#{bill_type}#{bill_number}"
           bill = Bill.find_by_opencongress_id(bill_id) || raise("Bill not found: #{bill_id}")
           report.bill_criteria.find_by_bill_id(bill.id) || report.bill_criteria.create!(
-            :bill_id => bill.id,
+            bill_id: bill.id,
             support: support == '1',
-            :created_at => liked_on.to_date
+            created_at: liked_on.to_date
           )
           count += 1
           $stdout.print '.'

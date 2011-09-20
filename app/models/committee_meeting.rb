@@ -8,12 +8,12 @@ class CommitteeMeeting < ActiveRecord::Base
 
   def subcommittees
     CommitteeMeeting.where(
-      :committee_id => committee.subcommittees,
-      :congress_id => congress_id
+      committee_id: committee.subcommittees,
+      congress_id: congress_id
     )
   end
 
-  has_many :memberships, :class_name => 'CommitteeMembership'
+  has_many :memberships, class_name: 'CommitteeMembership'
   has_many :members, through: :memberships, source: :politician
 
   validates_presence_of :committee, :congress

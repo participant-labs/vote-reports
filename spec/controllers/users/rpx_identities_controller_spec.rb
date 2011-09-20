@@ -6,7 +6,7 @@ describe Users::RpxIdentitiesController do
   describe "POST #create" do
     describe "on adding a registration to an existing user" do
       def create_post(user)
-        post :create, :user_id => user.to_param,
+        post :create, user_id: user.to_param,
           "token"=>"2a6e5bb00cd01b94752c26e55bbde78242e1514b",
           "authenticity_token"=>"WJhfd6WXN6DG9ujdhK9YG8pFK5GSPZJfRE43EedI+EQ=",
           "add_rpx"=>"true",

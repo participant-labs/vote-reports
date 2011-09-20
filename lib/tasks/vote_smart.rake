@@ -3,19 +3,19 @@ namespace :vote_smart do
     VoteSmart::Importer.import_all
   end
 
-  task :import_races => :environment do
+  task import_races: :environment do
     VoteSmart::Importer.import_races
   end
 
-  task :import_elections => :environment do
+  task import_elections: :environment do
     VoteSmart::Importer.import_elections
   end
 
-  task :import_ratings => :environment do
+  task import_ratings: :environment do
     VoteSmart::Importer.import_ratings
   end
 
-  task :import_interest_groups => :environment do
+  task import_interest_groups: :environment do
     VoteSmart::Importer.import_interest_groups
   end
 end

@@ -20,7 +20,7 @@ namespace :cluster do
 
     puts "Senators"
     names, values = data_for_pols(scored_pols.select {|p| p.current_office_type == "SenateTerm"})
-    data_frame = r.as_data_frame(x: values, :row_names => names)
+    data_frame = r.as_data_frame(x: values, row_names: names)
 
     dist = r.dist(x: data_frame)
     p dist

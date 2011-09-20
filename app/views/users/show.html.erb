@@ -1,7 +1,7 @@
 <%- title "#{h(@user.username)} - Users" -%>
 
 <div class="section">
-  <h2><%= render 'users/user', user: @user, :thumbnail_size => 100 %></h2>
+  <h2><%= render 'users/user', user: @user, thumbnail_size: 100 %></h2>
 
   <p><%= link_to 'Edit Profile', edit_user_path(@user) %></p>
 </div>

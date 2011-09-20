@@ -8,7 +8,7 @@ class InterestGroups::ScoresController < ApplicationController
       format.html
       format.js {
         render partial: 'reports/scores/table', locals: {
-          report: @report, scores: @scores, :target_path => interest_group_report_scores_path(@interest_group)
+          report: @report, scores: @scores, target_path: interest_group_report_scores_path(@interest_group)
         }
       }
       format.json {

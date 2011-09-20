@@ -36,7 +36,7 @@ class Roll < ActiveRecord::Base
   class << self
     def update_roll_types_for_consistency!
       CONSISTENT_TYPES.each_pair do |consistent, inconsistent|
-        update_all({:roll_type => consistent}, {:roll_type => inconsistent})
+        update_all({roll_type: consistent}, {roll_type: inconsistent})
       end
     end
   end

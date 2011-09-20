@@ -26,7 +26,7 @@
         <%- report = report_score.report -%>
         <tr>
           <td><%= render 'reports/scores/score', score: report_score, report: report %></td>
-          <td><%= render 'reports/report', report: report, :cause_only => (source == 'Cause') %></td>
+          <td><%= render 'reports/report', report: report, cause_only: (source == 'Cause') %></td>
         </tr>
       <%- end -%>
     </tbody>

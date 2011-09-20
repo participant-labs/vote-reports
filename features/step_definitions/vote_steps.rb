@@ -1,5 +1,5 @@
 Given /^(bill "[^\"]*") has the following passage votes(?: on "(.*)"|):$/ do |bill, voted_at, table|
-  roll = create_roll(subject: bill, :roll_type => "On Passage", :voted_at => voted_at)
+  roll = create_roll(subject: bill, roll_type: "On Passage", voted_at: voted_at)
   table.map_column!('politician') {|name| Politician.with_name(name).first }
   table.hashes.each do |attrs|
     next if attrs['vote'].blank?
@@ -12,7 +12,7 @@ Given /^the following bill passage votes:$/ do |table|
   table.hashes.each do |attrs|
     politician = attrs.delete('politician')
     @rolls ||= attrs.keys.inject({}) do |rolls, bill|
-      rolls[bill] = create_roll(subject: Bill.with_title(bill).first, :roll_type => "On Passage")
+      rolls[bill] = create_roll(subject: Bill.with_title(bill).first, roll_type: "On Passage")
       rolls
     end
 

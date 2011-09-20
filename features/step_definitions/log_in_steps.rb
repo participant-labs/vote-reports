@@ -11,7 +11,7 @@ end
 
 Given /^I am signed in( as an Admin)?$/ do |admin|
   When %{I log in as "#{current_user.email}/#{current_user.password}"}
-  current_user.create_adminship(:created_by => current_user) if admin.present?
+  current_user.create_adminship(created_by: current_user) if admin.present?
 end
 
 Given /^I am signed in as "([^"]*)"$/ do |name|

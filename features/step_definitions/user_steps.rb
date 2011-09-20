@@ -8,7 +8,7 @@ end
 
 Given /^an admin named "([^\"]*)"(?: promoted by (user "[^\"]*"))?$/ do |username, promotor|
   user = create_user(username: username)
-  user.create_adminship(:created_by => promotor || create_user)
+  user.create_adminship(created_by: promotor || create_user)
 end
 
 Given /^a user named "([^\"]*)"$/ do |username|

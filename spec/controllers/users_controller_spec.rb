@@ -19,7 +19,7 @@ describe UsersController do
     it "should reject me if I'm not logged in" do
       get :index
       flash[:notice].should == "You must be logged in to access this page"
-      response.should redirect_to(login_url(:return_to => '/users'))
+      response.should redirect_to(login_url(return_to: '/users'))
     end
 
     it "should reject me if I'm not an admin" do
@@ -38,7 +38,7 @@ describe UsersController do
     it "should reject me if I'm not logged in" do
       logout
       get :edit, id: @user
-      response.should redirect_to(login_url(:return_to => %Q{/users/#{@user.to_param}/edit}))
+      response.should redirect_to(login_url(return_to: %Q{/users/#{@user.to_param}/edit}))
       flash[:notice].should == "You must be logged in to access this page"
     end
 

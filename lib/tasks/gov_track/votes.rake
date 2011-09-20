@@ -42,15 +42,15 @@ namespace :gov_track do
             subject: subject,
             congress: @congress,
             where: data['where'].to_s,
-            :voted_at => data['datetime'].to_s,
+            voted_at: data['datetime'].to_s,
             aye: data['aye'].to_s,
             nay: data['nay'].to_s,
-            :not_voting => data['nv'].to_s,
+            not_voting: data['nv'].to_s,
             present: data['present'].to_s,
             result: data.at('result').inner_text,
             required: data.at('required').inner_text,
             question: data.at('question').inner_text,
-            :roll_type => data.at('type').inner_text,
+            roll_type: data.at('type').inner_text,
             congress: @congress
           )
           inserts = data.xpath('voter').map { |vote|

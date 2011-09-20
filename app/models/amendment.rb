@@ -18,7 +18,7 @@ class Amendment < ActiveRecord::Base
     where(['amendments.purpose = ? OR amendments.description = ?', title, title])
   }
 
-  has_many :passage_rolls, as: :subject, :class_name => 'Roll', conditions: [
+  has_many :passage_rolls, as: :subject, class_name: 'Roll', conditions: [
     "rolls.roll_type IN(?)", ROLL_PASSAGE_TYPES
   ]
 

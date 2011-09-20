@@ -31,15 +31,15 @@ module VoteSmart
                 office_type = OfficeType.find_by_vote_smart_id(election_data['officeTypeId']) || raise("Office type #{election_data['officeTypeId']} not found")
                 election = ::Election.find_by_vote_smart_id(election_data['electionId']) \
                  || ::Election.create!(
-                  :vote_smart_id => election_data['electionId'],
-                  :state_id => state.id,
-                  :office_type_id => office_type.id)
+                  vote_smart_id: election_data['electionId'],
+                  state_id: state.id,
+                  office_type_id: office_type.id)
                 election.update_attributes!(
                   name: election_data['name'],
-                  :state_id => state.id,
+                  state_id: state.id,
                   year: election_data['electionYear'],
                   special: object_to_boolean(election_data['special']),
-                  :office_type_id => office_type.id)
+                  office_type_id: office_type.id)
                 array_of_hashes(election_data['stage']).each do |es|
                   raise "#{election_data['stateId']} != #{es['stateId']}" if election_data['stateId'] != es['stateId']
                   election.stages.find_or_create_by_vote_smart_id_and_name_and_voted_on(es['stageId'], es['name'], es['electionDate'])
@@ -66,14 +66,14 @@ module VoteSmart
               # PVS falsely says he is Representative, United States House of Representatives, 2008-present
               # he lost this race by a small margin: http://en.wikipedia.org/wiki/Jay_Love
               ::Politician.create!(
-                  :vote_smart_id => candidate['candidateId'],
-                  :first_name => candidate['firstName'],
-                  :middle_name => candidate['middle_name'],
-                  :last_name => candidate['lastName'],
+                  vote_smart_id: candidate['candidateId'],
+                  first_name: candidate['firstName'],
+                  middle_name: candidate['middle_name'],
+                  last_name: candidate['lastName'],
                   nickname: candidate['nickName'],
-                  :name_suffix => candidate['suffix'],
-                  :vote_smart_photo_url => bio_candidate['photo'],
-                  :open_secrets_id => bio_candidate['crp_id'],
+                  name_suffix: candidate['suffix'],
+                  vote_smart_photo_url: bio_candidate['photo'],
+                  open_secrets_id: bio_candidate['crp_id'],
                   gender: bio_candidate['gender'].first)
             end
           end || begin
@@ -112,24 +112,24 @@ module VoteSmart
               # raise bio_candidate['political'].to_s
             end
           end || ::Politician.create!(
-              :vote_smart_id => candidate['candidateId'],
-              :first_name => candidate['firstName'],
-              :middle_name => candidate['middle_name'],
-              :last_name => candidate['lastName'],
+              vote_smart_id: candidate['candidateId'],
+              first_name: candidate['firstName'],
+              middle_name: candidate['middle_name'],
+              last_name: candidate['lastName'],
               nickname: candidate['nickName'],
-              :name_suffix => candidate['suffix'],
-              :vote_smart_photo_url => bio_candidate['photo'],
-              :open_secrets_id => bio_candidate['crp_id'],
+              name_suffix: candidate['suffix'],
+              vote_smart_photo_url: bio_candidate['photo'],
+              open_secrets_id: bio_candidate['crp_id'],
               gender: bio_candidate['gender'].first)
 
         politician.update_attributes!(
-          :first_name => candidate['firstName'],
-          :middle_name => candidate['middle_name'],
-          :last_name => candidate['lastName'],
+          first_name: candidate['firstName'],
+          middle_name: candidate['middle_name'],
+          last_name: candidate['lastName'],
           nickname: candidate['nickName'],
-          :name_suffix => candidate['suffix'],
-          :vote_smart_photo_url => bio_candidate['photo'],
-          :open_secrets_id => bio_candidate['crp_id'],
+          name_suffix: candidate['suffix'],
+          vote_smart_photo_url: bio_candidate['photo'],
+          open_secrets_id: bio_candidate['crp_id'],
           gender: bio_candidate['gender'].first
         )
         politician
@@ -147,19 +147,19 @@ module VoteSmart
                   office = ::Office.find_by_vote_smart_id(candidate['officeId'])
 
                   race_params = {
-                    :office_id => office.id,
-                    :district_name => nil_if_blank(candidate['district']),
+                    office_id: office.id,
+                    district_name: nil_if_blank(candidate['district']),
                   }
                   race = stage.races.first(conditions: race_params) || stage.races.create!(race_params)
                   politician = import_candidate(candidate)
                   ::Candidacy.find_by_race_id_and_politician_id(race.id, politician.id) \
                   || ::Candidacy.create!(
-                    :race_id => race.id,
-                    :politician_id => politician.id,
+                    race_id: race.id,
+                    politician_id: politician.id,
                     party: candidate['party'],
                     status: candidate['status'],
-                    :vote_count => candidate['voteCount'],
-                    :vote_percent => candidate['votePercent']
+                    vote_count: candidate['voteCount'],
+                    vote_percent: candidate['votePercent']
                   )
                   print '.'
                 end
@@ -175,13 +175,13 @@ module VoteSmart
         puts "Offices"
         valid_hash(VoteSmart::Office.get_types)['officeTypes']['type'].each do |type_data|
           office_type = ::OfficeType.find_by_level_id_and_branch_id_and_vote_smart_id_and_name(type_data['officeLevelId'], type_data['officeBranchId'], type_data['officeTypeId'], type_data['name']) \
-            || ::OfficeType.create!(name: type_data['name'], :level_id => type_data['officeLevelId'], :branch_id => type_data['officeBranchId'], :vote_smart_id => type_data['officeTypeId'])
+            || ::OfficeType.create!(name: type_data['name'], level_id: type_data['officeLevelId'], branch_id: type_data['officeBranchId'], vote_smart_id: type_data['officeTypeId'])
           
 
           if office_data = valid_hash(VoteSmart::Office.get_offices_by_type(office_type.vote_smart_id))
             array_of_hashes(office_data['offices']['office']).each do |office|
               office_type.offices.find_by_level_id_and_branch_id_and_vote_smart_id_and_name_and_title_and_short_title(office['officeLevelId'], office['officeBranchId'], office['officeId'], office['name'], office['title'], office['shortTitle']) \
-              || office_type.offices.create!(name: office['name'], :vote_smart_id => office['officeId'], title: office['title'], :level_id => office['officeLevelId'], :short_title => office['shortTitle'], :branch_id => office['officeBranchId'])
+              || office_type.offices.create!(name: office['name'], vote_smart_id: office['officeId'], title: office['title'], level_id: office['officeLevelId'], short_title: office['shortTitle'], branch_id: office['officeBranchId'])
               print '.'
             end
           end
@@ -209,7 +209,7 @@ module VoteSmart
                 group = InterestGroup.find_by_vote_smart_id(sig['sigId']) \
                   || InterestGroup.create!(
                     name: sig['name'],
-                    :vote_smart_id => sig['sigId'])
+                    vote_smart_id: sig['sigId'])
                 group.interest_group_subjects.create!(subject: subject) if subject && !group.subjects.include?(subject)
                 print '.'
               end
@@ -239,7 +239,7 @@ module VoteSmart
               fax: nil_if_blank(group_data['fax']),
               email: nil_if_blank(group_data['email']),
               url: nil_if_blank(group_data['url']),
-              :contact_name => nil_if_blank(group_data['contactName'])
+              contact_name: nil_if_blank(group_data['contactName'])
             )
             print '.'
           end
@@ -265,7 +265,7 @@ module VoteSmart
                 to_array(ratings['candidateRating']['rating']).each do |rating|
                   print '.'
                   report = group.reports.find_by_vote_smart_id(rating['ratingId']) || group.reports.create!(
-                    :vote_smart_id => rating['ratingId'],
+                    vote_smart_id: rating['ratingId'],
                     timespan: rating['timespan'])
                   new_rating = report.ratings.find_by_politician_id(politician) \
                     || report.ratings.create(

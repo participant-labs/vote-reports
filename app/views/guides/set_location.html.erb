@@ -16,7 +16,7 @@
         <%- if presidents = @politicians['PresidentialTerm'] -%>
           <dt>President</dt>
           <%- presidents.each do |politician| -%>
-            <dd><%= render 'politicians/politician', politician: politician, :headshot_style => :tiny, :name_only => true %></dd>
+            <dd><%= render 'politicians/politician', politician: politician, headshot_style: :tiny, name_only: true %></dd>
           <%- end -%>
         <%- end -%>
       </dl>
@@ -24,7 +24,7 @@
         <%- if senators = @politicians['SenateTerm'] -%>
           <dt>Senators for <%= @federal.state.abbreviation %></dt>
           <%- senators.each do |politician| -%>
-            <dd><%= render 'politicians/politician', politician: politician, :headshot_style => :tiny, :name_only => true %></dd>
+            <dd><%= render 'politicians/politician', politician: politician, headshot_style: :tiny, name_only: true %></dd>
           <%- end -%>
         <%- end -%>
       </dl>
@@ -32,7 +32,7 @@
         <%- if representatives = @politicians['RepresentativeTerm'] -%>
           <dt>Rep for <%= @federal.congressional_district.abbreviation %></dt>
           <%- representatives.each do |politician| -%>
-            <dd><%= render 'politicians/politician', politician: politician, :headshot_style => :tiny, :name_only => true %></dd>
+            <dd><%= render 'politicians/politician', politician: politician, headshot_style: :tiny, name_only: true %></dd>
           <%- end -%>
         <%- end -%>
       </dl>
@@ -56,5 +56,5 @@
 
 <div class="guide_map">
   <div id="guide_location_map_canvas"></div>
-  <%= render 'locations/map_js', :canvas_id => 'guide_location_map_canvas' %>
+  <%= render 'locations/map_js', canvas_id: 'guide_location_map_canvas' %>
 </div>

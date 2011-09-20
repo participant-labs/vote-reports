@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include Gravtastic
   gravtastic
-  has_friendly_id :username, :use_slug => true
+  has_friendly_id :username, use_slug: true
   alias_attribute :to_s, :username
 
   acts_as_authentic do |c|
@@ -11,12 +11,12 @@ class User < ActiveRecord::Base
   has_one :adminship
   has_one :moderatorship
   has_many :reports
-  has_one :personal_report, :class_name => 'Report', conditions: {state: 'personal'}
+  has_one :personal_report, class_name: 'Report', conditions: {state: 'personal'}
 
   has_many :report_follows
   has_many :followed_reports, through: :report_follows, source: :report
 
-  validates_uniqueness_of :username, :email, :case_sensitive => false
+  validates_uniqueness_of :username, :email, case_sensitive: false
   validate :username_not_reserved
 
   state_machine initial: :active do

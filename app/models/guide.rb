@@ -5,8 +5,8 @@ class Guide < ActiveRecord::Base
   has_friendly_id :secure_token
 
   has_many :guide_reports
-  has_many :reports_supported, through: :guide_reports, conditions: {:guide_reports => {position: 'support'}}, source: :report
-  has_many :reports_opposed, through: :guide_reports, conditions: {:guide_reports => {position: 'oppose'}}, source: :report
+  has_many :reports_supported, through: :guide_reports, conditions: {guide_reports: {position: 'support'}}, source: :report
+  has_many :reports_opposed, through: :guide_reports, conditions: {guide_reports: {position: 'oppose'}}, source: :report
 
   before_validation :initialize_report, on: :create
   delegate :scores, to: :report
@@ -23,9 +23,9 @@ class Guide < ActiveRecord::Base
     opposed_report_ids = reports_opposed.map(&:id)
     report_ids = supported_report_ids + opposed_report_ids
     politicians.map do |politician|
-      if ReportScore.where(:politician_id => politician.id, :report_id => report_ids).exists?
-        GuideScore.where(:politician_id => politician.id, :supported_report_ids => {"$all" => supported_report_ids, "$size" => supported_report_ids.size}, :opposed_report_ids => {"$all" => opposed_report_ids, "$size" => opposed_report_ids.size}).first \
-         || GuideScore.create!(:politician_id => politician.id, :supported_report_ids => supported_report_ids, :opposed_report_ids => opposed_report_ids)
+      if ReportScore.where(politician_id: politician.id, report_id: report_ids).exists?
+        GuideScore.where(politician_id: politician.id, supported_report_ids: {"$all" => supported_report_ids, "$size" => supported_report_ids.size}, opposed_report_ids: {"$all" => opposed_report_ids, "$size" => opposed_report_ids.size}).first \
+         || GuideScore.create!(politician_id: politician.id, supported_report_ids: supported_report_ids, opposed_report_ids: opposed_report_ids)
       end
     end.compact
   end

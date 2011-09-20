@@ -5,10 +5,10 @@ describe CongressionalDistrict do
     before do
       @nm_district = create_congressional_district(state: create_us_state(abbreviation: 'NM'))
       @ca_district = create_congressional_district(state: create_us_state(abbreviation: 'CA'))
-      @nm_district.zip_codes << create_zip_code(:zip_code => '11111')
-      @ca_district.zip_codes << create_zip_code(:zip_code => '22222')
-      create_location(city: 'SAN FRANCISCO', state: 'CA', :zip_code => '22222')
-      create_location(city: 'SAN FRANCISCO', state: 'NM', :zip_code => '11111')
+      @nm_district.zip_codes << create_zip_code(zip_code: '11111')
+      @ca_district.zip_codes << create_zip_code(zip_code: '22222')
+      create_location(city: 'SAN FRANCISCO', state: 'CA', zip_code: '22222')
+      create_location(city: 'SAN FRANCISCO', state: 'NM', zip_code: '11111')
     end
 
     context "when a city is supplied" do

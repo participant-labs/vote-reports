@@ -1,9 +1,9 @@
 <div class="section" id="cause_scores">
   <h2>Scores</h2>
   <p>We score representatives on how they actually vote.  Votes in favor of <%= link_to "this causes's reports", '#Reports', class: "act-tab-select", rel: 'Reports' %> lead to a high score, votes against, a low one.</p>
-  <%= render 'politicians/search', :in_office => @in_office, replace: 'report_scores',
+  <%= render 'politicians/search', in_office: @in_office, replace: 'report_scores',
     url: cause_report_scores_path(@cause),
-    :reset_path => cause_report_scores_path(@cause, representing: '') %>
+    reset_path: cause_report_scores_path(@cause, representing: '') %>
   <%= render 'reports/scores/table', report: @report, scores: @scores, replace: 'report_scores',
-    :target_path => cause_report_scores_path(@cause) %>
+    target_path: cause_report_scores_path(@cause) %>
 </div>

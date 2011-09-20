@@ -5,7 +5,7 @@ class Report
     def initialize(report_id)
       raise "Bad report_id #{report_id}" unless Report.find_by_id(report_id)
       @report_id = report_id
-      GuideScore.delete_all(:report_ids => report_id)
+      GuideScore.delete_all(report_ids: report_id)
     end
 
     def class_name(klass)
@@ -31,7 +31,7 @@ class Report
           report = Report.find(report_id)
           evidences = {}
 
-          ReportScore.destroy_all(:report_id => report.id)
+          ReportScore.destroy_all(report_id: report.id)
           ReportSweeper.send(:new).on_rescore(report)
           report.score_criteria.inject({}) do |criterion_events, criterion|
             # Collect up all important events by politician and criteria
@@ -64,7 +64,7 @@ class Report
               "#{count} #{ReportScoreEvidence.type_name(type)}#{'s' if count > 1}"
             end.to_sentence
 
-            score = report.scores.create!(:politician_id => politician_id, score: report_score(criteria_events), :evidence_description => evidence_description)
+            score = report.scores.create!(politician_id: politician_id, score: report_score(criteria_events), evidence_description: evidence_description)
 
             evidences[score.id] = score_evidences
           end

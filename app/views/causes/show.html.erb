@@ -9,9 +9,9 @@
 
 
     <div id="report_scores_section" class="section report_scores">
-      <%= render 'politicians/search', :in_office => true, replace: 'report_scores',
+      <%= render 'politicians/search', in_office: true, replace: 'report_scores',
         url: cause_report_scores_path(@cause),
-        :reset_path => cause_report_scores_path(@cause, representing: '') %>
+        reset_path: cause_report_scores_path(@cause, representing: '') %>
       <div class="act-fill"
         rel="<%= cause_report_scores_path(@cause) %>"
          id="scores"></div>
@@ -32,7 +32,7 @@
       <dl>
         <dt><%= pluralize_word(@subjects.size, 'Subject') %></dt>
         <%- @subjects.each do |subject| -%>
-          <dd><%= render 'subjects/subject', subject: subject, :subject_only => true %></dd>
+          <dd><%= render 'subjects/subject', subject: subject, subject_only: true %></dd>
         <%- end -%>
         <dt><%= pluralize_word(@related_causes.size, 'Related Cause') %></dt>
         <%- if @related_causes.empty? -%>

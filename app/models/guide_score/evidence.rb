@@ -13,7 +13,7 @@ class GuideScore::Evidence
   end
 
   def public_evidence_count
-    ReportScoreEvidence.count(conditions: {:report_score_id => report_score_id})
+    ReportScoreEvidence.count(conditions: {report_score_id: report_score_id})
   end
 
   def report

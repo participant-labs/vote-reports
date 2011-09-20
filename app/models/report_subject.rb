@@ -10,7 +10,7 @@ class ReportSubject < ActiveRecord::Base
 
   class << self
     def generate_for(report)
-      ReportSubject.delete_all(:report_id => report.id)
+      ReportSubject.delete_all(report_id: report.id)
       subjects = Hash[report.bill_criteria_subjects.select("DISTINCT(subjects.id), COUNT(subjects.id) AS count")\
         .group('subjects.id').map do |subject|
         [subject, Integer(subject.count)]

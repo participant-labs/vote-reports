@@ -7,7 +7,7 @@
     <dd><%= @amendment.offered_on.to_s(:rfc822) %></dd>
     <%- if sponsor = @amendment.sponsoring_politician -%>
       <dt>By</dt>
-      <dd><%= render 'politicians/politician', politician: sponsor, :headshot_style => :small %></dd>
+      <dd><%= render 'politicians/politician', politician: sponsor, headshot_style: :small %></dd>
     <%- end -%>
     <dt>For</dt>
     <dd><%= render 'bills/bill', bill: @amendment.bill %></dd>

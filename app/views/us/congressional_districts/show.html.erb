@@ -7,7 +7,7 @@
     <h3>President</h3>
     <ul>
       <%- @presidents.each do |president| -%>
-        <%= render 'politicians/politician', politician: president, :full_name => true, tag: :li %>
+        <%= render 'politicians/politician', politician: president, full_name: true, tag: :li %>
       <%- end -%>
     </ul>
 
@@ -15,7 +15,7 @@
       <h3>Senators</h3>
       <ul>
         <%- @senators.each do |senator| -%>
-          <%= render 'politicians/politician', politician: senator, :full_name => true, tag: :li %>
+          <%= render 'politicians/politician', politician: senator, full_name: true, tag: :li %>
         <%- end -%>
       </ul>
     <%- end -%>
@@ -23,7 +23,7 @@
     <h3>Representatives (<%= @representative.count %>)</h3>
     <ul>
       <%- @representative.each do |representative| -%>
-        <%= render 'politicians/politician', politician: representative, :full_name => true, tag: :li %>
+        <%= render 'politicians/politician', politician: representative, full_name: true, tag: :li %>
       <%- end -%>
     </ul>
   </div>

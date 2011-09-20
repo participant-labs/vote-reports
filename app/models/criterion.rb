@@ -2,7 +2,7 @@ module Criterion
   def self.included(base)
     base.class_eval do
       belongs_to :report
-      has_many :evidence, :class_name => 'ReportScoreEvidence', dependent: :destroy, as: :criterion
+      has_many :evidence, class_name: 'ReportScoreEvidence', dependent: :destroy, as: :criterion
 
       scope :supported, where(support: true)
       scope :opposed, where(support: false)

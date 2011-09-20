@@ -21,7 +21,7 @@
     <% end %>
   </div>
 
-  <%= render 'interest_groups/list', :interest_groups => @interest_groups, replace: 'interest_groups_index' %>
+  <%= render 'interest_groups/list', interest_groups: @interest_groups, replace: 'interest_groups_index' %>
 
   <%- permitted_to? :create, :interest_groups do -%>
     <%= link_to "Create a new Interest Group", new_interest_group_path %>

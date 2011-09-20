@@ -1,7 +1,7 @@
 class District < ActiveRecord::Base
-  composed_of :level, mapping: %w(level level), :class_name => 'District::Level'
+  composed_of :level, mapping: %w(level level), class_name: 'District::Level'
 
-  belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
+  belongs_to :state, class_name: 'UsState', foreign_key: :us_state_id
   has_one :congressional_district
   has_many :races
   has_many :offices, through: :races

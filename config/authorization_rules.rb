@@ -21,10 +21,10 @@ authorization do
     end
     has_permission_on :users_reports_follows, :causes_follows, :interest_groups_follows, to: [:show, :create, :destroy]
     has_permission_on :users_rpx_identities, to: [:create, :destroy] do
-      if_attribute :user_id => is {user.id}
+      if_attribute user_id: is {user.id}
     end
     has_permission_on :reports, :users_reports, :users_reports_bill_criteria, :users_reports_amendment_criteria, :users_reports_thumbnails, to: [:show, :index, :new, :create, :edit, :update, :destroy] do
-      if_attribute :user_id => is {user.id}
+      if_attribute user_id: is {user.id}
     end
   end
 

@@ -2,11 +2,11 @@ class Politician < ActiveRecord::Base
   include Politician::GovTrack
   include Politician::SunlightLabs
 
-  has_friendly_id :full_name, :use_slug => true, :approximate_ascii => true
+  has_friendly_id :full_name, use_slug: true, approximate_ascii: true
 
   has_many :candidacies
   has_many :races, through: :candidacies
-  belongs_to :current_candidacy, :class_name => 'Candidacy'
+  belongs_to :current_candidacy, class_name: 'Candidacy'
 
   def latest_candidacy
     candidacies.valid.first(joins: {race: :election_stage}, order: 'election_stages.voted_on DESC', conditions: ['election_stages.voted_on > ?', Date.today]) \
@@ -17,13 +17,13 @@ class Politician < ActiveRecord::Base
   has_many :committee_meetings, through: :committee_memberships
 
   has_many :representative_terms
-  has_one :latest_representative_term, :class_name => 'RepresentativeTerm', order: 'ended_on DESC'
+  has_one :latest_representative_term, class_name: 'RepresentativeTerm', order: 'ended_on DESC'
 
   has_many :senate_terms
-  has_one :latest_senate_term, :class_name => 'SenateTerm', order: 'ended_on DESC'
+  has_one :latest_senate_term, class_name: 'SenateTerm', order: 'ended_on DESC'
 
   has_many :presidential_terms
-  has_one :latest_presidential_term, :class_name => 'PresidentialTerm', order: 'ended_on DESC'
+  has_one :latest_presidential_term, class_name: 'PresidentialTerm', order: 'ended_on DESC'
 
   has_many :interest_group_ratings
   has_many :interest_group_reports, through: :interest_group_ratings
@@ -56,7 +56,7 @@ class Politician < ActiveRecord::Base
   end
 
   belongs_to :congressional_district
-  belongs_to :state, :class_name => 'UsState', :foreign_key => :us_state_id
+  belongs_to :state, class_name: 'UsState', foreign_key: :us_state_id
   def location
     congressional_district || state
   end
@@ -100,8 +100,8 @@ class Politician < ActiveRecord::Base
   IDENTITY_INTEGER_FIELDS = [:gov_track_id].freeze
   IDENTITY_FIELDS = (IDENTITY_STRING_FIELDS | IDENTITY_INTEGER_FIELDS).freeze
 
-  validates_length_of IDENTITY_STRING_FIELDS, minimum: 1, :allow_nil => true
-  validates_uniqueness_of IDENTITY_FIELDS, :allow_nil => true
+  validates_length_of IDENTITY_STRING_FIELDS, minimum: 1, allow_nil: true
+  validates_uniqueness_of IDENTITY_FIELDS, allow_nil: true
 
   validate :name_shouldnt_contain_nickname
   before_validation :extract_nickname_from_first_name_if_present
@@ -148,7 +148,7 @@ class Politician < ActiveRecord::Base
 
     def update_current_office_status!(opts = {})
       transaction do
-        update_all(:current_office_id => nil, :current_office_type => nil)
+        update_all(current_office_id: nil, current_office_type: nil)
         in_office_normal_form.find_each do |politician|
           politician.update_attribute(:current_office, politician.latest_term)
           print '.' unless opts[:quiet]
@@ -159,7 +159,7 @@ class Politician < ActiveRecord::Base
 
     def update_current_candidacy_status!
       transaction do
-        update_all(:current_candidacy_id => nil)
+        update_all(current_candidacy_id: nil)
         has_current_candidacy.find_each do |politician|
           politician.update_attribute(:current_candidacy, politician.latest_candidacy)
           print '.'
@@ -172,16 +172,16 @@ class Politician < ActiveRecord::Base
     !current_office_id.nil?
   end
 
-  scope :senators, where(:current_office_type => 'SenateTerm')
-  scope :representatives, where(:current_office_type => 'RepresentativeTerm')
-  scope :presidents, where(:current_office_type => 'PresidentialTerm')
+  scope :senators, where(current_office_type: 'SenateTerm')
+  scope :representatives, where(current_office_type: 'RepresentativeTerm')
+  scope :presidents, where(current_office_type: 'PresidentialTerm')
 
   scope :none, where('0 = 1')
   scope :for_display, includes([:state, :congressional_district])
 
   scope :with_name, lambda {|name|
     first, last = name.split(' ', 2)
-    where(:first_name => first, :last_name => last)
+    where(first_name: first, last_name: last)
   }
   scope :by_birth_date, order('birthday DESC NULLS LAST')
   scope :from_congressional_district, lambda {|districts|
@@ -224,7 +224,7 @@ class Politician < ActiveRecord::Base
     state = UsState.where(["abbreviation = :state OR UPPER(full_name) = :state", {state: state.upcase}]).first if state.is_a?(String)
     if state
       select('DISTINCT politicians.*').where(['congressional_districts.us_state_id = ?', state])\
-        .joins(:representative_terms => :congressional_district)
+        .joins(representative_terms: :congressional_district)
     else
       where('0 = 1')
     end
@@ -296,7 +296,7 @@ class Politician < ActiveRecord::Base
     end
   end
 
-  has_many :sponsorships, :class_name => 'Cosponsorship'
+  has_many :sponsorships, class_name: 'Cosponsorship'
   has_many :bills_sponsored, through: :sponsorships, source: :bill
 
   def full_name= full_name
@@ -329,15 +329,15 @@ class Politician < ActiveRecord::Base
 
   def merge!(politician)
     transaction do
-      politician.candidacies.update_all(:politician_id => id)
-      politician.representative_terms.update_all(:politician_id => id)
-      politician.senate_terms.update_all(:politician_id => id)
-      politician.presidential_terms.update_all(:politician_id => id)
-      politician.interest_group_ratings.update_all(:politician_id => id)
-      politician.votes.update_all(:politician_id => id)
-      politician.report_scores.update_all(:politician_id => id)
-      politician.committee_memberships.update_all(:politician_id => id)
-      politician.slugs.update_all(:sluggable_id => id, :created_at => 1.year.ago)
+      politician.candidacies.update_all(politician_id: id)
+      politician.representative_terms.update_all(politician_id: id)
+      politician.senate_terms.update_all(politician_id: id)
+      politician.presidential_terms.update_all(politician_id: id)
+      politician.interest_group_ratings.update_all(politician_id: id)
+      politician.votes.update_all(politician_id: id)
+      politician.report_scores.update_all(politician_id: id)
+      politician.committee_memberships.update_all(politician_id: id)
+      politician.slugs.update_all(sluggable_id: id, created_at: 1.year.ago)
       attributes.each do |attribute, value|
         merge_value = politician.attributes[attribute]
         if IDENTITY_FIELDS.include?(attribute.to_sym) && value && merge_value && value != merge_value

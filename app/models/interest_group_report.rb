@@ -1,6 +1,6 @@
 class InterestGroupReport < ActiveRecord::Base
   belongs_to :interest_group
-  has_many :ratings, :class_name => 'InterestGroupRating'
+  has_many :ratings, class_name: 'InterestGroupRating'
 
   validates_presence_of :interest_group
   validates_uniqueness_of :vote_smart_id
@@ -96,7 +96,7 @@ class InterestGroupReport < ActiveRecord::Base
   end
 
   def calibrate_ratings
-    ratings.update_all(:numeric_rating => nil)
+    ratings.update_all(numeric_rating: nil)
 
     calibrate_unusual_ratings
     calibrate_zero_centered_ratings
@@ -110,7 +110,7 @@ class InterestGroupReport < ActiveRecord::Base
 
   def calibrate_unusual_ratings
     UNUSUAL_RATINGS_MAP.each_pair do |rating, numeric_rating|
-      ratings.update_all({:numeric_rating => numeric_rating}, {rating: rating})
+      ratings.update_all({numeric_rating: numeric_rating}, {rating: rating})
     end
   end
 
@@ -133,7 +133,7 @@ class InterestGroupReport < ActiveRecord::Base
 
       step = 100.0 / (options.size - 1)
       options.each_with_index do |letter, index|
-        ratings.update_all({:numeric_rating => index * step}, {rating: letter})
+        ratings.update_all({numeric_rating: index * step}, {rating: letter})
       end
     end
   end
@@ -148,7 +148,7 @@ class InterestGroupReport < ActiveRecord::Base
         raise "Unexpected + rating in #{vote_smart_id} which we assumed was a normal range"
       end
       $stdout.print 'G'
-      ratings.update_all({:numeric_rating => 0.0}, {rating: ZERO_CENTERED_RATINGS})
+      ratings.update_all({numeric_rating: 0.0}, {rating: ZERO_CENTERED_RATINGS})
     else
       # this is a range centered around 0
       abs_min = -rating_values.min
@@ -181,7 +181,7 @@ class InterestGroupReport < ActiveRecord::Base
         end
 
       ratings.update_all(
-        {:numeric_rating => numeric_rating}, {rating: rating, :numeric_rating => nil})
+        {numeric_rating: numeric_rating}, {rating: rating, numeric_rating: nil})
       $stdout.print '.'
     end
   end

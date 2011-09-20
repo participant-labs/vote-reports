@@ -5,7 +5,7 @@ class Users::ModeratorshipsController < ApplicationController
   def create
     if @user.moderatorship
       flash[:error] = "User is already an Moderator"
-    elsif @user.create_moderatorship(:created_by => current_user)
+    elsif @user.create_moderatorship(created_by: current_user)
       flash[:notice] = "Successfully promoted to Moderator"
     else
       flash[:error] = "Failed to grant Moderator status"

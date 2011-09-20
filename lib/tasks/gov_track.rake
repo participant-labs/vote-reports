@@ -65,7 +65,7 @@ namespace :gov_track do
             corresponding_subcommittee_meeting = corresponding_subcommittee_meetings.first
             puts node
             puts("Selected #{corresponding_subcommittee_meeting.name} for #{subcommittee_name}")
-            existing_meeting = corresponding_subcommittee_meeting.committee.meetings.first(conditions: {:congress_id => @congress.id})
+            existing_meeting = corresponding_subcommittee_meeting.committee.meetings.first(conditions: {congress_id: @congress.id})
             if existing_meeting
               puts "but it already had #{existing_meeting.name}"
               committee_meeting.committee.subcommittees.create!.meetings.for_congress(@congress, subcommittee_name)
@@ -111,7 +111,7 @@ namespace :gov_track do
     @politicians = Politician.all(select: "id, gov_track_id, us_state_id").index_by {|p| p.gov_track_id }
   end
 
-  task :download_all => :support do
+  task download_all: :support do
     rescue_and_reraise do
       log = Rails.root.join('log/govtrack-data.log')
       chdir(Rails.root.join("data/gov_track/us/")) do

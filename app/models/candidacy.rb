@@ -4,7 +4,7 @@ class Candidacy < ActiveRecord::Base
 
   scope :valid, where(['status NOT IN(?)', ["Deceased", "Withdrawn", "Removed"]])
   scope :for_races, lambda {|races|
-    where(:race_id => races)
+    where(race_id: races)
   }
 
   class << self

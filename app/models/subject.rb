@@ -8,7 +8,7 @@ class Subject < ActiveRecord::Base
   has_many :report_subjects
   has_many :reports, through: :report_subjects
 
-  has_friendly_id :name, :use_slug => true
+  has_friendly_id :name, use_slug: true
 
   searchable do
     text :name

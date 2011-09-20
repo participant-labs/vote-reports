@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe SenateTerm do
   before do
-    @middle = create_senate_term(:ended_on => 1.month.ago)
-    @oldest = create_senate_term(:ended_on => 10.years.ago)
-    @latest = create_senate_term(:ended_on => 1.year.from_now)
+    @middle = create_senate_term(ended_on: 1.month.ago)
+    @oldest = create_senate_term(ended_on: 10.years.ago)
+    @latest = create_senate_term(ended_on: 1.year.from_now)
   end
 
   describe ".by_ended_on" do

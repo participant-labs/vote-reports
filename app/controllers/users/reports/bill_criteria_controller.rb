@@ -1,5 +1,5 @@
 class Users::Reports::BillCriteriaController < ApplicationController
-  filter_resource_access :nested_in => :reports
+  filter_resource_access nested_in: :reports
   before_filter :load_user
   before_filter :find_report, only: [:index, :destroy]
 

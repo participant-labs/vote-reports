@@ -9,7 +9,7 @@ class Users::Reports::ScoresController < ApplicationController
       }
       format.js {
         render partial: 'reports/scores/table', locals: {
-          report: @report, scores: @scores, :target_path => user_report_report_scores_path(@user, @report)
+          report: @report, scores: @scores, target_path: user_report_report_scores_path(@user, @report)
         }
       }
       format.json {

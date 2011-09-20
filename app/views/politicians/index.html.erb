@@ -1,8 +1,8 @@
 <%- title 'Politicians' -%>
 
 <div class="section">
-  <%= render 'politicians/search', :in_office => @in_office, replace: 'politicians',
+  <%= render 'politicians/search', in_office: @in_office, replace: 'politicians',
     url: politicians_path,
-    :reset_path => politicians_path(representing: '') %>
+    reset_path: politicians_path(representing: '') %>
   <%= render 'politicians/list', politicians: @politicians %>
 </div>

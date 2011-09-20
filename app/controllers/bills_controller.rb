@@ -16,7 +16,7 @@ class BillsController < ApplicationController
   end
 
   def show
-    @bill = Bill.find(params[:id], include: [{sponsor: :state}, :titles, :subjects, :amendments, :rolls, {:bill_criteria => {report: :user}}])
+    @bill = Bill.find(params[:id], include: [{sponsor: :state}, :titles, :subjects, :amendments, :rolls, {bill_criteria: {report: :user}}])
     @rolls = @bill.rolls.by_voted_at
     @amendments_count = @bill.amendments.with_votes.count
     @reports = @bill.reports.published

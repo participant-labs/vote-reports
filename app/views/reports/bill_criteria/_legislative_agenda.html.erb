@@ -9,14 +9,14 @@
     <%- if active_bills.supported.present? -%>
     <ul>
       <%- active_bills.supported.each do |criterion| -%>
-        <li class="bill_criterion"><span><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %></span></li>
+        <li class="bill_criterion"><span><%= render 'bill_criteria/bill_criterion', bill_criterion: criterion %></span></li>
       <%- end -%>
     </ul>
     <%- end -%>
     <%- if active_amendments.supported.present? -%>
     <ul>
       <%- active_amendments.supported.each do |criterion| -%>
-        <li class="amendment_criterion"><span><%= render 'amendment_criteria/amendment_criterion', :amendment_criterion => criterion, :show_year => true %></span></li>
+        <li class="amendment_criterion"><span><%= render 'amendment_criteria/amendment_criterion', amendment_criterion: criterion, show_year: true %></span></li>
       <%- end -%>
     </ul>
     <%- end -%>
@@ -31,14 +31,14 @@
       <%- if active_bills.opposed.present? -%>
       <ul>
         <%- active_bills.opposed.each do |criterion| -%>
-          <li class="bill_criterion"><span><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion %></span></li>
+          <li class="bill_criterion"><span><%= render 'bill_criteria/bill_criterion', bill_criterion: criterion %></span></li>
         <%- end -%>
       </ul>
       <%- end -%>
       <%- if active_amendments.opposed.present? -%>
       <ul>
         <%- active_amendments.opposed.except(:select).select('DISTINCT(amendment_criteria.*), amendments.offered_on').each do |criterion| -%>
-          <li class="amendment_criterion"><span><%= render 'amendment_criteria/amendment_criterion', :amendment_criterion => criterion, :show_year => true %></span></li>
+          <li class="amendment_criterion"><span><%= render 'amendment_criteria/amendment_criterion', amendment_criterion: criterion, show_year: true %></span></li>
         <%- end -%>
       </ul>
       <%- end -%>
@@ -55,14 +55,14 @@
       <%- if unvoted_bills.present? -%>
       <ul>
         <%- unvoted_bills.each do |criterion| -%>
-          <li class="bill_criterion"><span><%= render 'bill_criteria/bill_criterion', :bill_criterion => criterion, :with_support => true %></span></li>
+          <li class="bill_criterion"><span><%= render 'bill_criteria/bill_criterion', bill_criterion: criterion, with_support: true %></span></li>
         <%- end -%>
       </ul>
       <%- end -%>
       <%- if unvoted_amendments.present? -%>
       <ul>
         <%- unvoted_amendments.each do |criterion| -%>
-          <li class="amendment_criterion"><span><%= render 'amendment_criteria/amendment_criterion', :amendment_criterion => criterion, :with_support => true, :show_year => true %></span></li>
+          <li class="amendment_criterion"><span><%= render 'amendment_criteria/amendment_criterion', amendment_criterion: criterion, with_support: true, show_year: true %></span></li>
         <%- end -%>
       </ul>
       <%- end -%>

@@ -14,7 +14,7 @@ namespace :gov_track do
       district = district.to_i
       district = nil if district == -1
       @districts.fetch([state.id, district]) do
-        @districts[[state.id, district]] = CongressionalDistrict.create!(state: state, :district_number => district)
+        @districts[[state.id, district]] = CongressionalDistrict.create!(state: state, district_number: district)
       end
     end
 
@@ -26,7 +26,7 @@ namespace :gov_track do
     def politician(gov_track_id)
       @politicians ||= Politician.all(include: [:representative_terms, :senate_terms, :presidential_terms]).index_by(&:gov_track_id)
       @politicians.fetch(gov_track_id.to_i) do
-        @politicians[gov_track_id.to_i] = Politician.new(:gov_track_id => gov_track_id)
+        @politicians[gov_track_id.to_i] = Politician.new(gov_track_id: gov_track_id)
       end
     end
 
@@ -80,12 +80,12 @@ namespace :gov_track do
 
               case role['type']
               when 'rep'
-                attrs.merge!(:congressional_district => district(role['state'], role['district']))
+                attrs.merge!(congressional_district: district(role['state'], role['district']))
                 representative_terms[role['startdate'].to_date].tap do |term|
                   term && term.update_attributes(attrs)
                 end || politician.representative_terms.create(attrs)
               when 'sen'
-                attrs.merge!(:senate_class => role['class'], state: us_state(role['state']))
+                attrs.merge!(senate_class: role['class'], state: us_state(role['state']))
                 senate_terms[role['startdate'].to_date].tap do |term|
                   term && term.update_attributes(attrs)
                 end || politician.senate_terms.create(attrs)

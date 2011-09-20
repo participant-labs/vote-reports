@@ -2,9 +2,9 @@ class InterestGroup < ActiveRecord::Base
   include HasReport
 
   has_ancestry
-  has_friendly_id :name, :use_slug => true
+  has_friendly_id :name, use_slug: true
 
-  belongs_to :owner, :class_name => 'User'
+  belongs_to :owner, class_name: 'User'
 
   searchable do
     text :name, :description
@@ -28,7 +28,7 @@ class InterestGroup < ActiveRecord::Base
   # The ReportSubject generator takes InterestGroupSubjects into account
   delegate :subjects, to: :report
 
-  has_many :reports, :class_name => 'InterestGroupReport' do
+  has_many :reports, class_name: 'InterestGroupReport' do
     def by_rated_on
       sort_by(&:rated_on).reverse
     end

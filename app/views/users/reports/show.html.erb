@@ -9,9 +9,9 @@
     <div class="description"><%= md_to_html(@report.description) %></div>
 
     <div id="report_scores_section" class="section report_scores">
-      <%= render 'politicians/search', :in_office => true, replace: 'report_scores',
+      <%= render 'politicians/search', in_office: true, replace: 'report_scores',
         url: user_report_report_scores_path(@report.user, @report),
-        :reset_path => user_report_report_scores_path(@report.user, @report, representing: '') %>
+        reset_path: user_report_report_scores_path(@report.user, @report, representing: '') %>
       <div class="act-fill"
         rel="<%= user_report_report_scores_path(@report.user, @report) %>"
          id="scores"></div>
@@ -36,7 +36,7 @@
           <dd>None</dd>
         <%- else -%>
           <%- @subjects.each do |subject| -%>
-            <dd><%= render 'subjects/subject', subject: subject, :subject_only => true %></dd>
+            <dd><%= render 'subjects/subject', subject: subject, subject_only: true %></dd>
           <%- end -%>
         <%- end -%>
         <dt><%= pluralize_word(@causes.size, 'Cause') %></dt>

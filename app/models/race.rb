@@ -9,7 +9,7 @@ class Race < ActiveRecord::Base
   scope :upcoming, joins(:election_stage).where(['election_stages.voted_on >= ?', Date.today])
 
   scope :for_districts, lambda {|districts|
-    joins([:office, {:election_stage => :election}]).where([
+    joins([:office, {election_stage: :election}]).where([
       %{elections.state_id = ? AND (
           (offices.id IN(?) AND races.district_name IN(?)) OR
           (offices.id IN(?) AND races.district_name IN(?)) OR
@@ -25,7 +25,7 @@ class Race < ActiveRecord::Base
   }
 
   scope :with_scores_from, lambda {|scores|
-    joins(:candidacies).where(candidacies: {:politician_id => scores.map(&:politician_id)})
+    joins(:candidacies).where(candidacies: {politician_id: scores.map(&:politician_id)})
   }
 
   scope :state_lower, joins(:office).where(offices: {name: ['State House', 'State Assembly']})

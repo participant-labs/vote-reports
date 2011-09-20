@@ -22,11 +22,11 @@ describe Politician do
       state = create_us_state
       @politician.state.should_not == state
       proc {
-        create_representative_term(:congressional_district => create_congressional_district(state: state), politician: @politician, :ended_on => 1.year.ago)
+        create_representative_term(congressional_district: create_congressional_district(state: state), politician: @politician, ended_on: 1.year.ago)
       }.should change(@politician, :state).to(state)
       new_state = create_us_state
       proc {
-        create_senate_term(state: new_state, politician: @politician, :ended_on => 1.year.from_now)
+        create_senate_term(state: new_state, politician: @politician, ended_on: 1.year.from_now)
       }.should change(@politician, :state).to(new_state)
     end
   end

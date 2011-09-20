@@ -25,12 +25,12 @@ module ReportsHelper
     if criteria_targets.first.is_a?(Bill)
       criteria_targets.map do |bill|
         report.bill_criteria.find_by_bill_id(bill.id) ||
-          report.bill_criteria.build(:bill_id => bill.id)
+          report.bill_criteria.build(bill_id: bill.id)
       end
     else
       criteria_targets.map do |amendment|
         report.amendment_criteria.find_by_amendment_id(amendment.id) ||
-          report.amendment_criteria.build(:amendment_id => amendment.id)
+          report.amendment_criteria.build(amendment_id: amendment.id)
       end
     end
   end
@@ -42,7 +42,7 @@ module ReportsHelper
       step.assert_valid_keys(:text, :why, :state_event, :confirm)
       content_tag :div, class: 'clearfix' do
         content_tag(:p, step.fetch(:why))
-        link_to(step.fetch(:text), user_report_path(report.user, report, report: {:state_event => step.fetch(:state_event)}), confirm: step.fetch(:confirm), method: :put, class: 'button')
+        link_to(step.fetch(:text), user_report_path(report.user, report, report: {state_event: step.fetch(:state_event)}), confirm: step.fetch(:confirm), method: :put, class: 'button')
       end
     end
   end

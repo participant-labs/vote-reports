@@ -2,7 +2,7 @@
 
 <div class="section clearfix">
   <div class="span-24">
-    <h2 class="span-20"><%= render 'politicians/name', politician: @politician, full: true, :no_fancybox => true %></h2>
+    <h2 class="span-20"><%= render 'politicians/name', politician: @politician, full: true, no_fancybox: true %></h2>
 
     <%- if @politician.in_office? || @politician.congresspedia_url -%>
     <ul class="details span-4 last">

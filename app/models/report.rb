@@ -16,7 +16,7 @@ class Report < ActiveRecord::Base
     current_image || build_image
   end
 
-  has_friendly_id :name, :use_slug => true, scope: :user
+  has_friendly_id :name, use_slug: true, scope: :user
 
   has_many :report_delayed_jobs
   has_many :delayed_jobs, through: :report_delayed_jobs do
@@ -35,7 +35,7 @@ class Report < ActiveRecord::Base
 
   has_many :report_subjects
   has_many :subjects, through: :report_subjects
-  belongs_to :top_subject, :class_name => 'Subject'
+  belongs_to :top_subject, class_name: 'Subject'
 
   scope :for_display, includes([:top_subject, :image, :cause, :user, :interest_group])
 
@@ -52,7 +52,7 @@ class Report < ActiveRecord::Base
       {
         text: 'Publish this Report',
         why: "Publishing this report will include it in lists and searches on the site",
-        :state_event => 'publish',
+        state_event: 'publish',
         confirm: 'Publish this Report?  It will then show up in lists and searches on this site.'
       }
     end
@@ -62,7 +62,7 @@ class Report < ActiveRecord::Base
     {
       text: 'Share this Report',
       why: "Sharing this report will allow others to access it from this url.",
-      :state_event => 'share',
+      state_event: 'share',
       confirm: 'Share this Report?  It will accessible to others via this url.'
     }
   end
@@ -71,7 +71,7 @@ class Report < ActiveRecord::Base
     {
       text: 'Unshare this Report',
       why: "Unsharing this report will make it accessible only to you.",
-      :state_event => 'unshare',
+      state_event: 'unshare',
       confirm: 'Unshare this Report? It will only be accesible to you.'
     }
   end
@@ -80,7 +80,7 @@ class Report < ActiveRecord::Base
     {
       text: 'Unlist this Report',
       why: "Unlisting this report will remove it from lists & searches on the site.",
-      :state_event => 'unlist',
+      state_event: 'unlist',
       confirm: 'Unlist this Report? It will no longer show up in lists and searches on this site.'
     }
   end
@@ -180,7 +180,7 @@ class Report < ActiveRecord::Base
         if params[:except].present?
           without(params[:except])
         end
-        paginate page: params[:page], :per_page => Report.default_per_page
+        paginate page: params[:page], per_page: Report.default_per_page
       end
     end
   end
@@ -212,15 +212,15 @@ class Report < ActiveRecord::Base
     bill_criteria.present? || amendment_criteria.present?
   end
 
-  has_many :follows, :class_name => 'ReportFollow', dependent: :destroy
+  has_many :follows, class_name: 'ReportFollow', dependent: :destroy
   has_many :followers, through: :follows, source: :user
 
-  has_many :scores, :class_name => 'ReportScore', dependent: :destroy
+  has_many :scores, class_name: 'ReportScore', dependent: :destroy
 
   validate :name_not_reserved
 
-  accepts_nested_attributes_for :bill_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
-  accepts_nested_attributes_for :amendment_criteria, :reject_if => proc {|attributes| attributes['support'].nil? }
+  accepts_nested_attributes_for :bill_criteria, reject_if: proc {|attributes| attributes['support'].nil? }
+  accepts_nested_attributes_for :amendment_criteria, reject_if: proc {|attributes| attributes['support'].nil? }
 
   validates_presence_of :name
   validate :ensure_only_one_owner
@@ -247,7 +247,7 @@ class Report < ActiveRecord::Base
   scope :unpublished, where(["reports.state IN(?)", %w[unlisted private]])
   scope :except_personal, where(["reports.state != ?", 'personal'])
   scope :with_criteria, select('DISTINCT reports.*').joins(:bill_criteria)
-  scope :scored, select('DISTINCT reports.*').joins(:bill_criteria => {bill: :passage_rolls})
+  scope :scored, select('DISTINCT reports.*').joins(bill_criteria: {bill: :passage_rolls})
   scope :by_updated_at, order('updated_at DESC')
   scope :by_created_at, order('created_at DESC')
   scope :by_name, order('name')

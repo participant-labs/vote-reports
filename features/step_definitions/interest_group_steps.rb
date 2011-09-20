@@ -11,13 +11,13 @@ Given /^(interest group "[^"]*") has the following ratings:$/ do |interest_group
   table.map_column!('report') {|timespan|
     interest_group.reports.find_by_timespan(timespan) \
       || create_interest_group_report(
-          :interest_group => interest_group, timespan: timespan)
+          interest_group: interest_group, timespan: timespan)
   }
   table.hashes.each do |hash|
     create_interest_group_rating(
       hash.merge(
-        :interest_group_report => hash.delete('report'),
-        :numeric_rating => hash['rating'].to_f))
+        interest_group_report: hash.delete('report'),
+        numeric_rating: hash['rating'].to_f))
   end
 end
 

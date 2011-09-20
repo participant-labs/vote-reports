@@ -3,7 +3,7 @@ class ReportScore < ActiveRecord::Base
 
   belongs_to :report
   belongs_to :politician
-  has_many :evidence, :class_name => 'ReportScoreEvidence', dependent: :destroy
+  has_many :evidence, class_name: 'ReportScoreEvidence', dependent: :destroy
 
   # default_scope order: 'score DESC'
   scope :bottom, order(:score)
@@ -25,8 +25,8 @@ class ReportScore < ActiveRecord::Base
     end
   end
 
-  has_many :dependent_report_score_evidences, :class_name => 'ReportScoreEvidence', as: :evidence
-  has_many :dependent_report_scores, :class_name => 'ReportScore',
+  has_many :dependent_report_score_evidences, class_name: 'ReportScoreEvidence', as: :evidence
+  has_many :dependent_report_scores, class_name: 'ReportScore',
     through: :dependent_report_score_evidences, source: :score
 
   scope :for_politician_display, includes(report: [:cause, :image, :interest_group, :user, :top_subject]).order('report_scores.score DESC')
@@ -57,7 +57,7 @@ class ReportScore < ActiveRecord::Base
     if politicians.empty? || politicians.first == Politician
       {}
     else
-      where(:politician_id => politicians)
+      where(politician_id: politicians)
     end
   }
 
@@ -66,7 +66,7 @@ class ReportScore < ActiveRecord::Base
     if reports.empty?
       {}
     else
-      where(:report_id => reports)
+      where(report_id: reports)
     end
   }
 

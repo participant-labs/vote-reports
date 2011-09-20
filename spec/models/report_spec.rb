@@ -69,7 +69,7 @@ describe Report do
     end
 
     it "should return reports with voted bill_criteria" do
-      create_roll(subject: @bill, :roll_type => Bill::ROLL_PASSAGE_TYPES.sample)
+      create_roll(subject: @bill, roll_type: Bill::ROLL_PASSAGE_TYPES.sample)
 
       Report.scored.should == [@report]
     end
@@ -89,7 +89,7 @@ describe Report do
     context "when the report has a score criteria" do
       before do
         create_bill_criterion(report: @report)
-        roll = create_roll(subject: @report.reload.bill_criteria.first.bill, :roll_type => "On Passage")
+        roll = create_roll(subject: @report.reload.bill_criteria.first.bill, roll_type: "On Passage")
       end
 
       it "should create a delayed job accessible via #delayed_jobs" do

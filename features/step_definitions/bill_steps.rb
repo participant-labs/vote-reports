@@ -11,13 +11,13 @@ Given /^an? (.*)bill named "([^\"]*)"$/ do |attrs, title|
         meeting = Congress.current_meeting
         attrs.merge!(
           congress: Congress.find_by_meeting(meeting) || create_congress(meeting: meeting),
-          :introduced_on => Date.today
+          introduced_on: Date.today
         )
       when 'previous-congress'
         meeting = Congress.current_meeting - 1
         attrs.merge!(
           congress: Congress.find_by_meeting(meeting) || create_congress(meeting: meeting),
-          :introduced_on => 2.years.ago.to_date
+          introduced_on: 2.years.ago.to_date
         )
       when 'un-voted'
       when 'voted'
@@ -28,7 +28,7 @@ Given /^an? (.*)bill named "([^\"]*)"$/ do |attrs, title|
         year = Integer(attr) rescue nil
         if year
           attrs.merge!(
-            :introduced_on => "#{year}/5/4"
+            introduced_on: "#{year}/5/4"
           )
         else
           raise "Unrecognize bill attr: #{attr}"
@@ -42,7 +42,7 @@ Given /^an? (.*)bill named "([^\"]*)"$/ do |attrs, title|
     create_roll(subject: title.bill)
   end
   if create_pass_bill_roll
-    create_roll(subject: title.bill, :roll_type => 'On Passage')
+    create_roll(subject: title.bill, roll_type: 'On Passage')
   end
   Bill.solr_reindex
 end
@@ -58,7 +58,7 @@ Given /^(bill "[^\"]*") has a title "([^\"]*)"$/ do |bill, title|
 end
 
 Given /^(bill "[^"]*") is sponsored by (politician "[^"]*")$/ do |bill, politician|
-  bill.create_sponsorship(:joined_on => bill.introduced_on, politician: politician, bill: bill)
+  bill.create_sponsorship(joined_on: bill.introduced_on, politician: politician, bill: bill)
 end
 
 Given /^(bill "[^"]*") is cosponsored by:$/ do |bill, table|

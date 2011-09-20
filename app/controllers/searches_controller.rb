@@ -7,7 +7,7 @@ class SearchesController < ApplicationController
     @results = Sunspot.search(Report, Politician) do
       fulltext term
       with(:autocompletable, true)
-      paginate :per_page => 20
+      paginate per_page: 20
     end.results
 
     respond_to do |format|

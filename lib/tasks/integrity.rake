@@ -1,5 +1,5 @@
 task :integrity_spec  => [:'integrity:setup', :spec]
-task :integrity_cucumber => [:'integrity:setup', :cucumber]
+task integrity_cucumber: [:'integrity:setup', :cucumber]
 
 namespace :integrity do
   task :setup do

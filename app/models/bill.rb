@@ -43,7 +43,7 @@ class Bill < ActiveRecord::Base
     def paginated_search(params)
       search do
         fulltext params[:term]
-        paginate page: params[:page], :per_page => Bill.default_per_page
+        paginate page: params[:page], per_page: Bill.default_per_page
         if params[:voted]
           without :voted, false
         end
@@ -59,26 +59,26 @@ class Bill < ActiveRecord::Base
     def guess(info)
       number, name = info.split(' - ')
       house, bill_number = number.split(' ')
-      paginated_search(term: "#{house} #{name}", :bill_number => bill_number).results.first || begin
+      paginated_search(term: "#{house} #{name}", bill_number: bill_number).results.first || begin
         words = name.split(' ')
         count = words.size / 2
         while count > 1
           comb = words.first(count).join(' ')
-          if result = paginated_search(term: "#{house} #{comb}", :bill_number => bill_number, current: true).results.first
+          if result = paginated_search(term: "#{house} #{comb}", bill_number: bill_number, current: true).results.first
             return result
           end
           count /= 2
         end
-        paginated_search(term: house, :bill_number => bill_number, current: true).results.first
+        paginated_search(term: house, bill_number: bill_number, current: true).results.first
       end
     end
   end
 
   belongs_to :congress
 
-  belongs_to :sponsorship, :class_name => 'Cosponsorship'
+  belongs_to :sponsorship, class_name: 'Cosponsorship'
   has_one :sponsor, through: :sponsorship, source: :politician
-  has_many :sponsorships, :class_name => 'Cosponsorship'
+  has_many :sponsorships, class_name: 'Cosponsorship'
   has_many :sponsors, through: :sponsorships, source: :politician
 
   def cosponsorships
@@ -94,15 +94,15 @@ class Bill < ActiveRecord::Base
   has_many :bill_subjects
   has_many :subjects, through: :bill_subjects
 
-  has_many :committee_actions, :class_name => 'BillCommitteeActions'
+  has_many :committee_actions, class_name: 'BillCommitteeActions'
   has_many :committees, through: :committee_actions
 
-  has_many :titles, :class_name => 'BillTitle'
+  has_many :titles, class_name: 'BillTitle'
   has_many :bill_criteria, dependent: :destroy
   has_many :reports, through: :bill_criteria
   has_many :amendments, dependent: :destroy
   has_many :rolls, as: :subject, dependent: :destroy
-  has_many :passage_rolls, as: :subject, :class_name => 'Roll', conditions: {:roll_type => ROLL_PASSAGE_TYPES}
+  has_many :passage_rolls, as: :subject, class_name: 'Roll', conditions: {roll_type: ROLL_PASSAGE_TYPES}
   has_many :votes, through: :rolls
   has_many :passage_votes, through: :passage_rolls, source: :votes
   def politicians

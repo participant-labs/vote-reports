@@ -68,7 +68,7 @@
     <div class="span-8"><%= image_tag 'homepage/circle_3.png', id: 'circle3' %></div>
 
     <div class="span-8 last" id="groups-explained">
-      <%= link_to content_tag(:span, 'Member created reports', class: "section-header"), reports_path(:from_members => true) %><br />
+      <%= link_to content_tag(:span, 'Member created reports', class: "section-header"), reports_path(from_members: true) %><br />
       <p class="medium-text">Registered members can also create their own grades on politicians. Members create a report outlining which bills they support and are against. The system then automatically generates a score for all politicians.</p>
     </div>
   </div>

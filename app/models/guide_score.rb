@@ -42,7 +42,7 @@ class GuideScore
   private
 
   def evidence_count
-    ReportScoreEvidence.count(conditions: {:report_score_id => evidence_ids})
+    ReportScoreEvidence.count(conditions: {report_score_id: evidence_ids})
   end
 
   def build_evidence_description
@@ -51,8 +51,8 @@ class GuideScore
 
   def build_scores
     return if self.score
-    supported_scores = ReportScore.where(:politician_id => politician_id, :report_id => supported_report_ids)
-    opposed_scores = ReportScore.where(:politician_id => politician_id, :report_id => opposed_report_ids)
+    supported_scores = ReportScore.where(politician_id: politician_id, report_id: supported_report_ids)
+    opposed_scores = ReportScore.where(politician_id: politician_id, report_id: opposed_report_ids)
     scores = supported_scores.map(&:score) + opposed_scores.map(&:opposition_score)
     self.score = scores.sum.to_f / scores.size
     self.evidence_ids = (supported_scores + opposed_scores).map(&:id)

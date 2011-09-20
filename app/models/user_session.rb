@@ -20,6 +20,6 @@ private
   end
 
   def save_rpx_data
-    RpxIdentity.create(:user_id => attempted_record.id, profile: @rpx_data)
+    RpxIdentity.create(user_id: attempted_record.id, profile: @rpx_data)
   end
 end

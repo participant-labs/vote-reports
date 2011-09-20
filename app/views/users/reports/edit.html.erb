@@ -20,7 +20,7 @@
   <div class="section" id="Edit_Report">
     <h2>Edit Report</h2>
 
-    <%= render 'users/reports/form', report: @report, :back_to => user_report_path(@report.user, @report) %>
+    <%= render 'users/reports/form', report: @report, back_to: user_report_path(@report.user, @report) %>
   </div>
 
   <%- permitted_to? :destroy, @report do -%>

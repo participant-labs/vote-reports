@@ -20,13 +20,13 @@ class ContinuousTerm
   class << self
     def create_from_terms(politician, terms)
       create(
-        :politician_id => politician.id,
-        :started_on => terms.first.started_on.to_time,
-        :ended_on => terms.last.ended_on.to_time,
+        politician_id: politician.id,
+        started_on: terms.first.started_on.to_time,
+        ended_on: terms.last.ended_on.to_time,
         party: terms.last.party.try(:name),
         url: terms.last.url,
-        :location_type => terms.last.location.class.name,
-        :location_id => terms.last.location.try(:id),
+        location_type: terms.last.location.class.name,
+        location_id: terms.last.location.try(:id),
         title: terms.last.title,
         terms: terms.map {|t| {type: t.class.name, id: t.id} }
       )

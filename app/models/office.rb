@@ -12,11 +12,11 @@ class Office < ActiveRecord::Base
     end
 
     def state_lower
-      all(conditions: {:vote_smart_id => [7, 8]})
+      all(conditions: {vote_smart_id: [7, 8]})
     end
 
     def districted
-      all(conditions: {:vote_smart_id => [5, 7, 8, 9]})
+      all(conditions: {vote_smart_id: [5, 7, 8, 9]})
     end
   end
 end

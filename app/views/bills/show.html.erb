@@ -1,10 +1,10 @@
 <%- title %Q{"#{@bill.titles.first}" - Bills} -%>
 
 <div class="section">
-  <h2><%= render @bill, :hide_year => true %></h2>
+  <h2><%= render @bill, hide_year: true %></h2>
   <p>Introduced on <%= @bill.introduced_on.to_s(:long_ordinal) %>
   <%- if @bill.sponsor -%>
-    by <%= render 'politicians/politician', politician: @bill.sponsor, :headshot_style => :small %>
+    by <%= render 'politicians/politician', politician: @bill.sponsor, headshot_style: :small %>
   <%- end -%>
   </p>
 </div>

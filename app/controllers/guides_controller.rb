@@ -23,7 +23,7 @@ class GuidesController < ApplicationController
     supported = fetch_reports_for(session[:guide_causes])
     opposed = fetch_reports_for(session[:guide_causes_opposed])
 
-    @guide = Guide.new(geoloc: current_geo_location, :reports_supported => supported, :reports_opposed => opposed)
+    @guide = Guide.new(geoloc: current_geo_location, reports_supported: supported, reports_opposed: opposed)
 
     respond_to do |format|
       format.html {

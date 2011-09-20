@@ -1,5 +1,5 @@
 class Users::ReportsController < ApplicationController
-  filter_resource_access :nested_in => :users
+  filter_resource_access nested_in: :users
 
   def index
     @reports = @user.reports.published
@@ -52,7 +52,7 @@ class Users::ReportsController < ApplicationController
     @report = @user.reports.build(params[:report])
     if @report.save
       flash[:notice] = "Successfully created report."
-      redirect_to edit_user_report_path(@user, @report, :new_report => true, anchor: 'Add_Bills')
+      redirect_to edit_user_report_path(@user, @report, new_report: true, anchor: 'Add_Bills')
     else
       render action: 'new'
     end

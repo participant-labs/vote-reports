@@ -12,18 +12,18 @@
             <%- roll = bill_score.evidence.roll -%>
             <dt><%= link_to "On #{roll.voted_at.to_date.to_s(:long)} voted #{bill_score.evidence.position}", roll %></dt>
           <%- end -%>
-          <dd>On <%= render 'bills/bill', bill: subject, :hide_year => true %> which this report <%= scores.first.criterion.position %>s</dd>
+          <dd>On <%= render 'bills/bill', bill: subject, hide_year: true %> which this report <%= scores.first.criterion.position %>s</dd>
         <%- elsif scores.first.evidence.is_a?(Cosponsorship) -%>
           <%- sponsorship = scores.first.evidence -%>
           <dt><%= link_to "On #{sponsorship.joined_on.to_s(:long)} #{sponsorship.verb}", bill_path(subject, anchor: 'bill_cosponsors') %></dt>
-          <dd><%= render 'bills/bill', bill: subject, :hide_year => true %> which this report <%= scores.first.criterion.position %>s</dd>
+          <dd><%= render 'bills/bill', bill: subject, hide_year: true %> which this report <%= scores.first.criterion.position %>s</dd>
         <%- end -%>
       <%- elsif subject.is_a?(Amendment) -%>
         <%- scores.each do |score| -%>
           <%- roll = score.evidence.roll -%>
           <dt><%= link_to "On #{roll.voted_at.to_date.to_s(:rfc822)} voted #{score.evidence.position}", roll %></dt>
         <%- end -%>
-        <dd>On <%= render 'amendments/amendment', amendment: subject, :hide_year => true %> which this report <%= scores.first.criterion.position %>s</dd>
+        <dd>On <%= render 'amendments/amendment', amendment: subject, hide_year: true %> which this report <%= scores.first.criterion.position %>s</dd>
       <%- else -%>
         <% notify_hoptoad("unrecognized score evidence type: #{subject.inspect} for #{scores.inspect}") %>
         <p>Sorry, there was an error displaying this score's evidence - we'll be addressing it shortly.</p>

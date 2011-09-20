@@ -1,6 +1,6 @@
 <%- title "Edit #{@interest_group.name} - Interest Groups" -%>
 
-<%= render 'interest_groups/header', :interest_group => @interest_group %>
+<%= render 'interest_groups/header', interest_group: @interest_group %>
 
 <%- permitted_to? :show, @interest_group do -%>
   <%= link_to 'View this Interest Group', interest_group_path(@interest_group) %>

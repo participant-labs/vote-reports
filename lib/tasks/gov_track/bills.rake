@@ -94,13 +94,13 @@ namespace :gov_track do
             sponsor = @politicians.fetch(data.at('sponsor')['id'].to_i) unless data.at('sponsor')['none'].present?
             introduced_on = data.at('introduced')['datetime'].to_s
             attrs = {
-              :opencongress_id => opencongress_bill_id,
-              :gov_track_id => gov_track_bill_id,
-              :congress_id => @congress.id,
-              :bill_type => data['type'].to_s,
-              :bill_number => data['number'].to_s,
-              :gov_track_updated_at => data['updated'].to_s,
-              :introduced_on => introduced_on,
+              opencongress_id: opencongress_bill_id,
+              gov_track_id: gov_track_bill_id,
+              congress_id: @congress.id,
+              bill_type: data['type'].to_s,
+              bill_number: data['number'].to_s,
+              gov_track_updated_at: data['updated'].to_s,
+              introduced_on: introduced_on,
               summary: data.at('summary').inner_text.strip
             }
             if update? && bill = Bill.find_by_opencongress_id(opencongress_bill_id)
@@ -149,7 +149,7 @@ namespace :gov_track do
               [@politicians.fetch(cosponsor_node['id'].to_s.to_i).id, joined, bill.id]
             end)
             if sponsor
-              sponsorship = Cosponsorship.create!(bill: bill, politician: sponsor, :joined_on => introduced_on)
+              sponsorship = Cosponsorship.create!(bill: bill, politician: sponsor, joined_on: introduced_on)
               bill.update_attribute(:sponsorship_id, sponsorship.id)
             end
 

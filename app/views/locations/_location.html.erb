@@ -1,9 +1,9 @@
 <span id="location-text">Location:</span>
 <%- if current_geo_location -%>
-  <%= link_to current_location, location_path(:return_to => request.path), class: 'fancyboxy white' %>
+  <%= link_to current_location, location_path(return_to: request.path), class: 'fancyboxy white' %>
   <%- if declared_geo_location -%>
-    <%= link_to 'clear', location_path(:return_to => request.path), method: :delete, class: 'white' %>
+    <%= link_to 'clear', location_path(return_to: request.path), method: :delete, class: 'white' %>
   <%- end -%>
 <%- else -%>
-  <%= link_to 'set location', location_path(:return_to => request.path), class: 'fancyboxy white' %>
+  <%= link_to 'set location', location_path(return_to: request.path), class: 'fancyboxy white' %>
 <%- end -%>

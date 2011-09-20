@@ -17,21 +17,21 @@ Fixjour verify: false do
     return state if state.is_a?(UsState)
     state =STATES.assoc(state) || STATES.rassoc(state)
     UsState.find_by_abbreviation(state.last) || create_us_state(
-      :full_name => state.first,
+      full_name: state.first,
       abbreviation: state.last,
-      :state_type => 'state')
+      state_type: 'state')
   end
 
   def meeting
-    Forgery(:basic).number(:at_least => 103, :at_most => 111)
+    Forgery(:basic).number(at_least: 103, at_most: 111)
   end
 
   def bill_type
-    Forgery(:basic).text(:at_least => 2, :at_most => 2, :allow_numeric => false, :allow_upper => false)
+    Forgery(:basic).text(at_least: 2, at_most: 2, allow_numeric: false, allow_upper: false)
   end
 
   def bill_number
-    Forgery(:basic).number(:at_most => 9999)
+    Forgery(:basic).number(at_most: 9999)
   end
 
   def opencongress_id
@@ -48,7 +48,7 @@ Fixjour verify: false do
     end
 
     klass.new(
-      :zip_code => new_zip_code
+      zip_code: new_zip_code
     )
   end
 
@@ -68,7 +68,7 @@ Fixjour verify: false do
 
   define_builder(Committee) do |klass, overrides|
     klass.new(
-      :display_name => Forgery(:basic).text,
+      display_name: Forgery(:basic).text,
       code: Forgery(:basic).text
     )
   end
@@ -86,7 +86,7 @@ Fixjour verify: false do
       email: Forgery(:internet).email_address,
       username: Forgery(:basic).text,
       password: 'password',
-      :password_confirmation => 'password',
+      password_confirmation: 'password',
       state: 'active'
     )
   end
@@ -110,21 +110,21 @@ Fixjour verify: false do
   define_builder(InterestGroup) do |klass, overrides|
     klass.new(
       name: Forgery(:basic).text,
-      :vote_smart_id => rand(100000000).to_s
+      vote_smart_id: rand(100000000).to_s
     )
   end
 
   define_builder(InterestGroupReport) do |klass, overrides|
     klass.new(
-      :interest_group => new_interest_group,
-      :vote_smart_id => rand(100000000).to_s,
+      interest_group: new_interest_group,
+      vote_smart_id: rand(100000000).to_s,
       timespan: "2007"
     )
   end
 
   define_builder(InterestGroupRating) do |klass, overrides|
     klass.new(
-      :interest_group_report => new_interest_group_report,
+      interest_group_report: new_interest_group_report,
       politician: new_politician,
       description: Forgery(:basic).text
     )
@@ -137,7 +137,7 @@ Fixjour verify: false do
       sponsor: send("create_#{%w[politician committee_meeting].sample}"),
       bill: new_bill,
       number: rand(1000),
-      :offered_on => "13/12/2009",
+      offered_on: "13/12/2009",
       chamber: ['h', 's'].sample,
       congress: new_congress)
   end
@@ -162,7 +162,7 @@ Fixjour verify: false do
         'introduced',
         'popular'
       ].each_with_index do |as, index|
-        BillTitleAs.create(as: as, :sort_order => index)
+        BillTitleAs.create(as: as, sort_order: index)
       end
     end
 
@@ -172,7 +172,7 @@ Fixjour verify: false do
 
     klass.new(
       title: Forgery(:basic).text,
-      :title_type => 'official',
+      title_type: 'official',
       as: BillTitleAs.find_by_as(["reported to senate", "agreed to by house and senate", "amended by house",
         "passed senate", "amended by senate", "introduced", "enacted", "reported to house", "passed house", 'popular'].sample),
       bill: new_bill
@@ -181,11 +181,11 @@ Fixjour verify: false do
 
   define_builder(Bill) do |klass, overrides|
     klass.new(
-      :opencongress_id => opencongress_id,
-      :gov_track_id => gov_track_id,
-      :introduced_on => 2.years.ago.to_date,
-      :bill_type => 'hr',
-      :bill_number => bill_number,
+      opencongress_id: opencongress_id,
+      gov_track_id: gov_track_id,
+      introduced_on: 2.years.ago.to_date,
+      bill_type: 'hr',
+      bill_number: bill_number,
       congress: Congress.find_or_create_by_meeting(rand(200))
     )
   end
@@ -199,7 +199,7 @@ Fixjour verify: false do
   end
 
   define_builder(Cosponsorship) do |klass, overrides|
-    klass.new(bill: new_bill, politician: new_politician, :joined_on => 1.month.ago)
+    klass.new(bill: new_bill, politician: new_politician, joined_on: 1.month.ago)
   end
 
   DISTRICT_GEOM = MultiPolygon.from_polygons([Polygon.from_coordinates([[[12.4,-45.3],[45.4,41.6],[4.456,1.0698],[12.4,-45.3]],[[2.4,5.3],[5.4,1.4263],[14.46,1.06],[2.4,5.3]]],256),Polygon.from_coordinates([[[0,0],[4,0],[4,4],[0,4],[0,0]],[[1,1],[3,1],[3,3],[1,3],[1,1]]],256)], -1)
@@ -214,15 +214,15 @@ Fixjour verify: false do
     overrides.process(:name) do |name|
       first_name, last_name = name.split(' ', 2)
       overrides.merge!(
-        :first_name => first_name,
-        :last_name => last_name,
-        :gov_track_id => rand(1000000))
+        first_name: first_name,
+        last_name: last_name,
+        gov_track_id: rand(1000000))
     end
 
     klass.new(
-      :gov_track_id => rand(1000000),
-      :first_name => Forgery(:name).first_name,
-      :last_name => Forgery(:name).last_name
+      gov_track_id: rand(1000000),
+      first_name: Forgery(:name).first_name,
+      last_name: Forgery(:name).last_name
     )
   end
 
@@ -250,11 +250,11 @@ Fixjour verify: false do
       result: Forgery(:basic).text,
       required: Forgery(:basic).text,
       question: Forgery(:basic).text,
-      :roll_type => Forgery(:basic).text,
-      :voted_at => '1/1/2004',
+      roll_type: Forgery(:basic).text,
+      voted_at: '1/1/2004',
       aye: rand(500),
       nay: rand(500),
-      :not_voting => rand(500),
+      not_voting: rand(500),
       present: rand(500)
     )
   end
@@ -265,8 +265,8 @@ Fixjour verify: false do
     klass.new(
       politician: new_politician,
       party: new_party,
-      :started_on => 2.years.ago,
-      :ended_on => 2.years.from_now
+      started_on: 2.years.ago,
+      ended_on: 2.years.from_now
     )
   end
 
@@ -274,9 +274,9 @@ Fixjour verify: false do
     state = STATES.sample
     
     klass.new(
-      :full_name => state.first,
+      full_name: state.first,
       abbreviation: state.last,
-      :state_type => 'state'
+      state_type: 'state'
     )
   end
 
@@ -290,13 +290,13 @@ Fixjour verify: false do
   define_builder(Subject) do |klass, overrides|
     klass.new(
       name: Forgery::LoremIpsum.words(4),
-      :cached_slug => Forgery(:basic).text
+      cached_slug: Forgery(:basic).text
     )
   end
 
   define_builder(ZipCode) do |klass, overrides|
     klass.new(
-      :zip_code => rand(99999)
+      zip_code: rand(99999)
     )
   end
 
@@ -309,8 +309,8 @@ Fixjour verify: false do
     end
 
     klass.new(
-      :congressional_district => new_congressional_district,
-      :zip_code => new_zip_code
+      congressional_district: new_congressional_district,
+      zip_code: new_zip_code
     )
   end
 
@@ -324,9 +324,9 @@ Fixjour verify: false do
     klass.new(
       politician: new_politician,
       party: new_party,
-      :congressional_district => new_congressional_district,
-      :started_on => 1.year.ago,
-      :ended_on => 1.year.from_now
+      congressional_district: new_congressional_district,
+      started_on: 1.year.ago,
+      ended_on: 1.year.from_now
     )
   end
 
@@ -336,10 +336,10 @@ Fixjour verify: false do
     klass.new(
       politician: new_politician,
       party: new_party,
-      :senate_class => [1, 2, 3].sample,
+      senate_class: [1, 2, 3].sample,
       state: new_us_state,
-      :started_on => 3.years.ago,
-      :ended_on => 3.years.from_now
+      started_on: 3.years.ago,
+      ended_on: 3.years.from_now
     )
   end
 
@@ -372,7 +372,7 @@ Fixjour verify: false do
   def create_in_office_politician(params)
     create_politician(params).tap do |politician|
       term = create_representative_term(politician: politician)
-      politician.update_attributes(:current_office => term)
+      politician.update_attributes(current_office: term)
     end
   end
 
@@ -389,7 +389,7 @@ Fixjour verify: false do
   def create_scored_report(attrs = {})
     create_politician if Politician.count == 0
     create_unscored_report(attrs).tap do |report|
-      roll = create_roll(subject: report.bill_criteria.first.bill, :roll_type => "On Passage")
+      roll = create_roll(subject: report.bill_criteria.first.bill, roll_type: "On Passage")
       Politician.all.each do |p|
         create_vote(roll: roll, politician: p, vote: Vote::POSSIBLE_VALUES.sample)
       end
