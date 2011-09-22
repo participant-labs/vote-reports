@@ -105,7 +105,7 @@ class ApplicationController < ActionController::Base
   def js_render(options = {})
     partial_html = render_to_string(options.except(:css))
     if options[:css]
-      css_path = File.read(Rails.root.join("public/stylesheets/#{options[:css]}.css"))
+      css_path = File.read(Rails.root.join("app/assets/stylesheets/#{options[:css]}.css"))
       partial_html = TamTam.inline(css: css_path, body: partial_html)
     end
     partial_html.gsub(/class="(.*)"/, 'class="votereports_\1"').gsub(/id="(.*)"/, 'id="votereports_\1"').to_json

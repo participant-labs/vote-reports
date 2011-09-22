@@ -1,9 +1,9 @@
 VoteReports::Application.routes.draw do
   resource :search, only: :show
   resources :issues
-  resources :embed_reports, only: :show
+  resources :embed_reports, only: :show, controller: 'embeds/reports'
   resources :causes do
-    resource :embed, only: :show, controller: 'causes/embeds'
+    resource :embed, only: :show, controller: 'reports/embeds'
     resources :report_scores, only: [:index, :show], controller: 'causes/scores'
     resource :follows, only: [:show, :create, :destroy], controller: 'causes/follows'
     resources :reports, only: [:new, :create, :index, :destroy], controller: 'causes/reports'
@@ -21,7 +21,7 @@ VoteReports::Application.routes.draw do
   resources :users, only: [], path: 'reports' do
     resources :reports, path: '', controller: 'users/reports' do
       resources :report_scores, only: [:index, :show], controller: 'users/reports/scores'
-      resource :embed, only: :show, controller: 'users/reports/embed'
+      resource :embed, only: :show, controller: 'reports/embeds'
       resource :follows, only: [:show, :create, :destroy], controller: 'users/reports/follows'
       resources :causes, only: :index, controller: 'users/reports/causes'
       resources :subjects, only: :index, controller: 'users/reports/subjects'
