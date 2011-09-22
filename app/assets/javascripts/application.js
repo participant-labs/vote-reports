@@ -1,4 +1,5 @@
 //= require jquery-ui-1.8.16.custom.min
+//= require jquery.ui.autocomplete.html
 //= require jquery.enumerable
 //= require jquery.blockUI
 //= require jquery.hoverIntent
