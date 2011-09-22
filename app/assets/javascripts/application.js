@@ -64,6 +64,7 @@
     $("#nav_search").autocomplete({
       source: "/search",
       minLength: 2,
+      html: true,
       select: function(event, ui) {
         window.location = ui.item.path;
       }
