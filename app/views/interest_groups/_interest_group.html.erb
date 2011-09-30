@@ -1,4 +1,7 @@
 <%= div_for(interest_group, class: 'clearfix') do %>
+  <%- if interest_group.current_image -%>
+    <%= sized_image_tag interest_group.current_image, interest_group.name, style: :tiny, class: 'report_image' %>
+  <%- end -%>
   <%- description = truncate(md_to_text(interest_group.description), length: 140 - interest_group.name.length) -%>
   <%= link_to h(interest_group.name), interest_group_path(interest_group), class: 'report_title' %>
   <%- if description.blank? || interest_group.name.size > 60 -%>
