@@ -31,12 +31,12 @@
   </div>
 
   <div class="span-24 last" id="diagram-row-one">
-    <div class="span-9"><p class="large-hp-text">At Vote Reports, we believe the most reliable way of gauging a politician's compatibility is by evaluating their voting record. So we made it easy.</p></div>
+    <div class="span-9"><p class="large-hp-text">At Vote Reports, we believe it's been far too difficult to know a politician's true colors for far too long. So we made it easy.</p></div>
     <div class="span-15 last">
       <div class="span-9"><%= image_tag 'homepage/circle_1.png', id: 'circle1' %></div>
       <div class="span-6 last" id="grades-matter">
         <span class="section-header">Grades matter</span><br />
-        <p class="medium-text">High grades mean the politician is graded well according to the issue they are being evaluated on. Just click on any grade to see the facts that went into it.</p>
+        <p class="medium-text">We put their performance in simple terms, so you know who deserves the gold star and who gets the dunce cap. High grades mean the politician is supporting a given issue, low grades means they oppose it.</p>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
     <div class="span-8"><%= image_tag 'homepage/circle_2.png', id: 'circle2' %></div>
     <div class="span-8" id="source-of-ratings">
       <span class="section-header">The source of the ratings</span><br />
-      <p class="medium-text">Vote Reports does not rate politicians. Rather, every rating is generated from two sources: interest group ratings (e.g. ACLU, NRA) and legislative agendas from interest groups and members of Vote Reports.</p>
+      <p class="medium-text">Just click on any grade to see the facts that went into it. Every one of our politician grades is based on interest group ratings (e.g. ACLU, NRA) and actual legislative agendas for that issue.</p>
     </div>
     <div class="span-8 last" id="other-grades">
       <div class="span-4">
@@ -61,15 +61,15 @@
 
   <div class="span-24 last" id="diagram-row-three">
     <div class="span-8" id="groups-explained">
-      <%= link_to content_tag(:span, 'Interest group ratings', class: "section-header"), interest_groups_path %><br />
-      <p class="medium-text">Interest groups individually have their own criteria of evaluating a politician. This usually includes voting records, interviews, survey results, and sources of funding. We also import interest group ratings from <a href="http://votesmart.org/">Project VoteSmart</a>.</p>
+      <%= link_to content_tag(:span, 'Interest group reports', class: "section-header"), interest_groups_path %><br />
+      <p class="medium-text">Interest groups individually have their own criteria for evaluating politicians, which usually includes voting records, interviews, survey results, and sources of funding. Interest groups have been rating politicians for decades, but we've made their judgments more accessible with Vote Reports.</p>
     </div>
 
     <div class="span-8"><%= image_tag 'homepage/circle_3.png', id: 'circle3' %></div>
 
     <div class="span-8 last" id="groups-explained">
       <%= link_to content_tag(:span, 'Member created reports', class: "section-header"), reports_path(from_members: true) %><br />
-      <p class="medium-text">Registered members can also create their own grades on politicians. Members create a report outlining which bills they support and are against. The system then automatically generates a score for all politicians.</p>
+      <p class="medium-text">You can <%= link_to 'publish your own report cards for politicians', new_report_path %>, on any issues that interests you, simply by outlining which bills and amendments you support or oppose. Vote Reports then automatically generates a score for every politician that has voted on those bills. Your reports will turn out <%= link_to 'just like these', reports_path(from_members: true) %>.</p>
     </div>
   </div>
 
@@ -87,8 +87,8 @@
       <%= image_tag 'homepage/imac_preview.jpg', id: 'preview' %>
     </div>
     <div class="span-16 last" id="the-votercard">
-      <%= link_to content_tag(:span, 'The VoterCard', class: 'large-section-header'), new_guide_path %>
-      <p class="large-hp-text" id="diagram-copy">These ratings and causes culminate into the comprehensive and easy-to-use Vote Reports VoterCard. Just answer a few easy questions to get your own personal ratings for the candidates.</p>
+      <%= link_to content_tag(:span, 'Declare Yourself', class: 'large-section-header'), new_guide_path %>
+      <p class="large-hp-text" id="diagram-copy">When you add in your own perspective, these ratings and causes enable your own personal insight into political campaigns which is based on the true color of the politicians and where they stand. Just answer a few easy questions to get your own personal ratings for the candidates.</p>
       <%= link_to content_tag(:span, "Let's get started!"), new_guide_path, class: 'call-to-action' %>
     </div>
   </div>
