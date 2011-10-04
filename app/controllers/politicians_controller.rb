@@ -1,7 +1,7 @@
 class PoliticiansController < ApplicationController
 
   def index
-    @politicians = sought_politicians.by_birth_date.page(params[:page])
+    @politicians = sought_politicians.by_birth_date.page(params[:page]).use_distinct(:id)
 
     respond_to do |format|
       format.html

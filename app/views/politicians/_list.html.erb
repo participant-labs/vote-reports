@@ -1,9 +1,10 @@
 <div id="politicians">
   <h2>Politicians<%= %Q{ representing "#{params[:representing]}"} if params[:representing].present? %></h2>
+  <div class="act-replace" rel="politicians"><%= paginate politicians %></div>
   <ul>
     <% politicians.each do |politician| %>
       <li><%= render 'politicians/politician', politician: politician %></li>
     <% end %>
   </ul>
-  <%= paginate politicians %>
+  <div class="act-replace" rel="politicians"><%= paginate politicians %></div>
 </div>

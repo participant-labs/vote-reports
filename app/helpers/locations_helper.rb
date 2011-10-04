@@ -57,11 +57,9 @@ module LocationsHelper
         Politician
       end
     result =
-      if !params.has_key?(:in_office)
-        result.scoreworthy
-      elsif ['1', true].include?(params[:in_office])
+      if !params.has_key?(:in_office) || ['1', true].include?(params[:in_office])
         @in_office = true
-        result.in_office
+        result.scoreworthy
       else
         result
       end

@@ -38,7 +38,7 @@ gem 'parallel'
 gem 'Empact-activerecord-import', '>= 0.3.4', require: 'activerecord-import'
 
 # Models
-gem 'kaminari'
+gem 'kaminari', git: 'git://github.com/Empact/kaminari.git'
 gem 'sunspot_rails'
 gem 'sunspot_with_kaminari'
 gem 'Paperclip-Autosizer'
