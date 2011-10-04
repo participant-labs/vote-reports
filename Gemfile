@@ -2,7 +2,7 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc8'
+gem 'rails', '3.1.1.rc2'
 
 gem 'ancestry', '>=1.2.0'
 gem 'Empact-authlogic', '>=3.0.3', require: 'authlogic'
