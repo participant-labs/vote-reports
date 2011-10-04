@@ -26,7 +26,7 @@ Feature: Browsing Politicians
       | congressional_district   | state   | party   |
       | <congressional_district> | <state> | <party> |
     When I go to the politician page for "Ron Wyden"
-    Then I should see "Terms in Office"
+    Then I should see "Political History"
     And I should see "<description>"
     And I should see "Rep. Ron Wyden (<state>)"
 
@@ -44,7 +44,7 @@ Feature: Browsing Politicians
       | senate_class | state | party      |
       | 3            | IA    | Republican |
     When I go to the politician page for "Ron Wyden"
-    Then I should see "Terms in Office"
+    Then I should see "Political History"
     And I should see "Senator for Iowa; Republican"
     And I should see "Sen. Ron Wyden (IA)"
 
@@ -56,6 +56,6 @@ Feature: Browsing Politicians
       | party      |
       | Republican |
     When I go to the politician page for "Ron Wyden"
-    Then I should see "Terms in Office"
+    Then I should see "Political History"
     And I should see "President of these United States; Republican"
     And I should see "Pres. Ron Wyden"
