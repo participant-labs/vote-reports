@@ -15,7 +15,7 @@ class Users::ReportsController < ApplicationController
   def show
     respond_to do |format|
       format.html {
-        if params[:id] != @report.to_param
+        if request.path != user_report_path(@user, @report)
           redirect_to user_report_path(@user, @report), status: 301
           return
         end

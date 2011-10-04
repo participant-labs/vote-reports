@@ -21,7 +21,7 @@ describe PoliticiansController do
       end
 
       it "should redirect" do
-        get :show, id: @politician
+        get :show, id: @politician.id
         response.should redirect_to(politician_path(@politician))
       end
     end

@@ -38,7 +38,7 @@ describe Users::ReportsController do
 
     context "when there is a better id for this report" do
       it "should redirect" do
-        get :edit, user_id: current_user, id: @report
+        get :edit, user_id: current_user, id: @report.id
         response.should redirect_to(edit_user_report_path(current_user, @report))
       end
     end
