@@ -1,3 +1,8 @@
-<iframe class="us_state_map" width="425" height="300" frameborder="0"
- scrolling="no" marginheight="0" marginwidth="0"
+<%
+  width ||= 425
+  height ||= 300
+  style ||= ''
+%>
+<iframe class="us_state_map" width="<%= width %>" height="<%= height %>" frameborder="0"
+ scrolling="no" marginheight="0" marginwidth="0" style="<%= style %>"
  src="<%= gov_track_map_url(state) %>"></iframe>
