@@ -100,9 +100,9 @@ namespace :gov_track do
             end
 
             $stdout.print "."
-            $stdout.flush
-            puts
           end
+          $stdout.flush
+          puts
         end
       end
     end
