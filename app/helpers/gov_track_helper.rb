@@ -1,12 +1,12 @@
 module GovTrackHelper
   def gov_track_map_params(object)
     if object.is_a?(UsState)
-      {state: object.abbreviation}
+      {state: object.abbreviation, bounds: object.bounds}
     elsif object.is_a?(CongressionalDistrict)
       if object.at_large?
-        {state: object.state.abbreviation}
+        {state: object.state.abbreviation, bounds: object.state.bounds}
       else
-        {state: object.state.abbreviation, district: object.district}
+        {state: object.state.abbreviation, bounds: object.state.bounds, district: object.district}
       end
     else
       raise "Not gov-trackable: #{object.inspect}"

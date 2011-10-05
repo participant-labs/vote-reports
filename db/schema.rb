@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101022230124) do
+ActiveRecord::Schema.define(:version => 20111004070528) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -733,6 +733,7 @@ ActiveRecord::Schema.define(:version => 20101022230124) do
     t.datetime "updated_at"
     t.string   "state_type",                :null => false
     t.string   "fips_code"
+    t.string   "bounds"
   end
 
   add_index "us_states", ["abbreviation"], :name => "index_us_states_on_abbreviation"

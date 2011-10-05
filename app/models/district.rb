@@ -40,7 +40,7 @@ class District < ActiveRecord::Base
     end
   end
 
-  delegate :envelope, to: :the_geom
+  delegate :bounding_box, :envelope, to: :the_geom
 
   class << self
     def geocode(loc)
