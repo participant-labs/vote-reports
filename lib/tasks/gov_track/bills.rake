@@ -69,7 +69,7 @@ namespace :gov_track do
         if ENV['MEETING'] == 'ALL'
           ENV['MEETING'] = ''
         elsif ENV['MEETING'].blank?
-          ENV['MEETING'] = '111'
+          raise 'You must specify a meeting of congress or ALL'
         end
 
         meetings do |meeting|
