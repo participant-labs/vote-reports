@@ -35,7 +35,6 @@ namespace :gov_track do
       rescue_and_reraise do
         data_path = ENV['MEETING'] ? "us/#{ENV['MEETING']}/people.xml" : "us/people.xml"
         doc = Nokogiri::XML(open(gov_track_path(data_path)))
-        include SuppressValidations
 
         ActiveRecord::Base.transaction do
           doc.xpath('people/person').each do |person|
