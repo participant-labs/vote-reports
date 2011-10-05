@@ -78,7 +78,7 @@ namespace :gov_track do
       sub
     end
 
-    def chdir(path)
+    def change_to_dir(path)
       FileUtils.mkdir_p(path)
       Dir.chdir(path) do
         yield
@@ -91,7 +91,7 @@ namespace :gov_track do
           @congress = Congress.find_or_create_by_meeting(meeting)
           Sunspot.batch do
             path = Rails.root.join("data/gov_track/us", meeting.to_s)
-            chdir(path) do
+            change_to_dir(path) do
               puts "Starting Meeting: #{meeting}"
               yield meeting
               puts "Finished Meeting: #{meeting}"
@@ -114,7 +114,7 @@ namespace :gov_track do
   task download_all: :support do
     rescue_and_reraise do
       log = Rails.root.join('log/govtrack-data.log')
-      chdir(Rails.root.join("data/gov_track/us/")) do
+      change_to_dir(Rails.root.join("data/gov_track/us/")) do
         `wget -N http://www.govtrack.us/data/us/people.xml --append-output=#{log}`
         `wget -N http://www.govtrack.us/data/us/committees.xml --append-output=#{log}`
       end
