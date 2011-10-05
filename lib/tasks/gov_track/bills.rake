@@ -156,7 +156,14 @@ namespace :gov_track do
               [@politicians.fetch(cosponsor_node['id'].to_s.to_i).id, joined, bill.id]
             end)
             if sponsor
-              sponsorship = Cosponsorship.create!(bill: bill, politician: sponsor, joined_on: introduced_on)
+              sponsorship =
+                if update?
+                  c = Cosponsorship.find_or_create_by_bill_id_and_politician_id(bill.id, sponsor.id)
+                  c.update_attributes(joined_on: introduced_on)
+                  c
+                else
+                  Cosponsorship.create!(bill: bill, politician: sponsor, joined_on: introduced_on)
+                end
               bill.update_attribute(:sponsorship_id, sponsorship.id)
             end
 
