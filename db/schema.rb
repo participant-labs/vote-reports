@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007040736) do
+ActiveRecord::Schema.define(:version => 20111007042746) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
