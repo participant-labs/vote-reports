@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007223508) do
+ActiveRecord::Schema.define(:version => 20111007225746) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -815,6 +815,9 @@ ActiveRecord::Schema.define(:version => 20111007223508) do
 
   add_foreign_key "congressional_districts", "districts", :name => "congressional_districts_district_id_fk"
   add_foreign_key "congressional_districts", "us_states", :name => "congressional_districts_us_state_id_fk"
+
+  add_foreign_key "cosponsorships", "bills", :name => "cosponsorships_bill_id_fk"
+  add_foreign_key "cosponsorships", "politicians", :name => "cosponsorships_politician_id_fk"
 
   add_foreign_key "districts", "us_states", :name => "districts_us_state_id_fk"
 

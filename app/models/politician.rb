@@ -338,6 +338,7 @@ class Politician < ActiveRecord::Base
       politician.report_scores.update_all(politician_id: id)
       politician.committee_memberships.update_all(politician_id: id)
       politician.slugs.update_all(sluggable_id: id, created_at: 1.year.ago)
+      politician.cosponsorships.update_all(politician_id: id)
       attributes.each do |attribute, value|
         merge_value = politician.attributes[attribute]
         if IDENTITY_FIELDS.include?(attribute.to_sym) && value && merge_value && value != merge_value
