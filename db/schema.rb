@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007225746) do
+ActiveRecord::Schema.define(:version => 20111007231204) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -809,6 +809,9 @@ ActiveRecord::Schema.define(:version => 20111007225746) do
 
   add_foreign_key "cause_reports", "causes", :name => "cause_reports_cause_id_reference"
   add_foreign_key "cause_reports", "reports", :name => "cause_reports_report_id_reference"
+
+  add_foreign_key "committee_memberships", "committee_meetings", :name => "committee_memberships_committee_meeting_id_fk"
+  add_foreign_key "committee_memberships", "politicians", :name => "committee_memberships_politician_id_fk"
 
   add_foreign_key "congressional_district_zip_codes", "congressional_districts", :name => "district_zip_codes_district_id_reference"
   add_foreign_key "congressional_district_zip_codes", "zip_codes", :name => "district_zip_codes_zip_code_id_reference"
