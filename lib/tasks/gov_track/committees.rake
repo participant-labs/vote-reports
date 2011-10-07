@@ -70,6 +70,8 @@ namespace :gov_track do
           end
           puts "\n\n"
         end
+        # Fix source data issues
+        Congress.find_by_meeting(112).committee_meetings.find_by_name('House Transportation').update_attribute(:name, 'House Transportation and Infrastructure')
       end
     end
   end
