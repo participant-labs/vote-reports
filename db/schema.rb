@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007042746) do
+ActiveRecord::Schema.define(:version => 20111007223508) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -802,7 +802,7 @@ ActiveRecord::Schema.define(:version => 20111007042746) do
   add_foreign_key "bill_criteria", "bills", :name => "bill_criteria_bill_id_reference", :dependent => :delete
   add_foreign_key "bill_criteria", "reports", :name => "bill_criteria_report_id_reference", :dependent => :delete
 
-  add_foreign_key "bills", "cosponsorships", :name => "bills_sponsorship_id_fk", :column => "sponsorship_id"
+  add_foreign_key "bills", "cosponsorships", :name => "bills_sponsorship_id_fk", :column => "sponsorship_id", :dependent => :nullify
 
   add_foreign_key "candidacies", "politicians", :name => "candidacies_politician_id_fk"
   add_foreign_key "candidacies", "races", :name => "candidacies_race_id_fk"
