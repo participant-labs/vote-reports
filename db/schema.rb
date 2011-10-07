@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111004070528) do
+ActiveRecord::Schema.define(:version => 20111007040736) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -516,6 +516,7 @@ ActiveRecord::Schema.define(:version => 20111004070528) do
     t.string   "current_office_type"
     t.integer  "current_candidacy_id"
     t.string   "vote_smart_photo_url"
+    t.string   "facebook_id"
   end
 
   add_index "politicians", ["bioguide_id"], :name => "index_politicians_on_bioguide_id", :unique => true
@@ -524,6 +525,7 @@ ActiveRecord::Schema.define(:version => 20111004070528) do
   add_index "politicians", ["congresspedia_url"], :name => "index_politicians_on_congresspedia_url", :unique => true
   add_index "politicians", ["email"], :name => "index_politicians_on_email", :unique => true
   add_index "politicians", ["eventful_id"], :name => "index_politicians_on_eventful_id", :unique => true
+  add_index "politicians", ["facebook_id"], :name => "index_politicians_on_facebook_id", :unique => true
   add_index "politicians", ["fec_id"], :name => "index_politicians_on_fec_id", :unique => true
   add_index "politicians", ["gov_track_id"], :name => "index_politicians_on_gov_track_id", :unique => true
   add_index "politicians", ["metavid_id"], :name => "index_politicians_on_metavid_id", :unique => true
