@@ -48,6 +48,9 @@ namespace :deploy do
     %w[database.yml mongo.yml facebooker.yml secure_variables.rb].each do |file|
       run "ln -nfs #{deploy_to}/shared/config/#{file} #{release_path}/config/#{file}"
     end
+    %w[data].each do |path|
+      run "ln -nfs #{deploy_to}/shared/#{path} #{release_path}/#{path}"
+    end
   end
 end
 after 'deploy:update_code', 'deploy:symlink_configs'
