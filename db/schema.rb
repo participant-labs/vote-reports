@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007231204) do
+ActiveRecord::Schema.define(:version => 20111007231637) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -798,9 +798,19 @@ ActiveRecord::Schema.define(:version => 20111007231204) do
   add_foreign_key "adminships", "users", :name => "adminships_user_id_reference"
 
   add_foreign_key "amendment_criteria", "amendments", :name => "amendment_criteria_amendment_id_fk"
+  add_foreign_key "amendment_criteria", "reports", :name => "amendment_criteria_report_id_fk", :dependent => :delete
+
+  add_foreign_key "amendments", "bills", :name => "amendments_bill_id_fk"
+  add_foreign_key "amendments", "congresses", :name => "amendments_congress_id_fk"
+
+  add_foreign_key "bill_committee_actions", "bills", :name => "bill_committee_actions_bill_id_fk"
+  add_foreign_key "bill_committee_actions", "committee_meetings", :name => "bill_committee_actions_committee_meeting_id_fk"
 
   add_foreign_key "bill_criteria", "bills", :name => "bill_criteria_bill_id_reference", :dependent => :delete
   add_foreign_key "bill_criteria", "reports", :name => "bill_criteria_report_id_reference", :dependent => :delete
+
+  add_foreign_key "bill_subjects", "bills", :name => "bill_subjects_bill_id_fk"
+  add_foreign_key "bill_subjects", "subjects", :name => "bill_subjects_subject_id_fk"
 
   add_foreign_key "bills", "cosponsorships", :name => "bills_sponsorship_id_fk", :column => "sponsorship_id", :dependent => :nullify
 
@@ -809,6 +819,9 @@ ActiveRecord::Schema.define(:version => 20111007231204) do
 
   add_foreign_key "cause_reports", "causes", :name => "cause_reports_cause_id_reference"
   add_foreign_key "cause_reports", "reports", :name => "cause_reports_report_id_reference"
+
+  add_foreign_key "committee_meetings", "committees", :name => "committee_meetings_committee_id_fk"
+  add_foreign_key "committee_meetings", "congresses", :name => "committee_meetings_congress_id_fk"
 
   add_foreign_key "committee_memberships", "committee_meetings", :name => "committee_memberships_committee_meeting_id_fk"
   add_foreign_key "committee_memberships", "politicians", :name => "committee_memberships_politician_id_fk"
@@ -875,6 +888,9 @@ ActiveRecord::Schema.define(:version => 20111007231204) do
 
   add_foreign_key "report_score_evidences", "report_scores", :name => "report_score_evidences_report_score_id_fk"
 
+  add_foreign_key "report_scores", "politicians", :name => "report_scores_politician_id_fk"
+  add_foreign_key "report_scores", "reports", :name => "report_scores_report_id_fk"
+
   add_foreign_key "report_subjects", "reports", :name => "report_subjects_report_id_reference", :dependent => :delete
   add_foreign_key "report_subjects", "subjects", :name => "report_subjects_subject_id_reference", :dependent => :delete
 
@@ -888,10 +904,15 @@ ActiveRecord::Schema.define(:version => 20111007231204) do
   add_foreign_key "representative_terms", "parties", :name => "representative_terms_party_id_reference"
   add_foreign_key "representative_terms", "politicians", :name => "representative_terms_politician_id_reference"
 
+  add_foreign_key "rolls", "congresses", :name => "rolls_congress_id_fk"
+
   add_foreign_key "rpx_identifiers", "users", :name => "rpx_identifiers_user_id_reference", :dependent => :delete
 
   add_foreign_key "senate_terms", "parties", :name => "senate_terms_party_id_reference"
   add_foreign_key "senate_terms", "politicians", :name => "senate_terms_politician_id_reference"
   add_foreign_key "senate_terms", "us_states", :name => "senate_terms_us_state_id_reference"
+
+  add_foreign_key "votes", "politicians", :name => "votes_politician_id_fk"
+  add_foreign_key "votes", "rolls", :name => "votes_roll_id_fk"
 
 end
