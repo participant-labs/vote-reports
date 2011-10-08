@@ -32,7 +32,16 @@ module Geokit
     # Uses the stored location value from the cookie if it exists.  If
     # no cookie exists, calls out to the web service to get the location. 
     def retrieve_location_from_cookie_or_service
-      return YAML.load(cookies[:geo_location]) if cookies[:geo_location]
+      if cookies[:geo_location]
+        saved_result =
+          begin
+            YAML.load(cookies[:geo_location])
+          rescue => e
+            notify_hoptoad("#{e.inspect} for cookie #{cookies[:geo_location]}")
+            nil
+          end
+        return saved_result if saved_result
+      end
       location = Geocoders::MultiGeocoder.geocode(get_ip_address)
       return location.success ? location : nil
     end
