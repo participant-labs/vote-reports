@@ -1,4 +1,6 @@
 class Opposed
+  extend ActiveModel::Naming
+
   def initialize(object)
     @object = object
   end
