@@ -5,12 +5,13 @@ class Politicians::ReportsController < ApplicationController
     params[:subjects] ||= []
     if params[:term].present?
       @reports = Report.paginated_search(params)
-      @scores = @reports.instance_variable_set(:@results, topical_scores.for_reports(@reports.results).all)
+      @reports.instance_variable_set(:@results, topical_scores.for_reports(@reports.results))
+      @scores = @reports
     else
       @scores = topical_scores.page(params[:page])
     end
 
-    @subjects = Subject.for_report(@scores.map(&:report)).for_tag_cloud.all(limit: 20)
+    @subjects = Subject.for_report(paginated_results(@scores).map(&:report)).for_tag_cloud.all(limit: 20)
 
     respond_to do |format|
       format.html {

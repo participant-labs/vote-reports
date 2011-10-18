@@ -111,6 +111,11 @@ class ApplicationController < ActionController::Base
     partial_html.gsub(/class="(.*)"/, 'class="votereports_\1"').gsub(/id="(.*)"/, 'id="votereports_\1"').to_json
   end
 
+  def paginated_results(paginated)
+    paginated.respond_to?(:results) ? paginated.results : paginated
+  end
+  helper_method :paginated_results
+
   private
 
   def current_user_session
