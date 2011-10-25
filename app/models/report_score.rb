@@ -88,6 +88,7 @@ class ReportScore < ActiveRecord::Base
   end
 
   def as_json(opts = {})
+    opts ||= {}
     super(opts.reverse_merge(only: [:evidence_description, :gov_track_id, :vote_smart_id, :score, :name], include: [:politician]))
   end
 
