@@ -1,4 +1,7 @@
 class Report < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :scoped], scope: :user
+
   belongs_to :user
   belongs_to :interest_group
   belongs_to :cause
@@ -15,8 +18,6 @@ class Report < ActiveRecord::Base
   def thumbnail
     current_image || build_image
   end
-
-  has_friendly_id :name, use_slug: true, scope: :user
 
   has_many :report_delayed_jobs
   has_many :delayed_jobs, through: :report_delayed_jobs do
@@ -258,7 +259,7 @@ class Report < ActiveRecord::Base
       {}
     elsif subjects.first.is_a?(String)
       select('DISTINCT reports.*').joins(:subjects).where([
-        "subjects.name IN(:subjects) OR subjects.cached_slug IN(:subjects)",
+        "subjects.name IN(:subjects) OR subjects.slug IN(:subjects)",
         {subjects: subjects}
       ])
     else

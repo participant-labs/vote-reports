@@ -2,7 +2,8 @@ class Politician < ActiveRecord::Base
   include Politician::GovTrack
   include Politician::SunlightLabs
 
-  has_friendly_id :full_name, use_slug: true, approximate_ascii: true
+  extend FriendlyId
+  friendly_id :full_name, use: :slugged
 
   has_many :candidacies
   has_many :races, through: :candidacies
@@ -344,7 +345,7 @@ class Politician < ActiveRecord::Base
         if IDENTITY_FIELDS.include?(attribute.to_sym) && value && merge_value && value != merge_value
           raise "Unmatched ids for #{attribute}: #{value}, #{merge_value}"
         end
-        if attribute == 'cached_slug' && value.match(/--\d/) && !merge_value.match(/--\d/)
+        if attribute == 'slug' && value.match(/--\d/) && !merge_value.match(/--\d/)
           value = politician.attributes[attribute]
         end
         send(:"#{attribute}=", value || merge_value)
@@ -355,6 +356,10 @@ class Politician < ActiveRecord::Base
   end
 
   private
+
+  def normalize_friendly_id(text)
+    text.to_slug.normalize!
+  end
 
   def name_shouldnt_contain_nickname
     errors.add(:first_name, "shouldn't contain nickname") if first_name =~ /\s?(.+)\s'(.+)'\s?/

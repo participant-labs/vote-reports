@@ -1,8 +1,9 @@
 class Guide < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :secure_token
+
   belongs_to :report
   belongs_to :user
-
-  has_friendly_id :secure_token
 
   has_many :guide_reports
   has_many :reports_supported, through: :guide_reports, conditions: {guide_reports: {position: 'support'}}, source: :report

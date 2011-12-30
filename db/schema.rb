@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007231637) do
+ActiveRecord::Schema.define(:version => 20111230173745) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20111007231637) do
     t.integer  "sequence"
     t.integer  "congress_id",  :null => false
     t.string   "short_name",   :null => false
+    t.string   "slug"
   end
 
   add_index "amendments", ["bill_id", "chamber", "number"], :name => "amendments_number_bill_id_chamber_unique", :unique => true
@@ -166,10 +167,10 @@ ActiveRecord::Schema.define(:version => 20111007231637) do
     t.string   "ancestry"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "cached_slug"
+    t.string   "slug"
   end
 
-  add_index "causes", ["cached_slug"], :name => "index_causes_on_cached_slug"
+  add_index "causes", ["slug"], :name => "index_causes_on_cached_slug"
 
   create_table "committee_meetings", :force => true do |t|
     t.string   "name"
@@ -393,14 +394,14 @@ ActiveRecord::Schema.define(:version => 20111007231637) do
     t.string   "zip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "cached_slug"
+    t.string   "slug"
     t.integer  "owner_id"
     t.datetime "ratings_updated_at"
   end
 
   add_index "interest_groups", ["ancestry"], :name => "index_interest_groups_on_ancestry"
-  add_index "interest_groups", ["cached_slug"], :name => "index_interest_groups_on_cached_slug"
   add_index "interest_groups", ["owner_id"], :name => "index_interest_groups_on_owner_id"
+  add_index "interest_groups", ["slug"], :name => "index_interest_groups_on_cached_slug"
   add_index "interest_groups", ["vote_smart_id"], :name => "index_interest_groups_on_vote_smart_id", :unique => true
 
   create_table "issue_causes", :force => true do |t|
@@ -415,13 +416,13 @@ ActiveRecord::Schema.define(:version => 20111007231637) do
   add_index "issue_causes", ["issue_id"], :name => "index_issue_causes_on_issue_id"
 
   create_table "issues", :force => true do |t|
-    t.string   "title",       :null => false
-    t.string   "cached_slug"
+    t.string   "title",      :null => false
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "issues", ["cached_slug"], :name => "index_issues_on_cached_slug"
+  add_index "issues", ["slug"], :name => "index_issues_on_cached_slug"
 
   create_table "locations", :force => true do |t|
     t.string   "city"
@@ -508,7 +509,7 @@ ActiveRecord::Schema.define(:version => 20111007231637) do
     t.string   "religion"
     t.string   "official_rss"
     t.string   "open_secrets_id"
-    t.string   "cached_slug"
+    t.string   "slug"
     t.string   "title"
     t.integer  "us_state_id"
     t.integer  "congressional_district_id"
@@ -520,7 +521,6 @@ ActiveRecord::Schema.define(:version => 20111007231637) do
   end
 
   add_index "politicians", ["bioguide_id"], :name => "index_politicians_on_bioguide_id", :unique => true
-  add_index "politicians", ["cached_slug"], :name => "index_politicians_on_cached_slug"
   add_index "politicians", ["congressional_district_id"], :name => "index_politicians_on_district_id"
   add_index "politicians", ["congresspedia_url"], :name => "index_politicians_on_congresspedia_url", :unique => true
   add_index "politicians", ["email"], :name => "index_politicians_on_email", :unique => true
@@ -531,6 +531,7 @@ ActiveRecord::Schema.define(:version => 20111007231637) do
   add_index "politicians", ["metavid_id"], :name => "index_politicians_on_metavid_id", :unique => true
   add_index "politicians", ["open_secrets_id"], :name => "index_politicians_on_open_secrets_id", :unique => true
   add_index "politicians", ["phone"], :name => "index_politicians_on_phone", :unique => true
+  add_index "politicians", ["slug"], :name => "index_politicians_on_cached_slug"
   add_index "politicians", ["twitter_id"], :name => "index_politicians_on_twitter_id", :unique => true
   add_index "politicians", ["us_state_id"], :name => "index_politicians_on_us_state_id"
   add_index "politicians", ["vote_smart_id"], :name => "index_politicians_on_vote_smart_id", :unique => true
@@ -624,7 +625,7 @@ ActiveRecord::Schema.define(:version => 20111007231637) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
-    t.string   "cached_slug"
+    t.string   "slug"
     t.string   "state",             :null => false
     t.integer  "interest_group_id"
     t.integer  "image_id"
@@ -633,10 +634,10 @@ ActiveRecord::Schema.define(:version => 20111007231637) do
     t.integer  "top_subject_id"
   end
 
-  add_index "reports", ["cached_slug"], :name => "index_reports_on_cached_slug"
   add_index "reports", ["cause_id"], :name => "index_reports_on_cause_id", :unique => true
   add_index "reports", ["image_id"], :name => "index_reports_on_image_id"
   add_index "reports", ["interest_group_id"], :name => "index_reports_on_interest_group_id"
+  add_index "reports", ["slug"], :name => "index_reports_on_cached_slug"
   add_index "reports", ["top_subject_id"], :name => "index_reports_on_top_subject_id"
   add_index "reports", ["user_id"], :name => "index_reports_on_user_id"
 
@@ -721,11 +722,11 @@ ActiveRecord::Schema.define(:version => 20111007231637) do
 
   create_table "subjects", :force => true do |t|
     t.string  "name",          :null => false
-    t.string  "cached_slug"
+    t.string  "slug"
     t.integer "vote_smart_id"
   end
 
-  add_index "subjects", ["cached_slug"], :name => "index_subjects_on_cached_slug"
+  add_index "subjects", ["slug"], :name => "index_subjects_on_cached_slug"
   add_index "subjects", ["vote_smart_id"], :name => "index_subjects_on_vote_smart_id", :unique => true
 
   create_table "us_states", :force => true do |t|
@@ -748,7 +749,7 @@ ActiveRecord::Schema.define(:version => 20111007231637) do
     t.string   "username",                          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "cached_slug"
+    t.string   "slug"
     t.integer  "login_count",        :default => 0, :null => false
     t.integer  "failed_login_count", :default => 0, :null => false
     t.datetime "last_request_at"
@@ -759,10 +760,10 @@ ActiveRecord::Schema.define(:version => 20111007231637) do
     t.string   "state",                             :null => false
   end
 
-  add_index "users", ["cached_slug"], :name => "index_users_on_cached_slug"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
+  add_index "users", ["slug"], :name => "index_users_on_cached_slug"
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
   create_table "votes", :force => true do |t|

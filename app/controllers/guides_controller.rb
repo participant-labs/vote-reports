@@ -61,7 +61,7 @@ class GuidesController < ApplicationController
   private
 
   def fetch_reports_for(slugs)
-    slugs.present? ? Cause.find_all_by_cached_slug(slugs, include: :report).map(&:report) : []
+    slugs.present? ? Cause.find_all_by_slug(slugs, include: :report).map(&:report) : []
   end
 
   def next_step

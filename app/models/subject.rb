@@ -1,4 +1,7 @@
 class Subject < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   has_many :bill_subjects
   has_many :bills, through: :bill_subjects
 
@@ -7,8 +10,6 @@ class Subject < ActiveRecord::Base
 
   has_many :report_subjects
   has_many :reports, through: :report_subjects
-
-  has_friendly_id :name, use_slug: true
 
   searchable do
     text :name

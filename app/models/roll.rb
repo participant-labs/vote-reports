@@ -16,11 +16,12 @@ class Roll < ActiveRecord::Base
     "On the Motion to Table the Motion to Reconsider" => ["Table Motion to Reconsider"]
   }
 
+  extend FriendlyId
+  friendly_id :display_name
+
   has_many :votes, dependent: :destroy
   belongs_to :subject, polymorphic: true
   belongs_to :congress
-
-  has_friendly_id :display_name
 
   scope :by_voted_at, order("voted_at DESC")
   scope :not_on_bill_passage, where([

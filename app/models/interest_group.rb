@@ -1,8 +1,9 @@
 class InterestGroup < ActiveRecord::Base
   include HasReport
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 
   has_ancestry
-  has_friendly_id :name, use_slug: true
 
   belongs_to :owner, class_name: 'User'
 

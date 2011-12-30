@@ -290,7 +290,7 @@ Fixjour verify: false do
   define_builder(Subject) do |klass, overrides|
     klass.new(
       name: Forgery::LoremIpsum.words(4),
-      cached_slug: Forgery(:basic).text
+      slug: Forgery(:basic).text
     )
   end
 

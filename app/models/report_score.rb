@@ -47,7 +47,7 @@ class ReportScore < ActiveRecord::Base
       select('DISTINCT report_scores.*')\
       .joins(report: :subjects)\
       .where((subjects.first.is_a?(String) \
-       ? ["subjects.name IN(?) OR subjects.cached_slug IN(?)", subjects, subjects] \
+       ? ["subjects.name IN(?) OR subjects.slug IN(?)", subjects, subjects] \
        : ['subjects.id IN(?)', subjects]))
     end
   }

@@ -1,4 +1,7 @@
 class Bill < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :opencongress_id
+
   default_scope include: {titles: :as}
   scope :by_introduced_on, order: 'introduced_on DESC'
   scope :with_title, lambda {|title|
@@ -8,8 +11,6 @@ class Bill < ActiveRecord::Base
   ROLL_PASSAGE_TYPES = [
     "On Passage", "Passage, Objections of the President Notwithstanding", "On Agreeing to the Resolution", "On Agreeing to the Resolution, as Amended", "On Motion to Suspend the Rules and Agree", "On Motion to Suspend the Rules and Agree, as Amended", "On Motion to Suspend the Rules and Pass", "On Motion to Suspend the Rules and Pass, as Amended", "On the Cloture Motion", "On Cloture on the Motion to Proceed",
   ]
-
-  has_friendly_id :opencongress_id
 
   searchable do
     text :summary, :gov_track_id, :opencongress_id, :bill_number

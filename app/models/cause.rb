@@ -1,5 +1,7 @@
 class Cause < ActiveRecord::Base
   include HasReport
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 
   has_many :cause_reports, dependent: :destroy
   has_many :reports, through: :cause_reports do
@@ -21,8 +23,6 @@ class Cause < ActiveRecord::Base
   end
 
   accepts_nested_attributes_for :cause_reports, reject_if: proc {|attributes| attributes['support'] == '0' }
-
-  has_friendly_id :name, use_slug: true
 
   validates_presence_of :description
 

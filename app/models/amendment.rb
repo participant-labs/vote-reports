@@ -1,4 +1,8 @@
 class Amendment < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :short_name, use: :scoped, scope: :bill
+  before_validation :set_short_name, on: :create
+
   belongs_to :bill
   belongs_to :sponsor, polymorphic: true
   belongs_to :congress
@@ -8,9 +12,6 @@ class Amendment < ActiveRecord::Base
   ]
 
   has_many :rolls, as: :subject, dependent: :destroy
-
-  has_friendly_id :short_name, scope: :bill
-  before_validation :set_short_name, on: :create
 
   scope :by_offered_on, order('offered_on DESC')
   scope :with_votes, joins(:rolls).select('DISTINCT amendments.*')

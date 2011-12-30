@@ -62,11 +62,8 @@ class UsState < ActiveRecord::Base
     "78" => "VI"
   }
 
-  def unincorporated?
-    state_type != 'state'
-  end
-
-  has_friendly_id :abbreviation
+  extend FriendlyId
+  friendly_id :abbreviation
 
   has_many :districts
   has_many :elections, foreign_key: 'state_id'
@@ -94,5 +91,9 @@ class UsState < ActiveRecord::Base
 
   def presidents
     Politician.presidents
+  end
+
+  def unincorporated?
+    state_type != 'state'
   end
 end

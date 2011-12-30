@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   include Gravtastic
   gravtastic
-  has_friendly_id :username, use_slug: true
+
+  extend FriendlyId
+  friendly_id :username, use: :slugged
   alias_attribute :to_s, :username
 
   acts_as_authentic do |c|
