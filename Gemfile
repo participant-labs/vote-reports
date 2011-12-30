@@ -55,6 +55,7 @@ group :test, :development do
   # Dev
   gem 'thin'
   gem 'ruby-debug19', require: 'ruby-debug'
+  gem 'sunspot_solr'
 
   # Test
   gem "rspec-rails"
