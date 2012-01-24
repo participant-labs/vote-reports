@@ -48,7 +48,7 @@ VoteReports::Application.routes.draw do
   resources :politicians, only: [:index, :show] do
     resources :causes, only: :index, controller: 'politicians/causes'
     resources :reports, only: :index, controller: 'politicians/reports'
-    resource :radar, only: :show, controller: 'politicians/radar'
+    resource :radar, only: :show, controller: 'politicians/radars'
   end
 
   resources :subjects, only: [:index, :show] do
