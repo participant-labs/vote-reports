@@ -61,7 +61,7 @@ group :test, :development do
   # Test
   gem "rspec-rails"
   gem 'fakeweb'
-  gem 'rr'
+  gem 'rr', git: 'git@github.com:Empact/rr.git'
   gem 'parallel'
 
   # Cucumber
