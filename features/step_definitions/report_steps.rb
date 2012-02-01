@@ -37,23 +37,23 @@ end
 Then /^I should see the following scores?:$/ do |table|
   table.map_column!('politician') {|name| Politician.with_name(name).first }
   table.hashes.each do |hash|
-    Then %{I should see "#{hash['politician'].last_name}"}
+    step %{I should see "#{hash['politician'].last_name}"}
     hash['politician'].report_scores.map {|s| s.score.round }.should include(hash['score'].to_i)
-    Then %{I should see "#{ReportScore.new(score: hash['score']).letter_grade}" within ".report_score"}
+    step %{I should see "#{ReportScore.new(score: hash['score']).letter_grade}" within ".report_score"}
   end
 end
 
 # for use reading score lists from a politician page
 Then /^I should see the following report scores?:$/ do |table|
   table.hashes.each do |hash|
-    Then %{I should see "#{hash['name']}"} if hash['name'].present?
-    Then %{I should see "#{ReportScore.new(score: hash['score']).letter_grade}" within ".report_score"}
+    step %{I should see "#{hash['name']}"} if hash['name'].present?
+    step %{I should see "#{ReportScore.new(score: hash['score']).letter_grade}" within ".report_score"}
   end
 end
 
 Then /^I should not see the following report scores?:$/ do |table|
   table.hashes.each do |hash|
-    Then %{I should not see "#{hash['name']}"} if hash['name'].present?
-    Then %{I should not see "#{ReportScore.new(score: hash['score']).letter_grade}" within ".report_score"}
+    step %{I should not see "#{hash['name']}"} if hash['name'].present?
+    step %{I should not see "#{ReportScore.new(score: hash['score']).letter_grade}" within ".report_score"}
   end
 end
