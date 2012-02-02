@@ -65,6 +65,7 @@ group :test, :development do
   gem 'parallel'
 
   # Cucumber
+  gem 'cucumber', git: 'https://github.com/hashrocket/cucumber.git' # to solve this problem: https://github.com/cucumber/cucumber/pull/208
   gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'capybara'
