@@ -152,15 +152,25 @@ module VoteSmart
                   }
                   race = stage.races.first(conditions: race_params) || stage.races.create!(race_params)
                   politician = import_candidate(candidate)
-                  ::Candidacy.find_by_race_id_and_politician_id(race.id, politician.id) \
-                  || ::Candidacy.create!(
-                    race_id: race.id,
-                    politician_id: politician.id,
-                    party: candidate['party'],
-                    status: candidate['status'],
-                    vote_count: candidate['voteCount'],
-                    vote_percent: candidate['votePercent']
-                  )
+                  if existing_candidacy = ::Candidacy.find_by_race_id_and_politician_id(race.id, politician.id)
+                    unless existing_candidacy.status == candidate['status']
+                      existing_candidacy.update_attributes(
+                        party: candidate['party'],
+                        status: candidate['status'],
+                        vote_count: candidate['voteCount'],
+                        vote_percent: candidate['votePercent']
+                      )
+                    end
+                  else
+                    ::Candidacy.create!(
+                      race_id: race.id,
+                      politician_id: politician.id,
+                      party: candidate['party'],
+                      status: candidate['status'],
+                      vote_count: candidate['voteCount'],
+                      vote_percent: candidate['votePercent']
+                    )
+                  end
                   print '.'
                 end
               end
