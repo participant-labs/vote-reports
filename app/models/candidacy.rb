@@ -1,8 +1,11 @@
 class Candidacy < ActiveRecord::Base
+  INVALID_STATUSES = ["Won", "Lost", "Too Close To Call", "Deceased", "Withdrawn", "Removed"]
+  VALID_STATUS = "Running"
+
   belongs_to :politician
   belongs_to :race
 
-  scope :valid, where(['status NOT IN(?)', ["Deceased", "Withdrawn", "Removed"]])
+  scope :valid, where(status: VALID_STATUS)
   scope :for_races, lambda {|races|
     where(race_id: races)
   }
