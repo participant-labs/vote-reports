@@ -83,7 +83,7 @@ class InterestGroup < ActiveRecord::Base
   end
 
   def vote_smart_url
-    "http://votesmart.org/issue_group_detail.php?sig_id=#{vote_smart_id}" if vote_smart_id
+    "http://votesmart.org/interest-group/#{vote_smart_id}" if vote_smart_id
   end
 
   def full_address

@@ -17,7 +17,7 @@ class InterestGroupReport < ActiveRecord::Base
   end
 
   def vote_smart_url
-    "http://votesmart.org/issue_rating_detail.php?r_id=#{vote_smart_id}"
+    "http://votesmart.org/interest-group/#{interest_group.vote_smart_id}/rating/#{vote_smart_id}"
   end
 
   def events
