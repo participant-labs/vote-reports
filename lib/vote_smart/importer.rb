@@ -24,7 +24,7 @@ module VoteSmart
             Rails.logger.info "Importing Elections for #{s} ..."
             if (e = valid_hash(VoteSmart::Election.get_election_by_year_state "2010", s))
               Rails.logger.info "Okay state #{s} has some elections for 2010..."
-              elections = array_of_hashes(e['elections']['election'])
+              elections = Array.wrap(e['elections']['election'])
               elections.each do |election_data|
                 Rails.logger.info "Now processing #{election_data['name']}\n"
                 state = UsState.find_by_abbreviation(election_data['stateId']) || raise("Missing state #{election_data['stateId']}")
@@ -40,7 +40,7 @@ module VoteSmart
                   year: election_data['electionYear'],
                   special: object_to_boolean(election_data['special']),
                   office_type_id: office_type.id)
-                array_of_hashes(election_data['stage']).each do |es|
+                Array.wrap(election_data['stage']).each do |es|
                   raise "#{election_data['stateId']} != #{es['stateId']}" if election_data['stateId'] != es['stateId']
                   election.stages.find_or_create_by_vote_smart_id_and_name_and_voted_on(es['stageId'], es['name'], es['electionDate'])
                   print '.'
@@ -77,7 +77,7 @@ module VoteSmart
                   gender: bio_candidate['gender'].first)
             end
           end || begin
-            if bio['bio']['office'] && office = to_array(bio['bio']['office']).detect {|o| o['type'] == 'Congressional' }
+            if bio['bio']['office'] && office = Array.wrap(bio['bio']['office']).detect {|o| o['type'] == 'Congressional' }
               politicians = Politician.find_all_by_first_name_and_last_name( bio_candidate['firstName'], bio_candidate['lastName'])
               politicians = Politician.find_all_by_last_name(bio_candidate['lastName']) if politicians.empty?
               if politicians.size > 1
@@ -143,7 +143,7 @@ module VoteSmart
             election.stages.each do |stage|
               candidate_hash = valid_hash(VoteSmart::Election.get_stage_candidates(election.vote_smart_id, stage.vote_smart_id))
               if candidate_hash
-                array_of_hashes(candidate_hash['stageCandidates']['candidate']).each do |candidate|
+                Array.wrap(candidate_hash['stageCandidates']['candidate']).each do |candidate|
                   office = ::Office.find_by_vote_smart_id(candidate['officeId'])
 
                   race_params = {
@@ -189,7 +189,7 @@ module VoteSmart
           
 
           if office_data = valid_hash(VoteSmart::Office.get_offices_by_type(office_type.vote_smart_id))
-            array_of_hashes(office_data['offices']['office']).each do |office|
+            Array.wrap(office_data['offices']['office']).each do |office|
               office_type.offices.find_by_level_id_and_branch_id_and_vote_smart_id_and_name_and_title_and_short_title(office['officeLevelId'], office['officeBranchId'], office['officeId'], office['name'], office['title'], office['shortTitle']) \
               || office_type.offices.create!(name: office['name'], vote_smart_id: office['officeId'], title: office['title'], level_id: office['officeLevelId'], short_title: office['shortTitle'], branch_id: office['officeBranchId'])
               print '.'
@@ -202,7 +202,7 @@ module VoteSmart
       def import_interest_groups
         ActiveRecord::Base.transaction do
           puts "Categories"
-          to_array(VoteSmart::Rating.get_categories['categories']['category']).each do |category|
+          Array.wrap(VoteSmart::Rating.get_categories['categories']['category']).each do |category|
             subject = Subject.find_or_create_by_name(category['name'])
             subject.update_attribute(:vote_smart_id, category['categoryId'])
             print '.'
@@ -214,7 +214,7 @@ module VoteSmart
           sigs = ('0'..max_cat_id).map do |cat_id|
             subject = Subject.find_by_vote_smart_id(cat_id)
             if sigs = valid_hash(VoteSmart::Rating.get_sig_list(cat_id))
-              sigs = to_array(sigs['sigs']['sig'])
+              sigs = Array.wrap(sigs['sigs']['sig'])
               sigs.each do |sig|
                 group = InterestGroup.find_by_vote_smart_id(sig['sigId']) \
                   || InterestGroup.create!(
@@ -272,7 +272,7 @@ module VoteSmart
                   next if ratings['error']['errorMessage'] == 'No Ratings fit this criteria.'
                   raise ratings.inspect
                 end
-                to_array(ratings['candidateRating']['rating']).each do |rating|
+                Array.wrap(ratings['candidateRating']['rating']).each do |rating|
                   print '.'
                   report = group.reports.find_by_vote_smart_id(rating['ratingId']) || group.reports.create!(
                     vote_smart_id: rating['ratingId'],
@@ -305,16 +305,6 @@ module VoteSmart
       end
 
       private
-
-      def to_array(obj)
-        obj.is_a?(Array) ? obj : [obj]
-      end
-
-      def array_of_hashes(array_or_hash)
-        return array_or_hash if array_or_hash.is_a? Array
-        return [array_or_hash] if array_or_hash.is_a? Hash
-        raise "VoteSmart::Importer Unexpected Data Type Error: I didn't think I'd get #{array_or_hash}!!!\n"
-      end
   
       def valid_hash(hash)
         return nil if hash['error']
