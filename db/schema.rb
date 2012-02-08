@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111230173745) do
+ActiveRecord::Schema.define(:version => 20120208091656) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -285,7 +285,7 @@ ActiveRecord::Schema.define(:version => 20111230173745) do
     t.date    "voted_on",      :null => false
   end
 
-  add_index "election_stages", ["election_id", "vote_smart_id"], :name => "index_election_stages_on_election_id_and_vote_smart_id", :unique => true
+  add_index "election_stages", ["election_id", "vote_smart_id", "voted_on"], :name => "index_election_stages", :unique => true
 
   create_table "elections", :force => true do |t|
     t.string   "name"
@@ -459,7 +459,7 @@ ActiveRecord::Schema.define(:version => 20111230173745) do
     t.string "vote_smart_id", :null => false
   end
 
-  add_index "office_types", ["vote_smart_id"], :name => "index_office_types_on_vote_smart_id", :unique => true
+  add_index "office_types", ["branch_id", "level_id", "vote_smart_id"], :name => "index_office_types_on_branch_id_and_level_id_and_vote_smart_id", :unique => true
 
   create_table "offices", :force => true do |t|
     t.string  "name",           :null => false
