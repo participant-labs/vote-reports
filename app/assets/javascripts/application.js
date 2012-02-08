@@ -6,7 +6,7 @@
 //= require jquery.defaultvalue
 //= require jquery.Jcrop
 //= require jquery.cookie
-//= require jquery.tipsy
+//= require tipsy_titles
 //= require highcharts/highcharts.src
 //= require faceboxy
 //= require rails
@@ -67,15 +67,6 @@
       html: true,
       select: function(event, ui) {
         window.location = ui.item.path;
-      }
-    });
-
-    $('[title]').live('mouseover', function() {
-      var self = $(this);
-      if (!self.data('tipsy-init')) {
-        self.data('tipsy-init', true);
-        self.tipsy({fade: true, gravity: 'n'});
-        self.mouseover();
       }
     });
   });
