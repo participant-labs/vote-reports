@@ -244,11 +244,11 @@ module VoteSmart
               city: nil_if_blank(group_data['city']),
               state: nil_if_blank(group_data['state']),
               zip: nil_if_blank(group_data['zip']),
-              :phone1 => nil_if_blank(group_data['phone1']),
-              :phone2 => nil_if_blank(group_data['phone2']),
+              phone1: nil_if_blank(group_data['phone1']),
+              phone2: nil_if_blank(group_data['phone2']),
               fax: nil_if_blank(group_data['fax']),
               email: nil_if_blank(group_data['email']),
-              url: nil_if_blank(group_data['url']),
+              website_url: nil_if_blank(group_data['url']),
               contact_name: nil_if_blank(group_data['contactName'])
             )
             print '.'
