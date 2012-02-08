@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   def permission_denied
     if current_user
       flash[:error] = 'You may not access this page'
-      notify_hoptoad(RuntimeError.new("User #{current_user.inspect} attempted to access protected page #{request.path}"))
+      notify_airbrake(RuntimeError.new("User #{current_user.inspect} attempted to access protected page #{request.path}"))
       respond_to do |format|
         format.html { redirect_to permission_denied_path }
         format.xml  { head :unauthorized }

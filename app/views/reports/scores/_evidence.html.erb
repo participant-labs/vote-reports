@@ -25,7 +25,7 @@
         <%- end -%>
         <dd>On <%= render 'amendments/amendment', amendment: subject, hide_year: true %> which this report <%= scores.first.criterion.position %>s</dd>
       <%- else -%>
-        <% notify_hoptoad("unrecognized score evidence type: #{subject.inspect} for #{scores.inspect}") %>
+        <% notify_airbrake("unrecognized score evidence type: #{subject.inspect} for #{scores.inspect}") %>
         <p>Sorry, there was an error displaying this score's evidence - we'll be addressing it shortly.</p>
       <%- end -%>
     <%- end -%>

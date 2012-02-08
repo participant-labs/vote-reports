@@ -14,7 +14,7 @@ module PoliticianTermsHelper
     when SenateTerm
       "for #{state_name(term.state)}"
     else
-      notify_hoptoad("Unrecognized term #{term.inspect}")
+      notify_airbrake("Unrecognized term #{term.inspect}")
       ''
     end.html_safe
   end

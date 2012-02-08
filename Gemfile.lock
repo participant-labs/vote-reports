@@ -78,6 +78,9 @@ GEM
     activesupport (3.1.3)
       multi_json (~> 1.0)
     addressable (2.2.6)
+    airbrake (3.0.9)
+      activesupport
+      builder
     ancestry (1.2.4)
       activerecord (>= 2.2.2)
     archive-tar-minitar (0.5.2)
@@ -144,9 +147,6 @@ GEM
     gravtastic (3.1.0)
     highline (1.6.11)
     hike (1.2.1)
-    hoptoad_notifier (2.4.11)
-      activesupport
-      builder
     hpricot (0.8.6)
     httparty (0.8.1)
       multi_json
@@ -301,6 +301,7 @@ DEPENDENCIES
   Empact-authlogic_rpx (>= 2.0.0)
   Empact-sexy_pg_constraints
   Paperclip-Autosizer
+  airbrake
   ancestry (>= 1.2.0)
   auto_tagger
   babosa
@@ -326,7 +327,6 @@ DEPENDENCIES
   geokit
   georuby
   gravtastic (= 3.1.0)
-  hoptoad_notifier (>= 2.3.2)
   httparty
   kaminari!
   launchy

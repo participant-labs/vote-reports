@@ -8,16 +8,16 @@ require 'rake'
 VoteReports::Application.load_tasks
 
 begin
-  require 'hoptoad_notifier'
+  require 'airbrake'
 
   def rescue_and_reraise
     yield
   rescue => e
-    HoptoadNotifier.notify(e)
+    Airbrake.notify(e)
     raise
   end
 rescue LoadError
-  puts "hoptoad_notifier not available"
+  puts "airbrake not available"
 end
 
 task default: [:spec, :'cucumber:rerun']

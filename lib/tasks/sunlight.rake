@@ -61,7 +61,7 @@ namespace :sunlight do
             pol.update_attributes!(row)
           rescue => e
             puts "'#{row['votesmart_id']}' => #{row['govtrack_id']}"
-            notify_hoptoad("Sunllight error on #{row.inspect}, #{pol.inspect}, #{pol.errors.full_messages.inspect}, #{e.inspect}")
+            notify_airbrake("Sunllight error on #{row.inspect}, #{pol.inspect}, #{pol.errors.full_messages.inspect}, #{e.inspect}")
             raise
           end
           print '.'
