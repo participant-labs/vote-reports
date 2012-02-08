@@ -7,7 +7,6 @@
 //= require jquery.Jcrop
 //= require jquery.cookie
 //= require tipsy_titles
-//= require highcharts/highcharts.src
 //= require faceboxy
 //= require rails
 //= require replace
