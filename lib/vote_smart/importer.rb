@@ -307,16 +307,15 @@ module VoteSmart
       private
   
       def valid_hash(hash)
-        return nil if hash['error']
-        hash
+        hash unless hash['error']
       end
 
       def object_to_boolean(value)
-         return [true, "true", 1, "1", "T", "t"].include?(value.class == String ? value.downcase : value)
+         ["true", "1", "t"].include?(value.to_s.downcase)
       end
     
       def nil_if_blank(string)
-        (string && string.blank?) ? nil : string
+        string if string.present?
       end
     end
   end
