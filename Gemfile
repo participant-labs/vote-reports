@@ -9,7 +9,6 @@ gem 'Empact-authlogic', '>=3.0.3', require: 'authlogic'
 gem 'Empact-authlogic_rpx', '>= 2.0.0', require: 'authlogic_rpx'
 gem 'bluecloth', '>=2.0.5'
 gem 'declarative_authorization'
-gem 'delayed_job_active_record'
 gem 'erubis', '>= 2.6.6'
 gem 'excelsior'
 gem 'foreigner'
@@ -45,6 +44,10 @@ gem 'Paperclip-Autosizer'
 
 # Views
 gem 'dynamic_form'
+
+# Background Processing
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 # Deployment
 gem 'capistrano'

@@ -313,6 +313,7 @@ DEPENDENCIES
   capybara
   cucumber!
   cucumber-rails
+  daemons
   database_cleaner
   declarative_authorization
   delayed_job_active_record
