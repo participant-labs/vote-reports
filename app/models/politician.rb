@@ -114,6 +114,7 @@ class Politician < ActiveRecord::Base
   has_many :reports, through: :report_scores
 
   belongs_to :current_office, polymorphic: true
+  scope :vote_smart, where('vote_smart_id is not null')
   scope :by_prominance, order('prominence')
   scope :in_office, where('politicians.current_office_id IS NOT NULL')
   scope :in_office_normal_form, lambda {

@@ -261,7 +261,7 @@ module VoteSmart
         puts "Ratings"
         require 'typhoeus'
         VoteSmart::Rating.parallelize!
-        politicians = Politician.all(select: 'id, vote_smart_id', conditions: 'vote_smart_id IS NOT NULL')
+        politicians = Politician.vote_smart.select('id, vote_smart_id')
         InterestGroup.vote_smart.ratings_not_recently_updated.find_each do |group|
           ActiveRecord::Base.transaction do
             puts "InterestGroup: #{group.vote_smart_id} #{group.name}"
