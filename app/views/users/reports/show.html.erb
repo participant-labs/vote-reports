@@ -10,11 +10,12 @@
 
     <div id="report_scores_section" class="section report_scores">
       <%= render 'politicians/search', in_office: true, replace: 'report_scores',
-        url: user_report_report_scores_path(@report.user, @report),
-        reset_path: user_report_report_scores_path(@report.user, @report, representing: '') %>
-      <div class="act-fill"
-        rel="<%= user_report_report_scores_path(@report.user, @report) %>"
-         id="scores"></div>
+        url: user_report_path(@report.user, @report),
+        reset_path: user_report_path(@report.user, @report, representing: '') %>
+      <div id="scores">
+        <%= render 'reports/scores/table',
+          report: @report, scores: @scores, target_path: user_report_path(@user, @report) %>
+      </div>
     </div>
   </div>
 

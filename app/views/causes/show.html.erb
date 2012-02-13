@@ -7,14 +7,15 @@
     <%= render 'reports/follows/button', report: @cause.report %>
     <div class="description"><%= md_to_html(@cause.description) %></div>
 
-
     <div id="report_scores_section" class="section report_scores">
       <%= render 'politicians/search', in_office: true, replace: 'report_scores',
-        url: cause_report_scores_path(@cause),
-        reset_path: cause_report_scores_path(@cause, representing: '') %>
-      <div class="act-fill"
-        rel="<%= cause_report_scores_path(@cause) %>"
-         id="scores"></div>
+        url: cause_path(@cause),
+        reset_path: cause_path(@cause, representing: '') %>
+      <div id="scores">
+        <%= render 'reports/scores/table',
+          report: @cause.report, scores: @scores, replace: 'scores', target_path: cause_path(@cause)
+        %>
+      </div>
     </div>
   </div>
 

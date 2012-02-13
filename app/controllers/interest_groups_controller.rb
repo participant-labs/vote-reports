@@ -27,13 +27,19 @@ class InterestGroupsController < ApplicationController
     @subjects = @interest_group.subjects.for_tag_cloud.all(
       select: "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
       limit: 3)
+    @scores = @interest_group.scores.for_politicians(sought_politicians).for_report_display
     respond_to do |format|
       format.html {
-        if request.path != interest_group_path(@interest_group)
+        unless request.path.start_with?(interest_group_path(@interest_group))
           redirect_to interest_group_path(@interest_group), status: 301
           return
         end
         @causes = @interest_group.causes.all(limit: 3)
+      }
+      format.js {
+        render partial: 'reports/scores/table', locals: {
+          report: @interest_group.report, scores: @scores, target_path: interest_group_path(@interest_group)
+        }
       }
       format.json {
         render json: @interest_group.as_json.merge(subject: @subjects, causes: @interest_group.causes)

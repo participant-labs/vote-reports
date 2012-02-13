@@ -37,11 +37,16 @@ class CausesController < ApplicationController
 
     respond_to do |format|
       format.html {
-        if request.path != cause_path(@cause)
+        unless request.path.start_with?(cause_path(@cause))
           redirect_to cause_path(@cause), status: 301
           return
         end
         @related_causes = @cause.related_causes.all(limit: 3)
+      }
+      format.js {
+        render partial: 'reports/scores/table', locals: {
+          report: @cause.report, scores: @scores, replace: 'scores', target_path: cause_path(@cause)
+        }
       }
       format.json {
         cause_hash = @cause.as_json

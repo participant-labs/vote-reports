@@ -5,12 +5,6 @@ class InterestGroups::ScoresController < ApplicationController
     @scores = @report.scores.for_politicians(sought_politicians).for_report_display
 
     respond_to do |format|
-      format.html
-      format.js {
-        render partial: 'reports/scores/table', locals: {
-          report: @report, scores: @scores, target_path: interest_group_report_scores_path(@interest_group)
-        }
-      }
       format.json {
         render json: @report.as_json.merge(scores: @report.scores.as_json)
       }

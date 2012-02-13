@@ -16,7 +16,7 @@ module NavigationHelpers
     when /^the cause reports page for "(.*)"$/
       cause_reports_path(Cause.find_by_name($1))
     when /^the cause scores page for "(.*)"$/
-      cause_report_scores_path(Cause.find_by_name($1))
+      cause_path(Cause.find_by_name($1))
     when /^the issue page for "(.*)"$/
       issue_path(Issue.find_by_title($1))
 
@@ -28,7 +28,7 @@ module NavigationHelpers
     when /^my report agenda page for "(.+)"$/i
       user_report_agenda_path(current_user, current_user.reports.find_by_name($1))
     when /^my report scores page for "(.+)"$/i
-      user_report_report_scores_path(current_user, current_user.reports.find_by_name($1))
+      user_report_path(current_user, current_user.reports.find_by_name($1))
     when /^the edit page for my report "(.+)"$/i
       edit_user_report_path(current_user, current_user.reports.find_by_name($1))
     when /^the new bills page for my report "(.+)"$/
@@ -74,7 +74,7 @@ module NavigationHelpers
     when /^the interest group agenda page for "(.+)"$/
       interest_group_agenda_path(InterestGroup.find_by_name($1))
     when /^the interest group scores page for "(.+)"$/
-      interest_group_report_scores_path(InterestGroup.find_by_name($1))
+      interest_group_path(InterestGroup.find_by_name($1))
     when /^the edit interest group page for "(.+)"$/
       edit_interest_group_path(InterestGroup.find_by_name($1))
     when /^the edit interest group image page for "(.+)"$/

@@ -13,14 +13,20 @@ class Users::ReportsController < ApplicationController
   end
 
   def show
+    @scores = @report.scores.for_politicians(sought_politicians).by_score
     respond_to do |format|
       format.html {
-        if request.path != user_report_path(@user, @report)
+        unless request.path.start_with?(user_report_path(@user, @report))
           redirect_to user_report_path(@user, @report), status: 301
           return
         end
         @causes = @report.causes.all(limit: 3)
         @subjects = @report.subjects.for_tag_cloud.except(:select).select("DISTINCT(subjects.*), SUM(report_subjects.count) AS count").limit(3).all
+      }
+      format.js {
+        render partial: 'reports/scores/table', locals: {
+          report: @report, scores: @scores, target_path: user_report_path(@user, @report)
+        }
       }
       format.json {
         render json: @report.as_json(include: :causes)
