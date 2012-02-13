@@ -19,17 +19,14 @@
 <%- if score_count > 36 -%>
   <%- votes_how = params[:votes_how].present? ? params[:votes_how].to_sym : :with -%>
 
-  <%= form_tag target_path, class: 'act-replace-via-inputs', rel: replace do %>
+  <%= form_tag target_path, class: 'act-replace', rel: replace do %>
     <%- params.each_pair do |key, value| -%>
       <%= hidden_field_tag key, value %>
     <%- end -%>
     <ul class="score_view_options clearfix">
-      <li class="span-6"><%= radio_button_tag :votes_how, :with, votes_how == :with %>
-      <%= label_tag :votes_how_with, "Votes With (#{scores.with.count})", class: "span-6 last round-4 #{'selected' if votes_how == :with}" %></li>
-      <li class="span-6"><%= radio_button_tag :votes_how, :against, votes_how == :against %>
-      <%= label_tag :votes_how_against, "Votes Against (#{scores.against.count})", class: "span-6 last round-4 #{'selected' if votes_how == :against}" %></li>
-      <li class="span-6 last"><%= radio_button_tag :votes_how, :neutral, votes_how == :neutral %>
-      <%= label_tag :votes_how_neutral, "Neutral (#{scores.neutral.count})", class: "span-6 last round-4 #{'selected' if votes_how == :neutral}" %></li>
+      <li class="span-6"><%= link_to "Votes With (#{scores.with.count})", target_path + '?votes_how=with', class: "act-replace span-6 last round-4 #{'selected' if votes_how == :with}" %></li>
+      <li class="span-6"><%= link_to "Votes Against (#{scores.against.count})", target_path + '?votes_how=against', class: "act-replace span-6 last round-4 #{'selected' if votes_how == :against}" %></li>
+      <li class="span-6 last"><%= link_to "Neutral (#{scores.neutral.count})", target_path + '?votes_how=neutral', class: "act-replace span-6 last round-4 #{'selected' if votes_how == :neutral}" %></li>
     </ul>
   <% end %>
   <%- scores = scores.with_evidence.votes_how(votes_how).page(params[:page]) -%>

@@ -146,26 +146,23 @@
   margin: 0;
   width: 100%;
 }
-.score_view_options > li > label {
+.score_view_options > li > a {
   text-align: center;
   text-transform: lowercase;
+  text-decoration: none;
   padding-top: 6px;
   padding-bottom: 6px;
   background-color: #d1d1d1;
   color: white;
-}
-
-.score_view_options > li > input {
-  display: none;
-}
-.score_view_options > li > label {
   cursor: pointer;
   cursor: hand;
+  font-weight: bold;
 }
 
-.score_view_options > li > label.selected, .score_view_options > li > label:hover {
+.score_view_options > li > a.selected, .score_view_options > li > a:hover {
   background-color: #efefef;
   color: black;
+  text-decoration: none;
 }
 
 #report_scores > ul {

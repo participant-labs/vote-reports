@@ -88,11 +88,6 @@
       return replaceWith(source.attr('rel'), source.attr('action') + '?' + source.serialize(), 'pjax');
     });
 
-    $('form.act-replace-via-inputs :input').live('click', function(event) {
-      var source = $(event.target).closest('form');
-      return replaceWith(source.attr('rel'), source.attr('action') + '?' + source.serialize(), 'pjax');
-    });
-
     $('form#guide_causes :submit').live('click', function(event) {
       var source = $(event.target);
       var form = source.closest('form');
