@@ -66,7 +66,6 @@
     });
 
     $('.act-replace > a, .act-replace > .pagination a, a.act-replace').live('click', function(event) {
-      console.info('click!');
       var target = $(event.target);
       target.trigger('update_selected');
       return replaceWith(target.closest('.act-replace').attr('rel'), target.attr('href'), 'pjax');
