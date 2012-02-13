@@ -80,7 +80,7 @@ class CongressionalDistrict < ActiveRecord::Base
   end
 
   def to_param
-    abbreviation.gsub(' ', '_')
+    abbreviation.tr(' ', '_')
   end
 
   def unidentified?

@@ -79,7 +79,7 @@ namespace :laws_i_like do
               identifier.save!
               User.create!(
                 username: name,
-                email: "#{name.gsub(' ', '_')}+facebook@votereports.org",
+                email: "#{name.tr(' ', '_')}+facebook@votereports.org",
                 rpx_identifiers: [identifier]
               )
             end
