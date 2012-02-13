@@ -11,11 +11,6 @@ set :stages, [:staging, :production]
 # set :auto_tagger_stages, stages
 require 'capistrano/ext/multistage'
 
-$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
-require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-set :rvm_ruby_string, '1.9.2@votereports'        # Or whatever env you want it to run in.
-set :rvm_type, :user
-
 ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 set :scm, "git"
@@ -33,14 +28,6 @@ set :user, 'deploy'
 
 set :copy_exclude, [".git"]
 set :use_sudo, false
-
-namespace :rvm do
-  desc 'Trust rvmrc file'
-  task :trust_rvmrc do
-    run "rvm rvmrc trust #{current_release}"
-  end
-end
-after "deploy:update_code", "rvm:trust_rvmrc"
 
 namespace :deploy do
   desc "Symlinks the database.yml"
