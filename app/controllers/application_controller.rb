@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user, :report_path_components, :report_path, :report_follows_path, :report_score_path, :report_bill_criteria_path, :new_report_amendment_criterion_path, :report_amendment_criteria_path, :report_embed_id, :report_url
 
   before_filter :basic_authenticate if Rails.env.staging?
+  before_filter :strip_pjax_param
 
   def permission_denied_path
     root_path
@@ -117,6 +118,11 @@ class ApplicationController < ActionController::Base
   helper_method :paginated_results
 
   private
+
+  def strip_pjax_param
+    # https://github.com/defunkt/jquery-pjax/issues/89
+    params[:_pjax] = nil
+  end
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)

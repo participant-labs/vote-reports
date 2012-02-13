@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/Empact/kaminari.git
-  revision: 9c73f3658fb8c82c0d176dcf31d4cfa546234f51
-  specs:
-    kaminari (0.12.4)
-      railties (>= 3.0.0)
-
-GIT
   remote: git://github.com/Empact/spatial_adapter.git
   revision: d64ac1c03c837d6fffddfac1a0dc0818bf10bce6
   specs:
@@ -112,6 +105,13 @@ GEM
     childprocess (0.3.1)
       ffi (~> 1.0.6)
     cocaine (0.2.1)
+    coffee-rails (3.1.1)
+      coffee-script (>= 2.2.0)
+      railties (~> 3.1.0)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.1.2)
     columnize (0.3.6)
     cucumber-rails (1.2.1)
       capybara (>= 1.1.2)
@@ -131,6 +131,8 @@ GEM
     escape (0.0.4)
     eventmachine (0.12.10)
     excelsior (0.1.0)
+    execjs (1.2.8)
+      multi_json (~> 1.0)
     fakeweb (1.3.0)
     ffi (1.0.11)
     fixjour (0.5.3)
@@ -154,6 +156,10 @@ GEM
     i18n (0.6.0)
     json (1.6.5)
     json_pure (1.6.5)
+    kaminari (0.13.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      railties (>= 3.0.0)
     launchy (2.0.5)
       addressable (~> 2.2.6)
     linecache19 (0.5.13)
@@ -249,6 +255,13 @@ GEM
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
     rubyzip (0.9.6.1)
+    sass (3.1.7)
+    sass-rails (3.1.2)
+      actionpack (~> 3.1.0)
+      railties (~> 3.1.0)
+      sass (>= 3.1.4)
+      sprockets (~> 2.0.0)
+      tilt (~> 1.3.2)
     selenium-webdriver (2.19.0)
       childprocess (>= 0.2.5)
       ffi (~> 1.0.9)
@@ -286,6 +299,9 @@ GEM
     typhoeus (0.3.3)
       mime-types
     tzinfo (0.3.31)
+    uglifier (1.0.3)
+      execjs (>= 0.3.0)
+      multi_json (>= 1.0.2)
     votesmart (0.4.0)
       patron (>= 0.4.6)
     xpath (0.1.4)
@@ -311,6 +327,7 @@ DEPENDENCIES
   capistrano-ext
   capistrano_colors
   capybara
+  coffee-rails (~> 3.1.0)
   cucumber!
   cucumber-rails
   daemons
@@ -329,7 +346,7 @@ DEPENDENCIES
   georuby
   gravtastic (= 3.1.0)
   httparty
-  kaminari!
+  kaminari
   launchy
   loofah
   mongo_mapper
@@ -343,6 +360,7 @@ DEPENDENCIES
   rr!
   rspec-rails
   ruby-debug19
+  sass-rails (~> 3.1.0)
   spatial_adapter!
   state_machine
   sunspot_rails
@@ -351,5 +369,6 @@ DEPENDENCIES
   tamtam
   thin
   typhoeus
+  uglifier
   votesmart (>= 0.3.3)
   ym4r

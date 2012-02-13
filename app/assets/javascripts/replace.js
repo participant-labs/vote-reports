@@ -1,3 +1,5 @@
+//= require jquery.pjax
+
 ;(function($) {
   function current_url() {
     return window.location.protocol + '//' + window.location.host + window.location.pathname;
@@ -7,7 +9,14 @@
     return target_id + '/' + url.substring(url.indexOf('?') + 1);
   }
 
-  function replaceWith(target_ids, url) {
+  function replaceWith(target_ids, url, mode) {
+    function success_callback() {
+        target.unblock();
+        if (typeof(init_map) != 'undefined' && $.isFunction(init_map)) {
+          init_map();
+        }
+    }
+
     var target_id = $(target_ids.split(' ')).select(function() {
       return $('#' + this + ':visible').length != 0;
     });
@@ -17,12 +26,16 @@
       return true;
     }
     target.block({message: '<p class="loading">Loading...</p>'});
-    target.load(url, function() {
-      target.unblock();
-      if (typeof(init_map) != 'undefined' && $.isFunction(init_map)) {
-        init_map();
-      }
-    });
+    if (mode == 'pjax') {
+      $.pjax({
+        url: url,
+        container: '#' + target_id,
+        timeout: null
+      });
+      target.bind('pjax:end', success_callback);
+    } else {
+      target.load(url, success_callback);
+    }
     return false;
   }
 
@@ -47,7 +60,8 @@
       var target = $(event.target);
       replaceWith(
         target.attr('rel'),
-        current_url() + '?' + target.closest('form').serialize());
+        current_url() + '?' + target.closest('form').serialize(),
+        'pjax');
       return true;
     });
 
@@ -55,7 +69,7 @@
       console.info('click!');
       var target = $(event.target);
       target.trigger('update_selected');
-      return replaceWith(target.closest('.act-replace').attr('rel'), target.attr('href'));
+      return replaceWith(target.closest('.act-replace').attr('rel'), target.attr('href'), 'pjax');
     })
 
     $('form.act-replace :submit').live('click', function(event){
@@ -67,17 +81,17 @@
         args[source.attr('name')] = source.attr('value')
         target += '&' + $.param(args);
       }
-      return replaceWith(form.attr('rel'), target);
+      return replaceWith(form.attr('rel'), target, 'pjax');
     });
 
     $('form.act-replace').live('submit', function(event){
       var source = $(event.target);
-      return replaceWith(source.attr('rel'), source.attr('action') + '?' + source.serialize());
+      return replaceWith(source.attr('rel'), source.attr('action') + '?' + source.serialize(), 'pjax');
     });
 
     $('form.act-replace-via-inputs :input').live('click', function(event) {
       var source = $(event.target).closest('form');
-      return replaceWith(source.attr('rel'), source.attr('action') + '?' + source.serialize());
+      return replaceWith(source.attr('rel'), source.attr('action') + '?' + source.serialize(), 'pjax');
     });
 
     $('form#guide_causes :submit').live('click', function(event) {

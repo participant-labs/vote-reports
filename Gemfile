@@ -37,13 +37,19 @@ gem 'parallel'
 gem 'Empact-activerecord-import', '>= 0.3.4', require: 'activerecord-import'
 
 # Models
-gem 'kaminari', git: 'git://github.com/Empact/kaminari.git'
+gem 'kaminari'
 gem 'sunspot_rails'
 gem 'sunspot_with_kaminari'
 gem 'Paperclip-Autosizer'
 
 # Views
 gem 'dynamic_form'
+
+group :assets do
+  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
+  gem 'uglifier'
+end
 
 # Background Processing
 gem 'delayed_job_active_record'
