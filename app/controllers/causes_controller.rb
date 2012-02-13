@@ -33,6 +33,8 @@ class CausesController < ApplicationController
       select: "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
       limit: 3)
 
+    @scores = @cause.scores.for_politicians(sought_politicians).by_score
+
     respond_to do |format|
       format.html {
         if request.path != cause_path(@cause)

@@ -8,7 +8,7 @@
   <%- if source == 'Report' -%>  
     Maybe you can <%= link_to 'make the first', new_report_path %>?
   <%- elsif source == 'Cause' -%>
-    <%= mail_to 'causes@votereports.org', 'Let us know' %> if one of <%= link_to 'their report scores', '#Reports', class: 'act-tab-select', rel: 'Reports' %> should be included in a cause.
+    <%= mail_to 'causes@votereports.org', 'Let us know' %> if one of their report scores should be included in a cause.
   <%- end -%>
   </p>
 <%- else -%>
