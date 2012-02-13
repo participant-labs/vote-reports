@@ -2,9 +2,6 @@
 require "bundler/capistrano"
 
 set :domain, 'votereports-app'
-set :default_environment, {
-  'PATH' => "/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin:$PATH"
-}
 
 server domain, :app, :web, :db, primary: true
 
