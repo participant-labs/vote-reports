@@ -188,7 +188,7 @@ class Report < ActiveRecord::Base
         if bill = Bill.guess(bill_title)
           find_by_bill_id(bill) || build(attrs.merge(bill: bill))
         elsif Rails.env.production?
-          notify_airbrake("No bill found for autofetch #{bill_title} from #{url}")
+          Airbrake.notify(RuntimeError.new("No bill found for autofetch #{bill_title} from #{url}"))
         end
       end.compact.index_by(&:bill).values
     end

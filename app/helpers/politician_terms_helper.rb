@@ -14,7 +14,7 @@ module PoliticianTermsHelper
     when SenateTerm
       "for #{state_name(term.state)}"
     else
-      notify_airbrake("Unrecognized term #{term.inspect}")
+      Airbrake.notify(RuntimeError.new("Unrecognized term #{term.inspect}"))
       ''
     end.html_safe
   end

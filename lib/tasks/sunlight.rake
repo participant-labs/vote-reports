@@ -61,7 +61,7 @@ namespace :sunlight do
             pol.update_attributes!(row)
           rescue => e
             puts "'#{row['votesmart_id']}' => #{row['govtrack_id']}"
-            notify_airbrake("Sunllight error on #{row.inspect}, #{pol.inspect}, #{pol.errors.full_messages.inspect}, #{e.inspect}")
+            Airbrake.notify(RuntimeError.new("Sunllight error on #{row.inspect}, #{pol.inspect}, #{pol.errors.full_messages.inspect}, #{e.inspect}"))
             raise
           end
           print '.'

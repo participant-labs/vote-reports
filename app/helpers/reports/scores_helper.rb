@@ -40,7 +40,7 @@ module Reports::ScoresHelper
 
   def interest_group_score_evidence_points(score)
     score.evidence.interest_group_ratings.group_by(&:subject).map do |(subject, scores)|
-      notify_airbrake("Multiple interest group ratings #{scores.inspect}") if scores.size > 1
+      Airbrake.notify(RuntimeError.new("Multiple interest group ratings #{scores.inspect}")) if scores.size > 1
       rating = scores.first.evidence
       tooltip = content_tag(:b, "In #{subject.timespan}: #{rating.numeric_rating.round}%") + '<br/>'.html_safe \
          + content_tag(:p, rating.description.scan(/.{1,80}(?:\s+|$)/).join('<br/>').html_safe)
