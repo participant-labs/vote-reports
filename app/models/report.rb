@@ -20,19 +20,7 @@ class Report < ActiveRecord::Base
   end
 
   has_many :report_delayed_jobs
-  has_many :delayed_jobs, through: :report_delayed_jobs do
-    def failing
-      where('delayed_jobs.last_error IS NOT NULL')
-    end
-
-    def passing
-      where(last_error: nil)
-    end
-
-    def unlocked
-      where(locked_at: nil)
-    end
-  end
+  has_many :delayed_jobs, through: :report_delayed_jobs
 
   has_many :report_subjects
   has_many :subjects, through: :report_subjects
