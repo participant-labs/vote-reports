@@ -21,7 +21,11 @@ class ReportScore < ActiveRecord::Base
   scope :neutral, where("report_scores.score BETWEEN 33.333 AND 66.667")
   class << self
     def votes_how(how)
-      send(how.to_sym)
+      if [:with, :against, :neutral].include?(how.to_sym)
+        send(how.to_sym)
+      else
+        raise ArgumentError, 'Invalid vote type #{how.inspect}'
+      end
     end
   end
 
