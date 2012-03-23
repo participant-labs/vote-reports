@@ -55,17 +55,18 @@ end
 gem 'delayed_job_active_record'
 gem 'daemons'
 
-# Deployment
-gem 'capistrano'
-gem 'capistrano-ext'
-gem 'capistrano_colors'
-gem 'auto_tagger'
-
 group :test, :development do
   # Dev
   gem 'thin'
   gem 'ruby-debug19', require: 'ruby-debug'
   gem 'sunspot_solr'
+
+  # Deployment
+  gem 'rvm'
+  gem 'capistrano'
+  gem 'capistrano-ext'
+  gem 'capistrano_colors'
+  gem 'auto_tagger'
 
   # Test
   gem "rspec-rails"
