@@ -76,7 +76,6 @@ GEM
       builder
     ancestry (1.2.4)
       activerecord (>= 2.2.2)
-    archive-tar-minitar (0.5.2)
     arel (2.2.1)
     auto_tagger (0.2.6)
       capistrano (>= 2.5.3)
@@ -119,6 +118,13 @@ GEM
       nokogiri (>= 1.5.0)
     daemons (1.1.8)
     database_cleaner (0.7.1)
+    debugger (1.1.1)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.1)
+      debugger-ruby_core_source (~> 1.1)
+    debugger-linecache (1.1.1)
+      debugger-ruby_core_source (>= 1.1.1)
+    debugger-ruby_core_source (1.1.1)
     declarative_authorization (0.5.5)
     delayed_job (3.0.1)
       activesupport (~> 3.0)
@@ -162,8 +168,6 @@ GEM
       railties (>= 3.0.0)
     launchy (2.0.5)
       addressable (~> 2.2.6)
-    linecache19 (0.5.13)
-      ruby_core_source (>= 0.1.4)
     loofah (1.2.0)
       nokogiri (>= 1.4.4)
     mail (2.3.0)
@@ -244,16 +248,6 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.8.0)
-    ruby-debug-base19 (0.11.26)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby_core_source (>= 0.1.4)
-    ruby-debug19 (0.11.6)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby-debug-base19 (>= 0.11.19)
-    ruby_core_source (0.1.5)
-      archive-tar-minitar (>= 0.5.2)
     rubyzip (0.9.6.1)
     rvm (1.9.2)
     sass (3.1.7)
@@ -333,6 +327,7 @@ DEPENDENCIES
   cucumber-rails
   daemons
   database_cleaner
+  debugger
   declarative_authorization
   delayed_job_active_record
   dynamic_form
@@ -360,7 +355,6 @@ DEPENDENCIES
   rpx_now (>= 0.6.12)
   rr!
   rspec-rails
-  ruby-debug19
   rvm
   sass-rails (~> 3.1.0)
   spatial_adapter!

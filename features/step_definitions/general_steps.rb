@@ -30,7 +30,7 @@ When /^I console$/ do
 end
 
 When /^I debug$/ do
-  require 'ruby-debug'
+  require 'debugger'
   debugger
   x = 1 + 1
 end

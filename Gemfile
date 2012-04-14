@@ -58,7 +58,7 @@ gem 'daemons'
 group :test, :development do
   # Dev
   gem 'thin'
-  gem 'ruby-debug19', require: 'ruby-debug'
+  gem 'debugger', require: false
   gem 'sunspot_solr'
 
   # Deployment
