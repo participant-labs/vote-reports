@@ -56,7 +56,7 @@ module ApplicationHelper
   end
 
   def errors_for(form, *fields)
-    fields.map do |field|
+    fields.flat_map do |field|
       if field == :base
         Array.wrap(form.object.errors[:base]).uniq.map do |error|
           content_tag :p, error, class: 'error'
@@ -66,7 +66,7 @@ module ApplicationHelper
           content_tag :p, error, class: 'error'
         end
       end
-    end.flatten.join.html_safe
+    end.join.html_safe
   end
 
   def md_to_text(md)

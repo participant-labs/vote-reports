@@ -211,7 +211,7 @@ module VoteSmart
 
           puts "Sig Subjects"
           max_cat_id = (Subject.first(order: 'vote_smart_id DESC', conditions: 'vote_smart_id is not null').vote_smart_id + 5).to_s
-          sigs = ('0'..max_cat_id).map do |cat_id|
+          sigs = ('0'..max_cat_id).flat_map do |cat_id|
             subject = Subject.find_by_vote_smart_id(cat_id)
             if sigs = valid_hash(VoteSmart::Rating.get_sig_list(cat_id))
               sigs = Array.wrap(sigs['sigs']['sig'])
@@ -225,7 +225,7 @@ module VoteSmart
               end
               sigs
             end
-          end.compact.flatten
+          end.compact
           puts
 
           puts "Sigs"

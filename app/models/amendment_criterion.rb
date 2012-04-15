@@ -22,7 +22,7 @@ class AmendmentCriterion < ActiveRecord::Base
   end
 
   def events
-    amendment.passage_rolls.all(include: {votes: [{politician: :state}, :roll]}).map(&:votes).flatten
+    amendment.passage_rolls.all(include: {votes: [{politician: :state}, :roll]}).flat_map {|roll| roll.votes }
   end
 
   def event_score(vote)
