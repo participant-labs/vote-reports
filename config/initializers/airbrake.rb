@@ -1,5 +1,5 @@
 Airbrake.configure do |config|
-  config.api_key = '5615579fbd5772fbf96c0fa21adce582'
+  config.api_key = ENV['VOTEREPORTS_AIRBRAKE_API_KEY']
 end
 
 def rescue_and_reraise
