@@ -24,10 +24,10 @@ class Roll < ActiveRecord::Base
   belongs_to :congress
 
   scope :by_voted_at, order("voted_at DESC")
-  scope :not_on_bill_passage, where([
-    "rolls.roll_type NOT IN(?) AND rolls.subject_type = ?", Bill::ROLL_PASSAGE_TYPES, 'Bill'])
-  scope :on_bill_passage, where([
-    "rolls.roll_type IN(?) AND rolls.subject_type = ?", Bill::ROLL_PASSAGE_TYPES, 'Bill'])
+  scope :on_bill, where(subject_type: 'Bill')
+  scope :not_on_bill_passage, on_bill.where([
+    "rolls.roll_type NOT IN(?)", Bill::ROLL_PASSAGE_TYPES])
+  scope :on_bill_passage, on_bill.where(roll_type: Bill::ROLL_PASSAGE_TYPES)
 
   scope :house, where(where: 'house')
   scope :senate, where(where: 'senate')
