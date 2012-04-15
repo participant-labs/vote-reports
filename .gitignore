@@ -3,6 +3,7 @@ config/facebooker.yml
 config/secure_variables.rb
 config/mongo.yml
 config/newrelic.yml
+config/initializers/secret_token.rb
 db/*.sqlite3
 db/mongo
 log/*.log
