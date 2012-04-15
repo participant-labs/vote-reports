@@ -52,6 +52,7 @@ namespace :deploy do
         newrelic.yml
         secure_variables.rb
         initializers/secret_token.rb
+        initializers/session_store.rb
       ].each do |file|
       run "ln -nfs #{deploy_to}/shared/config/#{file} #{release_path}/config/#{file}"
     end
