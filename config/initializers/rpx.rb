@@ -1,8 +1,3 @@
-begin
-  require Rails.root.join('config/secure_variables')
-rescue LoadError
-end
-
 class RPXIdentifier < ActiveRecord::Base
   belongs_to :user
 end
