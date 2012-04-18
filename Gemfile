@@ -55,10 +55,9 @@ end
 gem 'delayed_job_active_record'
 gem 'daemons'
 
-group :test, :development do
+group :development do
   # Dev
   gem 'thin'
-  gem 'debugger', require: false
   gem 'sunspot_solr'
 
   # Deployment
@@ -67,16 +66,23 @@ group :test, :development do
   gem 'capistrano-ext'
   gem 'capistrano_colors'
   gem 'auto_tagger'
+end
 
-  # Test
+group :test, :development do
+  gem 'debugger', require: false
+
   gem "rspec-rails"
+end
+
+group :test do
+  # Test
   gem 'fakeweb'
   gem 'rr', git: 'git@github.com:Empact/rr.git'
   gem 'parallel'
 
   # Cucumber
   gem 'cucumber', git: 'https://github.com/hashrocket/cucumber.git' # to solve this problem: https://github.com/cucumber/cucumber/pull/208
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
