@@ -9,7 +9,12 @@ namespace :sunspot do
     `rake sunspot:solr:start RAILS_ENV=development`
     `rake sunspot:solr:start RAILS_ENV=test`
     `rake sunspot:solr:start RAILS_ENV=staging`
-    `rake sunspot:solr:start RAILS_ENV=production`
+  end
+
+  task :stop do
+    `rake sunspot:solr:stop RAILS_ENV=development`
+    `rake sunspot:solr:stop RAILS_ENV=test`
+    `rake sunspot:solr:stop RAILS_ENV=staging`
   end
 
   task reindex: [:'bills:reindex', :'reports:reindex', :'subjects:reindex']
