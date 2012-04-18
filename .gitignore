@@ -12,7 +12,7 @@ tmp/
 public/system
 public/assets
 /data/
-spec/support/web_requests.marshal
+spec/fixtures/web_requests.marshal
 solr
 rerun.txt
 .DS_Store

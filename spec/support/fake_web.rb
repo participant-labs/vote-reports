@@ -1,4 +1,4 @@
-request_fixtures_path = Rails.root.join('spec/support/web_requests.marshal')
+request_fixtures_path = Rails.root.join('spec/fixtures/web_requests.marshal')
 
 unless request_fixtures_path.exist?
   raise "Web request fixtures are missing. Generate them with 'rake web_requests:fixtures:generate'"

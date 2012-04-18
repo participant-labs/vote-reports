@@ -16,7 +16,7 @@ namespace :web_requests do
         end
       end.compact
 
-      Marshal.dump(responses, open(Rails.root.join('spec/support/web_requests.marshal'), 'w'))
+      Marshal.dump(responses, open(Rails.root.join('spec/fixtures/web_requests.marshal'), 'w'))
     end
   end
 end
