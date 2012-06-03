@@ -1,5 +1,6 @@
 class IssuesController < ApplicationController
   filter_resource_access
+  before_filter :prepare_causes, only: [:new, :create]
 
   def index
     @issues = Issue.page(params[:page])
@@ -11,9 +12,8 @@ class IssuesController < ApplicationController
   end
 
   def new
-    params[:issue][:causes] = Cause.find(params[:causes]) if params[:causes].present?
     @issue = Issue.new(params[:issue])
-    @causes = Cause.without_issue.all
+    @causes = Cause.without_issue
 
     respond_to do |format|
       format.html
@@ -24,7 +24,6 @@ class IssuesController < ApplicationController
   end
 
   def create
-    params[:issue][:causes] = Cause.find(params[:causes]) if params[:causes].present?
     @issue = Issue.new(params[:issue])
     if @issue.save
       flash[:notice] = "Issue Create"
@@ -41,5 +40,13 @@ class IssuesController < ApplicationController
     @issue.destroy
     flash[:notice] = "Issue destroyed"
     redirect_to action: :index
+  end
+
+  private
+
+  def prepare_causes
+    if params[:causes].present?
+      params[:issue][:causes] = Cause.where(slug: params[:causes])
+    end
   end
 end
