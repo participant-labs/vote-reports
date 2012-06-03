@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
- 
+
 describe UsersController do
   setup :activate_authlogic
 
@@ -27,6 +27,30 @@ describe UsersController do
       get :index
       flash[:error].should == "You may not access this page"
       response.should redirect_to(root_path)
+    end
+  end
+
+  describe "GET show" do
+    let(:other_user) { create_user }
+
+    context 'when logged in' do
+      before do
+        login
+      end
+
+      context 'viewing a different user' do
+        it 'sends me their reports page' do
+          get :show, id: other_user
+          response.should redirect_to(user_reports_path(other_user))
+        end
+      end
+
+      context 'viewing my own page' do
+        it 'succeeds' do
+          get :show, id: current_user
+          response.should be_success
+        end
+      end
     end
   end
 

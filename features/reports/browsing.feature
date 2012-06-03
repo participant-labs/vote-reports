@@ -44,8 +44,3 @@ Feature: Browsing Reports
     And I should see "Scored Report"
     And I should see "Personal Report"
     And I should see "Active Report"
-
-  Scenario: Other users can't access My Reports
-    Given I am signed in as "NotEmpact"
-    When I go to the user page for "Empact"
-    Then I should be on the reports page for "Empact"
