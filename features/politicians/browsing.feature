@@ -32,9 +32,9 @@ Feature: Browsing Politicians
 
   Examples:
     | congressional_district | state | party      | party_abbrev | description |
-    | 3        | IA    | Republican | R            | Representative for the 3rd congressional district of Iowa; Republican |
-    | 0        | TX    | Republican | R            | Representative for the at-large congressional district of Texas; Republican |
-    | 3        | IA    |            | I            | Representative for the 3rd congressional district of Iowa |
+    | 3        | IA    | Republican | R            | Representative for Iowa's 3rd congressional district; Republican |
+    | 0        | TX    | Republican | R            | Representative for Texas' at-large congressional district; Republican |
+    | 3        | IA    |            | I            | Representative for Iowa's 3rd congressional district |
 
   Scenario: Viewing senate terms from the Politicians Page
     Given the following politician records:
