@@ -6,10 +6,6 @@ class Users::Reports::BillCriteriaController < ApplicationController
   def new
     @new_report = true if params[:new_report]
     @report = @user.reports.find(params[:report_id])
-    if request.path != new_user_report_bill_criterion_path(@user, @report)
-      redirect_to new_user_report_bill_criterion_path(@user, @report), status: 301
-      return
-    end
     @bills = Bill.paginated_search(params)
 
     @current = params[:current]

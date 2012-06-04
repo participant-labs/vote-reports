@@ -4,10 +4,6 @@ class Users::Reports::AmendmentCriteriaController < ApplicationController
   filter_access_to :all, attribute_check: true, require: :edit, context: :reports
 
   def new
-    if request.path != new_user_report_amendment_criterion_path(@user, @report)
-      redirect_to new_user_report_amendment_criterion_path(@user, @report), status: 301
-      return
-    end
     @bill = Bill.find(params[:bill_id])
     @amendments = @bill.amendments.order('chamber, number').page(params[:page])
 

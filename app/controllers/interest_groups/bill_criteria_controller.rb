@@ -5,10 +5,6 @@ class InterestGroups::BillCriteriaController < ApplicationController
 
   def new
     @new_report = true if params[:new_report]
-    if request.path != new_interest_group_bill_criterion_path(@interest_group)
-      redirect_to new_interest_group_bill_criterion_path(@interest_group), status: 301
-      return
-    end
     @bills = Bill.paginated_search(params)
 
     @current = params[:current]

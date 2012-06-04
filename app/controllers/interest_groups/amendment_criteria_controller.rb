@@ -5,10 +5,6 @@ class InterestGroups::AmendmentCriteriaController < ApplicationController
   layout nil
 
   def new
-    if request.path != new_interest_group_amendment_criterion_path(@interest_group)
-      redirect_to new_interest_group_amendment_criterion_path(@interest_group), status: 301
-      return
-    end
     @bill = Bill.find(params[:bill_id])
     @amendments = @bill.amendments.order('chamber, number').page(params[:page])
   end
