@@ -36,16 +36,25 @@ class Image < PaperclipAutosizer
 
   # helper method used by the cropper view to get the real image geometry
   def thumbnail_geometry(style = :original)
-    @geometry ||= {}
-    path = thumbnail.path(style)
-    if path.present?
-      @geometry[style] ||= Paperclip::Geometry.from_file path
-    else
-      @default_geometry ||= Paperclip::Geometry.from_file Rails.root.join("public/thumbnails/#{style}/missing.png")
-    end
+    geometry(style) || default_geometry(style)
   end
 
   private
+
+  def geometry(style)
+    @geometry ||= {}
+    @geometry[style] ||
+      if path = thumbnail.path(style)
+        @geometry[style] ||= Paperclip::Geometry.from_file path
+      end
+  rescue Paperclip::Errors::NotIdentifiedByImageMagickError => e
+    Airbrake.notify(e)
+    nil
+  end
+
+  def default_geometry(style)
+    @default_geometry ||= Paperclip::Geometry.from_file Rails.root.join("public/thumbnails/#{style}/missing.png")
+  end
 
   def reprocess_thumbnail
     thumbnail.reprocess!
