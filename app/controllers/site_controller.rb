@@ -8,11 +8,11 @@ class SiteController < ApplicationController
     end
   end
 
-  def alive
-    render text: 'Site is alive!'
+  def show # about
   end
 
-  def about
+  def alive
+    render text: 'Site is alive!'
   end
 
   if Rails.env.development?

@@ -88,6 +88,7 @@ VoteReports::Application.routes.draw do
   match '/donate' => 'donations#new', as: :new_donation
   match '/thanks' => 'donations#show', as: :donation_thanks
   resource :donations
+
   match 'about' => 'site#show', as: :about
   match 'alive' => 'site#alive', as: :alive
   match '/' => 'site#index', as: :root
