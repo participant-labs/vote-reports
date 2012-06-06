@@ -2,7 +2,7 @@ class SiteController < ApplicationController
 
   def index
     if current_user
-      dashboard
+      redirect_to user_path(current_user)
     else
       render layout: 'footer_only'
     end
@@ -13,12 +13,6 @@ class SiteController < ApplicationController
   end
 
   def about
-  end
-
-  def dashboard
-    @user = current_user
-    @reports = current_user.reports
-    render template: 'users/show'
   end
 
   if Rails.env.development?

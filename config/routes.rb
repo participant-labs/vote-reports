@@ -79,6 +79,7 @@ VoteReports::Application.routes.draw do
     resource :moderatorship, only: [:create, :destroy], controller: 'users/moderatorships'
     resources :report_scores, only: :index, controller: 'users/scores'
   end
+  resource :dashboard
 
   resources :user_sessions
   match '/signup' => 'users#new', as: :signup
