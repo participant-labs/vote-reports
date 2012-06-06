@@ -198,7 +198,7 @@ class Report < ActiveRecord::Base
   has_many :amendment_criteria, dependent: :destroy
 
   def has_criteria?
-    bill_criteria.present? || amendment_criteria.present?
+    bill_criteria.exists? || amendment_criteria.exists?
   end
 
   has_many :follows, class_name: 'ReportFollow', dependent: :destroy
