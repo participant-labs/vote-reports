@@ -3,21 +3,6 @@ Feature: Browsing Politicians
   As a user
   I want to browse politician info
 
-  @homepagey
-  Scenario: Navigating to politicians from the sidebar
-    When I go to the home page
-    And I follow "Politicians"
-    Then I should be on the politicians page
-
-  Scenario: Browsing to a Politician from the Politicians Page
-    Given the following in-office politician records:
-      | name      | gov_track_id |
-      | Ron Wyden | 300100       |
-      | Bob Barr  |              |
-    When I go to the politicians page
-    And I follow "Ron Wyden"
-    Then I should be on the politician page for "Ron Wyden"
-
   Scenario Outline: Viewing representative terms from the Politicians Page
     Given the following politician records:
       | name      | gov_track_id |

@@ -131,7 +131,8 @@ class Politician < ActiveRecord::Base
     ])
   }
 
-  scope :has_current_candidacy, select('DISTINCT politicians.*').joins(:candidacies).where(['candidacies.status = ?', Candidacy::VALID_STATUS])
+  scope :has_candidacies, joins(:candidacies).uniq
+  scope :has_current_candidacy, has_candidacies.where(candidacies: {status: Candidacy::ACTIVE_STATUSES})
 
   scope :scoreworthy, where('politicians.current_office_id IS NOT NULL OR politicians.current_candidacy_id IS NOT NULL')
 
