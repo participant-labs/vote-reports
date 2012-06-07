@@ -14,7 +14,7 @@ class UserSessionsController < ApplicationController
 
   def create
     @user_session = UserSession.new(params[:user_session])
-    
+
     if @user_session.registration_incomplete?
       @current_user_session = @user_session
       @user = @user_session.attempted_record
