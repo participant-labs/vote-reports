@@ -10,7 +10,7 @@ class InterestGroupsController < ApplicationController
       else
         InterestGroup.for_subjects(params[:subjects]).order('name').page(params[:page])
       end
-    @subjects = Subject.tag_cloud_for_interest_groups_matching(params[:term]).all(limit: 25)
+    @subjects = Subject.tag_cloud_for_interest_groups_matching(params[:term]).limit(25)
 
     respond_to do |format|
       format.html
