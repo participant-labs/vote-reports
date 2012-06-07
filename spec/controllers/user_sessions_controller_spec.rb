@@ -3,9 +3,77 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe UserSessionsController do
   setup :activate_authlogic
 
-  describe "route recognition" do
-    it "should route the login route correctly" do
+  describe 'GET new' do
+    it "routes from /login" do
       {get: '/login'}.should route_to(controller: 'user_sessions', action: 'new')
+    end
+  end
+
+  describe 'POST create' do
+    shared_examples_for 'failed sign-in' do
+      it "tells me I'm wrong" do
+        send_request
+        flash[:error].should == "Failed to login or register."
+      end
+    end
+    shared_examples_for 'successful sign-in' do
+      it "tells me it worked" do
+        send_request
+        flash[:notice].should == "Logged in successfully"
+      end
+
+      it "sends me to my dashboard" do
+        send_request
+        response.should redirect_to(user_path(user))
+      end
+
+      context 'when I have a return path set' do
+        it 'sends me to the return path' do
+          send_request(return_to: causes_path)
+          response.should redirect_to(causes_path)
+        end
+      end
+    end
+
+    def send_request(args = {})
+      post :create, args.merge(user_session: session_params)
+    end
+
+    context 'I am not signed up' do
+      let(:session_params) {
+        {username: 'email@person.com', password: 'password'}
+      }
+      it_behaves_like 'failed sign-in'
+    end
+    context "I'm signed up" do
+      let(:user) { create_user(password: 'password') }
+
+      context "but I put in the wrong email" do
+        let(:session_params) {
+          {username: 'wrongemail@example.com', password: 'password'}
+        }
+        it_behaves_like 'failed sign-in'
+      end
+
+      context "but I put in the wrong password" do
+        let(:session_params) {
+          {username: user.email, password: 'wrongpassword'}
+        }
+        it_behaves_like 'failed sign-in'
+      end
+
+      context 'and I sign in by email' do
+        let(:session_params) {
+          {username: user.email, password: 'password'}
+        }
+        it_behaves_like 'successful sign-in'
+      end
+      context 'and I sign in by username' do
+        let(:session_params) {
+          {username: user.username, password: 'password'}
+        }
+        it_behaves_like 'successful sign-in'
+      end
     end
   end
 

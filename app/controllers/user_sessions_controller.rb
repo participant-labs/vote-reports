@@ -22,11 +22,13 @@ class UserSessionsController < ApplicationController
       render 'users/new_from_rpx'
     elsif @user_session.save
       if @user_session.new_registration?
-        flash[:notice] = "That does it! As a new user, please review your registration details before continuing.."
-        redirect_to edit_user_path(@user_session.record, new_user: true)
+        flash[:notice] = redirect_to edit_user_path(@user_session.record, new_user: true),
+          notice: "That does it! As a new user, please review your registration details before continuing.."
       else
-        flash[:notice] = "Logged in successfully"
-        redirect_to (params[:return_to].present? ? params[:return_to] : root_path)
+        redirect_to (params[:return_to].present? \
+          ? params[:return_to] \
+          : user_path(@user_session.user)),
+          notice: "Logged in successfully"
       end
     else
       flash[:error] = "Failed to login or register."
@@ -37,7 +39,7 @@ class UserSessionsController < ApplicationController
   def destroy
     @user_session = current_user_session
     @user_session.destroy
-    flash[:notice] = "You have been logged out"
-    redirect_to root_path
+    redirect_to root_path,
+      notice: "You have been logged out"
   end
 end
