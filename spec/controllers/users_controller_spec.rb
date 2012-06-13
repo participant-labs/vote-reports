@@ -6,13 +6,7 @@ describe UsersController do
   describe "route recognition" do
     it "should route the signup route correctly" do
       {get: '/signup'}.should route_to(controller: 'users', action: 'new')
-      {get: '/users/new'}.should route_to(controller: 'users', action: 'new')
     end
-
-    it "should route to a single user correctly" do
-      {get: '/users/empact'}.should route_to(controller: 'users', action: 'show', id: 'empact')
-    end
-
   end
 
   describe "GET index" do
