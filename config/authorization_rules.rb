@@ -1,7 +1,10 @@
 authorization do
   role :admin do
     includes :moderator
-    has_permission_on :users, :users_reports, :users_reports_bill_criteria, :users_reports_amendment_criteria, :reports,
+    has_permission_on :users, :users_reports,
+      :users_reports_bill_criteria,
+      :users_reports_amendment_criteria,
+      :reports,
       to: [:index, :show, :edit, :update, :new, :create, :destroy]
     has_permission_on :users_adminships, :users_moderatorships, to: [:create, :destroy]
   end
@@ -9,7 +12,11 @@ authorization do
   role :moderator do
     includes :all
     has_permission_on :reports_bill_criteria, to: :autofetch
-    has_permission_on :interest_groups, :interest_groups_bill_criteria, :interest_groups_amendment_criteria, :issues, :causes, :causes_reports, to: [:index, :new, :create, :edit, :update, :destroy]
+    has_permission_on :interest_groups,
+      :interest_groups_bill_criteria,
+      :interest_groups_amendment_criteria,
+      :issues, :causes, :causes_reports,
+      to: [:index, :new, :create, :edit, :update, :destroy]
     has_permission_on :interest_groups_images, :causes_images, to: [:edit, :create, :update]
   end
 
