@@ -20,13 +20,6 @@ describe Users::Reports::BillCriteriaController do
       @report = create_report(user: current_user)
     end
 
-    context "when there is a better id for this report" do
-      it "should redirect" do
-        get :new, user_id: current_user, report_id: @report.id, term: 'Smelly Roses'
-        response.should redirect_to(new_user_report_bill_criterion_path(current_user, @report))
-      end
-    end
-
     context "when I am not logged in" do
       it "should deny access" do
         logout
