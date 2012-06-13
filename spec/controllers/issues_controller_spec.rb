@@ -5,11 +5,7 @@ describe IssuesController do
 
   describe "POST create" do
     context 'as an admin' do
-      let(:admin) { create_admin }
-
-      before do
-        login admin
-      end
+      include_context 'as an admin'
 
       context 'when linking two causes' do
         before do
