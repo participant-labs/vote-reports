@@ -36,5 +36,5 @@ task :update do
 
   Politician.update_current_office_status!
   Politician.update_titles!
-  Rake::Task['calculations:politicians:continuous_terms:regenerate'].invoke
+  Rake::Task['politicians:continuous_terms:regenerate'].invoke
 end
