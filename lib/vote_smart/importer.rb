@@ -138,7 +138,7 @@ module VoteSmart
       def import_races
         puts "Races"
         ActiveRecord::Base.transaction do
-          ::Election.all.each do |election|
+          ::Election.find_each do |election|
             count = 0
             election.stages.each do |stage|
               candidate_hash = valid_hash(VoteSmart::Election.get_stage_candidates(election.vote_smart_id, stage.vote_smart_id))

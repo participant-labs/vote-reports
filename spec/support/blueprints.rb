@@ -396,7 +396,7 @@ Fixjour verify: false do
     create_politician if Politician.count == 0
     create_unscored_report(attrs).tap do |report|
       roll = create_roll(subject: report.bill_criteria.first.bill, roll_type: "On Passage")
-      Politician.all.each do |p|
+      Politician.find_each do |p|
         create_vote(roll: roll, politician: p, vote: Vote::POSSIBLE_VALUES.sample)
       end
       report.rescore!

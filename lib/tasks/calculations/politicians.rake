@@ -7,7 +7,7 @@ namespace :calculations do
       # order: 'COALESCE(politician_terms.ended_on, representative_terms_us_states.ended_on) DESC NULLS LAST')
 
       ActiveRecord::Base.transaction do
-        Politician.all.each do |politician|
+        Politician.find_each do |politician|
           $stdout.print '.'
           $stdout.flush
           latest = politician.terms.latest
