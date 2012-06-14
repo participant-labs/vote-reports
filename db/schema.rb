@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120210020431) do
+ActiveRecord::Schema.define(:version => 20120613234853) do
 
   create_table "adminships", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -235,6 +235,17 @@ ActiveRecord::Schema.define(:version => 20120210020431) do
   end
 
   add_index "congressional_districts", ["us_state_id", "district_number"], :name => "districts_us_state_id_district_unique", :unique => true
+
+  create_table "continuous_terms", :force => true do |t|
+    t.integer "politician_id",     :null => false
+    t.date    "started_on",        :null => false
+    t.date    "ended_on",          :null => false
+    t.integer "example_term_id",   :null => false
+    t.string  "example_term_type", :null => false
+    t.integer "terms_count",       :null => false
+  end
+
+  add_index "continuous_terms", ["politician_id"], :name => "index_continuous_terms_on_politician_id"
 
   create_table "cosponsorships", :force => true do |t|
     t.integer  "bill_id",       :null => false
@@ -833,6 +844,8 @@ ActiveRecord::Schema.define(:version => 20120210020431) do
 
   add_foreign_key "congressional_districts", "districts", :name => "congressional_districts_district_id_fk"
   add_foreign_key "congressional_districts", "us_states", :name => "congressional_districts_us_state_id_fk"
+
+  add_foreign_key "continuous_terms", "politicians", :name => "continuous_terms_politician_id_fk"
 
   add_foreign_key "cosponsorships", "bills", :name => "cosponsorships_bill_id_fk"
   add_foreign_key "cosponsorships", "politicians", :name => "cosponsorships_politician_id_fk"

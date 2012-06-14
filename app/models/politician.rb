@@ -26,6 +26,8 @@ class Politician < ActiveRecord::Base
   has_many :presidential_terms
   has_one :latest_presidential_term, class_name: 'PresidentialTerm', order: 'ended_on DESC'
 
+  has_many :continuous_terms, order: 'ended_on DESC'
+
   has_many :interest_group_ratings
   has_many :interest_group_reports, through: :interest_group_ratings
   def rating_interest_groups
@@ -45,15 +47,6 @@ class Politician < ActiveRecord::Base
       senate_terms.all(include: [:party, :state]) +
       presidential_terms.all(include: :party)
     ).sort_by(&:ended_on).reverse
-  end
-
-  def continuous_terms
-    cterms = ContinuousTerm.find_all_by_politician_id(id, order: [['ended_on', 'desc']])
-    if cterms.empty? && terms.present?
-      ContinuousTerm.regenerate_for(self)
-      cterms = ContinuousTerm.find_all_by_politician_id(id, order: [['ended_on', 'desc']])
-    end
-    cterms
   end
 
   belongs_to :congressional_district

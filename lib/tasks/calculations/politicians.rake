@@ -17,5 +17,18 @@ namespace :calculations do
         end
       end
     end
+
+    namespace :continuous_terms do
+      task regenerate: :environment do
+        ContinuousTerm.delete_all
+        Politician.find_in_batches do |politicians|
+          politicians.each do |politician|
+            ContinuousTerm.regenerate_for(politician)
+          end
+          print '.'
+        end
+        puts
+      end
+    end
   end
 end

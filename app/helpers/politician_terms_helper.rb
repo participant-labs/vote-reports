@@ -5,7 +5,7 @@ module PoliticianTermsHelper
   end
 
   def term_place(term)
-    term = term.representative_term if term.is_a?(ContinuousTerm)
+    term = term.example_term if term.is_a?(ContinuousTerm)
     case term
     when PresidentialTerm
       "of these United States"
