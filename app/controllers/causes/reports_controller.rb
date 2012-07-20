@@ -6,9 +6,10 @@ class Causes::ReportsController < ApplicationController
     params[:subjects] ||= []
     @reports =
       if params[:term].present?
-        Report.paginated_search(params.merge(except: @cause.report))
+        Report.paginated_search(params.merge(except: @cause.reports))
       else
-        topical_reports.order(:name).page(params[:page])
+        Report.published.with_subjects(params[:subjects])
+          .order(:name).page(params[:page])
       end
 
     respond_to do |format|
@@ -47,10 +48,6 @@ class Causes::ReportsController < ApplicationController
   end
 
   private
-
-  def topical_reports
-    Report.published.with_subjects(params[:subjects])
-  end
 
   def load_cause
     @cause = Cause.find(params[:cause_id])
