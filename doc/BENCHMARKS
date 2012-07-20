@@ -1,0 +1,15 @@
+
+Full Bill Import:
+real  189m20.792s
+user  60m35.305s
+sys 3m16.466s
+
+Full Amendment Import:
+real  3m45.767s
+user  2m41.690s
+sys 0m9.823s
+
+Full Vote Import:
+real  30m32.227s
+user  14m5.166s
+sys 0m31.824s

@@ -1,0 +1,93 @@
+causes:
+
+Free Enterprise, Lower Taxes:
+  * 60 Plus Association
+
+End the Death Tax,   Private Social Security
+  * 60 Plus Association
+
+More Medicare, More Government Healthcare, Against Medicare  Advantage:
+  * Alliance for Retired Americans
+
+Against Private Social Security:
+  * Alliance for Retired Americans
+
+Pro-Oil, Pro-Coal, More Off-shore Drilling
+  * Alliance to Stop War on Poor
+
+Pro-Israel, Pro-War,   Against Islamo-fascism, Pro-Torture
+  * ACT! For America
+
+Pro-Union/Pro-Labor:
+  * AFL-CIO
+
+* Medical Research/Support
+  * AIDS Action Council
+  * Alliance for Headache Disorders Advocacy
+
+Uncategorized:
+  * Academy of General Dentistry
+  * AeA
+  * American Academy of Emergency Medicine
+
+http://www.govtrack.us/congress/bill.xpd?bill=hj111-5
+
+interest_groups/republican-liberty-caucus has several repeated reports on vote smart.  Time to clean up their data!
+
+time cap invoke COMMAND="cd /var/www/votereports/production/current && RAILS_ENV=production /usr/bin/env nice -n 3 rake vote_smart:import"
+
+# AssociateLocationsToZipCodes.migrate(:down)
+ENV['VERSION'] = '20100409185819'
+Rake::Task['db:migrate:down'].invoke
+
+# CreateLocationZipCodes.migrate(:down)
+ENV['VERSION'] = '20100406060108'
+Rake::Task['db:migrate:down'].invoke
+
+# CreateZipCodes.migrate(:down)
+ENV['VERSION'] = '20100408055427'
+Rake::Task['db:migrate:down'].invoke
+
+# PopulateZipCodes.migrate(:down)
+ENV['VERSION'] = '20100409174738'
+Rake::Task['db:migrate:down'].invoke
+
+# CreateLocationZipCodes.migrate(:up)
+ENV['VERSION'] = '20100406060108'
+Rake::Task['db:migrate:up'].invoke
+
+Rake::Task['zip_codes:download'].invoke
+Rake::Task['zip_codes:import'].invoke
+
+# CreateZipCodes.migrate(:up)
+ENV['VERSION'] = '20100408055427'
+Rake::Task['db:migrate:up'].invoke
+
+# PopulateZipCodes.migrate(:up)
+ENV['VERSION'] = '20100409174738'
+Rake::Task['db:migrate:up'].invoke
+
+# AssociateLocationsToZipCodes.migrate(:up)
+ENV['VERSION'] = '20100409185819'
+Rake::Task['db:migrate:up'].invoke
+
+Extract State class for associating terms and such
+script/generate rspec_model BillRelation from_id:integer to_id:integer relation:string
+Missing data model: related bills, actions, status
+Bill subcommittee references often don't exist: e.g. Bill 106-s68 listed committee 'International Security, Proliferation and Federal Services' via <committee name="Senate Governmental Affairs" subcommittee="International Security, Proliferation and Federal Services" activity="Referral"/> which wasn't found
+Constrain Roll#roll_type to not-blank (deal with: 103/rolls/h1994-68.xml)
+BillType is dangerous in that you must call #to_s to get the expected view string
+Push back sunspot retry logic to github: /opt/local/lib/ruby/gems/1.8/gems/rsolr-0.11.0/lib/rsolr/connection/net_http.rb:31:in `request'
+/opt/local/lib/ruby/gems/1.8/gems/sunspot_rails-0.11.4/lib/sunspot/rails/searchable.rb:200:in `reindex'
+Should use offset:
+/opt/local/lib/ruby/gems/1.8/gems/sunspot_rails-0.11.4/lib/sunspot/rails/searchable.rb:200:in `reindex'
+Add ability to report a report (for misuse)
+
+http://localhost:3000/politicians/charles-stewart, --1, --2
+
+http://action.aclu.org/site/PageServer?pagename=AP_alerts_all
+https://secure.aclu.org/site/Advocacy?pagename=homepage&id=1859&page=UserAction&JServSessionIdr004=zpb6hftvy1.app226a
+* [H.R. 4472, the Children's Safety and Violent Crime Reduction Act of 2005](http://votereports.org/bills/109-h4472) - [Oppose](http://www.aclu.org/racial-justice_prisoners-rights_drug-law-reform_immigrants-rights/aclu-letter-house-representatives-1) (unvoted)
+* [H.R. 4545, the Drug Sentencing Reform and Cocaine Kingpin Trafficking Act of 2007](http://votereports.org/bills/110-h4545) - [Support](http://www.aclu.org/racial-justice_prisoners-rights_drug-law-reform_immigrants-rights/aclu-letter-house-members-urging-s) (unvoted)
+* [S 557 Civil Rights Tax Relief Act](http://votereports.org/bills/108-s557) - [Support](http://www.aclu.org/racial-justice_womens-rights/aclu-letter-senate-urging-support-s-557-civil-rights-tax-relief-act) (unvoted)
+* [H.R. 1155, the Civil Rights Tax Relief Act](http://votereports.org/bills/108-h1155) - [Support](http://www.aclu.org/racial-justice_womens-rights/aclu-letter-house-urging-support-hr-1155-civil-rights-tax-relief-act) (unvoted)
