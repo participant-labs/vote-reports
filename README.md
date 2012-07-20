@@ -10,5 +10,6 @@ You can find it here: http://votereports.org/
 Unfortunately I don't have much time to devote to it at the moment, but important next steps include:
 * Crowd-sourced ratings system for non-incumbent politicians
 * A classification system for politicians, such that we can give them each a category (ala blue dog democrat, libertarian republican) to quickly communicate their general positions.
+* Cover state-level politicians via http://openstates.org/ legislative data.
 
 Thanks for looking, and remember: Knowing is half the ballot!
