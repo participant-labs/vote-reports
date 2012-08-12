@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/Empact/rr.git
+  revision: 29ef8b6cc65b6b594cab46552af614c3ffd511b7
+  specs:
+    rr (1.0.4)
+
+GIT
   remote: git://github.com/Empact/spatial_adapter.git
   revision: d64ac1c03c837d6fffddfac1a0dc0818bf10bce6
   specs:
@@ -7,13 +13,7 @@ GIT
       activerecord (>= 2.2.2)
 
 GIT
-  remote: git@github.com:Empact/rr.git
-  revision: 29ef8b6cc65b6b594cab46552af614c3ffd511b7
-  specs:
-    rr (1.0.4)
-
-GIT
-  remote: https://github.com/hashrocket/cucumber.git
+  remote: git://github.com/hashrocket/cucumber.git
   revision: 457d395be81a0a1546eba3a730d99a811c3fd296
   specs:
     cucumber (1.1.4)

@@ -27,7 +27,7 @@ gem 'pg'
 gem 'rpx_now', '>= 0.6.12'
 gem 'Empact-sexy_pg_constraints', require: 'sexy_pg_constraints'
 gem 'state_machine'
-gem 'spatial_adapter', git: 'git://github.com/Empact/spatial_adapter.git'
+gem 'spatial_adapter', github: 'Empact/spatial_adapter'
 gem 'tamtam'
 gem 'typhoeus'
 gem 'votesmart', '>= 0.3.3'
@@ -77,11 +77,11 @@ end
 group :test do
   # Test
   gem 'fakeweb'
-  gem 'rr', git: 'git@github.com:Empact/rr.git'
+  gem 'rr', github: 'Empact/rr'
   gem 'parallel'
 
   # Cucumber
-  gem 'cucumber', git: 'https://github.com/hashrocket/cucumber.git' # to solve this problem: https://github.com/cucumber/cucumber/pull/208
+  gem 'cucumber', github: 'hashrocket/cucumber' # to solve this problem: https://github.com/cucumber/cucumber/pull/208
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'capybara'
