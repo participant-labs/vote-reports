@@ -19,3 +19,4 @@ rerun.txt
 bin/
 vendor/bundler_gems/
 .bundle
+.tddium*
