@@ -1,0 +1,4 @@
+---
+:tddium:
+  :postgresql:
+    :version: '9.1'
