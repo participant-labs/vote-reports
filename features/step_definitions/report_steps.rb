@@ -39,7 +39,7 @@ Then /^I should see the following scores?:$/ do |table|
   table.hashes.each do |hash|
     step %{I should see "#{hash['politician'].last_name}"}
     hash['politician'].report_scores.map {|s| s.score.round }.should include(hash['score'].to_i)
-    step %{I should see "#{ReportScore.new(score: hash['score']).letter_grade}" within ".report_score"}
+    step %{I should see "#{ReportScore.new(score: hash['score']).letter_grade}" within ".report_score.for_politician_#{hash['politician'].id}"}
   end
 end
 

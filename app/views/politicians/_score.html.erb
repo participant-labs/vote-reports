@@ -10,6 +10,6 @@
   <div class="politician_score round-4 clearfix">
     <%= render 'politicians/headshot', politician: politician, style: headshot_style %>
     <%= render 'politicians/name', politician: politician, name_only: name_only %>
-    <%= render 'reports/scores/score', score: score, report: report, hide_evidence: hide_evidence %>
+    <%= render 'reports/scores/score', score: score, report: report, hide_evidence: hide_evidence, politician: politician %>
   </div>
 <% end %>

@@ -1,15 +1,16 @@
 <%-
   hide_evidence ||= false
   report ||= nil
+  politician ||= score.politician
 -%>
 
 <%- if score.nil? -%>
-  <div class="report_score">
+  <div class="report_score <%= dom_id(politician, :for) %>">
     <span class="score blank">?</span>
   </div>
 <%- else -%>
   <% cache dom_id(score) do %>
-    <div class="report_score">
+    <div class="report_score <%= dom_id(politician, :for) %>">
       <%= link_to score, report_score_path(score, report), class: "fancyboxy score #{score_class(score)}" %>
       <%- unless hide_evidence -%>
         <%= render 'reports/scores/evidence_summary', score: score, report: report, prefix: '' %>
