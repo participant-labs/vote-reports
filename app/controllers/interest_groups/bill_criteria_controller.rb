@@ -1,5 +1,5 @@
 class InterestGroups::BillCriteriaController < ApplicationController
-  filter_resource_access nested_in: :interest_groups
+  filter_access_to :all
   before_filter :find_report
   cache_sweeper :bill_criterion_sweeper, only: [:create, :destroy]
 
@@ -41,6 +41,7 @@ class InterestGroups::BillCriteriaController < ApplicationController
   private
 
   def find_report
+    @interest_group = InterestGroup.find(params[:interest_group_id])
     @report = @interest_group.report
   end
 
