@@ -64,9 +64,6 @@ class InterestGroupsController < ApplicationController
   end
 
   def update
-    #protect ig from nils.. (shouldn't rails do this?)
-    params[:interest_group].each_pair {|k, v| params[:interest_group][k] = nil if v.blank? }
-
     if params[:report].present? && @interest_group.report.update_attributes(params[:report])
       flash[:notice] = "Successfully updated interest group"
       redirect_to @interest_group
