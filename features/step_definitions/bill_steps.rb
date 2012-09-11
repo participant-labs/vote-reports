@@ -49,7 +49,7 @@ end
 
 Given /^(\d+) recent bills$/ do |count|
   count.to_i.times do
-    create_bill
+    create_bill(introduced_on: 2.months.ago.to_date)
   end
 end
 
