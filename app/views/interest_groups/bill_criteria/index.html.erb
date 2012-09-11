@@ -57,7 +57,7 @@
                 <%= amendment_criteria_fields.text_field :explanatory_url, size: '20' %>
               </td>
               <td>
-                <%= link_to('Remove', interest_group_amendment_criterion_path(@report.user, @report, criterion),
+                <%= link_to('Remove', interest_group_amendment_criterion_path(@report.interest_group, criterion),
                           method: :delete,
                           title: "Delete criterion for '#{criterion.amendment.title}'",
                           confirm: "Are you sure you want to delete the criterion for '#{criterion.amendment.title}'?") -%>
