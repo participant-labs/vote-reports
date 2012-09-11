@@ -81,7 +81,7 @@ group :test do
   gem 'parallel'
 
   # Cucumber
-  gem 'cucumber', github: 'hashrocket/cucumber' # to solve this problem: https://github.com/cucumber/cucumber/pull/208
+  gem 'cucumber'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'capybara'
