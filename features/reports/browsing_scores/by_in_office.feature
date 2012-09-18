@@ -67,7 +67,7 @@ Feature: Browsing Report Scores by State
       | Kay Hutchison        | 53    |
       | Connie Mack          | 50    |
       | Neil Abercrombie     | 0     |
-    When I fill in "Reps from" with "TX"
+    When I fill in "Reps representing" with "TX"
     When I check "In Office"
     And I press "Show Reps"
     Then I should see the following scores:

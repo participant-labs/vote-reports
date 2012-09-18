@@ -62,7 +62,7 @@ Feature: Browsing Report Scores by City
 
   Scenario Outline: Narrow report results to those within a certain zip code
     When I go to the interest group scores page for "Sierra Club"
-    And I fill in "Reps from" with "<address>"
+    And I fill in "Reps representing" with "<address>"
     And I press "Show Reps"
     Then I should see the following scores:
       | politician           | score |
