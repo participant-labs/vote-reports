@@ -12,35 +12,35 @@ module NavigationHelpers
       '/'
 
     when /^the cause page for "(.*)"$/
-      cause_path(Cause.find_by_name($1))
+      cause_path(Cause.find_by_name!($1))
     when /^the cause reports page for "(.*)"$/
-      cause_reports_path(Cause.find_by_name($1))
+      cause_reports_path(Cause.find_by_name!($1))
     when /^the cause scores page for "(.*)"$/
-      cause_path(Cause.find_by_name($1))
+      cause_path(Cause.find_by_name!($1))
     when /^the issue page for "(.*)"$/
       issue_path(Issue.find_by_title($1))
 
     when /^user "(.*)"'s page for report "(.*)"$/
       user = User.find_by_username($1)
-      user_report_path(user, user.reports.find_by_name($2))
+      user_report_path(user, user.reports.find_by_name!($2))
     when /^my report page for "(.+)"$/i
-      user_report_path(current_user, current_user.reports.find_by_name($1))
+      user_report_path(current_user, current_user.reports.find_by_name!($1))
     when /^my report agenda page for "(.+)"$/i
-      user_report_agenda_path(current_user, current_user.reports.find_by_name($1))
+      user_report_agenda_path(current_user, current_user.reports.find_by_name!($1))
     when /^my report scores page for "(.+)"$/i
-      user_report_path(current_user, current_user.reports.find_by_name($1))
+      user_report_path(current_user, current_user.reports.find_by_name!($1))
     when /^the edit page for my report "(.+)"$/i
-      edit_user_report_path(current_user, current_user.reports.find_by_name($1))
+      edit_user_report_path(current_user, current_user.reports.find_by_name!($1))
     when /^the new bills page for my report "(.+)"$/
-      new_user_report_bill_criterion_path(current_user, Report.find_by_name($1))
+      new_user_report_bill_criterion_path(current_user, Report.find_by_name!($1))
     when /^the edit bills page for my report "(.+)"$/
-      user_report_bill_criteria_path(current_user, Report.find_by_name($1))
+      user_report_bill_criteria_path(current_user, Report.find_by_name!($1))
     when /^the new bills page for the report "(.+)"$/
-      new_user_report_bill_criterion_path(Report.find_by_name($1).user, Report.find_by_name($1))
+      new_user_report_bill_criterion_path(Report.find_by_name!($1).user, Report.find_by_name!($1))
     when /^the edit bills page for the report "(.+)"$/
-      user_report_bill_criteria_path(Report.find_by_name($1).user, Report.find_by_name($1))
+      user_report_bill_criteria_path(Report.find_by_name!($1).user, Report.find_by_name!($1))
     when /^the edit image page for the report "(.+)"$/
-      edit_user_report_image_path(Report.find_by_name($1).user, Report.find_by_name($1), format: :html)
+      edit_user_report_image_path(Report.find_by_name!($1).user, Report.find_by_name!($1), format: :html)
 
     when /^my reports page/i
       user_reports_path(current_user)
@@ -61,29 +61,29 @@ module NavigationHelpers
       roll_path(Roll.find_by_question($1))
 
     when /^the report page for "(.+)"$/
-      report = Report.find_by_name($1)
+      report = Report.find_by_name!($1)
       user_report_path(report.user, report)
 
     when /^the bill page for "(.+)"$/
       bill_path(BillTitle.find_by_title($1).bill)
     when /^the subject page for "(.+)"$/
-      subject_path(Subject.find_by_name($1))
+      subject_path(Subject.find_by_name!($1))
 
     when /^the interest group page for "(.+)"$/
-      interest_group_path(InterestGroup.find_by_name($1))
+      interest_group_path(InterestGroup.find_by_name!($1))
     when /^the interest group agenda page for "(.+)"$/
-      interest_group_agenda_path(InterestGroup.find_by_name($1))
+      interest_group_agenda_path(InterestGroup.find_by_name!($1))
     when /^the interest group scores page for "(.+)"$/
-      interest_group_path(InterestGroup.find_by_name($1))
+      interest_group_path(InterestGroup.find_by_name!($1))
     when /^the edit interest group page for "(.+)"$/
-      edit_interest_group_path(InterestGroup.find_by_name($1))
+      edit_interest_group_path(InterestGroup.find_by_name!($1))
     when /^the edit interest group image page for "(.+)"$/
-      edit_interest_group_image_path(InterestGroup.find_by_name($1), format: :html)
+      edit_interest_group_image_path(InterestGroup.find_by_name!($1), format: :html)
 
     when /^the interest group new bills page for "(.+)"$/
-      new_interest_group_bill_criterion_path(InterestGroup.find_by_name($1))
+      new_interest_group_bill_criterion_path(InterestGroup.find_by_name!($1))
     when /^the interest group edit bills page for "(.+)"$/
-      interest_group_bill_criteria_path(InterestGroup.find_by_name($1))
+      interest_group_bill_criteria_path(InterestGroup.find_by_name!($1))
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
