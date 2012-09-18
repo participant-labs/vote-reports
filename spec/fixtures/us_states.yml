@@ -1,0 +1,6 @@
+---
+  tx:
+    id: 6
+    full_name: "Texas"
+    abbreviation: 'TX'
+    state_type: state

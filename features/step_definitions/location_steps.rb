@@ -11,7 +11,7 @@ end
 
 Given /^my location is assured(?: to "([^"]*)")?$/ do |congressional_district|
   ActiveRecord::Fixtures.reset_cache
-  ActiveRecord::Fixtures.create_fixtures(Rails.root.join('spec/fixtures'), ['districts'])
+  ActiveRecord::Fixtures.create_fixtures(Rails.root.join('spec/fixtures'), ['districts', 'congressional_districts', 'us_states'])
   stub(District).lookup(anything) { District.all }
 
   if congressional_district
