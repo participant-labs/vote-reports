@@ -9,10 +9,10 @@ class BillCriterion < ActiveRecord::Base
 
   accepts_nested_attributes_for :bill
 
-  scope :by_introduced_on, select('DISTINCT(bill_criteria.*), bills.introduced_on').joins(:bill).order('bills.introduced_on DESC')
+  scope :by_introduced_on, select(['DISTINCT(bill_criteria.*)', 'bills.introduced_on']).joins(:bill).order('bills.introduced_on DESC')
 
   # see also: Roll.on_bill_passage
-  scope :active, select('DISTINCT bill_criteria.*').joins([
+  scope :active, select('DISTINCT(bill_criteria.*)').joins([
       %{LEFT OUTER JOIN "bills" active_bills ON bill_criteria.bill_id = active_bills.id},
       %{LEFT OUTER JOIN "rolls" active_rolls ON active_rolls.subject_id = active_bills.id},
       %{LEFT OUTER JOIN "cosponsorships" active_cosponsorships ON active_cosponsorships.bill_id = active_bills.id}
