@@ -4,7 +4,7 @@ class ContinuousTerm < ActiveRecord::Base
 
   class << self
     def create_from_terms(politician, terms)
-      politician.continuous_terms.create!(
+      politician.continuous_term_records.create!(
         started_on: terms.first.started_on,
         ended_on: terms.last.ended_on,
         example_term: terms.last,

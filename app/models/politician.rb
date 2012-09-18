@@ -26,7 +26,13 @@ class Politician < ActiveRecord::Base
   has_many :presidential_terms
   has_one :latest_presidential_term, class_name: 'PresidentialTerm', order: 'ended_on DESC'
 
-  has_many :continuous_terms, order: 'ended_on DESC'
+  has_many :continuous_term_records, order: 'ended_on DESC', class_name: 'ContinuousTerm'
+  def continuous_terms(force_reload = false)
+    if !ContinuousTerm.where(politician_id: id).exists? && terms.present?
+      ContinuousTerm.regenerate_for(self)
+    end
+    continuous_term_records(force_reload)
+  end
 
   has_many :interest_group_ratings
   has_many :interest_group_reports, through: :interest_group_ratings
