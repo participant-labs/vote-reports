@@ -25,16 +25,19 @@ gem 'nokogiri'
 gem 'paperclip', '>= 2.3.3'
 gem 'pg'
 gem 'rpx_now', '>= 0.6.12'
+
+#Models
 gem 'Empact-sexy_pg_constraints', require: 'sexy_pg_constraints'
 gem 'state_machine'
-gem 'spatial_adapter', github: 'Empact/spatial_adapter'
+gem 'activerecord-postgis-adapter'
+gem 'Empact-activerecord-import', '>= 0.3.4', require: 'activerecord-import'
+
 gem 'tamtam'
 gem 'typhoeus'
 gem 'votesmart', '>= 0.3.3'
 gem 'ym4r'
 gem 'httparty'
 gem 'parallel'
-gem 'Empact-activerecord-import', '>= 0.3.4', require: 'activerecord-import'
 
 # Models
 gem 'kaminari'

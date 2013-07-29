@@ -276,15 +276,15 @@ ActiveRecord::Schema.define(:version => 20120613234853) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "index_delayed_jobs_on_priority_and_run_at"
 
   create_table "districts", :force => true do |t|
-    t.string        "cd",            :limit => 3
-    t.string        "lsad",          :limit => 2
-    t.string        "name",          :limit => 90
-    t.string        "lsad_trans",    :limit => 50
-    t.multi_polygon "the_geom",      :limit => nil, :null => false
-    t.string        "level"
-    t.string        "census_geo_id"
-    t.integer       "us_state_id",                  :null => false
-    t.string        "title"
+    t.string  "cd",            :limit => 3
+    t.string  "lsad",          :limit => 2
+    t.string  "name",          :limit => 90
+    t.string  "lsad_trans",    :limit => 50
+    t.spatial "the_geom",      :limit => {:srid=>0, :type=>"multi_polygon"}, :null => false
+    t.string  "level"
+    t.string  "census_geo_id"
+    t.integer "us_state_id",                                                 :null => false
+    t.string  "title"
   end
 
   add_index "districts", ["the_geom"], :name => "index_districts_on_the_geom", :spatial => true

@@ -40,5 +40,12 @@ module VoteReports
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_confirmation, :fb_sig_friends]
+
+    # According to mattuhiggins, we should be able to call this in an initializer,
+    # but we can't because a gem is improperly eager loading active record
+    # https://github.com/matthuhiggins/foreigner/pull/95
+    config.before_initialize do
+      Foreigner::Adapter.register 'postgis', 'foreigner/connection_adapters/postgresql_adapter'
+    end
   end
 end
