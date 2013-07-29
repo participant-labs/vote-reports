@@ -18,14 +18,14 @@ Feature: Editing Report Images
 
   Scenario: Updating the image on my report
     When I go to the edit image page for the report "My Report"
-    And I attach the file "public/images/homepage/circle_1.png" to "image_thumbnail"
+    And I attach the file "app/assets/images/homepage/circle_1.png" to "image_thumbnail"
     And I press "Replace!"
     Then I should be on my report page for "My Report"
     And I should see "Successfully updated thumbnail."
     And I should see the image "circle_1.png"
     # Updating
     When I go to the edit image page for the report "My Report"
-    And I attach the file "public/images/homepage/circle_2.png" to "image_thumbnail"
+    And I attach the file "app/assets/images/homepage/circle_2.png" to "image_thumbnail"
     And I press "Replace!"
     Then I should be on my report page for "My Report"
     And I should see "Successfully updated thumbnail."

@@ -16,14 +16,14 @@ Feature: Editing Interest Group Images
 
   Scenario: Updating the image on an interest group
     When I go to the edit interest group image page for "AARP"
-    And I attach the file "public/images/homepage/circle_1.png" to "image_thumbnail"
+    And I attach the file "app/assets/images/homepage/circle_1.png" to "image_thumbnail"
     And I press "Replace!"
     Then I should be on the interest group page for "AARP"
     And I should see "Successfully updated thumbnail."
     And I should see the image "circle_1.png"
     # Update image
     When I go to the edit interest group image page for "AARP"
-    And I attach the file "public/images/homepage/circle_2.png" to "image_thumbnail"
+    And I attach the file "app/assets/images/homepage/circle_2.png" to "image_thumbnail"
     And I press "Replace!"
     Then I should be on the interest group page for "AARP"
     And I should see "Successfully updated thumbnail."
