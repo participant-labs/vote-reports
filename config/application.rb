@@ -6,6 +6,27 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
+class ActiveRecordOverrideRailtie < Rails::Railtie
+  initializer "active_record.initialize_database.override" do |app|
+
+    ActiveSupport.on_load(:active_record) do
+      if url = ENV['DATABASE_URL']
+        ActiveRecord::Base.connection_pool.disconnect!
+        url = URI.parse(url)
+        establish_connection(
+          adapter:             'postgis',
+          host:                url.host,
+          encoding:            'unicode',
+          database:            url.path.split("/")[-1],
+          port:                url.port,
+          username:            url.user,
+          password:            url.password
+        )
+      end
+    end
+  end
+end
+
 module VoteReports
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
