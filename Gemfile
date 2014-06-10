@@ -81,7 +81,6 @@ group :test do
   # Test
   gem 'fakeweb'
   gem 'rr', github: 'Empact/rr'
-  gem 'parallel'
 
   # Cucumber
   gem 'cucumber'
