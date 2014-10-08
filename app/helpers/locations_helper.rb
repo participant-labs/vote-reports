@@ -56,14 +56,12 @@ module LocationsHelper
       else
         Politician
       end
-    result =
-      if !params.has_key?(:in_office) || ['1', true].include?(params[:in_office])
-        @in_office = true
-        result.scoreworthy
-      else
-        result
-      end
-    result
+    if !params.has_key?(:in_office) || ['1', true].include?(params[:in_office])
+      @in_office = true
+      result.scoreworthy
+    else
+      result
+    end
   end
 
   def shown_location
