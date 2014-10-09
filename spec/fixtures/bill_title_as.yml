@@ -1,0 +1,30 @@
+enacted:
+  as: enacted
+  sort_order: 0
+agreed to by house and senate:
+  as: agreed to by house and senate
+  sort_order: 1
+passed house:
+  as: passed house
+  sort_order: 2
+passed senate:
+  as: passed senate
+  sort_order: 3
+amended by senate:
+  as: amended by senate
+  sort_order: 4
+amended by house:
+  as: amended by house
+  sort_order: 5
+reported to senate:
+  as: reported to senate
+  sort_order: 6
+reported to house:
+  as: reported to house
+  sort_order: 7
+introduced:
+  as: introduced
+  sort_order: 8
+popular:
+  as: popular
+  sort_order: 9

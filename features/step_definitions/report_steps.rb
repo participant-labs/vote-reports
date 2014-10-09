@@ -4,32 +4,33 @@ end
 
 Given /^(I have |)an? (.*?) ?report named "([^\"]*)"$/ do |mine, type, name|
   params = mine.present? ? {user: current_user} : {}
-  creator = type.present? ? :"create_#{type}_report" : :create_report
-  send(creator, params.merge(name: name))
+  if type.present?
+    create(:report, type, params.merge(name: name))
+  else
+    create(:report, params.merge(name: name))
+  end
 end
 
 Given /^(\d+) published reports$/ do |count|
-  count.to_i.times do
-    create_published_report
-  end
+  create_list(:report, count.to_i, :published)
 end
 
 Given /^I have the following (.*) reports?:$/ do |type, table|
   table.hashes.each do |row|
-    send(:"create_#{type}_report", row.symbolize_keys.merge(user: current_user))
+    create(:report, type, row.symbolize_keys.merge(user: current_user))
   end
 end
 
 Given /^the following (.*) reports?:$/ do |type, table|
   table.hashes.each do |row|
-    send(:"create_#{type}_report", row.symbolize_keys)
+    create(:report, type, row.symbolize_keys)
   end
 end
 
 Given /^(\d+) published reports with (subject "[^"]*")$/ do |count, subject|
   Integer(count).times do
-    report = create_published_report
-    create_report_subject(report: report, subject: subject)
+    report = create(:report, :published)
+    create(:report_subject, report: report, subject: subject)
   end
 end
 

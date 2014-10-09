@@ -1,13 +1,13 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
- 
+
 describe Politicians::ReportsController do
   setup :activate_authlogic
   render_views
 
   before do
-    @politician = create_politician
-    @report_scores = 5.times.map do
-      create_published_report.scores.for_politicians(@politician).first
+    @politician = create(:politician)
+    @report_scores = create_list(:report, 5, :published).map do |report|
+      report.scores.for_politicians(@politician).first
     end
   end
 
@@ -24,7 +24,7 @@ describe Politicians::ReportsController do
     context "when narrowed by subject" do
       before do
         @score = @report_scores.first
-        @report_subject = create_report_subject(report: @score.report)
+        @report_subject = create(:report_subject, report: @score.report)
       end
 
       it "should return reports with those subjects" do

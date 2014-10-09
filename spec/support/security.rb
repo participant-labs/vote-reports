@@ -1,5 +1,9 @@
 shared_context 'as an admin' do
-  let(:admin) { create_admin }
+  let(:admin) {
+    user = create(:user)
+    user.create_adminship!(created_by: user)
+    user
+  }
 
   before do
     login admin

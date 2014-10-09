@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe InterestGroups::ClaimsController do
-  let(:interest_group) { create_interest_group }
+  let(:interest_group) { create(:interest_group) }
 
   describe 'GET new' do
     render_views

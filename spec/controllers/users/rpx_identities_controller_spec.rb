@@ -5,7 +5,7 @@ describe Users::RpxIdentitiesController do
 
   describe "POST #create" do
     describe "on adding a registration to an existing user" do
-      def create_post(user)
+      def send_request(user)
         mock(UserSession).find { UserSession.create(user) }
         post :create, user_id: user.to_param,
           "token"=>"2a6e5bb00cd01b94752c26e55bbde78242e1514b",
@@ -28,20 +28,20 @@ describe Users::RpxIdentitiesController do
       end
 
       context 'as a user' do
-        let(:user) { create_user }
+        let(:user) { create(:user) }
         before { login user }
 
         context "when adding to someone else" do
-          let(:modified)  { create_user }
+          let(:modified)  { create(:user) }
 
           it "should redirect" do
-            create_post(modified)
+            send_request(modified)
             response.should redirect_to(user_path(modified))
           end
 
           it "should not create an rpx identity" do
             expect {
-              create_post(modified)
+              send_request(modified)
             }.to_not change(RPXIdentifier, :count)
           end
         end
@@ -52,25 +52,25 @@ describe Users::RpxIdentitiesController do
           end
 
           it "should redirect to user page" do
-            create_post(user)
+            send_request(user)
             response.should redirect_to(user_path(user))
           end
 
           it "should notify of success" do
-            create_post(user)
+            send_request(user)
             flash[:notice].should == "Successfully added login to this account."
           end
 
           it "should create an RPXIdentifier" do
             pending "Tokens are time-sensitive and I don't know how to generate them properly"
             lambda {
-              create_post(user)
+              send_request(user)
             }.should change(RPXIdentifier, :count).by(1)
           end
 
           it "should create an rpx_identifier record" do
             pending "Tokens are time-sensitive and I don't know how to generate them properly"
-            create_post(user)
+            send_request(user)
             RPXIdentifier.find_by_identifier(@identifier).user.should == user
             User.find_by_rpx_identifier(@identifier).should == user
           end

@@ -46,7 +46,7 @@ describe UserSessionsController do
       it_behaves_like 'failed sign-in'
     end
     context "I'm signed up" do
-      let(:user) { create_user(password: 'password') }
+      let(:user) { create(:user, password: 'password') }
 
       context "but I put in the wrong email" do
         let(:session_params) {

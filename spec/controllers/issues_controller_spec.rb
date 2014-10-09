@@ -10,8 +10,8 @@ describe IssuesController do
       context 'when linking two causes' do
         before do
           @causes = [
-            create_cause(name: 'Gun Rights'),
-            create_cause(name: 'Gun Control')
+            create(:cause, name: 'Gun Rights'),
+            create(:cause, name: 'Gun Control')
           ]
         end
 

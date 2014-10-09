@@ -3,14 +3,15 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe Bill do
   describe ".search" do
     include SolrSpecHelper
+    before(:all) { solr_setup }
 
     after(:all) do
       Bill.remove_all_from_index!
     end
 
     before do
-      bill = create_bill
-      create_bill_title(bill: bill, title: "USA PATRIOT Reauthorization Act of 2009")
+      bill = create(:bill)
+      create(:bill_title, bill: bill, title: "USA PATRIOT Reauthorization Act of 2009")
       Bill.solr_reindex
     end
 
@@ -28,7 +29,7 @@ describe Bill do
     end
 
     it "should match on bill number" do
-      bill = create_bill(bill_number: 4472)
+      bill = create(:bill, bill_number: 4472)
       Bill.solr_reindex
       Bill.search { fulltext "4472" }.results.should == [bill]
     end
@@ -37,14 +38,14 @@ describe Bill do
   describe "Validations" do
     it "should validate presence of introduced_on" do
       proc {
-        create_bill(introduced_on: nil)
+        create(:bill, introduced_on: nil)
       }.should raise_error(ActiveRecord::StatementInvalid)
     end
   end
 
   describe "Updates" do
     before do
-      @bill = create_bill(bill_type: 'h')
+      @bill = create(:bill, bill_type: 'h')
     end
     context "when updating congress_id" do
       context "with a new value" do
@@ -106,22 +107,22 @@ describe Bill do
 
   describe ".by_introduced_on" do
     it "should return bills with the most recent first" do
-      bill1 = create_bill(introduced_on: 1.year.ago)
-      bill2 = create_bill(introduced_on: 2.years.ago)
-      bill3 = create_bill(introduced_on: 1.month.ago)
+      bill1 = create(:bill, introduced_on: 1.year.ago)
+      bill2 = create(:bill, introduced_on: 2.years.ago)
+      bill3 = create(:bill, introduced_on: 1.month.ago)
       Bill.by_introduced_on.should == [bill3, bill1, bill2]
     end
   end
 
   describe "#politicians" do
     before do
-      @supporting = create_politician
-      @opposing = create_politician
-      @unconnected = create_politician
-      @bill = create_bill
-      @roll = create_roll(subject: @bill)
-      create_vote(politician: @supporting, roll: @roll, vote: '+')
-      create_vote(politician: @opposing, roll: @roll, vote: '-')
+      @supporting = create(:politician)
+      @opposing = create(:politician)
+      @unconnected = create(:politician)
+      @bill = create(:bill)
+      @roll = create(:roll, subject: @bill)
+      create(:vote, politician: @supporting, roll: @roll, vote: '+')
+      create(:vote, politician: @opposing, roll: @roll, vote: '-')
     end
 
     it "returns all politicians with connecting votes" do

@@ -2,7 +2,7 @@ Given /^(report "[^\"]*") has the following (.*) criteri(?:a|on):$/ do |report, 
   type = criterion_type.classify.constantize
   table.map_column!(criterion_type) {|title| type.with_title(title).first }
   table.hashes.each do |attrs|
-    send(:"create_#{criterion_type}_criterion", attrs.symbolize_keys.merge(report: report))
+    create(:"#{criterion_type}_criterion", attrs.symbolize_keys.merge(report: report))
   end
 end
 
@@ -10,7 +10,7 @@ Given /^(interest group "[^\"]*") has the following (.*) criteri(?:a|on):$/ do |
   type = criterion_type.classify.constantize
   table.map_column!(criterion_type) {|title| type.with_title(title).first }
   table.hashes.each do |attrs|
-    send(:"create_#{criterion_type}_criterion", attrs.symbolize_keys.merge(report: interest_group.report))
+    create(:"#{criterion_type}_criterion", attrs.symbolize_keys.merge(report: interest_group.report))
   end
 end
 

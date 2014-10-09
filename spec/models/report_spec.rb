@@ -13,7 +13,7 @@ describe Report do
 
   describe "destruction" do
     it "should delete related criteria" do
-      report = create_published_report
+      report = create(:report, :published)
       criteria = report.bill_criteria
       criteria.should_not be_empty
       lambda {
@@ -24,9 +24,9 @@ describe Report do
 
   describe ".with_criteria" do
     it "should return reports with bill_criteria" do
-      create_report
-      published_report = create_report
-      create_bill_criterion(report: published_report)
+      create(:report)
+      published_report = create(:report)
+      create(:bill_criterion, report: published_report)
 
       Report.with_criteria.should == [published_report]
     end
@@ -34,18 +34,18 @@ describe Report do
 
   describe ".unpublished" do
     it  "should include private and unlisted reports" do
-      unlisted = create_unlisted_report
-      private_report = create_private_report
+      unlisted = create(:report, :unlisted)
+      private_report = create(:report)
       Report.unpublished.to_a.should =~ [unlisted, private_report]
     end
 
     it "should not include personal reports" do
-      personal = create_personal_report
+      personal = create(:report, :personal)
       Report.unpublished.should_not include(personal)
     end
 
     it "should not include published reports" do
-      published = create_published_report
+      published = create(:report, :published)
       published.state.should == 'published'
       Report.unpublished.should_not include(published)
     end
@@ -53,23 +53,23 @@ describe Report do
 
   describe ".scored" do
     before do
-      create_report
-      published_report = create_report
-      create_bill_criterion(report: published_report)
-      @report = create_report
-      @bill = create_bill
-      create_bill_criterion(report: @report, bill: @bill)
+      create(:report)
+      published_report = create(:report)
+      create(:bill_criterion, report: published_report)
+      @report = create(:report)
+      @bill = create(:bill)
+      create(:bill_criterion, report: @report, bill: @bill)
     end
 
     it "should not return reports with non-passage votes" do
-      roll = create_roll(subject: @bill)
+      roll = create(:roll, subject: @bill)
       Bill::ROLL_PASSAGE_TYPES.should_not include(roll.roll_type)
 
       Report.scored.should == []
     end
 
     it "should return reports with voted bill_criteria" do
-      create_roll(subject: @bill, roll_type: Bill::ROLL_PASSAGE_TYPES.sample)
+      create(:roll, subject: @bill, roll_type: Bill::ROLL_PASSAGE_TYPES.sample)
 
       Report.scored.should == [@report]
     end
@@ -77,7 +77,7 @@ describe Report do
 
   describe "#rescore!" do
     before do
-      @report = create_report
+      @report = create(:report)
     end
 
     it "should not create a delayed job accessible via #delayed_jobs" do
@@ -88,8 +88,8 @@ describe Report do
 
     context "when the report has a score criteria" do
       before do
-        create_bill_criterion(report: @report)
-        roll = create_roll(subject: @report.reload.bill_criteria.first.bill, roll_type: "On Passage")
+        create(:bill_criterion, report: @report)
+        roll = create(:roll, subject: @report.reload.bill_criteria.first.bill, roll_type: "On Passage")
       end
 
       it "should create a delayed job accessible via #delayed_jobs" do

@@ -6,7 +6,7 @@ describe Users::Reports::BillCriteriaController do
   describe "GET new" do
     before do
       login
-      @report = create_report(user: current_user)
+      @report = create(:report, user: current_user)
     end
 
     context "when I am not logged in" do
@@ -19,7 +19,7 @@ describe Users::Reports::BillCriteriaController do
 
     context "when I am not the owner" do
       before do
-        login(create_user)
+        login(create(:user))
         current_user.should_not == @report.user
       end
 

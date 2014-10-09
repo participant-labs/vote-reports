@@ -3,13 +3,13 @@ require "authlogic/test_case"
 module Authlogic::Test
   def current_user(opts = {})
     if opts.empty?
-      @current_user ||= create_user.reload
+      @current_user ||= create(:user).reload
     else
       logout
-      @current_user = create_user(opts).reload
+      @current_user = create(:user, opts).reload
     end
   end
- 
+
   def login(user = nil)
     user ||= current_user
     UserSession.create(user)

@@ -3,5 +3,5 @@ Transform /^amendment "(.*)"$/ do |amendment_title|
 end
 
 Given /^an amendment named "([^"]*)" on (bill "[^"]*")$/ do |amendment_title, bill|
-  create_amendment(bill: bill, purpose: amendment_title, description: amendment_title)
+  create(:amendment, bill: bill, purpose: amendment_title, description: amendment_title)
 end

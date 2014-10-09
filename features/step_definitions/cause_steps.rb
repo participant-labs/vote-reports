@@ -3,7 +3,7 @@ Transform /^cause "(.*)"$/ do |cause_name|
 end
 
 Given /^a cause named "([^"]*)"$/ do |cause_name|
-  create_cause(name: cause_name)
+  create(:cause, name: cause_name)
 end
 
 Given /^(cause "[^"]*") includes (report "[^"]*")$/ do |cause, report|

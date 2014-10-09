@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Politician do
   before do
-    @politician = create_politician
+    @politician = create(:politician)
   end
 
   describe ".from" do
@@ -19,25 +19,25 @@ describe Politician do
 
   describe "#state" do
     it "should be sourced from the latest term" do
-      state = create_us_state
+      state = UsState.all.sample
       @politician.state.should_not == state
       proc {
-        create_representative_term(congressional_district: create_congressional_district(state: state), politician: @politician, ended_on: 1.year.ago)
+        create(:representative_term, congressional_district: create(:congressional_district, state: state), politician: @politician, ended_on: 1.year.ago)
       }.should change(@politician, :state).to(state)
-      new_state = create_us_state
+      new_state = UsState.all.sample
       proc {
-        create_senate_term(state: new_state, politician: @politician, ended_on: 1.year.from_now)
+        create(:senate_term, state: new_state, politician: @politician, ended_on: 1.year.from_now)
       }.should change(@politician, :state).to(new_state)
     end
   end
 
   describe "#rolls" do
     before do
-      @supported = create_roll
-      @opposed = create_roll
-      @unconnected = create_roll
-      create_vote(politician: @politician, roll: @supported, vote: '+')
-      create_vote(politician: @politician, roll: @opposed, vote: '-')
+      @supported = create(:roll)
+      @opposed = create(:roll)
+      @unconnected = create(:roll)
+      create(:vote, politician: @politician, roll: @supported, vote: '+')
+      create(:vote, politician: @politician, roll: @opposed, vote: '-')
     end
 
     it "returns all politicians with connecting votes" do

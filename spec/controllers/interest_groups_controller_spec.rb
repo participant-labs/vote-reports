@@ -3,7 +3,7 @@ require 'spec_helper'
 describe InterestGroupsController do
   describe 'GET index' do
     before do
-      35.times { create_interest_group }
+      35.times { create(:interest_group) }
     end
 
     context 'without arguments' do

@@ -3,17 +3,17 @@ require 'spec_helper'
 describe ReportScore do
   it "should create a new instance given valid attributes" do
     ReportScore.create!(
-      politician: create_politician,
-      report: create_report,
+      politician: create(:politician),
+      report: create(:report),
       score: 1.5
     )
   end
 
   describe "on destroy" do
     before do
-      @score_evidence = create_report_score_evidence
+      @score_evidence = create(:report_score_evidence)
       @score = @score_evidence.score
-      @dependent_score_evidence = create_report_score_evidence(evidence: @score)
+      @dependent_score_evidence = create(:report_score_evidence, evidence: @score)
       @dependent_score = @dependent_score_evidence.score
     end
 

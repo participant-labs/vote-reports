@@ -16,12 +16,12 @@ Given /^my location is assured(?: to "([^"]*)")?$/ do |congressional_district|
 
   if congressional_district
     state, district_number = congressional_district.split('-')
-    state = UsState.find_by_abbreviation(state) || create_us_state(abbreviation: state)
+    state = UsState.find_by_abbreviation!(state)
     District.find_each do |district|
       district.update_attributes!(state: state, name: district_number)
     end
   else
-    state = create_us_state
+    state = UsState.all.sample
     District.update_all(us_state_id: state.id)
   end
 end

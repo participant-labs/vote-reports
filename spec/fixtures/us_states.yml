@@ -1,6 +1,200 @@
----
-  tx:
-    id: 6
-    full_name: "Texas"
-    abbreviation: 'TX'
-    state_type: state
+ak:
+  full_name: Alaska
+  abbreviation: AK
+  state_type: state
+al:
+  full_name: Alabama
+  abbreviation: AL
+  state_type: state
+ar:
+  full_name: Arkansas
+  abbreviation: AR
+  state_type: state
+az:
+  full_name: Arizona
+  abbreviation: AZ
+  state_type: state
+ca:
+  full_name: California
+  abbreviation: CA
+  state_type: state
+co:
+  full_name: Colorado
+  abbreviation: CO
+  state_type: state
+ct:
+  full_name: Connecticut
+  abbreviation: CT
+  state_type: state
+dc:
+  full_name: District of Columbia
+  abbreviation: DC
+  state_type: state
+de:
+  full_name: Delaware
+  abbreviation: DE
+  state_type: state
+fl:
+  full_name: Florida
+  abbreviation: FL
+  state_type: state
+ga:
+  full_name: Georgia
+  abbreviation: GA
+  state_type: state
+hi:
+  full_name: Hawaii
+  abbreviation: HI
+  state_type: state
+ia:
+  full_name: Iowa
+  abbreviation: IA
+  state_type: state
+id:
+  full_name: Idaho
+  abbreviation: ID
+  state_type: state
+il:
+  full_name: Illinois
+  abbreviation: IL
+  state_type: state
+in:
+  full_name: Indiana
+  abbreviation: IN
+  state_type: state
+ks:
+  full_name: Kansas
+  abbreviation: KS
+  state_type: state
+ky:
+  full_name: Kentucky
+  abbreviation: KY
+  state_type: state
+la:
+  full_name: Louisiana
+  abbreviation: LA
+  state_type: state
+ma:
+  full_name: Massachusetts
+  abbreviation: MA
+  state_type: state
+md:
+  full_name: Maryland
+  abbreviation: MD
+  state_type: state
+me:
+  full_name: Maine
+  abbreviation: ME
+  state_type: state
+mn:
+  full_name: Minnesota
+  abbreviation: MN
+  state_type: state
+mo:
+  full_name: Missouri
+  abbreviation: MO
+  state_type: state
+ms:
+  full_name: Mississippi
+  abbreviation: MS
+  state_type: state
+mt:
+  full_name: Montana
+  abbreviation: MT
+  state_type: state
+nc:
+  full_name: North Carolina
+  abbreviation: NC
+  state_type: state
+nd:
+  full_name: North Dakota
+  abbreviation: ND
+  state_type: state
+ne:
+  full_name: Nebraska
+  abbreviation: NE
+  state_type: state
+nh:
+  full_name: New Hampshire
+  abbreviation: NH
+  state_type: state
+nj:
+  full_name: New Jersey
+  abbreviation: NJ
+  state_type: state
+nm:
+  full_name: New Mexico
+  abbreviation: NM
+  state_type: state
+nv:
+  full_name: Nevada
+  abbreviation: NV
+  state_type: state
+ny:
+  full_name: New York
+  abbreviation: NY
+  state_type: state
+oh:
+  full_name: Ohio
+  abbreviation: OH
+  state_type: state
+ok:
+  full_name: Oklahoma
+  abbreviation: OK
+  state_type: state
+or:
+  full_name: Oregon
+  abbreviation: OR
+  state_type: state
+pa:
+  full_name: Pennsylvania
+  abbreviation: PA
+  state_type: state
+ri:
+  full_name: Rhode Island
+  abbreviation: RI
+  state_type: state
+sc:
+  full_name: South Carolina
+  abbreviation: SC
+  state_type: state
+sd:
+  full_name: South Dakota
+  abbreviation: SD
+  state_type: state
+tn:
+  full_name: Tennessee
+  abbreviation: TN
+  state_type: state
+tx:
+  full_name: Texas
+  abbreviation: TX
+  state_type: state
+ut:
+  full_name: Utah
+  abbreviation: UT
+  state_type: state
+va:
+  full_name: Virginia
+  abbreviation: VA
+  state_type: state
+vt:
+  full_name: Vermont
+  abbreviation: VT
+  state_type: state
+wa:
+  full_name: Washington
+  abbreviation: WA
+  state_type: state
+wi:
+  full_name: Wisconsin
+  abbreviation: WI
+  state_type: state
+wv:
+  full_name: West Virginia
+  abbreviation: WV
+  state_type: state
+wy:
+  full_name: Wyoming
+  abbreviation: WY
+  state_type: state

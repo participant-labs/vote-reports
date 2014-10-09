@@ -4,7 +4,7 @@ describe PoliticiansController do
   setup :activate_authlogic
 
   describe "GET index" do
-    let(:has_many_politicians) { 35.times { create_politician } }
+    let(:has_many_politicians) { 35.times { create(:politician) } }
 
     context 'without params' do
       it 'shows the first page of politicians' do
@@ -25,7 +25,7 @@ describe PoliticiansController do
 
   describe "GET show" do
     context "when there is a better id for this report" do
-      let(:politician) { create_politician }
+      let(:politician) { create(:politician) }
 
       it "should redirect" do
         get :show, id: politician.id

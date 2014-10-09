@@ -25,7 +25,7 @@ describe UsersController do
   end
 
   describe "GET show" do
-    let(:other_user) { create_user }
+    let(:other_user) { create(:user) }
 
     context 'when logged in' do
       before do
@@ -50,7 +50,7 @@ describe UsersController do
 
   describe "GET edit" do
     before do
-      @user = create_user
+      @user = create(:user)
     end
 
     it "should reject me if I'm not logged in" do
@@ -61,7 +61,7 @@ describe UsersController do
     end
 
     it "should reject me if I'm not the user being edited" do
-      current = create_user
+      current = create(:user)
       login(current)
       get :edit, id: @user
       response.should redirect_to(user_reports_url(@user))

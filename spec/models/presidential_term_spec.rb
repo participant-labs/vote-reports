@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe PresidentialTerm do
   before do
-    @middle = create_presidential_term(ended_on: 1.month.ago)
-    @oldest = create_presidential_term(ended_on: 10.years.ago)
-    @latest = create_presidential_term(ended_on: 1.year.from_now)
+    @middle = create(:presidential_term, ended_on: 1.month.ago)
+    @oldest = create(:presidential_term, ended_on: 10.years.ago)
+    @latest = create(:presidential_term, ended_on: 1.year.from_now)
   end
 
   describe ".by_ended_on" do

@@ -5,8 +5,8 @@ describe Issue do
     context "with a title and some causes" do
       before do
         @causes = [
-          create_cause(name: 'Gun Rights'),
-          create_cause(name: 'Gun Control')
+          create(:cause, name: 'Gun Rights'),
+          create(:cause, name: 'Gun Control')
         ]
       end
 

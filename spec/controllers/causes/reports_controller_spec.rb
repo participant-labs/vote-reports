@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Causes::ReportsController do
   setup :activate_authlogic
 
-  let(:report) { create_published_report(name: "Brady Campaign to Prevent Gun Violence") }
-  let(:cause) { create_cause(name: 'Gun Control') }
+  let(:report) { create(:report, :published, name: "Brady Campaign to Prevent Gun Violence") }
+  let(:cause) { create(:cause, name: 'Gun Control') }
 
   describe 'GET new' do
     context 'as an admin' do
@@ -12,6 +12,7 @@ describe Causes::ReportsController do
 
       context 'with a term' do
         include SolrSpecHelper
+        before(:all) { solr_setup }
         before {
           report
           Report.solr_reindex

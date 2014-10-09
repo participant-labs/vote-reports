@@ -5,7 +5,7 @@ describe CausesController do
 
   describe 'GET index' do
     let(:with_many_causes) {
-      35.times { create_cause }
+      35.times { create(:cause) }
     }
     context 'without params' do
       it 'shows the first page of causes' do
@@ -53,7 +53,7 @@ describe CausesController do
   end
 
   describe 'PUT update' do
-    let(:cause) { create_cause(name: 'Trade is Awesome') }
+    let(:cause) { create(:cause, name: 'Trade is Awesome') }
     let(:new_name) { 'International Trade is Awesome' }
 
     def send_request

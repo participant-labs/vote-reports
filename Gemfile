@@ -26,6 +26,9 @@ gem 'paperclip', '>= 2.3.3'
 gem 'pg'
 gem 'rpx_now', '>= 0.6.12'
 
+# Geo
+gem 'georuby', require: 'geo_ruby'
+
 #Models
 gem 'Empact-sexy_pg_constraints', require: 'sexy_pg_constraints'
 gem 'state_machine'
@@ -39,7 +42,6 @@ gem 'ym4r'
 gem 'httparty'
 gem 'parallel'
 
-# Models
 gem 'kaminari'
 gem 'sunspot_rails'
 gem 'sunspot_with_kaminari'
@@ -74,7 +76,7 @@ end
 group :test, :development do
   gem 'debugger', require: false
 
-  gem "rspec-rails"
+  gem "rspec-rails", '< 3.0.0'
 end
 
 group :test do
@@ -90,7 +92,6 @@ group :test do
   gem 'launchy'
 
   # Fixtures
-  gem 'fixjour'
+  gem 'factory_girl_rails'
   gem 'forgery'
-  gem 'georuby', require: 'geo_ruby'
 end

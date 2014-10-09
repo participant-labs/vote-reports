@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe BillCriterion do
   before do
-    @bill_criterion = create_bill_criterion
+    @bill_criterion = create(:bill_criterion)
   end
 
   describe "#support=" do
@@ -29,12 +29,12 @@ describe BillCriterion do
 
   describe "#rescore_report!" do
     before do
-      @report = create_report
+      @report = create(:report)
     end
 
     context "on create" do
       it "should be called" do
-        criterion = new_bill_criterion(report: @report)
+        criterion = build(:bill_criterion, report: @report)
         mock(@report).rescore!
         criterion.save!
       end
@@ -42,13 +42,13 @@ describe BillCriterion do
 
     context "on update" do
       it "should be called if support is changed" do
-        criterion = create_bill_criterion(report: @report, support: true)
+        criterion = create(:bill_criterion, report: @report, support: true)
         mock(@report).rescore!
         criterion.update_attributes(support: false)
       end
 
       it "should not be called if support is not changed" do
-        criterion = create_bill_criterion(report: @report)
+        criterion = create(:bill_criterion, report: @report)
         dont_allow(@report).rescore!
         criterion.update_attributes(explanatory_url: 'http://google.com')
       end

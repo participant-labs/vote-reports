@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
- 
+
 describe Users::ReportsController do
   setup :activate_authlogic
 
@@ -10,7 +10,7 @@ describe Users::ReportsController do
   describe "GET show" do
     context "when there is a better id for this report" do
       before do
-        @report = create_report(user: current_user)
+        @report = create(:report, user: current_user)
       end
 
       it "should redirect" do
@@ -23,7 +23,7 @@ describe Users::ReportsController do
 
   describe "GET edit" do
     before do
-      @report = create_report(user: current_user)
+      @report = create(:report, user: current_user)
     end
 
     context "when there is a better id for this report" do
@@ -43,7 +43,7 @@ describe Users::ReportsController do
 
     context "when I am not the owner" do
       before do
-        login(create_user)
+        login(create(:user))
         current_user.should_not == @report.user
       end
 
