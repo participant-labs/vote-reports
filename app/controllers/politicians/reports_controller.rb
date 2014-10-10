@@ -1,6 +1,6 @@
 class Politicians::ReportsController < ApplicationController
   def index
-    @politician = Politician.find(params[:politician_id])
+    @politician = Politician.friendly.find(params[:politician_id])
 
     params[:subjects] ||= []
     if params[:term].present?
@@ -11,7 +11,7 @@ class Politicians::ReportsController < ApplicationController
       @scores = topical_scores.page(params[:page])
     end
 
-    @subjects = Subject.for_report(paginated_results(@scores).map(&:report)).for_tag_cloud.all(limit: 20)
+    @subjects = Subject.for_report(paginated_results(@scores).map(&:report)).for_tag_cloud.limit(20)
 
     respond_to do |format|
       format.html {

@@ -81,7 +81,7 @@ class InterestGroupsController < ApplicationController
     redirect_to interest_groups_path
   end
 
-  protected
+  private
 
   def new_interest_group_from_params
     @interest_group = InterestGroup.new((params[:interest_group] || {}).reject {|k, v| v.blank? })

@@ -2,6 +2,8 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 source 'http://rubygems.org'
 
+ruby '2.1.3'
+
 gem 'rails', '4.0.10'
 
 gem 'ancestry', '>=1.2.0'
@@ -74,7 +76,7 @@ group :development do
 end
 
 group :test, :development do
-  gem 'debugger', require: false
+  gem 'byebug', require: false
 
   gem "rspec-rails", '< 3.0.0'
 end

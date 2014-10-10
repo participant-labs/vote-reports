@@ -14,14 +14,15 @@ class Report
     end
 
     def perform
-      GuideScore.delete_all(report_ids: report_id)
+      GuideScore.joins(guide: :guide_reports).where(guide_reports: {report_id: report_id})
+        .delete_all
       rescue_and_reraise do
         @bases = {}
         ActiveRecord::Base.transaction do
           report = Report.find(report_id)
           evidences = {}
 
-          ReportScore.destroy_all(report_id: report.id)
+          ReportScore.where(report_id: report.id).destroy_all
           report.score_criteria.inject({}) do |criterion_events, criterion|
             # Collect up all important events by politician and criteria
             # e.g.

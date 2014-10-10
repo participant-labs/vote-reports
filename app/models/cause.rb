@@ -21,7 +21,7 @@ class Cause < ActiveRecord::Base
   scope :random, -> { order('random()') }
 
   def related_causes
-    Cause.joins(:issue_causes).where(['causes.id NOT IN(?) AND issue_causes.issue_id IN(?)', self, issues])
+    Cause.joins(:issue_causes).where('causes.id NOT IN(?) AND issue_causes.issue_id IN(?)', self, issues.pluck('issues.id'))
   end
 
   accepts_nested_attributes_for :cause_reports, reject_if: proc {|attributes| attributes['support'] == '0' }

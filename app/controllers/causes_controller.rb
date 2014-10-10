@@ -41,7 +41,7 @@ class CausesController < ApplicationController
           redirect_to cause_path(@cause), status: 301
           return
         end
-        @related_causes = @cause.related_causes.all(limit: 3)
+        @related_causes = @cause.related_causes.limit(3)
       }
       format.js {
         render partial: 'reports/scores/table', locals: {
@@ -81,7 +81,7 @@ class CausesController < ApplicationController
     redirect_to causes_path
   end
 
-  protected
+  private
 
   def new_cause_from_params
     @cause = Cause.new(cause_params)
@@ -90,8 +90,6 @@ class CausesController < ApplicationController
   def load_cause
     @cause = Cause.friendly.find(params[:id])
   end
-
-  private
 
   def cause_params
     params.require(:cause).permit(:name, :description)

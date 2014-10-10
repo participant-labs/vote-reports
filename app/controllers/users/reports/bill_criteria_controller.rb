@@ -39,14 +39,12 @@ class Users::Reports::BillCriteriaController < ApplicationController
     redirect_to edit_user_report_path(@user, @report, anchor: 'Edit_Agenda')
   end
 
-  protected
+  private
 
   def load_report
     @user = User.friendly.find(params[:user_id])
     @report = @user.reports.friendly.find(params[:report_id])
   end
-
-  private
 
   def permission_denied_path
     user_report_path(params[:user_id], params[:report_id])

@@ -70,15 +70,7 @@ class Users::ReportsController < ApplicationController
     redirect_to user_reports_path(@user)
   end
 
-  protected
-
-  def permission_denied_path
-    if permitted_to?(:show, @report, context: :users_reports)
-      user_report_path(params[:user_id], params[:id])
-    else
-      user_reports_path(params[:user_id])
-    end
-  end
+  private
 
   def load_user
     @user = User.friendly.find(params[:user_id])
@@ -86,5 +78,13 @@ class Users::ReportsController < ApplicationController
 
   def load_report
     @report = @user.reports.except_personal.friendly.find(params[:id])
+  end
+
+  def permission_denied_path
+    if permitted_to?(:show, @report, context: :users_reports)
+      user_report_path(params[:user_id], params[:id])
+    else
+      user_reports_path(params[:user_id])
+    end
   end
 end

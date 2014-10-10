@@ -22,7 +22,7 @@ class Causes::ReportsController < ApplicationController
   end
 
   def create
-    if @cause.update_attributes(params[:cause].slice(:cause_reports_attributes))
+    if @cause.update_attributes(cause_params)
       flash[:success] = "Successfully added reports to cause"
       redirect_to @cause
     else
@@ -49,7 +49,11 @@ class Causes::ReportsController < ApplicationController
 
   private
 
+  def cause_params
+    params.require(:cause).permit(cause_reports_attributes: [:report_id])
+  end
+
   def load_cause
-    @cause = Cause.find(params[:cause_id])
+    @cause = Cause.friendly.find(params[:cause_id])
   end
 end

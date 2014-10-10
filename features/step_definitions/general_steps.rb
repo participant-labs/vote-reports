@@ -30,8 +30,8 @@ When /^I console$/ do
 end
 
 When /^I debug$/ do
-  require 'debugger'
-  debugger
+  require 'byebug'
+  byebug
   x = 1 + 1
 end
 

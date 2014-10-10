@@ -40,13 +40,11 @@ class IssuesController < ApplicationController
     redirect_to action: :index
   end
 
-  protected
+  private
 
   def new_issue_from_params
     @issue = Issue.new(issue_params)
   end
-
-  private
 
   def issue_params
     ps = params.require(:issue).permit(:title)

@@ -27,7 +27,7 @@ class Cosponsorship < ActiveRecord::Base
     bill
   end
 
-  protected
+  private
 
   def populate_joined_on_if_missing
     joined_on ||= bill.try(:introduced_on)

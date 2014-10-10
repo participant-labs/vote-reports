@@ -51,13 +51,13 @@ class ReportScore < ActiveRecord::Base
   scope :for_reports_with_subjects, ->(subjects) {
     subjects = Array(subjects)
     if subjects.empty?
-      {}
+      all
     else
-      select('DISTINCT report_scores.*')\
-      .joins(report: :subjects)\
-      .where((subjects.first.is_a?(String) \
-       ? ["subjects.name IN(?) OR subjects.slug IN(?)", subjects, subjects] \
-       : ['subjects.id IN(?)', subjects]))
+      select('DISTINCT report_scores.*')
+        .joins(report: :subjects)
+        .where((subjects.first.is_a?(String) \
+         ? ["subjects.name IN(?) OR subjects.slug IN(?)", subjects, subjects] \
+         : ['subjects.id IN(?)', subjects]))
     end
   }
 
