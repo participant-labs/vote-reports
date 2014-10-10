@@ -3,8 +3,6 @@
 source 'http://rubygems.org'
 
 gem 'rails', '4.0.10'
-gem 'actionpack-page_caching'
-gem 'rails-observers'
 
 gem 'ancestry', '>=1.2.0'
 gem 'authlogic'

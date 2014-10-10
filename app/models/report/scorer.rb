@@ -22,7 +22,6 @@ class Report
           evidences = {}
 
           ReportScore.destroy_all(report_id: report.id)
-          ReportSweeper.send(:new).on_rescore(report)
           report.score_criteria.inject({}) do |criterion_events, criterion|
             # Collect up all important events by politician and criteria
             # e.g.
