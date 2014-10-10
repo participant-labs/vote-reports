@@ -2,8 +2,6 @@ class GuideScore < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
   include Score
 
-  key :evidence_description, String
-
   belongs_to :guide
   belongs_to :politician
   has_many :evidence, class_name: 'GuideScoreEvidence'
