@@ -15,21 +15,21 @@ FactoryGirl.define do
 
     trait :unscored do
       after :create do |report|
-        FactoryGirl.create(:bill_criterion, report: report)
-        Delayed::Worker.new(quiet: true).work_off(5)
+        create(:bill_criterion, report: report)
+        Delayed::Worker.new.work_off
       end
     end
 
     trait :scored do
       unscored
       after :create do |report|
-        FactoryGirl.create(:politician) if Politician.count == 0
-        roll = FactoryGirl.create(:roll, subject: report.bill_criteria.first.bill, roll_type: "On Passage")
+        create(:politician) if Politician.count == 0
+        roll = create(:roll, subject: report.bill_criteria.first.bill, roll_type: "On Passage")
         Politician.find_each do |p|
-          FactoryGirl.create(:vote, roll: roll, politician: p, vote: Vote::POSSIBLE_VALUES.sample)
+          create(:vote, roll: roll, politician: p, vote: Vote::POSSIBLE_VALUES.sample)
         end
         report.rescore!
-        Delayed::Worker.new(quiet: true).work_off(5)
+        Delayed::Worker.new.work_off
       end
     end
 

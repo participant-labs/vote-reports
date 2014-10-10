@@ -5,7 +5,7 @@ describe UserSessionsController do
 
   describe 'GET new' do
     it "routes from /login" do
-      {get: '/login'}.should route_to(controller: 'user_sessions', action: 'new')
+      expect(get: '/login').to route_to(controller: 'user_sessions', action: 'new')
     end
   end
 
@@ -13,24 +13,24 @@ describe UserSessionsController do
     shared_examples_for 'failed sign-in' do
       it "tells me I'm wrong" do
         send_request
-        flash[:error].should == "Failed to login or register."
+        expect(flash[:error]).to eq("Failed to login or register.")
       end
     end
     shared_examples_for 'successful sign-in' do
       it "tells me it worked" do
         send_request
-        flash[:notice].should == "Logged in successfully"
+        expect(flash[:notice]).to eq("Logged in successfully")
       end
 
       it "sends me to my dashboard" do
         send_request
-        response.should redirect_to(user_path(user))
+        expect(response).to redirect_to(user_path(user))
       end
 
       context 'when I have a return path set' do
         it 'sends me to the return path' do
           send_request(return_to: causes_path)
-          response.should redirect_to(causes_path)
+          expect(response).to redirect_to(causes_path)
         end
       end
     end
@@ -79,7 +79,7 @@ describe UserSessionsController do
 
   describe 'DELETE destroy' do
     it "routes from /logout" do
-      {get: '/logout'}.should route_to(controller: 'user_sessions', action: 'destroy')
+      expect(get: '/logout').to route_to(controller: 'user_sessions', action: 'destroy')
     end
 
     context 'when logged in' do
@@ -87,7 +87,7 @@ describe UserSessionsController do
 
       it 'alerts me to signout' do
         delete :destroy
-        flash[:notice].should == "You have been logged out"
+        expect(flash[:notice]).to eq("You have been logged out")
       end
 
       it 'signs me out' do
@@ -98,7 +98,7 @@ describe UserSessionsController do
 
       it 'sends me to the home page' do
         delete :destroy
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
     end
   end

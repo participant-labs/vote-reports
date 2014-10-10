@@ -23,5 +23,5 @@ end
 
 Given /^the scores for (interest group "[^"]*") are calculated$/ do |interest_group|
   interest_group.rescore!
-  Delayed::Worker.new(quiet: true).work_off(1).should == [1, 0]
+  expect(Delayed::Worker.new(quiet: true).work_off(1)).to == [1, 0]
 end

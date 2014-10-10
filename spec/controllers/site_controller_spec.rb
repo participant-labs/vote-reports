@@ -9,12 +9,12 @@ describe SiteController do
 
       it 'send me to my dashboard' do
         get :index
-        response.should redirect_to(user_path(current_user))
+        expect(response).to redirect_to(user_path(current_user))
       end
     end
     it 'succeeds' do
       get :index
-      response.should be_success
+      expect(response).to be_success
     end
   end
 end

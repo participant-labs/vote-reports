@@ -8,7 +8,7 @@ describe InterestGroups::ClaimsController do
 
     it 'succeeds' do
       get :new, interest_group_id: interest_group
-      response.body.should include('just send us an email send us an email at')
+      expect(response.body).to include('just send us an email send us an email at')
     end
   end
 end

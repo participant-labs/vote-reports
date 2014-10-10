@@ -36,7 +36,7 @@ describe Users::RpxIdentitiesController do
 
           it "should redirect" do
             send_request(modified)
-            response.should redirect_to(user_path(modified))
+            expect(response).to redirect_to(user_path(modified))
           end
 
           it "should not create an rpx identity" do
@@ -53,26 +53,12 @@ describe Users::RpxIdentitiesController do
 
           it "should redirect to user page" do
             send_request(user)
-            response.should redirect_to(user_path(user))
+            expect(response).to redirect_to(user_path(user))
           end
 
           it "should notify of success" do
             send_request(user)
-            flash[:notice].should == "Successfully added login to this account."
-          end
-
-          it "should create an RPXIdentifier" do
-            pending "Tokens are time-sensitive and I don't know how to generate them properly"
-            lambda {
-              send_request(user)
-            }.should change(RPXIdentifier, :count).by(1)
-          end
-
-          it "should create an rpx_identifier record" do
-            pending "Tokens are time-sensitive and I don't know how to generate them properly"
-            send_request(user)
-            RPXIdentifier.find_by_identifier(@identifier).user.should == user
-            User.find_by_rpx_identifier(@identifier).should == user
+            expect(flash[:notice]).to eq("Successfully added login to this account.")
           end
         end
       end

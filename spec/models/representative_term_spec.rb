@@ -9,13 +9,13 @@ describe RepresentativeTerm do
 
   describe ".by_ended_on" do
     it "should return the terms ordered by .ended_on date" do
-      RepresentativeTerm.by_ended_on.should == [@latest, @middle, @oldest]
+      expect(RepresentativeTerm.by_ended_on).to eq([@latest, @middle, @oldest])
     end
   end
 
   describe ".latest" do
     it "should return the term with the most recent .ended_on date" do
-      RepresentativeTerm.latest.should == @latest
+      expect(RepresentativeTerm.latest).to eq(@latest)
     end
   end
 end

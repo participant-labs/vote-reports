@@ -8,11 +8,11 @@ describe Politician do
   describe ".from" do
     context "with an unknown location" do
       it "should not return nil" do
-        Politician.from('Tokyo, Japan').should_not be_nil
+        expect(Politician.from('Tokyo, Japan')).to_not be_nil
       end
 
       it "should return an empty set" do
-        Politician.from('Tokyo, Japan').should be_empty
+        expect(Politician.from('Tokyo, Japan')).to be_empty
       end
     end
   end
@@ -20,14 +20,13 @@ describe Politician do
   describe "#state" do
     it "should be sourced from the latest term" do
       state = UsState.all.sample
-      @politician.state.should_not == state
-      proc {
+      expect {
         create(:representative_term, congressional_district: create(:congressional_district, state: state), politician: @politician, ended_on: 1.year.ago)
-      }.should change(@politician, :state).to(state)
+      }.to change(@politician, :state).to(state)
       new_state = UsState.all.sample
-      proc {
+      expect {
         create(:senate_term, state: new_state, politician: @politician, ended_on: 1.year.from_now)
-      }.should change(@politician, :state).to(new_state)
+      }.to change(@politician, :state).to(new_state)
     end
   end
 
@@ -41,18 +40,18 @@ describe Politician do
     end
 
     it "returns all politicians with connecting votes" do
-      @politician.rolls.should =~ [@supported, @opposed]
+      expect(@politician.rolls).to match_array([@supported, @opposed])
     end
 
     describe "#supported" do
       it "returns all politicians with supporting votes" do
-        @politician.rolls.supported.should == [@supported]
+        expect(@politician.rolls.supported).to eq([@supported])
       end
     end
 
     describe "#opposed" do
       it "returns all politicians with supporting votes" do
-        @politician.rolls.opposed.should == [@opposed]
+        expect(@politician.rolls.opposed).to eq([@opposed])
       end
     end
   end
@@ -64,14 +63,14 @@ describe Politician do
 
     context "with no argument" do
       it "should return the url of the largest available headshot" do
-        @politician.headshot.url.to_s.should =~ gov_track_url("photos/#{@politician.gov_track_id}.jpeg")
+        expect(@politician.headshot.url.to_s).to match(gov_track_url("photos/#{@politician.gov_track_id}.jpeg"))
       end
     end
 
     context "with size argument" do
       it "should return an equivalent url" do
         {large: 200, medium: 100, small: 50}.each_pair do |arg, width|
-          @politician.headshot.url(arg).should =~ gov_track_url("photos/#{@politician.gov_track_id}-#{width}px.jpeg")
+          expect(@politician.headshot.url(arg)).to match(gov_track_url("photos/#{@politician.gov_track_id}-#{width}px.jpeg"))
         end
       end
     end
@@ -79,7 +78,7 @@ describe Politician do
 
   describe "#firstname=" do
     it "should set first_name" do
-      Politician.new(firstname: 'Bill').first_name.should == 'Bill'
+      expect(Politician.new(firstname: 'Bill').first_name).to eq('Bill')
     end
   end
 end

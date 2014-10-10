@@ -3,7 +3,7 @@ Transform /^user "([^\"]*)"$/ do |username|
 end
 
 Given /^there is no user with "(.*)"$/ do |email|
-  User.find_by_email(email).should == nil
+  expect(User.find_by_email(email)).to be_nil
 end
 
 Given /^an admin named "([^\"]*)"(?: promoted by (user "[^\"]*"))?$/ do |username, promotor|

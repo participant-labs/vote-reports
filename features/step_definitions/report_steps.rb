@@ -39,8 +39,10 @@ Then /^I should see the following scores?:$/ do |table|
   table.map_column!('politician') {|name| Politician.with_name(name).first }
   table.hashes.each do |hash|
     step %{I should see "#{hash['politician'].last_name}"}
-    hash['politician'].report_scores.map {|s| s.score.round }.should include(hash['score'].to_i)
-    page.should have_css(".report_score.for_politician_#{hash['politician'].id}", text: ReportScore.new(score: hash['score']).letter_grade)
+    expect(
+      hash['politician'].report_scores.map {|s| s.score.round }
+    ).to include(hash['score'].to_i)
+    expect(page).to have_css(".report_score.for_politician_#{hash['politician'].id}", text: ReportScore.new(score: hash['score']).letter_grade)
   end
 end
 
@@ -48,13 +50,13 @@ end
 Then /^I should see the following report scores?:$/ do |table|
   table.hashes.each do |hash|
     step %{I should see "#{hash['name']}"} if hash['name'].present?
-    page.should have_css(".report_score", text: ReportScore.new(score: hash['score']).letter_grade)
+    expect(page).to have_css(".report_score", text: ReportScore.new(score: hash['score']).letter_grade)
   end
 end
 
 Then /^I should not see the following report scores?:$/ do |table|
   table.hashes.each do |hash|
     step %{I should not see "#{hash['name']}"} if hash['name'].present?
-    page.should_not have_css(".report_score", text: ReportScore.new(score: hash['score']).letter_grade)
+    expect(page).to_not have_css(".report_score", text: ReportScore.new(score: hash['score']).letter_grade)
   end
 end

@@ -38,26 +38,26 @@ end
 Then /^I should( not|) see the button "(.*)"$/ do |should_not, button_text|
   selector = "[value='#{button_text.strip}'][type=submit]"
   if should_not.present?
-    page.should_not have_css(selector)
+    expect(page).to_not have_css(selector)
   else
-    page.should have_css(selector)
+    expect(page).to have_css(selector)
   end
 end
 
 Then /^I should( not|) see the image "(.*)"$/ do |should_not, file_name|
   selector = "img[src*='/#{file_name.strip}?']"
   if should_not.present?
-    page.should_not have_css(selector)
+    expect(page).to_not have_css(selector)
   else
-    page.should have_css(selector)
+    expect(page).to have_css(selector)
   end
 end
 
 Then /^I should( not|) see the title "(.*)"$/ do |should_not, title|
   selector = "*[title='#{title}']"
   if should_not.present?
-    page.should_not have_css(selector)
+    expect(page).to_not have_css(selector)
   else
-    page.should have_css(selector)
+    expect(page).to have_css(selector)
   end
 end

@@ -15,7 +15,7 @@ describe Congress do
       }.each do |date, meeting|
         date = Date.parse(date)
         stub(Date).today { date }
-        Congress.current_meeting.should == meeting
+        expect(Congress.current_meeting).to eq(meeting)
       end
     end
   end

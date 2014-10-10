@@ -24,7 +24,7 @@ describe Causes::ReportsController do
 
         it 'returns related reports' do
           send_request
-          assigns[:reports].results.should include(report)
+          expect(assigns[:reports].results).to include(report)
         end
 
         context 'when the report is on the cause' do
@@ -32,7 +32,7 @@ describe Causes::ReportsController do
 
           it 'is not returned' do
             send_request
-            assigns[:reports].results.should_not include(report)
+            expect(assigns[:reports].results).to_not include(report)
           end
         end
       end
@@ -48,7 +48,7 @@ describe Causes::ReportsController do
           post :create, cause_id: cause, cause: {
             cause_reports_attributes:[{report_id: report.id}]
           }
-          cause.reload.reports.should include(report)
+          expect(cause.reload.reports).to include(report)
         end
       end
     end
@@ -66,7 +66,7 @@ describe Causes::ReportsController do
 
       it 'removes the report' do
         send_request
-        assigns[:cause].reports.should_not include(report)
+        expect(assigns[:cause].reports).to_not include(report)
       end
     end
   end

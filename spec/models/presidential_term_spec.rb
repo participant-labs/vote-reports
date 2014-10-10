@@ -9,13 +9,13 @@ describe PresidentialTerm do
 
   describe ".by_ended_on" do
     it "should return the terms ordered by .ended_on date" do
-      PresidentialTerm.by_ended_on.should == [@latest, @middle, @oldest]
+      expect(PresidentialTerm.by_ended_on).to eq([@latest, @middle, @oldest])
     end
   end
 
   describe ".latest" do
     it "should return the term with the most recent .ended_on date" do
-      PresidentialTerm.latest.should == @latest
+      expect(PresidentialTerm.latest).to eq(@latest)
     end
   end
 end

@@ -10,14 +10,14 @@ describe BillTitle do
       short = create(:bill_title, as: as(:enacted), title_type: 'short')
       create(:bill_title, as: as(:enacted), title_type: 'official')
 
-      BillTitle.first.should == short
+      expect(BillTitle.first).to eq(short)
     end
 
     it "should return enacted before popular" do
       create(:bill_title, as: as(:popular), title_type: 'official')
       enacted = create(:bill_title, as: as(:enacted), title_type: 'official')
 
-      BillTitle.first.should == enacted
+      expect(BillTitle.first).to eq(enacted)
     end
   end
 end

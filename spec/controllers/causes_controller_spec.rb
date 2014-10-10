@@ -11,14 +11,14 @@ describe CausesController do
       it 'shows the first page of causes' do
         with_many_causes
         get :index
-        assigns[:causes].should == Cause.order(:name).page(1)
+        expect(assigns[:causes]).to eq(Cause.order(:name).page(1))
       end
     end
     context 'with a page' do
       it 'shows that page of causes' do
         with_many_causes
         get :index, page: 2
-        assigns[:causes].should == Cause.order(:name).page(2)
+        expect(assigns[:causes]).to eq(Cause.order(:name).page(2))
       end
     end
   end
@@ -40,14 +40,15 @@ describe CausesController do
         expect {
           send_request
         }.to change(Cause, :count).by(1)
-        assigns[:cause].name == 'My favorite cause'
-        assigns[:cause].description ==
+        expect(assigns[:cause].name).to eq('My favorite cause')
+        expect(assigns[:cause].description).to eq(
           'Why do I like it so much? It boggles the mind.'
+        )
       end
 
       it 'sends me to the cause page' do
         send_request
-        response.should redirect_to(cause_path(assigns[:cause]))
+        expect(response).to redirect_to(cause_path(assigns[:cause]))
       end
     end
   end
@@ -68,12 +69,12 @@ describe CausesController do
 
       it 'updates the cause' do
         send_request
-        assigns[:cause].name.should == new_name
+        expect(assigns[:cause].name).to eq(new_name)
       end
 
       it 'sends me to the cause page' do
         send_request
-        response.should redirect_to(cause_path(assigns[:cause]))
+        expect(response).to redirect_to(cause_path(assigns[:cause]))
       end
     end
   end

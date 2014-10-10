@@ -4,13 +4,13 @@ describe PoliticiansController do
   setup :activate_authlogic
 
   describe "GET index" do
-    let(:has_many_politicians) { 35.times { create(:politician) } }
+    let(:has_many_politicians) { create_list(:politician, 35) }
 
     context 'without params' do
       it 'shows the first page of politicians' do
         has_many_politicians
         get :index
-        assigns[:politicians].should == Politician.scoreworthy.by_birth_date.page(1)
+        expect(assigns[:politicians]).to eq(Politician.scoreworthy.by_birth_date.page(1))
       end
     end
 
@@ -18,7 +18,7 @@ describe PoliticiansController do
       it 'shows that page of politicians' do
         has_many_politicians
         get :index, page: 2
-        assigns[:politicians].should == Politician.scoreworthy.by_birth_date.page(2)
+        expect(assigns[:politicians]).to eq(Politician.scoreworthy.by_birth_date.page(2))
       end
     end
   end
@@ -29,7 +29,7 @@ describe PoliticiansController do
 
       it "should redirect" do
         get :show, id: politician.id
-        response.should redirect_to(politician_path(politician))
+        expect(response).to redirect_to(politician_path(politician))
       end
     end
   end

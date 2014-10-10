@@ -19,17 +19,17 @@ describe ReportScore do
 
     it "should destroy the score evidence" do
       @score.destroy
-      ReportScoreEvidence.all.should_not include(@score_evidence)
+      expect(ReportScoreEvidence.all).to_not include(@score_evidence)
     end
 
     it "should destroy dependent scores" do
       @score.destroy
-      ReportScore.all.should_not include(@dependent_score)
+      expect(ReportScore.all).to_not include(@dependent_score)
     end
 
     it "should destroy dependent scores' evidence" do
       @score.destroy
-      ReportScoreEvidence.all.should_not include(@dependent_score_evidence)
+      expect(ReportScoreEvidence.all).to_not include(@dependent_score_evidence)
     end
 
     it "should rescore dependent scores' reports" do

@@ -4,37 +4,44 @@ describe Politicians::ReportsController do
   setup :activate_authlogic
   render_views
 
-  before do
-    @politician = create(:politician)
-    @report_scores = create_list(:report, 5, :published).map do |report|
-      report.scores.for_politicians(@politician).first
+  let!(:politician) { create(:politician) }
+  let!(:report_scores) {
+    create_list(:report, 5, :published).map do |report|
+      report.scores.for_politicians(politician).first
     end
-  end
+  }
 
   describe "GET index" do
+    def send_request
+      get :index, politician_id: politician
+    end
+
     it "should return reports" do
-      get :index, politician_id: @politician
+      send_request
+      expect(response).to be_success
 
-      response.should be_success
-
-      assigns[:politician].should == @politician
-      assigns[:scores].to_a.should =~ @report_scores
+      expect(assigns[:politician]).to eq(politician)
+      expect(assigns[:scores].to_a).to match_array(report_scores)
     end
 
     context "when narrowed by subject" do
+      def send_request
+        get :index, politician_id: politician, subjects: [@report_subject.subject.to_param]
+      end
+
       before do
-        @score = @report_scores.first
+        @score = report_scores.first
         @report_subject = create(:report_subject, report: @score.report)
       end
 
       it "should return reports with those subjects" do
-        @report_subject.subject.to_param.should_not == @report_subject.subject_id.to_s
-        get :index, politician_id: @politician, subjects: [@report_subject.subject.to_param]
+        expect(@report_subject.subject.to_param).to_not eq(@report_subject.subject_id.to_s)
+        send_request
 
-        response.should be_success
+        expect(response).to be_success
 
-        assigns[:politician].should == @politician
-        assigns[:scores].to_a.should == [@score]
+        expect(assigns[:politician]).to eq(politician)
+        expect(assigns[:scores].to_a).to match_array([@score])
       end
     end
   end

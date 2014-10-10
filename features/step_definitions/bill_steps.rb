@@ -48,9 +48,7 @@ Given /^an? (.*)bill named "([^\"]*)"$/ do |attrs, title|
 end
 
 Given /^(\d+) recent bills$/ do |count|
-  count.to_i.times do
-    create(:bill, introduced_on: 2.months.ago.to_date)
-  end
+  create_list(:bill, count.to_i, introduced_on: 2.months.ago.to_date)
 end
 
 Given /^(bill "[^\"]*") has a title "([^\"]*)"$/ do |bill, title|

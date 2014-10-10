@@ -5,22 +5,22 @@ describe UsersController do
 
   describe "route recognition" do
     it "should route the signup route correctly" do
-      {get: '/signup'}.should route_to(controller: 'users', action: 'new')
+      expect(get: '/signup').to route_to(controller: 'users', action: 'new')
     end
   end
 
   describe "GET index" do
     it "should reject me if I'm not logged in" do
       get :index
-      flash[:notice].should == "You must be logged in to access this page"
-      response.should redirect_to(login_url(return_to: '/users'))
+      expect(flash[:notice]).to eq("You must be logged in to access this page")
+      expect(response).to redirect_to(login_url(return_to: '/users'))
     end
 
     it "should reject me if I'm not an admin" do
       login
       get :index
-      flash[:error].should == "You may not access this page"
-      response.should redirect_to(root_path)
+      expect(flash[:error]).to eq("You may not access this page")
+      expect(response).to redirect_to(root_path)
     end
   end
 
@@ -35,14 +35,14 @@ describe UsersController do
       context 'viewing a different user' do
         it 'sends me their reports page' do
           get :show, id: other_user
-          response.should redirect_to(user_reports_path(other_user))
+          expect(response).to redirect_to(user_reports_path(other_user))
         end
       end
 
       context 'viewing my own page' do
         it 'succeeds' do
           get :show, id: current_user
-          response.should be_success
+          expect(response).to be_success
         end
       end
     end
@@ -56,16 +56,16 @@ describe UsersController do
     it "should reject me if I'm not logged in" do
       logout
       get :edit, id: @user
-      response.should redirect_to(login_url(return_to: %Q{/users/#{@user.to_param}/edit}))
-      flash[:notice].should == "You must be logged in to access this page"
+      expect(response).to redirect_to(login_url(return_to: %Q{/users/#{@user.to_param}/edit}))
+      expect(flash[:notice]).to eq("You must be logged in to access this page")
     end
 
     it "should reject me if I'm not the user being edited" do
       current = create(:user)
       login(current)
       get :edit, id: @user
-      response.should redirect_to(user_reports_url(@user))
-      flash[:error].should == "You may not access this page"
+      expect(response).to redirect_to(user_reports_url(@user))
+      expect(flash[:error]).to eq("You may not access this page")
     end
   end
 end

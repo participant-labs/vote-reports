@@ -9,20 +9,20 @@ describe Roll do
     end
 
     it "should order by vote date, with the most recent first" do
-      Roll.by_voted_at.should == [@recent, @middle, @old]
+      expect(Roll.by_voted_at).to eq([@recent, @middle, @old])
     end
   end
 
   describe "friendly_id" do
     it "should work" do
       roll = create(:roll, year: 1990, number: 5, where: 'house')
-      roll.friendly_id.should == '1990-h5'
-      Roll.friendly.find('1990-h5').should == roll
+      expect(roll.friendly_id).to eq('1990-h5')
+      expect(Roll.friendly.find('1990-h5')).to eq(roll)
     end
 
     it "should allow search by actual id" do
       roll = create(:roll, year: 1990, number: 5, where: 'house')
-      Roll.find(roll.id).should == roll
+      expect(Roll.find(roll.id)).to eq(roll)
     end
   end
 end
