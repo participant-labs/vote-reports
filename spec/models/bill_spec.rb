@@ -51,7 +51,7 @@ describe Bill do
       context "with a new value" do
         it "should blow up" do
           proc {
-            @bill.update_attributes(congress: Congress.find_or_create_by_meeting(@bill.congress.meeting + 1))
+            @bill.update_attributes(congress: Congress.find_or_create_by(meeting: @bill.congress.meeting + 1))
           }.should raise_error(ActiveRecord::ReadOnlyRecord)
         end
       end

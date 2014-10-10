@@ -28,7 +28,7 @@ end
 def politician_term_overrides(overrides, years)
   overrides.process(:party) do |party|
     party = nil if party.blank?
-    party = Party.find_or_create_by_name(party) if party.is_a?(String)
+    party = Party.find_or_create_by(name: party) if party.is_a?(String)
     overrides[:party] = party
   end
 

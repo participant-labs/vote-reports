@@ -1,5 +1,5 @@
 Transform /subject "([^\"]*)"/ do |subject|
-  Subject.find_or_create_by_name(subject)
+  Subject.find_or_create_by(name: subject)
 end
 
 Given /^(bill "[^\"]*") has (subject "[^\"]*")$/ do |bill, subject|

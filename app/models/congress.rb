@@ -15,7 +15,7 @@ class Congress < ActiveRecord::Base
     end
 
     def current
-      first(conditions: {meeting: current_meeting})
+      where(meeting: current_meeting).first
     end
   end
 

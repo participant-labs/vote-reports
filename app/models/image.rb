@@ -22,7 +22,7 @@ class Image < PaperclipAutosizer
 
   class << self
     def laws_i_like
-      first(conditions: {thumbnail_file_name: 'lawsilike.png'})
+      where(thumbnail_file_name: 'lawsilike.png').first
     end
   end
 

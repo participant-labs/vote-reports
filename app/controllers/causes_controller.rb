@@ -67,8 +67,7 @@ class CausesController < ApplicationController
   end
 
   def update
-    @cause = Cause.find(params[:id])
-    if @cause.update_attributes(params[:cause])
+    if @cause.update_attributes(cause_params)
       flash[:notice] = "Successfully updated Cause"
       redirect_to @cause
     else
@@ -78,8 +77,23 @@ class CausesController < ApplicationController
   end
 
   def destroy
-    @cause = Cause.find(params[:id])
     @cause.destroy
     redirect_to causes_path
+  end
+
+  protected
+
+  def new_cause_from_params
+    @cause = Cause.new(cause_params)
+  end
+
+  def load_cause
+    @cause = Cause.friendly.find(params[:id])
+  end
+
+  private
+
+  def cause_params
+    params.require(:cause).permit(:name, :description)
   end
 end

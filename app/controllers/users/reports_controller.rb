@@ -81,10 +81,10 @@ class Users::ReportsController < ApplicationController
   end
 
   def load_user
-    @user = User.find(params[:user_id])
+    @user = User.friendly.find(params[:user_id])
   end
 
   def load_report
-    @report = @user.reports.except_personal.find(params[:id])
+    @report = @user.reports.except_personal.friendly.find(params[:id])
   end
 end

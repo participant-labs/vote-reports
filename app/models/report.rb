@@ -26,7 +26,7 @@ class Report < ActiveRecord::Base
   has_many :subjects, through: :report_subjects
   belongs_to :top_subject, class_name: 'Subject'
 
-  scope :for_display, includes([:top_subject, :image, :cause, :user, :interest_group])
+  scope :for_display, -> { includes([:top_subject, :image, :cause, :user, :interest_group]) }
 
   def bill_criteria_subjects
     Subject.for_bill_criteria_on_report(self)
@@ -217,15 +217,17 @@ class Report < ActiveRecord::Base
 
   before_create :ensure_state_is_set
 
-  scope :random, order('random()')
+  scope :random, -> {  order('random()') }
 
-  scope :laws_i_like, where(source: 'laws_i_like')
-  scope :user_published, where(state: 'published').includes(:user)
-  scope :for_causes, where('reports.cause_id IS NOT NULL')
-  scope :non_cause, where('reports.cause_id IS NULL')
-  scope :without_associated_cause, joins('LEFT OUTER JOIN cause_reports ON cause_reports.report_id = reports.id').where('cause_reports.cause_id IS NULL')
-  scope :published, where(["reports.state = ? OR reports.user_id IS NULL", 'published'])\
-    .includes([:user, :interest_group])
+  scope :laws_i_like, -> {  where(source: 'laws_i_like') }
+  scope :user_published, -> {  where(state: 'published').includes(:user) }
+  scope :for_causes, -> {  where('reports.cause_id IS NOT NULL') }
+  scope :non_cause, -> {  where('reports.cause_id IS NULL') }
+  scope :without_associated_cause, -> {  joins('LEFT OUTER JOIN cause_reports ON cause_reports.report_id = reports.id').where('cause_reports.cause_id IS NULL') }
+  scope :published, -> {
+    where(["reports.state = ? OR reports.user_id IS NULL", 'published'])
+      .includes([:user, :interest_group])
+  }
 
   class << self
     def qualified_column_names
@@ -233,15 +235,15 @@ class Report < ActiveRecord::Base
     end
   end
 
-  scope :unpublished, where(["reports.state IN(?)", %w[unlisted private]])
-  scope :except_personal, where(["reports.state != ?", 'personal'])
-  scope :with_criteria, select('DISTINCT reports.*').joins(:bill_criteria)
-  scope :scored, select('DISTINCT reports.*').joins(bill_criteria: {bill: :passage_rolls})
-  scope :by_updated_at, order('updated_at DESC')
-  scope :by_created_at, order('created_at DESC')
-  scope :by_name, order('name')
+  scope :unpublished, -> { where(["reports.state IN(?)", %w[unlisted private]]) }
+  scope :except_personal, -> { where(["reports.state != ?", 'personal']) }
+  scope :with_criteria, -> { select('DISTINCT reports.*').joins(:bill_criteria) }
+  scope :scored, -> { select('DISTINCT reports.*').joins(bill_criteria: {bill: :passage_rolls}) }
+  scope :by_updated_at, -> { order('updated_at DESC') }
+  scope :by_created_at, -> { order('created_at DESC') }
+  scope :by_name, -> { order('name') }
 
-  scope :with_subjects, lambda {|subjects|
+  scope :with_subjects, ->(subjects) {
     subjects = Array(subjects)
     if subjects.empty?
       {}
@@ -255,7 +257,7 @@ class Report < ActiveRecord::Base
     end
   }
 
-  scope :with_scores_for, lambda {|politicians|
+  scope :with_scores_for, ->(politicians) {
     if politicians.blank?
       {}
     else

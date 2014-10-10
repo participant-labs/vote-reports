@@ -82,18 +82,19 @@ VoteReports::Application.routes.draw do
   resource :dashboard
 
   resources :user_sessions
-  match '/signup' => 'users#new', as: :signup
-  match '/login' => 'user_sessions#new', as: :login
-  match '/logout' => 'user_sessions#destroy', as: :logout
-  match '/donate' => 'donations#new', as: :new_donation
-  match '/thanks' => 'donations#show', as: :donation_thanks
+  get '/signup' => 'users#new', as: :signup
+  get '/login' => 'user_sessions#new', as: :login
+  get '/logout' => 'user_sessions#destroy', as: :logout
+  get '/donate' => 'donations#new', as: :new_donation
+  get '/thanks' => 'donations#show', as: :donation_thanks
+  get '/auth/:provider/callback', to: 'user_sessions#create'
   resource :donations
 
-  match 'about' => 'site#show', as: :about
-  match 'alive' => 'site#alive', as: :alive
-  match '/' => 'site#index', as: :root
+  get 'about' => 'site#show', as: :about
+  get 'alive' => 'site#alive', as: :alive
+  get '/' => 'site#index', as: :root
 
   if Rails.env.development?
-    match 'fake_location' => 'site#fake_location', as: :fake_location
+    get 'fake_location' => 'site#fake_location', as: :fake_location
   end
 end

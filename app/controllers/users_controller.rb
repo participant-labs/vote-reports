@@ -50,6 +50,12 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  protected
+
+  def load_user
+    @user = User.friendly.find(params[:id])
+  end
+
   private
 
   def permission_denied_path

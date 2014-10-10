@@ -3,8 +3,7 @@ class Committee < ActiveRecord::Base
 
   has_many :meetings, class_name: 'CommitteeMeeting' do
     def for_congress(congress, name = nil)
-      find_or_create_by_congress_id(
-        congress_id: congress.id, name: name).tap do |meeting|
+      create_with(name: name).find_or_create_by(congress_id: congress.id).tap do |meeting|
         raise meeting.errors.full_messages.inspect unless meeting.valid?
       end
     end

@@ -6,7 +6,7 @@ class CongressionalDistrict < ActiveRecord::Base
   delegate :level, to: :district
 
   has_many :representative_terms
-  has_many :representatives, through: :representative_terms, source: :politician, uniq: true do
+  has_many :representatives, -> { uniq }, through: :representative_terms, source: :politician do
     def in_office
       where(['politicians.current_office_type = ? AND politicians.current_office_id IN(?)', 'RepresentativeTerm', proxy_owner.representative_terms])
     end
@@ -14,7 +14,7 @@ class CongressionalDistrict < ActiveRecord::Base
 
   delegate :senators, :presidents, to: :state
 
-  scope :with_zip, lambda {|zip_code|
+  scope :with_zip, ->(zip_code) {
     zip_code, plus_4 = ZipCode.sections_of(zip_code)
     if zip_code.blank?
       where('0 = 1')
@@ -33,7 +33,7 @@ class CongressionalDistrict < ActiveRecord::Base
     end
   }
 
-  scope :for_city, lambda {|address|
+  scope :for_city, ->(address) {
     city, state = address.upcase.split(', ', 2)
     if city.blank?
       where('0 = 1')
@@ -53,7 +53,10 @@ class CongressionalDistrict < ActiveRecord::Base
     def find_by_name(name)
       state, district = name.split('-')
       district = 0 if district == 'At_large'
-      first(conditions: {'congressional_districts.district_number' => district, 'us_states.abbreviation' => state}, joins: :state)
+      joins(:state).where(
+        'congressional_districts.district_number' => district,
+        'us_states.abbreviation' => state
+      ).first
     end
   end
 

@@ -1,7 +1,7 @@
 class InterestGroup < ActiveRecord::Base
   include HasReport
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: [:slugged, :history]
 
   has_ancestry
 
@@ -40,16 +40,17 @@ class InterestGroup < ActiveRecord::Base
     Politician.select('DISTINCT politicians.*').joins(:interest_group_reports).where(:'interest_group_reports.interest_group_id' => self)
   end
 
-  scope :ratings_not_recently_updated, where(
-    ['interest_groups.ratings_updated_at IS NULL OR interest_groups.ratings_updated_at < ?', 1.month.ago])
+  scope :ratings_not_recently_updated, -> {
+    where(['interest_groups.ratings_updated_at IS NULL OR interest_groups.ratings_updated_at < ?', 1.month.ago])
+  }
 
-  scope :for_display, includes([:image, {report: [:top_subject]}])
+  scope :for_display, -> { includes([:image, {report: [:top_subject]}]) }
 
-  scope :vote_smart, where('interest_groups.vote_smart_id is not null')
+  scope :vote_smart, -> { where('interest_groups.vote_smart_id is not null') }
 
-  scope :for_subjects, lambda {|subjects|
+  scope :for_subjects, ->(subjects) {
     if subjects.blank?
-      {}
+      all
     else
       if subjects.first.is_a?(String)
         subjects = Subject.find(subjects)

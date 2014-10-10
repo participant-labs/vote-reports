@@ -5,7 +5,7 @@ describe CausesController do
 
   describe 'GET index' do
     let(:with_many_causes) {
-      35.times { create(:cause) }
+      create_list(:cause, 35)
     }
     context 'without params' do
       it 'shows the first page of causes' do

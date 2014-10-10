@@ -27,6 +27,8 @@ VoteReports::Application.configure do
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
 
+  config.eager_load = true
+
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
   config.serve_static_assets = false

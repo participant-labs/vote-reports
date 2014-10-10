@@ -12,8 +12,8 @@ namespace :gov_track do
            || committee.meetings.create!(name: meeting_name.to_s, congress_id: @congress.id)
         end
         node.xpath('thomas-names/name').each do |name_node|
-          committee.meetings.find_or_create_by_congress_id(
-            Congress.find_or_create_by_meeting(name_node['session'].to_s.to_i).id
+          committee.meetings.find_or_create_by(
+            congress_id: Congress.find_or_create_by(meeting: name_node['session'].to_s.to_i).id
           ).update_attribute(:name, name_node.inner_text)
         end
         node.xpath('member').each do |member_node|

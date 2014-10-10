@@ -6,12 +6,10 @@ class Guide < ActiveRecord::Base
   belongs_to :user
 
   has_many :guide_reports
-  has_many :reports_supported, through: :guide_reports, conditions: {guide_reports: {position: 'support'}}, source: :report
-  has_many :reports_opposed, through: :guide_reports, conditions: {guide_reports: {position: 'oppose'}}, source: :report
+  has_many :reports_supported, -> { where(guide_reports: {position: 'support'}) }, through: :guide_reports, source: :report
+  has_many :reports_opposed, -> { where(guide_reports: {position: 'oppose'}) }, through: :guide_reports, source: :report
 
   before_validation :initialize_report, on: :create
-  delegate :scores, to: :report
-
   validates_presence_of :secure_token, :report
 
   delegate :scores, :rescore!, to: :report

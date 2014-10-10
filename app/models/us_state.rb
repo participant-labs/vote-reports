@@ -83,7 +83,7 @@ class UsState < ActiveRecord::Base
   end
 
   has_many :senate_terms
-  has_many :senators, through: :senate_terms, source: :politician, uniq: true do
+  has_many :senators, -> { uniq }, through: :senate_terms, source: :politician do
     def in_office
       where(['politicians.current_office_type = ?', 'SenateTerm'])
     end

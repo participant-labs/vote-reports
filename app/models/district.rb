@@ -6,8 +6,8 @@ class District < ActiveRecord::Base
   has_many :races
   has_many :offices, through: :races
 
-  scope :random, order('random()')
-  scope :lookup, lambda {|geoloc|
+  scope :random, -> { order('random()') }
+  scope :lookup, ->(geoloc) {
     if geoloc.success?
       where(["ST_Contains(the_geom, GeometryFromText('POINT(? ?)', -1))",
         geoloc.lng, geoloc.lat])
@@ -15,18 +15,18 @@ class District < ActiveRecord::Base
       where('0 = 1')
     end
   }
-  scope :level, lambda {|level|
+  scope :level, ->(level) {
     if level.present?
       where(level: level)
     else
       {}
     end
   }
-  scope :state, lambda {|abbr|
+  scope :state, ->(abbr) {
     joins(:state).where('us_states.abbreviation' => abbr)
   }
 
-  scope :with_name, lambda {|district_name|
+  scope :with_name, ->(district_name) {
     name = ((district_name =~ /^\d+$/) ? district_name.to_i.to_s.rjust(3, '0') : district_name)
     where(name: name)
   }
@@ -34,7 +34,7 @@ class District < ActiveRecord::Base
   validates_presence_of :congressional_district, if: :federal?
 
   District::Level.levels.each do |level|
-    scope level, where(level: level)
+    scope level, -> { where(level: level) }
     define_method :"#{level}?" do
       self.level.to_s == level
     end

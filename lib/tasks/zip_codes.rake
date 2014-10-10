@@ -1,10 +1,10 @@
 namespace :zip_codes do
-  DATA_PATH = Rails.root.join('data/federalgovernmentzipcodes.us/free-zipcode-database.csv')
+  ZIP_CODES_DATA_PATH = Rails.root.join('data/federalgovernmentzipcodes.us/free-zipcode-database.csv')
 
   task :download do
-    FileUtils.mkdir_p(DATA_PATH.dirname)
+    FileUtils.mkdir_p(ZIP_CODES_DATA_PATH.dirname)
     log = Rails.root.join('log/zip-code-data.log')
-    Dir.chdir(DATA_PATH.dirname) do
+    Dir.chdir(ZIP_CODES_DATA_PATH.dirname) do
       `wget -N http://federalgovernmentzipcodes.us/free-zipcode-database.csv --append-output=#{log}`
     end
   end
@@ -47,7 +47,7 @@ namespace :zip_codes do
       'world_region',
       'country',
       'location_name',
-      'location_id',  
+      'location_id',
       'population',
       'housing_units',
       'income',
@@ -64,7 +64,7 @@ namespace :zip_codes do
       $stdout.sync = true
       count = 0
       rows = []
-      Excelsior::Reader.rows(File.open(DATA_PATH, 'rb')) do |row|
+      Excelsior::Reader.rows(File.open(ZIP_CODES_DATA_PATH, 'rb')) do |row|
        rows << row
        if count == 0
          headers = rows.shift

@@ -47,7 +47,7 @@ namespace :laws_i_like do
     require 'excelsior'
     $stdout.sync = true
     count = 0
-    
+
     class Report < ActiveRecord::Base
       has_many :bill_criteria, dependent: :destroy
       def rescore!
@@ -84,11 +84,12 @@ namespace :laws_i_like do
               )
             end
           identifier.update_attribute(:user_id, user.id)
-          report = user.reports.find_or_create_by_name(
-            name: 'Laws I Like',
+          report = user.reports.create_with(
             source: 'laws_i_like',
             state: 'private',
             description: 'These scores are based on the bills I voted on with the [Laws I Like](http://apps.facebook.com/lawsilike/) Facebook App'
+          ).find_or_create_by(
+            name: 'Laws I Like',
           )
 
           bill_type = begin

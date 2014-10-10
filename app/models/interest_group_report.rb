@@ -64,7 +64,7 @@ class InterestGroupReport < ActiveRecord::Base
 
     'Anti Hemp' => 0.0,
     'Fence Sitter' => 50.0,
-    'Pro Hemp' => 100.0, 
+    'Pro Hemp' => 100.0,
   }
 
   ALL_LETTER_GRADES = [
@@ -86,8 +86,10 @@ class InterestGroupReport < ActiveRecord::Base
     'A+'
   ]
 
-  scope :with_zero_centered_ratings, select('DISTINCT interest_group_reports.*').joins(:ratings)\
-    .where(:'interest_group_ratings.rating' => ZERO_CENTERED_RATINGS)
+  scope :with_zero_centered_ratings, -> {
+    select('DISTINCT interest_group_reports.*').joins(:ratings)\
+      .where(:'interest_group_ratings.rating' => ZERO_CENTERED_RATINGS)
+  }
 
   class << self
     def calibrate_ratings
@@ -116,7 +118,7 @@ class InterestGroupReport < ActiveRecord::Base
 
   def calibrate_letter_ratings
     if ratings.exists?(rating: ALL_LETTER_GRADES)
-      rating_values = ratings.all(conditions: {rating: ALL_LETTER_GRADES}).map(&:rating).uniq.sort.reverse
+      rating_values = ratings.where(rating: ALL_LETTER_GRADES).map(&:rating).uniq.sort.reverse
       options =
         if rating_values.join.include?('-') || rating_values.join.include?('+')
           case rating_values.first
@@ -163,8 +165,8 @@ class InterestGroupReport < ActiveRecord::Base
   end
 
   def calibrate_normal_ratings
-    ratings.all(select: 'distinct rating', conditions: ['numeric_rating IS NULL AND rating NOT IN(?)', NON_RATINGS]).map(&:rating).each do |rating|
-      numeric_rating = 
+    ratings.where('numeric_rating IS NULL AND rating NOT IN(?)', NON_RATINGS).select('distinct rating').map(&:rating).each do |rating|
+      numeric_rating =
         begin
           if rating.match(/^[+-]+$/)
             rating.count('+').to_f / rating.size

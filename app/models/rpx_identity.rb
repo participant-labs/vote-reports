@@ -1,6 +1,6 @@
-class RpxIdentity
-  include MongoMapper::Document
+# class RpxIdentity
+#   include MongoMapper::Document
 
-  key :user_id, Integer
-  timestamps!
-end
+#   key :user_id, Integer
+#   timestamps!
+# end

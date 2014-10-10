@@ -2,7 +2,7 @@ class ReportSubject < ActiveRecord::Base
   belongs_to :report
   belongs_to :subject
 
-  scope :by_count, order('count DESC')
+  scope :by_count, -> { order('count DESC') }
 
   # constraints on db:
   # report, subject presence

@@ -7,7 +7,7 @@ module VoteSmart
       def fifty_states
         @fifty_states ||= VoteSmart::State.all.map(&:id)
       end
-  
+
       def import_all
         ActiveRecord::Base.transaction do
           import_offices
@@ -42,7 +42,10 @@ module VoteSmart
                   office_type_id: office_type.id)
                 Array.wrap(election_data['stage']).each do |es|
                   raise "#{election_data['stateId']} != #{es['stateId']}" if election_data['stateId'] != es['stateId']
-                  election.stages.find_or_create_by_vote_smart_id_and_name_and_voted_on(es['stageId'], es['name'], es['electionDate'])
+                  election.stages.find_or_create_by(
+                    vote_smart_id: es['stageId'],
+                    name: es['name'],
+                    voted_on: es['electionDate'])
                   print '.'
                 end
               end
@@ -150,7 +153,7 @@ module VoteSmart
                     office_id: office.id,
                     district_name: nil_if_blank(candidate['district']),
                   }
-                  race = stage.races.first(conditions: race_params) || stage.races.create!(race_params)
+                  race = stage.races.where(race_params).first || stage.races.create!(race_params)
                   politician = import_candidate(candidate)
                   if existing_candidacy = ::Candidacy.find_by_race_id_and_politician_id(race.id, politician.id)
                     unless existing_candidacy.status == candidate['status']
@@ -180,13 +183,13 @@ module VoteSmart
         end
         puts
       end
-    
+
       def import_offices
         puts "Offices"
         valid_hash(VoteSmart::Office.get_types)['officeTypes']['type'].each do |type_data|
           office_type = ::OfficeType.find_by_level_id_and_branch_id_and_vote_smart_id_and_name(type_data['officeLevelId'], type_data['officeBranchId'], type_data['officeTypeId'], type_data['name']) \
             || ::OfficeType.create!(name: type_data['name'], level_id: type_data['officeLevelId'], branch_id: type_data['officeBranchId'], vote_smart_id: type_data['officeTypeId'])
-          
+
 
           if office_data = valid_hash(VoteSmart::Office.get_offices_by_type(office_type.vote_smart_id))
             Array.wrap(office_data['offices']['office']).each do |office|
@@ -203,14 +206,14 @@ module VoteSmart
         ActiveRecord::Base.transaction do
           puts "Categories"
           Array.wrap(VoteSmart::Rating.get_categories['categories']['category']).each do |category|
-            subject = Subject.find_or_create_by_name(category['name'])
+            subject = Subject.find_or_create_by(name: category['name'])
             subject.update_attribute(:vote_smart_id, category['categoryId'])
             print '.'
           end
           puts
 
           puts "Sig Subjects"
-          max_cat_id = (Subject.first(order: 'vote_smart_id DESC', conditions: 'vote_smart_id is not null').vote_smart_id + 5).to_s
+          max_cat_id = (Subject.order('vote_smart_id DESC').where('vote_smart_id is not null').first.vote_smart_id + 5).to_s
           sigs = ('0'..max_cat_id).flat_map do |cat_id|
             subject = Subject.find_by_vote_smart_id(cat_id)
             if sigs = valid_hash(VoteSmart::Rating.get_sig_list(cat_id))
@@ -305,7 +308,7 @@ module VoteSmart
       end
 
       private
-  
+
       def valid_hash(hash)
         hash unless hash['error']
       end
@@ -313,7 +316,7 @@ module VoteSmart
       def object_to_boolean(value)
          ["true", "1", "t"].include?(value.to_s.downcase)
       end
-    
+
       def nil_if_blank(string)
         string if string.present?
       end

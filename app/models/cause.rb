@@ -1,7 +1,7 @@
 class Cause < ActiveRecord::Base
   include HasReport
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: [:slugged, :history]
 
   has_many :cause_reports, dependent: :destroy
   has_many :reports, through: :cause_reports do
@@ -13,10 +13,12 @@ class Cause < ActiveRecord::Base
   has_many :issue_causes, dependent: :destroy
   has_many :issues, through: :issue_causes
 
-  scope :without_issue,
-    joins('LEFT OUTER JOIN issue_causes ON issue_causes.cause_id = causes.id').where(:'issue_causes.issue_id' => nil)
+  scope :without_issue, -> {
+    joins('LEFT OUTER JOIN issue_causes ON issue_causes.cause_id = causes.id')
+      .where(:'issue_causes.issue_id' => nil)
+  }
 
-  scope :random, order('random()')
+  scope :random, -> { order('random()') }
 
   def related_causes
     Cause.joins(:issue_causes).where(['causes.id NOT IN(?) AND issue_causes.issue_id IN(?)', self, issues])

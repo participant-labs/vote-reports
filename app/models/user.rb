@@ -3,20 +3,22 @@ class User < ActiveRecord::Base
   gravtastic
 
   extend FriendlyId
-  friendly_id :username, use: :slugged
+  friendly_id :username, use: [:slugged, :history]
   alias_attribute :to_s, :username
 
   acts_as_authentic do |c|
-    c.merge_validates_format_of_login_field_options with: /\A\w[\w\.+\-_@ ']+$/
+    c.merge_validates_format_of_login_field_options with: /\A\w[\w\.+\-_@ ']+\z/
   end
 
   has_one :adminship
   has_one :moderatorship
   has_many :reports
-  has_one :personal_report, class_name: 'Report', conditions: {state: 'personal'}
+  has_one :personal_report, -> { where(state: 'personal') }, class_name: 'Report'
 
   has_many :report_follows
   has_many :followed_reports, through: :report_follows, source: :report
+
+  has_many :authentications
 
   validates_uniqueness_of :username, :email, case_sensitive: false
   validate :username_not_reserved
@@ -28,6 +30,12 @@ class User < ActiveRecord::Base
   end
 
   class << self
+    def self.find_or_create_from_auth_hash(auth_hash)
+      info = auth_hash['info']
+      name = info['name'] || info['email']
+      find_by_username_or_email(name)
+    end
+
     def find_by_username_or_email(login)
       find_by_smart_case_login_field(login) || find_by_email(login)
     end

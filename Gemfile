@@ -2,29 +2,31 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.12'
+gem 'rails', '4.0.10'
+gem 'actionpack-page_caching'
+gem 'rails-observers'
 
 gem 'ancestry', '>=1.2.0'
-gem 'Empact-authlogic', '>=3.0.3', require: 'authlogic'
-gem 'Empact-authlogic_rpx', '>= 2.0.0', require: 'authlogic_rpx'
+gem 'authlogic'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-linkedin-oauth2'
 gem 'bluecloth', '>=2.0.5'
 gem 'declarative_authorization'
 gem 'erubis', '>= 2.6.6'
 gem 'excelsior'
 gem 'foreigner'
-gem 'friendly_id', '>= 4.0.0'
+gem 'friendly_id'
 gem 'babosa'
-gem 'geokit'
+gem 'geokit-rails'
 gem 'gravtastic', '= 3.1.0'
 gem 'airbrake'
 gem 'loofah'
-gem 'bson_ext'
-gem 'mongo_mapper'
 gem 'newrelic_rpm', '>= 2.12.3'
 gem 'nokogiri'
 gem 'paperclip', '>= 2.3.3'
 gem 'pg'
-gem 'rpx_now', '>= 0.6.12'
 
 # Geo
 gem 'georuby', require: 'geo_ruby'
@@ -50,11 +52,9 @@ gem 'Paperclip-Autosizer'
 # Views
 gem 'dynamic_form'
 
-group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
-  gem 'uglifier'
-end
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
 
 # Background Processing
 gem 'delayed_job_active_record'
@@ -64,6 +64,8 @@ group :development do
   # Dev
   gem 'thin'
   gem 'sunspot_solr'
+
+  gem 'dotenv-rails'
 
   # Deployment
   gem 'rvm'

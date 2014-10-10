@@ -5,15 +5,15 @@ module PoliticianTerm
       belongs_to :party
       validates_presence_of :politician
 
-      scope :by_ended_on, order("ended_on DESC")
+      scope :by_ended_on, -> { order("ended_on DESC") }
 
       unless Rails.env.development? || Rails.env.production?
         after_create :update_politician_state_and_title
       end
 
       class << self
-        def latest(options = {})
-          by_ended_on.first(options)
+        def latest
+          by_ended_on.first
         end
       end
 
@@ -32,8 +32,8 @@ module PoliticianTerm
           latest = politician.latest_term
           return if latest.nil?
           state = (
-            politician.representative_terms.all(joins: :congressional_district) +
-            politician.senate_terms.all(joins: :state)
+            politician.representative_terms.joins(:congressional_district) +
+            politician.senate_terms.joins(:state)
           ).sort_by(&:ended_on).reverse.detect(&:state).try(:state)
           politician.update_attributes!(state: state, title: latest.title)
         end

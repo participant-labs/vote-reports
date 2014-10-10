@@ -14,7 +14,7 @@ class PoliticiansController < ApplicationController
   end
 
   def show
-    @politician = Politician.for_display.find(params[:id])
+    @politician = Politician.for_display.friendly.find(params[:id])
     if request.path != politician_path(@politician)
       redirect_to politician_path(@politician), status: 301
       return

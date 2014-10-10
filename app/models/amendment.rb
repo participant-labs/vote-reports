@@ -13,15 +13,15 @@ class Amendment < ActiveRecord::Base
 
   has_many :rolls, as: :subject, dependent: :destroy
 
-  scope :by_offered_on, order('offered_on DESC')
-  scope :with_votes, joins(:rolls).select('DISTINCT amendments.*')
-  scope :with_title, lambda {|title|
+  scope :by_offered_on, -> { order('offered_on DESC') }
+  scope :with_votes, -> { joins(:rolls).select('DISTINCT amendments.*') }
+  scope :with_title, ->(title) {
     where(['amendments.purpose = ? OR amendments.description = ?', title, title])
   }
 
-  has_many :passage_rolls, as: :subject, class_name: 'Roll', conditions: [
-    "rolls.roll_type IN(?)", ROLL_PASSAGE_TYPES
-  ]
+  has_many :passage_rolls, -> { where("rolls.roll_type IN(?)", ROLL_PASSAGE_TYPES) },
+    as: :subject, class_name: 'Roll'
+
 
   def title
     purpose || description

@@ -16,7 +16,7 @@ namespace :cluster do
     r.class_table['data.frame'] = lambda{|x| DataFrame.new(x)}
     RSRuby.set_default_mode(RSRuby::CLASS_CONVERSION)
 
-    scored_pols = ReportScore.for_causes.all(select: 'distinct politician_id', joins: :politician, conditions: 'politicians.current_office_id is not null').map(&:politician)
+    scored_pols = ReportScore.for_causes.select('distinct politician_id').joins(:politician).where('politicians.current_office_id is not null').all.map(&:politician)
 
     puts "Senators"
     names, values = data_for_pols(scored_pols.select {|p| p.current_office_type == "SenateTerm"})
@@ -31,7 +31,7 @@ namespace :cluster do
 
     # puts "Representatives"
     # output_csv_for_pols(Rails.root.join('tmp/rep_cause_ratings.csv'), scored_pols.select {|p| p.current_office_type == "RepresentativeTerm"})
-    # 
+    #
     # puts "All Pols"
     # output_csv_for_pols(Rails.root.join('tmp/all_pol_cause_ratings.csv'), scored_pols)
   end

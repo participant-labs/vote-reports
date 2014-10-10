@@ -5,20 +5,19 @@ class ReportScore < ActiveRecord::Base
   belongs_to :politician
   has_many :evidence, class_name: 'ReportScoreEvidence', dependent: :destroy
 
-  # default_scope order: 'score DESC'
-  scope :bottom, order(:score)
+  # default_scope -> { order('score DESC') }
+  scope :bottom, -> { order(:score) }
 
   alias_method :subject, :report # for the score evidence pop-up
 
-  scope :by_score, order('report_scores.score DESC')
-  scope :with_evidence, includes([
-    {politician: :state},
-    :evidence
-  ])
+  scope :by_score, -> { order('report_scores.score DESC') }
+  scope :with_evidence, -> {
+    includes([{politician: :state}, :evidence])
+  }
 
-  scope :with, where("report_scores.score > 66.667")
-  scope :against, where("report_scores.score < 33.333")
-  scope :neutral, where("report_scores.score BETWEEN 33.333 AND 66.667")
+  scope :with, -> { where("report_scores.score > 66.667") }
+  scope :against, -> { where("report_scores.score < 33.333") }
+  scope :neutral, -> { where("report_scores.score BETWEEN 33.333 AND 66.667") }
   class << self
     def votes_how(how)
       if [:with, :against, :neutral].include?(how.to_sym)
@@ -33,17 +32,23 @@ class ReportScore < ActiveRecord::Base
   has_many :dependent_report_scores, class_name: 'ReportScore',
     through: :dependent_report_score_evidences, source: :score
 
-  scope :for_politician_display, includes(report: [:cause, :image, :interest_group, :user, :top_subject]).order('report_scores.score DESC')
-  scope :for_report_display, includes(politician: [:state, :congressional_district]).order('report_scores.score DESC')
+  scope :for_politician_display, -> {
+    includes(report: [:cause, :image, :interest_group, :user, :top_subject]).order('report_scores.score DESC')
+  }
+  scope :for_report_display, -> {
+    includes(politician: [:state, :congressional_district]).order('report_scores.score DESC')
+  }
 
-  scope :published, joins(:report).where([
-    "reports.state = ? OR reports.user_id IS NULL", 'published'])
+  scope :published, -> {
+    joins(:report).where(["reports.state = ? OR reports.user_id IS NULL", 'published'])
+  }
 
-  scope :for_causes, joins(:report).where(['reports.cause_id IS NOT NULL'])
-  scope :for_published_reports, joins(:report).where([
-    "(reports.state = ? OR reports.user_id IS NULL) AND reports.cause_id IS NULL", 'published'])
+  scope :for_causes, -> { joins(:report).where(['reports.cause_id IS NOT NULL']) }
+  scope :for_published_reports, -> {
+    joins(:report).where(["(reports.state = ? OR reports.user_id IS NULL) AND reports.cause_id IS NULL", 'published'])
+  }
 
-  scope :for_reports_with_subjects, lambda {|subjects|
+  scope :for_reports_with_subjects, ->(subjects) {
     subjects = Array(subjects)
     if subjects.empty?
       {}
@@ -56,16 +61,16 @@ class ReportScore < ActiveRecord::Base
     end
   }
 
-  scope :for_politicians, lambda {|politicians|
+  scope :for_politicians, ->(politicians) {
     politicians = Array(politicians)
     if politicians.empty? || politicians.first == Politician
-      {}
+      all
     else
       where(politician_id: politicians)
     end
   }
 
-  scope :for_reports, lambda {|reports|
+  scope :for_reports, ->(reports) {
     reports = Array(reports)
     if reports.empty?
       {}

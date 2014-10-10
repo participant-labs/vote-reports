@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CongressionalDistrict do
   def zip_code(number)
-    ZipCode.find_or_create_by_zip_code(number)
+    ZipCode.find_or_create_by(zip_code: number)
   end
 
   describe ".for_city" do

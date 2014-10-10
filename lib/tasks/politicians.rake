@@ -11,7 +11,7 @@ namespace :politicians do
         $stdout.flush
         latest = politician.terms.latest
         next if latest.nil?
-        state = politician.terms.latest(joins: :state).try(:state)
+        state = politician.terms.joins(:state).latest.try(:state)
         politician.update_attributes!(state: state, title: latest.title)
       end
     end

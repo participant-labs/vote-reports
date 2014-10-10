@@ -58,7 +58,7 @@ namespace :gov_track do
             puts
           end
         end
-        
+
       end
     end
 
@@ -89,7 +89,7 @@ namespace :gov_track do
                 return nil
               end
             if @congress.meeting != data['session'].to_i
-              raise "Something is weird #{@congress.meeting} != #{data['session']}" 
+              raise "Something is weird #{@congress.meeting} != #{data['session']}"
             end
             sponsor = @politicians.fetch(data.at('sponsor')['id'].to_i) unless data.at('sponsor')['none'].present?
             introduced_on = data.at('introduced')['datetime'].to_s
@@ -130,9 +130,10 @@ namespace :gov_track do
               if (subcommittee_name = committee_node['subcommittee']).present?
                 subcommittee_id =
                   begin
-                    (committee_meeting_id && CommitteeMeeting.first(
-                      joins: :committee, conditions: {:'committee_meetings.name' => subcommittee_name, :'committees.ancestry' => CommitteeMeeting.find(committee_meeting_id).committee_id.to_s}
-                    ).try(:id)) || find_subcommittee(committee_name, subcommittee_name, "Bill #{opencongress_bill_id}", committee_node)
+                    (committee_meeting_id && CommitteeMeeting
+                      .joins(:committee)
+                      .where(:'committee_meetings.name' => subcommittee_name, :'committees.ancestry' => CommitteeMeeting.find(committee_meeting_id).committee_id.to_s)
+                      .first.try(:id)) || find_subcommittee(committee_name, subcommittee_name, "Bill #{opencongress_bill_id}", committee_node)
                   rescue => e
                     p e
                     nil
@@ -158,7 +159,7 @@ namespace :gov_track do
             if sponsor
               sponsorship =
                 if update?
-                  c = Cosponsorship.find_or_create_by_bill_id_and_politician_id(bill.id, sponsor.id)
+                  c = Cosponsorship.find_or_create_by(bill_id: bill.id, politician_id: sponsor.id)
                   c.update_attributes(joined_on: introduced_on)
                   c
                 else

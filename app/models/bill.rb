@@ -2,9 +2,9 @@ class Bill < ActiveRecord::Base
   extend FriendlyId
   friendly_id :opencongress_id
 
-  default_scope include: {titles: :as}
-  scope :by_introduced_on, order: 'introduced_on DESC'
-  scope :with_title, lambda {|title|
+  default_scope -> { includes(titles: :as) }
+  scope :by_introduced_on, -> { order('introduced_on DESC') }
+  scope :with_title, ->(title) {
     select('DISTINCT bills.*').joins(:titles).where(:'bill_titles.title' => title)
   }
 
@@ -103,7 +103,8 @@ class Bill < ActiveRecord::Base
   has_many :reports, through: :bill_criteria
   has_many :amendments, dependent: :destroy
   has_many :rolls, as: :subject, dependent: :destroy
-  has_many :passage_rolls, as: :subject, class_name: 'Roll', conditions: {roll_type: ROLL_PASSAGE_TYPES}
+  has_many :passage_rolls, -> { where(roll_type: ROLL_PASSAGE_TYPES) },
+    as: :subject, class_name: 'Roll'
   has_many :votes, through: :rolls
   has_many :passage_votes, through: :passage_rolls, source: :votes
   def politicians

@@ -8,8 +8,8 @@ class Candidacy < ActiveRecord::Base
   belongs_to :politician
   belongs_to :race
 
-  scope :valid, where(status: ACTIVE_STATUSES)
-  scope :for_races, lambda {|races|
+  scope :valid, -> { where(status: ACTIVE_STATUSES) }
+  scope :for_races, ->(races) {
     where(race_id: races)
   }
 

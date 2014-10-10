@@ -18,7 +18,7 @@ namespace :gov_track do
       end
 
       @committee_meetings[name] || begin
-        congress_meeting = CommitteeMeeting.first(conditions: {name: name}) || begin
+        congress_meeting = CommitteeMeeting.where(name: name).first || begin
             committee = Committee.find_by_display_name(name)
             committee && committee.meetings.for_congress(@congress)
           end
@@ -65,7 +65,7 @@ namespace :gov_track do
             corresponding_subcommittee_meeting = corresponding_subcommittee_meetings.first
             puts node
             puts("Selected #{corresponding_subcommittee_meeting.name} for #{subcommittee_name}")
-            existing_meeting = corresponding_subcommittee_meeting.committee.meetings.first(conditions: {congress_id: @congress.id})
+            existing_meeting = corresponding_subcommittee_meeting.committee.meetings.where(congress_id: @congress.id).first
             if existing_meeting
               puts "but it already had #{existing_meeting.name}"
               committee_meeting.committee.subcommittees.create!.meetings.for_congress(@congress, subcommittee_name)
@@ -88,7 +88,7 @@ namespace :gov_track do
     def meetings(&block)
       ActiveRecord::Base.transaction do
         (ENV['MEETING'].present? ? ENV['MEETING'].split(',').map(&:to_i) : MEETINGS).each do |meeting|
-          @congress = Congress.find_or_create_by_meeting(meeting)
+          @congress = Congress.find_or_create_by(meeting: meeting)
           Sunspot.batch do
             path = Rails.root.join("data/gov_track/us", meeting.to_s)
             change_to_dir(path) do

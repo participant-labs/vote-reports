@@ -4,8 +4,8 @@ module Criterion
       belongs_to :report
       has_many :evidence, class_name: 'ReportScoreEvidence', dependent: :destroy, as: :criterion
 
-      scope :supported, where(support: true)
-      scope :opposed, where(support: false)
+      scope :supported, -> { where(support: true) }
+      scope :opposed, -> { where(support: false) }
 
       after_save :rescore_report
       delegate :user_id, to: :report

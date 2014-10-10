@@ -8,14 +8,14 @@ class Vote < ActiveRecord::Base
   validates_presence_of :politician, :roll
   validates_inclusion_of :vote, in: POSSIBLE_VALUES
 
-  scope :aye, where(vote: '+')
-  scope :nay, where(vote: '-')
-  scope :present, where(vote: 'P')
-  scope :not_voting, where(vote: '0')
+  scope :aye, -> { where(vote: '+') }
+  scope :nay, -> { where(vote: '-') }
+  scope :present, -> { where(vote: 'P') }
+  scope :not_voting, -> { where(vote: '0') }
 
   delegate :subject, to: :roll
 
-  scope :for_display, includes(politician: [:state, :congressional_district])
+  scope :for_display, -> { includes(politician: [:state, :congressional_district]) }
 
   def position
     {'+' => 'Aye',

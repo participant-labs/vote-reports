@@ -19,7 +19,7 @@ class CleanUpDistricts < ActiveRecord::Migration
   def self.up
     $stdout.sync = true
     District.paginated_each(:conditions => {:district => -1}) do |district|
-      proper_district = District.find_or_create_by_us_state_id_and_district(district.us_state_id, 0)
+      proper_district = District.find_or_create_by(us_state_id: district.us_state_id, district: 0)
       raise "Missing district" unless proper_district.present?
       district.representative_terms.update_all(:district_id => proper_district)
       district.cached_politicians.update_all(:district_id => proper_district)

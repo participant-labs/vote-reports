@@ -17,7 +17,7 @@ describe Roll do
     it "should work" do
       roll = create(:roll, year: 1990, number: 5, where: 'house')
       roll.friendly_id.should == '1990-h5'
-      Roll.find('1990-h5').should == roll
+      Roll.friendly.find('1990-h5').should == roll
     end
 
     it "should allow search by actual id" do

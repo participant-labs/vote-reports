@@ -1,6 +1,5 @@
 class IssuesController < ApplicationController
   filter_resource_access
-  before_filter :prepare_causes, only: [:new, :create]
 
   def index
     @issues = Issue.page(params[:page])
@@ -12,7 +11,6 @@ class IssuesController < ApplicationController
   end
 
   def new
-    @issue = Issue.new(params[:issue])
     @causes = Cause.without_issue
 
     respond_to do |format|
@@ -24,7 +22,7 @@ class IssuesController < ApplicationController
   end
 
   def create
-    @issue = Issue.new(params[:issue])
+    @issue = Issue.new(issue_params)
     if @issue.save
       flash[:notice] = "Issue Create"
       redirect_to issue_path(@issue)
@@ -42,11 +40,19 @@ class IssuesController < ApplicationController
     redirect_to action: :index
   end
 
+  protected
+
+  def new_issue_from_params
+    @issue = Issue.new(issue_params)
+  end
+
   private
 
-  def prepare_causes
+  def issue_params
+    ps = params.require(:issue).permit(:title)
     if params[:causes].present?
-      params[:issue][:causes] = Cause.where(slug: params[:causes])
+      ps[:causes] = Cause.where(slug: params[:causes])
     end
+    ps
   end
 end

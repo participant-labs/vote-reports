@@ -1,0 +1,5 @@
+<h3>Sign in with</h3>
+ <% ["twitter","facebook", "linkedin"].each do |provider| %>
+   <%= link_to provider, "/auth/#{provider}" %>
+ <% end %>
+</div>

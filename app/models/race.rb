@@ -6,9 +6,11 @@ class Race < ActiveRecord::Base
 
   before_create :populate_race_reference
 
-  scope :upcoming, joins(:election_stage).where(['election_stages.voted_on >= ?', Date.today])
+  scope :upcoming, -> {
+    joins(:election_stage).where(['election_stages.voted_on >= ?', Date.today])
+  }
 
-  scope :for_districts, lambda {|districts|
+  scope :for_districts, ->(districts) {
     joins([:office, {election_stage: :election}]).where([
       %{elections.state_id = ? AND (
           (offices.id IN(?) AND races.district_name IN(?)) OR
@@ -24,13 +26,13 @@ class Race < ActiveRecord::Base
     ])
   }
 
-  scope :with_scores_from, lambda {|scores|
+  scope :with_scores_from, ->(scores) {
     joins(:candidacies).where(candidacies: {politician_id: scores.map(&:politician_id)})
   }
 
-  scope :state_lower, joins(:office).where(offices: {name: ['State House', 'State Assembly']})
-  scope :state_upper, joins(:office).where(offices: {name: 'State Senate'})
-  scope :federal, joins(:office).where(offices: {name: 'U.S. House'})
+  scope :state_lower, -> { joins(:office).where(offices: {name: ['State House', 'State Assembly']}) }
+  scope :state_upper, -> { joins(:office).where(offices: {name: 'State Senate'}) }
+  scope :federal, -> { joins(:office).where(offices: {name: 'U.S. House'}) }
 
   delegate :election, to: :election_stage
   delegate :state, to: :election
