@@ -26,6 +26,6 @@ class Causes::ScoresController < ApplicationController
   private
 
   def load_cause
-    @cause = Cause.find(params[:cause_id])
+    @cause = Cause.friendly.find(params[:cause_id])
   end
 end
