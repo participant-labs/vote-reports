@@ -12,7 +12,7 @@ class District < ActiveRecord::Base
       where(["ST_Contains(the_geom, GeometryFromText('POINT(? ?)', -1))",
         geoloc.lng, geoloc.lat])
     else
-      where('0 = 1')
+      none
     end
   }
   scope :level, ->(level) {

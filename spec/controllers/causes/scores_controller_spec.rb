@@ -37,6 +37,10 @@ RSpec.describe Causes::ScoresController do
     context 'with format js' do
       let(:format) { :js }
 
+      def send_request
+        xhr :get, :show, cause_id: cause, id: score, format: format
+      end
+
       it 'succeeds' do
         send_request
         expect(response).to be_success

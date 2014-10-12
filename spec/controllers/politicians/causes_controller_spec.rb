@@ -22,6 +22,10 @@ RSpec.describe Politicians::CausesController do
     context 'with format js' do
       let(:format) { :js }
 
+      def send_request
+        xhr :get, :index, politician_id: politician
+      end
+
       it 'succeeds' do
         send_request
         expect(response).to be_success

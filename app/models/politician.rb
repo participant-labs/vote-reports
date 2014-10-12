@@ -181,7 +181,6 @@ class Politician < ActiveRecord::Base
   scope :representatives, -> { where(current_office_type: 'RepresentativeTerm') }
   scope :presidents, -> { where(current_office_type: 'PresidentialTerm') }
 
-  scope :none, -> { where('0 = 1') }
   scope :for_display, -> { includes([:state, :congressional_district]) }
 
   scope :with_name, ->(name) {
@@ -200,7 +199,7 @@ class Politician < ActiveRecord::Base
         %{LEFT OUTER JOIN "presidential_terms" ON presidential_terms.politician_id = politicians.id},
       ]).select('DISTINCT politicians.*')
     else
-      where('0 = 1')
+      none
     end
   }
   scope :with_in_office_terms, -> {
@@ -224,7 +223,7 @@ class Politician < ActiveRecord::Base
         %{LEFT OUTER JOIN "congressional_districts" ON representative_terms.congressional_district_id = congressional_districts.id},
       ])
     else
-      where('0 = 1')
+      none
     end
   }
   scope :representatives_from_state, ->(state) {
@@ -233,7 +232,7 @@ class Politician < ActiveRecord::Base
       select('DISTINCT politicians.*').where(['congressional_districts.us_state_id = ?', state])\
         .joins(representative_terms: :congressional_district)
     else
-      where('0 = 1')
+      none
     end
   }
 

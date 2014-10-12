@@ -17,7 +17,7 @@ class CongressionalDistrict < ActiveRecord::Base
   scope :with_zip, ->(zip_code) {
     zip_code, plus_4 = ZipCode.sections_of(zip_code)
     if zip_code.blank?
-      where('0 = 1')
+      none
     elsif plus_4.blank?
       joins(:zip_codes).where(:'zip_codes.zip_code' => zip_code)
     elsif CongressionalDistrictZipCode.joins(:zip_code).where(
@@ -36,15 +36,14 @@ class CongressionalDistrict < ActiveRecord::Base
   scope :for_city, ->(address) {
     city, state = address.upcase.split(', ', 2)
     if city.blank?
-      where('0 = 1')
+      none
     elsif state.blank?
-      select('DISTINCT congressional_districts.*').joins(zip_codes: :locations).where(
-        :'locations.city' => city
-      )
+      select('DISTINCT congressional_districts.*').joins(zip_codes: :locations)
+        .where('locations.city = ?', city)
     else
-      select('DISTINCT congressional_districts.*').joins([{zip_codes: :locations}, :state]).where(
-        :'locations.city' => city, :'locations.state' => state,
-        :'us_states.abbreviation' => state
+      select('DISTINCT congressional_districts.*').joins(:state, zip_codes: :locations).where(
+        'locations.city = ? AND locations.state = ? AND us_states.abbreviation = ?',
+        city, state, state
       )
     end
   }
