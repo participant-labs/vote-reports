@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :roll do
-    congress
+    congress { Congress.all.sample }
     association :subject, factory: :bill
     year { rand(200) + 1810 }
     number { rand(10000) }

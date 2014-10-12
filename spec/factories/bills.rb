@@ -17,7 +17,7 @@ FactoryGirl.define do
     introduced_on { 2.years.ago.to_date }
     bill_type 'hr'
     bill_number
-    congress { Congress.find_or_create_by(meeting: rand(200)) }
+    congress { Congress.all.sample }
   end
 
   factory :bill_title do

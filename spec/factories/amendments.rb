@@ -7,6 +7,6 @@ FactoryGirl.define do
     number { rand(1000) }
     offered_on { "13/12/2009" }
     chamber { ['h', 's'].sample }
-    congress
+    congress { Congress.all.sample }
   end
 end
