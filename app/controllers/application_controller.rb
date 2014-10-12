@@ -8,7 +8,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   geocode_ip_address
 
-  helper_method :current_user_session, :current_user, :report_path_components, :report_path, :report_follows_path, :report_score_path, :report_bill_criteria_path, :new_report_amendment_criterion_path, :report_amendment_criteria_path, :report_embed_id, :report_url
+  helper_method :current_user_session, :current_user, :report_path_components,
+    :report_path, :report_follows_path, :report_score_path,
+    :report_bill_criteria_path, :new_report_amendment_criterion_path,
+    :report_amendment_criteria_path, :report_embed_id, :report_url
 
   before_filter :basic_authenticate if Rails.env.staging?
   before_filter :strip_pjax_param

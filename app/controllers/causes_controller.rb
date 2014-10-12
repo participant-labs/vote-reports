@@ -29,9 +29,8 @@ class CausesController < ApplicationController
   end
 
   def show
-    @subjects = @cause.subjects.for_tag_cloud.all(
-      select: "DISTINCT(subjects.*), SUM(report_subjects.count) AS count",
-      limit: 3)
+    @subjects = @cause.subjects.for_tag_cloud
+      .select("DISTINCT(subjects.*), SUM(report_subjects.count) AS count").limit(3)
 
     @scores = @cause.scores.for_politicians(sought_politicians).by_score
 
@@ -62,7 +61,6 @@ class CausesController < ApplicationController
   def edit
     if request.path != edit_cause_path(@cause)
       redirect_to edit_cause_path(@cause), status: 301
-      return
     end
   end
 

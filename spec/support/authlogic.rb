@@ -1,6 +1,6 @@
 require "authlogic/test_case"
 
-module Authlogic::Test
+module AuthlogicTestHelpers
   def current_user(opts = {})
     if opts.empty?
       @current_user ||= create(:user).reload
@@ -22,9 +22,7 @@ module Authlogic::Test
   end
 end
 
-if RSpec.respond_to?(:configure)
-  RSpec.configure do |config|
-    config.include(Authlogic::TestCase)
-    config.include(Authlogic::Test)
-  end
+RSpec.configure do |config|
+  config.include(Authlogic::TestCase)
+  config.include(AuthlogicTestHelpers)
 end
