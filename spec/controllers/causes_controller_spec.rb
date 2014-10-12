@@ -4,19 +4,17 @@ RSpec.describe CausesController do
   setup :activate_authlogic
 
   describe 'GET index' do
-    let(:with_many_causes) {
+    before(:all) {
       create_list(:cause, 35)
     }
     context 'without params' do
       it 'shows the first page of causes' do
-        with_many_causes
         get :index
         expect(assigns[:causes]).to eq(Cause.order(:name).page(1))
       end
     end
     context 'with a page' do
       it 'shows that page of causes' do
-        with_many_causes
         get :index, page: 2
         expect(assigns[:causes]).to eq(Cause.order(:name).page(2))
       end

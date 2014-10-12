@@ -49,22 +49,20 @@ RSpec.describe UsersController do
   end
 
   describe "GET edit" do
-    before do
-      @user = create(:user)
-    end
+    let(:user) { create(:user) }
 
     it "should reject me if I'm not logged in" do
       logout
-      get :edit, id: @user
-      expect(response).to redirect_to(login_url(return_to: %Q{/users/#{@user.to_param}/edit}))
+      get :edit, id: user
+      expect(response).to redirect_to(login_url(return_to: %Q{/users/#{user.to_param}/edit}))
       expect(flash[:notice]).to eq("You must be logged in to access this page")
     end
 
     it "should reject me if I'm not the user being edited" do
       current = create(:user)
       login(current)
-      get :edit, id: @user
-      expect(response).to redirect_to(user_reports_url(@user))
+      get :edit, id: user
+      expect(response).to redirect_to(user_reports_url(user))
       expect(flash[:error]).to eq("You may not access this page")
     end
   end
