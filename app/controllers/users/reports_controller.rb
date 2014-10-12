@@ -20,8 +20,8 @@ class Users::ReportsController < ApplicationController
           redirect_to user_report_path(@user, @report), status: 301
           return
         end
-        @causes = @report.causes.all(limit: 3)
-        @subjects = @report.subjects.for_tag_cloud.except(:select).select("DISTINCT(subjects.*), SUM(report_subjects.count) AS count").limit(3).all
+        @causes = @report.causes.limit(3)
+        @subjects = @report.subjects.for_tag_cloud.except(:select).select("DISTINCT(subjects.*), SUM(report_subjects.count) AS count").limit(3)
       }
       format.js {
         render partial: 'reports/scores/table', locals: {

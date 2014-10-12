@@ -5,7 +5,7 @@ end
 Given /^(I have |)an? (.*?) ?report named "([^\"]*)"$/ do |mine, type, name|
   params = mine.present? ? {user: current_user} : {}
   if type.present?
-    create(:report, type, params.merge(name: name))
+    create(:report, type.to_sym, params.merge(name: name))
   else
     create(:report, params.merge(name: name))
   end
@@ -28,8 +28,7 @@ Given /^the following (.*) reports?:$/ do |type, table|
 end
 
 Given /^(\d+) published reports with (subject "[^"]*")$/ do |count, subject|
-  Integer(count).times do
-    report = create(:report, :published)
+  create_list(:report, Integer(count), :published).each do |report|
     create(:report_subject, report: report, subject: subject)
   end
 end
