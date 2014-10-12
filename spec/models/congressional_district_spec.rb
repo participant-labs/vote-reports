@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe CongressionalDistrict do
+RSpec.describe CongressionalDistrict do
   def zip_code(number)
     ZipCode.find_or_create_by(zip_code: number)
   end

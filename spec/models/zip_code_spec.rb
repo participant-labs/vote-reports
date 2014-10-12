@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe ZipCode do
+RSpec.describe ZipCode do
   describe ".zip_code" do
     it "should recognize regular zip codes" do
       expect(ZipCode.zip_code('75028')).to eq('75028')

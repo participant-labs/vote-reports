@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Adminship do
+RSpec.describe Adminship do
 end

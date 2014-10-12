@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe SiteController do
+RSpec.describe SiteController do
   describe 'GET index' do
     context "when I'm signed in" do
       setup :activate_authlogic

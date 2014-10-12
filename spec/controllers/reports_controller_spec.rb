@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe ReportsController do
+RSpec.describe ReportsController do
   setup :activate_authlogic
 
   describe 'GET new' do

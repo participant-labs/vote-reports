@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe RepresentativeTerm do
+RSpec.describe RepresentativeTerm do
   before do
     @middle = create(:representative_term, ended_on: 1.month.ago)
     @oldest = create(:representative_term, ended_on: 10.years.ago)

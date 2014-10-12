@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe PresidentialTerm do
+RSpec.describe PresidentialTerm do
   before do
     @middle = create(:presidential_term, ended_on: 1.month.ago)
     @oldest = create(:presidential_term, ended_on: 10.years.ago)

@@ -1,5 +1,5 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe BillsController do
+RSpec.describe BillsController do
   setup :activate_authlogic
 end

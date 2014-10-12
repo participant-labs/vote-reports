@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Party do
+RSpec.describe Party do
   before(:each) do
     @valid_attributes = {
       name: "value for name"

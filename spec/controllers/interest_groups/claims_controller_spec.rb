@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe InterestGroups::ClaimsController do
+RSpec.describe InterestGroups::ClaimsController do
   let(:interest_group) { create(:interest_group) }
 
   describe 'GET new' do

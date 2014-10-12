@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Cosponsorship do
+RSpec.describe Cosponsorship do
 end

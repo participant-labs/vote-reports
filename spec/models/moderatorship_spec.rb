@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Moderatorship do
+RSpec.describe Moderatorship do
 end

@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe BillTitle do
+RSpec.describe BillTitle do
   def as(name)
     BillTitleAs.find_by_as!(name)
   end

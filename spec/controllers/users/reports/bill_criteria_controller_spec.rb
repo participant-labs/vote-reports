@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../../spec_helper'
 
-describe Users::Reports::BillCriteriaController do
+RSpec.describe Users::Reports::BillCriteriaController do
   setup :activate_authlogic
 
   describe "GET new" do

@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe ReportScore do
+RSpec.describe ReportScore do
   it "should create a new instance given valid attributes" do
     ReportScore.create!(
       politician: create(:politician),
@@ -33,9 +33,7 @@ describe ReportScore do
     end
 
     it "should rescore dependent scores' reports" do
-      any_instance_of(Report) do |r|
-        mock(r).rescore!
-      end
+      expect_any_instance_of(Report).to receive(:rescore!)
       @score.destroy
     end
   end

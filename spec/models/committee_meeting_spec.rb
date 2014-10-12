@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe CommitteeMeeting do
+RSpec.describe CommitteeMeeting do
 end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Cause do
+RSpec.describe Cause do
 end

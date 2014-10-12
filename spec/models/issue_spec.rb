@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Issue do
+RSpec.describe Issue do
   describe ".create" do
     context "with a title and some causes" do
       before do

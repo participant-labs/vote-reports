@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Politicians::CausesController do
+RSpec.describe Politicians::CausesController do
   describe 'GET index' do
     let(:politician) { create(:politician) }
     let(:cause) { create(:cause) }

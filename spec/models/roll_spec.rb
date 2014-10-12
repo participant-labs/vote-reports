@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe Roll do
+RSpec.describe Roll do
   describe ".by_voted_at" do
     before do
       @recent = create(:roll, voted_at: 1.week.ago)

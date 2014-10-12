@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe BillCriterion do
+RSpec.describe BillCriterion do
   before do
     @bill_criterion = create(:bill_criterion)
   end
@@ -35,7 +35,7 @@ describe BillCriterion do
     context "on create" do
       it "should be called" do
         criterion = build(:bill_criterion, report: @report)
-        mock(@report).rescore!
+        expect(@report).to receive(:rescore!)
         criterion.save!
       end
     end
@@ -43,13 +43,13 @@ describe BillCriterion do
     context "on update" do
       it "should be called if support is changed" do
         criterion = create(:bill_criterion, report: @report, support: true)
-        mock(@report).rescore!
+        expect(@report).to receive(:rescore!)
         criterion.update_attributes(support: false)
       end
 
       it "should not be called if support is not changed" do
         criterion = create(:bill_criterion, report: @report)
-        dont_allow(@report).rescore!
+        expect(@report).to_not receive(:rescore!)
         criterion.update_attributes(explanatory_url: 'http://google.com')
       end
     end

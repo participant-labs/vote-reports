@@ -1,4 +1,4 @@
-shared_context 'as an admin' do
+RSpec.shared_context 'as an admin' do
   let(:admin) {
     user = create(:user)
     user.create_adminship!(created_by: user)
@@ -10,7 +10,7 @@ shared_context 'as an admin' do
   end
 end
 
-shared_examples_for 'denies user' do
+RSpec.shared_examples_for 'denies user' do
   context "as a user" do
     it "denies access" do
       login
@@ -21,7 +21,7 @@ shared_examples_for 'denies user' do
   end
 end
 
-shared_examples_for 'denies visitor' do
+RSpec.shared_examples_for 'denies visitor' do
   context "as a visitor" do
     it "denies access" do
       send_request

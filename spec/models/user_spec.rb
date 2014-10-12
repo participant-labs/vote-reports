@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe User do
+RSpec.describe User do
   let(:user) { create(:user) }
 
   it "should be created with valid attributes" do

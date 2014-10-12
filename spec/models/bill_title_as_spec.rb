@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe BillTitleAs do
+RSpec.describe BillTitleAs do
 end

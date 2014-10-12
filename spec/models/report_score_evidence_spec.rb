@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe ReportScoreEvidence do
+RSpec.describe ReportScoreEvidence do
 end

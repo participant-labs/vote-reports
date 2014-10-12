@@ -1,60 +1,62 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe LocationsHelper do
+RSpec.describe LocationsHelper do
 
   describe "sought_politicians" do
-    before do
-      @geo = Object.new
-      stub(@geo).full_address { 'geo' }
-      stub(@geo).is_us? { true }
-      stub(@geo).city { 'Seattle' }
-      stub(@geo).state { 'WA' }
-      stub(@geo).zip { '98101' }
-    end
+    let(:geo) {
+      double(:geo,
+        full_address: 'geo',
+        is_us?: true,
+        city: 'Seattle', state: 'WA', zip: '98101')
+    }
+
+    subject(:sought_politicians) {
+      helper.sought_politicians
+    }
 
     context "when representing param is set" do
       before do
         params[:representing] = 'param'
       end
 
-      it "should be favored over session" do
+      it "is favored over session" do
         session[:zip_code] = 'zip'
-        mock(Politician).from('param') { Politician }
-        helper.sought_politicians
+        expect(Politician).to receive(:from).with('param').and_return(Politician)
+        sought_politicians
       end
 
-      it "should be favored over geolocation" do
-        session[:geo_location] = @geo
-        mock(Politician).from('param') { Politician }
-        helper.sought_politicians
+      it "is favored over geolocation" do
+        session[:geo_location] = geo
+        expect(Politician).to receive(:from).with('param').and_return(Politician)
+        sought_politicians
       end
 
-      it "should be used when alone" do
-        mock(Politician).from('param') { Politician }
-        helper.sought_politicians
+      it "is used when alone" do
+        expect(Politician).to receive(:from).with('param').and_return(Politician)
+        sought_politicians
       end
     end
 
     context "when geocode has results" do
       before do
-        session[:geo_location] = @geo
+        session[:geo_location] = geo
       end
 
-      it "should defer to representing" do
+      it "defers to representing" do
         params[:representing] = 'param'
-        mock(Politician).from('param') { Politician }
-        helper.sought_politicians
+        expect(Politician).to receive(:from).with('param').and_return(Politician)
+        sought_politicians
       end
 
-      it "should defer to blank representing" do
+      it "defers to blank representing" do
         params[:representing] = ''
-        mock(Politician).from('') { Politician }
-        helper.sought_politicians
+        expect(Politician).to receive(:from).with('').and_return(Politician)
+        sought_politicians
       end
 
-      it "should be used when alone" do
-        mock(Politician).from_location(@geo) { Politician }
-        helper.sought_politicians
+      it "is used when alone" do
+        expect(Politician).to receive(:from_location).with(geo).and_return(Politician)
+        sought_politicians
       end
     end
   end

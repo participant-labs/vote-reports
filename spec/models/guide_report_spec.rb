@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe GuideReport do
+RSpec.describe GuideReport do
 end

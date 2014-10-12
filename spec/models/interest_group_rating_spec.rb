@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe InterestGroupRating do
+RSpec.describe InterestGroupRating do
 end

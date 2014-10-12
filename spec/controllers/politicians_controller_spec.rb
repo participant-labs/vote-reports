@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe PoliticiansController do
+RSpec.describe PoliticiansController do
   setup :activate_authlogic
 
   describe "GET index" do

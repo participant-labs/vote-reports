@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe UsState do
+RSpec.describe UsState do
 end

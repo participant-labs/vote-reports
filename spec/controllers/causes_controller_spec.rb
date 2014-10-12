@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe CausesController do
+RSpec.describe CausesController do
   setup :activate_authlogic
 
   describe 'GET index' do

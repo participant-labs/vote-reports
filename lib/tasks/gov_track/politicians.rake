@@ -1,32 +1,32 @@
 namespace :gov_track do
   namespace :politicians do
-    def party(name)
-      return nil if name.blank? || Party::BLACKLIST.include?(name)
-      @parties ||= Party.all.index_by(&:name)
-      @parties.fetch(name) do
-        @parties[name] = Party.create(name: name)
-      end
-    end
-
-    def district(state, district)
-      @districts ||= CongressionalDistrict.all(select: 'id,us_state_id,district_number').index_by {|d| [d.us_state_id, d.district_number] }
-      state = UsState.find_by_abbreviation!(state)
-      district = district.to_i
-      district = nil if district == -1
-      @districts.fetch([state.id, district]) do
-        @districts[[state.id, district]] = CongressionalDistrict.create!(state: state, district_number: district)
-      end
-    end
-
-    def politician(gov_track_id)
-      @politicians ||= Politician.all(include: [:representative_terms, :senate_terms, :presidential_terms]).index_by(&:gov_track_id)
-      @politicians.fetch(gov_track_id.to_i) do
-        @politicians[gov_track_id.to_i] = Politician.new(gov_track_id: gov_track_id)
-      end
-    end
-
     desc "Process Politicians"
     task unpack: :'gov_track:support' do
+      def party(name)
+        return nil if name.blank? || Party::BLACKLIST.include?(name)
+        @parties ||= Party.all.index_by(&:name)
+        @parties.fetch(name) do
+          @parties[name] = Party.create(name: name)
+        end
+      end
+
+      def district(state, district)
+        @districts ||= CongressionalDistrict.all(select: 'id,us_state_id,district_number').index_by {|d| [d.us_state_id, d.district_number] }
+        state = UsState.find_by_abbreviation!(state)
+        district = district.to_i
+        district = nil if district == -1
+        @districts.fetch([state.id, district]) do
+          @districts[[state.id, district]] = CongressionalDistrict.create!(state: state, district_number: district)
+        end
+      end
+
+      def politician(gov_track_id)
+        @politicians ||= Politician.all(include: [:representative_terms, :senate_terms, :presidential_terms]).index_by(&:gov_track_id)
+        @politicians.fetch(gov_track_id.to_i) do
+          @politicians[gov_track_id.to_i] = Politician.new(gov_track_id: gov_track_id)
+        end
+      end
+
       rescue_and_reraise do
         data_path = ENV['MEETING'] ? "us/#{ENV['MEETING']}/people.xml" : "us/people.xml"
         doc = Nokogiri::XML(open(gov_track_path(data_path)))

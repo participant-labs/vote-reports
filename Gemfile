@@ -78,13 +78,12 @@ end
 group :test, :development do
   gem 'byebug', require: false
 
-  gem "rspec-rails", '< 3.1.0'
+  gem "rspec-rails"
 end
 
 group :test do
   # Test
   gem 'fakeweb'
-  gem 'rr', github: 'Empact/rr'
 
   # Cucumber
   gem 'cucumber'

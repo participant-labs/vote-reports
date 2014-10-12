@@ -1,18 +1,10 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe Bill do
-  describe ".search" do
-    include SolrSpecHelper
-    before(:all) { solr_setup }
-
-    after(:all) do
-      Bill.remove_all_from_index!
-    end
-
+RSpec.describe Bill do
+  describe ".search", :solr do
     before do
       bill = create(:bill)
       create(:bill_title, bill: bill, title: "USA PATRIOT Reauthorization Act of 2009")
-      Bill.solr_reindex
     end
 
     context "when there are no matches" do

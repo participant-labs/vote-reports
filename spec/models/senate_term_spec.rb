@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe SenateTerm do
+RSpec.describe SenateTerm do
   before do
     @middle = create(:senate_term, ended_on: 1.month.ago)
     @oldest = create(:senate_term, ended_on: 10.years.ago)

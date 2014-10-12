@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe UserSessionsController do
+RSpec.describe UserSessionsController do
   setup :activate_authlogic
 
   describe 'GET new' do

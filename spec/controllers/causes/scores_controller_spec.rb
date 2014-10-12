@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Causes::ScoresController do
+RSpec.describe Causes::ScoresController do
   let(:cause) { create(:cause) }
 
   describe 'GET index' do

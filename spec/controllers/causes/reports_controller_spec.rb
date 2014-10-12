@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Causes::ReportsController do
+RSpec.describe Causes::ReportsController do
   setup :activate_authlogic
 
   let(:report) { create(:report, :published, name: "Brady Campaign to Prevent Gun Violence") }
@@ -10,14 +10,7 @@ describe Causes::ReportsController do
     context 'as an admin' do
       include_context 'as an admin'
 
-      context 'with a term' do
-        include SolrSpecHelper
-        before(:all) { solr_setup }
-        before {
-          report
-          Report.solr_reindex
-        }
-
+      context 'with a term', :solr do
         def send_request
           get :new, cause_id: cause, term: 'Brady'
         end

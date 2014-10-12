@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe InterestGroupsController do
+RSpec.describe InterestGroupsController do
   describe 'GET index' do
     before do
       create_list(:interest_group, 35)

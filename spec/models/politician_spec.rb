@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe Politician do
+RSpec.describe Politician do
   before do
     @politician = create(:politician)
   end

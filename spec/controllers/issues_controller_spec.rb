@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe IssuesController do
+RSpec.describe IssuesController do
   setup :activate_authlogic
 
   describe "POST create" do

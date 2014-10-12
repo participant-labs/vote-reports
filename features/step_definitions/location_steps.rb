@@ -6,13 +6,13 @@ Transform /location is "([^\"]*)"/ do |address|
 end
 
 Given /^my (location is "[^"]*")$/ do |address|
-  mock(Geokit::Geocoders::MultiGeocoder).geocode(anything) { address }
+  allow(Geokit::Geocoders::MultiGeocoder).to receive(:geocode).and_return(address)
 end
 
 Given /^my location is assured(?: to "([^"]*)")?$/ do |congressional_district|
   ActiveRecord::Fixtures.reset_cache
   ActiveRecord::Fixtures.create_fixtures(Rails.root.join('spec/fixtures'), ['districts', 'congressional_districts', 'us_states'])
-  stub(District).lookup(anything) { District.all }
+  allow(District).to receive(:lookup) { District.all }
 
   if congressional_district
     state, district_number = congressional_district.split('-')

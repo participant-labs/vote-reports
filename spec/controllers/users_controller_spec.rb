@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe UsersController do
+RSpec.describe UsersController do
   setup :activate_authlogic
 
   describe "route recognition" do

@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe Report do
+RSpec.describe Report do
   describe "creation" do
     it "should be validate presence of name" do
       expect do

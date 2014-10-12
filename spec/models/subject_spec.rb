@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Subject do
+RSpec.describe Subject do
 end
