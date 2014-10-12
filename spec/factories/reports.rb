@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :report do
     name { Forgery(:basic).text }
-    user
+    user { User.all.sample || create(:user) }
 
     trait :personal do
       state 'personal'
