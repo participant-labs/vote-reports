@@ -5,7 +5,7 @@ FactoryGirl.define do
     end
 
     gov_track_id { rand(1000000) }
-    first_name { full_name.split(' ', 2).first }
-    last_name { full_name.split(' ', 2).last }
+    first_name { name.split(' ', 2).first }
+    last_name { name.split(' ', 2).last }
   end
 end
