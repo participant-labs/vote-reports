@@ -7,9 +7,7 @@ RSpec.describe Causes::ReportsController do
   let(:cause) { create(:cause, name: 'Gun Control') }
 
   describe 'GET new' do
-    context 'as an admin' do
-      include_context 'as an admin'
-
+    context 'as an admin', :admin do
       context 'with a term', :solr do
         def send_request
           get :new, cause_id: cause, term: 'Brady'
@@ -33,9 +31,7 @@ RSpec.describe Causes::ReportsController do
   end
 
   describe 'POST create' do
-    context 'as an admin' do
-      include_context 'as an admin'
-
+    context 'as an admin', :admin do
       context 'with a cause report' do
         it 'adds the report' do
           post :create, cause_id: cause, cause: {
@@ -54,9 +50,7 @@ RSpec.describe Causes::ReportsController do
       delete :destroy, cause_id: cause, id: cause_report
     end
 
-    context 'as an admin' do
-      include_context 'as an admin'
-
+    context 'as an admin', :admin do
       it 'removes the report' do
         send_request
         expect(assigns[:cause].reports).to_not include(report)

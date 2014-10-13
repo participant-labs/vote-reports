@@ -1,4 +1,4 @@
-RSpec.shared_context 'as an admin' do
+RSpec.shared_context 'as an admin', :admin do
   let(:admin) {
     user = create(:user)
     user.create_adminship!(created_by: user)

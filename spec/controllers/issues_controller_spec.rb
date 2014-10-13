@@ -16,9 +16,7 @@ RSpec.describe IssuesController do
         causes: causes.map(&:to_param)
     end
 
-    context 'as an admin' do
-      include_context 'as an admin'
-
+    context 'as an admin', :admin do
       context 'when linking two causes' do
         it 'creates a new issue' do
           expect {

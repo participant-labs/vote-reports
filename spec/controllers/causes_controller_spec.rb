@@ -31,9 +31,7 @@ RSpec.describe CausesController do
     it_behaves_like 'denies user'
     it_behaves_like 'denies visitor'
 
-    context 'as an admin' do
-      include_context 'as an admin'
-
+    context 'as an admin', :admin do
       it 'creates the cause' do
         expect {
           send_request
@@ -62,9 +60,7 @@ RSpec.describe CausesController do
     it_behaves_like 'denies user'
     it_behaves_like 'denies visitor'
 
-    context 'as an admin' do
-      include_context 'as an admin'
-
+    context 'as an admin', :admin do
       it 'updates the cause' do
         send_request
         expect(assigns[:cause].name).to eq(new_name)
