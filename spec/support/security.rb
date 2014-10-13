@@ -24,6 +24,7 @@ end
 RSpec.shared_examples_for 'denies visitor' do
   context "as a visitor" do
     it "denies access" do
+      logout
       send_request
       expect(flash[:notice]).to eq('You must be logged in to access this page')
       expect(response.redirect_url).to match(%r{^http://test.host#{login_path}(\?|$)})
