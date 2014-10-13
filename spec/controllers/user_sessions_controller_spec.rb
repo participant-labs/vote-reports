@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'rails_helper'
 
 RSpec.describe UserSessionsController do
   setup :activate_authlogic

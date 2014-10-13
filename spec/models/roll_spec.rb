@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'rails_helper'
 
 RSpec.describe Roll do
   describe ".by_voted_at" do
