@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Report do
   describe "creation" do
-    it "should be validate presence of name" do
+    it "validates presence of name" do
       expect do
         @report = Report.new(name: nil)
         @report.save
@@ -12,7 +12,7 @@ RSpec.describe Report do
   end
 
   describe "destruction" do
-    it "should delete related criteria" do
+    it "deletes related criteria" do
       report = create(:report, :published)
       criteria = report.bill_criteria
       expect(criteria).to_not be_empty
@@ -23,7 +23,7 @@ RSpec.describe Report do
   end
 
   describe ".with_criteria" do
-    it "should return reports with bill_criteria" do
+    it "returns reports with bill_criteria" do
       create(:report)
       published_report = create(:report)
       create(:bill_criterion, report: published_report)
@@ -33,18 +33,18 @@ RSpec.describe Report do
   end
 
   describe ".unpublished" do
-    it  "should include private and unlisted reports" do
+    it  "includes private and unlisted reports" do
       unlisted = create(:report, :unlisted)
       private_report = create(:report)
-      expect(Report.unpublished.to_a).to match_array([unlisted, private_report])
+      expect(Report.unpublished.to_a).to include(unlisted, private_report)
     end
 
-    it "should not include personal reports" do
+    it "does not include personal reports" do
       personal = create(:report, :personal)
       expect(Report.unpublished).to_not include(personal)
     end
 
-    it "should not include published reports" do
+    it "does not include published reports" do
       published = create(:report, :published)
       expect(published.state).to eq('published')
       expect(Report.unpublished).to_not include(published)
@@ -61,14 +61,14 @@ RSpec.describe Report do
       create(:bill_criterion, report: @report, bill: @bill)
     end
 
-    it "should not return reports with non-passage votes" do
+    it "does not return reports with non-passage votes" do
       roll = create(:roll, subject: @bill)
       expect(Bill::ROLL_PASSAGE_TYPES).to_not include(roll.roll_type)
 
       expect(Report.scored).to eq([])
     end
 
-    it "should return reports with voted bill_criteria" do
+    it "returns reports with voted bill_criteria" do
       create(:roll, subject: @bill, roll_type: Bill::ROLL_PASSAGE_TYPES.sample)
 
       expect(Report.scored).to eq([@report])
@@ -80,7 +80,7 @@ RSpec.describe Report do
       @report = create(:report)
     end
 
-    it "should not create a delayed job accessible via #delayed_jobs" do
+    it "does not create a delayed job accessible via #delayed_jobs" do
       expect {
         @report.rescore!
       }.to_not change(@report.delayed_jobs, :count)
@@ -92,7 +92,7 @@ RSpec.describe Report do
         roll = create(:roll, subject: @report.reload.bill_criteria.first.bill, roll_type: "On Passage")
       end
 
-      it "should create a delayed job accessible via #delayed_jobs" do
+      it "creates a delayed job accessible via #delayed_jobs" do
         expect {
           @report.rescore!
         }.to change(@report.delayed_jobs, :count).by(1)
