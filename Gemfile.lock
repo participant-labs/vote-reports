@@ -212,7 +212,7 @@ GEM
       mime-types
     parallel (0.5.16)
     patron (0.4.18)
-    pg (0.13.2)
+    pg (0.18.1)
     pr_geohash (1.0.0)
     rack (1.5.2)
     rack-test (0.6.2)
