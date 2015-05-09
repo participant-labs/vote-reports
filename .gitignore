@@ -16,7 +16,6 @@ spec/fixtures/web_requests.marshal
 solr
 rerun.txt
 .DS_Store
-bin/
 vendor/bundler_gems/
 .bundle
 .tddium*
