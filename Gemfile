@@ -2,7 +2,7 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 source 'http://rubygems.org'
 
-ruby '2.1.3'
+ruby '2.2.2'
 
 gem 'rails', '4.1.6'
 
